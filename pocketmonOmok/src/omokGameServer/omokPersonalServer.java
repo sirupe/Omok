@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class OmokPersonalServer extends Thread{
+public class omokPersonalServer extends Thread{
 	private OmokServer omokServer;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
