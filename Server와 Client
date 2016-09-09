@@ -1,0 +1,19 @@
+ServerOn : 기능 - 서버를 열어주고 접속자가 있을때까지 대기한다.
+                접속자 접속시 ServerAcceptClident를 제공하며
+                접속자 리스트를 관리한다.
+                (이 아이의 입장에서는 접속자 리스트가 곧 개별의 ServerAcceptCleient)
+    server run. 서버의 스레드가 돌며 대기중.
+    컬렉션 (유저 접속자 리스트. 각각에게 ServerAcceptClient 를 할당)
+ServerAcceptClient : 기능 - 하나의 유저에게 하나씩 제공된다.
+                            ServerOn의 리스트를 활용하여야 하기 때문에 ServerOn을 알고있어야 한다.
+                            유저들이 보내주는 정보를 Enum 등등...을 활용하여 분기를 태우고 각 작업을 할 클래스 혹은 메소드로 보내주는 역할.
+ClientAccept : client run.(화면이 뜨면 바로 서버에 접속됨)
+
+    serverOn 에서 client accept 시 따로 스레드를 생성하여 해당 client에게 할당함.
+        - ServerAcceptClient()...
+        - ServerAcceptClient()...
+        - ServerAcceptClient()...
+        - ServerAcceptClient()...
+
+    이 접속자 리스트를 컬렉션에 저장하고 있다.
+    각각의 클라이언트용 메소드인 ServerAcceptClient() 도 서버.(가 작업하고 있는 것)

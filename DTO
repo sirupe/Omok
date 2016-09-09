@@ -1,0 +1,86 @@
+1. 회원정보 DTO
+    * 회원 개인정보(USER_PERSONAL_INFO) - 회원가입 혹은 정보수정 때 변경
+        (1) userID - VARCHAR20 , 필수, 중복없음
+        (2) userPasswd - VARCHAR20 , 필수
+        (3) userName - VARCHAR10, 필수
+        (4) userGender - NUMBER, 1 = 남자, 2 = 여자 필수
+        (5) userBirth - VARCHAR15, 필수
+        (6) userEmail - VARCHAR50, 필수, 중복없음
+        (7) userPhoneNumber - VARCHAR15, 선택
+        (8) userJoinDate - Date , 가입일자. 필수. sysdate.
+
+        --DB테이블--
+            CREATE TABLE SIRUPE.USER_GAMEDATA_INFO
+            (
+              USER_ID VARCHAR2(20) PRIMARY KEY,
+              USER_GRADE VARCHAR2(5) NOT NULL,
+              USER_RECORD VARCHAR2(50) NOT NULL,
+              USER_WIN_RATE NUMBER(2,2) NOT NULL,
+              USER_SCORE NUMBER NOT NULL,
+              USER_IMAGE VARCHAR2(100)
+            );
+
+
+    * 회원 게임데이터 정보(USER_GAMEDATA_INFO) - 게임에서 지거나 이길 때 변경
+        (1) userID (아이디)- VARCHAR20 , 필수, 중복없음
+        (2) userGrade (등급)- VARCHAR5, 필수
+        (3) userRecord (전적)- VARCHAR50, 필수
+        (4) userWinRate (승률)- NUMBER(2,2), 필수, 실수 저장
+            (승수 / 전체 게임수) * 100 = 승률. 소수점 2째자리까지 표시
+        (5) userScore (승점)- NUMBER, 필수
+        (6) userImage- 선택, VARCHAR100
+
+        --DB테이블--
+            CREATE TABLE SIRUPE.USER_PERSONAL_INFO
+            (
+            	USER_ID VARCHAR2(20),
+              USER_PASSWD VARCHAR2(20) NOT NULL,
+              USER_NAME VARCHAR2(10) NOT NULL,
+              USER_GENDER NUMBER NOT NULL,
+              USER_BIRTH VARCHAR2(15) NOT NULL,
+              USER_EMAIL VARCHAR2(50) ,
+              USER_PHONENUMBER VARCHAR2(15),
+              USER_JOINDATE DATE DEFAULT SYSDATE,
+              CONSTRAINT "USER_PERSONAL_INFO_PK" PRIMARY KEY(USER_ID, USER_EMAIL),
+              CONSTRAINT CHECK_USER_GENDER CHECK(USER_GENDER IN(1, 2))
+            );
+
+
+3. 게임방 DTO
+    * 시퀀스(GAMEROOM_SEQ). 1부터 20까지 반복, 중복제거.
+
+    * DB테이블
+        (1) roomTitle - VARCHAR100, 필수
+        (2) roomOwnerID - VARCHAR20 , 필수, 방장 ID
+        (3) roomGuestID - VARCHAR20 , 접속자 ID
+        (4) roomMaxPersons - NUMBER, 최대치 2, 기본값 1, 필수
+        (5) roomIsPublic - VARCHAR10, 필수, 'public', 'closed' 중 하나
+        (6) roomCreateTime - DATE, 필수, 방 생성시간, sysdate
+        (7) roomPasswd - VARCHAR20, 선택. roomIsPublic 이 closed 인 경우에만 입력됨.
+
+        --DB테이블--
+            CREATE TABLE SIRUPE.GAMEROOM_INFO
+            (
+            	ROOM_NO NUMBER,
+            	ROOM_TITLE VARCHAR2(100) NOT NULL,
+                ROOM_OWNER_ID VARCHAR2(20),
+                ROOM_GUEST_ID VARCHAR2(20),
+                ROOM_MAX_PERSONS NUMBER DEFAULT 1,
+                ROOM_IS_PUBLIC VARCHAR2(10) NOT NULL,
+                ROOM_CREATE_TIME DATE DEFAULT SYSDATE,
+                ROOM_PASSWD VARCHAR2(20),
+                CONSTRAINT "GAMEROOM_INFO_PK" PRIMARY KEY(ROOM_NO, ROOM_OWNER_ID),
+                CONSTRAINT CHECK_ROOM_MAX_PERSONS CHECK(ROOM_MAX_PERSONS IN(1, 2)),
+                CONSTRAINT CHECK_ROOM_IS_PUBLIC CHECK(ROOM_IS_PUBLIC IN('public','closed'))
+            );
+
+
+4. 채팅 DTO
+    (1) chattingSpot 채팅상테값 enum
+        *대기실(WAITING)
+        *게임방(IN_GAME)
+        *귓속말(WHISPER)
+    (2) chattingMyMessage
+    (3) chattingMyID
+    (4) chattingTargetUserID
+    채팅은 굳이 DB테이블까지 만들 필요는 없을 듯.
