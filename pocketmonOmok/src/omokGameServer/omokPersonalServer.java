@@ -8,6 +8,9 @@ public class omokPersonalServer extends Thread{
 	private OmokServer omokServer;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
+	private String test; 
+	
+	private String test1;
 	
 //	
 //	public omokPersonalServer(OmokServer omokServer) throws IOException {
