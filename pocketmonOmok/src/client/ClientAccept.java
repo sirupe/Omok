@@ -8,10 +8,12 @@ import java.net.UnknownHostException;
 
 import enums.ServerIPEnum;
 
+// 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
 	private Socket clientSocket;
 	private ObjectInputStream clientIS;
 	private ObjectOutputStream clientOS;
+	// TODO 여기에 프레임 넣어줘용
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
@@ -19,8 +21,6 @@ public class ClientAccept {
 		this.clientOS = new ObjectOutputStream(this.clientSocket.getOutputStream());
 		//TODO 여기서 프레임 열기.
 		new ClientReciever(this).start();
-		
-
 	}
 
 	public ObjectInputStream getClientIS() {
