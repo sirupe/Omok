@@ -44,6 +44,4 @@ public enum LoginFrameSizesEnum {
 	public Dimension getDimension() {
 		return dimension;
 	}
-	
-	
 }
