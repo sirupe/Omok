@@ -2,7 +2,7 @@ package enums;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-// 태성
+// 태성(경로)
 public enum LoginFrameSizesEnum {
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	LOGIN_FRAME_SIZE_WIDTH(1300),

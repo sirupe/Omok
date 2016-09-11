@@ -1,7 +1,11 @@
 package frames;
 
 import java.awt.Font;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,10 +26,11 @@ public class LoginFrame extends JFrame {
 	private JTextField idField;
 	private JPasswordField pwField;
 	
-	public LoginFrame() {
+	public LoginFrame() throws IOException {
 		Font idpwFont 		= new Font("", Font.BOLD, 20);
-		
-		this.setContentPane(new JLabel(new ImageIcon("Login/background.jpg")));	//배경화면 출력
+		Image image = ImageIO.read(new File("Login/background.jpg"));
+		Image reimage = image.getScaledInstance(1300, 900, Image.SCALE_SMOOTH);
+		this.setContentPane(new JLabel(new ImageIcon(reimage)));	//배경화면 출력
 		
 		this.joinButton 	= new JButton(new ImageIcon("Login/signup.png"));
 		this.loginButton 	= new JButton(new ImageIcon("Login/login.jpg"));
