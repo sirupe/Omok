@@ -27,45 +27,45 @@ public class OmokServer {
 	//TODO 여기에 서버의 분기업무 추가
 	
 	public void login() {
-		
+		System.out.println("로그인창");
 	}
 	
 	public void waitingRoom() {
-		
+		System.out.println("대기실");
 	}
 	
 	public void join() {
-		
+		System.out.println("회원가입");
 	}
 	
 	public void findID() {
-		
+		System.out.println("ID찾기");
 	}
 	
 	public void findPW() {
-		
+		System.out.println("비밀번호찾기");
 	}
 	
 	public void gameRoom() {
-		
+		System.out.println("게임방");
 	}
 	
 	public void store() {
-		
+		System.out.println("상점");
 	}
 	
 	public void otherUserInfo() {
-		
+		System.out.println("다른사람정보보기");
 	}
 	
 	public void modifyMyInfo() {
-		
+		System.out.println("내정보보기");
 	}
 
+	
+	
+	
 	public Socket getSocket() {
 		return socket;
 	}
-	
-	
-	
 }
