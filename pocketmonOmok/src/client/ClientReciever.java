@@ -10,6 +10,7 @@ public class ClientReciever extends Thread {
 	private ObjectInputStream clientIS;
 	
 	public ClientReciever(ClientAccept accept) {
+		System.out.println("ClientReciever 생성자 실행");
 		this.clientAccept = accept;
 		this.clientIS = this.clientAccept.getClientIS();
 	}
@@ -17,6 +18,7 @@ public class ClientReciever extends Thread {
 	//TODO 데이터가 넘나들게 될 것.
 	@Override
 	public void run() {
+		System.out.println("ClientReciever run!!");
 		while(true) {
 			boolean isAccept = true;
 			try {
