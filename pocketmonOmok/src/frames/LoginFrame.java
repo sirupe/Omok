@@ -41,11 +41,20 @@ public class LoginFrame extends JFrame implements ActionListener{
    private Font loginFailFont;
    
    private JTextArea loginFailText;
+
    private JTextArea loginFailAlotText;
    
-   private Image ID, IDreimage, PW, PWreimage;
+
    
    private int loginFailCount;
+   
+   private Image image;
+   private Image reimage;
+   private Image ID, IDreimage, PW, PWreimage;
+   private Image join, joinreimage;
+   private Image login, loginreimage;
+   private Image searchid, searchidreimage;
+   private Image searchpw, searchpwreimage;
    
    //테스트용 스트링선언
    private String dataId;
@@ -60,16 +69,17 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.textFieldFont     = new Font("", Font.BOLD, 20);
       
       this.loginFailText      = new JTextArea();
-      this.loginFailAlotText = new JTextArea();
+
+
          
       
       //배경이미지 모니터의 해상도에 따라 조절되게 설정
-      Image image = ImageIO.read(new File("Login/background.jpg"));
-      Image reimage = image.getScaledInstance(
-            LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-            LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
-            Image.SCALE_SMOOTH);
-      
+      image = ImageIO.read(new File("resources/login/background.jpg"));
+      reimage = image.getScaledInstance(
+                     LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+                     LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+                     Image.SCALE_SMOOTH);
+
       this.setContentPane(new JLabel(new ImageIcon(reimage)));   
       
       //프레임 화면 출력 위치 설정
@@ -102,8 +112,9 @@ public class LoginFrame extends JFrame implements ActionListener{
       
       if(this.loginButton == e.getSource()) {
          if(putId.equals(dataId) && putPw.equals(dataPw)){
+
        //  new LoginAccess();
-               
+
          //로그인 성공 뒤에 아이디 텍스트필드 초기화
          this.idField.setText("");
          //로그인 성공뒤에 비밀번호 텍스트필드 초기화
@@ -136,22 +147,36 @@ public class LoginFrame extends JFrame implements ActionListener{
    }
    
    public void setIdPwImagePositon() throws IOException{
-	      ID = ImageIO.read(new File("Login/ID.png"));
-	      IDreimage = ID.getScaledInstance(
-	                     LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-	                     LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
-	                     Image.SCALE_SMOOTH);
-	      this.idImage       = new JButton(new ImageIcon(IDreimage));
-	      PW = ImageIO.read(new File("Login/PW.png"));
-	      PWreimage = PW.getScaledInstance(
-	                     LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
-	                     LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
-	                     Image.SCALE_SMOOTH);
-	      this.passwordImage    = new JButton(new ImageIcon(PWreimage));
-	      
+
+      ID        = ImageIO.read(new File("resources/login/ID.png"));
+      IDreimage = ID.getScaledInstance(
+                     LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+                     LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
+                     Image.SCALE_SMOOTH);
+      
+      this.idImage       = new JButton(new ImageIcon(IDreimage));
+      
+      //아이디 이미지 위치 설정
+      this.idImage.setBounds(
+            LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize(),
+            LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_Y.getSize(),
+            LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
+            LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+      );
+      
+
       this.idImage.setBorderPainted(false);
       this.idImage.setContentAreaFilled(false);
       this.idImage.setFocusPainted(false);
+      
+
+      PW         = ImageIO.read(new File("resources/login/PW.png"));
+      PWreimage = PW.getScaledInstance(
+                     LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
+                     LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
+                     Image.SCALE_SMOOTH);
+      
+      this.passwordImage    = new JButton(new ImageIcon(PWreimage));  
       
       //비밀번호 이미지 위치 설정
       this.passwordImage.setBounds(
@@ -169,11 +194,37 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.add(this.passwordImage);
    }
    
-   public void setButtonPosition(){
-      this.joinButton    = new JButton(new ImageIcon("Login/signup.png"));
-      this.loginButton    = new JButton(new ImageIcon("Login/login.jpg"));
-      this.searchIdButton = new JButton(new ImageIcon("Login/forgotID.png"));
-      this.searchPwButton = new JButton(new ImageIcon("Login/forgotPW.png"));
+
+
+   public void setButtonPosition() throws IOException{
+      this.join  = ImageIO.read(new File("resources/login/signup.png"));
+      this.joinreimage = join.getScaledInstance(
+                     LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
+                     LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize(),
+                     Image.SCALE_AREA_AVERAGING);
+      this.joinButton    = new JButton(new ImageIcon(joinreimage));
+      
+      this.login  = ImageIO.read(new File("resources/login/login.jpg"));
+      this.loginreimage = login.getScaledInstance(
+                     LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
+                     LoginFrameSizesEnum.LOGIN_ICON_HEIGHT.getSize(),
+                     Image.SCALE_AREA_AVERAGING);
+      this.loginButton    = new JButton(new ImageIcon(loginreimage));
+      
+      this.searchid  = ImageIO.read(new File("resources/login/forgotID.png"));
+      this.searchidreimage = searchid.getScaledInstance(
+                     LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
+                     LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize(),
+                     Image.SCALE_AREA_AVERAGING);
+      this.searchIdButton = new JButton(new ImageIcon(searchidreimage));
+      
+      this.searchpw  = ImageIO.read(new File("resources/login/forgotPW.png"));
+      this.searchpwreimage = searchpw.getScaledInstance(
+                     LoginFrameSizesEnum.SIZE_PW_ICON_WIDTH.getSize(),
+                     LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize(),
+                     Image.SCALE_AREA_AVERAGING);
+      this.searchPwButton = new JButton(new ImageIcon(searchpwreimage));
+
       
       //로그인 버튼 위치 설정
       this.loginButton.setBounds(
@@ -196,7 +247,9 @@ public class LoginFrame extends JFrame implements ActionListener{
             LoginFrameSizesEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_X.getSize(),
             LoginFrameSizesEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_Y.getSize(),
                 LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(), 
-                LoginFrameSizesEnum.SIZE_JOIN_ICON_WIDTH.getSize()
+
+                LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize()
+
         );
       
       this.joinButton.setBorderPainted(false);
@@ -209,7 +262,8 @@ public class LoginFrame extends JFrame implements ActionListener{
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_X.getSize(),
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_Y.getSize(),
                 LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(), 
-                LoginFrameSizesEnum.SIZE_JOIN_ICON_WIDTH.getSize()
+
+                LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize()
         );
       
       this.searchIdButton.setBorderPainted(false);
@@ -221,8 +275,9 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.searchPwButton.setBounds(
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X.getSize(),
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y.getSize(),
-                LoginFrameSizesEnum.SIZE_PW_ICON_HEIGHT.getSize(), 
-                LoginFrameSizesEnum.SIZE_JOIN_ICON_WIDTH.getSize()
+
+                LoginFrameSizesEnum.SIZE_PW_ICON_WIDTH.getSize(), 
+                LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize()
         );
       
       this.searchPwButton.setBorderPainted(false);
