@@ -298,7 +298,7 @@ public class LoginFrame extends JFrame implements ActionListener{
    
    public static void main(String[] args) {
       try {
-         new LoginFrames();
+         new LoginFrame();
       } catch (IOException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
