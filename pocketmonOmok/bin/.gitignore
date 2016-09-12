@@ -1,3 +1,12 @@
+/actions/
 /client/
+<<<<<<< HEAD
 /frames/
 /enums/
+=======
+/dataBaseConnection/
+/datas/
+/enums/
+/frames/
+/omokGameServer/
+>>>>>>> 7eb7b43b99bb954232ffcfca474fc8881b99cb2b

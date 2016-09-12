@@ -104,7 +104,6 @@ public class LoginFrame extends JFrame implements ActionListener{
       
       if(this.loginButton == e.getSource()) {
          if(putId.equals(dataId) && putPw.equals(dataPw)){
-         new LoginAccess();
                
          //로그인 성공 뒤에 아이디 텍스트필드 초기화
          this.idField.setText("");
