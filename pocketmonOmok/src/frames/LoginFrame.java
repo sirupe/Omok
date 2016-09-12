@@ -64,7 +64,6 @@ public class LoginFrame extends JFrame implements ActionListener{
 		
 		this.loginFailText	   = new JTextArea();
 			
-		
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 		image = ImageIO.read(new File("resources/login/background.jpg"));
 		reimage = image.getScaledInstance(
