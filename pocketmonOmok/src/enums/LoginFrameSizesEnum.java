@@ -5,49 +5,76 @@ import java.awt.Toolkit;
 // 태성(경로)
 
 public enum LoginFrameSizesEnum {
+	//전체화면 사이즈
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
+	
+	//로그인 프레임 가로 길이
 	LOGIN_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.67)),
-	LOGIN_FRAME_SIZE_HEIGHT((int)(SCREEN_SIZE.getDimension().getHeight() * 0.85)),
+	//로그인 프레임 세로 길이
+	LOGIN_FRAME_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.7)),
 
+	//로그인 프레임의 X위치
 	LOGIN_FRAME_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (LOGIN_FRAME_SIZE_WIDTH.getSize() / 2))),
+	//로그인 프레임의 Y위치
 	LOGIN_FRAME_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2)) - (LOGIN_FRAME_SIZE_HEIGHT.getSize() / 2)),	
 	
-	SIZE_LABEL_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.04)),
-	SIZE_LABEL_HEIGHT((int)(SCREEN_SIZE.getDimension().getHeight() * 0.04)),
-	
-	LOGIN_RESOURCE_ID_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.24)),
-	LOGIN_RESOURCE_ID_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.28)),
+	//ID이미지의 X위치
+	LOGIN_RESOURCE_ID_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.37)),
+	//ID이미지의 Y위치
+	LOGIN_RESOURCE_ID_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.34)),
 		
-	LOGIN_RESOURCE_PASSWORD_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.24)),
-	LOGIN_RESOURCE_PASSWORD_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.33)),
+	//PW이미지의 X위치
+	LOGIN_RESOURCE_PASSWORD_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.368)),
+	//PW이미지의 Y위치
+	LOGIN_RESOURCE_PASSWORD_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.40)),
 	
-	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.30)),
-	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.46)),
+	//로그인 이미지의 X위치
+	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.46)),
+	//로그인 이미지의 Y위치
+	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.55)),
 	
-	LOGIN_RESOURCE_JOIN_BUTTON_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.24)),
-	LOGIN_RESOURCE_JOIN_BUTTON_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.41)),
+	//회원가입(sign up) 이미지의  X위치
+	LOGIN_RESOURCE_JOIN_BUTTON_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.37)),
+	//회원가입(sign up) 이미지의 Y위치
+	LOGIN_RESOURCE_JOIN_BUTTON_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.49)),
 	
-	LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.30)),
-	LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.41)),
+	//아이디찾기(forgot ID) 이미지의 X위치
+	LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.455)),
+	//아이디찾기(forgot ID) 이미지의 Y위치
+	LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.49)),
 	
-	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.36)),
-	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.41)),
+	//비밀번호찾기(forgot PW) 이미지의 X위치
+	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.54)),
+	//비밀번호찾기(forgot PW) 이미지의 Y위치
+	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.49)),
 	
-	LOGIN_RESOURCE_ID_FIELD_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.29)),
-	LOGIN_RESOURCE_ID_FIELD_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.29)),
+	//아이디 입력창 필드의 X위치
+	LOGIN_RESOURCE_ID_FIELD_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.44)),
+	//아이디 입력창 필드의 Y위치
+	LOGIN_RESOURCE_ID_FIELD_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.35)),
 	
-	LOGIN_RESOURCE_PW_FIELD_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.29)),
-	LOGIN_RESOURCE_PW_FIELD_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.34)),
+	//패스워드 입력창 필드의 X위치
+	LOGIN_RESOURCE_PW_FIELD_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.44)),
+	//패스워드 입력창 필드의 Y위치
+	LOGIN_RESOURCE_PW_FIELD_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.41)),
 	
-	LOGIN_ICON_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.04)),
-	LOGIN_ICON_HEIGHT((int)(SCREEN_SIZE.getDimension().getWidth() * 0.04)),
-	LOGIN_ICON_POSITION_X((int)((LOGIN_FRAME_SIZE_WIDTH.getSize() / 2) - (LOGIN_ICON_WIDTH.getSize() / 2))),
+	//로그인 화면창의  아이콘들의 가로 크기
+	LOGIN_ICON_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.07)),
+	//로그인 화면창의 아이콘들의 세로 크기
+	LOGIN_ICON_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.08)),
 	
-	SIZE_TEXT_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.095)),
-	SIZE_TEXT_HEIGHT((int)(SCREEN_SIZE.getDimension().getWidth() * 0.015)),
+	//ID, PW 이미지의 가로 크기
+	SIZE_LABEL_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.06)),
+	//ID, PW 이미지의 세로 크기
+	SIZE_LABEL_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.05)),
 	
-	SIZE_JOIN_ICON_HEIGTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.03)),
-	SIZE_PW_ICON_WIDTH((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.12)),
+	//ID, PW 입력창의 가로 크기
+	SIZE_TEXT_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.15)),
+	//ID, PW 입력창의 세로 크기
+	SIZE_TEXT_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.035)),
+	
+	ICON_SIZE_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.03)),
+	ICON_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.13)),
 	
 	//============================================================================================
 	
