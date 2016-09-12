@@ -186,7 +186,7 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.join  = ImageIO.read(new File("resources/login/signup.png"));
       this.joinreimage = join.getScaledInstance(
                      LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
-                     LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize(),
+                     LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize(),
                      Image.SCALE_AREA_AVERAGING);
       this.joinButton    = new JButton(new ImageIcon(joinreimage));
       
@@ -200,14 +200,14 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.searchid  = ImageIO.read(new File("resources/login/forgotID.png"));
       this.searchidreimage = searchid.getScaledInstance(
                      LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
-                     LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize(),
+                     LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize(),
                      Image.SCALE_AREA_AVERAGING);
       this.searchIdButton = new JButton(new ImageIcon(searchidreimage));
       
       this.searchpw  = ImageIO.read(new File("resources/login/forgotPW.png"));
       this.searchpwreimage = searchpw.getScaledInstance(
-                     LoginFrameSizesEnum.SIZE_PW_ICON_WIDTH.getSize(),
-                     LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize(),
+                     LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
+                     LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize(),
                      Image.SCALE_AREA_AVERAGING);
       this.searchPwButton = new JButton(new ImageIcon(searchpwreimage));
       
@@ -232,7 +232,7 @@ public class LoginFrame extends JFrame implements ActionListener{
             LoginFrameSizesEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_X.getSize(),
             LoginFrameSizesEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_Y.getSize(),
                 LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(), 
-                LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize()
+                LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize()
         );
       
       this.joinButton.setBorderPainted(false);
@@ -245,7 +245,7 @@ public class LoginFrame extends JFrame implements ActionListener{
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_X.getSize(),
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_Y.getSize(),
                 LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(), 
-                LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize()
+                LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize()
         );
       
       this.searchIdButton.setBorderPainted(false);
@@ -257,8 +257,8 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.searchPwButton.setBounds(
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X.getSize(),
             LoginFrameSizesEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y.getSize(),
-                LoginFrameSizesEnum.SIZE_PW_ICON_WIDTH.getSize(), 
-                LoginFrameSizesEnum.SIZE_JOIN_ICON_HEIGTH.getSize()
+                LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(), 
+                LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize()
         );
       
       this.searchPwButton.setBorderPainted(false);
