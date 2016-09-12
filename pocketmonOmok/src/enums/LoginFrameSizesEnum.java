@@ -7,20 +7,13 @@ import java.awt.Toolkit;
 public enum LoginFrameSizesEnum {
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	LOGIN_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.67)),
-	LOGIN_FRAME_SIZE_HEIGHT((int)(SCREEN_SIZE.getDimension().getHeight() * 0.85)),
-<<<<<<< HEAD
-	LOGIN_FRAME_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 2))),
-	LOGIN_FRAME_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2)) - (LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 2)),	
-	
-	SIZE_LABEL_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.08)),
-	SIZE_LABEL_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.05)),
-=======
+	LOGIN_FRAME_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.7)),
+
 	LOGIN_FRAME_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (LOGIN_FRAME_SIZE_WIDTH.getSize() / 2))),
 	LOGIN_FRAME_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2)) - (LOGIN_FRAME_SIZE_HEIGHT.getSize() / 2)),	
 	
 	SIZE_LABEL_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.04)),
 	SIZE_LABEL_HEIGHT((int)(SCREEN_SIZE.getDimension().getHeight() * 0.04)),
->>>>>>> d16bc0739fa95be12bcd33d0b646e1140267bc40
 	
 	LOGIN_RESOURCE_ID_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.24)),
 	LOGIN_RESOURCE_ID_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.28)),
