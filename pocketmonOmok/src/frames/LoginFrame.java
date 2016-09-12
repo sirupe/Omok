@@ -146,15 +146,6 @@ public class LoginFrame extends JFrame implements ActionListener{
       
       this.idImage       = new JButton(new ImageIcon(IDreimage));
       
-      PW         = ImageIO.read(new File("resources/login/PW.png"));
-      PWreimage = PW.getScaledInstance(
-                     LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
-                     LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
-                     Image.SCALE_SMOOTH);
-      
-      this.passwordImage    = new JButton(new ImageIcon(PWreimage));
-      
-      
       //아이디 이미지 위치 설정
       this.idImage.setBounds(
             LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize(),
@@ -166,6 +157,14 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.idImage.setBorderPainted(false);
       this.idImage.setContentAreaFilled(false);
       this.idImage.setFocusPainted(false);
+      
+      PW         = ImageIO.read(new File("resources/login/PW.png"));
+      PWreimage = PW.getScaledInstance(
+                     LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
+                     LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
+                     Image.SCALE_SMOOTH);
+      
+      this.passwordImage    = new JButton(new ImageIcon(PWreimage));  
       
       //비밀번호 이미지 위치 설정
       this.passwordImage.setBounds(

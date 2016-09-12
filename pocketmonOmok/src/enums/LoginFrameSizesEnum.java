@@ -11,6 +11,9 @@ public enum LoginFrameSizesEnum {
 	LOGIN_FRAME_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 2))),
 	LOGIN_FRAME_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2)) - (LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 2)),	
 	
+	SIZE_LABEL_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.08)),
+	SIZE_LABEL_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.05)),
+	
 	LOGIN_RESOURCE_ID_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.36)),
 	LOGIN_RESOURCE_ID_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.34)),
 		
@@ -29,18 +32,16 @@ public enum LoginFrameSizesEnum {
 	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize() + 250),
 	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_Y.getSize() + 126),
 	
-	LOGIN_RESOURCE_ID_FIELD_POSITION_X(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize() + 102),
+	LOGIN_RESOURCE_ID_FIELD_POSITION_X(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize() + 
+									   LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize()),
 	LOGIN_RESOURCE_ID_FIELD_POSITION_Y(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_Y.getSize() + 10),
 	
-	LOGIN_RESOURCE_PW_FIELD_POSITION_X(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize() + 102),
+	LOGIN_RESOURCE_PW_FIELD_POSITION_X(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_FIELD_POSITION_X.getSize()),
 	LOGIN_RESOURCE_PW_FIELD_POSITION_Y(LoginFrameSizesEnum.LOGIN_RESOURCE_ID_POSITION_Y.getSize() + 68),
 	
 	LOGIN_ICON_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.08)),
 	LOGIN_ICON_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.11)),
 	LOGIN_ICON_POSITION_X((int)((LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 2) - (LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize() / 2))),
-	
-	SIZE_LABEL_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.08)),
-	SIZE_LABEL_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.05)),
 	
 	SIZE_TEXT_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.14)),
 	SIZE_TEXT_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03)),
