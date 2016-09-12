@@ -6,12 +6,9 @@ import java.awt.Toolkit;
 
 public enum LoginFrameSizesEnum {
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-	LOGIN_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.67)),
-<<<<<<< HEAD
+	LOGIN_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.80)),
+
 	LOGIN_FRAME_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.7)),
-=======
-	LOGIN_FRAME_SIZE_HEIGHT((int)(SCREEN_SIZE.getDimension().getHeight() * 0.85)),
->>>>>>> 0d4dde563532fd46c2f4711ac2bec9ff3d140651
 
 	LOGIN_FRAME_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (LOGIN_FRAME_SIZE_WIDTH.getSize() / 2))),
 	LOGIN_FRAME_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2)) - (LOGIN_FRAME_SIZE_HEIGHT.getSize() / 2)),	
@@ -19,10 +16,10 @@ public enum LoginFrameSizesEnum {
 	SIZE_LABEL_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.04)),
 	SIZE_LABEL_HEIGHT((int)(SCREEN_SIZE.getDimension().getHeight() * 0.04)),
 	
-	LOGIN_RESOURCE_ID_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.24)),
+	LOGIN_RESOURCE_ID_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.4)),
 	LOGIN_RESOURCE_ID_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.28)),
 		
-	LOGIN_RESOURCE_PASSWORD_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.24)),
+	LOGIN_RESOURCE_PASSWORD_POSITION_X(LOGIN_RESOURCE_ID_POSITION_X.getSize()),
 	LOGIN_RESOURCE_PASSWORD_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.33)),
 	
 	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.30)),
@@ -37,10 +34,10 @@ public enum LoginFrameSizesEnum {
 	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.36)),
 	LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.41)),
 	
-	LOGIN_RESOURCE_ID_FIELD_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.29)),
+	LOGIN_RESOURCE_ID_FIELD_POSITION_X(LOGIN_RESOURCE_ID_POSITION_X.getSize() + SIZE_LABEL_WIDTH.getSize()),
 	LOGIN_RESOURCE_ID_FIELD_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.29)),
 	
-	LOGIN_RESOURCE_PW_FIELD_POSITION_X((int)(SCREEN_SIZE.getDimension().getWidth() * 0.29)),
+	LOGIN_RESOURCE_PW_FIELD_POSITION_X(LOGIN_RESOURCE_PASSWORD_POSITION_X.getSize() + SIZE_LABEL_WIDTH.getSize()),
 	LOGIN_RESOURCE_PW_FIELD_POSITION_Y((int)(SCREEN_SIZE.getDimension().getHeight() * 0.34)),
 	
 	LOGIN_ICON_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.04)),
