@@ -2,7 +2,7 @@ package client;
 
 import java.io.IOException;
 
-import frames.LoginFrame;
+import frames.BasicFrame;
 import dataBaseConnection.DBConnectionPool;
 import dataBaseConnection.LoginDAO;
 import datas.UserPersonalInfoDTO;

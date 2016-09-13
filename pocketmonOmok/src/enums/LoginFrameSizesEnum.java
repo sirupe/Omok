@@ -28,9 +28,9 @@ public enum LoginFrameSizesEnum {
 	//PW이미지의 Y위치
 	LOGIN_RESOURCE_PASSWORD_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.40)),
 	
-	//로그인 이미지의 X위치
+	//로그인 버튼의 X위치
 	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.46)),
-	//로그인 이미지의 Y위치
+	//로그인 버튼의 Y위치
 	LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.55)),
 	
 	//회원가입(sign up) 이미지의  X위치
@@ -73,8 +73,19 @@ public enum LoginFrameSizesEnum {
 	//ID, PW 입력창의 세로 크기
 	SIZE_TEXT_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.035)),
 	
-	ICON_SIZE_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.03)),
-	ICON_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.13)),
+	//회원가입, 아이디찾기, 비밀번호찾기 아이콘 크기 가로 크기
+	ICON_SIZE_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.07)),
+	//회원가입, 아이디찾기, 비밀번호찾기 아이콘 크기 세로 크기
+	ICON_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.03)),
+	
+	//로그인 실패시 오류 알림 텍스트 표시 X위치
+	LOGIN_FAIL_TEXT_POSITION_X((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.444)),
+	//로그인 실패시 오류 알림 텍스트 표시 Y위치
+	LOGIN_FAIL_TEXT_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.455)),
+	//로그인 실패시 오류 알림 텍스트 표시 가로 크기
+	LOGIN_FAIL_TEXT_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.12)),
+	//로그인 실패시 오류 알림 텍스트 표시 세로 크기
+	LOGIN_FAIL_TEXT_HEIGTH((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.02)),
 	
 	//============================================================================================
 	
