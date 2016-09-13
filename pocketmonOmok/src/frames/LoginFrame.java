@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import client.ClientSender;
 import enums.LoginFrameSizesEnum;
 // 태성
 
@@ -56,13 +57,17 @@ public class LoginFrame extends JFrame implements ActionListener{
    private String putId;
    private String putPw;
 
-   public LoginFrame() throws IOException {
-      this.dataId            = new String("ceterman");
-      this.dataPw            = new String("1234");
+   // 은정 - sender 추가
+   private ClientSender clientSender;
+   
+   // 은정 - sender 생성자 매개변수로 받음
+   public LoginFrame(ClientSender sender) throws IOException {
+	  this.clientSender  = sender;
+      this.dataId        = new String("ceterman");
+      this.dataPw        = new String("1234");
       
-      this.textFieldFont     = new Font("", Font.BOLD, 20);
-      
-      this.loginFailText      = new JTextArea();
+      this.textFieldFont = new Font("", Font.BOLD, 20);
+      this.loginFailText = new JTextArea();
          
       
       //배경이미지 모니터의 해상도에 따라 조절되게 설정
@@ -97,6 +102,7 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.setResizable(false);
    }   
    
+   // 은정 - 이거리스너로 빼주세영
    @Override
    public void actionPerformed(ActionEvent e) {
       this.putId = idField.getText();
@@ -295,12 +301,4 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.add(this.pwField);
    }
    
-   public static void main(String[] args) {
-      try {
-         new LoginFrame();
-      } catch (IOException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-   }
 }
