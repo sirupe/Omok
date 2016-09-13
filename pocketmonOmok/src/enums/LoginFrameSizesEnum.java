@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 // 태성(경로)
 
 public enum LoginFrameSizesEnum {
-	//전체화면 사이즈
+
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	//로그인 프레임 가로 길이
@@ -109,23 +109,23 @@ public enum LoginFrameSizesEnum {
 	
 	private int size;
 
-	private Dimension dimension;
-	
-	private LoginFrameSizesEnum() {}
-	
-	private LoginFrameSizesEnum(int x) {
-		this.size = x;
-	}
-	
-	private LoginFrameSizesEnum(Dimension dimension) {
-		this.dimension = dimension;
-	}
-	
-	public int getSize() {
-		return size;
-	}
+   private Dimension dimension;
+   
+   private LoginFrameSizesEnum() {}
+   
+   private LoginFrameSizesEnum(int x) {
+      this.size = x;
+   }
+   
+   private LoginFrameSizesEnum(Dimension dimension) {
+      this.dimension = dimension;
+   }
+   
+   public int getSize() {
+      return size;
+   }
 
-	public Dimension getDimension() {
-		return dimension;
-	}
+   public Dimension getDimension() {
+      return dimension;
+   }
 }
