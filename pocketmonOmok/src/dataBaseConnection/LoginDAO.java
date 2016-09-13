@@ -8,16 +8,17 @@ import datas.UserPersonalInfoDTO;
 import enums.UserPositionEnum;
 
 public class LoginDAO {
-	
-	public UserPersonalInfoDTO checkIDMatchesPW(String id) {
+	// DTO 에 ID가 입력되어 전달되면 DTO 에 ID와 PW가 담겨 되돌려집니다. 없을경우 NULL 이 반환됩니다.
+	public UserPersonalInfoDTO checkIDMatchesPW(UserPersonalInfoDTO personalDTO) {
 		// try-catch문에서 선언하여 사용시 finally 와 스코프가 달라 에러 발생. 미리 선언해준다.
 		Connection connection = null;
-		PreparedStatement ps = null;
-		ResultSet resultSet = null;
-		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_LOGIN);
-		
+		PreparedStatement ps  = null;
+		ResultSet resultSet   = null;
+
 		// DB Pool 없으면 생성, 있으면 인스턴스 가져오기
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		
+		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_LOGIN);
 		
 		try {
 			// 연결 요청
@@ -31,7 +32,7 @@ public class LoginDAO {
 			
 			// 쿼리 날리고 값 가져오기
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, id);
+			ps.setString(1, personalDTO.getUserID());
 			resultSet = ps.executeQuery();
 			
 			// DAO 에 가져온 값 세팅
