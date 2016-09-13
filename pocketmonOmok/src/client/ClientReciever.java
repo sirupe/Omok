@@ -6,12 +6,10 @@ import java.io.ObjectInputStream;
 import datas.UserPositionIndex;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
 public class ClientReciever extends Thread {
-	private ClientAccept clientAccept;
 	private ObjectInputStream clientIS;
 	
 	public ClientReciever(ClientAccept accept) {
 		System.out.println("ClientReciever 생성자 실행");
-		this.clientAccept = accept;
 		this.clientIS = accept.getClientIS();
 	}
 	

@@ -24,7 +24,9 @@ public class OmokServer {
 		while(true) {
 			System.out.println("Waiting User...");
 			this.socket = this.serverSocket.accept();
-			this.psersonalServerList.add(new OmokPersonalServer(this));
+			OmokPersonalServer persomalServer = new OmokPersonalServer(this);
+			this.psersonalServerList.add(persomalServer);
+			persomalServer.start();
 			System.out.println("now list size is " + this.psersonalServerList.size());
 			System.out.println("User Accept .. " + socket.getLocalAddress());
 		}

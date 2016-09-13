@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -17,9 +18,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import datas.UserPersonalInfoDTO;
 import enums.LoginFrameSizesEnum;
+import enums.UserPositionEnum;
 
-public class LoginPanel extends JPanel implements ActionListener {
+public class LoginPanel extends JPanel implements ActionListener, Serializable {
 	private JButton joinButton;
 	private JButton loginButton;    
 	private JButton searchIdButton;  
@@ -60,6 +63,13 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
 		//프레임 화면 출력 위치 설정
+		
+		
+		UserPersonalInfoDTO dto = new UserPersonalInfoDTO(UserPositionEnum.POSITION_LOGIN);
+		dto.setUserID("test");
+		dto.setUserPasswd("1234");
+		this.basicFrame.getClientSender().getClientOS().writeObject(dto);
+		
 		this.setBounds(   
 		      LoginFrameSizesEnum.LOGIN_FRAME_POSITION_X.getSize(),
 		      LoginFrameSizesEnum.LOGIN_FRAME_POSITION_Y.getSize(),
@@ -79,6 +89,8 @@ public class LoginPanel extends JPanel implements ActionListener {
 		
 		this.add(this.loginPanel);
 		this.setLayout(new CardLayout());
+		
+		
 		
 	}
 	
