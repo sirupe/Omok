@@ -44,8 +44,6 @@ public class LoginFrame extends JFrame implements ActionListener{
 
    private JTextArea loginFailAlotText;
    
-
-   
    private int loginFailCount;
    
    private Image image;
@@ -136,7 +134,6 @@ public class LoginFrame extends JFrame implements ActionListener{
       this.add(this.loginFailText);
       
       this.loginFailFont = new Font("", Font.PLAIN, 13);
-      this.loginFailText.setFont(loginFailFont);
       this.loginFailText.setForeground(Color.RED);
       this.loginFailText.setBackground(Color.BLACK);
       this.loginFailText.setText("아이디 또는 비밀번호 오류");

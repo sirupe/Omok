@@ -6,8 +6,8 @@ import java.awt.Toolkit;
 
 public enum LoginFrameSizesEnum {
    SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-   LOGIN_FRAME_SIZE_WIDTH((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().getWidth() * 0.67)),
-   LOGIN_FRAME_SIZE_HEIGHT((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().getHeight() * 0.85)),
+   LOGIN_FRAME_SIZE_WIDTH((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().getWidth() * 0.7)),
+   LOGIN_FRAME_SIZE_HEIGHT((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.7)),
    LOGIN_FRAME_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 2))),
    LOGIN_FRAME_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2)) - (LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 2)),   
    
