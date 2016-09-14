@@ -1,5 +1,5 @@
 package actions.join;
 
-public class joinAction {
+public class JoinAction {
 
 }

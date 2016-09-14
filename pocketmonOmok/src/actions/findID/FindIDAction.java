@@ -1,5 +1,5 @@
 package actions.findID;
 
-public class findIDAction {
+public class FindIDAction {
 
 }

@@ -1,5 +1,5 @@
 package actions.otherUserInfo;
 
-public class otherUserInfoAction {
+public class OtherUserInfoAction {
 
 }

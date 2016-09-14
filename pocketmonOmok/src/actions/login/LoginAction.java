@@ -1,5 +1,5 @@
 package actions.login;
 
-public class loginAction {
+public class LoginAction {
 	
 }

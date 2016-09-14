@@ -1,5 +1,5 @@
 package actions.waitingRoom;
 
-public class waitingRoonAction {
+public class WaitingRoonAction {
 
 }
