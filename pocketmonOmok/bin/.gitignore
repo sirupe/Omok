@@ -4,12 +4,15 @@
 /enums/
 =======
 /actions/
-/client/
-/dataBaseConnection/
-/datas/
-/enums/
 /frames/
+<<<<<<< HEAD
+=======
 /omokGameServer/
 >>>>>>> 67fedcf69f32850bbdca2897bc10230834660c17
+<<<<<<< HEAD
 /utility.class
 /utility/
+=======
+>>>>>>> 7f80e56b4aec0a63c43940ed99d28ff3929cdcb5
+>>>>>>> 2c28212b5c1fdc4a44a6452a28c8fa8781bc2dfd
+/client/

@@ -9,7 +9,6 @@ import java.net.UnknownHostException;
 
 import enums.ServerIPEnum;
 import frames.BasicFrame;
-
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 @SuppressWarnings("serial")
 public class ClientAccept implements Serializable {
