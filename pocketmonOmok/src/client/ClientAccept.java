@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import enums.ServerIPEnum;
-import frames.LoginFrame;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
@@ -23,7 +22,6 @@ public class ClientAccept {
 		ClientReciever reciever = new ClientReciever(this);
 		reciever.start();
 		ClientSender sender = new ClientSender(this);
-		LoginFrame loginFrame = new LoginFrame(sender);
 	}
 
 	public ObjectInputStream getClientIS() {
