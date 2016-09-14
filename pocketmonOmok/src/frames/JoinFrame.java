@@ -89,6 +89,8 @@ public class JoinFrame extends JFrame {
 	private Image reimage;
 
 	public JoinFrame() throws IOException {
+		
+		System.out.println("왜 안나오니?????");
 //모든 레이블 
 		this.idLabel = new JLabel("아이디"); 
 	
@@ -581,9 +583,9 @@ public class JoinFrame extends JFrame {
 		this.add(emailErrorLabel);
 		
 	}
-	public static void main(String[] args) throws IOException {
-		new JoinFrame();
-	}
+//	public static void main(String[] args) throws IOException {
+//		new JoinFrame();
+//	}
 
 }
        
