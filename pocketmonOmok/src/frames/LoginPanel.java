@@ -4,24 +4,20 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import datas.UserPersonalInfoDTO;
 import actions.login.LoginAction;
 import enums.LoginFrameSizesEnum;
-import enums.UserPositionEnum;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel {
@@ -36,9 +32,8 @@ public class LoginPanel extends JPanel {
 	private JPasswordField pwField;
 	
 	private Font textFieldFont;
-	private Font loginFailFont;
 	
-	private JTextArea loginFailText;
+	private JLabel loginFailText;
 	
 	//이미지 화면 비율에 맞춰서 바뀌게 하기 위해 이미지 사용
 	private Image ID, IDreimage, PW, PWreimage;
@@ -46,12 +41,6 @@ public class LoginPanel extends JPanel {
 	private Image login, loginreimage;
 	private Image searchid, searchidreimage;
 	private Image searchpw, searchpwreimage;
-	
-	//테스트용 스트링선언
-	private String dataId;
-	private String dataPw;
-	private String putId;
-	private String putPw;
 	
 	private JPanel loginPanel;
 	private BasicFrame basicFrame;
@@ -62,19 +51,11 @@ public class LoginPanel extends JPanel {
 		this.loginAction = new LoginAction(this);
 		
 		this.loginPanel	= new JPanel();
-		this.dataId     = new String("1234");
-		this.dataPw     = new String("1234");   
 		
 		this.loginPanel.setLayout(null);
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
 		//프레임 화면 출력 위치 설정
-		
-		
-		UserPersonalInfoDTO dto = new UserPersonalInfoDTO(UserPositionEnum.POSITION_LOGIN);
-		dto.setUserID("test");
-		dto.setUserPasswd("1234");
-		this.basicFrame.getClientSender().getClientOS().writeObject(dto);
 		
 		this.setBounds(   
 		      LoginFrameSizesEnum.LOGIN_FRAME_POSITION_X.getSize(),
@@ -98,23 +79,22 @@ public class LoginPanel extends JPanel {
 	}
 	
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
-	public void loginFail(){
+	public void loginFail(String errMsg){
 		this.setLayout(null);
-		this.loginFailText = new JTextArea();
 		this.textFieldFont = new Font("", Font.BOLD, 20);      
+		this.loginFailText = new JLabel();
 		this.loginFailText.setBounds(
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_POSITION_X.getSize(),
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_POSITION_Y.getSize(),
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_WIDTH.getSize(), 
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_HEIGTH.getSize()
 		);
+		this.loginFailText.setOpaque(false);
 		this.add(this.loginFailText);
 		
-		this.loginFailFont = new Font("", Font.PLAIN, 13);
-		this.loginFailText.setFont(loginFailFont);
+		this.loginFailText.setFont(new Font("", Font.PLAIN, 13));
 		this.loginFailText.setForeground(Color.RED);
-		this.loginFailText.setBackground(Color.BLACK);
-		this.loginFailText.setText("아이디 또는 비밀번호 오류");
+		this.loginFailText.setText(errMsg);
 	}
 	
 	public void loginFailTextReset(){
@@ -300,14 +280,6 @@ public class LoginPanel extends JPanel {
 
 	public JPasswordField getPwField() {
 		return pwField;
-	}
-
-	public String getDataId() {
-		return dataId;
-	}
-
-	public String getDataPw() {
-		return dataPw;
 	}
 
 	public BasicFrame getBasicFrame() {

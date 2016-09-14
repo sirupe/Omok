@@ -2,11 +2,14 @@ package actions.login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import datas.UserPersonalInfoDTO;
+import enums.UserPositionEnum;
 import frames.BasicFrame;
 import frames.LoginPanel;
 
@@ -18,34 +21,22 @@ public class LoginAction implements ActionListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {	
-		//getPassword() 를 하면 String을 char[]로 가져오기 때문에 char[]자료형인 passwd 변수에 넣었둔다.
+	public void actionPerformed(ActionEvent e) {
+		// id입력칸이나 pw입력칸 중 하나만 비어있어도 입력하라는 메세지 출력.
+		System.out.println(this.loginPanel.getIdField().getText().isEmpty());
 		char[] passwd = this.loginPanel.getPwField().getPassword();
-
-		if(this.loginPanel.getLoginButton() == e.getSource()) {
-			
-			if(this.loginPanel.getIdField().getText().equals(this.loginPanel.getDataId())
-						//passwd변수에 넣어둔 getPassword값을 String형태로 변환하여 비교한다.
-						&& new String(passwd, 0, passwd.length).equals(this.loginPanel.getDataPw())){
-			
-			this.loginPanel.getBasicFrame().inWaitingRoom();
-				
-			//로그인 성공 뒤에 아이디 텍스트필드 초기화
-			this.loginPanel.getIdField().setText("");
-			//로그인 성공뒤에 비밀번호 텍스트필드 초기화
-			this.loginPanel.getPwField().setText("");       
-			
-			//this.loginFailText.setText("");
-			} if(!(this.loginPanel.getIdField().getText().equals(this.loginPanel.getDataId())) 
-						&& this.loginPanel.getPwField().getPassword().equals(this.loginPanel.getDataPw())) {
-				this.loginPanel.loginFail();
-				
-			} else if(!(this.loginPanel.getPwField().getPassword().equals(this.loginPanel.getDataPw())) 
-						&& this.loginPanel.getIdField().getText().equals(this.loginPanel.getDataId())) {
-				this.loginPanel.loginFail();
-				
-			} else {
-				this.loginPanel.loginFail();
+		String passwdStr = new String(passwd, 0, passwd.length);
+		if(this.loginPanel.getIdField().getText().isEmpty() || passwdStr.isEmpty()) {
+			this.loginPanel.loginFailTextReset();
+			this.loginPanel.loginFail("아이디와 비밀번호를 모두 입력해주세요.");
+		} else {
+			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_LOGIN);
+			personalDTO.setUserID(this.loginPanel.getIdField().getText());
+			personalDTO.setUserPasswd(passwdStr);
+			try {
+				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

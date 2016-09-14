@@ -3,18 +3,21 @@ package omokGameServer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import datas.UserPositionIndex;
 
 public class OmokPersonalServer extends Thread{
 	private OmokServer omokServer;
+	private Socket personalSocket;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
 	
 	
 	
-	public OmokPersonalServer(OmokServer omokServer) throws IOException {
+	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
 		this.omokServer = omokServer;
+		this.personalSocket = socket;
 		this.serverInputStream  = new ObjectInputStream(this.omokServer.getSocket().getInputStream());
 		this.serverOutputStream = new ObjectOutputStream(this.omokServer.getSocket().getOutputStream());
 	}
@@ -29,9 +32,9 @@ public class OmokPersonalServer extends Thread{
 				UserPositionIndex userPosition = (UserPositionIndex)object;
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
-					this.omokServer.login();
+					this.omokServer.login(userPosition, this);
 					break;
-				case POSITION_WAITING_ROON :
+				case POSITION_WAITING_ROOM :
 					this.omokServer.waitingRoom();
 					break;
 				case POSITION_JOIN :
@@ -73,6 +76,8 @@ public class OmokPersonalServer extends Thread{
 	public ObjectOutputStream getServerOutputStream() {
 		return serverOutputStream;
 	}
-	
-	
+
+	public Socket getPersonalSocket() {
+		return personalSocket;
+	}
 }

@@ -17,4 +17,7 @@ public class UserPositionIndex implements Serializable {
 		return position;
 	}
 
+	public void setPosition(UserPositionEnum position) {
+		this.position = position;
+	}
 }
