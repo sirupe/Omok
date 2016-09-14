@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import datas.UserPersonalInfoDTO;
 import datas.UserPositionIndex;
 
 public class OmokPersonalServer extends Thread{
 	private OmokServer omokServer;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
+	
+	
 	
 	public OmokPersonalServer(OmokServer omokServer) throws IOException {
 		this.omokServer = omokServer;
@@ -27,8 +28,7 @@ public class OmokPersonalServer extends Thread{
 				Object object = this.serverInputStream.readObject();
 				UserPositionIndex userPosition = (UserPositionIndex)object;
 				switch(userPosition.getPosition()) {
-				case POSITION_LOGIN :
-					System.out.println(((UserPersonalInfoDTO)userPosition).getUserID());
+				case POSITION_LOGIN :             
 					break;
 				case POSITION_WAITING_ROON :      
 					break;

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+/omokGameServer/
+/frames/
+/enums/
+=======
 /actions/
 /client/
 /dataBaseConnection/
@@ -5,3 +10,6 @@
 /enums/
 /frames/
 /omokGameServer/
+>>>>>>> 67fedcf69f32850bbdca2897bc10230834660c17
+/utility.class
+/utility/

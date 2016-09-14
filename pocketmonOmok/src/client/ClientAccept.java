@@ -16,7 +16,6 @@ public class ClientAccept implements Serializable {
 	private Socket clientSocket;
 	private ObjectInputStream clientIS;
 	private ObjectOutputStream clientOS;
-	// TODO 여기에 프레임 넣어줘용
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
