@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import datas.UserPositionIndex;
 import enums.ServerIPEnum;
 
 public class OmokServer {
@@ -70,7 +71,12 @@ public class OmokServer {
 		System.out.println("내정보보기");
 	}
 
-	
+	public void exitProgram(UserPositionIndex index, OmokPersonalServer personalServer) throws IOException {
+		System.out.println("프로그램 종료");
+		personalServer.getServerOutputStream().close();
+		personalServer.getServerInputStream().close();
+		
+	}
 	
 	
 	public Socket getSocket() {

@@ -12,13 +12,6 @@ public class ClientMain implements Serializable {
 			e.printStackTrace();
 		}
 		
-//		DBConnectionPool dbcp = DBConnectionPool.getInstance();
-//		
-//		LoginDAO loginDAO = new LoginDAO();
-//		UserPersonalInfoDTO userPersonalInfo = loginDAO.checkIDMatchesPW("imcts");
-//		
-//		System.out.println(userPersonalInfo.getUserID());
-//		System.out.println(userPersonalInfo.getUserPasswd());
 	}
 	
 	

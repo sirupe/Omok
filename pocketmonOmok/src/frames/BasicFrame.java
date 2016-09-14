@@ -2,6 +2,8 @@ package frames;
 
 import java.awt.CardLayout;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -13,8 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import client.ClientSender;
+import datas.UserPositionIndex;
 import enums.LoginFrameSizesEnum;
 // 태성
+import enums.UserPositionEnum;
 
 @SuppressWarnings("serial")
 public class BasicFrame extends JFrame implements Serializable{
@@ -35,7 +39,6 @@ public class BasicFrame extends JFrame implements Serializable{
 					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 					Image.SCALE_SMOOTH);
 		
-		
 		this.setContentPane(new JLabel(new ImageIcon(reimage)));   
 		
 		//프레임 화면 출력 위치 설정
@@ -52,14 +55,31 @@ public class BasicFrame extends JFrame implements Serializable{
 		
 		this.waitingRoomPanel = new WaitingroomPanel();
 		
-		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.gameExit();
 		this.setLayout(this.cardLayout);
 		this.add("loginPanel", this.loginPanel);
 		this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.setTitle("Login");
 		this.setVisible(true);
 		this.setResizable(false);
+	}
+	
+	public void gameExit() {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.out.println("인덱스를 전송합니다.");
+				UserPositionIndex index = new UserPositionIndex(UserPositionEnum.POSITION_EXIT);
+				try {
+					clientSender.getClientOS().writeObject(index);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				e.getWindow().setVisible(false);
+			}
+		
+		});
 	}
 	
 	public void inWaitingRoom() {
@@ -69,7 +89,4 @@ public class BasicFrame extends JFrame implements Serializable{
 	public ClientSender getClientSender() {
 		return clientSender;
 	}
-	
-	
-	
 }
