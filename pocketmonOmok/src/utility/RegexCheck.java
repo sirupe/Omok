@@ -18,7 +18,6 @@ public class RegexCheck {
 		if(Pattern.matches("^[0-9]*$", id)) {
 			result = false;
 		}
-		
 		return result;
 	}
 	
