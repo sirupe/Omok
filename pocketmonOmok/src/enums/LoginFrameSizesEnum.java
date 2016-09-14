@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 public enum LoginFrameSizesEnum {
 
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-	
+	     
 	//로그인 프레임 가로 길이
 	LOGIN_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.67)),
 	//로그인 프레임 세로 길이

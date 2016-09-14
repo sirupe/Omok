@@ -12,6 +12,7 @@ import datas.UserPositionIndex;
 import enums.ServerIPEnum;
 import frames.BasicFrame;
 import frames.LoginPanel;
+
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 @SuppressWarnings("serial")
 public class ClientAccept implements Serializable {
@@ -27,6 +28,7 @@ public class ClientAccept implements Serializable {
 		this.basicFrame = new BasicFrame(this);
 		ClientReciever reciever = new ClientReciever(this, this.basicFrame);
 		reciever.start();
+
 	}
 
 	
