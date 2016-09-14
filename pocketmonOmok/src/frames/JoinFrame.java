@@ -269,6 +269,9 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
+		
+		System.out.println(ClientJoinSizesEnum.JOIN_ID_POSITION_Y);
+		System.out.println(ClientJoinSizesEnum.JOIN_PWD_POSITION_Y);
 		this.rePwLabel.setBounds(
 				ClientJoinSizesEnum.JOIN_REPWD_POSITION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_REPWD_POSITION_Y.getSize(),
