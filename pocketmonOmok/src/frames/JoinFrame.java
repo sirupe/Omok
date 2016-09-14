@@ -117,8 +117,8 @@ public class JoinFrame extends JFrame {
 // 에러 레이블
 		
 		String idErrMsg = "특수문자 입력불가,6~15자 이외 글자수";
-		String pwErrMsg = "pw불일치시,6~16글자수";
-		String repwErrMsg = "";
+		String pwErrMsg = ",6~16글자수";
+		String repwErrMsg = "pw불일치시";
 		String nameErrMsg = "한글만 가능, 2자 이상";
 		String genderErrMsg = "미선택시 - 필수 입력";
 		String emailErrMsg = "인증번호 틀렸을시";
@@ -140,18 +140,7 @@ public class JoinFrame extends JFrame {
 		
 		this.emailError  = new JLabel(emailErrMsg);
 		this.emailError.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
-		
 
-	
-		/*
-		this.idError.setForeground(Color.red);
-		this.pwdError.setForeground(Color.red);
-		this.rePwdError.setForeground(Color.red);
-		this.nameError.setForeground(Color.red);
-		this.genderError.setForeground(Color.red);
-		this.emailError.setForeground(Color.red);
-		*/
-		
 			
 // 모든 텍스트 필드
 		this.idT    = new JTextField(10);
@@ -550,8 +539,8 @@ public class JoinFrame extends JFrame {
 	//에러 메세지 출력
 	public void setErrorPosition() {
 		this.idError.setBounds(
-				ClientJoinSizesEnum.JOIN_IDERROR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_IDERROR_POSITTION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_IDERROR_POSITION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_IDERROR_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
@@ -594,5 +583,9 @@ public class JoinFrame extends JFrame {
 		this.add(emailError);
 		
 	}
+	public static void main(String[] args) throws IOException {
+		new JoinFrame();
+	}
 
 }
+       
