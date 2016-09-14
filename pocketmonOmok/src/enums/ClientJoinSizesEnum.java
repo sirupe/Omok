@@ -157,8 +157,8 @@ public enum ClientJoinSizesEnum {
 
 	
 	//year,month,date,date,tel,tel2 텍스트  조절
-	SIZE_TEXT_WIDTH(40),
-	SIZE_TEXT_HEIGHT(20),
+	SIZE_TEXT_WIDTH(JOINFRAME_SIZE_WIDTH.getSize() / 100 * 15),
+	SIZE_TEXT_HEIGHT(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 3),
 	
 	//email,emilAdr텍스트 크기 조절 , 이메일,전화번호 콤보박스, 성별 라디오박스, 버튼
 	SIZE_EMAIL_WIDTH(60),
