@@ -2,10 +2,6 @@
 <classpath>
 	<classpathentry kind="lib" path="ojdbc6-11.2.0.3.jar"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/omok/pocketmonOmok/ojdbc6-11.2.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/omok/pocketmonOmok/activation.jar"/>
-	<classpathentry kind="lib" path="C:/omok/pocketmonOmok/additionnal.jar"/>
-	<classpathentry kind="lib" path="C:/omok/pocketmonOmok/mail.jar"/>
 	<classpathentry kind="lib" path="activation.jar"/>
 	<classpathentry kind="lib" path="additionnal.jar"/>
 	<classpathentry kind="lib" path="mail.jar"/>

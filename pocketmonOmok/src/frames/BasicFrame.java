@@ -32,7 +32,6 @@ public class BasicFrame extends JFrame implements Serializable{
 	private ClientAccept clientAccept;
 	
 	public BasicFrame(ClientAccept clientAccept) throws IOException {
-		System.out.println("얘도 안나오나???");
 		this.clientAccept = clientAccept;
 		
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정

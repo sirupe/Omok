@@ -1,12 +1,15 @@
 package frames;
 
+import java.awt.Component;
+import java.awt.Font;
+
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,8 +18,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import enums.ClientJoinSizesEnum;
+import enums.LoginFrameSizesEnum;
 
 @SuppressWarnings("serial")
 public class JoinFrame extends JFrame {
@@ -77,7 +83,7 @@ public class JoinFrame extends JFrame {
 	private JButton joinButton; //회원가입 버튼
 	private JButton resetButton; //취소버튼
 	private JButton confirmButton; //인증 버큰
-	
+
 	
 //생년월일 콤보 박스
 	private Calendar rightNow = Calendar.getInstance();
@@ -85,15 +91,18 @@ public class JoinFrame extends JFrame {
 	private int nowmonth 	  = rightNow.get(Calendar.MONTH);
 	private int nowdate 	  = rightNow.get(Calendar.DATE);
 
-	//배경	
-	private Image reimage;
+//배경
+	private Image backGround;
+	private Object joinButtonimage;
+	private Object resetButtonImage;
+
 
 	public JoinFrame() throws IOException {
 		
-		System.out.println("왜 안나오니?????");
+		
+		
 //모든 레이블 
 		this.idLabel = new JLabel("아이디"); 
-	
 		this.pwLabel    = new JLabel("비밀번호");
 		this.rePwLabel  = new JLabel("비밀번호재입력");
 		this.nameLabel   = new JLabel("이름");
@@ -137,6 +146,30 @@ public class JoinFrame extends JFrame {
 		
 		this.emailErrorLabel  = new JLabel(emailErrMsg);
 		this.emailErrorLabel.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
+		
+//레이블 폰트
+		
+		this.idLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.pwLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.rePwLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.nameLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.birthLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.genderLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.emailLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.telLabel.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		
+//텍스트필드 테두리 없애기
+		
+		//border=new BevelBorder(BevelBorder.RAISED);//3차원적인 테두리 효과를 위한것이고 양각의 옵션을 준다.
+		//  label.setBorder(border);//라벨에 적용시킨다.
+		//  add(label);
+		
+		//idTextField.setBorder(ClientJoinSizesEnum.LABEL_DEFAULT.getBorder());
+		//this.idTextField.setOpaque(true);
+		
+		//idTextField.setBorder(new EmptyBorder(5,5,5,5));
+		//setContentPane(idTextField);
+		
 
 			
 // 모든 텍스트 필드
@@ -157,7 +190,6 @@ public class JoinFrame extends JFrame {
 		
 // 이메일 전화번호 콤보 박스
 		this.emailAddrChoice = new JComboBox<>();
-		this.confirmButton     = new JButton();
 
 		this.emailAddrChoice.addItem("직접입력");
 		this.emailAddrChoice.addItem("naver.com");
@@ -167,28 +199,12 @@ public class JoinFrame extends JFrame {
 		 
 		
 		this.telFrontNumChoice = new JComboBox<>();
-		this.telFrontNumChoice.addItem("02");
+		
 		this.telFrontNumChoice.addItem("010");
 		this.telFrontNumChoice.addItem("011");
-		this.telFrontNumChoice.addItem("09");
-	
-
-		//생일콤보 박스
-		this.yearChoice = new JComboBox<>();
+		this.telFrontNumChoice.addItem("016");
+		this.telFrontNumChoice.addItem("019");
 		
-		for(int i = 1900; i <= 2016; i++) {
-			yearChoice.addItem(i);
-		}
-		
-		this.monthChoice = new JComboBox<>();
-		for(int j = 1; j <= 12; j++) {
-			monthChoice.addItem(j);
-		}
-		
-		this.dateChoice = new JComboBox<>();
-		for(int k = 1; k <= 31; k++) {
-			dateChoice.addItem(k);
-		}
 		
 // 성별 여자남자 라디오 박스
 		this.genderButtonGroup = new ButtonGroup();
@@ -203,36 +219,78 @@ public class JoinFrame extends JFrame {
 		this.add(genderManRadio);
 		this.add(genderWomanRadio);
 		
+//콤보 박스
+//		
+//		Calendar cal = Calendar.getInstance();//생성
+//		int year = 0;
+//		cal.set(Calendar.YEAR,yearChoice);
+//		int month = 0;
+//		cal.set(Calendar.MONTH,month);
+//		int date = 0;
+//		cal.set(Calendar.DATE,date);
+//		
+//		for(int i = 1900; i < cal.get(Calendar.YEAR); i++) {
+//			yearChoice.addItem(i);
+//		}
+//		
+//		
+		
+		
+
+		
+		
+	
+		
 //회원가입, 취소 버튼	
-		joinButton  = new JButton("회원가입");
+		
+		resetButton  = new JButton();
+		
+		resetButton.setBorderPainted(false);
+		resetButton.setFocusPainted(false);
+		resetButton.setContentAreaFilled(false);
+		
 		resetButton = new JButton("취소");
 		
+		joinButton  = new JButton();
+		joinButton.setBorderPainted(false);
+		joinButton.setFocusPainted(false);
+		joinButton.setContentAreaFilled(false);
 		
-		this.add(resetButton);
-		this.add(joinButton);
+		joinButton = new JButton("회원가입");
+		
+		
+		confirmButton  = new JButton();	
+		confirmButton.setBorderPainted(false);
+		confirmButton.setFocusPainted(false);
+		confirmButton.setContentAreaFilled(false);
 		
 		confirmButton = new JButton("인증");
+		
 		this.add(confirmButton);
+		this.add(resetButton);
+		this.add(joinButton);
 		
 
 
 //전체 프레임 크기 출력
 		
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
-	      reimage = ImageIO.read(new File("resources/signUp/back.png")).getScaledInstance(
+	      backGround = ImageIO.read(new File("resources/signUp/back.png")).getScaledInstance(
 	                     ClientJoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 	                     ClientJoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 	                     Image.SCALE_SMOOTH);
 
-	      this.setContentPane(new JLabel(new ImageIcon(reimage)));  
+	      this.setContentPane(new JLabel(new ImageIcon(backGround))); 
+	      
 		
-		
-		this.setBounds(
+	      this.setBounds(
 				ClientJoinSizesEnum.JOINFRMAE_POSITION_X.getSize(),
 				ClientJoinSizesEnum.JOINFRMAE_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 				ClientJoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize()
 				);
+	      
+	      
 		
 //레이블 
 		this.setLabelPosition();
@@ -245,6 +303,8 @@ public class JoinFrame extends JFrame {
 		this.setButtonPosItion();
 //에러 메세지
 		this.setErrorPosition();
+
+		
 		
 		
 		 
@@ -252,7 +312,7 @@ public class JoinFrame extends JFrame {
 	    this.setTitle("회원가입");
 	    this.setVisible(true);
 	    this.setResizable(true);
-
+	    
 	}
 	
 	//모든 레이블 위치 -- > 순서대로
@@ -260,54 +320,52 @@ public class JoinFrame extends JFrame {
 		
 		
 		this.idLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_ID_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_ID_POSITION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_IDLABEL_POSITION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_IDLABEL_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		this.pwLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_PWD_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_PWD_POSITION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_PWDLABEL_POSITION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_PWDLABEL_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
-		System.out.println(ClientJoinSizesEnum.JOIN_ID_POSITION_Y);
-		System.out.println(ClientJoinSizesEnum.JOIN_PWD_POSITION_Y);
 		this.rePwLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_REPWD_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_REPWD_POSITION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_REPWDLABEL_POSITION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_REPWDLABEL_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		this.nameLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_NAME_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_NAME_POSITION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_NAMELABEL_POSITION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_NAMELABEL_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 	
 		this.genderLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_GENDER_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_GENDER_POSITTION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_GENDERLABEL_POSITTION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_GENDERLABEL_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		this.birthLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_BIRTH_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_BIRTH_POSITTION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_BIRTHLABEL_POSITTION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_BIRTHLABEL_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		this.yearLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_YEAR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_YEAR_POSITTION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_YEARLABEL_POSITTION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_YEARLABEL_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		this.monthLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_MONTH_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_MONTH_POSITTION_Y.getSize(),
+				ClientJoinSizesEnum.JOIN_MONTHLABEL_POSITTION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_MONTHLABEL_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
@@ -460,6 +518,8 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
+		
+		
 		this.yearChoice.setBounds(
 				ClientJoinSizesEnum.JOIN_YEARCHOICE_POSITTION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_YEARCHOICE_POSITTION_Y.getSize(),
@@ -467,26 +527,13 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
-		this.monthChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_MONTHCHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_MONTHCHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
-		);
-		
-		this.dateChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_DATECHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_DATECHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
-		);
+
 		
 		this.add(emailAddrChoice);
 		this.add(telFrontNumChoice);
 		
 		this.add(yearChoice);
-		this.add(monthChoice);
-		this.add(dateChoice);
+		
 	}
 	
 	//여자 남자 라디오 뱍스
@@ -510,18 +557,54 @@ public class JoinFrame extends JFrame {
 	}
 	
 	// 이메일인증, 회원가입, 취소 버튼
-	public void setButtonPosItion() {
-		this.resetButton.setBounds(
+	public void setButtonPosItion() throws IOException {
+		
+		//회원가입 해상도 맞게 그리기
+//		this.joinButton      = ImageIO.read(new File("resources/signUp/signup.jpg"));
+		
+		this.joinButton.setIcon(
+			new ImageIcon(ImageIO.read(
+				new File("resources/signUp/signup.jpg")).getScaledInstance(
+					ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+					ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING))
+		);
+
+	       
+	    			
+	    // 취소 버튼 해상도 맞게 그리기
+		this.resetButton.setIcon(
+			new ImageIcon(ImageIO.read(
+				new File("resources/signUp/reset.jpg")).getScaledInstance(
+					ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+	    		    ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize(),
+	    		    Image.SCALE_AREA_AVERAGING))
+			);
+
+	
+	    		    			
+	    //인증 해상도 맞기 그리기
+	    this.confirmButton.setIcon(
+	    		new ImageIcon(ImageIO.read(
+	    			new File("resources/signUp/confirm.jpg")).getScaledInstance(
+	    					ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+	    					ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize(),
+	    					Image.SCALE_AREA_AVERAGING))
+	    			);
+	    					
+	    
+	    
+	 this.resetButton.setBounds(
 				ClientJoinSizesEnum.JOIN_RESET_POSITTION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_RESET_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_JOIN_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_JOIN_HEIGHT.getSize()
+				ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+				ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize()
 		);
 		this.joinButton.setBounds(
 				ClientJoinSizesEnum.JOIN_JOIN_POSITTION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_JOIN_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_JOIN_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_JOIN_HEIGHT.getSize()
+				ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+				ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize()
 		);
 		this.confirmButton.setBounds(
 				ClientJoinSizesEnum.JOIN_CONFIRM_POSITTION_X.getSize(),
@@ -529,7 +612,7 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
-				
+	 
 		this.add(resetButton);
 		this.add(joinButton);
 		this.add(confirmButton);
@@ -583,9 +666,10 @@ public class JoinFrame extends JFrame {
 		this.add(emailErrorLabel);
 		
 	}
-//	public static void main(String[] args) throws IOException {
-//		new JoinFrame();
-//	}
+	public static void main(String[] args) throws IOException  {
+		
+		new JoinFrame();
+	}
 
 }
        
