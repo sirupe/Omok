@@ -35,7 +35,7 @@ public class ClientAccept implements Serializable {
 	public void loginSuccessCheck(UserPositionIndex index, BasicFrame basicFrame) {
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)index;
 		if(userPersonalDTO.getUserID() == null) {
-			this.basicFrame.getLoginPanel().loginFailTextReset();
+			this.basicFrame.getLoginPanel().loginFailLabelReset();
 			this.basicFrame.getLoginPanel().loginFail("아이디, 패스워드 오류입니다.");
 		} else {
 			
@@ -48,6 +48,7 @@ public class ClientAccept implements Serializable {
 		this.clientOS.close();
 		this.clientIS.close();
 		this.clientSocket.close();
+		this.basicFrame.dispose();
 		System.exit(0);
 	}
 	

@@ -1,7 +1,9 @@
-package client;
+package start;
 
 import java.io.IOException;
 import java.io.Serializable;
+
+import client.ClientAccept;
 
 // 클라이언트 실행
 public class ClientMain implements Serializable {
@@ -13,6 +15,4 @@ public class ClientMain implements Serializable {
 		}
 		
 	}
-	
-	
 }

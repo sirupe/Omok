@@ -56,9 +56,8 @@ public class OmokServer {
 	public void login(UserPositionIndex index, OmokPersonalServer personalServer) {
 		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO)index;
 		UserPersonalInfoDTO outputUserPersonalInfo = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
-		System.out.println(outputUserPersonalInfo.getUserID().isEmpty());
 		outputUserPersonalInfo.setPosition(UserPositionEnum.POSITION_LOGIN);
-		
+		System.out.println(outputUserPersonalInfo.getUserID());
 		try {
 			personalServer.getServerOutputStream().writeObject(outputUserPersonalInfo);
 		} catch (IOException e) {

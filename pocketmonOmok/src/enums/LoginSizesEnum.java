@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 // 태성(경로)
 
-public enum LoginFrameSizesEnum {
+public enum LoginSizesEnum {
 
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	     
@@ -105,27 +105,41 @@ public enum LoginFrameSizesEnum {
 	LOGIN_ACCESS_OK_BUTTON_HEIGHT(50),
 	
 	LOGIN_ACCESS_OK_BUTTON_POSITION_X((int)(LOGIN_ACCESS_SIZE_WIDTH.getSize() / 2.66)),
-	LOGIN_ACCESS_OK_BUTTON_POSITION_Y((int)(LOGIN_ACCESS_SIZE_HEIGHT.getSize() / 2));
+	LOGIN_ACCESS_OK_BUTTON_POSITION_Y((int)(LOGIN_ACCESS_SIZE_HEIGHT.getSize() / 2)),
 	
+	BUTTON_NAME_SIGNUP("signup"),
+	BUTTON_NAME_SEARCHID("searchID"),
+	BUTTON_NAME_SEARCHPW("searchPW"),
+	BUTTON_NAME_LOGIN("login");
+	
+	private String buttonName;
 	private int size;
-
-   private Dimension dimension;
-   
-   private LoginFrameSizesEnum() {}
-   
-   private LoginFrameSizesEnum(int x) {
-      this.size = x;
-   }
-   
-   private LoginFrameSizesEnum(Dimension dimension) {
-      this.dimension = dimension;
-   }
-   
-   public int getSize() {
-      return size;
-   }
-
-   public Dimension getDimension() {
-      return dimension;
-   }
+	private Dimension dimension;
+	
+	private LoginSizesEnum() {}
+	
+	private LoginSizesEnum(int x) {
+	   this.size = x;
+	}
+	
+	private LoginSizesEnum(Dimension dimension) {
+	   this.dimension = dimension;
+	}
+	
+	private LoginSizesEnum(String buttonName) {
+		this.buttonName = buttonName;
+	}
+	
+	public int getSize() {
+	   return size;
+	}
+	
+	public Dimension getDimension() {
+	   return dimension;
+	}
+	
+	public String getButtonName() {
+		return buttonName;
+	}
+	
 }

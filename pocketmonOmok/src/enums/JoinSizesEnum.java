@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 
-public enum ClientJoinSizesEnum {
+public enum JoinSizesEnum {
 	
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
@@ -190,16 +190,16 @@ public enum ClientJoinSizesEnum {
 	private int size;
 	private Color color;
 	
-	private ClientJoinSizesEnum(Color color) {
+	private JoinSizesEnum(Color color) {
 		this.color = color;
 	}
 	
 	
-	private ClientJoinSizesEnum(int size) {
+	private JoinSizesEnum(int size) {
 		this.size = size;
 	}
 	
-	private ClientJoinSizesEnum(Dimension dimension) {
+	private JoinSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 
