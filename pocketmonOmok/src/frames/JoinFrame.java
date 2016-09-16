@@ -4,6 +4,9 @@ import java.awt.Component;
 import java.awt.Font;
 
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -21,6 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import actions.join.JoinAction;
+import enums.ClientJoinSizesEnum;
 import enums.ClientJoinSizesEnum;
 import enums.LoginFrameSizesEnum;
 
@@ -111,28 +116,28 @@ public class JoinFrame extends JFrame {
 		this.emailLabel  = new JLabel("이메일");
 		this.telLabel    = new JLabel("전화번호");
 	
-		this.telHyphen1Label = new JLabel("-");
-		this.telHyphen2Label = new JLabel("-");		
-		this.atLabel      = new JLabel("@");
+		this.telHyphen1Label  = new JLabel("-");
+		this.telHyphen2Label  = new JLabel("-");		
+		this.atLabel      	  = new JLabel("@");
 		
 		
-		this.yearLabel    = new JLabel("년");
-		this.monthLabel   = new JLabel("월");
-		this.dateLabel    = new JLabel("일");
+		this.yearLabel    	  = new JLabel("년");
+		this.monthLabel   	  = new JLabel("월");
+		this.dateLabel    	  = new JLabel("일");
 		
 // 에러 레이블
 		
-		String idErrMsg = "특수문자 입력불가,6~15자 이외 글자수";
-		String pwErrMsg = ",6~16글자수";
-		String repwErrMsg = "pw불일치시";
-		String nameErrMsg = "한글만 가능, 2자 이상";
-		String genderErrMsg = "미선택시 - 필수 입력";
-		String emailErrMsg = "인증번호 틀렸을시";
+		String idErrMsg 	  = "특수문자 입력불가,6~15자 이외 글자수";
+		String pwErrMsg 	  = ",6~16글자수";
+		String repwErrMsg 	  = "pw불일치시";
+		String nameErrMsg 	  = "한글만 가능, 2자 이상";
+		String genderErrMsg   = "미선택시 - 필수 입력";
+		String emailErrMsg 	  = "인증번호 틀렸을시";
 		
-		this.idErrorLabel     = new JLabel(idErrMsg);
+		this.idErrorLabel	  = new JLabel(idErrMsg);
 		this.idErrorLabel.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
 		
-		this.pwdErrorLabel    = new JLabel(pwErrMsg);
+		this.pwdErrorLabel	  = new JLabel(pwErrMsg);
 		this.pwdErrorLabel.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
 		
 		this.rePwdErrorLabel  = new JLabel(repwErrMsg);
@@ -173,19 +178,19 @@ public class JoinFrame extends JFrame {
 
 			
 // 모든 텍스트 필드
-		this.idTextField    = new JTextField(10);
-		this.pwdTextField   = new JTextField(10);
-		this.rePwdTextField = new JTextField(10);
-		this.nameTextField  = new JTextField(10);
-		this.yearTextField  = new JTextField(4);
-		this.monthTextField = new JTextField(2);
-		this.dateTextField  = new JTextField(2);
+		this.idTextField	  = new JTextField(10);
+		this.pwdTextField	  = new JTextField(10);
+		this.rePwdTextField	  = new JTextField(10);
+		this.nameTextField	  = new JTextField(10);
+		this.yearTextField	  = new JTextField(4);
+		this.monthTextField	  = new JTextField(2);
+		this.dateTextField	  = new JTextField(2);
 
-		this.emailIDTextField    = new JTextField(10); 
-		this.emailAddrTextField = new JTextField(10);
-		this.telMiddleNumTextField      = new JTextField(4);
-		this.telBackNumTextField     = new JTextField(4);
-		this.emailConfirmTextField  = new JTextField(6);
+		this.emailIDTextField	   = new JTextField(10); 
+		this.emailAddrTextField	   = new JTextField(10);
+		this.telMiddleNumTextField = new JTextField(4);
+		this.telBackNumTextField   = new JTextField(4);
+		this.emailConfirmTextField = new JTextField(6);
 
 		
 // 이메일 전화번호 콤보 박스
@@ -202,6 +207,7 @@ public class JoinFrame extends JFrame {
 		
 		this.telFrontNumChoice.addItem("010");
 		this.telFrontNumChoice.addItem("011");
+
 		this.telFrontNumChoice.addItem("016");
 		this.telFrontNumChoice.addItem("019");
 		
@@ -307,12 +313,10 @@ public class JoinFrame extends JFrame {
 		
 		
 		
-		 
 		this.setLayout(null);
 	    this.setTitle("회원가입");
 	    this.setVisible(true);
 	    this.setResizable(true);
-	    
 	}
 	
 	//모든 레이블 위치 -- > 순서대로
@@ -320,6 +324,7 @@ public class JoinFrame extends JFrame {
 		
 		
 		this.idLabel.setBounds(
+
 				ClientJoinSizesEnum.JOIN_IDLABEL_POSITION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_IDLABEL_POSITION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
@@ -426,6 +431,7 @@ public class JoinFrame extends JFrame {
 		this.add(telHyphen1Label);
 		this.add(telHyphen2Label);
 		this.add(atLabel);
+		
 		
 	}
 	
@@ -666,10 +672,11 @@ public class JoinFrame extends JFrame {
 		this.add(emailErrorLabel);
 		
 	}
-	public static void main(String[] args) throws IOException  {
-		
-		new JoinFrame();
-	}
+//
+//	public static void main(String[] args) throws IOException  {
+//		
+//		new JoinFrame();
+//	}
 
 }
        

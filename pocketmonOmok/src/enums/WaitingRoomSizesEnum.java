@@ -47,6 +47,20 @@ public enum WaitingRoomSizesEnum {
 	CREATEROOM_JBUTTON_POSITION_X((LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() /100) * 62),
 	CREATEROOM_JBUTTON_POSITION_Y((LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100) * 86);
 	
+	//접속자창 가로, 세로 길이
+	
+	//접속자창 x,y 위치
+	
+	
+	
+	//내정보 가로, 세로 길이
+	
+	//내정보 x,y 위치
+	
+	
+	
+	
+	
 	
 
 	
