@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 
 import client.ClientAccept;
 import datas.UserPositionIndex;
+import enums.LoginFrameSizesEnum;
 import enums.LoginSizesEnum;
 // ÅÂ¼º
 import enums.UserPositionEnum;
@@ -27,7 +28,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	private Image reimage;
 	private CardLayout cardLayout;
 	private LoginPanel loginPanel;
-	private WaitingroomPanel waitingRoomPanel;
+	private WaitingRoomPanel waitingRoomPanel;
 	private GameRoomPanel gameRoomPanel;
 	
 	private ClientAccept clientAccept;

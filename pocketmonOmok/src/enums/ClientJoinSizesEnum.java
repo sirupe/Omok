@@ -14,7 +14,7 @@ import java.awt.Font;
 import java.awt.Label;
 import java.awt.TextField;
 
-public enum JoinSizesEnum {
+public enum ClientJoinSizesEnum {
 	
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
@@ -206,7 +206,7 @@ public enum JoinSizesEnum {
 	private Font font;
 	private EmptyBorder border;
 	
-	private JoinSizesEnum(Color color) {
+	private ClientJoinSizesEnum(Color color) {
 		this.color = color;
 	}
 	private ClientJoinSizesEnum(Font font) {
@@ -217,11 +217,11 @@ public enum JoinSizesEnum {
 	}
 
 	
-	private JoinSizesEnum(int size) {
+	private ClientJoinSizesEnum(int size) {
 		this.size = size;
 	}
 	
-	private JoinSizesEnum(Dimension dimension) {
+	private ClientJoinSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 
