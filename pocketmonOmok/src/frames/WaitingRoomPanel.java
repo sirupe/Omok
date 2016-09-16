@@ -30,7 +30,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JTextArea chattingOutput;
 	private JTextField chattingInput;
 	
-	
 	public WaitingRoomPanel() throws IOException {	
 		
 		this.vector = new Vector<String>();
