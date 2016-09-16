@@ -1,14 +1,14 @@
 package client;
 
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class ClientSender {
-	private ClientAccept clientAccept;
+@SuppressWarnings("serial")
+public class ClientSender implements Serializable {
 	private ObjectOutputStream clientOS;
 	
 	
 	public ClientSender(ClientAccept accept) {
-		this.clientAccept = accept;
 		this.clientOS = accept.getClientOS();
 	}
 

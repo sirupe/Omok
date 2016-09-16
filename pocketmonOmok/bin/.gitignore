@@ -1,3 +1,4 @@
+/start/
 /actions/
 /client/
 /dataBaseConnection/
@@ -5,3 +6,4 @@
 /enums/
 /frames/
 /omokGameServer/
+/utility/

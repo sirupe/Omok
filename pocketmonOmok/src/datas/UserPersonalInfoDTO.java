@@ -1,11 +1,12 @@
 package datas;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import enums.UserPositionEnum;
 
 // 유저 개인정보 DTO (Data Transfer Object)
-public class UserPersonalInfoDTO extends UserPositionIndex {
+public class UserPersonalInfoDTO extends UserPositionIndex implements Serializable{
 	private String userID;			// 유저 아이디
 	private String userPasswd;		// 유저 비밀번호
 	private String userName;		// 유저 이름

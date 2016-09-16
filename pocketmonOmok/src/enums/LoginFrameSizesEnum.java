@@ -5,9 +5,9 @@ import java.awt.Toolkit;
 // 태성(경로)
 
 public enum LoginFrameSizesEnum {
-	//전체화면 사이즈
+
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-	
+	     
 	//로그인 프레임 가로 길이
 	LOGIN_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.67)),
 	//로그인 프레임 세로 길이
@@ -83,7 +83,7 @@ public enum LoginFrameSizesEnum {
 	//로그인 실패시 오류 알림 텍스트 표시 Y위치
 	LOGIN_FAIL_TEXT_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.455)),
 	//로그인 실패시 오류 알림 텍스트 표시 가로 크기
-	LOGIN_FAIL_TEXT_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.12)),
+	LOGIN_FAIL_TEXT_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.2)),
 	//로그인 실패시 오류 알림 텍스트 표시 세로 크기
 	LOGIN_FAIL_TEXT_HEIGTH((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.02)),
 	
@@ -105,27 +105,40 @@ public enum LoginFrameSizesEnum {
 	LOGIN_ACCESS_OK_BUTTON_HEIGHT(50),
 	
 	LOGIN_ACCESS_OK_BUTTON_POSITION_X((int)(LOGIN_ACCESS_SIZE_WIDTH.getSize() / 2.66)),
-	LOGIN_ACCESS_OK_BUTTON_POSITION_Y((int)(LOGIN_ACCESS_SIZE_HEIGHT.getSize() / 2));
+	LOGIN_ACCESS_OK_BUTTON_POSITION_Y((int)(LOGIN_ACCESS_SIZE_HEIGHT.getSize() / 2)),
 	
+	BUTTON_NAME_SIGNUP("signup"),
+	BUTTON_NAME_SEARCHID("searchID"),
+	BUTTON_NAME_SEARCHPW("searchPW");
+	
+	private String buttonName;
 	private int size;
-
 	private Dimension dimension;
 	
 	private LoginFrameSizesEnum() {}
 	
 	private LoginFrameSizesEnum(int x) {
-		this.size = x;
+	   this.size = x;
 	}
 	
 	private LoginFrameSizesEnum(Dimension dimension) {
-		this.dimension = dimension;
+	   this.dimension = dimension;
+	}
+	
+	private LoginFrameSizesEnum(String buttonName) {
+		this.buttonName = buttonName;
 	}
 	
 	public int getSize() {
-		return size;
+	   return size;
 	}
-
+	
 	public Dimension getDimension() {
-		return dimension;
+	   return dimension;
 	}
+	
+	public String getButtonName() {
+		return buttonName;
+	}
+	
 }
