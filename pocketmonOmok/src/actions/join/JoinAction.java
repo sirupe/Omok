@@ -18,8 +18,10 @@ public class JoinAction extends Adapters {
 	
 	@Override
 	public void windowClosed(WindowEvent e) {
+		System.out.println("여기 오긴 오니 ??");
 		this.loginPanel.getBasicFrame().setVisible(true);
 		this.joinFrame.setVisible(false);
+		this.joinFrame.dispose();
 	}
 
 	@Override

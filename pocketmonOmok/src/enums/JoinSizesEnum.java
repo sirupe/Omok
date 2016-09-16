@@ -1,11 +1,8 @@
 package enums;
 
-import java.awt.Toolkit;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 
 public enum JoinSizesEnum {

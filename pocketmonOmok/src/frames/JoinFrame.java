@@ -1,6 +1,8 @@
 package frames;
 
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import actions.join.JoinAction;
 import enums.JoinSizesEnum;
 
 @SuppressWarnings("serial")
@@ -87,8 +90,11 @@ public class JoinFrame extends JFrame {
 
 	//배경	
 	private Image reimage;
+	
+	private LoginPanel loginPanel;
+	private JoinAction joinAction;
 
-	public JoinFrame() {
+	public JoinFrame(LoginPanel loginPanel) {
 //모든 레이블 
 		this.idLabel		  = new JLabel("아이디"); 
 	
@@ -170,7 +176,20 @@ public class JoinFrame extends JFrame {
 		this.telFrontNumChoice.addItem("011");
 		this.telFrontNumChoice.addItem("09");
 	
-
+		this.addWindowListener(
+			new WindowAdapter() {
+				@Override
+				public void windowClosed(WindowEvent e) {
+					System.out.println("여기 오긴 오니 ??");
+					loginPanel.getBasicFrame().setVisible(true);
+					setVisible(false);
+					dispose();
+				}
+			});
+		// TODO 윈도우리스너 등록
+//		this.joinAction = new JoinAction(this.loginPanel, this);
+//		this.addWindowListener(this.joinAction);
+		
 		//생일콤보 박스
 		this.yearChoice = new JComboBox<>();
 		
@@ -224,7 +243,6 @@ public class JoinFrame extends JFrame {
 					JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 					Image.SCALE_SMOOTH);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -236,7 +254,8 @@ public class JoinFrame extends JFrame {
 				JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 				JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize()
 		);
-		
+		//TODO 로그인패널 추가
+		this.loginPanel = loginPanel;
 //레이블 
 		this.setLabelPosition();
 //덱스트 필드
@@ -250,7 +269,6 @@ public class JoinFrame extends JFrame {
 		this.setErrorPosition();
 		
 		
-		 
 		this.setLayout(null);
 	    this.setTitle("회원가입");
 	    this.setVisible(true);
@@ -367,6 +385,7 @@ public class JoinFrame extends JFrame {
 		this.add(telHyphen1Label);
 		this.add(telHyphen2Label);
 		this.add(atLabel);
+		
 		
 	}
 	
@@ -583,4 +602,3 @@ public class JoinFrame extends JFrame {
 		
 	}
 }
-       
