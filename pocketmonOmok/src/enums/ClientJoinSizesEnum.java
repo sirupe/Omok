@@ -189,14 +189,16 @@ public enum ClientJoinSizesEnum {
 	LABELCOLOR_ERROR(Color.red),
 	LABELCOLOR_DEFAULT(Color.green),
 	
+	CHOICEBACKGROUND(Color.black),
+	
 	//레이블 폰트
 	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,14)),
 	
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),
 	
 	//버튼 크기
-	BUTTONIMAGE_WIDTH(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 15),
-	BUTTONIMAGE_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 8));
+	BUTTONIMAGE_WIDTH(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 12),
+	BUTTONIMAGE_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 5));
 	
 	
 
@@ -205,6 +207,8 @@ public enum ClientJoinSizesEnum {
 	private Color color;
 	private Font font;
 	private EmptyBorder border;
+	
+	
 	
 	private ClientJoinSizesEnum(Color color) {
 		this.color = color;
