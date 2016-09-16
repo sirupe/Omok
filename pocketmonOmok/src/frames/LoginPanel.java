@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import actions.login.LoginAction;
+import enums.ImageEnum;
 import enums.LoginSizesEnum;
 
 @SuppressWarnings("serial")
@@ -152,7 +153,7 @@ public class LoginPanel extends JPanel {
 	
 	public void setButtonPosition() throws IOException{
 	   //이미지 비율 변환
-		this.loginreimage = ImageIO.read(new File("resources/login/login.jpg")).getScaledInstance(
+		this.loginreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_LOGIN.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.LOGIN_ICON_WIDTH.getSize(),
 		               LoginSizesEnum.LOGIN_ICON_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
