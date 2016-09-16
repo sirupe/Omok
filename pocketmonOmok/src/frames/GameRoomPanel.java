@@ -1,23 +1,27 @@
 package frames;
 
+import java.awt.Button;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.ProgressMonitor;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import enums.GameRoomEnum;
 import enums.ImageEnum;
-import enums.LoginSizesEnum;
 
 public class GameRoomPanel extends JPanel {
 	private JPanel gameBoardPanel;	// 오목판
@@ -41,9 +45,49 @@ public class GameRoomPanel extends JPanel {
 		this.setInGameMenuButtons();
 		this.setInGameChattingArea();
 		this.setTimeLimit();
-//		this.omokStonePanel.setBackground(Color.blue);
+		this.setStonePanel();
 			
 	} // 생성자
+	
+	public void setStonePanel() {
+		this.omokStonePanel.setLayout(null);
+		this.omokStonePanel.setOpaque(false);
+		JButton[][] stonesLocation = new JButton[15][];
+		// 다차원 배열 [15][15] 사이즈를 모두 new 해주는 fot문
+		for(int i = 0, size = stonesLocation.length; i < size; i++) {
+			stonesLocation[i] = new JButton[15];
+			
+		}
+		
+		for(int i = 0, iSize = stonesLocation.length; i < iSize; i++) {
+			for(int j = 0, jSize = stonesLocation.length; j < jSize; j++) {
+				stonesLocation[i][j] = new JButton();
+				stonesLocation[i][j].setBounds(new Rectangle(
+						j * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
+						i * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height,
+						GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
+						GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height
+				));
+				stonesLocation[i][j].setContentAreaFilled(false);
+				stonesLocation[i][j].setFocusPainted(false);
+				stonesLocation[i][j].setBorderPainted(false);
+				this.omokStonePanel.add(stonesLocation[i][j]);
+			}
+		}
+		try {
+			stonesLocation[7][7].setIcon(
+					new ImageIcon(
+						ImageIO.read(new File(ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir())).getScaledInstance(
+							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
+							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
+							Image.SCALE_AREA_AVERAGING)
+					));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.omokStonePanel.setBounds(GameRoomEnum.GAME_STONEPANEL_RECT.getRect());
+	}
 	
 	@SuppressWarnings("serial")
 	public void setGameBoard() {
@@ -65,10 +109,11 @@ public class GameRoomPanel extends JPanel {
 				}
 			}
 		};
-		this.gameBoardPanel.setBackground(Color.red);
+		
+		this.gameBoardPanel.setLayout(null);
 		this.gameBoardPanel.setBounds(GameRoomEnum.GAME_BOARD_PANEL_RECT.getRect());
 		
-		
+		this.gameBoardPanel.add(this.omokStonePanel);
 		this.add(this.gameBoardPanel);
 	} // 오목판 패널
 	
@@ -86,7 +131,7 @@ public class GameRoomPanel extends JPanel {
 		JLabel timeLabel = new JLabel("0:" + time.toString());
 		timeLabel.setBounds(GameRoomEnum.GAME_TIMELIMIT_TIMELABEL_RECT.getRect());
 		timeLabel.setForeground(Color.red);
-		timeLabel.setFont(new Font("Consolas", Font.BOLD, 35));
+		timeLabel.setFont(GameRoomEnum.GAME_TIMELABEL_FONT.getFont());
 		
 		new Thread() {
 			@Override
@@ -162,13 +207,27 @@ public class GameRoomPanel extends JPanel {
 	
 	public void setInGameMenuButtons() {
 		this.gameMenuPanel.setLayout(null);
-		this.gameMenuPanel.setBackground(Color.orange);
+		this.gameMenuPanel.setOpaque(false);
 		this.gameMenuPanel.setBounds(GameRoomEnum.GAME_MENU_PANEL_RECT.getRect());
 		Rectangle defaultRect = GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect();
 		String[] buttonsName = GameRoomEnum.GAME_BUTTONNAME.getButtonName();
+		String[] buttonsDir = ImageEnum.GAMEROOM_MENU_IMAGES_OWNER.getImages();
 		JButton[] menuButtons = new JButton[buttonsName.length];
+		
 		for(int i = 0, size = buttonsName.length; i < size; i++) {
-			menuButtons[i] = new JButton();
+			try {
+				menuButtons[i] = new JButton(
+					new ImageIcon(
+						ImageIO.read(new File(buttonsDir[i])).getScaledInstance(
+							GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
+							GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
+							Image.SCALE_AREA_AVERAGING)
+					)
+				);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			if(i < 4) {
 				menuButtons[i].setBounds(new Rectangle(
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().x + (GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width * i),
@@ -177,7 +236,6 @@ public class GameRoomPanel extends JPanel {
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height
 				));
 			} else {
-				System.out.println(GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().x * (i + 1));
 				menuButtons[i].setBounds(new Rectangle(
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().x + (GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width * (i - 4)),
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height,
@@ -187,6 +245,9 @@ public class GameRoomPanel extends JPanel {
 				
 			}
 			menuButtons[i].setName(buttonsName[i]);
+			menuButtons[i].setBorderPainted(false);
+			menuButtons[i].setContentAreaFilled(false);
+			menuButtons[i].setFocusPainted(false);
 			this.gameMenuPanel.add(menuButtons[i]);
 		}
 		
@@ -194,10 +255,27 @@ public class GameRoomPanel extends JPanel {
 	} // 게임메뉴 및  아이템 패널
 	
 	public void setInGameChattingArea() {
+		this.chattingPanel.setLayout(null);
+		this.chattingPanel.setOpaque(false);
 		this.chattingPanel.setBackground(Color.yellow);
 		this.chattingPanel.setBounds(GameRoomEnum.GAME_CHATTING_PANEL_RECT.getRect());
 		
+		
+		JTextArea chattingArea = new JTextArea();
+		chattingArea.setLineWrap(true);
+		chattingArea.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
+		chattingArea.setEditable(false);
+		
+		JTextField chattingField = new JTextField();
+		chattingField.setBounds(GameRoomEnum.GAME_CHATTINGFIELD_RECT.getRect());
+		chattingField.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
+
+		JScrollPane scroll = new JScrollPane(chattingArea);
+		scroll.setBounds(GameRoomEnum.GAME_SCROLL_PANE_RECT.getRect());
+		
+		this.chattingPanel.add(scroll);
+		this.chattingPanel.add(chattingField);
 		this.add(this.chattingPanel);
 	} // 채팅 패널
-
+	
 }
