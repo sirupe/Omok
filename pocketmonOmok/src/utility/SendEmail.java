@@ -6,12 +6,10 @@ import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -26,13 +24,12 @@ import enums.UtilityEnums;
 public class SendEmail {
 	public SendEmail(String certification, String userEmail) {
 		try {
-			String emailPort = "465";
 			Properties prop = new Properties();
 			prop.setProperty("mail.transport.protocol", "smtp");
 			prop.setProperty("mail.host", "smtp.gmail.com");
 			prop.put("mail.smtp.auth", "true");
-			prop.put("mail.smtp.port", emailPort);
-			prop.put("mail.smtp.socketFactory.port", emailPort);
+			prop.put("mail.smtp.port", UtilityEnums.SENDER_EMAIL_PORT.getStr());
+			prop.put("mail.smtp.socketFactory.port", UtilityEnums.SENDER_EMAIL_PORT.getStr());
 			prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			prop.put("mail.smtp.socketFactory.fallback", "false");
 			prop.setProperty("mail.smtp.quitwait", "false");
@@ -66,6 +63,8 @@ public class SendEmail {
 			message.setContent(multiPart);
 			
 			Transport.send(message);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
