@@ -65,7 +65,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		      LoginFrameSizesEnum.LOGIN_FRAME_POSITION_Y.getSize(),
 		      LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
 		      LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
-		  );
+		 );
 		
 		
 		//아이디, 비밀번호 입력하는 텍스트필드 설정

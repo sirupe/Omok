@@ -1,7 +1,3 @@
-/actions/
-/client/
-/dataBaseConnection/
-/datas/
 /enums/
 /frames/
-/omokGameServer/
+/actions/
