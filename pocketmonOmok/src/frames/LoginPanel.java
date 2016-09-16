@@ -4,22 +4,23 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import actions.login.LoginAction;
 import enums.LoginFrameSizesEnum;
 
-public class LoginPanel extends JPanel implements ActionListener {
+@SuppressWarnings("serial")
+public class LoginPanel extends JPanel {
 	private JButton joinButton;
 	private JButton loginButton;    
 	private JButton searchIdButton;  
@@ -31,9 +32,8 @@ public class LoginPanel extends JPanel implements ActionListener {
 	private JPasswordField pwField;
 	
 	private Font textFieldFont;
-	private Font loginFailFont;
 	
-	private JTextArea loginFailText;
+	private JLabel loginFailText;
 	
 	//이미지 화면 비율에 맞춰서 바뀌게 하기 위해 이미지 사용
 	private Image ID, IDreimage, PW, PWreimage;
@@ -42,31 +42,28 @@ public class LoginPanel extends JPanel implements ActionListener {
 	private Image searchid, searchidreimage;
 	private Image searchpw, searchpwreimage;
 	
-	//테스트용 스트링선언
-	private String dataId;
-	private String dataPw;
-	private String putId;
-	private String putPw;
-	
 	private JPanel loginPanel;
 	private BasicFrame basicFrame;
 	
+	private LoginAction loginAction;
+	
 	public LoginPanel(BasicFrame basicFrame) throws IOException {
-		this.loginPanel 		 = new JPanel();
-		this.dataId            = new String("1234");
-		this.dataPw            = new String("1234");   
+		this.loginAction = new LoginAction(this);
+		
+		this.loginPanel	= new JPanel();
 		
 		this.loginPanel.setLayout(null);
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
 		//프레임 화면 출력 위치 설정
+		
 		this.setBounds(   
 		      LoginFrameSizesEnum.LOGIN_FRAME_POSITION_X.getSize(),
 		      LoginFrameSizesEnum.LOGIN_FRAME_POSITION_Y.getSize(),
 		      LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
 		      LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
-		 );
-		
+
+		);
 		
 		//아이디, 비밀번호 입력하는 텍스트필드 설정
 		this.setTextFieldPosition();
@@ -79,51 +76,26 @@ public class LoginPanel extends JPanel implements ActionListener {
 		
 		this.add(this.loginPanel);
 		this.setLayout(new CardLayout());
-		
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		this.putId = idField.getText();
-		this.putPw = new String(pwField.getPassword());
-		
-		if(this.loginButton == e.getSource()) {
-			if(putId.equals(dataId) && putPw.equals(dataPw)){
-				this.basicFrame.inWaitingRoom();
-			//로그인 성공 뒤에 아이디 텍스트필드 초기화
-			this.idField.setText("");
-			//로그인 성공뒤에 비밀번호 텍스트필드 초기화
-			this.pwField.setText("");       
-			
-			//this.loginFailText.setText("");
-			}  if(!(putId.equals(dataId)) && putPw.equals(dataPw)) {
-				this.loginFail();
-			} else if(!(putPw.equals(dataPw)) && putId.equals(dataId)) {
-				this.loginFail();
-			} else {
-				this.loginFail();
-			}
-		}
+
 	}
 	
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
-	public void loginFail(){
+	public void loginFail(String errMsg){
 		this.setLayout(null);
-		this.loginFailText = new JTextArea();
 		this.textFieldFont = new Font("", Font.BOLD, 20);      
+		this.loginFailText = new JLabel();
 		this.loginFailText.setBounds(
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_POSITION_X.getSize(),
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_POSITION_Y.getSize(),
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_WIDTH.getSize(), 
 					LoginFrameSizesEnum.LOGIN_FAIL_TEXT_HEIGTH.getSize()
 		);
+		this.loginFailText.setOpaque(false);
 		this.add(this.loginFailText);
 		
-		this.loginFailFont = new Font("", Font.PLAIN, 13);
-		this.loginFailText.setFont(loginFailFont);
+		this.loginFailText.setFont(new Font("", Font.PLAIN, 13));
 		this.loginFailText.setForeground(Color.RED);
-		this.loginFailText.setBackground(Color.BLACK);
-		this.loginFailText.setText("아이디 또는 비밀번호 오류");
+		this.loginFailText.setText(errMsg);
 	}
 	
 	public void loginFailTextReset(){
@@ -151,8 +123,8 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.idImage.setContentAreaFilled(false);
 		this.idImage.setFocusPainted(false);
 		
-		this.PW            = ImageIO.read(new File("resources/login/PW.png"));
-		this.PWreimage     = PW.getScaledInstance(
+		this.PW        = ImageIO.read(new File("resources/login/PW.png"));
+		this.PWreimage = PW.getScaledInstance(
 					LoginFrameSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
 					LoginFrameSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
 					Image.SCALE_SMOOTH);
@@ -177,28 +149,28 @@ public class LoginPanel extends JPanel implements ActionListener {
 	
 	public void setButtonPosition() throws IOException{
 	   //이미지 비율 변환
-		this.login  = ImageIO.read(new File("resources/login/login.jpg"));
+		this.login  	  = ImageIO.read(new File("resources/login/login.jpg"));
 		this.loginreimage = login.getScaledInstance(
 		               LoginFrameSizesEnum.LOGIN_ICON_WIDTH.getSize(),
 		               LoginFrameSizesEnum.LOGIN_ICON_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.loginButton = new JButton(new ImageIcon(this.loginreimage));
 	  
-		this.join  = ImageIO.read(new File("resources/login/signup.png"));
+		this.join 		 = ImageIO.read(new File("resources/login/signup.png"));
 		this.joinreimage = join.getScaledInstance(
 		               LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginFrameSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.joinButton = new JButton(new ImageIcon(this.joinreimage));
 		
-		this.searchid  = ImageIO.read(new File("resources/login/forgotID.png"));
+		this.searchid 		 = ImageIO.read(new File("resources/login/forgotID.png"));
 		this.searchidreimage = searchid.getScaledInstance(
 		               LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginFrameSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.searchIdButton = new JButton(new ImageIcon(this.searchidreimage));
 		
-		this.searchpw  = ImageIO.read(new File("resources/login/forgotPW.png"));
+		this.searchpw  		 = ImageIO.read(new File("resources/login/forgotPW.png"));
 		this.searchpwreimage = searchpw.getScaledInstance(
 		               LoginFrameSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginFrameSizesEnum.ICON_SIZE_HEIGHT.getSize(),
@@ -219,7 +191,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.loginButton.setToolTipText("로그인");
 		
 		//나중에 액션 등록 할때 this에 넣으면 됨
-		this.loginButton.addActionListener(this);
+		this.loginButton.addActionListener(this.loginAction);
 		
 		//회원가입 버튼 위치 설정
 		this.joinButton.setBounds(
@@ -234,7 +206,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.joinButton.setFocusPainted(false);
 		this.joinButton.setToolTipText("회원가입");
 		
-		this.joinButton.addActionListener(this);
+		this.joinButton.addActionListener(this.loginAction);
 		
 		//아이디찾기 버튼 위치 설정
 		this.searchIdButton.setBounds(
@@ -249,7 +221,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.searchIdButton.setFocusPainted(false);
 		this.searchIdButton.setToolTipText("아이디 찾기");
 		
-		this.searchIdButton.addActionListener(this);
+		this.searchIdButton.addActionListener(this.loginAction);
 		
 		//비밀번호찾기 버튼 위치 설정
 		this.searchPwButton.setBounds(
@@ -264,7 +236,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.searchPwButton.setFocusPainted(false);
 		this.searchPwButton.setToolTipText("비밀번호 찾기");
 		
-		this.searchPwButton.addActionListener(this);     
+		this.searchPwButton.addActionListener(this.loginAction);     
 		
 		this.loginPanel.add(this.loginButton);
 		this.loginPanel.add(this.joinButton);
@@ -272,7 +244,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.loginPanel.add(this.searchPwButton);
 	}
 	
-	public void setTextFieldPosition(){
+	public void setTextFieldPosition(){		
 		this.idField = new JTextField("", 10);
 		this.pwField = new JPasswordField("", 10);
 		
@@ -297,5 +269,21 @@ public class LoginPanel extends JPanel implements ActionListener {
 		this.loginPanel.add(this.idField);
 		this.loginPanel.add(this.pwField);
 	   
+	}
+
+	public JButton getLoginButton() {
+		return loginButton;
+	}
+
+	public JTextField getIdField() {
+		return idField;
+	}
+
+	public JPasswordField getPwField() {
+		return pwField;
+	}
+
+	public BasicFrame getBasicFrame() {
+		return basicFrame;
 	}
 }

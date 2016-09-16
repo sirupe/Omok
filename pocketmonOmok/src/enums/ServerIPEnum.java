@@ -2,7 +2,7 @@ package enums;
 
 public enum ServerIPEnum {
 	SERVER_IP("127.0.0.1"),
-	SERVER_PORT(7777);
+	SERVER_PORT(2345);
 	
 	public String serverIP;
 	public int serverPort;

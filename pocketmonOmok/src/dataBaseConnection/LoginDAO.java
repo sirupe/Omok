@@ -28,11 +28,12 @@ public class LoginDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT USER_ID, USER_PASSWD ");
 			sql.append("FROM USER_PERSONAL_INFO ");
-			sql.append("WHERE USER_ID=?");
+			sql.append("WHERE USER_ID=? AND USER_PASSWD=?");
 			
 			// 쿼리 날리고 값 가져오기
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, personalDTO.getUserID());
+			ps.setString(2, personalDTO.getUserPasswd());
 			resultSet = ps.executeQuery();
 			
 			// DAO 에 가져온 값 세팅

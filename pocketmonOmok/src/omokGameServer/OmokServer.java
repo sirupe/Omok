@@ -4,18 +4,38 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import dataBaseConnection.JoinDAO;
+import dataBaseConnection.LoginDAO;
+import dataBaseConnection.UserGamedataInfoDAO;
+import dataBaseConnection.UserStoreInfoDAO;
+import dataBaseConnection.UserStoreSkinInfoDAO;
+import datas.UserPersonalInfoDTO;
+import datas.UserPositionIndex;
 import enums.ServerIPEnum;
+import enums.UserPositionEnum;
 
 public class OmokServer {
 	private ServerSocket serverSocket;
 	private Socket socket;
-	private List<OmokPersonalServer> psersonalServerList = new ArrayList<OmokPersonalServer>();
-	//TODO 입장한 클라이언트 저장할 컬렉션 추가 필요
+	private Map<String, OmokPersonalServer> psersonalServerMap = new HashMap<String, OmokPersonalServer>();
+	
+	private JoinDAO joinDAO;
+	private LoginDAO loginDAO;
+	private UserGamedataInfoDAO gamedataDAO;
+	private UserStoreInfoDAO storeDAO;
+	private UserStoreSkinInfoDAO skinDAO;
 	
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
+		this.joinDAO 	  = new JoinDAO();
+		this.loginDAO 	  = new LoginDAO();
+		this.gamedataDAO  = new UserGamedataInfoDAO();
+		this.storeDAO	  = new UserStoreInfoDAO();
+		this.skinDAO	  = new UserStoreSkinInfoDAO();
 	}
 	
 	public void gameServerOn() throws IOException {
@@ -24,16 +44,26 @@ public class OmokServer {
 		while(true) {
 			System.out.println("Waiting User...");
 			this.socket = this.serverSocket.accept();
-			this.psersonalServerList.add(new OmokPersonalServer(this));
-			System.out.println("now list size is " + this.psersonalServerList.size());
+			OmokPersonalServer personalServer = new OmokPersonalServer(this, socket);
+			personalServer.start();
 			System.out.println("User Accept .. " + socket.getLocalAddress());
 		}
 	}
 	
 	//TODO 여기에 서버의 분기업무 추가
 	
-	public void login() {
-		System.out.println("로그인창");
+	
+	public void login(UserPositionIndex index, OmokPersonalServer personalServer) {
+		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO)index;
+		UserPersonalInfoDTO outputUserPersonalInfo = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
+		System.out.println(outputUserPersonalInfo.getUserID().isEmpty());
+		outputUserPersonalInfo.setPosition(UserPositionEnum.POSITION_LOGIN);
+		
+		try {
+			personalServer.getServerOutputStream().writeObject(outputUserPersonalInfo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void waitingRoom() {
@@ -68,10 +98,21 @@ public class OmokServer {
 		System.out.println("내정보보기");
 	}
 
-	
+	public void exitProgram(UserPositionIndex index, OmokPersonalServer personalServer) throws IOException {
+		System.out.println("프로그램 종료");
+		personalServer.getServerOutputStream().writeObject(index);
+		
+		personalServer.getServerOutputStream().close();
+		personalServer.getServerInputStream().close();
+		personalServer.getPersonalSocket().close();
+	}
 	
 	
 	public Socket getSocket() {
 		return socket;
+	}
+	
+	public Map<String, OmokPersonalServer> getPsersonalServerMap() {
+		return psersonalServerMap;
 	}
 }

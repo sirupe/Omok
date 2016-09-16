@@ -4,15 +4,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import datas.UserPositionIndex;
+import frames.BasicFrame;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
 public class ClientReciever extends Thread {
 	private ClientAccept clientAccept;
 	private ObjectInputStream clientIS;
+	private BasicFrame basicFrame;
 	
-	public ClientReciever(ClientAccept accept) {
-		System.out.println("ClientReciever 생성자 실행");
+	public ClientReciever(ClientAccept accept, BasicFrame basicFrame) {
 		this.clientAccept = accept;
-		this.clientIS = accept.getClientIS();
+		this.clientIS 	  = accept.getClientIS();
+		this.basicFrame   = basicFrame;
 	}
 	
 	//TODO 데이터가 넘나들게 될 것.
@@ -26,9 +28,10 @@ public class ClientReciever extends Thread {
 					Object object = this.clientIS.readObject();
 					UserPositionIndex userPosition = (UserPositionIndex)object;
 					switch(userPosition.getPosition()) {
-					case POSITION_LOGIN :             
+					case POSITION_LOGIN :   
+						this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
 						break;
-					case POSITION_WAITING_ROON :      
+					case POSITION_WAITING_ROOM :      
 						break;
 					case POSITION_JOIN :              
 						break;
@@ -44,7 +47,8 @@ public class ClientReciever extends Thread {
 						break;
 					case POSITION_MODIFY_MY_INFO :    
 						break;
-					case POSITION_EXIT :              
+					case POSITION_EXIT :  
+						this.clientAccept.gameExit();
 						break;
 					}
 				}
