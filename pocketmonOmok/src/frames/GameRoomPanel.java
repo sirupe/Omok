@@ -39,6 +39,7 @@ public class GameRoomPanel extends JPanel {
 //		this.omokStonePanel.setBackground(Color.blue);
 			
 	}
+	
 	@SuppressWarnings("serial")
 	public void setGameBoard() {
 		this.gameBoardPanel = new JPanel() {
