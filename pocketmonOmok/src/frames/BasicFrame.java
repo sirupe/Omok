@@ -56,13 +56,27 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.loginPanel = new LoginPanel(this);
 		this.loginPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
-		
-		this.waitingRoomPanel = new WaitingroomPanel();
-		this.newGameRoomPanel();
+
+		this.waitingRoomPanel = new WaitingRoomPanel(){
+			@Override
+			protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			try {
+				g.drawImage(ImageIO.read(
+					new File("resources/login/blackhole.png")), 
+					0, 
+					0,
+					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+					this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}};
 		
 		this.gameExit();
 		this.setLayout(this.cardLayout);
-		this.add("loginPanel", this.loginPanel);
+//		this.add("loginPanel", this.loginPanel);
 		this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.add("gameRoomPanel", this.gameRoomPanel);
 		this.setTitle("Login");
