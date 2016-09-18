@@ -20,7 +20,7 @@ import enums.searchRePwdEnum;
 public class SearchPwdFrame extends JFrame implements Serializable{
 	
 	private CardLayout cardLayout;
-	private searchPwdPanel searchPwdPanel;
+	private SearchPwdPanel searchPwdPanel;
 	private SearchRePwdPanel searchRePwdPanel;
 	private SearchChangePanel searchChangePanel;
 	private Image backGround;
@@ -43,8 +43,24 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 		
 		//비밀번호 찾기 프레임
 		
-		this.searchPwdPanel = new searchPwdPanel(this);
-		this.searchPwdPanel.setOpaque(false);
+		this.searchPwdPanel = new SearchPwdPanel(this) {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponents(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/signUp/backg.png")),
+							0,
+							0,
+							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							this);		
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+//		this.searchPwdPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 		
 		//비밀번호 재입력 프레임
@@ -98,13 +114,14 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 		};
 	}
 	
-	public searchPwdPanel getsearchPwdPanel() {
+	public SearchPwdPanel getsearchPwdPanel() {
 		return searchPwdPanel;
 	}
 	
 	public void insearchRePwdPanel() {
 		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
 	}	
+
 	public static void main(String[] args) {
 		try {
 			new SearchPwdFrame();
@@ -112,4 +129,4 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	}
+}
