@@ -1,10 +1,10 @@
-package dataBaseConnection;
+package datasDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import datas.UserPersonalInfoDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.UserPositionEnum;
 
 public class JoinDAO {
@@ -32,6 +32,7 @@ public class JoinDAO {
 			
 			while(resultSet.next()) {
 				resultDTO.setUserID(resultSet.getString("USER_ID"));
+				System.out.println(resultSet.getString("USER_ID"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

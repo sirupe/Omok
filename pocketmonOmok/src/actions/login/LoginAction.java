@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import datas.UserPersonalInfoDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.LoginSizesEnum;
 import enums.UserPositionEnum;
 import frames.JoinFrame;

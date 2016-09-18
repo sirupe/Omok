@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import client.ClientAccept;
-import datas.UserPositionIndex;
+import datasDTO.UserPositionIndex;
 import enums.LoginFrameSizesEnum;
 import enums.LoginSizesEnum;
 // 태성
@@ -83,8 +83,8 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.newGameRoomPanel();
 		this.setLayout(this.cardLayout);
 
-//		this.add("loginPanel", this.loginPanel);
-//		this.add("waitingRoomPanel", this.waitingRoomPanel);
+		this.add("loginPanel", this.loginPanel);
+		this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.add("gameRoomPanel", this.gameRoomPanel);
 
 		this.setTitle("Login");
@@ -150,13 +150,13 @@ public class BasicFrame extends JFrame implements Serializable{
 	public JoinFrame getJoinFrame() {
 		return joinFrame;
 	}
-	// TODO test중 ..
-	public static void main(String[] args) {
-		try {
-			new BasicFrame(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	// TODO test중 ..
+//	public static void main(String[] args) {
+//		try {
+//			new BasicFrame(null);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 }

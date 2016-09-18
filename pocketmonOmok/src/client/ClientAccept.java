@@ -1,5 +1,6 @@
 package client;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,8 +8,8 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import datas.UserPersonalInfoDTO;
-import datas.UserPositionIndex;
+import datasDTO.UserPersonalInfoDTO;
+import datasDTO.UserPositionIndex;
 import enums.ClientJoinSizesEnum;
 import enums.ServerIPEnum;
 import frames.BasicFrame;
@@ -46,12 +47,20 @@ public class ClientAccept implements Serializable {
 	
 	public void joinIDOverlapCheck(UserPositionIndex data, BasicFrame basicFrame) {
 		UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
-//		if(userPersonalInfoDTO.getUserID() == null) {
-//			this.basicFrame.getJoinFrame().labelSetting(
-//					this.basicFrame.getJoinFrame().getIdErrorLabel(), 
-//					ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), 
-//					);
-//		}
+		System.out.println(userPersonalInfoDTO.getUserID() == null);
+		String checkMsg = null;
+		Color color = null;
+		if(userPersonalInfoDTO.getUserID() == null) {
+			checkMsg = "join성공";
+			color = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+		} else {
+			checkMsg = "joinID중복";
+			color = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+		}
+		
+		this.basicFrame.getJoinFrame().labelSetting(
+				this.basicFrame.getJoinFrame().getIdErrorLabel(), 
+				color, checkMsg);
 	}
 	
 	public void gameExit() throws IOException {
