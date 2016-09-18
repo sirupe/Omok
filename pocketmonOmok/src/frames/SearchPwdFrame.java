@@ -60,6 +60,7 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 				}
 			}
 		};
+		
 //		this.searchPwdPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 		
@@ -85,7 +86,7 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 		this.newSearchChangePanel();
 		this.add("searchPwdPanel",this.searchPwdPanel);
 //		this.add("searchRePwdPanel", this.searchRePwdPanel);
-//		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+		this.add("searchChangeConfirmPanel", this.searchChangePanel);
 		this.setLayout(this.cardLayout);
 		this.setTitle("PW찾기");
 		this.setVisible(true);
@@ -95,23 +96,28 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 	
 	//비밀번호 변경 확인 프레임
 	public void newSearchChangePanel() {
-		this.searchChangePanel = new SearchChangePanel() {	
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				try {
-					g.drawImage(ImageIO.read(
-						new File("resources/signUp/backg.png")),
-							0,
-							0 ,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
-							this);		
-				}catch (IOException e) {
-					e.printStackTrace();
+		try {
+			this.searchChangePanel = new SearchChangePanel() {	
+				@Override
+				protected void paintComponent(Graphics g) {
+					super.paintComponent(g);
+					try {
+						g.drawImage(ImageIO.read(
+							new File("resources/signUp/backg.png")),
+								0,
+								0 ,
+								searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+								searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+								this);		
+					}catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		};
+			};
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public SearchPwdPanel getsearchPwdPanel() {

@@ -16,52 +16,60 @@ public enum searchRePwdEnum {
 	SEARCH_REPWD_FRAME_POSITION_X((int)((Screen_SIZE.getDimension().getWidth() / 2) - (SEARCH_REPWD_FRAME_WIDTH.getSize() / 2 ))),
 	SEARCH_REPWD_FRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (SEARCH_REPWD_FRAME_HEIGHT.getSize() / 2))),
 	
-//비밀번호, 재비밀번호 레이블
+//비밀번호, 레이블
 	SEARCH_PWD_LABEL(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 7),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 15),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 16),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
+	//재비밀번호 레이블
 	SEARCH_REPWD_LABEL(new Rectangle(
-			
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 7),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 37),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 20),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
+	//설정된 비밀번호와 재비밀번호의 에러 결과 메세지 
 		SEARCH_ERROR_LABEL(new Rectangle(
-			
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 20),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 50),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 50),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 13)
 			)),
-//비밀번호 재비밀번호 텍스트s
-	SEARCH_PWD_TEXTFIELD(new Rectangle(
+	// 비밀번호 바뀌었다는 메세지 -- > 화면 전환(searchChangePanel)
+		SEARCH_CONFIRM_CHANGE_LABEL(new Rectangle(
+				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 15),
+				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 30),
+				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 75),
+				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 20)
+				)),
+		
+		//비밀번호 재비밀번호 텍스트s
+		SEARCH_PWD_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 22),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 15),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 50),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
-	SEARCH_REPWD_TEXTFIELD(new Rectangle(
+		SEARCH_REPWD_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 22),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 37),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 50),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
-//	//버튼 생성
-	SEARCH_CONFIRM_BUTTON(new Rectangle(
+		//확인 버튼 생성
+		SEARCH_CONFIRM_BUTTON(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 25),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 88),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 30),
-			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100  * 15)
+			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100  * 20)
 			)),
 	
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,13)),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("맑은 고딕",Font.BOLD,20)),
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,20)),
 	//텍스트 테두리 없애기
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
 	
@@ -69,6 +77,7 @@ public enum searchRePwdEnum {
 		LABELCOLOR_ERROR(Color.red),
 	// 일반색깔
 		LABELCOLOR_DEFAULT(Color.BLUE);
+	
 	
 	private Dimension dimension;
 	private int size;

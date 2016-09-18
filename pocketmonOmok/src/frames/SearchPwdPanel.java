@@ -1,29 +1,22 @@
 package frames;
 
-import java.awt.CardLayout;
-//import java.awt.Color;
 import java.awt.Font;
-//import java.awt.Graphics;
 import java.awt.Image;
-//import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-//import com.sun.glass.ui.Size;
-
 import enums.searchPwdEnum;
 
-@SuppressWarnings("serial")
 public class SearchPwdPanel extends JPanel {
+
 	private JLabel searchIdLabel;
 	private JLabel searchemailLabel;
 	private JLabel searchErrorMsgLabel;
@@ -37,35 +30,16 @@ public class SearchPwdPanel extends JPanel {
 	private JButton searchConfirmButton;
 	//private Image backGround;
 	
-	private JPanel searchPwdPanel;
 	private SearchPwdFrame searchPwdFrame;
 	
 	
 	public SearchPwdPanel(SearchPwdFrame searchPwdFrame) throws IOException {
-//TODO	this.searchPwdPanel = new JPanel();
-	
-//TODO	this.searchPwdPanel.setLayout(null);
-//TODO	this.searchPwdPanel.setOpaque(false);
 		this.setLayout(null);
-		this.searchPwdFrame = searchPwdFrame;
-	     
-	     
-//TODO	this.setBounds(
-//				searchPwdEnum.SEARCH_PWD_FRAME_POSITION_X.getSize(),
-//				searchPwdEnum.SEARCH_PWD_FRAME_POSITION_Y.getSize(),
-//				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-//				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize()
-//		);
-	     
+		this.searchPwdFrame = searchPwdFrame;	     
 	     
 		//라벨 생성 TODO
-<<<<<<< HEAD:pocketmonOmok/src/frames/searchPwdPanel.java
 		this.searchIdLabel        = new JLabel("ID");
 		this.searchemailLabel        = new JLabel("Email");
-=======
-		this.searchIdLabel			= new JLabel("ID");
-		this.searchemailLabel		= new JLabel("Email");
->>>>>>> a82c859c3e6998cc9c0d9faa7f553caade845751:pocketmonOmok/src/frames/SearchPwdPanel.java
 	
 //		텍스트 필드생성
 		this.searchIdTextField      = new JTextField(10);
@@ -76,13 +50,13 @@ public class SearchPwdPanel extends JPanel {
 		this.add(searchemailLabel);
 		
 //		//에러 메세지 레이블
-		String searchErrorMsg = "3분초과가 되었습니다. \n" 
-							+ "다시 인증을 받아 주세요";
+		String searchErrorMsg = "<html>3분초과가 되었습니다."
+							+ "<br>다시 인증을 받아 주세요<br></html>";
 		this.searchErrorMsgLabel = new JLabel(searchErrorMsg);
 		this.searchErrorMsgLabel.setForeground(searchPwdEnum.LABELCOLOR_ERROR.getColor());
 		
-		String searchAnswer = "고객님의 이메일로  \n"
-				           + "인증번호가 발송되었습니다.";
+		String searchAnswer = "<html>고객님의 이메일로 "
+				           + "<br>인증번호가 발송되었습니다.<br></html>";
 		this.searchAnswerMsg = new JLabel(searchAnswer);
 		this.searchAnswerMsg.setForeground(searchPwdEnum.LABELCOLOR_DEFAULT.getColor());
 		
@@ -123,21 +97,10 @@ public class SearchPwdPanel extends JPanel {
 		//this.searchemailTextField.setOpaque(true);
 		searchConfirmTextField.setBorder(emptyBorder);
 		//this.searchConfirmTextField.setOpaque(true);
-	      
-	//배경화면	
-//		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
-//				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-//				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
-//                Image.SCALE_SMOOTH);
-//
-//		//this.setContentPane(new JLabel(new ImageIcon(backGround)));
-			
 		
 		
 //		//레이블, 텍스트, 버튼 불러오기
 
-//TODO	this.setLayout(new CardLayout());     
-		this.setLayout(null);
 		this.setLabelPosition();
 		this.setTextFieldPosition();
 		this.setButtonPosition();
@@ -173,8 +136,8 @@ public class SearchPwdPanel extends JPanel {
 	    	this.searchConfirmButton.setIcon(
 	    			new ImageIcon(ImageIO.read(
 	    				new File("resources/signUp/up_up_confirm.jpg")).getScaledInstance(
-	    						searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-	    						searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
+	    						searchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+	    						searchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 	    					Image.SCALE_AREA_AVERAGING))
 	    		);
 	    	this.searchConfirmButton.setBounds(searchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle()); 
@@ -184,6 +147,5 @@ public class SearchPwdPanel extends JPanel {
 	    public SearchPwdFrame getSearchPwdMain() {
 	    	return searchPwdFrame;
 	    }
+	}
 
-
-}

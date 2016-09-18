@@ -21,27 +21,31 @@ public enum ClientJoinSizesEnum {
 	//JOINFRAME_START_X(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 13),
 
 	//전체 레이블 위치
-	
+	//아이디 레이블 위치 x,y
 	JOIN_IDLABEL_POSITION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.02)), //옆
 	JOIN_IDLABEL_POSITION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.08)), //아래 위치
 	
-	
+	//패스워드 레이블 위치 x,y
 	JOIN_PWDLABEL_POSITION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_PWDLABEL_POSITION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 2), // JOIN_ID_POSITION_Y.getSize() * 2 -- >아이디레이블 위치 잡고 그 위치에 따라 * 2씩 함
 	
+	//패스워드 재입력 레이블 위치 x,y
 	JOIN_REPWDLABEL_POSITION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_REPWDLABEL_POSITION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 3),
 	
+	//이름 레이블  위치 x,y
 	JOIN_NAMELABEL_POSITION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_NAMELABEL_POSITION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 4),
 	
+	//성별 위치 x,y
 	JOIN_GENDERLABEL_POSITTION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_GENDERLABEL_POSITTION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 5),
 	
+	//생년월일 위치  x,y
 	JOIN_BIRTHLABEL_POSITTION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_BIRTHLABEL_POSITTION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 6),
 	
-	//년,월,일 글씨 
+	//년,월,일 글씨 레이블 x,y위치
 	JOIN_YEARLABEL_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.48)),
 	JOIN_YEARLABEL_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.482)),
 	
@@ -51,9 +55,11 @@ public enum ClientJoinSizesEnum {
 	JOIN_DATE_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.92)),
 	JOIN_DATE_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.482)),
 	
+	//이메일 레이블 위치 x,y
 	JOIN_EMAIL_POSITTION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_EMAIL_POSITTION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 7),
 	
+	//전화번호 레이블 위치 x,y
 	JOIN_TEL_POSITTION_X(JOIN_IDLABEL_POSITION_X.getSize()),
 	JOIN_TEL_POSITTION_Y(JOIN_IDLABEL_POSITION_Y.getSize() * 9),
 	
@@ -61,46 +67,53 @@ public enum ClientJoinSizesEnum {
 	
 //텍스트필드  위치 조절-------------------------------------------
 	
-	//TEXT_GAP()
 	//
+	// 아이디 텍스트 위치 x,y
 	JOIN_IDT_POSITION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.3)),
 	JOIN_IDT_POSITION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.08)),
 	
+	// 비밀번호 텍스트 x,y
 	JOIN_PWDT_POSITION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_PWDT_POSITION_Y(JOIN_IDT_POSITION_Y.getSize() * 2), //JOIN_IDT_POSITION_Y 을 위치로 잡고  * 2씩 증가
 	
+	// 비밀번호 텍스트 x,y
 	JOIN_REPWDT_POSITION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_REPWDT_POSITION_Y(JOIN_IDT_POSITION_Y.getSize() * 3),
 	
+	// 이름 텍스트 x,y
 	JOIN_NAMET_POSITION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_NAMET_POSITION_Y(JOIN_IDT_POSITION_Y.getSize() * 4),
 	
-	// 성별 텍스트
+	// 성별 텍스트 x,y 
 	GENDER_MAN_POSITION_X(JOIN_IDT_POSITION_X.getSize()),
 	GENDER_MAN_POSITION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.4)),
-	
 	GENDER_WOMAN_POSITION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.46)),
 	GENDER_WOMAN_POSITION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.4)),
 	//
-
+	//이메일 아이디 텍스트 x,y
 	JOIN_EMAILT_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_EMAILT_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.56)),
 	
+	// @ 레이블 위치 x,y
 	JOIN_AT_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.47)),
 	JOIN_AT_POSITTION_Y(JOIN_EMAILT_POSITTION_Y.getSize()),
 	
+	// 이메일 주소 텍스트 위치 x,y
 	JOIN_EMAILADRT_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.51)),
 	JOIN_EMAILADRT_POSITTION_Y(JOIN_EMAILT_POSITTION_Y.getSize()),
 
+	// 이메일 인증 텍스트 위치 x,y
 	JOIN_CONFIRMT_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.51)),
 	JOIN_CONFIRMT_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.6)),
 	
+	//전화 번호 텍스트 위치 x,y
 	JOIN_TELT_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.5)),
 	JOIN_TELT_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.72)),
 	
 	JOIN_TELT2_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.7)),
 	JOIN_TELT2_POSITTION_Y(JOIN_TELT_POSITTION_Y.getSize()),
 	
+	//전화 번호 하이픈 레이블 우ㅣ치 
 	JOIN_HYPHEN1_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.47)),
 	JOIN_HYPHEN1_POSITTION_Y(JOIN_TELT_POSITTION_Y.getSize()),
 	
@@ -126,33 +139,41 @@ public enum ClientJoinSizesEnum {
 	JOIN_NUMCHOICE_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.72)),
 
 	
-	// 회원가입 취소 이메일 인증 버튼
+	//이메일 인증 버튼
 	JOIN_CONFIRM_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_CONFIRM_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.6)),
 	
+	//취소  버튼
 	JOIN_RESET_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.30)),
 	JOIN_RESET_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.80)),
 	
+	//회원가입  버튼
 	JOIN_JOIN_POSITTION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.6)),
 	JOIN_JOIN_POSITTION_Y(JOIN_RESET_POSITTION_Y.getSize()),
 
 	
 	//errorMessage
+	// 아이디 에러 레이블 위치 
 	JOIN_IDERROR_POSITION_X((int)(JOINFRAME_SIZE_WIDTH.getSize() * 0.3)),
 	JOIN_IDERROR_POSITION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.12)),
 	
+	// 패스워드 레이블 위치
 	JOIN_PWDERROR_POSITTION_X(JOIN_IDERROR_POSITION_X.getSize()),
 	JOIN_PWDERROR_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.2)),
 	
+	// 패스워드 재입력 레이블 위치 
 	JOIN_REPWDERROR_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_REPWDERROR_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.28)),
 	
+	// 이름입력 레이블 위치 
 	JOIN_NAMEERROR_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_NAMEERROR_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.36)),
 	
+	// 성별 입력 레이블 위치
 	JOIN_GENDERERROR_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_GENDERERROR_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.44)),
 	
+	// 이메일 에러 레이블 위치 
 	JOIN_EMAILERROR_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_EMAILERROR_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.65)),
 
@@ -187,7 +208,7 @@ public enum ClientJoinSizesEnum {
 	CHOICEBACKGROUND(Color.black),
 	
 	//레이블 폰트
-	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,14)),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,14)),
 	
 	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	

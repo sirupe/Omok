@@ -1,21 +1,22 @@
 package frames;
 
-import java.awt.Graphics;
+
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import enums.searchPwdEnum;
 import enums.searchRePwdEnum;
 
+@SuppressWarnings("serial")
 public class SearchRePwdPanel extends JPanel {
 	private JLabel searchPwdLabel;
 	private JLabel searchRePwdLabel;
@@ -45,29 +46,28 @@ public class SearchRePwdPanel extends JPanel {
 		
 		//버튼 생성
 				searchConfirmButton  = new JButton();
-				
 				searchConfirmButton.setBorderPainted(false);
 				searchConfirmButton.setFocusPainted(false);
 				searchConfirmButton.setContentAreaFilled(false);
+				
 				this.add(searchConfirmButton);
 		
-		
-		
-		//텍스트 필드 테두리 없애기
-				searchPwdTextField.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
-				this.searchPwdTextField.setOpaque(true);
-				searchRePwdTextField.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
+				//텍스트 필드 테두리 없애기
+				EmptyBorder emptyBorder = searchPwdEnum.LABEL_DEFAULT.getBorder();
+				searchPwdTextField.setBorder(emptyBorder);
+				searchRePwdTextField.setBorder(emptyBorder);
 				this.searchRePwdTextField.setOpaque(true);
-				
-					//레이블 폰트
-					this.searchPwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
-					this.searchRePwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
-				
-	//				 
-	//				// 텍스트 폰트
-					this.searchPwdTextField.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
-					this.searchRePwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
-					this.searchPwdErrorLabel.setFont(searchRePwdEnum.LABELFONT_ERROR.getFont());
+				this.searchPwdTextField.setOpaque(true);
+
+				//레이블 폰트
+				Font font = searchRePwdEnum.LABEL_DEFAULT.getFont();
+				this.searchPwdLabel.setFont(font);
+				this.searchRePwdLabel.setFont(font);
+		 
+			    // 텍스트 폰트
+				this.searchPwdTextField.setFont(font);
+				this.searchRePwdLabel.setFont(font);
+				this.searchPwdErrorLabel.setFont(searchRePwdEnum.LABELFONT_ERROR.getFont());
 					
 					//배경화면	
 					backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
@@ -76,11 +76,11 @@ public class SearchRePwdPanel extends JPanel {
 			                Image.SCALE_SMOOTH);
 					this.add(new JLabel(new ImageIcon(backGround)));
 		
-		this.setBounds(
-				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
-				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
-				searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-				searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
+					this.setBounds(
+							searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
+							searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
+							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 		);
 		
 //		//레이블, 텍스트, 버튼 불러오기
@@ -88,9 +88,8 @@ public class SearchRePwdPanel extends JPanel {
 			     this.setTextFieldPosition();
 			     this.setButtonPosition();    
 				
-				this.setLayout(null);
-			    this.setVisible(true);
-			 
+			     this.setLayout(null);
+			     this.setVisible(true);
 	}
 	public void setLabelPosition() {
 		this.searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
@@ -109,21 +108,15 @@ public class SearchRePwdPanel extends JPanel {
 	}
 	public void setButtonPosition() throws IOException {
 		this.searchConfirmButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);
+    	this.searchConfirmButton.setBounds(searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
     	
     	this.searchConfirmButton.setIcon(
     			new ImageIcon(ImageIO.read(
-    				new File("resources/signUp/up_up_confirm.jpg")).getScaledInstance(
-    						searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-    						searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING))
+    				new File("resources/signUp/confirm.jpg")).getScaledInstance(
+    						searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+    						searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+    						Image.SCALE_AREA_AVERAGING))
     		);
-
-    	this.searchConfirmButton.setBounds(searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
-    	
-    	 
     	this.add(searchConfirmButton);
 	}
-
-
-
 }

@@ -73,7 +73,6 @@ public class JoinFrame extends JFrame {
 	private JTextField emailConfirmTextField;
 	private JComboBox<String> emailAddrChoice;
 
-	
 	private JComboBox<String> telFrontNumChoice; //전화번호 02,010..
 	private JTextField telMiddleNumTextField;
 	private JTextField telBackNumTextField;	
@@ -83,16 +82,16 @@ public class JoinFrame extends JFrame {
 	private JButton confirmButton; //인증 버큰
 
 	
-//생년월일 콤보 박스
-	private Calendar rightNow = Calendar.getInstance();
-	private int nowyear       = rightNow.get(Calendar.YEAR);
-	private int nowmonth 	  = rightNow.get(Calendar.MONTH);
-	private int nowdate 	  = rightNow.get(Calendar.DATE);
+////생년월일 콤보 박스
+//	private Calendar rightNow = Calendar.getInstance();
+//	private int nowyear       = rightNow.get(Calendar.YEAR);
+//	private int nowmonth 	  = rightNow.get(Calendar.MONTH);
+//	private int nowdate 	  = rightNow.get(Calendar.DATE);
 
 //배경
 	private Image backGround;
-	private Object joinButtonimage;
-	private Object resetButtonImage;
+//	private Object joinButtonimage;
+//	private Object resetButtonImage;
 	
 	private int month;
 
@@ -178,8 +177,6 @@ public class JoinFrame extends JFrame {
 		this.monthChoice = new JComboBox<Integer>();
 		this.dateChoice  = new JComboBox<Integer>();
 
-
-		
 //레이블 폰트
 		Font labelFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idLabel.setFont(labelFont);
@@ -190,6 +187,22 @@ public class JoinFrame extends JFrame {
 		this.genderLabel.setFont(labelFont);
 		this.emailLabel.setFont(labelFont);
 		this.telLabel.setFont(labelFont);
+
+//텍스트필드
+		Font textFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
+		this.idTextField.setFont(textFont);
+		this.pwdTextField.setFont(textFont);
+		this.rePwdTextField.setFont(textFont);
+		this.nameTextField.setFont(textFont);
+		this.yearTextField.setFont(textFont);
+		this.monthTextField.setFont(textFont);
+		this.dateTextField.setFont(textFont);
+
+		this.emailIDTextField.setFont(textFont);
+		this.emailAddrTextField.setFont(textFont);
+		this.telMiddleNumTextField.setFont(textFont);
+		this.telBackNumTextField.setFont(textFont);
+		this.emailConfirmTextField.setFont(textFont);
 		
 // 이메일 전화번호 콤보 박스
 		this.emailAddrChoice = new JComboBox<String>();

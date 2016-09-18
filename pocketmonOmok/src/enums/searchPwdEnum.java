@@ -35,40 +35,42 @@ public enum searchPwdEnum {
 //// 에러 레이블
 	SEARCH_ERROR_LABEL(new Rectangle(
 			
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 23),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 70),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 50),
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 15),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 75),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 80),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 13)
 			)),
 ////인증 레이블
 //	
-//// 이름, 이메일 텍스트 필드
+//// 이름 텍스트 필드 x,y, 가로 세로 
 	SEARCH_ID_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 22),
 			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 15),
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 50),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
+	// 이메일 텍스트 필드 x,y, 가로 세로 
 	SEARCH_EMAIL_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 22),
 			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 37),
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 50),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
+	// 인증  텍스트 필드 x,y, 가로 세로 
 	SEARCH_CONFIRM_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 22),
 			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 59),
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 35),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
-	
+	// 해당 사항의 정보가 맞는지 아닌지에 대한 대답 텍스트 필드   x,y, 가로 세로 
 	SEARCH_ANSWER_LABEL(new Rectangle(
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 85),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 95),
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 90),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 15)
 			)),
-	
+	//3분 제한시간 레이블  x,y, 가로 세로 
 	SEARCH_Time_LABEL(new Rectangle(
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 45),
 			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 55),
@@ -76,7 +78,7 @@ public enum searchPwdEnum {
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 15)
 			)),
 	
-//	//버튼 생성
+//	//인증확인 버튼ㄴ 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 7),
 			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 59),
@@ -85,9 +87,9 @@ public enum searchPwdEnum {
 			)),
 
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,15)),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,16)),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("맑은 고딕",Font.BOLD,18)),
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,18)),
 	//텍스트 테두리 없애기
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
 	
