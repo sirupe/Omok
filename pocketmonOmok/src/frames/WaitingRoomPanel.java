@@ -2,6 +2,7 @@ package frames;
 
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -9,9 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -40,7 +44,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JButton sendMessage;
 	
 	private JList<String> playerList;
-	private Vector<String> playerListVector;
+	//private Vector<String> playerListVector;
 	private JPanel playerListBackgrounnd;
 	
 	private JPanel myInfo;
@@ -52,9 +56,17 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JLabel level;
 	private JButton correct;
 	
+	private Map<String,ImageIcon> imageMap;
+	
+	
 
 	public WaitingRoomPanel() throws IOException {	
 		
+		String[] player = {"1번입니다","2번입니다","3번입니다","4번입니다"};
+		imageMap = createImage(player);
+		this.playerList = new JList(player);
+		//player.setCellRenderer(new PlayerRenderer());
+				
 		this.waitingRoomListVector = new Vector<String>();
 		this.waitingRoomInfo = new JLabel(" OX " + "  NO  "
 				+ "                 TITLE                 "
@@ -62,31 +74,79 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.waitingRoomList = new JList<>(this.waitingRoomListVector);
 		this.waitingRoomListVector.add("1111111111111111111111111번");
 		this.waitingRoomListVector.add("2222222222222222222222222번");
-		
-		this.chattingOutput = new JTextArea();
-		this.chattingInput = new JTextField();
-		this.sendMessage = new JButton();
 				
-
-		this.gamestartButton = new JButton();
+		this.chattingOutput = new JTextArea();
+		this.chattingInput  = new JTextField();
+		this.sendMessage    = new JButton();
+						
+		this.gamestartButton  = new JButton();
 		this.createRoomButton = new JButton();
 		
-		this.playerListVector = new Vector<String>();
-		this.playerList = new JList<>(this.playerListVector);
-		this.playerListVector.add("shin");
-		this.playerListVector.add("yeon");
-		this.playerListVector.add("jong");
+		//this.playerListVector = new Vector<String>();
+		//this.playerList = new JList<>(this.playerListVector);
+		//this.playerListVector.add("shin");
+		//this.playerListVector.add("yeon");
+		//this.playerListVector.add("jong");
 		
-		this.userID = new JLabel("아이디");
-		this.score = new JLabel("전적");
+		this.userID 	 = new JLabel("아이디");
+		this.score 		 = new JLabel("전적");
 		this.winningRate = new JLabel("승률");
-		this.point = new JLabel("승점");
-		this.level = new JLabel("등급");
-		this.correct = new JButton();
+		this.point 		 = new JLabel("승점");
+		this.level 		 = new JLabel("등급");
+		this.correct 	 = new JButton();
 		
 		this.roomListPosition();
 	}
 	
+	
+	public class PlayerRenderer extends DefaultListCellRenderer {
+		Font font = new Font("a으라차차", Font.BOLD, 24);
+		
+		public Component getListCellRendererComponent(
+				JList player, Object value, int index,
+				boolean isSelected, boolean cellHasFocus) {
+			
+			JLabel label = (JLabel) super.getListCellRendererComponent(
+                    player, value, index, isSelected, cellHasFocus);
+            label.setIcon(imageMap.get((String) value));
+            label.setHorizontalTextPosition(JLabel.RIGHT);
+            label.setFont(font);
+            return label;
+		}
+		
+	}
+	
+	private Map<String, ImageIcon> createImage(String[] player) throws IOException {
+	    Map<String, ImageIcon> map = new HashMap<>();
+	    try{
+	    	map.put("1번입니다", new ImageIcon(ImageIO.read(
+            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
+    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("2번입니다", new ImageIcon(ImageIO.read(
+            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
+    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("3번입니다", new ImageIcon(ImageIO.read(
+            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
+    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("4번입니다", new ImageIcon(ImageIO.read(
+            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
+    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+
+	    } catch (Exception e){
+	    	e.printStackTrace();
+	    }
+	    
+	    return map;
+
+	}
 
 	public void roomListPosition() throws IOException {
 		
@@ -409,6 +469,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.add(level);
 		this.add(correct);
 		this.add(myInfo);
+		
 
 	}
 
