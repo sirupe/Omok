@@ -644,9 +644,9 @@ public class JoinFrame extends JFrame {
 	public void setErrorPosition() {
 		// 에러 레이블
 		
-		this.idErrorLabel	  = new JLabel(ClientJoinSizesEnum.JOIN_ID_ERR_MESSAGE.getStrArr()[0]);
-		this.idErrorLabel.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
-		
+//		this.idErrorLabel	  = new JLabel(ClientJoinSizesEnum.JOIN_ID_ERR_MESSAGE.getStrArr()[0]);
+//		this.idErrorLabel.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
+//		
 		this.pwdErrorLabel	  = new JLabel();
 		this.pwdErrorLabel.setForeground(ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor());
 		
