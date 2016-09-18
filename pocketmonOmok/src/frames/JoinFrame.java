@@ -177,12 +177,7 @@ public class JoinFrame extends JFrame {
 				
 				
 		//회원가입, 취소 버튼	
-				
-				resetButton  = new JButton();
-				
-				resetButton.setBorderPainted(false);
-				resetButton.setFocusPainted(false);
-				resetButton.setContentAreaFilled(false);
+
 				
 				resetButton = new JButton("취소");
 				
@@ -291,6 +286,7 @@ public class JoinFrame extends JFrame {
 		this.telFrontNumChoice.addItem("016");
 		this.telFrontNumChoice.addItem("019");
 		
+//텍스트 필드 테두리 없애기		
 		rePwdTextField.setBorder(ClientJoinSizesEnum.LABEL_DEFAULT.getBorder());
 		this.pwdTextField.setOpaque(true);
 		
