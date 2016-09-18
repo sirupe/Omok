@@ -1,7 +1,11 @@
 /frames/
+<<<<<<< HEAD
 /actions/
 /client/
 /dataBaseConnection/
 /enums/
 /omokGameServer/
 /start/
+=======
+/enums/
+>>>>>>> 2923d8c3311d0975bfa46f5dfd63248ff1e0675c
