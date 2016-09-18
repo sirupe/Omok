@@ -44,7 +44,7 @@ public class OmokServer {
 		while(true) {
 			System.out.println("Waiting User...");
 			this.socket = this.serverSocket.accept();
-			OmokPersonalServer personalServer = new OmokPersonalServer(this, socket);
+			OmokPersonalServer personalServer = new OmokPersonalServer(this, this.socket);
 			personalServer.start();
 			System.out.println("User Accept .. " + socket.getLocalAddress());
 		}
@@ -54,7 +54,7 @@ public class OmokServer {
 	
 	
 	public void login(UserPositionIndex index, OmokPersonalServer personalServer) {
-		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO)index;
+		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) index;
 		UserPersonalInfoDTO outputUserPersonalInfo = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
 		outputUserPersonalInfo.setPosition(UserPositionEnum.POSITION_LOGIN);
 		System.out.println(outputUserPersonalInfo.getUserID());
@@ -69,8 +69,9 @@ public class OmokServer {
 		System.out.println("대기실");
 	}
 	
-	public void join() {
-		System.out.println("회원가입");
+	public void join(UserPositionIndex index, OmokPersonalServer personalServer) {
+		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)index;
+//		personalDTO.get
 	}
 	
 	public void findID() {

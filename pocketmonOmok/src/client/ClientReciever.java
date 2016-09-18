@@ -21,41 +21,42 @@ public class ClientReciever extends Thread {
 	@Override
 	public void run() {
 		System.out.println("ClientReciever run!!");
-		while(true) {
-			boolean isAccept = true;
-			try {
-				while(isAccept) {
-					Object object = this.clientIS.readObject();
-					UserPositionIndex userPosition = (UserPositionIndex)object;
-					switch(userPosition.getPosition()) {
-					case POSITION_LOGIN :   
-						this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
-						break;
-					case POSITION_WAITING_ROOM :      
-						break;
-					case POSITION_JOIN :              
-						break;
-					case POSITION_FIND_ID :           
-						break;
-					case POSITION_FIND_PW :           
-						break;
-					case POSITION_GAME_ROOM :         
-						break;
-					case POSITION_STORE :             
-						break;
-					case POSITION_OTHER_USER_INFO :   
-						break;
-					case POSITION_MODIFY_MY_INFO :    
-						break;
-					case POSITION_EXIT :  
-						this.clientAccept.gameExit();
-						break;
-					}
+		boolean isAccept = true;
+		try {
+			while(isAccept) {
+				System.out.println("클라이언트 리시브 시작");
+				Object object = this.clientIS.readObject();
+				System.out.println("");
+				UserPositionIndex userPosition = (UserPositionIndex)object;
+				switch(userPosition.getPosition()) {
+				case POSITION_LOGIN :   
+					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
+					break;
+				case POSITION_WAITING_ROOM :      
+					break;
+				case POSITION_JOIN :              
+					break;
+				case POSITION_FIND_ID :   
+					break;
+				case POSITION_FIND_PW :  
+					break;
+				case POSITION_GAME_ROOM :         
+					break;
+				case POSITION_STORE :             
+					break;
+				case POSITION_OTHER_USER_INFO :   
+					break;
+				case POSITION_MODIFY_MY_INFO :    
+					break;
+				case POSITION_EXIT :  
+					this.clientAccept.gameExit();
+					break;
 				}
-			} catch (ClassNotFoundException | IOException e) {
-				e.printStackTrace();
 			}
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
+		
 	}
 	
 	
