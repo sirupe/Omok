@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import enums.LoginFrameSizesEnum;
 import enums.WaitingRoomSizesEnum;
 
 public class WaitingRoomPanel extends JPanel implements ActionListener {	

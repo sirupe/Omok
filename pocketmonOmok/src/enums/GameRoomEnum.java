@@ -3,29 +3,31 @@ package enums;
 import java.awt.Font;
 import java.awt.Rectangle;
 
+import frames.LoginPanel;
+
 public enum GameRoomEnum {
 //오목판 설정값--------------------------------------------------------------
 	GAME_BOARD_PANEL_RECT(new Rectangle(
-			LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 1,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 3,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 64,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 64			
+			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.01),
+			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03),
+			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64),
+			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64)			
 	)),
 	
 
 //바둑알패널 설정-----------------------------------------------------------
 	GAME_STONEPANEL_RECT(new Rectangle(
-			(int)(GAME_BOARD_PANEL_RECT.getRect().width / 100 * 2.6),
-			(int)(GAME_BOARD_PANEL_RECT.getRect().height / 100 * 2.6),
-			(int)(GAME_BOARD_PANEL_RECT.getRect().width * 0.96),
-			(int)(GAME_BOARD_PANEL_RECT.getRect().height * 0.96)
+			(int)(GAME_BOARD_PANEL_RECT.getRect().width * 0.02 * 1.45),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().height * 0.02 * 1.45),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().width * 0.95),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().height * 0.95)
 	)),	
 	
 	GAME_STONE_LOCATION_RECT(new Rectangle(
 			0,
 			0,
-			(int)(GAME_BOARD_PANEL_RECT.getRect().width / 31 * 1.98),
-			(int)(GAME_BOARD_PANEL_RECT.getRect().height / 31 * 1.98)
+			(int)(GAME_BOARD_PANEL_RECT.getRect().width * 0.06 * 1.06),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().height * 0.06 * 1.06)
 	)),
 	
 	
@@ -90,7 +92,7 @@ public enum GameRoomEnum {
 	GAME_TIMELIMIT_PROGRESS_RECT(new Rectangle(
 			0,
 			0,
-			GAME_TIMELIMIT_PANEL_RECT.getRect().width / 100 * 90,
+			(int)(GAME_TIMELIMIT_PANEL_RECT.getRect().width * 0.8),
 			GAME_TIMELIMIT_PANEL_RECT.getRect().height
 	)),
 	
@@ -126,8 +128,8 @@ public enum GameRoomEnum {
 	
 	
 //폰트설정----------------------------------------------------------------	
-	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, 35)),
-	GAME_CHATTING_FONT(new Font("돋움", Font.PLAIN, 25));
+	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
+	GAME_CHATTING_FONT(new Font("돋움", Font.PLAIN, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 130));
 //======================================================================
 	private Rectangle rect;
 	private String[] buttonName;

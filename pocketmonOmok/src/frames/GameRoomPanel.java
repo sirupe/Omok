@@ -51,26 +51,25 @@ public class GameRoomPanel extends JPanel {
 	
 	public void setStonePanel() {
 		this.omokStonePanel.setLayout(null);
-		this.omokStonePanel.setOpaque(false);
+		this.omokStonePanel.setOpaque(true);
+		this.omokStonePanel.setBackground(new Color(255,255,255,90));
 		JButton[][] stonesLocation = new JButton[15][];
-		// 다차원 배열 [15][15] 사이즈를 모두 new 해주는 fot문
-		for(int i = 0, size = stonesLocation.length; i < size; i++) {
-			stonesLocation[i] = new JButton[15];
-			
-		}
-		
+
 		for(int i = 0, iSize = stonesLocation.length; i < iSize; i++) {
+			stonesLocation[i] = new JButton[15];
 			for(int j = 0, jSize = stonesLocation.length; j < jSize; j++) {
 				stonesLocation[i][j] = new JButton();
+				stonesLocation[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
 				stonesLocation[i][j].setBounds(new Rectangle(
 						j * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
 						i * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height,
 						GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
 						GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height
 				));
+				
 				stonesLocation[i][j].setContentAreaFilled(false);
 				stonesLocation[i][j].setFocusPainted(false);
-				stonesLocation[i][j].setBorderPainted(false);
+//				stonesLocation[i][j].setBorderPainted(false);
 				this.omokStonePanel.add(stonesLocation[i][j]);
 			}
 		}
@@ -83,7 +82,6 @@ public class GameRoomPanel extends JPanel {
 							Image.SCALE_AREA_AVERAGING)
 					));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.omokStonePanel.setBounds(GameRoomEnum.GAME_STONEPANEL_RECT.getRect());
