@@ -1,4 +1,4 @@
-package dataBaseConnection;
+package datasDAO;
 
 import java.sql.Connection;
 import java.sql.Driver;

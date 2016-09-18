@@ -3,7 +3,7 @@ package client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import datas.UserPositionIndex;
+import datasDTO.UserPositionIndex;
 import frames.BasicFrame;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
 public class ClientReciever extends Thread {

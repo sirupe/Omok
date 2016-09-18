@@ -187,8 +187,11 @@ public enum ClientJoinSizesEnum {
 	CHOICEBACKGROUND(Color.black),
 	
 	//레이블 폰트
-	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,14)),
+	LABELFONT_DEFAULT(new Font("맑은 고딕", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
 	
+	//컴포넌트 폰트
+	JOIN_COMPFONT_DEFAULT(new Font("맑은 고딕", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
+
 	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	
 	//버튼 크기
@@ -220,7 +223,7 @@ public enum ClientJoinSizesEnum {
 	private Font font;
 	private EmptyBorder border;
 	private String[] strArr;
-	private Map<String, String> errMap;
+	private Map<String, String> messageMap;
 	
 	private ClientJoinSizesEnum(Color color) {
 		this.color = color;
@@ -245,23 +248,25 @@ public enum ClientJoinSizesEnum {
 	}
 	
 	private ClientJoinSizesEnum(Map<String, String> map) {
-		this.errMap = map;
+		this.messageMap = map;
 	}
 
 	private static Map<String, String> joinMessageMap() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("join공란",			  "필수 입력사항입니다.");
+		map.put("join성공", 		  	  "사용 가능");
 		map.put("joinID정합성",		  "영문자와 숫자만 입력이 가능합니다.");
-		map.put("joinID길이",			  "6~15자 이내의 ID를 입력해주세요.");
+		map.put("joinID길이",			  "3~15자 이내의 ID를 입력해주세요.");
 		map.put("joinID중복",			  "이미 존재하는 ID입니다.");
-		map.put("joinID성공", 		  "사용이 가능한 ID입니다.");
 		map.put("joinPW길이",			  "6~16자 이내로 입력해주세요.");
+		map.put("joinPW아이디", 		  "아이디와 다르게 설정해주세요.");
 		map.put("joinPW정합성",		  "영문자와 숫자, 특수문자를 1개 이사 포함시켜 주세요.");
 		map.put("joinPW불일치", 		  "상단에 입력하신 패스워드와 일치하지 않습니다.");
 		map.put("joinName길이", 		  "2글자 이상 입력해주세요.");
 		map.put("joinName정합성",		  "한글만 입력이 가능합니다.");
 		map.put("joinMail인증번호불일치", "인증번호가 일치하지 않습니다. 다시 확인해주세요.");
-		
+		map.put("joinMail특수문자", 	  "이메일ID를 정확하게 입력해주세요.");
+		map.put("joinMain정합성", 	  "이메일 형식이 정확하지 않습니다.");
 		return map;
 	}
 	
@@ -290,7 +295,7 @@ public enum ClientJoinSizesEnum {
 		return strArr;
 	}
 	
-	public Map<String, String> getErrMap() {
-		return errMap;
+	public Map<String, String> getMessageMap() {
+		return messageMap;
 	}
 }
