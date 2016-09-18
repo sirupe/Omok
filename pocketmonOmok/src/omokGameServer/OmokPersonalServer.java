@@ -13,13 +13,11 @@ public class OmokPersonalServer extends Thread{
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
 	
-	
-	
 	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
 		this.omokServer = omokServer;
 		this.personalSocket = socket;
-		this.serverInputStream  = new ObjectInputStream(this.omokServer.getSocket().getInputStream());
-		this.serverOutputStream = new ObjectOutputStream(this.omokServer.getSocket().getOutputStream());
+		this.serverInputStream  = new ObjectInputStream(this.personalSocket.getInputStream());
+		this.serverOutputStream = new ObjectOutputStream(this.personalSocket.getOutputStream());
 	}
 	
 	@Override
@@ -29,7 +27,7 @@ public class OmokPersonalServer extends Thread{
 		try {
 			while(isAccept) {
 				Object object = this.serverInputStream.readObject();
-				UserPositionIndex userPosition = (UserPositionIndex)object;
+				UserPositionIndex userPosition = (UserPositionIndex) object;
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.omokServer.login(userPosition, this);
@@ -38,7 +36,7 @@ public class OmokPersonalServer extends Thread{
 					this.omokServer.waitingRoom();
 					break;
 				case POSITION_JOIN :
-					this.omokServer.join();
+					this.omokServer.join(userPosition, this);
 					break;
 				case POSITION_FIND_ID :
 					this.omokServer.findID();

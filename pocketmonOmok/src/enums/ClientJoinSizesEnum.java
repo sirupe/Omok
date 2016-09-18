@@ -1,18 +1,11 @@
 package enums;
 
-import java.awt.Toolkit;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Label;
-import java.awt.TextField;
+import java.awt.Toolkit;
+
+import javax.swing.border.EmptyBorder;
 
 public enum ClientJoinSizesEnum {
 	
@@ -194,12 +187,52 @@ public enum ClientJoinSizesEnum {
 	//레이블 폰트
 	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,14)),
 	
-	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),
+	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	
 	//버튼 크기
 	BUTTONIMAGE_WIDTH(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 12),
-	BUTTONIMAGE_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 5));
+	BUTTONIMAGE_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 5)),
 	
+	//이메일 및 전화번호 정보
+	JOIN_EMAIL_ADDRESS(new String[] {
+			"직접입력",
+			"naver.com",
+			"hanmail.net",
+			"nate.com",
+			"gmail.com"
+	}),
+	
+	JOIN_TEL_FRONT_NUM(new String[] {
+			"010", "011", "016", "019", "017"
+	}),
+	
+	//에러 메세지들
+	JOIN_ID_ERR_MESSAGE(new String[] {
+			"특수문자 입력불가",
+			"6~15자 이외 글자수",
+			"한글만 가능, 2자 이상"
+	}),
+	
+	JOIN_PW_ERR_MESSAGE(new String[] {
+			"6~16글자수",
+			"pw불일치시"
+	}),
+	
+	JOIN_NAME_ERR_MESSAGE(new String[] {
+			"한글만 가능",
+			"2자 이상"
+	}),
+	
+	JOIN_GENDER_ERR_MESSAGE(new String[] {
+			"미선택시 - 필수 입력"
+	}),
+	
+	JOIN_EMAIL_ERR_MESSAGE(new String[] {
+			"인증번호 틀렸을시"
+	}),
+	
+	//email Combo 설정값 ------------------------------------------------
+	JOIN_EMAIL_COMBOBOX_BACKGROUND(Color.white);
 	
 
 	private Dimension dimension;
@@ -207,7 +240,7 @@ public enum ClientJoinSizesEnum {
 	private Color color;
 	private Font font;
 	private EmptyBorder border;
-	
+	private String[] strArr;
 	
 	
 	private ClientJoinSizesEnum(Color color) {
@@ -219,7 +252,6 @@ public enum ClientJoinSizesEnum {
 	private ClientJoinSizesEnum(EmptyBorder border) {
 		this.border = border;
 	}
-
 	
 	private ClientJoinSizesEnum(int size) {
 		this.size = size;
@@ -228,7 +260,12 @@ public enum ClientJoinSizesEnum {
 	private ClientJoinSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
+	
+	private ClientJoinSizesEnum(String[] strArr) {
+		this.strArr = strArr;
+	}
 
+	
 	public Dimension getDimension() {
 		return dimension;
 	}
@@ -244,5 +281,8 @@ public enum ClientJoinSizesEnum {
 	}
 	public EmptyBorder getBorder() {
 		return border;
+	}
+	public String[] getStrArr() {
+		return strArr;
 	}
 }
