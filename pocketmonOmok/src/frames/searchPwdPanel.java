@@ -35,7 +35,7 @@ public class searchPwdPanel extends JPanel {
 	private JTextField searchConfirmTextField;
 	
 	private JButton searchConfirmButton;
-	private Image backGround;
+	//private Image backGround;
 	
 	private JPanel searchPwdPanel;
 	private SearchPwdFrame searchPwdMain;
@@ -57,9 +57,9 @@ public class searchPwdPanel extends JPanel {
 			);
 	     
 	     
-		//라벨 생성
+		//라벨 생성 TODO
 		this.searchIdLabel        = new JLabel("이름");
-		this.searchemailLabel     = new JLabel("Email");
+		this.searchemailLabel        = new JLabel("Email");
 	
 //		텍스트 필드생성
 		this.searchIdTextField      = new JTextField(10);
@@ -126,12 +126,12 @@ public class searchPwdPanel extends JPanel {
 		
 		
 //		//레이블, 텍스트, 버튼 불러오기
+
+			     this.setLayout(new CardLayout());     
 	             this.setLabelPosition();
 			     this.setTextFieldPosition();
 			     this.setButtonPosition();
-			     
 			     this.add(this.searchPwdPanel);
-			     this.setLayout(new CardLayout());
 			 
 	}
 //	//이름, 이메일 , 에러 메세지  레이블!!!!!! 위치 및 크기
@@ -147,8 +147,8 @@ public class searchPwdPanel extends JPanel {
 			this.add(searchAnswerMsg);
 			this.add(searchTimeLabel);
 			this.searchIdLabel.setOpaque(false);
-			
 	    }
+		
 //	// 이름 이메일, 인증 텍스트필드!!!!!!!!!!!!!! 위치 및 크기
 	    public void setTextFieldPosition() {
 	    	this.searchIdTextField.setBounds(searchPwdEnum.SEARCH_ID_TEXTFIELD.getRectangle());
@@ -175,9 +175,6 @@ public class searchPwdPanel extends JPanel {
 	    public SearchPwdFrame getSearchPwdMain() {
 	    	return searchPwdMain;
 	    }
-//	public static void main(String[] args) throws IOException {
-//		new searchPwdPanel();
-//
-//	}
+
 
 }

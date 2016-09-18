@@ -52,10 +52,10 @@ public enum searchRePwdEnum {
 			)),
 //	//버튼 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
-			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 59),
-			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 16),
-			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
+			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 25),
+			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 88),
+			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 30),
+			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100  * 15)
 			)),
 	
 	//일반 폰트

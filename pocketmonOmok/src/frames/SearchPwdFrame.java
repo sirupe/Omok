@@ -16,6 +16,7 @@ import enums.LoginFrameSizesEnum;
 import enums.searchPwdEnum;
 import enums.searchRePwdEnum;
 
+@SuppressWarnings("serial")
 public class SearchPwdFrame extends JFrame implements Serializable{
 	
 	private CardLayout cardLayout;
@@ -24,7 +25,6 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 	private SearchChangePanel searchChangePanel;
 	private Image backGround;
 	
-	//
 	public SearchPwdFrame() throws IOException {
 		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
 				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
@@ -42,6 +42,7 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 		);
 		
 		//비밀번호 찾기 프레임
+		
 		this.searchPwdPanel = new searchPwdPanel(this);
 		this.searchPwdPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
@@ -54,8 +55,8 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 				try {
 					g.drawImage(ImageIO.read(
 						new File("resources/signUp/backg.png")),
-							searchPwdEnum.SEARCH_PWD_FRAME_POSITION_X.getSize(),
-							searchPwdEnum.SEARCH_PWD_FRAME_POSITION_Y.getSize(),
+							0,
+							0,
 							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
 							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
@@ -64,14 +65,16 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 				}
 			}};
 		this.setLayout(null);
+		
 		this.newSearchChangePanel();
 		this.add("searchPwdPanel",this.searchPwdPanel);
-		this.add("searchRePwdPanel", this.searchRePwdPanel);
-		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+//		this.add("searchRePwdPanel", this.searchRePwdPanel);
+//		this.add("searchChangeConfirmPanel", this.searchChangePanel);
 		this.setLayout(this.cardLayout);
 		this.setTitle("PW찾기");
 		this.setVisible(true);
 		this.setResizable(false);
+		
 	}
 	
 	//비밀번호 변경 확인 프레임
@@ -94,16 +97,14 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 			}
 		};
 	}
-	public void insearchRePwdPanel() {
-		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
-	}
 	
 	public searchPwdPanel getsearchPwdPanel() {
 		return searchPwdPanel;
 	}
 	
-		
-		
+	public void insearchRePwdPanel() {
+		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
+	}	
 	public static void main(String[] args) {
 		try {
 			new SearchPwdFrame();

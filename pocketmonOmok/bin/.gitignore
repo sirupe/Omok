@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-/enums/
-/frames/
-/start/
-/actions/
-=======
-/frames/
-<<<<<<< HEAD
 /actions/
 /client/
 /dataBaseConnection/
+/datas/
 /enums/
+/frames/
 /omokGameServer/
 /start/
-=======
-/enums/
->>>>>>> 2923d8c3311d0975bfa46f5dfd63248ff1e0675c
->>>>>>> 7e26c41ea2d32cad1bb18e0ca7d58db79937bcaf
+/utility/

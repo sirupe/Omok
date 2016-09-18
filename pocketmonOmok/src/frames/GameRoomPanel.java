@@ -1,9 +1,7 @@
 package frames;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
@@ -23,6 +21,7 @@ import javax.swing.JTextField;
 import enums.GameRoomEnum;
 import enums.ImageEnum;
 
+@SuppressWarnings("serial")
 public class GameRoomPanel extends JPanel {
 	private JPanel gameBoardPanel;	// 오목판
 	private JPanel omokStonePanel;	// 돌을 놓을 패널
@@ -51,15 +50,15 @@ public class GameRoomPanel extends JPanel {
 	
 	public void setStonePanel() {
 		this.omokStonePanel.setLayout(null);
-		this.omokStonePanel.setOpaque(true);
-		this.omokStonePanel.setBackground(new Color(255,255,255,90));
+		this.omokStonePanel.setOpaque(false);
+//		this.omokStonePanel.setBackground(new Color(255,255,255,90));
 		JButton[][] stonesLocation = new JButton[15][];
 
 		for(int i = 0, iSize = stonesLocation.length; i < iSize; i++) {
 			stonesLocation[i] = new JButton[15];
 			for(int j = 0, jSize = stonesLocation.length; j < jSize; j++) {
 				stonesLocation[i][j] = new JButton();
-				stonesLocation[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+//				stonesLocation[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
 				stonesLocation[i][j].setBounds(new Rectangle(
 						j * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
 						i * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height,
@@ -69,7 +68,7 @@ public class GameRoomPanel extends JPanel {
 				
 				stonesLocation[i][j].setContentAreaFilled(false);
 				stonesLocation[i][j].setFocusPainted(false);
-//				stonesLocation[i][j].setBorderPainted(false);
+				stonesLocation[i][j].setBorderPainted(false);
 				this.omokStonePanel.add(stonesLocation[i][j]);
 			}
 		}
@@ -87,7 +86,6 @@ public class GameRoomPanel extends JPanel {
 		this.omokStonePanel.setBounds(GameRoomEnum.GAME_STONEPANEL_RECT.getRect());
 	}
 	
-	@SuppressWarnings("serial")
 	public void setGameBoard() {
 		this.gameBoardPanel = new JPanel() {
 			@Override
@@ -138,7 +136,6 @@ public class GameRoomPanel extends JPanel {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					timeBar.setValue(i);
@@ -207,7 +204,6 @@ public class GameRoomPanel extends JPanel {
 		this.gameMenuPanel.setLayout(null);
 		this.gameMenuPanel.setOpaque(false);
 		this.gameMenuPanel.setBounds(GameRoomEnum.GAME_MENU_PANEL_RECT.getRect());
-		Rectangle defaultRect = GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect();
 		String[] buttonsName = GameRoomEnum.GAME_BUTTONNAME.getButtonName();
 		String[] buttonsDir = ImageEnum.GAMEROOM_MENU_IMAGES_OWNER.getImages();
 		JButton[] menuButtons = new JButton[buttonsName.length];
@@ -255,7 +251,6 @@ public class GameRoomPanel extends JPanel {
 	public void setInGameChattingArea() {
 		this.chattingPanel.setLayout(null);
 		this.chattingPanel.setOpaque(false);
-		this.chattingPanel.setBackground(Color.yellow);
 		this.chattingPanel.setBounds(GameRoomEnum.GAME_CHATTING_PANEL_RECT.getRect());
 		
 		

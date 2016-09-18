@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.border.EmptyBorder;
 
@@ -206,42 +208,19 @@ public enum ClientJoinSizesEnum {
 			"010", "011", "016", "019", "017"
 	}),
 	
-	//에러 메세지들
-	JOIN_ID_ERR_MESSAGE(new String[] {
-			"특수문자 입력불가",
-			"6~15자 이외 글자수",
-			"한글만 가능, 2자 이상"
-	}),
-	
-	JOIN_PW_ERR_MESSAGE(new String[] {
-			"6~16글자수",
-			"pw불일치시"
-	}),
-	
-	JOIN_NAME_ERR_MESSAGE(new String[] {
-			"한글만 가능",
-			"2자 이상"
-	}),
-	
-	JOIN_GENDER_ERR_MESSAGE(new String[] {
-			"미선택시 - 필수 입력"
-	}),
-	
-	JOIN_EMAIL_ERR_MESSAGE(new String[] {
-			"인증번호 틀렸을시"
-	}),
+	//메세지들
+	JOIN_MESSAGE(joinMessageMap()),
 	
 	//email Combo 설정값 ------------------------------------------------
 	JOIN_EMAIL_COMBOBOX_BACKGROUND(Color.white);
 	
-
 	private Dimension dimension;
 	private int size;
 	private Color color;
 	private Font font;
 	private EmptyBorder border;
 	private String[] strArr;
-	
+	private Map<String, String> errMap;
 	
 	private ClientJoinSizesEnum(Color color) {
 		this.color = color;
@@ -264,7 +243,28 @@ public enum ClientJoinSizesEnum {
 	private ClientJoinSizesEnum(String[] strArr) {
 		this.strArr = strArr;
 	}
+	
+	private ClientJoinSizesEnum(Map<String, String> map) {
+		this.errMap = map;
+	}
 
+	private static Map<String, String> joinMessageMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("join공란",			  "필수 입력사항입니다.");
+		map.put("joinID정합성",		  "영문자와 숫자만 입력이 가능합니다.");
+		map.put("joinID길이",			  "6~15자 이내의 ID를 입력해주세요.");
+		map.put("joinID중복",			  "이미 존재하는 ID입니다.");
+		map.put("joinID성공", 		  "사용이 가능한 ID입니다.");
+		map.put("joinPW길이",			  "6~16자 이내로 입력해주세요.");
+		map.put("joinPW정합성",		  "영문자와 숫자, 특수문자를 1개 이사 포함시켜 주세요.");
+		map.put("joinPW불일치", 		  "상단에 입력하신 패스워드와 일치하지 않습니다.");
+		map.put("joinName길이", 		  "2글자 이상 입력해주세요.");
+		map.put("joinName정합성",		  "한글만 입력이 가능합니다.");
+		map.put("joinMail인증번호불일치", "인증번호가 일치하지 않습니다. 다시 확인해주세요.");
+		
+		return map;
+	}
+	
 	
 	public Dimension getDimension() {
 		return dimension;
@@ -273,16 +273,24 @@ public enum ClientJoinSizesEnum {
 	public int getSize() {
 		return size;
 	}
+	
 	public Color getColor() {
 		return color;
 	}
+	
 	public Font getFont() {
 		return font;
 	}
+	
 	public EmptyBorder getBorder() {
 		return border;
 	}
+	
 	public String[] getStrArr() {
 		return strArr;
+	}
+	
+	public Map<String, String> getErrMap() {
+		return errMap;
 	}
 }

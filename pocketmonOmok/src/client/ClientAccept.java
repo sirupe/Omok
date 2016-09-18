@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 
 import datas.UserPersonalInfoDTO;
 import datas.UserPositionIndex;
+import enums.ClientJoinSizesEnum;
 import enums.ServerIPEnum;
 import frames.BasicFrame;
 import frames.LoginPanel;
@@ -31,9 +32,8 @@ public class ClientAccept implements Serializable {
 
 	}
 
-	
-	public void loginSuccessCheck(UserPositionIndex index, BasicFrame basicFrame) {
-		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)index;
+	public void loginSuccessCheck(UserPositionIndex data, BasicFrame basicFrame) {
+		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)data;
 		if(userPersonalDTO.getUserID() == null) {
 			this.basicFrame.getLoginPanel().loginFailLabelReset();
 			this.basicFrame.getLoginPanel().loginFail("아이디, 패스워드 오류입니다.");
@@ -42,6 +42,16 @@ public class ClientAccept implements Serializable {
 			this.basicFrame.inWaitingRoom();
 		}
 		
+	}
+	
+	public void joinIDOverlapCheck(UserPositionIndex data, BasicFrame basicFrame) {
+		UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
+//		if(userPersonalInfoDTO.getUserID() == null) {
+//			this.basicFrame.getJoinFrame().labelSetting(
+//					this.basicFrame.getJoinFrame().getIdErrorLabel(), 
+//					ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), 
+//					);
+//		}
 	}
 	
 	public void gameExit() throws IOException {

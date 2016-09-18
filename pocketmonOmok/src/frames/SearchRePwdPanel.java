@@ -34,6 +34,9 @@ public class SearchRePwdPanel extends JPanel {
 		
 		this.searchPwdTextField   = new JTextField(10);
 		this.searchRePwdTextField = new JTextField(10);
+		
+		this.add(searchPwdTextField);
+		this.add(searchRePwdTextField);
 
 		
 		String searchErrorMsg = "error message";
@@ -41,7 +44,7 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchPwdErrorLabel.setForeground(searchRePwdEnum.LABELCOLOR_ERROR.getColor());
 		
 		//버튼 생성
-				searchConfirmButton  = new JButton("확인");
+				searchConfirmButton  = new JButton();
 				
 				searchConfirmButton.setBorderPainted(false);
 				searchConfirmButton.setFocusPainted(false);
@@ -60,7 +63,7 @@ public class SearchRePwdPanel extends JPanel {
 					this.searchPwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 					this.searchRePwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 				
-	//				
+	//				 
 	//				// 텍스트 폰트
 					this.searchPwdTextField.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 					this.searchRePwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
@@ -83,7 +86,7 @@ public class SearchRePwdPanel extends JPanel {
 //		//레이블, 텍스트, 버튼 불러오기
 	             this.setLabelPosition();
 			     this.setTextFieldPosition();
-			     this.setButtonPosition();
+			     this.setButtonPosition();    
 				
 				this.setLayout(null);
 			    this.setVisible(true);

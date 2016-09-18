@@ -24,9 +24,7 @@ public class ClientReciever extends Thread {
 		boolean isAccept = true;
 		try {
 			while(isAccept) {
-				System.out.println("클라이언트 리시브 시작");
 				Object object = this.clientIS.readObject();
-				System.out.println("");
 				UserPositionIndex userPosition = (UserPositionIndex)object;
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :   
@@ -34,7 +32,8 @@ public class ClientReciever extends Thread {
 					break;
 				case POSITION_WAITING_ROOM :      
 					break;
-				case POSITION_JOIN :              
+				case POSITION_JOIN :
+					this.clientAccept.joinIDOverlapCheck(userPosition, this.basicFrame);
 					break;
 				case POSITION_FIND_ID :   
 					break;

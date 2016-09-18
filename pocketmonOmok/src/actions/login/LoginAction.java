@@ -112,7 +112,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 		if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
 			this.loginPanel.getBasicFrame().setVisible(false);
 			try {
-				new JoinFrame(this.loginPanel);
+				this.loginPanel.getBasicFrame().newJoinFrame();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

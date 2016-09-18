@@ -32,7 +32,6 @@ public class JoinAction extends Adapters {
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println(this.joinFrame.getIdTextField().getText());
 		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
 		personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
 		try {

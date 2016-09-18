@@ -53,25 +53,20 @@ public class OmokServer {
 	//TODO 여기에 서버의 분기업무 추가
 	
 	
-	public void login(UserPositionIndex index, OmokPersonalServer personalServer) {
-		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) index;
-		UserPersonalInfoDTO outputUserPersonalInfo = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
-		outputUserPersonalInfo.setPosition(UserPositionEnum.POSITION_LOGIN);
-		System.out.println(outputUserPersonalInfo.getUserID());
-		try {
-			personalServer.getServerOutputStream().writeObject(outputUserPersonalInfo);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void login(UserPositionIndex data, OmokPersonalServer personalServer) {
+		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) data;
+		UserPersonalInfoDTO resultDTO = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
+		this.sendObject(resultDTO, personalServer);
 	}
 	
 	public void waitingRoom() {
 		System.out.println("대기실");
 	}
 	
-	public void join(UserPositionIndex index, OmokPersonalServer personalServer) {
-		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)index;
-//		personalDTO.get
+	public void join(UserPositionIndex data, OmokPersonalServer personalServer) {
+		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
+		UserPersonalInfoDTO resultDTO = this.joinDAO.checkOverlapID(personalDTO);
+		this.sendObject(resultDTO, personalServer);
 	}
 	
 	public void findID() {
@@ -107,6 +102,13 @@ public class OmokServer {
 		personalServer.getPersonalSocket().close();
 	}
 	
+	public void sendObject(UserPositionIndex data, OmokPersonalServer personalServer) {
+		try {
+			personalServer.getServerOutputStream().writeObject(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public Socket getSocket() {
 		return socket;

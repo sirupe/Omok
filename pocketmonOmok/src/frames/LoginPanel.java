@@ -79,9 +79,7 @@ public class LoginPanel extends JPanel {
 		
 		
 		this.add(this.loginPanel);
-		this.setLayout(new CardLayout());
-
-		
+		this.setLayout(new CardLayout());	
 	}
 	
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
