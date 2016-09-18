@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 import enums.searchPwdEnum;
 
 @SuppressWarnings("serial")
-public class searchPwdPanel extends JPanel {
+public class SearchPwdPanel extends JPanel {
 	private JLabel searchIdLabel;
 	private JLabel searchemailLabel;
 	private JLabel searchErrorMsgLabel;
@@ -38,28 +38,29 @@ public class searchPwdPanel extends JPanel {
 	//private Image backGround;
 	
 	private JPanel searchPwdPanel;
-	private SearchPwdFrame searchPwdMain;
+	private SearchPwdFrame searchPwdFrame;
 	
 	
-	public searchPwdPanel(SearchPwdFrame searchPwdMain) throws IOException {
-		 this.searchPwdPanel = new JPanel();
-		 
-	     this.searchPwdPanel.setLayout(null);
-	     this.searchPwdPanel.setOpaque(false);
-	     this.searchPwdMain = searchPwdMain;
+	public SearchPwdPanel(SearchPwdFrame searchPwdFrame) throws IOException {
+//TODO	this.searchPwdPanel = new JPanel();
+	
+//TODO	this.searchPwdPanel.setLayout(null);
+//TODO	this.searchPwdPanel.setOpaque(false);
+		this.setLayout(null);
+		this.searchPwdFrame = searchPwdFrame;
 	     
 	     
-			this.setBounds(
-					searchPwdEnum.SEARCH_PWD_FRAME_POSITION_X.getSize(),
-					searchPwdEnum.SEARCH_PWD_FRAME_POSITION_Y.getSize(),
-					searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-					searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize()
-			);
+//TODO	this.setBounds(
+//				searchPwdEnum.SEARCH_PWD_FRAME_POSITION_X.getSize(),
+//				searchPwdEnum.SEARCH_PWD_FRAME_POSITION_Y.getSize(),
+//				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
+//				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize()
+//		);
 	     
 	     
 		//라벨 생성 TODO
-		this.searchIdLabel        = new JLabel("이름");
-		this.searchemailLabel        = new JLabel("Email");
+		this.searchIdLabel			= new JLabel("ID");
+		this.searchemailLabel		= new JLabel("Email");
 	
 //		텍스트 필드생성
 		this.searchIdTextField      = new JTextField(10);
@@ -127,12 +128,12 @@ public class searchPwdPanel extends JPanel {
 		
 //		//레이블, 텍스트, 버튼 불러오기
 
-			     this.setLayout(new CardLayout());     
-	             this.setLabelPosition();
-			     this.setTextFieldPosition();
-			     this.setButtonPosition();
-			     this.add(this.searchPwdPanel);
-			 
+//TODO	this.setLayout(new CardLayout());     
+		this.setLayout(null);
+		this.setLabelPosition();
+		this.setTextFieldPosition();
+		this.setButtonPosition();
+	 
 	}
 //	//이름, 이메일 , 에러 메세지  레이블!!!!!! 위치 및 크기
 		public void setLabelPosition() {
@@ -173,7 +174,7 @@ public class searchPwdPanel extends JPanel {
 	    }   
 	    
 	    public SearchPwdFrame getSearchPwdMain() {
-	    	return searchPwdMain;
+	    	return searchPwdFrame;
 	    }
 
 
