@@ -35,6 +35,7 @@ public enum ImageEnum {
 	
 	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png");
 //---------------------------------------------------------------------
+
 	private String imageDir;
 	private String[] images;
 	

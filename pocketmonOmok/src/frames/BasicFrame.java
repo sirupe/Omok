@@ -73,14 +73,19 @@ public class BasicFrame extends JFrame implements Serializable{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 		}};
+	
+		
 		
 		this.gameExit();
 		this.newGameRoomPanel();
 		this.setLayout(this.cardLayout);
+		
 		this.add("loginPanel", this.loginPanel);
 		this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.add("gameRoomPanel", this.gameRoomPanel);
+
 		this.setTitle("Login");
 		this.setVisible(true);
 		this.setResizable(false);
