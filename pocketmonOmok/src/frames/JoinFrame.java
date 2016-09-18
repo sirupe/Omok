@@ -1,5 +1,6 @@
 package frames;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -708,6 +709,11 @@ public class JoinFrame extends JFrame {
 		this.add(emailErrorLabel);
 	}
 	
+	public void labelSetting(JLabel label, Color color, String text) {
+		label.setForeground(color);
+		label.setText(text);
+	}
+	
 	public void addListener() {
 		this.idTextField.addKeyListener(this.joinAction);
 	}
@@ -722,5 +728,9 @@ public class JoinFrame extends JFrame {
 	
 	public JTextField getIdTextField() {
 		return idTextField;
+	}
+	
+	public JLabel getIdErrorLabel() {
+		return idErrorLabel;
 	}
 }

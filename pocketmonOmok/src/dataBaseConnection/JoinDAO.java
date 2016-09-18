@@ -2,19 +2,22 @@ package dataBaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import datas.UserPersonalInfoDTO;
+import enums.UserPositionEnum;
 
 public class JoinDAO {
 	// ID 중복체크. 리턴이 0이면 사용 가능, 1이면 이미 존재하는 ID.
-	public int checkOverlapID(UserPersonalInfoDTO personalDTO) {
+	public UserPersonalInfoDTO checkOverlapID(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		
 		// DB Pool 없으면 생성, 있으면 인스턴스 가져오기
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		
-		int result = 0;
+		ResultSet resultSet = null;
+		UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
 		try {
 			connection = dbPool.getConnection();
 			StringBuilder sql = new StringBuilder();
@@ -25,8 +28,11 @@ public class JoinDAO {
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, personalDTO.getUserID());
 
-			result = ps.executeUpdate();
+			resultSet = ps.executeQuery();
 			
+			while(resultSet.next()) {
+				resultDTO.setUserID(resultSet.getString("USER_ID"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -34,6 +40,6 @@ public class JoinDAO {
 			dbPool.freeConnection(connection, ps);
 		}
 		
-		return result;
+		return resultDTO;
 	}
 }
