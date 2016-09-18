@@ -1,6 +1,5 @@
 package frames;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -31,8 +30,11 @@ import enums.WaitingRoomSizesEnum;
 public class WaitingRoomPanel extends JPanel implements ActionListener {	
 	private JPanel background;
 	
+	//TODO
 	private JScrollPane waitingRoomListScroll;
 	private JLabel waitingRoomInfo;
+	private JLabel[] infoLabel;
+	
 	private JList<String> waitingRoomList;
 	private Vector<String> waitingRoomListVector;
 	private JPanel waitingRoomListBackground;
@@ -70,8 +72,21 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				
 		this.waitingRoomListVector = new Vector<String>();
 		this.waitingRoomInfo = new JLabel(" OX " + "  NO  "
-				+ "                 TITLE                 "
-				+ "     MASTER     " + "NUMBER");
+				+ "              TITLE              "
+				+ "    MASTER    " + "NUMBER");
+		
+		String[] infoStr = new String[] {
+				"OX", "NO", "TITLE", "MASTER", "NUMBER"
+		};
+		this.infoLabel = new JLabel[5];
+		for(int i = 0, size = infoStr.length; i < size; i++) {
+			this.infoLabel[i] = new JLabel(infoStr[i]);
+			this.infoLabel[i].setBounds(WaitingRoomSizesEnum.WAITINGROOM_INFO_LABEL_RECTS.getRect()[i]);
+			this.infoLabel[i].setFont(new Font("a으라차차", Font.BOLD, 18));
+			this.infoLabel[i].setForeground(Color.white);
+			this.add(infoLabel[i]);
+		}
+
 		this.waitingRoomList = new JList<>(this.waitingRoomListVector);
 		this.waitingRoomListVector.add("1111111111111111111111111번");
 		this.waitingRoomListVector.add("2222222222222222222222222번");
@@ -89,11 +104,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		//this.playerListVector.add("yeon");
 		//this.playerListVector.add("jong");
 		
-		this.userID 	 = new JLabel("아이디");
+		this.userID 	 = new JLabel("ID");
 		this.score 		 = new JLabel("전적");
 		this.winningRate = new JLabel("승률");
 		this.point 		 = new JLabel("승점");
-		this.level 		 = new JLabel("등급");
+		this.level 		 = new JLabel(".LV");
 		this.correct 	 = new JButton();
 		
 		this.roomListPosition();
@@ -152,12 +167,14 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	public void roomListPosition() throws IOException {
 		
 		//방리스트 정보의 위치와 크기를 가져옴
-		this.waitingRoomInfo.setBounds(
-				WaitingRoomSizesEnum.WAITING_ROOM_INFO_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.WAITING_ROOM_INFO_POSITION_Y.getSize(),
-				WaitingRoomSizesEnum.WAITING_ROOM_INFO_WIDTH.getSize(),
-				WaitingRoomSizesEnum.WAITING_ROOM_INFO_HEIGHT.getSize()
-		);
+//		this.waitingRoomInfo.setBounds(
+//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_POSITION_X.getSize(),
+//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_POSITION_Y.getSize(),
+//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_WIDTH.getSize(),
+//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_HEIGHT.getSize()
+//		);
+		
+		
 		/******************************************************************************/
 		//방리스트 위치와 크기를 가져옴
 		this.waitingRoomList.setBounds(
@@ -440,19 +457,17 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		//방정보 폰트
 		this.waitingRoomInfo.setForeground(Color.WHITE);
 		this.waitingRoomInfo.setFont(new Font("a으라차차", Font.BOLD, 18));
+		
 		this.userID.setFont(new Font("a으라차차", Font.BOLD, 18));
-		this.score.setFont(new Font("a으라차차", Font.BOLD, 18));
-		this.winningRate.setFont(new Font("a으라차차", Font.BOLD, 18));
-		this.point.setFont(new Font("a으라차차", Font.BOLD, 18));
+		this.score.setFont(new Font("a으라차차", Font.BOLD, 16));
+		this.winningRate.setFont(new Font("a으라차차", Font.BOLD, 16));
+		this.point.setFont(new Font("a으라차차", Font.BOLD, 16));
 		this.level.setFont(new Font("a으라차차", Font.BOLD, 18));
 		
 		
 		
 		this.setLayout(null);
 		
-		
-		
-		this.add(waitingRoomInfo);
 		this.add(waitingRoomList);
 		this.add(waitingRoomListBackground);
 		this.add(chattingOutput);
