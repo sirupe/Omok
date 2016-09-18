@@ -1,11 +1,14 @@
 package actions.adapters;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public abstract class Adapters implements WindowListener, KeyListener {
+public abstract class Adapters extends MouseAdapter implements WindowListener, KeyListener, ItemListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {}
@@ -36,4 +39,8 @@ public abstract class Adapters implements WindowListener, KeyListener {
 	
 	@Override
 	public void keyTyped(KeyEvent e) {}
+	
+	@Override
+	public void itemStateChanged(ItemEvent e) {}
+	
 }

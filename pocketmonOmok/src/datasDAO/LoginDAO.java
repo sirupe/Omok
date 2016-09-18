@@ -1,10 +1,10 @@
-package dataBaseConnection;
+package datasDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import datas.UserPersonalInfoDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.UserPositionEnum;
 
 public class LoginDAO {

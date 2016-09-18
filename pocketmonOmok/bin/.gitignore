@@ -1,11 +1,9 @@
 /frames/
-<<<<<<< HEAD
-/actions/
+/enums/
 /client/
-/dataBaseConnection/
-/enums/
+/datasDAO/
 /omokGameServer/
+/actions/
+/datasDTO/
+/utility/
 /start/
-=======
-/enums/
->>>>>>> 2923d8c3311d0975bfa46f5dfd63248ff1e0675c

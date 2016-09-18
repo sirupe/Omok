@@ -1,4 +1,4 @@
-package datas;
+package datasDTO;
 
 public class UserStoreInfoDTO {
 	private String userID;

@@ -1,4 +1,4 @@
-package dataBaseConnection;
+package datasDAO;
 
 public class UserStoreSkinInfoDAO {
 	

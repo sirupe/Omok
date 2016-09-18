@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import datas.UserPositionIndex;
+import datasDTO.UserPositionIndex;
 
 public class OmokPersonalServer extends Thread{
 	private OmokServer omokServer;

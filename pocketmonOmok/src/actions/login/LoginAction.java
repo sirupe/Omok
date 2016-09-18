@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import datas.UserPersonalInfoDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.LoginSizesEnum;
 import enums.UserPositionEnum;
 import frames.JoinFrame;
@@ -112,7 +112,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 		if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
 			this.loginPanel.getBasicFrame().setVisible(false);
 			try {
-				new JoinFrame(this.loginPanel);
+				this.loginPanel.getBasicFrame().newJoinFrame();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
