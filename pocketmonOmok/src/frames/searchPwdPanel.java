@@ -58,13 +58,16 @@ public class searchPwdPanel extends JPanel {
 	     
 	     
 		//라벨 생성 TODO
-		this.searchIdLabel        = new JLabel("이름");
+		this.searchIdLabel        = new JLabel("ID");
 		this.searchemailLabel        = new JLabel("Email");
 	
 //		텍스트 필드생성
 		this.searchIdTextField      = new JTextField(10);
 		this.searchemailTextField   = new JTextField(10);
 		this.searchConfirmTextField = new JTextField(10);
+		
+		this.add(searchIdLabel);
+		this.add(searchemailLabel);
 		
 //		//에러 메세지 레이블
 		String searchErrorMsg = "3분초과가 되었습니다. \n" 
