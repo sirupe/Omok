@@ -23,9 +23,9 @@ public class ClientAccept implements Serializable {
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
-		this.clientOS = new ObjectOutputStream(this.clientSocket.getOutputStream());
-		this.clientIS = new ObjectInputStream(this.clientSocket.getInputStream());
-		this.basicFrame = new BasicFrame(this);
+		this.clientOS 	  = new ObjectOutputStream(this.clientSocket.getOutputStream());
+		this.clientIS	  = new ObjectInputStream(this.clientSocket.getInputStream());
+		this.basicFrame	  = new BasicFrame(this);
 		ClientReciever reciever = new ClientReciever(this, this.basicFrame);
 		reciever.start();
 

@@ -2,13 +2,12 @@ package dataBaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import datas.UserPersonalInfoDTO;
 
 public class JoinDAO {
 	// ID 중복체크. 리턴이 0이면 사용 가능, 1이면 이미 존재하는 ID.
-	public int checkOverlapID(String id) {
+	public int checkOverlapID(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		
@@ -24,7 +23,7 @@ public class JoinDAO {
 			sql.append("WHERE USER_ID=?");
 			
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, id);
+			ps.setString(1, personalDTO.getUserID());
 
 			result = ps.executeUpdate();
 			
@@ -36,9 +35,5 @@ public class JoinDAO {
 		}
 		
 		return result;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(new JoinDAO().checkOverlapID("test2"));
 	}
 }

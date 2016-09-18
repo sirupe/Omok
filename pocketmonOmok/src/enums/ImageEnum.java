@@ -1,8 +1,10 @@
 package enums;
 
 public enum ImageEnum {
+//BasieFrame 이미지-----------------------------------------------------
+	BASIC_BACKGROUND("resources/background/background.png"),
+//Loginpanel 이미지-----------------------------------------------------
 	LOGINPANEL_LOGIN("resources/login/login.jpg"),
-	
 //GameRoom 이미지들------------------------------------------------------	
 	GAMEROOM_MALE_IMAGE("resources/gameRoom/userImageMale.png"),
 	GAMEROOM_FEMALE_IMAGE("resources/gameRoom/userImageFemale.png"),
