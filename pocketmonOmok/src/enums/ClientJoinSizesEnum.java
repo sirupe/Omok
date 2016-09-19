@@ -155,6 +155,9 @@ public enum ClientJoinSizesEnum {
 	
 	JOIN_EMAILERROR_POSITTION_X(JOIN_IDT_POSITION_X.getSize()),
 	JOIN_EMAILERROR_POSITTION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.65)),
+	
+	JOIN_TELERROR_POSITION_X(JOIN_IDT_POSITION_X.getSize()),
+	JOIN_TELERROR_POSITION_Y((int)(JOINFRMAE_SIZE_HEIGHT.getSize() * 0.76)),
 
 	
 	//year,month,date,date,tel,tel2 텍스트  조절
@@ -192,6 +195,9 @@ public enum ClientJoinSizesEnum {
 	//컴포넌트 폰트
 	JOIN_COMPFONT_DEFAULT(new Font("맑은 고딕", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
 
+	//정합성검사 라벨 폰트
+	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("맑은 고딕", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 150)),
+	
 	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	
 	//버튼 크기
@@ -208,7 +214,7 @@ public enum ClientJoinSizesEnum {
 	}),
 	
 	JOIN_TEL_FRONT_NUM(new String[] {
-			"010", "011", "016", "019", "017"
+			"선택", "010", "011", "016", "019", "017"
 	}),
 	
 	//메세지들
@@ -253,7 +259,8 @@ public enum ClientJoinSizesEnum {
 
 	private static Map<String, String> joinMessageMap() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("join공란",			  "필수 입력사항입니다.");
+		map.put("join필수",			  "필수 입력사항입니다.");
+		map.put("join선택", 			  "선택사항입니다.");
 		map.put("join성공", 		  	  "사용 가능");
 		map.put("joinID정합성",		  "영문자와 숫자만 입력이 가능합니다.");
 		map.put("joinID길이",			  "3~15자 이내의 ID를 입력해주세요.");
@@ -265,8 +272,10 @@ public enum ClientJoinSizesEnum {
 		map.put("joinName길이", 		  "2글자 이상 입력해주세요.");
 		map.put("joinName정합성",		  "한글만 입력이 가능합니다.");
 		map.put("joinMail인증번호불일치", "인증번호가 일치하지 않습니다. 다시 확인해주세요.");
-		map.put("joinMail특수문자", 	  "이메일ID를 정확하게 입력해주세요.");
-		map.put("joinMain정합성", 	  "이메일 형식이 정확하지 않습니다.");
+		map.put("joinMail정합성", 	  "이메일 형식이 정확하지 않습니다.");
+		map.put("joinMail아이디미입력",  "email 아이디를 입력해주세요.");
+		map.put("joinMail도메인미입력",  "email 도메인을 입력해주세요."); 
+		map.put("joinTel정합성",		  "정보를 정확히 입력해주세요.");
 		return map;
 	}
 	

@@ -47,10 +47,6 @@ public class UserPersonalInfoDTO extends UserPositionIndex implements Serializab
 	public void setUserPhoneNumber(String userPhoneNumber) {
 		this.userPhoneNumber = userPhoneNumber;
 	}
-
-	public void setUserJoinDate(Date userJoinDate) {
-		this.userJoinDate = userJoinDate;
-	}
 	
 	public String getUserID() {
 		return userID;

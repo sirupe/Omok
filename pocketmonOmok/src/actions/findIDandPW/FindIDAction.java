@@ -1,4 +1,4 @@
-package actions.findID;
+package actions.findIDandPW;
 
 public class FindIDAction {
 
