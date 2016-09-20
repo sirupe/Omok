@@ -2,6 +2,7 @@ package frames;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -21,22 +22,26 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
 
-import enums.LoginFrameSizesEnum;
 import enums.WaitingRoomSizesEnum;
 
 public class WaitingRoomPanel extends JPanel implements ActionListener {	
 	private JPanel background;
 	
-	//TODO
 	private JScrollPane waitingRoomListScroll;
 	private JLabel waitingRoomInfo;
 	private JLabel[] infoLabel;
 	
 	private JList<String> waitingRoomList;
 	private Vector<String> waitingRoomListVector;
+	//TODO
+	private JTable waitingRoomTable;
 	private JPanel waitingRoomListBackground;
 	
 	private JButton gamestartButton;
@@ -47,7 +52,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JButton sendMessage;
 	
 	private JList<String> playerList;
-	//private Vector<String> playerListVector;
 	private JPanel playerListBackgrounnd;
 	
 	private JPanel myInfo;
@@ -60,24 +64,20 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JButton correct;
 	
 	private Map<String,ImageIcon> imageMap;
-	
-	
 
-	public WaitingRoomPanel() throws IOException {	
-		
-		String[] player = {"1번입니다","2번입니다","3번입니다","4번입니다"};
+	
+	public WaitingRoomPanel() throws IOException {
+		//==========================접속자 리스트==========================
+		String[] player = {"yjyj","hello","wowwowwow","OOOOOOOOOOOOOOO","1","2","3","4","5","6","7","8","9","10"};
 		imageMap = createImage(player);
 		this.playerList = new JList(player);
-		//player.setCellRenderer(new PlayerRenderer());
-				
+		playerList.setCellRenderer(new PlayerRenderer());
+			
 		this.waitingRoomListVector = new Vector<String>();
-		this.waitingRoomInfo = new JLabel(" OX " + "  NO  "
-				+ "              TITLE              "
-				+ "    MASTER    " + "NUMBER");
-		
 		String[] infoStr = new String[] {
 				"OX", "NO", "TITLE", "MASTER", "NUMBER"
 		};
+		
 		this.infoLabel = new JLabel[5];
 		for(int i = 0, size = infoStr.length; i < size; i++) {
 			this.infoLabel[i] = new JLabel(infoStr[i]);
@@ -86,24 +86,59 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 			this.infoLabel[i].setForeground(Color.white);
 			this.add(infoLabel[i]);
 		}
-
+		//==========================대기방 리스트==========================
+		
+		Font font = new Font("a으라차차",Font.BOLD,15);
+		WaitingRoomListTable roomListModel = new WaitingRoomListTable();
+		
+		DefaultListCellRenderer defaultrenderer = new DefaultListCellRenderer();
+		defaultrenderer.setHorizontalTextPosition(SwingConstants.CENTER);//가운데 정렬해준대놓고 꿈쩎또 안함.
+		
+		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
+		this.waitingRoomTable = new JTable(defaultTableModel) {
+			@Override
+			public Class getColumnClass(int column) {
+				return getValueAt(0, column).getClass();
+			}
+		};
+		
+		this.waitingRoomTable.setBounds(WaitingRoomSizesEnum.WAITING_ROOM_LIST_POSITION_X.getSize(), 
+									WaitingRoomSizesEnum.WAITING_ROOM_LIST_POSITION_Y.getSize(), 
+									WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_WIDTH.getSize(),
+									WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_HEIGHT.getSize());
+		
+			
 		this.waitingRoomList = new JList<>(this.waitingRoomListVector);
-		this.waitingRoomListVector.add("1111111111111111111111111번");
-		this.waitingRoomListVector.add("2222222222222222222222222번");
-				
+		
+		//this.setPreferredSize(new Dimension(WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_WIDTH.getSize(),
+		//									WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_HEIGHT.getSize()));
+		//this.setPreferredScrollableViewportSize(new Dimension(60, 40)); //어케하느지모르겟으뮤ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+		
+		
+		this.waitingRoomTable.setFont(font);
+		this.waitingRoomTable.setShowGrid(false);//격자선을 그릴것인가
+		this.waitingRoomTable.setShowHorizontalLines(false);//수평선을 그릴것인가
+		this.waitingRoomTable.setShowVerticalLines(false);//수직선을 그릴것인가
+		
+		this.waitingRoomTable.getColumn("OX").setPreferredWidth(10);
+		this.waitingRoomTable.getColumn("NO").setPreferredWidth(10);
+		this.waitingRoomTable.getColumn("TITLE").setPreferredWidth(100);
+		this.waitingRoomTable.getColumn("MASTER").setPreferredWidth(50);
+		this.waitingRoomTable.getColumn("NUMBER").setPreferredWidth(50);
+		this.waitingRoomTable.setRowHeight(80);
+		
+		this.waitingRoomListScroll = new JScrollPane(waitingRoomTable);
+		
+	
+		//==========================채팅방&내정보==========================
+		
 		this.chattingOutput = new JTextArea();
 		this.chattingInput  = new JTextField();
 		this.sendMessage    = new JButton();
 						
 		this.gamestartButton  = new JButton();
 		this.createRoomButton = new JButton();
-		
-		//this.playerListVector = new Vector<String>();
-		//this.playerList = new JList<>(this.playerListVector);
-		//this.playerListVector.add("shin");
-		//this.playerListVector.add("yeon");
-		//this.playerListVector.add("jong");
-		
+			
 		this.userID 	 = new JLabel("ID");
 		this.score 		 = new JLabel("전적");
 		this.winningRate = new JLabel("승률");
@@ -112,70 +147,112 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.correct 	 = new JButton();
 		
 		this.roomListPosition();
+			
 	}
-	
-	
+
+
+
+	/***************************접속자 리스트 클래스***************************/
 	public class PlayerRenderer extends DefaultListCellRenderer {
-		Font font = new Font("a으라차차", Font.BOLD, 24);
+		Font font = new Font("a으라차차", Font.BOLD, 15);
 		
 		public Component getListCellRendererComponent(
 				JList player, Object value, int index,
 				boolean isSelected, boolean cellHasFocus) {
-			
 			JLabel label = (JLabel) super.getListCellRendererComponent(
                     player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
             label.setHorizontalTextPosition(JLabel.RIGHT);
+            label.setOpaque(false);
             label.setFont(font);
             return label;
 		}
-		
 	}
-	
+	/***************************접속자 리스트 맵***************************/
 	private Map<String, ImageIcon> createImage(String[] player) throws IOException {
 	    Map<String, ImageIcon> map = new HashMap<>();
 	    try{
-	    	map.put("1번입니다", new ImageIcon(ImageIO.read(
-            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
-    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+	    	map.put("yjyj", new ImageIcon(ImageIO.read(
+            		new File("resources/user/userbegining.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
     					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("2번입니다", new ImageIcon(ImageIO.read(
-            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
-    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+	    	map.put("hello", new ImageIcon(ImageIO.read(
+            		new File("resources/user/userhero.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
     					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("3번입니다", new ImageIcon(ImageIO.read(
-            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
-    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+	    	map.put("wowwowwow", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usertop.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
     					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("4번입니다", new ImageIcon(ImageIO.read(
-            		new File("resources/waitingroom/skinggobulee.jpg")).getScaledInstance(
-    					WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize(),
+	    	map.put("OOOOOOOOOOOOOOO", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
     					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("1", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("2", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("3", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("4", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("5", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("6", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("7", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("8", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("9", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	map.put("10", new ImageIcon(ImageIO.read(
+            		new File("resources/user/usermorehigh.png")).getScaledInstance(
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					Image.SCALE_AREA_AVERAGING)));
+	    	
 
 	    } catch (Exception e){
 	    	e.printStackTrace();
-	    }
-	    
+	    }    
 	    return map;
-
 	}
 
+	/***************************대기실 위치***************************/
 	public void roomListPosition() throws IOException {
-		
-		//방리스트 정보의 위치와 크기를 가져옴
-//		this.waitingRoomInfo.setBounds(
-//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_POSITION_X.getSize(),
-//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_POSITION_Y.getSize(),
-//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_WIDTH.getSize(),
-//				WaitingRoomSizesEnum.WAITING_ROOM_INFO_HEIGHT.getSize()
-//		);
-		
-		
-		/******************************************************************************/
+
 		//방리스트 위치와 크기를 가져옴
 		this.waitingRoomList.setBounds(
 				WaitingRoomSizesEnum.WAITING_ROOM_LIST_POSITION_X.getSize(),
@@ -202,6 +279,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				}
 			}
 		};
+		
 		//방리스트 배경 이미지를 가져옴
 		this.waitingRoomListBackground.setBounds(
 				WaitingRoomSizesEnum.WAITING_ROOM_LIST_BACKGROUND_POSITION_X.getSize(), 
@@ -422,11 +500,8 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				WaitingRoomSizesEnum.MY_INFO_WIDTH.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_HEIGHT.getSize()
 		);
+		
 		myInfo.setOpaque(false);
-		
-		
-		
-		
 		
 		/******************************************************************************/
 	
@@ -455,9 +530,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.correct.setFocusPainted(false);
 		
 		//방정보 폰트
-		this.waitingRoomInfo.setForeground(Color.WHITE);
-		this.waitingRoomInfo.setFont(new Font("a으라차차", Font.BOLD, 18));
-		
 		this.userID.setFont(new Font("a으라차차", Font.BOLD, 18));
 		this.score.setFont(new Font("a으라차차", Font.BOLD, 16));
 		this.winningRate.setFont(new Font("a으라차차", Font.BOLD, 16));
@@ -467,6 +539,8 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		
 		
 		this.setLayout(null);
+		
+		this.waitingRoomListBackground.add(new JScrollPane(waitingRoomTable));
 		
 		this.add(waitingRoomList);
 		this.add(waitingRoomListBackground);
@@ -485,10 +559,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.add(level);
 		this.add(correct);
 		this.add(myInfo);
+		this.add(waitingRoomListScroll);
 		
 
 	}
-
+	
 	private void waitingRoomInfoFont(Font font) {
 		
 	}
@@ -496,4 +571,5 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 			
 	}
+	
 }
