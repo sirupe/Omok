@@ -32,7 +32,7 @@ public enum searchPwdEnum {
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 16),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
-//// 에러 레이블
+//// 에러 레이블 -- 3분초과메세지
 	SEARCH_ERROR_LABEL(new Rectangle(
 			
 			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 15),
@@ -63,10 +63,10 @@ public enum searchPwdEnum {
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 35),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
-	// 해당 사항의 정보가 맞는지 아닌지에 대한 대답 텍스트 필드   x,y, 가로 세로 
+	// 이메일 인증번호가 발송되었다는 텍스트 필드   x,y, 가로 세로 
 	SEARCH_ANSWER_LABEL(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 95),
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 15),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 98),
 			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 90),
 			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 15)
 			)),

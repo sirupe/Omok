@@ -1,20 +1,7 @@
-/actions/
-/client/
-/dataBaseConnection/
-/datas/
+/datasDAO/
+/datasDTO/
 /enums/
 /frames/
-<<<<<<< HEAD
 /omokGameServer/
 /start/
 /utility/
-=======
-/enums/
-/client/
-/datasDAO/
-/omokGameServer/
-/actions/
-/datasDTO/
-/utility/
-/start/
->>>>>>> c8fbb831f30fada30afcd93fc75ca9929e1b0d0b

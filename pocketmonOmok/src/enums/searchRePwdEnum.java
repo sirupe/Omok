@@ -32,17 +32,17 @@ public enum searchRePwdEnum {
 			)),
 	//설정된 비밀번호와 재비밀번호의 에러 결과 메세지 
 		SEARCH_ERROR_LABEL(new Rectangle(
-			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 20),
-			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 50),
-			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 50),
-			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 13)
+			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 10),
+			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 55),
+			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 90),
+			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 20)
 			)),
 	// 비밀번호 바뀌었다는 메세지 -- > 화면 전환(searchChangePanel)
 		SEARCH_CONFIRM_CHANGE_LABEL(new Rectangle(
-				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 15),
+				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 6),
 				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 30),
-				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 75),
-				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 20)
+				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 100),
+				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 35)
 				)),
 		
 		//비밀번호 재비밀번호 텍스트s
@@ -58,18 +58,27 @@ public enum searchRePwdEnum {
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 50),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
-		//확인 버튼 생성
+		//searchRePwd 확인 버튼 생성
 		SEARCH_CONFIRM_BUTTON(new Rectangle(
-			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 25),
-			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 88),
-			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 30),
-			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100  * 20)
+			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 23),
+			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 90),
+			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 40),
+			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100  * 15)
 			)),
+		//searchChangePwd 버튼 생성
+		SEARCH__CHANGE_CONFIRM_BUTTON(new Rectangle(
+				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 20),
+				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 90),
+				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 40),
+				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100  * 15)
+				)),
+		
 	
 	//일반 폰트
 	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),
+	LABELREPWDFONT_DEFAULT(new Font("a으라차차",Font.BOLD,13)),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,20)),
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,19)),
 	//텍스트 테두리 없애기
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
 	

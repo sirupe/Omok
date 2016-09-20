@@ -94,11 +94,6 @@ public class JoinFrame extends JFrame {
 
 //배경
 	private Image backGround;
-<<<<<<< HEAD
-//	private Object joinButtonimage;
-//	private Object resetButtonImage;
-=======
->>>>>>> c8fbb831f30fada30afcd93fc75ca9929e1b0d0b
 	
 	private LoginPanel loginPanel;
 	private JoinAction joinAction;
@@ -128,8 +123,8 @@ public class JoinFrame extends JFrame {
 		
 		// 모든 텍스트 필드
 		this.idTextField    = new JTextField(10);
-		this.pwdField   = new JPasswordField(10);
-		this.rePwdField = new JPasswordField(10);
+		this.pwdField       = new JPasswordField(10);
+		this.rePwdField     = new JPasswordField(10);
 		this.nameTextField  = new JTextField(10);
 		this.yearTextField  = new JTextField(4);
 		this.monthTextField = new JTextField(2);
@@ -193,8 +188,8 @@ public class JoinFrame extends JFrame {
 //텍스트필드
 		Font textFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idTextField.setFont(textFont);
-		this.pwdTextField.setFont(textFont);
-		this.rePwdTextField.setFont(textFont);
+		this.pwdField.setFont(textFont);
+		this.rePwdField.setFont(textFont);
 		this.nameTextField.setFont(textFont);
 		this.yearTextField.setFont(textFont);
 		this.monthTextField.setFont(textFont);

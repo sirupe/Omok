@@ -2,6 +2,7 @@ package frames;
 
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -13,110 +14,100 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import enums.GameRoomEnum;
 import enums.searchPwdEnum;
 import enums.searchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchRePwdPanel extends JPanel {
-	private JLabel searchPwdLabel;
-	private JLabel searchRePwdLabel;
-	private JLabel searchPwdErrorLabel;
-	
-	private JTextField searchPwdTextField;
-	private JTextField searchRePwdTextField;
-	
-	private JButton searchConfirmButton;
+	private JPanel searchPwdPanel;
 	private Image backGround;
-	
-	
-	public SearchRePwdPanel() throws IOException {
-		this.searchPwdLabel   = new JLabel("PW");
-		this.searchRePwdLabel = new JLabel("PW재입력");
-		
-		this.searchPwdTextField   = new JTextField(10);
-		this.searchRePwdTextField = new JTextField(10);
-		
-		this.add(searchPwdTextField);
-		this.add(searchRePwdTextField);
 
+	public void SearchRePwdPanel() throws IOException {
+		this.setLayout(null);
 		
-		String searchErrorMsg = "error message";
-		this.searchPwdErrorLabel = new JLabel(searchErrorMsg);
-		this.searchPwdErrorLabel.setForeground(searchRePwdEnum.LABELCOLOR_ERROR.getColor());
+		this.searchPwdPanel   = new JPanel();
 		
-		//버튼 생성
-				searchConfirmButton  = new JButton();
-				searchConfirmButton.setBorderPainted(false);
-				searchConfirmButton.setFocusPainted(false);
-				searchConfirmButton.setContentAreaFilled(false);
-				
-				this.add(searchConfirmButton);
-		
-				//텍스트 필드 테두리 없애기
-				EmptyBorder emptyBorder = searchPwdEnum.LABEL_DEFAULT.getBorder();
-				searchPwdTextField.setBorder(emptyBorder);
-				searchRePwdTextField.setBorder(emptyBorder);
-				this.searchRePwdTextField.setOpaque(true);
-				this.searchPwdTextField.setOpaque(true);
+		this.setsearchPwdPanel();
+	} //생성자
+	
+	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
+	public void setsearchPwdPanel() throws IOException {
 
-				//레이블 폰트
-				Font font = searchRePwdEnum.LABEL_DEFAULT.getFont();
-				this.searchPwdLabel.setFont(font);
-				this.searchRePwdLabel.setFont(font);
-		 
-			    // 텍스트 폰트
-				this.searchPwdTextField.setFont(font);
-				this.searchRePwdLabel.setFont(font);
-				this.searchPwdErrorLabel.setFont(searchRePwdEnum.LABELFONT_ERROR.getFont());
-					
-					//배경화면	
-					backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
-							searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-							searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
-			                Image.SCALE_SMOOTH);
-					this.add(new JLabel(new ImageIcon(backGround)));
+		this.searchPwdPanel.setLayout(null);
+		this.searchPwdPanel.setOpaque(false);
 		
-					this.setBounds(
-							searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
-		);
+		// 패널의 배경이미지
+		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
+				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
+                Image.SCALE_SMOOTH);
+		this.add(new JLabel(new ImageIcon(backGround)));
+		//this.setContentPane(new JLabel(new ImageIcon(backGround))); 
+
+		this.setBounds(
+				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
+				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
+				searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+				searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
+				);
+		//비밀번호 라벨
+		JLabel searchPwdLabel = new JLabel("PW");
+		searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
+		searchPwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 		
-//		//레이블, 텍스트, 버튼 불러오기
-	             this.setLabelPosition();
-			     this.setTextFieldPosition();
-			     this.setButtonPosition();    
-				
-			     this.setLayout(null);
-			     this.setVisible(true);
-	}
-	public void setLabelPosition() {
-		this.searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
-		this.searchRePwdLabel.setBounds(searchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
-		this.searchPwdErrorLabel.setBounds(searchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
-		this.add(searchPwdLabel);
-		this.add(searchRePwdLabel);
-		this.add(searchPwdErrorLabel);
-	}
-	public void setTextFieldPosition() {
-		this.searchPwdTextField.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
-		this.searchRePwdTextField.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
+		//비밀번호 입력창
+		JTextField searchPwdText = new JTextField();
+		searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
+		searchPwdText.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
+		searchPwdText.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
+
+		// 재비밀번호 라벨
+		JLabel searchRePwdLabel = new JLabel("PW재입력");
+		searchRePwdLabel.setBounds(searchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
+		searchRePwdLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 		
-    	this.add(searchPwdTextField);
-    	this.add(searchRePwdTextField);
+		// 제비밀번호 텍스트창
+		JTextField searchRePwdText = new JTextField();
+		searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
+		searchRePwdText.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
+		searchRePwdText.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
+		
+		// 에러 메세지 라벨
+		JLabel searchRePwdErrorLabel = new JLabel
+				("<html>비밀번호가 일치하지 않습니다. "
+				+ "<br>다시 입력해주세요<br></html>");
+		searchRePwdErrorLabel.setBounds(searchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
+		searchRePwdErrorLabel.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
+		searchRePwdErrorLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
+		
+		//확인 버튼창
+		JButton searchConfirmButton = new JButton() {
+		@Override
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			try {
+				g.drawImage(ImageIO.read(
+					new File("resources/signUp/confirm.jpg")), 
+					0, 
+					0, 
+					searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+					searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+					this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	};	
+		this.searchPwdPanel.add(searchPwdLabel);
+		this.searchPwdPanel.add(searchRePwdText);
+		this.searchPwdPanel.add(searchPwdText);
+		this.searchPwdPanel.add(searchRePwdLabel);
+		this.searchPwdPanel.add(searchRePwdErrorLabel);
+		this.searchPwdPanel.add(searchConfirmButton);
+		
+	
 	}
-	public void setButtonPosition() throws IOException {
-		this.searchConfirmButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);
-    	this.searchConfirmButton.setBounds(searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
-    	
-    	this.searchConfirmButton.setIcon(
-    			new ImageIcon(ImageIO.read(
-    				new File("resources/signUp/confirm.jpg")).getScaledInstance(
-    						searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
-    						searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
-    						Image.SCALE_AREA_AVERAGING))
-    		);
-    	this.add(searchConfirmButton);
-	}
+	
 }

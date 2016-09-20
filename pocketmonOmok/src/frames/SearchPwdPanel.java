@@ -1,5 +1,6 @@
 package frames;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -38,8 +39,8 @@ public class SearchPwdPanel extends JPanel {
 		this.searchPwdFrame = searchPwdFrame;	     
 	     
 		//라벨 생성 TODO
-		this.searchIdLabel        = new JLabel("ID");
-		this.searchemailLabel        = new JLabel("Email");
+		this.searchIdLabel    = new JLabel("ID");
+		this.searchemailLabel = new JLabel("Email");
 	
 //		텍스트 필드생성
 		this.searchIdTextField      = new JTextField(10);
@@ -64,13 +65,8 @@ public class SearchPwdPanel extends JPanel {
 		this.searchTimeLabel = new JLabel(time);
 		this.searchTimeLabel.setForeground(searchPwdEnum.LABELCOLOR_ERROR.getColor());
 		
-		//버튼 생성
-		searchConfirmButton  = new JButton();
-		
-		searchConfirmButton.setBorderPainted(false);
-		searchConfirmButton.setFocusPainted(false);
-		searchConfirmButton.setContentAreaFilled(false);
-		this.add(searchConfirmButton);
+
+		//this.add(searchConfirmButton);
 		
 		
 		//레이블 폰트
@@ -100,7 +96,6 @@ public class SearchPwdPanel extends JPanel {
 		
 		
 //		//레이블, 텍스트, 버튼 불러오기
-
 		this.setLabelPosition();
 		this.setTextFieldPosition();
 		this.setButtonPosition();
@@ -132,6 +127,12 @@ public class SearchPwdPanel extends JPanel {
 	    }
 	
 	    public void setButtonPosition() throws IOException {   	
+			//버튼 생성
+			this.searchConfirmButton  = new JButton();
+			
+			this.searchConfirmButton.setBorderPainted(false);
+			this.searchConfirmButton.setFocusPainted(false);
+			this.searchConfirmButton.setContentAreaFilled(false);
 	    	this.searchConfirmButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);    	
 	    	this.searchConfirmButton.setIcon(
 	    			new ImageIcon(ImageIO.read(
@@ -147,5 +148,6 @@ public class SearchPwdPanel extends JPanel {
 	    public SearchPwdFrame getSearchPwdMain() {
 	    	return searchPwdFrame;
 	    }
+	    
 	}
 

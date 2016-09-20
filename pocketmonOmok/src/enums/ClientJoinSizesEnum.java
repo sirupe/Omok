@@ -208,11 +208,8 @@ public enum ClientJoinSizesEnum {
 	CHOICEBACKGROUND(Color.black),
 	
 	//레이블 폰트
-<<<<<<< HEAD
-	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,14)),
-=======
+
 	LABELFONT_DEFAULT(new Font("맑은 고딕", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
->>>>>>> c8fbb831f30fada30afcd93fc75ca9929e1b0d0b
 	
 	//컴포넌트 폰트
 	JOIN_COMPFONT_DEFAULT(new Font("맑은 고딕", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
