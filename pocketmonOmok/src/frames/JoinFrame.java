@@ -79,7 +79,6 @@ public class JoinFrame extends JFrame {
 	private JTextField emailConfTextField;
 	private JComboBox<String> emailAddrChoice;
 
-	
 	private JComboBox<String> telFrontNumChoice; //전화번호 02,010..
 	private JTextField telMiddleTextField;
 	private JTextField telLastNumTextField;	
@@ -123,15 +122,11 @@ public class JoinFrame extends JFrame {
 		
 		// 모든 텍스트 필드
 		this.idTextField    = new JTextField(10);
-		this.pwdField   	= new JPasswordField(10);
-		this.rePwdField 	= new JPasswordField(10);
+
+		this.pwdField       = new JPasswordField(10);
+		this.rePwdField     = new JPasswordField(10);
 		this.nameTextField  = new JTextField(10);
-//		this.yearTextField  = new JTextField(4);
-//		this.monthTextField = new JTextField(2);
-//		this.dateTextField  = new JTextField(2);
-		
-		//JTextFieldLimit 에 글자수제한 4
-//		JTextFieldLimit limit = new JTextFieldLimit(4);
+
 		this.emailIDTextField    	= new JTextField(10); 
 		this.emailAddrTextField 	= new JTextField(10);
 		this.telMiddleTextField		= new JTextField(new JTextFieldNumOnly(4), "", 0);
@@ -157,8 +152,6 @@ public class JoinFrame extends JFrame {
 		this.monthChoice = new JComboBox<Integer>();
 		this.dateChoice  = new JComboBox<Integer>();
 
-
-		
 //레이블 폰트
 		Font labelFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idLabel.setFont(labelFont);
@@ -170,6 +163,16 @@ public class JoinFrame extends JFrame {
 		this.emailLabel.setFont(labelFont);
 		this.telLabel.setFont(labelFont);
 		this.emailTimeLabel.setFont(labelFont);
+
+//텍스트필드
+		Font textFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
+		this.idTextField.setFont(textFont);
+		this.pwdField.setFont(textFont);
+		this.rePwdField.setFont(textFont);
+		this.nameTextField.setFont(textFont);
+
+		this.emailIDTextField.setFont(textFont);
+		this.emailAddrTextField.setFont(textFont);
 		
 // 이메일 전화번호 콤보 박스
 		this.emailAddrChoice = new JComboBox<String>();

@@ -19,6 +19,7 @@ public enum searchIdEnum {
 	SEARCHFRAME_POSITION_X((int)((Screen_SIZE.getDimension().getWidth() / 2) - (SEARCHFRAME_SIZE_WIDTH.getSize() / 2 ))),
 	SEARCHFRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (SEARCHFRAME_SIZE_HEIGHT.getSize() / 2))),
 	
+	
 //이름, 이메일 레이블
 	SEARCH_ID_LABEL(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 5),
@@ -62,11 +63,11 @@ public enum searchIdEnum {
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 30),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 20)
 			)),
-
+	
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("맑은 고딕",Font.BOLD,15)),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,15)),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("맑은 고딕",Font.BOLD,20)),
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,20)),
 	//텍스트 테두리 없애기
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
 	
