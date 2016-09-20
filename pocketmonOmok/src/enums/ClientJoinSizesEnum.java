@@ -161,7 +161,7 @@ public enum ClientJoinSizesEnum {
 
 	
 	//year,month,date,date,tel,tel2 텍스트  조절
-	SIZE_TEXT_WIDTH(JOINFRAME_SIZE_WIDTH.getSize() / 100 * 16),
+	SIZE_TEXT_WIDTH(JOINFRAME_SIZE_WIDTH.getSize() / 100 * 20),
 	SIZE_TEXT_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 3.3)),
 	
 	//email,emilAdr텍스트 크기 조절 , 이메일,전화번호 콤보박스, 성별 라디오박스, 버튼
@@ -259,23 +259,28 @@ public enum ClientJoinSizesEnum {
 
 	private static Map<String, String> joinMessageMap() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("join필수",			  "필수 입력사항입니다.");
-		map.put("join선택", 			  "선택사항입니다.");
-		map.put("join성공", 		  	  "사용 가능");
-		map.put("joinID정합성",		  "영문자와 숫자만 입력이 가능합니다.");
-		map.put("joinID길이",			  "3~15자 이내의 ID를 입력해주세요.");
-		map.put("joinID중복",			  "이미 존재하는 ID입니다.");
-		map.put("joinPW길이",			  "6~16자 이내로 입력해주세요.");
-		map.put("joinPW아이디", 		  "아이디와 다르게 설정해주세요.");
-		map.put("joinPW정합성",		  "영문자와 숫자, 특수문자를 1개 이사 포함시켜 주세요.");
-		map.put("joinPW불일치", 		  "상단에 입력하신 패스워드와 일치하지 않습니다.");
-		map.put("joinName길이", 		  "2글자 이상 입력해주세요.");
-		map.put("joinName정합성",		  "한글만 입력이 가능합니다.");
-		map.put("joinMail인증번호불일치", "인증번호가 일치하지 않습니다. 다시 확인해주세요.");
-		map.put("joinMail정합성", 	  "이메일 형식이 정확하지 않습니다.");
-		map.put("joinMail아이디미입력",  "email 아이디를 입력해주세요.");
-		map.put("joinMail도메인미입력",  "email 도메인을 입력해주세요."); 
-		map.put("joinTel정합성",		  "정보를 정확히 입력해주세요.");
+		map.put("join필수",			 "필수 입력사항입니다.");
+		map.put("join선택", 			 "선택사항입니다.");
+		map.put("join성공", 		  	 "사용 가능");
+		map.put("joinID정합성",		 "영문자와 숫자만 입력이 가능합니다.");
+		map.put("joinID길이",			 "3~15자 이내의 ID를 입력해주세요.");
+		map.put("joinID중복",			 "이미 존재하는 ID입니다.");
+		map.put("joinPW길이",			 "6~16자 이내로 입력해주세요.");
+		map.put("joinPW아이디", 		 "아이디와 다르게 설정해주세요.");
+		map.put("joinPW정합성",		 "영문자와 숫자, 특수문자를 1개 이사 포함시켜 주세요.");
+		map.put("joinPW불일치", 		 "상단에 입력하신 패스워드와 일치하지 않습니다.");
+		map.put("joinName길이", 		 "2글자 이상 입력해주세요.");
+		map.put("joinName정합성",		 "한글만 입력이 가능합니다.");
+		map.put("joinMail인증불일치",	 "인증번호가 일치하지 않습니다. 다시 확인해주세요.");
+		map.put("joinMail정합성", 	 "이메일 형식이 정확하지 않습니다.");
+		map.put("joinMail아이디미입력", "email 아이디를 입력해주세요.");
+		map.put("joinMail도메인미입력", "email 도메인을 입력해주세요."); 
+		map.put("joinMail인증일치", 	 "인증번호가 일치합니다.");
+		map.put("joinMail시간초과", 	 "시간이 초과되었습니다. 인증번호를 다시 받아주세요.");
+		map.put("joinMail인증필", 	 "이메일 인증을 받아주세요.");
+		map.put("joinMail발송", 		 "입력하신 이메일로 인증번호가 발송되었습니다.");
+//		map.put("joinMail발송중", 	 "이메일을 발송중입니다. 잠시만 기다려주세요.");
+		map.put("joinTel정합성",		 "정보를 정확히 입력해주세요.");
 		return map;
 	}
 	
