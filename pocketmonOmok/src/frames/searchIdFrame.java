@@ -118,7 +118,7 @@ public class searchIdFrame extends JFrame {
 	    	// 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
 	    	
 	    	this.searchConfirmButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);
-	    	this.searchConfirmButton.setBounds(searchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
+	    	
 
 	    	this.searchConfirmButton.setIcon(
 	    			new ImageIcon(ImageIO.read(
@@ -127,7 +127,7 @@ public class searchIdFrame extends JFrame {
 	    						searchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 	    						Image.SCALE_AREA_AVERAGING))
 	    		);
-
+	    	this.searchConfirmButton.setBounds(searchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
 	    	this.add(searchConfirmButton);    	 
 	    }
 	   

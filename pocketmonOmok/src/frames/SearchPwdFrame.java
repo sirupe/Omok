@@ -59,7 +59,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}
 		};
 		
-//		this.searchPwdPanel.setOpaque(false);
+		this.searchPwdPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 		
 		//비밀번호 재입력 프레임
@@ -83,8 +83,11 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		
 		this.newSearchChangePanel();
 		this.add("searchPwdPanel",this.searchPwdPanel);
+		this.searchPwdPanel.setOpaque(false);
 		this.add("searchRePwdPanel", this.searchRePwdPanel);
+		this.searchRePwdPanel.setOpaque(false);
 		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+		this.searchChangePanel.setOpaque(false);
 		this.setLayout(this.cardLayout);
 		this.setTitle("PW찾기");
 		this.setVisible(true);
