@@ -1,1 +1,10 @@
 /frames/
+/datasDAO/
+/enums/
+/start/
+/actions/
+/omokGameServer/
+/client/
+/datasDTO/
+/utility/
+/server/

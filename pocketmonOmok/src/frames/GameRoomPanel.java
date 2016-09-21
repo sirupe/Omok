@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import enums.GameRoomEnum;
-import enums.ImageEnum;
+import enums.etc.ImageEnum;
+import enums.frames.GameRoomEnum;
 
 @SuppressWarnings("serial")
 public class GameRoomPanel extends JPanel {

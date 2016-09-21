@@ -9,13 +9,11 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Random;
 
-import javax.swing.JLabel;
-
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
-import enums.ClientJoinSizesEnum;
-import enums.UserPositionEnum;
-import enums.UtilityEnums;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
+import enums.frames.ClientJoinSizesEnum;
 import frames.JoinFrame;
 import frames.LoginPanel;
 import utility.RegexCheck;
@@ -116,38 +114,33 @@ public class JoinAction extends Adapters {
 	public void itemStateChanged(ItemEvent e) {
 		String source = e.getSource().toString();
 		if(e.getStateChange() == 1) {
-			if(e.getSource().toString().contains("yearChoice")) {
+			if(source.contains("yearChoice")) {
 				this.birthYear = e.getItem().toString();
 				this.joinFrame.getDateChoice().removeAllItems();
 				this.joinFrame.calSetDate(Integer.parseInt(this.birthYear), Integer.parseInt(this.birthMonth));
 			
-			} else if(e.getSource().toString().contains("monthChoice")) {
+			} else if(source.contains("monthChoice")) {
 				this.birthMonth = (String)e.getItem().toString();
 				this.joinFrame.getDateChoice().removeAllItems();
 				this.joinFrame.calSetDate(Integer.parseInt(this.birthYear), Integer.parseInt(this.birthMonth));
 
-			} else if(e.getSource().toString().contains("dateChoice")) {
+			} else if(source.contains("dateChoice")) {
 				this.birthDate = (String)e.getItem().toString();
 
-			} else if(e.getSource().toString().contains("emailAddrChoice")) {
+			} else if(source.contains("emailAddrChoice")) {
 				this.emailAddrChoiceResult(e.getItem());
 				
-			} else if(e.getSource().toString().contains("telFrontNumChoice")) {
+			} else if(source.contains("telFrontNumChoice")) {
 				this.telFrontNum = (String)e.getItem().toString();
 
-			}
-			
-			if(e.getSource().toString().contains("genderManRadio")) {
-				System.out.println("클릭?!");
+			} else if(source.contains("genderManRadio")) {
 				this.gender = 1;
 				this.joinFrame.getGenderErrorLabel().setVisible(false);
-			} else if(e.getSource().toString().contains("genderWomanRadio")) {
+			
+			} else if(source.contains("genderWomanRadio")) {
 				this.gender = 2;
 				this.joinFrame.getGenderErrorLabel().setVisible(false);
 			}
-			
-			
-			
 		}
 	}
 	
@@ -175,14 +168,15 @@ public class JoinAction extends Adapters {
 		
 		} else {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+			personalDTO.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
 			personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
-			checkMsg = "join성공";
-			color 	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 			try {
 				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+//			checkMsg = "join성공";
+//			color 	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 		}
 		
 		this.joinFrame.labelSetting(this.joinFrame.getIdErrorLabel(), color, checkMsg);
@@ -432,10 +426,12 @@ public class JoinAction extends Adapters {
 		}
 		
 		//전화번호가 앞번호, 뒷번호 중 하나만 입력되었을 때
-		if((this.telMidNum != null && this.telLastNum == null) || (this.telMidNum == null && this.telLastNum != null) || this.telFrontNum.equals("선택")) {
-			System.out.println("전화번호 입력에러");
-			this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
-			errCount++;
+		if(!(this.telFrontNum == null && this.telMidNum == null && this.telLastNum == null)) {
+			if((this.telMidNum != null && this.telLastNum == null) || (this.telMidNum == null && this.telLastNum != null) || this.telFrontNum.equals("선택")) {
+				System.out.println("전화번호 입력에러");
+				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
+				errCount++;
+			}
 		}
 		
 		//인증번호를 받지 않았을 때
@@ -464,6 +460,7 @@ public class JoinAction extends Adapters {
 			totalTel.append(this.telLastNum);
 			
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+			personalDTO.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
 			personalDTO.setUserBirth(totalBirth.toString());
 			personalDTO.setUserEmail(totalEmail.toString());
 			personalDTO.setUserGender(this.gender);
@@ -472,7 +469,13 @@ public class JoinAction extends Adapters {
 			personalDTO.setUserPasswd(this.pw);
 			personalDTO.setUserPhoneNumber(this.telLastNum);
 			
-			this.toString();
+			try {
+				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(this.toString());
 		}
 	}
 	

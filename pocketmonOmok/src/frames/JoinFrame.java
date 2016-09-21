@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import actions.join.JoinAction;
-import enums.ClientJoinSizesEnum;
+import enums.frames.ClientJoinSizesEnum;
 import utility.JTextFieldNumOnly;
 
 // ¼öÁø

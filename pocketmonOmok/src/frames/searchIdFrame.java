@@ -15,10 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
-
-import enums.ClientJoinSizesEnum;
-import enums.searchIdEnum;
+import enums.frames.ClientJoinSizesEnum;
+import enums.frames.searchIdEnum;
 
 public class searchIdFrame extends JFrame {
 	private JLabel searchIdLabel;

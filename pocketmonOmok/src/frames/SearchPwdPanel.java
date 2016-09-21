@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import enums.searchPwdEnum;
+import enums.frames.searchPwdEnum;
 
 public class SearchPwdPanel extends JPanel {
 

@@ -13,9 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import enums.LoginSizesEnum;
-import enums.searchPwdEnum;
-import enums.searchRePwdEnum;
+import enums.frames.LoginSizesEnum;
+import enums.frames.searchPwdEnum;
+import enums.frames.searchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchChangePanel extends JPanel {

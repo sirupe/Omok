@@ -29,7 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
 
-import enums.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomSizesEnum;
 
 public class WaitingRoomPanel extends JPanel {	
 //	private JPanel background;
