@@ -6,8 +6,14 @@ public class RegexCheck {
 	// 이메일 형식체크. 형식에 맞으면 true, 형식에 맞지 않으면 false return
 	// (아이디@사이트.com 의 형식)
 	public static boolean emailRegexCheck(String email) {
-		String regex = "[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		String regex = "^[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 		return Pattern.matches(regex, email);
+	}
+
+	// (사이트.com 형식 체크)
+	public static boolean emailDomainRegexCheck(String domain) {
+		String regex = "^[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+		return Pattern.matches(regex, domain);
 	}
 	
 	// 아이디 형식체크. 형식에 맞으면 true, 형식에 맞지 않으면 false return

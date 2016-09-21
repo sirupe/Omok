@@ -17,8 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import actions.login.LoginAction;
-import enums.ImageEnum;
-import enums.LoginSizesEnum;
+import enums.etc.ImageEnum;
+import enums.frames.LoginSizesEnum;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel {

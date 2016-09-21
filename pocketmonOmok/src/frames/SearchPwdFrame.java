@@ -12,12 +12,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import enums.LoginFrameSizesEnum;
-import enums.searchPwdEnum;
-import enums.searchRePwdEnum;
+import enums.frames.searchPwdEnum;
+import enums.frames.searchRePwdEnum;
 
 @SuppressWarnings("serial")
-public class SearchPwdFrame extends JFrame implements Serializable{
+public class SearchPwdFrame extends JFrame implements Serializable {
 	
 	private CardLayout cardLayout;
 	private SearchPwdPanel searchPwdPanel;
@@ -26,6 +25,7 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 	private Image backGround;
 	
 	public SearchPwdFrame() throws IOException {
+		
 		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
 				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
 				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
@@ -42,7 +42,6 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 		);
 		
 		//비밀번호 찾기 프레임
-		
 		this.searchPwdPanel = new SearchPwdPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -60,7 +59,8 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 				}
 			}
 		};
-//		this.searchPwdPanel.setOpaque(false);
+		
+		this.searchPwdPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 		
 		//비밀번호 재입력 프레임
@@ -84,17 +84,19 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 		
 		this.newSearchChangePanel();
 		this.add("searchPwdPanel",this.searchPwdPanel);
-//		this.add("searchRePwdPanel", this.searchRePwdPanel);
-//		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+		this.searchPwdPanel.setOpaque(false);
+		this.add("searchRePwdPanel", this.searchRePwdPanel);
+		this.searchRePwdPanel.setOpaque(false);
+		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+		this.searchChangePanel.setOpaque(false);
 		this.setLayout(this.cardLayout);
 		this.setTitle("PW찾기");
 		this.setVisible(true);
 		this.setResizable(false);
 		
 	}
-	
 	//비밀번호 변경 확인 프레임
-	public void newSearchChangePanel() {
+	public void newSearchChangePanel() throws IOException {
 		this.searchChangePanel = new SearchChangePanel() {	
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -103,7 +105,7 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 					g.drawImage(ImageIO.read(
 						new File("resources/signUp/backg.png")),
 							0,
-							0 ,
+							0,
 							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
 							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
@@ -117,11 +119,12 @@ public class SearchPwdFrame extends JFrame implements Serializable{
 	public SearchPwdPanel getsearchPwdPanel() {
 		return searchPwdPanel;
 	}
-	
 	public void insearchRePwdPanel() {
 		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
 	}	
-
+	public void insearchChangePwdPanel() {
+		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
+	}
 	public static void main(String[] args) {
 		try {
 			new SearchPwdFrame();

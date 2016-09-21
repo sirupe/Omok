@@ -82,7 +82,7 @@ public class DBConnectionPool {
 	}
 	
 	
-	public synchronized Connection getConnection() throws Exception {//TODO
+	public synchronized Connection getConnection() throws Exception {
 		if(!this.initialized) {
 			Class c = Class.forName(this.driver);
 			DriverManager.registerDriver((Driver)c.newInstance());
@@ -132,7 +132,6 @@ public class DBConnectionPool {
 	
 	public void releaseFreeConnections() {
 		this.trace("ConnectionPoolManager.releaseFreeConnections()");
-		Connection connection = null;
 		ConnectionObject connObject = null;
 		
 		for(int i = 0, size = this.connections.size(); i < size; i++) {
@@ -146,7 +145,6 @@ public class DBConnectionPool {
 	
 	public void finalize() {
 		this.trace("ConnectionPoolManager.finalize()");
-		Connection connection = null;
 		ConnectionObject connObject = null;
 		
 		for(int i = 0, size = this.connections.size(); i < size; i++) {

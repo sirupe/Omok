@@ -23,13 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 
-import enums.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomSizesEnum;
 
 public class WaitingRoomPanel extends JPanel implements ActionListener {	
 	private JPanel background;
@@ -387,8 +384,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		};
 		
 		this.playerListBackground.setLayout(null);
-		//this.playerListBackground.setBorder(new EmptyBorder(0, 0, 0, 0));
-		//this.playerListBackground.setBackground(new Color(0, 0, 0, 0));
 
 		
 		//현재 접속중인 플래이어 배경 이미지 크기와 위치
@@ -578,5 +573,4 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 			
 	}
-	
 }

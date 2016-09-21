@@ -1,12 +1,19 @@
 package datasDTO;
 
-public class UserStoreInfoDTO {
+import enums.etc.UserPositionEnum;
+
+public class UserStoreInfoDTO extends AbstractEnumsDTO {
+
 	private String userID;
 	private int itemColorMatching;
 	private int itemIncreaseTime;
 	private int itemReturn;
 	private int itemMoney;
 	
+	public UserStoreInfoDTO(UserPositionEnum position) {
+		super(position);
+	}
+
 	public String getUserID() {
 		return userID;
 	}

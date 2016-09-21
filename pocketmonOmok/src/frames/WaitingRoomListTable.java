@@ -7,7 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import enums.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomSizesEnum;
+
+
 
 class WaitingRoomListTable {
 	

@@ -1,8 +1,8 @@
 package datasDTO;
 
-import enums.UserPositionEnum;
+import enums.etc.UserPositionEnum;
 
-public class UserStoreSkinInfoDTO extends UserPositionIndex {
+public class UserStoreSkinInfoDTO extends AbstractEnumsDTO {
 	private String userID;
 	private int skinNyaong;
     private int skinLeesanghaeC;

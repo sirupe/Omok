@@ -15,7 +15,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import enums.UtilityEnums;
+import enums.etc.UtilityEnums;
 
 
 // 이메일을 보내는 클래스.
