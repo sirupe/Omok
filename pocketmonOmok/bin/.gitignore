@@ -1,6 +1,7 @@
+/server/
 /frames/
-/datasDAO/
 /enums/
+<<<<<<< HEAD
 /start/
 /actions/
 /omokGameServer/
@@ -10,3 +11,6 @@
 /server/
 /JoinFrames/
 /joinFrames/
+=======
+>>>>>>> 600d95e288d6f018b49c4d22545d3816d66f16dd
+/datasDAO/
