@@ -74,7 +74,7 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 		
 		//무르기 아이템 X,Y,가로,세로
 				STORE_USER_OWN_RETURN_ITEM_BUTTON_REC(new Rectangle(
-						(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 3),
+						(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 4),
 						(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 122),
 						(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 41),
 						(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 23)
@@ -87,13 +87,27 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 5)
 				)),
 		
-		//시간늘리기 아이템 보유숫자
+		//시간늘리기 아이템 위치
 		STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC(new Rectangle(
 				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 33),
 				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 5),
 				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 41),
 				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 23)
 				)),
+		STORE_USER_SKIN_CATCH_LABEL_REC(new Rectangle(
+				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 40),
+				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 *216),
+				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 25),
+				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 5)
+				)),
+		STORE_USER_SKIN_CATCH_BUTTON_REC(new Rectangle(
+				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 33),
+				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 122),
+				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 41),
+				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 23)
+				)),
+		
+		//
 				
 		
 		

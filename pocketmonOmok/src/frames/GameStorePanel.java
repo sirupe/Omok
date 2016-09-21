@@ -46,8 +46,6 @@ public class GameStorePanel extends JPanel {
 		this.setUserPanel();
 		this.setItemPanel();
 		this.setOutPanel();
-		
-			
 	}
 	
 	public void setUserPanel() throws IOException {
@@ -83,12 +81,13 @@ public class GameStorePanel extends JPanel {
 		this.userMoneyPanel.add(userConfirm);
 		this.userMoneyPanel.add(userMoney);
 		this.add(this.userMoneyPanel);		
+		userMoneyPanel.setOpaque(false);
 	}
 	
 	public void setItemPanel() {
 		this.itemChoicePanel.setLayout(null);
 		this.itemChoicePanel.setBounds(GameStoreEnum.STORE_ITEM_CHOICE_PANEL_REC.getRectangle());
-		//this.itemChoicePanel.setBackground(Color.blue);
+		
 		
 //		protected void paintComponent(Graphics g) {
 //			 super.paintComponent(g);
@@ -103,6 +102,30 @@ public class GameStorePanel extends JPanel {
 		userOwnInterrptItem.setBackground(Color.red);
 		userOwnInterrptItem.setOpaque(true);
 		
+		//방해하기 아이템 위치
+				JButton userOwnInterrptItemButton = new JButton() {
+					@Override
+					protected void paintComponent(Graphics g) {
+						super.paintComponent(g);
+						try {
+							g.drawImage(ImageIO.read(
+								new File("resources/store/re_interrupt.png")), 
+								0, 
+								0, 
+								GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().width,
+								GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().height,
+								this);
+						}catch (IOException e) {
+							e.printStackTrace();
+						}		
+					}
+				};	
+				userOwnInterrptItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle());
+				userOwnInterrptItemButton.setIconTextGap(userOwnInterrptItemButton.getIconTextGap() - 15);
+				userOwnInterrptItemButton.setFocusPainted(false);
+				userOwnInterrptItemButton.setBorderPainted(false);
+				userOwnInterrptItemButton.setContentAreaFilled(false);
+		
 //---------------------------------------------------------------------------------------------		
 		//무르기 아이템 보유수 라벨
 		JLabel userOwnReturnItem = new JLabel("2/99");
@@ -110,33 +133,8 @@ public class GameStorePanel extends JPanel {
 		userOwnReturnItem.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
 		userOwnReturnItem.setBackground(Color.red);
 		userOwnReturnItem.setOpaque(true);
-		//시간 늘리기 아이템 보유수 라벨
-		JLabel userOwnTimeExtionItem = new JLabel("0/99");
-		userOwnTimeExtionItem.setBounds(GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_REC.getRectangle());
-		userOwnTimeExtionItem.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
-		userOwnTimeExtionItem.setBackground(Color.red);
-		userOwnTimeExtionItem.setOpaque(true);
 		
-		//방해하기 아이템 위치
-		JButton userOwnInterrptItemButton = new JButton() {
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				try {
-					g.drawImage(ImageIO.read(
-						new File("resources/gameRoom/interrupt.png")), 
-						0, 
-						0, 
-						GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().width,
-						GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().height,
-						this);
-				}catch (IOException e) {
-					e.printStackTrace();
-				}		
-			}
-		};	
-		userOwnInterrptItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle());
-		userOwnInterrptItemButton.setIconTextGap(userOwnInterrptItemButton.getIconTextGap() - 15);
+	
 
 	//무르기 아이템 
 		JButton userOwnReturnItemButton = new JButton() {
@@ -145,7 +143,7 @@ public class GameStorePanel extends JPanel {
 				super.paintComponent(g);
 				try {
 					g.drawImage(ImageIO.read(
-						new File("resources/gameRoom/gamereturn.png")), 
+						new File("resources/store/return.png")), 
 						0, 
 						0, 
 						GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().width,
@@ -158,15 +156,26 @@ public class GameStorePanel extends JPanel {
 		};	
 		userOwnReturnItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle());
 		userOwnReturnItemButton.setIconTextGap(userOwnReturnItemButton.getIconTextGap() - 15);
+		userOwnReturnItemButton.setFocusPainted(false);
+		userOwnReturnItemButton.setBorderPainted(false);
+		userOwnReturnItemButton.setContentAreaFilled(false);
+
 		
-//시간 증가 아이템 
+		//시간 늘리기 아이템 보유수 라벨
+				JLabel userOwnTimeExtionItem = new JLabel("0/99");
+				userOwnTimeExtionItem.setBounds(GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_REC.getRectangle());
+				userOwnTimeExtionItem.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
+				userOwnTimeExtionItem.setBackground(Color.red);
+				userOwnTimeExtionItem.setOpaque(true);
+				
+	//시간 증가 아이템 
 				JButton userOwnTimeExtionItemButton = new JButton() {
 					@Override
 					protected void paintComponent(Graphics g) {
 						super.paintComponent(g);
 						try {
 							g.drawImage(ImageIO.read(
-								new File("resources/gameRoom/itemtimeplus.png")), 
+								new File("resources/store/timeExtension.png")), 
 								0, 
 								0, 
 								GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle().width,
@@ -179,16 +188,52 @@ public class GameStorePanel extends JPanel {
 				};	
 				userOwnTimeExtionItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle());
 				userOwnTimeExtionItemButton.setIconTextGap(userOwnTimeExtionItemButton.getIconTextGap() - 15);
-		
+				userOwnTimeExtionItemButton.setFocusPainted(false);
+				userOwnTimeExtionItemButton.setBorderPainted(false);
+				userOwnTimeExtionItemButton.setContentAreaFilled(false);
+				
+	//스킨 뽑기
+				JLabel userSkinCatch = new JLabel("스킨뽑기");
+				userSkinCatch.setBounds(GameStoreEnum.STORE_USER_SKIN_CATCH_LABEL_REC.getRectangle());
+				userSkinCatch.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
+				userSkinCatch.setBackground(Color.red);
+				userSkinCatch.setOpaque(true);
+				
+				JButton userSkinCatchButton = new JButton() {
+					@Override
+					protected void paintComponent(Graphics g) {
+						super.paintComponent(g);
+						try {
+							g.drawImage(ImageIO.read(
+								new File("resources/store/openball2.png")), 
+								0, 
+								0, 
+								GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle().width,
+								GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height,
+								this);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}		
+					}
+				};	
+				userSkinCatchButton.setBounds(GameStoreEnum.STORE_USER_SKIN_CATCH_BUTTON_REC.getRectangle());
+				userSkinCatchButton.setIconTextGap(userSkinCatchButton.getIconTextGap() - 15);
+				userSkinCatchButton.setFocusPainted(false);
+				userSkinCatchButton.setBorderPainted(false);
+				userSkinCatchButton.setContentAreaFilled(false);
 		
 		
 		this.itemChoicePanel.add(userOwnInterrptItem);
 		this.itemChoicePanel.add(userOwnReturnItem);
 		this.itemChoicePanel.add(userOwnTimeExtionItem);
+		this.itemChoicePanel.add(userSkinCatch);
+		
 		this.itemChoicePanel.add(userOwnInterrptItemButton);
 		this.itemChoicePanel.add(userOwnReturnItemButton);
 		this.itemChoicePanel.add(userOwnTimeExtionItemButton);
+		this.itemChoicePanel.add(userSkinCatchButton);
 		this.add(this.itemChoicePanel);
+		itemChoicePanel.setOpaque(false);
 }
 	
 	
@@ -216,7 +261,9 @@ public class GameStorePanel extends JPanel {
 		};	
 		OutButton.setBounds(GameStoreEnum.STORE_OUT_BUTTON_REC.getRectangle());
 		OutButton.setIconTextGap(OutButton.getIconTextGap() - 15);
+		
 		this.outPanel.add(OutButton);
 		this.add(this.outPanel);
+		outPanel.setOpaque(false);
 	}
 }

@@ -1,5 +1,7 @@
 package frames;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -17,15 +19,32 @@ public class GameStoreFrame extends JFrame{
 	
 	public GameStoreFrame() throws IOException {
 		
+
+		this.gameStorePanel = new GameStorePanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+							new File("resources/signUp/backg.png")),
+							0,
+							0,
+							GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(),
+							GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize(),
+							this);
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
 		
-//		
-//		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
-//				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-//				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
-//                Image.SCALE_SMOOTH);
-//		this.add(new JLabel(new ImageIcon(backGround)));
-//		this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 		
+		
+		
+		gameStorePanel.setOpaque(false);
+		
+		//this.add(new JLabel(new ImageIcon(backGround)));
+
 		this.setBounds(
 				GameStoreEnum.GAME_STORE_PANEL_POSITION_X.getSize(),
 				GameStoreEnum.GAME_STORE_PANEL_POSITION_Y.getSize(),
@@ -33,7 +52,7 @@ public class GameStoreFrame extends JFrame{
 				GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize()
 				);
 		
-		this.gameStorePanel = new GameStorePanel();
+		
 		this.add(gameStorePanel);
 		this.setVisible(true);
 		this.setResizable(false);

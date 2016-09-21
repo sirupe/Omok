@@ -43,7 +43,6 @@ public class SearchRePwdPanel extends JPanel {
 				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 		this.add(new JLabel(new ImageIcon(backGround)));
-		//this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 
 		this.setBounds(
 				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
