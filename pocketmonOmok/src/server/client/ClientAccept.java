@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import datasDTO.UserPersonalInfoDTO;
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
-import enums.frames.ClientJoinSizesEnum;
+import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
-import frames.LoginPanel;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 @SuppressWarnings("serial")
@@ -54,17 +54,21 @@ public class ClientAccept implements Serializable {
 			Color color = null;
 			if(userPersonalInfoDTO.getUserID() == null) {
 				checkMsg = "join성공";
-				color = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+				color = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 			} else {
 				checkMsg = "joinID중복";
-				color = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+				color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 			}
 			
 			this.basicFrame.getJoinFrame().labelSetting(
 					this.basicFrame.getJoinFrame().getIdErrorLabel(), 
 					color, checkMsg);
 		} else if(userPersonalInfoDTO.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
-			
+			if(userPersonalInfoDTO.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
+				
+			} else {
+				
+			}
 		}
 	}
 	

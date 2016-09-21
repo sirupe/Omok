@@ -3,9 +3,7 @@ package server.omokGameServer;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import datasDAO.JoinDAO;
@@ -13,8 +11,10 @@ import datasDAO.LoginDAO;
 import datasDAO.UserGamedataInfoDAO;
 import datasDAO.UserStoreInfoDAO;
 import datasDAO.UserStoreSkinInfoDAO;
-import datasDTO.UserPersonalInfoDTO;
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.ServerMessageDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
@@ -65,22 +65,31 @@ public class OmokServer {
 	}
 	
 	
+	//회원가입 프레임에서 넘어온 데이터
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
+		// 아이디 중복체크인 경우
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
 			UserPersonalInfoDTO resultDTO = this.joinDAO.checkOverlapID(personalDTO);
 			this.sendObject(resultDTO, personalServer);
+		// 회원가입인 경우
 		} else {
-			if(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null) {
-				
-			}
-			
-			
-			int result = this.joinDAO.userJoin(personalDTO);
-			if(result == 1) {
-				
-			} else {
-				
+			// 아이디가 중복되지 않는다면
+			if(!(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null)) {
+				ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_JOIN);
+				// DB에 데이터 업데이트 
+				int result = this.joinDAO.userJoin(personalDTO);
+				// 성공적으로 업데이트 된 경우
+				if(result == 1) {
+					serverMessage.setServerAction(ServerActionEnum.JOIN_SUCCESS);
+					serverMessage.setServerMessage(ServerActionEnum.JOIN_SUCCESS.getServerMessage());
+					this.sendObject(serverMessage, personalServer);
+				// 업데이트 실패한 경우
+				} else {
+					serverMessage.setServerAction(ServerActionEnum.JOIN_FAIL);
+					serverMessage.setServerMessage(ServerActionEnum.JOIN_FAIL.getServerMessage());
+					this.sendObject(serverMessage, personalServer);
+				}
 			}
 		}
 	}

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 
+@SuppressWarnings("serial")
 public class LoginDAO implements Serializable{
 	// DTO 에 ID가 입력되어 전달되면 DTO 에 ID와 PW가 담겨 되돌려집니다. 없을경우 NULL 이 반환됩니다.
 	public UserPersonalInfoDTO checkIDMatchesPW(UserPersonalInfoDTO personalDTO) {

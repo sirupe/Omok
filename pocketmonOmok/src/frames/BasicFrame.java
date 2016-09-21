@@ -19,6 +19,7 @@ import datasDTO.AbstractEnumsDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
+import frames.joinFrames.JoinFrame;
 import server.client.ClientAccept;
 
 @SuppressWarnings("serial")

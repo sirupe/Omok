@@ -3,13 +3,14 @@ package enums.frames;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.border.EmptyBorder;
 
-public enum ClientJoinSizesEnum {
+public enum JoinSizesEnum {
 	
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
@@ -243,7 +244,18 @@ public enum ClientJoinSizesEnum {
 	JOIN_MESSAGE(joinMessageMap()),
 	
 	//email Combo 설정값 ------------------------------------------------
-	JOIN_EMAIL_COMBOBOX_BACKGROUND(Color.white);
+	JOIN_EMAIL_COMBOBOX_BACKGROUND(Color.white),
+	
+	
+	//JoinSuccessFrame 설정값------------------------------------------------------------------------------------------------
+	JOIN_SUCCESS_FRAME_WIDTH((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width * 0.2)),
+	JOIN_SUCCESS_FRAME_HEIGHT((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height * 0.2)),
+	JOIN_SUCCESS_FRAME_X((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 2) - (JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_FRAME_Y((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height / 2) - (JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2)),
+	;
+//	JOIN_SUCCESS_LABEL_RECT(new Rectangle(
+//		JOIN_SUCCESS_FRAME_WIDTH.getSize(),
+//	));
 	
 	private Dimension dimension;
 	private int size;
@@ -252,31 +264,37 @@ public enum ClientJoinSizesEnum {
 	private EmptyBorder border;
 	private String[] strArr;
 	private Map<String, String> messageMap;
+	private Rectangle rect;
 	
-	private ClientJoinSizesEnum(Color color) {
+	
+	private JoinSizesEnum(Color color) {
 		this.color = color;
 	}
-	private ClientJoinSizesEnum(Font font) {
+	private JoinSizesEnum(Font font) {
 		this.font = font;
 	}
-	private ClientJoinSizesEnum(EmptyBorder border) {
+	private JoinSizesEnum(EmptyBorder border) {
 		this.border = border;
 	}
 	
-	private ClientJoinSizesEnum(int size) {
+	private JoinSizesEnum(int size) {
 		this.size = size;
 	}
 	
-	private ClientJoinSizesEnum(Dimension dimension) {
+	private JoinSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
-	private ClientJoinSizesEnum(String[] strArr) {
+	private JoinSizesEnum(String[] strArr) {
 		this.strArr = strArr;
 	}
 	
-	private ClientJoinSizesEnum(Map<String, String> map) {
+	private JoinSizesEnum(Map<String, String> map) {
 		this.messageMap = map;
+	}
+	
+	private JoinSizesEnum(Rectangle rect) {
+		this.rect = rect;
 	}
 
 	private static Map<String, String> joinMessageMap() {
@@ -333,5 +351,9 @@ public enum ClientJoinSizesEnum {
 	
 	public Map<String, String> getMessageMap() {
 		return messageMap;
+	}
+	
+	public Rectangle getRect() {
+		return rect;
 	}
 }
