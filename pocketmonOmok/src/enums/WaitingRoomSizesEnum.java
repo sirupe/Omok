@@ -1,53 +1,17 @@
 package enums;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 
 public enum WaitingRoomSizesEnum {
 	//로그인창의 x,y 값
 	WAITINGROOM_LABEL_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.01)),
 	WAITINGROOM_LABEL_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03)),
 	
-	//대기방  OX, NO, TITLE, MASTER, NUMBER
-	WAITINGROOM_INFO_LABEL_RECTS(
-		new Rectangle[] {
-			new Rectangle(//OX
-					WAITINGROOM_LABEL_POSITION_X.getSize(),
-					WAITINGROOM_LABEL_POSITION_Y.getSize(),
-					(int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.3),
-					(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100) * 3
-			), 
-			new Rectangle(//NO
-					WAITINGROOM_LABEL_POSITION_X.getSize() + (int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.05),
-					WAITINGROOM_LABEL_POSITION_Y.getSize(),
-					(int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.3),
-					(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100) * 3
-			), 
-			new Rectangle(//TITLE
-					WAITINGROOM_LABEL_POSITION_X.getSize() + (int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.25),
-					WAITINGROOM_LABEL_POSITION_Y.getSize(),
-					(int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.5),
-					(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100) * 3
-			), 
-			new Rectangle(//MASTER
-					WAITINGROOM_LABEL_POSITION_X.getSize() + (int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.5),
-					WAITINGROOM_LABEL_POSITION_Y.getSize(),
-					(int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.3),
-					(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100) * 3
-			), 
-			new Rectangle(//NUMBER
-					WAITINGROOM_LABEL_POSITION_X.getSize() + (int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.6),
-					WAITINGROOM_LABEL_POSITION_Y.getSize(),
-					(int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.3),
-					(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100) * 3
-			)
-		}
-	),	
 	//대기방 가로,세로 길이
 	WAITING_ROOM_LIST_SIZE_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.7)),
 	WAITING_ROOM_LIST_SIZE_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.52)),
 	//대기방의  x,y 위치
-	WAITING_ROOM_LIST_POSITION_X(WAITINGROOM_LABEL_POSITION_X.getSize()),
+	WAITING_ROOM_LIST_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.01)),
 	WAITING_ROOM_LIST_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.06)),
 	
 	//대기방 배경 가로, 세로 길이
@@ -56,6 +20,10 @@ public enum WaitingRoomSizesEnum {
 	//대기방 배경 x,y 위치
 	WAITING_ROOM_LIST_BACKGROUND_POSITION_X(WAITINGROOM_LABEL_POSITION_X.getSize()),
 	WAITING_ROOM_LIST_BACKGROUND_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.06)),
+	
+	//대기방 O△X 가로 세로 길이
+	ROOMLIST_STATUS_SIZE_WIDTH((int)(WAITING_ROOM_LIST_SIZE_WIDTH.getSize() * 0.08)),
+	ROOMLIST_STATUS_SIZW_HEIGHT((int)(WAITING_ROOM_LIST_SIZE_HEIGHT.getSize() * 0.08)),
 	
 	//==================================CHATTING==================================
 	//채팅 출력창 가로,세로 길이 
@@ -99,8 +67,9 @@ public enum WaitingRoomSizesEnum {
 	PLAYERS_LIST_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.24)),
 	PLAYERS_LIST_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() *0.48)),
 	//접속자창 x,y 위치
-	PLAYERS_LIST_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.735)),
-	PLAYERS_LIST_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.08)),
+	PLAYERS_LIST_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.014)),
+	PLAYERS_LIST_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03)),
+	
 	
 	//접속자창 배경 가로, 세로 길이
 	PLAYERS_LIST_BACKGROUND_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.27)),
@@ -171,7 +140,6 @@ public enum WaitingRoomSizesEnum {
 	MY_INFO_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.58));
 
 	
-
 	
 	private int size;
 	
@@ -179,8 +147,7 @@ public enum WaitingRoomSizesEnum {
 	
 	private WaitingRoomSizesEnum() {}
 	
-	private Rectangle[] rect;
-	
+
 	
 	//()<- 이안에 들어갈 것들이 문자형인데 이것을 정수형으로 바꿔주기위해 
 	private WaitingRoomSizesEnum(int x) {
@@ -191,11 +158,6 @@ public enum WaitingRoomSizesEnum {
 		this.dimension = dimension;
 	}
 	
-	private WaitingRoomSizesEnum(Rectangle[] rect) {
-		this.rect = rect;
-	}
-
-	
 	public int getSize() {
 		return size;
 	}
@@ -203,7 +165,5 @@ public enum WaitingRoomSizesEnum {
 		return dimension;
 	}
 	
-	public Rectangle[] getRect() {
-		return rect;
-	}
+
 }
