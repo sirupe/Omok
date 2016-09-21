@@ -516,6 +516,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				}
 			}
 		};
+		
 		this.myInfoImage.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_X.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_Y.getSize(), 

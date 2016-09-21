@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-/enums/
 /frames/
 /server/
 /start/
 /utility/
-=======
-/server/
-/frames/
 /enums/
->>>>>>> 600d95e288d6f018b49c4d22545d3816d66f16dd
-/datasDAO/

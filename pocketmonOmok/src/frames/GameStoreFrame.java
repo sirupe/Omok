@@ -42,8 +42,6 @@ public class GameStoreFrame extends JFrame{
 		
 		
 		gameStorePanel.setOpaque(false);
-		
-		//this.add(new JLabel(new ImageIcon(backGround)));
 
 		this.setBounds(
 				GameStoreEnum.GAME_STORE_PANEL_POSITION_X.getSize(),
