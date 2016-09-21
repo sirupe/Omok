@@ -131,12 +131,17 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.gamestartButton  = new JButton();
 		this.createRoomButton = new JButton();
 			
-		this.userID 	 = new JLabel("ID");
-		this.score 		 = new JLabel("전적");
-		this.winningRate = new JLabel("승률");
-		this.point 		 = new JLabel("승점");
-		this.level 		 = new JLabel(".LV");
-		this.correct 	 = new JButton();
+		this.userID 	 	 = new JLabel("ID");
+		this.userIDText  	 = new JLabel("여기에아이디가들어가요label");
+		this.score 		 	 = new JLabel("전적");
+		this.scoreText   	 = new JLabel("12345");
+		this.winningRate 	 = new JLabel("승률");
+		this.winningRateText = new JLabel("123123");
+		this.point 		 	 = new JLabel("승점");
+		this.pointText       = new JLabel("3333333");
+		this.level 		 	 = new JLabel(".LV");
+		this.levelText       = new JLabel();
+		this.correct 	 	 = new JButton();
 		
 		this.roomListPosition();
 			
@@ -397,43 +402,83 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.playerListBackground.setOpaque(false);
 		
 		/******************************************************************************/
-		//아이디
+
+		//아이디, 아이디 텍스트
 		this.userID.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_USERID_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_USERID_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_USERID_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_USERID_HEIGHT.getSize()
 		);
-		//전적
+		this.userIDText.setBounds(
+				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_POSITION_X.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_WIDTH.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_HEIGHT.getSize()
+		);
+		//전적, 전적 텍스트
 		this.score.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_SCORE_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_SCORE_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_SCORE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_SCORE_HEIGHT.getSize()
 		);
+		this.scoreText.setBounds(
+				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_POSITION_X.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_WIDTH.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_HEIGHT.getSize()
+		);
 		
-		//승률
+		//승률, 승률 텍스트
 		this.winningRate.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_HEIGHT.getSize()
 		);
+		this.winningRateText.setBounds(
+				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_X.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_WIDTH.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_HEIGHT.getSize()
+		);
 		
-		//승점
+		
+		//승점, 승점 텍스트
 		this.point.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_POINT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_POINT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_POINT_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_POINT_HEIGHT.getSize()
 		);
+		this.pointText.setBounds(
+				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_POSITION_X.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_WIDTH.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_HEIGHT.getSize()
+		);
 		
-		//등급
+		
+		//등급, 등급 텍스트 이미지
 		this.level.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_HEIGHT.getSize()
+		);
+		this.levelText.setBounds(
+				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_POSITION_X.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()
+		);
+		this.levelText.setIcon(
+				new ImageIcon(ImageIO.read(
+					new File("resources/user/usermediumgrade.png")).getScaledInstance(
+						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize() ,
+						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(),
+						Image.SCALE_AREA_AVERAGING))
 		);
 		
 		//수정
@@ -556,10 +601,15 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.add(playerListBackground);
 		this.add(myInfoImage);
 		this.add(userID);
+		this.add(userIDText);
 		this.add(score);
+		this.add(scoreText);
 		this.add(winningRate);
+		this.add(winningRateText);
 		this.add(point);
+		this.add(pointText);
 		this.add(level);
+		this.add(levelText);
 		this.add(correct);
 		this.add(myInfo);
 		
