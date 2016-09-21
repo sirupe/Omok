@@ -9,8 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import enums.GameStoreEnum;
-import enums.searchPwdEnum;
+import enums.frames.GameStoreEnum;
 
 public class GameStoreFrame extends JFrame{
 	private GameStorePanel gameStorePanel;

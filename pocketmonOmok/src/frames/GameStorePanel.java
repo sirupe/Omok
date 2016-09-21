@@ -14,10 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import enums.GameRoomEnum;
-import enums.GameStoreEnum;
-import enums.searchPwdEnum;
-import enums.searchRePwdEnum;
+//import enums.GameRoomEnum;
+//import enums.searchPwdEnum;
+//import enums.searchRePwdEnum;
+import enums.frames.GameStoreEnum;
 
 public class GameStorePanel extends JPanel {
 	private JPanel userMoneyPanel;

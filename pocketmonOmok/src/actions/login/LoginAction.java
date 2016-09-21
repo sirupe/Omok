@@ -11,8 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import datasDTO.UserPersonalInfoDTO;
-import enums.LoginSizesEnum;
-import enums.UserPositionEnum;
+import enums.etc.UserPositionEnum;
+import enums.frames.LoginSizesEnum;
 import frames.JoinFrame;
 import frames.LoginPanel;
 

@@ -15,12 +15,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import client.ClientAccept;
-import datasDTO.UserPositionIndex;
-import enums.LoginFrameSizesEnum;
-import enums.LoginSizesEnum;
-// ÅÂ¼º
-import enums.UserPositionEnum;
+import datasDTO.AbstractEnumsDTO;
+import enums.etc.UserPositionEnum;
+import enums.frames.LoginFrameSizesEnum;
+import enums.frames.LoginSizesEnum;
+import server.client.ClientAccept;
 
 @SuppressWarnings("serial")
 public class BasicFrame extends JFrame implements Serializable{
@@ -96,7 +95,7 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				UserPositionIndex index = new UserPositionIndex(UserPositionEnum.POSITION_EXIT);
+				AbstractEnumsDTO index = new AbstractEnumsDTO(UserPositionEnum.POSITION_EXIT);
 				try {
 					clientAccept.getClientOS().writeObject(index);
 				} catch (IOException e1) {

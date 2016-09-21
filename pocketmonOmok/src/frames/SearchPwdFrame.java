@@ -11,8 +11,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import enums.searchPwdEnum;
-import enums.searchRePwdEnum;
+
+import enums.frames.searchPwdEnum;
+import enums.frames.searchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchPwdFrame extends JFrame implements Serializable {

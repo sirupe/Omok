@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import enums.GameRoomEnum;
-import enums.searchPwdEnum;
-import enums.searchRePwdEnum;
+import enums.frames.GameRoomEnum;
+import enums.frames.searchPwdEnum;
+import enums.frames.searchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchRePwdPanel extends JPanel {

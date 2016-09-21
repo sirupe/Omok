@@ -1,10 +1,5 @@
-/datasDAO/
-/datasDTO/
-<<<<<<< HEAD
 /enums/
 /frames/
-/omokGameServer/
+/server/
 /start/
 /utility/
-=======
->>>>>>> 382ee3965fcb4a6d1b18da9bc89e640bd6eb4bc6

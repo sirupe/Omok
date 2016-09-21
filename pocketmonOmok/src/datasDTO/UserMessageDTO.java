@@ -1,8 +1,8 @@
 package datasDTO;
 
-import enums.UserPositionEnum;
+import enums.etc.UserPositionEnum;
 
-public class UserMessageDTO extends UserPositionIndex {
+public class UserMessageDTO extends AbstractEnumsDTO {
 	private String userID;
 	private String message;
 	private String targetID;

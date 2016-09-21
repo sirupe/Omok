@@ -1,7 +1,6 @@
 package frames;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -23,7 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import actions.join.JoinAction;
-import enums.ClientJoinSizesEnum;
+import enums.frames.ClientJoinSizesEnum;
+import utility.JTextFieldNumOnly;
 
 // 수진
 @SuppressWarnings("serial")
@@ -56,52 +56,50 @@ public class JoinFrame extends JFrame {
 	private JLabel dateLabel;
 	
 	private JLabel emailLabel;
+	private JLabel emailTimeLabel;
 	private JLabel emailErrorLabel;
 	
 	private JLabel telLabel;
 	private JLabel telHyphen1Label;
 	private JLabel telHyphen2Label;
 	private JLabel atLabel;
+	private JLabel telErrorLabel;
 	
 	private JTextField idTextField;
 	private JPasswordField pwdField;
 	private JPasswordField rePwdField;
 	private JTextField nameTextField;
 	
-	private JTextField yearTextField;
-	private JTextField monthTextField;
-	private JTextField dateTextField;
+//	private JTextField yearTextField;
+//	private JTextField monthTextField;
+//	private JTextField dateTextField;
 	
 	private JTextField emailIDTextField;
 	private JTextField emailAddrTextField;
-	private JTextField emailConfirmTextField;
+	private JTextField emailConfTextField;
 	private JComboBox<String> emailAddrChoice;
 
 	private JComboBox<String> telFrontNumChoice; //전화번호 02,010..
-	private JTextField telMiddleNumTextField;
-	private JTextField telBackNumTextField;	
+	private JTextField telMiddleTextField;
+	private JTextField telLastNumTextField;	
 	
 	private JButton joinButton; //회원가입 버튼
 	private JButton resetButton; //취소버튼
 	private JButton confirmButton; //인증 버큰
-
-	
-////생년월일 콤보 박스
-//	private Calendar rightNow = Calendar.getInstance();
-//	private int nowyear       = rightNow.get(Calendar.YEAR);
-//	private int nowmonth 	  = rightNow.get(Calendar.MONTH);
-//	private int nowdate 	  = rightNow.get(Calendar.DATE);
 
 //배경
 	private Image backGround;
 	
 	private LoginPanel loginPanel;
 	private JoinAction joinAction;
+	private Map<String, String> errMessageMap;
 
 	public JoinFrame(LoginPanel loginPanel) throws IOException {
 		this.loginPanel = loginPanel;
 		this.joinAction = new JoinAction(this.loginPanel, this);
 		this.addWindowListener(this.joinAction);
+		
+		this.errMessageMap = ClientJoinSizesEnum.JOIN_MESSAGE.getMessageMap();
 
 		//모든 레이블 
 		this.idLabel 	 = new JLabel("아이디"); 
@@ -120,25 +118,20 @@ public class JoinFrame extends JFrame {
 		this.yearLabel    	  = new JLabel("년");
 		this.monthLabel   	  = new JLabel("월");
 		this.dateLabel    	  = new JLabel("일");
+		this.emailTimeLabel	  = new JLabel("3:00");
 		
 		// 모든 텍스트 필드
 		this.idTextField    = new JTextField(10);
+
 		this.pwdField       = new JPasswordField(10);
 		this.rePwdField     = new JPasswordField(10);
 		this.nameTextField  = new JTextField(10);
-		this.yearTextField  = new JTextField(4);
-		this.monthTextField = new JTextField(2);
-		this.dateTextField  = new JTextField(2);
 
 		this.emailIDTextField    	= new JTextField(10); 
 		this.emailAddrTextField 	= new JTextField(10);
-		this.telMiddleNumTextField	= new JTextField(4);
-		this.telBackNumTextField    = new JTextField(4);
-		this.emailConfirmTextField  = new JTextField(6);
-				
-		// 이메일 전화번호 콤보 박스
-		this.emailAddrChoice   = new JComboBox<>();
-		this.telFrontNumChoice = new JComboBox<>();
+		this.telMiddleTextField		= new JTextField(new JTextFieldNumOnly(4), "", 0);
+		this.telLastNumTextField    = new JTextField(new JTextFieldNumOnly(4), "", 0);
+		this.emailConfTextField  = new JTextField(new JTextFieldNumOnly(6), "", 0);
 
 		// 성별 여자남자 라디오 박스
 		this.genderButtonGroup = new ButtonGroup();
@@ -151,24 +144,9 @@ public class JoinFrame extends JFrame {
 		
 				
 		//회원가입, 취소 버튼	
-		this.resetButton  = new JButton();
-		this.resetButton.setBorderPainted(false);
-		this.resetButton.setFocusPainted(false);
-		this.resetButton.setContentAreaFilled(false);
-		
-		this.joinButton  = new JButton();
-		this.joinButton.setBorderPainted(false);
-		this.joinButton.setFocusPainted(false);
-		this.joinButton.setContentAreaFilled(false);
-		
-		this.confirmButton  = new JButton();	
-		this.confirmButton.setBorderPainted(false);
-		this.confirmButton.setFocusPainted(false);
-		this.confirmButton.setContentAreaFilled(false);
-		
-		this.add(confirmButton);
-		this.add(resetButton);
-		this.add(joinButton);
+		this.resetButton   = new JButton();
+		this.joinButton	   = new JButton();
+		this.confirmButton = new JButton();	
 
 		this.yearChoice  = new JComboBox<Integer>();
 		this.monthChoice = new JComboBox<Integer>();
@@ -184,6 +162,7 @@ public class JoinFrame extends JFrame {
 		this.genderLabel.setFont(labelFont);
 		this.emailLabel.setFont(labelFont);
 		this.telLabel.setFont(labelFont);
+		this.emailTimeLabel.setFont(labelFont);
 
 //텍스트필드
 		Font textFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
@@ -191,15 +170,9 @@ public class JoinFrame extends JFrame {
 		this.pwdField.setFont(textFont);
 		this.rePwdField.setFont(textFont);
 		this.nameTextField.setFont(textFont);
-		this.yearTextField.setFont(textFont);
-		this.monthTextField.setFont(textFont);
-		this.dateTextField.setFont(textFont);
 
 		this.emailIDTextField.setFont(textFont);
 		this.emailAddrTextField.setFont(textFont);
-		this.telMiddleNumTextField.setFont(textFont);
-		this.telBackNumTextField.setFont(textFont);
-		this.emailConfirmTextField.setFont(textFont);
 		
 // 이메일 전화번호 콤보 박스
 		this.emailAddrChoice = new JComboBox<String>();
@@ -230,12 +203,13 @@ public class JoinFrame extends JFrame {
 		this.setChoicePosition();	//이메일 생일 전화번호 콤보 박스
 		
 		this.setButtonGroup();		//성별 그룹 묶음
+		
 		this.setButtonPosItion();	
 		
 		this.setErrorPosition();	//에러 메세지	
 
 		this.calSetDate(2016, 12);			//캘린더
-		for(int i = 1900; i <= 2016; i++ ) {
+		for(int i = 2016; i >= 1900; i-- ) {
 			yearChoice.addItem(i);
 		}
 		for(int j = 1; j <= 12; j++) {
@@ -251,11 +225,22 @@ public class JoinFrame extends JFrame {
 		this.addKeyAction(this.pwdField, 			"pwdField");
 		this.addKeyAction(this.rePwdField, 			"rePwdField");
 		this.addKeyAction(this.nameTextField, 		"nameTextField");
-		this.addMouseAction(this.genderManRadio, 	"genderManRadio");
-		this.addMouseAction(this.genderWomanRadio, 	"genderWomanRadio");
+		this.addKeyAction(this.emailIDTextField, 	"emailIDTextField");
+		this.addKeyAction(this.emailAddrTextField, 	"emailAddrTextField");
+		this.addKeyAction(this.telMiddleTextField, 	"telMiddleTextField");
+		this.addKeyAction(this.telLastNumTextField, "telLastNumTextField");
+		this.addKeyAction(this.emailConfTextField,	"emailConfTextField");
+//		this.addMouseAction(this.genderManRadio, 	"genderManRadio");
+//		this.addMouseAction(this.genderWomanRadio, 	"genderWomanRadio");
 		this.addItemAction(this.yearChoice, 		"yearChoice");
 		this.addItemAction(this.monthChoice, 		"monthChoice");
 		this.addItemAction(this.dateChoice, 		"dateChoice");
+		this.addItemAction(this.emailAddrChoice, 	"emailAddrChoice");
+		this.addItemAction(this.telFrontNumChoice,  "telFrontNumChoice");
+		this.addActionPerform(this.joinButton, 		"joinButton");
+		this.addActionPerform(this.confirmButton, 	"confirmButton");
+		this.addItemAction(this.genderManRadio, 	"genderManRadio");
+		this.addItemAction(this.genderWomanRadio, 	"genderWomanRadio");
 	}
 
 	//모든 레이블 위치 -- > 순서대로
@@ -357,24 +342,31 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
+		
+		this.emailTimeLabel.setBounds(
+				ClientJoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_CONFIRM_POSITTION_Y.getSize(),
+				ClientJoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
+				ClientJoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
+		);
 				
 		
-		this.add(idLabel);
-		this.add(pwLabel);
-		this.add(rePwLabel);
-		this.add(nameLabel);
-		this.add(genderLabel);
-		this.add(birthLabel);
-		
-		this.add(yearLabel);
-		this.add(monthLabel);
-		this.add(dateLabel);
-	
-		this.add(emailLabel);
-		this.add(telLabel);
-		this.add(telHyphen1Label);
-		this.add(telHyphen2Label);
-		this.add(atLabel);
+		this.add(this.idLabel);
+		this.add(this.pwLabel);
+		this.add(this.rePwLabel);
+		this.add(this.nameLabel);
+		this.add(this.genderLabel);
+		this.add(this.birthLabel);
+		         
+		this.add(this.yearLabel);
+		this.add(this.monthLabel);
+		this.add(this.dateLabel);
+	             
+		this.add(this.emailLabel);
+		this.add(this.telLabel);
+		this.add(this.telHyphen1Label);
+		this.add(this.telHyphen2Label);
+		this.add(this.atLabel);
 	}
 	
 	public void setTextFieldPosition() {
@@ -420,37 +412,33 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
-		this.emailConfirmTextField.setBounds(
+		this.emailConfTextField.setBounds(
 				ClientJoinSizesEnum.JOIN_CONFIRMT_POSITTION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_CONFIRMT_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
-		this.telMiddleNumTextField.setBounds(
+		this.telMiddleTextField.setBounds(
 				ClientJoinSizesEnum.JOIN_TELT_POSITTION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_TELT_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
 		
-		this.telBackNumTextField.setBounds(
+		this.telLastNumTextField.setBounds(
 				ClientJoinSizesEnum.JOIN_TELT2_POSITTION_X.getSize(),
 				ClientJoinSizesEnum.JOIN_TELT2_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
 	
-		this.add(yearTextField); 
-		this.add(monthTextField); 
-		this.add(dateTextField);
-		this.add(emailIDTextField); 
-		this.add(emailAddrTextField); 
-		this.add(emailConfirmTextField);
-		this.add(telMiddleNumTextField); 
-		this.add(telBackNumTextField);
+//		this.add(yearTextField); 
+//		this.add(monthTextField); 
+//		this.add(dateTextField);
+		this.add(emailConfTextField);
 	}
-	//TODO
+
 	public void calSetDate(int selectYear, int selectMonth) {
 
 		Calendar cal = Calendar.getInstance();//생성
@@ -520,7 +508,6 @@ public class JoinFrame extends JFrame {
 		this.setComboBoxInt(this.dateChoice);
 			
 		this.add(emailAddrChoice);
-		this.add(telFrontNumChoice);
 		
 	}
 	
@@ -559,14 +546,7 @@ public class JoinFrame extends JFrame {
 	}
 	
 	// 이메일인증, 회원가입, 취소 버튼
-	public void setButtonPosItion() throws IOException {
-		
-		//방생성 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
-		this.joinButton.setIconTextGap(this.joinButton.getIconTextGap() - 15);
-		this.resetButton.setIconTextGap(this.joinButton.getIconTextGap() - 15);
-		this.confirmButton.setIconTextGap(this.joinButton.getIconTextGap() - 15);
-	      
-		
+	public void setButtonPosItion() throws IOException {	
 		//회원가입 해상도 맞게 그리기		
 		this.joinButton.setIcon(
 			new ImageIcon(ImageIO.read(
@@ -615,24 +595,29 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.JOIN_CONFIRM_POSITTION_Y.getSize(),
 				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
-		);
-	 
-		this.add(resetButton);
-		this.add(joinButton);
-		this.add(confirmButton);
-		
+		);		
 	}
 	
 	//에러 메세지 출력
 	public void setErrorPosition() {
 		// 에러 레이블
 		
-		this.idErrorLabel	  = new JLabel();		
-		this.pwdErrorLabel	  = new JLabel();		
-		this.rePwdErrorLabel  = new JLabel();		
-		this.nameErrorLabel   = new JLabel();		
-		this.genderErrorLabel = new JLabel();		
+		Font font = ClientJoinSizesEnum.JOIN_CHECKLABEL_FONT_DEFAULT.getFont();
+		this.idErrorLabel	  = new JLabel();	
+		this.idErrorLabel.setFont(font);
+		this.pwdErrorLabel	  = new JLabel();
+		this.pwdErrorLabel.setFont(font);
+		this.rePwdErrorLabel  = new JLabel();
+		this.rePwdErrorLabel.setFont(font);
+		this.nameErrorLabel   = new JLabel();
+		this.nameErrorLabel.setFont(font);
+		this.genderErrorLabel = new JLabel();
+		this.genderErrorLabel.setFont(font);
 		this.emailErrorLabel  = new JLabel();		
+		this.emailErrorLabel.setFont(font);
+		this.telErrorLabel	  = new JLabel();
+		this.telErrorLabel.setFont(font);
+		this.labelSetting(this.telErrorLabel, ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "join선택");
 		
 		
 		this.idErrorLabel.setBounds(
@@ -671,6 +656,11 @@ public class JoinFrame extends JFrame {
 				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
 				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
+		this.telErrorLabel.setBounds(
+				ClientJoinSizesEnum.JOIN_TELERROR_POSITION_X.getSize(),
+				ClientJoinSizesEnum.JOIN_TELERROR_POSITION_Y.getSize(),
+				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize());
 
 		this.add(this.idErrorLabel);
 		this.add(this.pwdErrorLabel);
@@ -678,13 +668,15 @@ public class JoinFrame extends JFrame {
 		this.add(this.nameErrorLabel);
 		this.add(this.genderErrorLabel);
 		this.add(this.emailErrorLabel);
+		this.add(this.telErrorLabel);
+		this.add(this.emailTimeLabel);
+		this.emailTimeLabel.setVisible(false);
 	}
 	
+	
 	public void labelSetting(JLabel label, Color color, String text) {
-		Map<String, String> map = ClientJoinSizesEnum.JOIN_MESSAGE.getMessageMap();
-		
 		label.setForeground(color);
-		label.setText(map.get(text));
+		label.setText(this.errMessageMap.get(text));
 	}
 	
 	public void addKeyAction(JComponent comp, String compName) {
@@ -696,22 +688,44 @@ public class JoinFrame extends JFrame {
 		this.add(comp);
 	}
 	
-	public void addMouseAction(JComponent comp, String compName) {
-		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
-		comp.setName(compName);
-		comp.setBorder(border);
-		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
-		comp.setOpaque(false);
-		comp.addKeyListener(this.joinAction);
-		this.add(comp);
-	}
+//	public void addMouseAction(JComponent comp, String compName) {
+//		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+//		comp.setName(compName);
+//		comp.setBorder(border);
+//		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+//		comp.setOpaque(false);
+//		comp.addMouseMotionListener(this.joinAction);
+//		comp.addMouseListener(this.joinAction);
+//		this.add(comp);
+//	}
 	
+	@SuppressWarnings("rawtypes")
 	public void addItemAction(JComboBox comp, String compName) {
 		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 		comp.setName(compName);
 		comp.setBorder(border);
 		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
 		comp.addItemListener(this.joinAction);
+		this.add(comp);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public void addItemAction(JRadioButton comp, String compName) {
+		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+		comp.setName(compName);
+		comp.setBorder(border);
+		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+		comp.addItemListener(this.joinAction);
+		this.add(comp);
+	}
+	
+	public void addActionPerform(JButton comp, String compName) {
+		comp.setName(compName);
+		comp.setBorderPainted(false);
+		comp.setFocusPainted(false);
+		comp.setContentAreaFilled(false);
+		comp.setIconTextGap(comp.getIconTextGap() - 15);
+		comp.addActionListener(this.joinAction);
 		this.add(comp);
 	}
 	
@@ -739,7 +753,27 @@ public class JoinFrame extends JFrame {
 		return nameTextField;
 	}
 	
+	public JTextField getEmailIDTextField() {
+		return emailIDTextField;
+	}
 	
+	public JTextField getEmailAddrTextField() {
+		return emailAddrTextField;
+	}
+	
+	public JTextField getTelMidTextField() {
+		return telMiddleTextField;
+	}
+	
+	public JTextField getTelLastNumTextField() {
+		return telLastNumTextField;
+	}
+	
+	public JTextField getEmailConfTextField() {
+		return emailConfTextField;
+	}
+	
+
 	
 	
 	public JLabel getIdErrorLabel() {
@@ -756,5 +790,41 @@ public class JoinFrame extends JFrame {
 	
 	public JLabel getNameErrorLabel() {
 		return nameErrorLabel;
+	}
+	
+	public JLabel getEmailErrorLabel() {
+		return emailErrorLabel;
+	}
+	
+	public JLabel getGenderErrorLabel() {
+		return genderErrorLabel;
+	}
+	
+	public JLabel getTelErrorLabel() {
+		return telErrorLabel;
+	}
+	
+	public JLabel getEmailTimeLabel() {
+		return emailTimeLabel;
+	}
+	
+	
+	
+	
+	
+	public JComboBox<Integer> getDateChoice() {
+		return dateChoice;
+	}
+	
+	public JButton getConfirmButton() {
+		return confirmButton;
+	}
+	
+	public JRadioButton getGenderManRadio() {
+		return genderManRadio;
+	}
+	
+	public JRadioButton getGenderWomanRadio() {
+		return genderWomanRadio;
 	}
 }

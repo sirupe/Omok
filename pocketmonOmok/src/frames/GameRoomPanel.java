@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import enums.GameRoomEnum;
-import enums.ImageEnum;
+import enums.etc.ImageEnum;
+import enums.frames.GameRoomEnum;
 
 @SuppressWarnings("serial")
 public class GameRoomPanel extends JPanel {
@@ -86,6 +86,7 @@ public class GameRoomPanel extends JPanel {
 		this.omokStonePanel.setBounds(GameRoomEnum.GAME_STONEPANEL_RECT.getRect());
 	}
 	
+	
 	public void setGameBoard() {
 		this.gameBoardPanel = new JPanel() {
 			@Override
@@ -112,6 +113,7 @@ public class GameRoomPanel extends JPanel {
 		this.gameBoardPanel.add(this.omokStonePanel);
 		this.add(this.gameBoardPanel);
 	} // 오목판 패널
+	
 	
 	public void setTimeLimit() {
 		this.timeLimitPanel.setLayout(null);
@@ -148,6 +150,7 @@ public class GameRoomPanel extends JPanel {
 		this.timeLimitPanel.add(timeBar);
 		this.add(this.timeLimitPanel);
 	} // 시간제한 표시 패널
+	
 	
 	public void setUserImage() {
 		this.userImagePanel.setBounds(GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect());
@@ -200,6 +203,7 @@ public class GameRoomPanel extends JPanel {
 		
 	} // 유저이미지 패널
 	
+	
 	public void setInGameMenuButtons() {
 		this.gameMenuPanel.setLayout(null);
 		this.gameMenuPanel.setOpaque(false);
@@ -248,6 +252,7 @@ public class GameRoomPanel extends JPanel {
 		this.add(this.gameMenuPanel);
 	} // 게임메뉴 및  아이템 패널
 	
+	
 	public void setInGameChattingArea() {
 		this.chattingPanel.setLayout(null);
 		this.chattingPanel.setOpaque(false);
@@ -270,5 +275,4 @@ public class GameRoomPanel extends JPanel {
 		this.chattingPanel.add(chattingField);
 		this.add(this.chattingPanel);
 	} // 채팅 패널
-	
 }

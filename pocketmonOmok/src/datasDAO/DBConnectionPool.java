@@ -24,8 +24,8 @@ public class DBConnectionPool {
 	private Vector<ConnectionObject> connections = new Vector<ConnectionObject>(10);
 	private String driver = "oracle.jdbc.driver.OracleDriver";       
 	private String url    = "jdbc:oracle:thin:@localhost:1521:xe";   
-	private String user   = "system";                                
-	private String passwd = "system";                                  
+	private String user   = "sirupe";                                
+	private String passwd = "7133";                                  
 	
 	private boolean traceOn = true;;
 	private boolean initialized = false;
@@ -82,7 +82,7 @@ public class DBConnectionPool {
 	}
 	
 	
-	public synchronized Connection getConnection() throws Exception {//TODO
+	public synchronized Connection getConnection() throws Exception {
 		if(!this.initialized) {
 			Class c = Class.forName(this.driver);
 			DriverManager.registerDriver((Driver)c.newInstance());
@@ -132,7 +132,6 @@ public class DBConnectionPool {
 	
 	public void releaseFreeConnections() {
 		this.trace("ConnectionPoolManager.releaseFreeConnections()");
-		Connection connection = null;
 		ConnectionObject connObject = null;
 		
 		for(int i = 0, size = this.connections.size(); i < size; i++) {
@@ -146,7 +145,6 @@ public class DBConnectionPool {
 	
 	public void finalize() {
 		this.trace("ConnectionPoolManager.finalize()");
-		Connection connection = null;
 		ConnectionObject connObject = null;
 		
 		for(int i = 0, size = this.connections.size(); i < size; i++) {
