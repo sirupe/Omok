@@ -96,6 +96,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	}
 	//비밀번호 변경 확인 프레임
 	public void newSearchChangePanel() throws IOException {
+		
 		this.searchChangePanel = new SearchChangePanel() {	
 			@Override
 			protected void paintComponent(Graphics g) {

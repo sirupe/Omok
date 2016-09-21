@@ -23,7 +23,7 @@ public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
 
-	public void SearchRePwdPanel() throws IOException {
+	public SearchRePwdPanel() throws IOException {
 		this.setLayout(null);
 		
 		this.searchRePwdPanel   = new JPanel();
@@ -82,6 +82,7 @@ public class SearchRePwdPanel extends JPanel {
 		searchRePwdErrorLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 		
 		//확인 버튼창
+		
 		JButton searchConfirmButton = new JButton() {
 		@Override
 		protected void paintComponent(Graphics g) {
@@ -96,8 +97,7 @@ public class SearchRePwdPanel extends JPanel {
 					this);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-			
+			}		
 		}
 	};	
 		this.searchRePwdPanel.add(searchPwdLabel);
