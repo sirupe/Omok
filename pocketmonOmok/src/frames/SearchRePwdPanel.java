@@ -31,6 +31,8 @@ public class SearchRePwdPanel extends JPanel {
 		this.setsearchPwdPanel();
 	} //생성자
 	
+	
+	
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdPanel() throws IOException {
 
