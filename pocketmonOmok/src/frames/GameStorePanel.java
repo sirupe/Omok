@@ -1,10 +1,18 @@
 package frames;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -29,15 +37,15 @@ public class GameStorePanel extends JPanel {
 		
 		this.setLayout(null);
 		
-		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
-				GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(),
-				GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize(),
-                Image.SCALE_SMOOTH);
+		
+		this.backGround = ImageIO.read(new File("resources/signUp/backg.png"));
+		this.backGround.getScaledInstance(
+			GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(),
+			GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize(),
+            Image.SCALE_SMOOTH
+        );
 
 		this.add(new JLabel(new ImageIcon(backGround)));
-		
-		this.setVisible(true);	
-		this.setOpaque(false);
 		
 		this.userMoneyPanel   = new JPanel();
 		this.outPanel         = new JPanel();
@@ -46,8 +54,32 @@ public class GameStorePanel extends JPanel {
 		this.setUserPanel();
 		this.setItemPanel();
 		this.setOutPanel();
+		
+		this.setOpaque(false);
+		
+		this.setVisible(true);	
 	}
+
+
 	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		try {
+			g.drawImage(ImageIO.read(
+					new File("resources/signUp/backg.png")),
+					0,
+					0,
+					GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(),
+					GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize(),
+					this);
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 	//사용자 보유 금액, 충전하기 
 	public void setUserPanel() throws IOException {
 		this.userMoneyPanel.setBounds(GameStoreEnum.STORE_USER_MONEY_PANEL_REC.getRectangle());
@@ -61,28 +93,31 @@ public class GameStorePanel extends JPanel {
 		//userMoney.setBackground(Color.red);
 		
 		JButton userConfirm = new JButton() {	
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			try {
-				g.drawImage(ImageIO.read(
-					new File("resources/store/charge.png")), 
-					0, 
-					0, 
-					GameStoreEnum.STORE_USER_CONFIRM_BUTTON_REC.getRectangle().width,
-					GameStoreEnum.STORE_USER_CONFIRM_BUTTON_REC.getRectangle().height,
-					this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/store/charge.png")), 
+						0, 
+						0, 
+						GameStoreEnum.STORE_USER_CONFIRM_BUTTON_REC.getRectangle().width,
+						GameStoreEnum.STORE_USER_CONFIRM_BUTTON_REC.getRectangle().height,
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		};
+		
 		userConfirm.setBounds(GameStoreEnum.STORE_USER_CONFIRM_BUTTON_REC.getRectangle());
 		userConfirm.setIconTextGap(userConfirm.getIconTextGap() - 15);
+		
 		this.userMoneyPanel.add(userConfirm);
 		this.userMoneyPanel.add(userMoney);
+		this.userMoneyPanel.setOpaque(false);
+
 		this.add(this.userMoneyPanel);		
-		userMoneyPanel.setOpaque(false);
 	}
 //========================================================================================================
 	
@@ -105,169 +140,161 @@ public class GameStorePanel extends JPanel {
 				}
 			}
 		};
-		
 		this.itemChoicePanel.setBounds(
-				GameStoreEnum.GAME_STORE_PANEL_POSITION_X.getSize(), 
-				GameStoreEnum.GAME_STORE_PANEL_POSITION_Y.getSize(), 
-				GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(), 
-				GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize()
+			GameStoreEnum.GAME_STORE_PANEL_POSITION_X.getSize(), 
+			GameStoreEnum.GAME_STORE_PANEL_POSITION_Y.getSize(), 
+			GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(), 
+			GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize()
 		);
-		
-		itemChoicePanel.setOpaque(false);
+		this.itemChoicePanel.setOpaque(false);
 		this.itemChoicePanel.setLayout(null);
 		this.itemChoicePanel.setBounds(GameStoreEnum.STORE_ITEM_CHOICE_PANEL_REC.getRectangle());
 
-		
-		//방해하기 아이템 보유수 라벨 위치 폰트
-		JLabel userOwnInterrptItem = new JLabel("1/99");
-		userOwnInterrptItem.setBounds(GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_REC.getRectangle());
-		userOwnInterrptItem.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
-		userOwnInterrptItem.setBackground(Color.red);
-		userOwnInterrptItem.setOpaque(false);
-		
-		//방해하기 아이템 위치
-				JButton userOwnInterrptItemButton = new JButton() {
-					@Override
-					protected void paintComponent(Graphics g) {
-						super.paintComponent(g);
-						try {
-							g.drawImage(ImageIO.read(
-								new File("resources/store/re_interrupt.png")), 
-								0, 
-								0, 
-								GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().width,
-								GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().height,
-								this);
-						}catch (IOException e) {
-							e.printStackTrace();
-						}		
-					}
-				};	
-				userOwnInterrptItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle());
-				userOwnInterrptItemButton.setIconTextGap(userOwnInterrptItemButton.getIconTextGap() - 15);
-				userOwnInterrptItemButton.setFocusPainted(false);
-				userOwnInterrptItemButton.setBorderPainted(false);
-				userOwnInterrptItemButton.setContentAreaFilled(false);
-		
-//---------------------------------------------------------------------------------------------		
-		//무르기 아이템 보유수 라벨
-		JLabel userOwnReturnItem = new JLabel("2/99");
-		userOwnReturnItem.setBounds(GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_REC.getRectangle());
-		userOwnReturnItem.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
-		userOwnReturnItem.setOpaque(false);
-		
+		//get Data.
+		Map<String, List<Map<String, Object>>> itemsMap = this.getResourceData();
 	
+		for(String itemsKey : itemsMap.keySet()) {
+			
+			List<Map<String, Object>> list = itemsMap.get(itemsKey);
+			
+			for(Map<String, Object> map : list) {
+				
+				if(itemsKey.equals("buttons")) {
+					createButton(map);
+				} else {
+					createLabel(map);
+				}
+				
+			}
+		}
+		
+		this.add(this.itemChoicePanel);
+}
+	
+	@SuppressWarnings("serial")
+	public HashMap<String, List<Map<String, Object>>> getResourceData() {
+		return new HashMap<String, List<Map<String, Object>>>() {
+			{
+				put("buttons", Arrays.asList(new Map [] {
+					new HashMap<String, Object>() {
+						{
+							put("imagePath", "resources/store/re_interrupt.png");
+							put("width", GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().width);
+							put("height", GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle().height);
+							put("setBounds", GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC.getRectangle());
+						}
+					},
+					
+					new HashMap<String, Object>() {
+						{
+							put("imagePath", "resources/store/return.png");
+							put("width", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().width);
+							put("height", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height);
+							put("setBounds", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle());
+						}
+					},
+					
+					new HashMap<String, Object>() {
+						{
+							put("imagePath", "resources/store/timeExtension.png");
+							put("width", GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle().width);
+							put("height", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height);
+							put("setBounds", GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle());
+						}
+					},
+					
+					new HashMap<String, Object>() {
+						{
+							put("imagePath", "resources/store/ball2.png");
+							put("width", GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle().width);
+							put("height", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height);
+							put("setBounds", GameStoreEnum.STORE_USER_SKIN_CATCH_BUTTON_REC.getRectangle());
+						}
+					}
+				}));
+				
+				put("labels", Arrays.asList(new Map [] {
+					new HashMap<String, Object>() {
+						{	
+							put("title", "1/99");
+							put("setBounds", GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_REC.getRectangle());
+							put("setFont", GameStoreEnum.LABELFONT_DEFAULT.getFont());
+							put("setOpaque", false);
+						}
+					},
+					
+					new HashMap<String, Object>() {
+						{	
+							put("title", "2/99");
+							put("setBounds", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_REC.getRectangle());
+							put("setFont", GameStoreEnum.LABELFONT_DEFAULT.getFont());
+							put("setOpaque", false);
+						}
+					},
+					
+					new HashMap<String, Object>() {
+						{	
+							put("title", "0/99");
+							put("setBounds", GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_REC.getRectangle());
+							put("setFont", GameStoreEnum.LABELFONT_DEFAULT.getFont());
+							put("setOpaque", false);
+						}
+					},
+					
+					new HashMap<String, Object>() {
+						{	
+							put("title", "스킨뽑기");
+							put("setBounds", GameStoreEnum.STORE_USER_SKIN_CATCH_LABEL_REC.getRectangle());
+							put("setFont", GameStoreEnum.LABELFONT_DEFAULT.getFont());
+							put("setOpaque", false);
+						}
+					}
+				}));
+			}
+		};
+	}
 
-		//무르기 아이템 
-		JButton userOwnReturnItemButton = new JButton() {
+	//make labels
+	public void createLabel(Map<String, Object> map) {
+		JLabel label = new JLabel((String) map.get("title"));
+		label.setBounds((Rectangle) map.get("setBounds"));
+		label.setFont((Font) map.get("setFont"));
+		label.setOpaque((Boolean) map.get("setOpaque"));
+		
+		this.itemChoicePanel.add(label);
+	}
+	
+	//make buttons
+	public void createButton(Map<String, Object> map) {
+		JButton button = new JButton() {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				try {
 					g.drawImage(ImageIO.read(
-						new File("resources/store/return.png")), 
+						new File((String) map.get("imagePath"))), 
 						0, 
 						0, 
-						GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().width,
-						GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height,
-						this);
-				} catch (IOException e) {
+						(int) map.get("width"),
+						(int) map.get("height"),
+						this
+					);
+				}catch (IOException e) {
 					e.printStackTrace();
 				}		
 			}
 		};	
-		userOwnReturnItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle());
-		userOwnReturnItemButton.setIconTextGap(userOwnReturnItemButton.getIconTextGap() - 15);
-		userOwnReturnItemButton.setFocusPainted(false);
-		userOwnReturnItemButton.setBorderPainted(false);
-		userOwnReturnItemButton.setContentAreaFilled(false);
-
-
-//---------------------------------------------------------------------------------------------------------------
-		//시간 늘리기 아이템 보유수 라벨
-				JLabel userOwnTimeExtionItem = new JLabel("0/99");
-				userOwnTimeExtionItem.setBounds(GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_REC.getRectangle());
-				userOwnTimeExtionItem.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
-				userOwnTimeExtionItem.setOpaque(false);
-				
-		//시간 증가 아이템 
-				JButton userOwnTimeExtionItemButton = new JButton() {
-					@Override
-					protected void paintComponent(Graphics g) {
-						super.paintComponent(g);
-						try {
-							g.drawImage(ImageIO.read(
-								new File("resources/store/timeExtension.png")), 
-								0, 
-								0, 
-								GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle().width,
-								GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height,
-								this);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}		
-					}
-				};	
-				userOwnTimeExtionItemButton.setBounds(GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle());
-				userOwnTimeExtionItemButton.setIconTextGap(userOwnTimeExtionItemButton.getIconTextGap() - 15);
-				userOwnTimeExtionItemButton.setFocusPainted(false);
-				userOwnTimeExtionItemButton.setBorderPainted(false);
-				userOwnTimeExtionItemButton.setContentAreaFilled(false);
-//-----------------------------------------------------------------------------------------------------------------------				
-	//스킨 뽑기
-				JLabel userSkinCatch = new JLabel("스킨뽑기");
-				userSkinCatch.setBounds(GameStoreEnum.STORE_USER_SKIN_CATCH_LABEL_REC.getRectangle());
-				userSkinCatch.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
-				userSkinCatch.setOpaque(false);
-				
-				JButton userSkinCatchButton = new JButton() {
-					@Override
-					protected void paintComponent(Graphics g) {
-						super.paintComponent(g);
-						try {
-							g.drawImage(ImageIO.read(
-								new File("resources/store/ball2.png")), 
-								0, 
-								0, 
-								GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC.getRectangle().width,
-								GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_BUTTON_REC.getRectangle().height,
-								this);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}		
-					}
-				};	
-				userSkinCatchButton.setBounds(GameStoreEnum.STORE_USER_SKIN_CATCH_BUTTON_REC.getRectangle());
-				userSkinCatchButton.setIconTextGap(userSkinCatchButton.getIconTextGap() - 15);
-				userSkinCatchButton.setFocusPainted(false);
-				userSkinCatchButton.setBorderPainted(false);
-				userSkinCatchButton.setContentAreaFilled(false);
-				
-//---------------------------------------------------------------------------------------------------------
-				
 		
-		//라벨을 패널에 추가
-		this.add(this.itemChoicePanel);
-		this.itemChoicePanel.add(linePanel);
+		button.setBounds((Rectangle) map.get("setBounds"));
+		button.setIconTextGap(button.getIconTextGap() - 15);
 		
-		this.itemChoicePanel.add(userOwnInterrptItem);
-		this.itemChoicePanel.add(userOwnReturnItem);
-		this.itemChoicePanel.add(userOwnTimeExtionItem);
-		this.itemChoicePanel.add(userSkinCatch);
-		//버튼을 패널에 추가	
-		this.itemChoicePanel.add(userOwnInterrptItemButton);
-		this.itemChoicePanel.add(userOwnReturnItemButton);
-		this.itemChoicePanel.add(userOwnTimeExtionItemButton);
-		this.itemChoicePanel.add(userSkinCatchButton);
+		button.setFocusPainted(false);
+		button.setBorderPainted(false);
+		button.setContentAreaFilled(false);
 		
-		//패널을 전체 패널에 추가
-		
-	//	itemChoicePanel.setOpaque(false);
-		
-}
-
+		this.itemChoicePanel.add(button);
+	}
 	
-//========================================================================================================
 	// 나가기 버튼
 	public void setOutPanel() {
 		this.outPanel.setLayout(null);
