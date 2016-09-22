@@ -1,3 +1,11 @@
+<<<<<<< HEAD
 /server/
 /datasDTO/
 /frames/
+=======
+/frames/
+/server/
+/start/
+/utility/
+/enums/
+>>>>>>> cc2cf80bb4493b5b8202fd84bce200e4f0735204

@@ -23,13 +23,15 @@ public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
 
-	public void SearchRePwdPanel() throws IOException {
+	public SearchRePwdPanel() throws IOException {
 		this.setLayout(null);
 		
 		this.searchRePwdPanel   = new JPanel();
 		
 		this.setsearchPwdPanel();
 	} //생성자
+	
+	
 	
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdPanel() throws IOException {
@@ -43,7 +45,6 @@ public class SearchRePwdPanel extends JPanel {
 				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 		this.add(new JLabel(new ImageIcon(backGround)));
-		//this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 
 		this.setBounds(
 				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
@@ -82,6 +83,7 @@ public class SearchRePwdPanel extends JPanel {
 		searchRePwdErrorLabel.setFont(searchRePwdEnum.LABELFONT_DEFAULT.getFont());
 		
 		//확인 버튼창
+		
 		JButton searchConfirmButton = new JButton() {
 		@Override
 		protected void paintComponent(Graphics g) {
@@ -96,8 +98,7 @@ public class SearchRePwdPanel extends JPanel {
 					this);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-			
+			}		
 		}
 	};	
 		this.searchRePwdPanel.add(searchPwdLabel);
