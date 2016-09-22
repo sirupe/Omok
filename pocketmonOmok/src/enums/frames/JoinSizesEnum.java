@@ -3,7 +3,6 @@ package enums.frames;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
@@ -252,10 +251,16 @@ public enum JoinSizesEnum {
 	JOIN_SUCCESS_FRAME_HEIGHT((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height * 0.2)),
 	JOIN_SUCCESS_FRAME_X((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 2) - (JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2)),
 	JOIN_SUCCESS_FRAME_Y((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height / 2) - (JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2)),
-	;
-//	JOIN_SUCCESS_LABEL_RECT(new Rectangle(
-//		JOIN_SUCCESS_FRAME_WIDTH.getSize(),
-//	));
+	
+	JOIN_SUCCESS_LABEL_WIDTH((int)(JOIN_SUCCESS_FRAME_WIDTH.getSize() * 0.34)),
+	JOIN_SUCCESS_LABEL_HEIGHT((int)(JOIN_SUCCESS_FRAME_HEIGHT.getSize() * 0.5)),
+	JOIN_SUCCESS_LABEL_X((JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2) - (JOIN_SUCCESS_LABEL_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_LABEL_Y((JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2) - (int)(JOIN_SUCCESS_LABEL_HEIGHT.getSize() / 1.3)),
+	
+	JOIN_SUCCESS_BUTTON_WIDTH((int)(JOIN_SUCCESS_FRAME_WIDTH.getSize() * 0.15)),
+	JOIN_SUCCESS_BUTTON_HEIGHT((int)(JOIN_SUCCESS_FRAME_HEIGHT.getSize() * 0.15)),
+	JOIN_SUCCESS_BUTTON_X((JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2) - (JOIN_SUCCESS_BUTTON_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_BUTTON_Y((JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2) - (int)(JOIN_SUCCESS_BUTTON_HEIGHT.getSize() / 2));
 	
 	private Dimension dimension;
 	private int size;
@@ -264,8 +269,6 @@ public enum JoinSizesEnum {
 	private EmptyBorder border;
 	private String[] strArr;
 	private Map<String, String> messageMap;
-	private Rectangle rect;
-	
 	
 	private JoinSizesEnum(Color color) {
 		this.color = color;
@@ -291,10 +294,6 @@ public enum JoinSizesEnum {
 	
 	private JoinSizesEnum(Map<String, String> map) {
 		this.messageMap = map;
-	}
-	
-	private JoinSizesEnum(Rectangle rect) {
-		this.rect = rect;
 	}
 
 	private static Map<String, String> joinMessageMap() {
@@ -351,9 +350,5 @@ public enum JoinSizesEnum {
 	
 	public Map<String, String> getMessageMap() {
 		return messageMap;
-	}
-	
-	public Rectangle getRect() {
-		return rect;
 	}
 }

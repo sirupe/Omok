@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
 import enums.etc.UserPositionEnum;
 
-@SuppressWarnings("serial")
-public class LoginDAO implements Serializable{
+public class LoginDAO implements Serializable {
 	// DTO 에 ID가 입력되어 전달되면 DTO 에 ID와 PW가 담겨 되돌려집니다. 없을경우 NULL 이 반환됩니다.
 	public UserPersonalInfoDTO checkIDMatchesPW(UserPersonalInfoDTO personalDTO) {
 		// try-catch문에서 선언하여 사용시 finally 와 스코프가 달라 에러 발생. 미리 선언해준다.
@@ -21,13 +21,13 @@ public class LoginDAO implements Serializable{
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		
 		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_LOGIN);
-		
+		userPersonalInfo.setServerAction(ServerActionEnum.LOGIN_SUCCESS);
 		try {
 			// 연결 요청
 			connection = dbPool.getConnection();
 			
 			// sql 문
-			StringBuilder sql = new StringBuilder();
+			StringBuffer sql = new StringBuffer();
 			sql.append("SELECT USER_ID, USER_PASSWD ");
 			sql.append("FROM USER_PERSONAL_INFO ");
 			sql.append("WHERE USER_ID=? AND USER_PASSWD=?");
@@ -44,6 +44,8 @@ public class LoginDAO implements Serializable{
 				userPersonalInfo.setUserPasswd(resultSet.getString("USER_PASSWD"));
 			}
 			
+			userPersonalInfo.setServerAction(userPersonalInfo.getUserID() == null ?
+							ServerActionEnum.LOGIN_FAIL : ServerActionEnum.LOGIN_SUCCESS);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

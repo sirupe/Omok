@@ -33,8 +33,12 @@ public enum ImageEnum {
 			"resources/gameroom/gamecoin.png"		// 상점
 	}),
 	
-	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png");
-//---------------------------------------------------------------------
+	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png"),
+//WaitingRoom 이미지들-------------------------------------------------------
+	WAITINGROOM_ENTER_POSSIBLE_IMAGE("resources/waitroom/waitingvacancy.jpg"),
+	WAITINGROOM_ENTER_PRIVATE_IMAGE("resources/waitroom/waitingprivate.jpg"),
+	WAITINGROOM_ENTER_FULL_IMAGE("resources/waitroom/watingfull.jpg");
+	
 
 	private String imageDir;
 	private String[] images;

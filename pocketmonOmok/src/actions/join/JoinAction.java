@@ -97,7 +97,6 @@ public class JoinAction extends Adapters {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource().toString().contains("genderManRadio")) {
-			System.out.println("클릭?!");
 			this.gender = 1;
 			this.joinFrame.getGenderErrorLabel().setVisible(false);
 		} else if(e.getSource().toString().contains("genderWomanRadio")) {
@@ -168,7 +167,7 @@ public class JoinAction extends Adapters {
 		
 		} else {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-			personalDTO.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
+			personalDTO.setUserAction(UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK);
 			personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
 			try {
 				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
@@ -299,10 +298,10 @@ public class JoinAction extends Adapters {
 
 	//인증 버튼 눌렀을 시
 	public void confirmAction() {
-		System.out.println("인증번호 클릭!!");
 		if(this.emailAddrSuitabilityCheck() && this.emailIDSuitabilityCheck()) {
 			//인증번호 생성
 			this.confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
+			System.out.println(this.confirmNumber);
 			//이메일발송
 			new SendEmail(this.confirmNumber, this.totalEmail.toString());
 			//시간라벨보여주기
@@ -441,8 +440,6 @@ public class JoinAction extends Adapters {
 			errCount++;
 		}
 		
-		System.out.println(errCount);
-		
 		if(errCount == 0) {
 			StringBuffer totalBirth = new StringBuffer();
 			totalBirth.append(this.birthYear);
@@ -475,17 +472,6 @@ public class JoinAction extends Adapters {
 				e.printStackTrace();
 			}
 			
-			System.out.println(this.toString());
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return "JoinAction [id=" + id + ", pw=" + pw + ", rePw=" + rePw + ", name=" + name + ", gender=" + gender
-				+ ", birthYear=" + birthYear + ", birthMonth=" + birthMonth + ", birthDate=" + birthDate + ", emailID="
-				+ emailID + ", emailAddr=" + emailAddr + ", telFrontNum=" + telFrontNum + ", telMidNum=" + telMidNum
-				+ ", telLastNum=" + telLastNum + "]";
-	}
-	
-	
 }

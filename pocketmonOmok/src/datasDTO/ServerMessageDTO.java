@@ -1,9 +1,11 @@
 package datasDTO;
 
+import java.io.Serializable;
+
 import enums.etc.ServerActionEnum;
 import enums.etc.UserPositionEnum;
 
-public class ServerMessageDTO extends AbstractEnumsDTO {
+public class ServerMessageDTO extends AbstractEnumsDTO implements Serializable {
 	private String serverMessage;
 
 	public ServerMessageDTO(UserPositionEnum position) {

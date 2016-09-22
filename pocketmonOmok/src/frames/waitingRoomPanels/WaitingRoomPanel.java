@@ -1,4 +1,4 @@
-package frames;
+package frames.waitingRoomPanels;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -81,15 +81,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		
 		Font font = new Font("a으라차차",Font.BOLD,15);
 		WaitingRoomListTable roomListModel = new WaitingRoomListTable();
-
-//		//대기실 List내용 가운데정렬
-//		DefaultListCellRenderer defaultrenderer = new DefaultListCellRenderer();//정렬을 위해 생성
-//		defaultrenderer.setHorizontalTextPosition(SwingConstants.CENTER);       //가운데로 정렬
-//		TableColumnModel centerArray = waitingRoomTable.getColumnModel();		//가운데정렬할 ColumnModel을 가져옴	
-//		for (int i = 0; i < centerArray.getColumnCount(); i++) {     			//반복문으로 가운데정렬
-//			centerArray.getColumn(i).setCellRenderer(defaultrenderer);
-//		}
-
 		
 		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
 		this.waitingRoomTable = new JTable(defaultTableModel) {
@@ -97,6 +88,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 			public Class getColumnClass(int column) {
 				return getValueAt(0, column).getClass();
 			}
+			
 			@Override
 			//테이블 수정 금지
 			public boolean isCellEditable(int row, int column){
@@ -155,8 +147,8 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		Font font = new Font("a으라차차", Font.BOLD, 15);
 		
 		public Component getListCellRendererComponent(
-				JList player, Object value, int index,
-				boolean isSelected, boolean cellHasFocus) {
+			JList player, Object value, int index,
+			boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(
                     player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
@@ -251,8 +243,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 
 	/***************************대기실 위치***************************/
 	public void roomListPosition() throws IOException {
-		
-	
 		//방 리스트의 배경 이미지를 불러올 JPanel 생성
 		this.waitingRoomListBackground = new JPanel() {
 			@Override
@@ -321,11 +311,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		);
 		//메시지 버튼의 이미지를 불러옴
 		this.sendMessage.setIcon(
-				new ImageIcon(ImageIO.read(
-					new File("resources/waitingroom/send.png")).getScaledInstance(
-						WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_WIDTH.getSize(),
-						WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_HEIGHT.getSize(),
-						Image.SCALE_AREA_AVERAGING))
+			new ImageIcon(ImageIO.read(
+				new File("resources/waitingroom/send.png")).getScaledInstance(
+					WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_WIDTH.getSize(),
+					WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING))
 		);
 		
 		/******************************************************************************/
@@ -354,11 +344,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		);
 		//방생성 버튼의 이미지를 불러옴
 		this.createRoomButton.setIcon(
-				new ImageIcon(ImageIO.read(
-					new File("resources/waitingroom/_createRoom.jpg")).getScaledInstance(
-						WaitingRoomSizesEnum.CREATEROOM_JBUTTON_WIDTH.getSize() ,
-						WaitingRoomSizesEnum.CREATEROOM_JBUTTON_HEIGHT.getSize(),
-						Image.SCALE_AREA_AVERAGING))
+			new ImageIcon(ImageIO.read(
+				new File("resources/waitingroom/_createRoom.jpg")).getScaledInstance(
+					WaitingRoomSizesEnum.CREATEROOM_JBUTTON_WIDTH.getSize() ,
+					WaitingRoomSizesEnum.CREATEROOM_JBUTTON_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING))
 		);
 		/******************************************************************************/
 		
@@ -474,11 +464,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()
 		);
 		this.levelText.setIcon(
-				new ImageIcon(ImageIO.read(
-					new File("resources/user/usermediumgrade.png")).getScaledInstance(
-						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize() ,
-						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(),
-						Image.SCALE_AREA_AVERAGING))
+			new ImageIcon(ImageIO.read(
+				new File("resources/user/usermediumgrade.png")).getScaledInstance(
+					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize() ,
+					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING))
 		);
 		
 		//수정
@@ -490,11 +480,11 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		);
 		//수정 버튼의 이미지를 불러옴
 		this.correct.setIcon(
-				new ImageIcon(ImageIO.read(
-					new File("resources/waitingroom/correct.png")).getScaledInstance(
-						WaitingRoomSizesEnum.MY_INFO_CORRECT_WIDTH.getSize() ,
-						WaitingRoomSizesEnum.MY_INFO_CORRECT_HEIGHT.getSize(),
-						Image.SCALE_AREA_AVERAGING))
+			new ImageIcon(ImageIO.read(
+				new File("resources/waitingroom/correct.png")).getScaledInstance(
+					WaitingRoomSizesEnum.MY_INFO_CORRECT_WIDTH.getSize() ,
+					WaitingRoomSizesEnum.MY_INFO_CORRECT_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING))
 		);
 
 
@@ -516,6 +506,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				}
 			}
 		};
+		
 		this.myInfoImage.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_X.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_Y.getSize(), 
@@ -551,7 +542,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 				WaitingRoomSizesEnum.MY_INFO_HEIGHT.getSize()
 		);
 		
-		myInfo.setOpaque(false);
+		this.myInfo.setOpaque(false);
 		
 		/******************************************************************************/
 	
@@ -615,10 +606,7 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		
 		
 	}
-	
-	private void waitingRoomInfoFont(Font font) {
-		
-	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			

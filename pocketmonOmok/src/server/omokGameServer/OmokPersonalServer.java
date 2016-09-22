@@ -3,11 +3,12 @@ package server.omokGameServer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
 import datasDTO.AbstractEnumsDTO;
 
-public class OmokPersonalServer extends Thread{
+public class OmokPersonalServer extends Thread implements Serializable {
 	private OmokServer omokServer;
 	private Socket personalSocket;
 	private ObjectInputStream serverInputStream;
@@ -36,7 +37,6 @@ public class OmokPersonalServer extends Thread{
 					this.omokServer.waitingRoom();
 					break;
 				case POSITION_JOIN :
-					System.out.println("회원가입니다 !!!!");
 					this.omokServer.join(userPosition, this);
 					break;
 				case POSITION_FIND_ID :

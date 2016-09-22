@@ -242,6 +242,8 @@ public class JoinFrame extends JFrame {
 		this.addActionPerform(this.confirmButton, 	"confirmButton");
 		this.addItemAction(this.genderManRadio, 	"genderManRadio");
 		this.addItemAction(this.genderWomanRadio, 	"genderWomanRadio");
+		
+		this.test();
 	}
 
 	//모든 레이블 위치 -- > 순서대로
@@ -827,5 +829,19 @@ public class JoinFrame extends JFrame {
 	
 	public JRadioButton getGenderWomanRadio() {
 		return genderWomanRadio;
+	}
+	
+	
+	
+	
+	//테스트용
+	public void test() {
+		this.idTextField.setText("sirupe");
+		this.getPwdTextField().setText("xo1004tks!");
+		this.getRePwdField().setText("xo1004tks!");
+		this.getNameTextField().setText("지은정");
+		this.getEmailIDTextField().setText("sirupe");
+		this.getEmailAddrTextField().setText("nate.com");
+		this.genderWomanRadio.setSelected(true);
 	}
 }

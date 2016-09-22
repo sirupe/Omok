@@ -1,4 +1,4 @@
-package frames;
+package frames.waitingRoomPanels;
 
 import java.awt.Image;
 import java.io.File;

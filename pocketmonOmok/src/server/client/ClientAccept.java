@@ -15,9 +15,9 @@ import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
+import frames.joinFrames.JoinSuccessFrame;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
-@SuppressWarnings("serial")
 public class ClientAccept implements Serializable {
 	private Socket clientSocket;
 	private ObjectInputStream clientIS;
@@ -46,10 +46,13 @@ public class ClientAccept implements Serializable {
 		
 	}
 	
+	// 회원가입 화면에 대한 서버의 응답
 	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) {
-		UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
-		
-		if(userPersonalInfoDTO.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
+		// 아이디 중복체크
+		System.out.println(data.getUserAction());
+		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
+			System.out.println("아이디중복체크");
+			UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
 			String checkMsg = null;
 			Color color = null;
 			if(userPersonalInfoDTO.getUserID() == null) {
@@ -63,10 +66,18 @@ public class ClientAccept implements Serializable {
 			this.basicFrame.getJoinFrame().labelSetting(
 					this.basicFrame.getJoinFrame().getIdErrorLabel(), 
 					color, checkMsg);
-		} else if(userPersonalInfoDTO.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
-			if(userPersonalInfoDTO.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
-				
+			
+		// 회원가입
+		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
+			System.out.println("회원가입");
+			if(data.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
+				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입이 완료되었습니다.");
+				this.basicFrame.getJoinFrame().setVisible(false);
+				this.basicFrame.getJoinFrame().dispose();
 			} else {
+				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "오류가 발생하였습니다 다시 시도해주세요.");
+				this.basicFrame.getJoinFrame().setVisible(false);
+				this.basicFrame.getJoinFrame().dispose();
 				
 			}
 		}
