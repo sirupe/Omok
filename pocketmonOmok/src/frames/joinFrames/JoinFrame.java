@@ -1,4 +1,4 @@
-package frames;
+package frames.joinFrames;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,7 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import actions.join.JoinAction;
-import enums.frames.ClientJoinSizesEnum;
+import enums.frames.JoinSizesEnum;
+import frames.LoginPanel;
 import utility.JTextFieldNumOnly;
 
 // 수진
@@ -99,7 +100,7 @@ public class JoinFrame extends JFrame {
 		this.joinAction = new JoinAction(this.loginPanel, this);
 		this.addWindowListener(this.joinAction);
 		
-		this.errMessageMap = ClientJoinSizesEnum.JOIN_MESSAGE.getMessageMap();
+		this.errMessageMap = JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
 
 		//모든 레이블 
 		this.idLabel 	 = new JLabel("아이디"); 
@@ -153,7 +154,7 @@ public class JoinFrame extends JFrame {
 		this.dateChoice  = new JComboBox<Integer>();
 
 //레이블 폰트
-		Font labelFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
+		Font labelFont = JoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idLabel.setFont(labelFont);
 		this.pwLabel.setFont(labelFont);
 		this.rePwLabel.setFont(labelFont);
@@ -165,7 +166,7 @@ public class JoinFrame extends JFrame {
 		this.emailTimeLabel.setFont(labelFont);
 
 //텍스트필드
-		Font textFont = ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont();
+		Font textFont = JoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idTextField.setFont(textFont);
 		this.pwdField.setFont(textFont);
 		this.rePwdField.setFont(textFont);
@@ -182,18 +183,18 @@ public class JoinFrame extends JFrame {
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 	    backGround = ImageIO.read(
 	   		  new File("resources/signUp/joinn.jpg")).getScaledInstance(
-	                   ClientJoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
-	                   ClientJoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
+	                   JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
+	                   JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 	                   Image.SCALE_SMOOTH);
 
 	    this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 	    
 		
 	    this.setBounds(
-			ClientJoinSizesEnum.JOINFRMAE_POSITION_X.getSize(),
-			ClientJoinSizesEnum.JOINFRMAE_POSITION_Y.getSize(),
-			ClientJoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
-			ClientJoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize()
+			JoinSizesEnum.JOINFRMAE_POSITION_X.getSize(),
+			JoinSizesEnum.JOINFRMAE_POSITION_Y.getSize(),
+			JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
+			JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize()
 		);
 
 		this.setLabelPosition();	//레이블 
@@ -241,113 +242,115 @@ public class JoinFrame extends JFrame {
 		this.addActionPerform(this.confirmButton, 	"confirmButton");
 		this.addItemAction(this.genderManRadio, 	"genderManRadio");
 		this.addItemAction(this.genderWomanRadio, 	"genderWomanRadio");
+		
+		this.test();
 	}
 
 	//모든 레이블 위치 -- > 순서대로
 	public void setLabelPosition() {
 		this.idLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_IDLABEL_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_IDLABEL_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_IDLABEL_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_IDLABEL_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.pwLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_PWDLABEL_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_PWDLABEL_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_PWDLABEL_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_PWDLABEL_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.rePwLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_REPWDLABEL_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_REPWDLABEL_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_REPWDLABEL_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_REPWDLABEL_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.nameLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_NAMELABEL_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_NAMELABEL_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_NAMELABEL_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_NAMELABEL_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 	
 		this.genderLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_GENDERLABEL_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_GENDERLABEL_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_GENDERLABEL_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_GENDERLABEL_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.birthLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_BIRTHLABEL_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_BIRTHLABEL_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_BIRTHLABEL_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_BIRTHLABEL_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.yearLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_YEARLABEL_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_YEARLABEL_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_YEARLABEL_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_YEARLABEL_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.monthLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_MONTHLABEL_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_MONTHLABEL_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_MONTHLABEL_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_MONTHLABEL_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.dateLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_DATE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_DATE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_DATE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_DATE_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.emailLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_EMAIL_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_EMAIL_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_EMAIL_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_EMAIL_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.telLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_TEL_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_TEL_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_TEL_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_TEL_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.telHyphen1Label.setBounds(
-				ClientJoinSizesEnum.JOIN_HYPHEN1_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_HYPHEN1_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_HYPHEN1_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_HYPHEN1_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.telHyphen2Label.setBounds(
-				ClientJoinSizesEnum.JOIN_HYPHEN2_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_HYPHEN2_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_HYPHEN2_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_HYPHEN2_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.atLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_AT_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_AT_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_AT_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_AT_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.emailTimeLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_CONFIRM_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_CONFIRM_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
 				
 		
@@ -371,66 +374,66 @@ public class JoinFrame extends JFrame {
 	
 	public void setTextFieldPosition() {
 		this.idTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_IDT_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_IDT_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_IDT_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_IDT_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.pwdField.setBounds(
-				ClientJoinSizesEnum.JOIN_PWDT_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_PWDT_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_PWDT_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_PWDT_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.rePwdField.setBounds(
-				ClientJoinSizesEnum.JOIN_REPWDT_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_REPWDT_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_REPWDT_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_REPWDT_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.nameTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_NAMET_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_NAMET_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_NAMET_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_NAMET_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_LABEL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 	
 		this.emailIDTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_EMAILT_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_EMAILT_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_EMAILT_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_EMAILT_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
 		this.emailAddrTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_EMAILADRT_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_EMAILADRT_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_EMAILADRT_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_EMAILADRT_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
 		this.emailConfTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_CONFIRMT_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_CONFIRMT_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_CONFIRMT_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_CONFIRMT_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
 		this.telMiddleTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_TELT_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_TELT_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_TELT_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_TELT_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
 		
 		this.telLastNumTextField.setBounds(
-				ClientJoinSizesEnum.JOIN_TELT2_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_TELT2_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_TELT2_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_TELT2_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_TEXT_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
 	
 //		this.add(yearTextField); 
@@ -457,53 +460,53 @@ public class JoinFrame extends JFrame {
 	}
 // 이메일 핸드폰 콤보 박스 출력
 	public void setChoicePosition() {
-		String[] emailAddr = ClientJoinSizesEnum.JOIN_EMAIL_ADDRESS.getStrArr();
+		String[] emailAddr = JoinSizesEnum.JOIN_EMAIL_ADDRESS.getStrArr();
 		for(int i = 0, size = emailAddr.length; i < size; i++) {
 			this.emailAddrChoice.addItem(emailAddr[i]);
 		}
 		
-		String[] telFrontNum = ClientJoinSizesEnum.JOIN_TEL_FRONT_NUM.getStrArr();
+		String[] telFrontNum = JoinSizesEnum.JOIN_TEL_FRONT_NUM.getStrArr();
 		for(int i = 0, size = telFrontNum.length; i < size; i++) {
 			this.telFrontNumChoice.addItem(telFrontNum[i]);
 		}
 		
 		this.emailAddrChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_JOIN_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_JOIN_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_EMAILCHOICE_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_JOIN_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_JOIN_HEIGHT.getSize()
 		);
 		this.setComboBoxStr(this.emailAddrChoice);
 	
 		this.telFrontNumChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_NUMCHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_NUMCHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_NUMCHOICE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_NUMCHOICE_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		this.setComboBoxStr(this.telFrontNumChoice);
 		
 		this.yearChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_YEARCHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_YEARCHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_YEARCHOICE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_YEARCHOICE_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		this.setComboBoxInt(this.yearChoice);
 		
 		this.monthChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_MONTHCHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_MONTHCHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_MONTHCHOICE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_MONTHCHOICE_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		this.setComboBoxInt(this.monthChoice);
 		
 		this.dateChoice.setBounds(
-				ClientJoinSizesEnum.JOIN_DATECHOICE_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_DATECHOICE_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_DATECHOICE_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_DATECHOICE_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		this.setComboBoxInt(this.dateChoice);
 			
@@ -512,34 +515,34 @@ public class JoinFrame extends JFrame {
 	}
 	
 	public void setComboBoxInt(JComboBox<Integer> comboBox) {
-		comboBox.setBackground(ClientJoinSizesEnum.JOIN_EMAIL_COMBOBOX_BACKGROUND.getColor());
+		comboBox.setBackground(JoinSizesEnum.JOIN_EMAIL_COMBOBOX_BACKGROUND.getColor());
 		comboBox.setBorder(new EmptyBorder(0,0,0,0));
-		comboBox.setForeground(ClientJoinSizesEnum.CHOICEBACKGROUND.getColor());
-		comboBox.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		comboBox.setForeground(JoinSizesEnum.CHOICEBACKGROUND.getColor());
+		comboBox.setFont(JoinSizesEnum.LABELFONT_DEFAULT.getFont());
 	}
 	
 	public void setComboBoxStr(JComboBox<String> comboBox) {
-		comboBox.setBackground(ClientJoinSizesEnum.JOIN_EMAIL_COMBOBOX_BACKGROUND.getColor());
+		comboBox.setBackground(JoinSizesEnum.JOIN_EMAIL_COMBOBOX_BACKGROUND.getColor());
 		comboBox.setBorder(new EmptyBorder(0,0,0,0));
-		comboBox.setForeground(ClientJoinSizesEnum.CHOICEBACKGROUND.getColor());
-		comboBox.setFont(ClientJoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		comboBox.setForeground(JoinSizesEnum.CHOICEBACKGROUND.getColor());
+		comboBox.setFont(JoinSizesEnum.LABELFONT_DEFAULT.getFont());
 	}
 	
 	//여자 남자 라디오 뱍스
 	public void setButtonGroup() {
 		this.genderManRadio.setBounds(
-				ClientJoinSizesEnum.GENDER_MAN_POSITION_X.getSize(),
-				ClientJoinSizesEnum.GENDER_MAN_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.GENDER_MAN_POSITION_X.getSize(),
+				JoinSizesEnum.GENDER_MAN_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
 	
 		this.genderWomanRadio.setBounds(
-				ClientJoinSizesEnum.GENDER_WOMAN_POSITION_X.getSize(),
-				ClientJoinSizesEnum.GENDER_WOMAN_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.GENDER_WOMAN_POSITION_X.getSize(),
+				JoinSizesEnum.GENDER_WOMAN_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);
 		
 		
@@ -551,8 +554,8 @@ public class JoinFrame extends JFrame {
 		this.joinButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File("resources/signUp/signup.jpg")).getScaledInstance(
-					ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
-					ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize(),
+					JoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+					JoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING))
 		);
 	       
@@ -561,8 +564,8 @@ public class JoinFrame extends JFrame {
 		this.resetButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File("resources/signUp/reset.jpg")).getScaledInstance(
-					ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
-	    		    ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize(),
+					JoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+	    		    JoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize(),
 	    		    Image.SCALE_AREA_AVERAGING))
 		);
 
@@ -571,30 +574,30 @@ public class JoinFrame extends JFrame {
 		this.confirmButton.setIcon(
     		new ImageIcon(ImageIO.read(
     			new File("resources/signUp/confirm.jpg")).getScaledInstance(
-					ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-					ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize(),
+					JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+					JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING))
 	    );
 	    					
 	    
 		
 		this.resetButton.setBounds(
-				ClientJoinSizesEnum.JOIN_RESET_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_RESET_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
-				ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_RESET_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_RESET_POSITTION_Y.getSize(),
+				JoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+				JoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize()
 		);
 		this.joinButton.setBounds(
-				ClientJoinSizesEnum.JOIN_JOIN_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_JOIN_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
-				ClientJoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_JOIN_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_JOIN_POSITTION_Y.getSize(),
+				JoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
+				JoinSizesEnum.BUTTONIMAGE_HEIGHT.getSize()
 		);
 		this.confirmButton.setBounds(
-				ClientJoinSizesEnum.JOIN_CONFIRM_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_CONFIRM_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_CONFIRM_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_CONFIRM_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_EMAIL_HEIGHT.getSize()
 		);		
 	}
 	
@@ -602,7 +605,7 @@ public class JoinFrame extends JFrame {
 	public void setErrorPosition() {
 		// 에러 레이블
 		
-		Font font = ClientJoinSizesEnum.JOIN_CHECKLABEL_FONT_DEFAULT.getFont();
+		Font font = JoinSizesEnum.JOIN_CHECKLABEL_FONT_DEFAULT.getFont();
 		this.idErrorLabel	  = new JLabel();	
 		this.idErrorLabel.setFont(font);
 		this.pwdErrorLabel	  = new JLabel();
@@ -617,50 +620,50 @@ public class JoinFrame extends JFrame {
 		this.emailErrorLabel.setFont(font);
 		this.telErrorLabel	  = new JLabel();
 		this.telErrorLabel.setFont(font);
-		this.labelSetting(this.telErrorLabel, ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "join선택");
+		this.labelSetting(this.telErrorLabel, JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "join선택");
 		
 		
 		this.idErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_IDERROR_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_IDERROR_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_IDERROR_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_IDERROR_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
 		this.pwdErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_PWDERROR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_PWDERROR_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_PWDERROR_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_PWDERROR_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
 		this.rePwdErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_REPWDERROR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_REPWDERROR_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_REPWDERROR_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_REPWDERROR_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
 		this.nameErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_NAMEERROR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_NAMEERROR_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_NAMEERROR_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_NAMEERROR_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
 		this.genderErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_GENDERERROR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_GENDERERROR_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_GENDERERROR_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_GENDERERROR_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
 		this.emailErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_EMAILERROR_POSITTION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_EMAILERROR_POSITTION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
+				JoinSizesEnum.JOIN_EMAILERROR_POSITTION_X.getSize(),
+				JoinSizesEnum.JOIN_EMAILERROR_POSITTION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize()
 		);
 		this.telErrorLabel.setBounds(
-				ClientJoinSizesEnum.JOIN_TELERROR_POSITION_X.getSize(),
-				ClientJoinSizesEnum.JOIN_TELERROR_POSITION_Y.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
-				ClientJoinSizesEnum.SIZE_ERROR_HEIGHT.getSize());
+				JoinSizesEnum.JOIN_TELERROR_POSITION_X.getSize(),
+				JoinSizesEnum.JOIN_TELERROR_POSITION_Y.getSize(),
+				JoinSizesEnum.SIZE_ERROR_WIDTH.getSize(),
+				JoinSizesEnum.SIZE_ERROR_HEIGHT.getSize());
 
 		this.add(this.idErrorLabel);
 		this.add(this.pwdErrorLabel);
@@ -680,10 +683,10 @@ public class JoinFrame extends JFrame {
 	}
 	
 	public void addKeyAction(JComponent comp, String compName) {
-		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 		comp.setName(compName);
 		comp.setBorder(border);
-		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+		comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
 		comp.addKeyListener(this.joinAction);
 		this.add(comp);
 	}
@@ -701,20 +704,20 @@ public class JoinFrame extends JFrame {
 	
 	@SuppressWarnings("rawtypes")
 	public void addItemAction(JComboBox comp, String compName) {
-		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 		comp.setName(compName);
 		comp.setBorder(border);
-		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+		comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
 		comp.addItemListener(this.joinAction);
 		this.add(comp);
 	}
 	
 	@SuppressWarnings("rawtypes")
 	public void addItemAction(JRadioButton comp, String compName) {
-		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 		comp.setName(compName);
 		comp.setBorder(border);
-		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+		comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
 		comp.addItemListener(this.joinAction);
 		this.add(comp);
 	}
@@ -826,5 +829,19 @@ public class JoinFrame extends JFrame {
 	
 	public JRadioButton getGenderWomanRadio() {
 		return genderWomanRadio;
+	}
+	
+	
+	
+	
+	//테스트용
+	public void test() {
+		this.idTextField.setText("sirupe");
+		this.getPwdTextField().setText("xo1004tks!");
+		this.getRePwdField().setText("xo1004tks!");
+		this.getNameTextField().setText("지은정");
+		this.getEmailIDTextField().setText("sirupe");
+		this.getEmailAddrTextField().setText("nate.com");
+		this.genderWomanRadio.setSelected(true);
 	}
 }

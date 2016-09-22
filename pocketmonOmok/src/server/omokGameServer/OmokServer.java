@@ -1,6 +1,7 @@
 package server.omokGameServer;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -13,16 +14,21 @@ import datasDAO.LoginDAO;
 import datasDAO.UserGamedataInfoDAO;
 import datasDAO.UserStoreInfoDAO;
 import datasDAO.UserStoreSkinInfoDAO;
-import datasDTO.UserPersonalInfoDTO;
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.GameRoomInfoVO;
+import datasDTO.RoomAndUserListDTO;
+import datasDTO.ServerMessageDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 
-public class OmokServer {
+public class OmokServer implements Serializable {
 	private ServerSocket serverSocket;
 	private Socket socket;
-	private Map<String, OmokPersonalServer> psersonalServerMap = new HashMap<String, OmokPersonalServer>();
+	private Map<String, OmokPersonalServer> loginUsersMap;
+	private List<GameRoomInfoVO> gameRoomList;
 	
 	private JoinDAO joinDAO;
 	private LoginDAO loginDAO;
@@ -37,6 +43,9 @@ public class OmokServer {
 		this.gamedataDAO  = new UserGamedataInfoDAO();
 		this.storeDAO	  = new UserStoreInfoDAO();
 		this.skinDAO	  = new UserStoreSkinInfoDAO();
+		
+		this.loginUsersMap = new HashMap<String, OmokPersonalServer>();
+		this.gameRoomList  = new ArrayList<GameRoomInfoVO>();
 	}
 	
 	public void gameServerOn() throws IOException {
@@ -52,12 +61,20 @@ public class OmokServer {
 	}
 	
 	//TODO 여기에 서버의 분기업무 추가
-	
-	
 	public void login(AbstractEnumsDTO data, OmokPersonalServer personalServer) {
 		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) data;
 		UserPersonalInfoDTO resultDTO = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
 		this.sendObject(resultDTO, personalServer);
+		
+		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
+			this.loginUsersMap.put(resultDTO.getUserID(), personalServer);
+			RoomAndUserListDTO roomAndUserListDTO = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
+			roomAndUserListDTO.setLoginUsersMap(this.loginUsersMap);
+			roomAndUserListDTO.setGameRoomList(this.gameRoomList);
+//			roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(resultDTO));
+			this.sendObject(roomAndUserListDTO, personalServer);
+			System.out.println("접속자 리스트에 추가된 인원수 : " + loginUsersMap.size());
+		}
 	}
 	
 	public void waitingRoom() {
@@ -65,22 +82,34 @@ public class OmokServer {
 	}
 	
 	
+	//회원가입 프레임에서 넘어온 데이터
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
+		// 아이디 중복체크인 경우
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
 			UserPersonalInfoDTO resultDTO = this.joinDAO.checkOverlapID(personalDTO);
 			this.sendObject(resultDTO, personalServer);
+		
+		// 회원가입인 경우
 		} else {
+			// 아이디가 중복되지 않는다면
+			System.out.println(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null);
 			if(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null) {
+				ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_JOIN);
+				serverMessage.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
+				// DB에 데이터 업데이트 
+				int result = this.joinDAO.userJoin(personalDTO);
 				
-			}
-			
-			
-			int result = this.joinDAO.userJoin(personalDTO);
-			if(result == 1) {
-				
-			} else {
-				
+				// 성공적으로 업데이트 된 경우
+				if(result == 1) {
+					serverMessage.setServerAction(ServerActionEnum.JOIN_SUCCESS);
+					this.sendObject(serverMessage, personalServer);
+
+					// 업데이트 실패한 경우
+				} else {
+					serverMessage.setServerAction(ServerActionEnum.JOIN_FAIL);
+					this.sendObject(serverMessage, personalServer);
+				}
 			}
 		}
 	}
@@ -131,6 +160,6 @@ public class OmokServer {
 	}
 	
 	public Map<String, OmokPersonalServer> getPsersonalServerMap() {
-		return psersonalServerMap;
+		return loginUsersMap;
 	}
 }

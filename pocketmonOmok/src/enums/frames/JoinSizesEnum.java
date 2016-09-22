@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.swing.border.EmptyBorder;
 
-public enum ClientJoinSizesEnum {
+public enum JoinSizesEnum {
 	
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
@@ -243,7 +243,24 @@ public enum ClientJoinSizesEnum {
 	JOIN_MESSAGE(joinMessageMap()),
 	
 	//email Combo 설정값 ------------------------------------------------
-	JOIN_EMAIL_COMBOBOX_BACKGROUND(Color.white);
+	JOIN_EMAIL_COMBOBOX_BACKGROUND(Color.white),
+	
+	
+	//JoinSuccessFrame 설정값------------------------------------------------------------------------------------------------
+	JOIN_SUCCESS_FRAME_WIDTH((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width * 0.2)),
+	JOIN_SUCCESS_FRAME_HEIGHT((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height * 0.2)),
+	JOIN_SUCCESS_FRAME_X((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 2) - (JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_FRAME_Y((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height / 2) - (JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2)),
+	
+	JOIN_SUCCESS_LABEL_WIDTH((int)(JOIN_SUCCESS_FRAME_WIDTH.getSize() * 0.34)),
+	JOIN_SUCCESS_LABEL_HEIGHT((int)(JOIN_SUCCESS_FRAME_HEIGHT.getSize() * 0.5)),
+	JOIN_SUCCESS_LABEL_X((JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2) - (JOIN_SUCCESS_LABEL_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_LABEL_Y((JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2) - (int)(JOIN_SUCCESS_LABEL_HEIGHT.getSize() / 1.3)),
+	
+	JOIN_SUCCESS_BUTTON_WIDTH((int)(JOIN_SUCCESS_FRAME_WIDTH.getSize() * 0.15)),
+	JOIN_SUCCESS_BUTTON_HEIGHT((int)(JOIN_SUCCESS_FRAME_HEIGHT.getSize() * 0.15)),
+	JOIN_SUCCESS_BUTTON_X((JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2) - (JOIN_SUCCESS_BUTTON_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_BUTTON_Y((JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2) - (int)(JOIN_SUCCESS_BUTTON_HEIGHT.getSize() / 2));
 	
 	private Dimension dimension;
 	private int size;
@@ -253,29 +270,29 @@ public enum ClientJoinSizesEnum {
 	private String[] strArr;
 	private Map<String, String> messageMap;
 	
-	private ClientJoinSizesEnum(Color color) {
+	private JoinSizesEnum(Color color) {
 		this.color = color;
 	}
-	private ClientJoinSizesEnum(Font font) {
+	private JoinSizesEnum(Font font) {
 		this.font = font;
 	}
-	private ClientJoinSizesEnum(EmptyBorder border) {
+	private JoinSizesEnum(EmptyBorder border) {
 		this.border = border;
 	}
 	
-	private ClientJoinSizesEnum(int size) {
+	private JoinSizesEnum(int size) {
 		this.size = size;
 	}
 	
-	private ClientJoinSizesEnum(Dimension dimension) {
+	private JoinSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
-	private ClientJoinSizesEnum(String[] strArr) {
+	private JoinSizesEnum(String[] strArr) {
 		this.strArr = strArr;
 	}
 	
-	private ClientJoinSizesEnum(Map<String, String> map) {
+	private JoinSizesEnum(Map<String, String> map) {
 		this.messageMap = map;
 	}
 

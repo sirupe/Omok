@@ -1,8 +1,10 @@
 package datasDTO;
 
+import java.io.Serializable;
+
 import enums.etc.UserPositionEnum;
 
-public class UserMessageDTO extends AbstractEnumsDTO {
+public class UserMessageDTO extends AbstractEnumsDTO implements Serializable {
 	private String userID;
 	private String message;
 	private String targetID;
