@@ -69,6 +69,7 @@ public class searchIdFrame extends JFrame {
 		
 	      
 	    //배경화면	
+		
 		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
 				searchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
 				searchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
@@ -114,7 +115,6 @@ public class searchIdFrame extends JFrame {
 	    public void setButtonPosition() throws IOException {
 	    	
 	    	// 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
-	    	
 	    	this.searchConfirmButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);
 	    	
 

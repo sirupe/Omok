@@ -18,7 +18,6 @@ public class GameStoreFrame extends JFrame{
 	private Image backGround;
 	
 	public GameStoreFrame() throws IOException {
-		
 
 		this.gameStorePanel = new GameStorePanel() {
 			@Override
@@ -37,10 +36,6 @@ public class GameStoreFrame extends JFrame{
 				}
 			}
 		};
-		
-		
-		
-		
 		gameStorePanel.setOpaque(false);
 
 		this.setBounds(
