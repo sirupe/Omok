@@ -114,7 +114,7 @@ public class DBConnectionPool {
 				connection = connObject.connection;
 				connObject.inUse = true;
 				
-				this.trace("ConnectionPoolManager: Using existing DB connection #" + (i + 1));
+//				this.trace("ConnectionPoolManager: Using existing DB connection #" + (i + 1));
 				break;
 			}
 		}

@@ -1,4 +1,4 @@
-package server.omokGameServer;
+package omokGame.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -68,28 +68,22 @@ public class OmokServer {
 		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) data;
 		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
 		UserPersonalInfoDTO resultDTO = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
-		// 성공여부 클라이언트에게 전송
-		personalServer.getServerOutputStream().writeObject(resultDTO);
 		
-		
-		// 만약 클라이언트가 로그인 성공했다면
+		// 만약 클라이언트의 정보가 DB에 있다면 
 		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
-			// 서버가 가지고 있을 유저목록에 추가
-			this.loginUsersMap.put(resultDTO.getUserID(), personalServer);
-			// 사용자에게 보낼 현재 접속자 목록에 추가
-			this.userIDList.add(gamedataDAO.getUserGrade(resultDTO));
-			
-			// 접속자리스트 와 게임방 리스트와 현재 접속자의 게임정보를 담아 클라이언트로 발송
-			RoomAndUserListDTO roomAndUserListDTO = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
-			roomAndUserListDTO.setUserList(this.userIDList);
-
-			roomAndUserListDTO.setGameRoomList(this.gameRoomList);
-			roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(resultDTO));
-			System.out.println("보내기 전 리스트 크기는 : " + roomAndUserListDTO.getUserList().size());
-			
-			roomAndUserListDTO.getUserGameData().setServerAction(ServerActionEnum.LOGIN_NEWUSER);
-			for(String id : this.loginUsersMap.keySet()) {
-				this.loginUsersMap.get(id).getServerOutputStream().writeObject(roomAndUserListDTO.getUserGameData());
+			//클라이언트의 ID가 처음 인입된 것이라면
+			if(this.loginUsersMap.get(resultDTO.getUserID()) == null) {
+				// 서버가 가지고 있을 유저목록에 추가
+				this.loginUsersMap.put(resultDTO.getUserID(), personalServer);
+				// 사용자에게 보낼 현재 접속자 목록에 추가
+				this.userIDList.add(gamedataDAO.getUserGrade(resultDTO));
+				// 유저에게 로그인 성공정보 전송
+				personalServer.getServerOutputStream().writeObject(resultDTO);
+			//클라이언트의 ID가 이미 접속자리스트에 존재한다면
+			} else {
+				resultDTO.setServerAction(ServerActionEnum.LOGIN_FAIL_OVERLAP_ACCEPT);
+				System.out.println(resultDTO.getServerAction());
+				personalServer.getServerOutputStream().writeObject(resultDTO);
 			}
 
 				
@@ -98,8 +92,31 @@ public class OmokServer {
 		}
 	}
 	
-	public void waitingRoom() {
-		System.out.println("대기실");
+	public void waitingRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) throws IOException {
+		switch(listDTO.getUserAction()) {
+		case USER_LOGIN_SUCCESS :
+			// 접속자리스트 와 게임방 리스트와 현재 접속자의 게임정보를 담아 클라이언트로 발송
+			RoomAndUserListDTO roomAndUserListDTO = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
+			roomAndUserListDTO.setServerAction(ServerActionEnum.WAITING_ROOM_ENTER);
+			roomAndUserListDTO.setUserList(this.userIDList);
+			
+			roomAndUserListDTO.setGameRoomList(this.gameRoomList);
+			roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(((UserPersonalInfoDTO)listDTO).getUserID()));
+			System.out.println(this.gamedataDAO.userGameData(((UserPersonalInfoDTO)listDTO).getUserID()));
+			personalServer.getServerOutputStream().writeObject(roomAndUserListDTO);
+			
+			UserGamedataInfoDTO newUserDTO = roomAndUserListDTO.getUserGameData();
+			newUserDTO.setPosition(UserPositionEnum.POSITION_WAITING_ROOM);
+			newUserDTO.setServerAction(ServerActionEnum.LOGIN_NEW_USER);
+			for(String id : this.loginUsersMap.keySet()) {
+				if(id != roomAndUserListDTO.getUserGameData().getUserID()) {
+					this.loginUsersMap.get(id).getServerOutputStream().writeObject(newUserDTO);
+				}
+			}
+			break;
+		default :
+			break;
+		}
 	}
 	
 	
@@ -119,12 +136,14 @@ public class OmokServer {
 				ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_JOIN);
 				serverMessage.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
 				// DB에 데이터 업데이트 
-				int result = this.joinDAO.userJoin(personalDTO);
-				
+				int result = this.joinDAO.creatUserPersonalInfo(personalDTO);
+				result += this.joinDAO.createUserGameDataInfo(personalDTO);
+				result += this.joinDAO.createUserStoreInfo(personalDTO);
+				result += this.joinDAO.createUserSkinInfo(personalDTO);
 				// 성공적으로 업데이트 된 경우
-				if(result == 1) {
+				if(result == 4) {
 					serverMessage.setServerAction(ServerActionEnum.JOIN_SUCCESS);
-
+//TODO
 					// 업데이트 실패한 경우
 				} else {
 					serverMessage.setServerAction(ServerActionEnum.JOIN_FAIL);

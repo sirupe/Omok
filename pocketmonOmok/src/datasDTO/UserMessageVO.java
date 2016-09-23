@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import enums.etc.UserPositionEnum;
 
-public class UserMessageDTO extends AbstractEnumsDTO {
+public class UserMessageVO extends AbstractEnumsDTO {
 	private String userID;
 	private String message;
 	private String targetID;
 	
-	public UserMessageDTO(UserPositionEnum position) {
+	public UserMessageVO(UserPositionEnum position) {
 		super(position);
 	}
 

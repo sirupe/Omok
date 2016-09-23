@@ -1,4 +1,4 @@
-package server.client;
+package omokGame.client;
 
 import java.io.ObjectOutputStream;
 import java.io.Serializable;

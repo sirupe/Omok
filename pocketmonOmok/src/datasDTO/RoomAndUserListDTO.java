@@ -24,7 +24,6 @@ public class RoomAndUserListDTO extends AbstractEnumsDTO {
 
 	public void setUserList(List<UserGamedataInfoDTO> userList) {
 		this.userList = userList;
-		System.out.println("DTO에 저장된 크기는 : " + this.userList.size());
 	}
 	
 	public void setGameRoomList(List<GameRoomInfoVO> gameRoomList) {

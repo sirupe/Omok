@@ -1,4 +1,4 @@
-package server.client;
+package omokGame.client;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
 import frames.joinFrames.JoinSuccessFrame;
@@ -35,16 +36,32 @@ public class ClientAccept {
 
 	}
 
-	public void loginSuccessCheck(AbstractEnumsDTO data, BasicFrame basicFrame) {
+	public void loginSuccessCheck(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)data;
-		if(userPersonalDTO.getUserID() == null) {
+		System.out.println(userPersonalDTO.getServerAction());
+		
+		// 서버의 메세지
+		switch(userPersonalDTO.getServerAction()) {
+		// - 로그인 중 유저가 입력을 잘못했을 시
+		case LOGIN_FAIL_INPUT_ERROR :
 			this.basicFrame.getLoginPanel().loginFailLabelReset();
 			this.basicFrame.getLoginPanel().loginFail("아이디, 패스워드 오류입니다.");
-		} else {
-			
-			this.basicFrame.inWaitingRoom();
+			break;
+		// - 로그인 중 이미 접속한 유저의 정보를 입력했을 시
+		case LOGIN_FAIL_OVERLAP_ACCEPT :
+			this.basicFrame.getLoginPanel().loginFailLabelReset();
+			this.basicFrame.getLoginPanel().loginFail("이미 접속중인 아이디입니다.");
+			break;
+		// 로그인에 성공했을 시
+		case LOGIN_SUCCESS :
+			// 대기실로 이동하겠다는 정보를 담아 서버에 전송 (실제로 이동하진 않는다.)
+			userPersonalDTO.setPosition(UserPositionEnum.POSITION_WAITING_ROOM);
+			userPersonalDTO.setUserAction(UserActionEnum.USER_LOGIN_SUCCESS);
+			this.basicFrame.getClientOS().writeObject(userPersonalDTO);
+			break;
+		default :
+			break;
 		}
-		
 	}
 	
 	// 회원가입 화면에 대한 서버의 응답
@@ -55,10 +72,12 @@ public class ClientAccept {
 			System.out.println("아이디중복체크");
 			UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
 			String checkMsg = null;
-			Color color = null;
+			Color color 	= null;
+			
 			if(userPersonalInfoDTO.getUserID() == null) {
 				checkMsg = "join성공";
 				color = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+			
 			} else {
 				checkMsg = "joinID중복";
 				color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
@@ -75,6 +94,7 @@ public class ClientAccept {
 				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입이 완료되었습니다.");
 				this.basicFrame.getJoinFrame().setVisible(false);
 				this.basicFrame.getJoinFrame().dispose();
+			
 			} else {
 				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "오류가 발생하였습니다 다시 시도해주세요.");
 				this.basicFrame.getJoinFrame().setVisible(false);
@@ -85,10 +105,13 @@ public class ClientAccept {
 	}
 	//TODO
 	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
-		if(data.getServerAction() == ServerActionEnum.LOGIN_NEWUSER) {
+		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
+			System.out.println(data.getServerAction() + "if");
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
 			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
-		} else {
+		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
+			System.out.println(data.getServerAction() + "else");
+			this.basicFrame.inWaitingRoom();
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
 		}

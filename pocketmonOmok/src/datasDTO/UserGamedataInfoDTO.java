@@ -75,5 +75,13 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 		this.userImage = userImage;
 	}
 
+	@Override
+	public String toString() {
+		return "UserGamedataInfoDTO [userID=" + userID + ", userGrade=" + userGrade + ", userGameCount=" + userGameCount
+				+ ", userWinCount=" + userWinCount + ", userScore=" + userScore + ", userWinRate=" + userWinRate
+				+ ", userImage=" + userImage + "]";
+	}
+	
+	
 	
 }

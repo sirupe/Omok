@@ -1,4 +1,4 @@
-package server.client;
+package omokGame.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -25,12 +25,12 @@ public class ClientReciever extends Thread {
 			while(isAccept) {
 				Object object = this.clientIS.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
+				System.out.println("1 : " + userPosition.getUserAction());
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
 					break;
 				case POSITION_WAITING_ROOM :
-					System.out.println("waitingroom 으로 옵니다.");
 					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame);
 					break;
 				case POSITION_JOIN :

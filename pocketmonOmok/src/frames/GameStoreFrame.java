@@ -29,7 +29,6 @@ public class GameStoreFrame extends JFrame  {
 		try {
 			new GameStoreFrame();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,4 +1,4 @@
-package server.omokGameServer;
+package omokGame.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -33,7 +33,7 @@ public class OmokPersonalServer extends Thread {
 					this.omokServer.login(userPosition, this);
 					break;
 				case POSITION_WAITING_ROOM :
-					this.omokServer.waitingRoom();
+					this.omokServer.waitingRoom(userPosition, this);
 					break;
 				case POSITION_JOIN :
 					this.omokServer.join(userPosition, this);

@@ -1,6 +1,7 @@
-/frames/
-/server/
-/enums/
 /datasDTO/
+/server/
 /datasDAO/
+/enums/
+/frames/
 /start/
+/omokGame/
