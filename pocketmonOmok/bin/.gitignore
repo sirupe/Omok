@@ -1,2 +1,7 @@
 /frames/
+/server/
 /enums/
+/datasDTO/
+/datasDAO/
+/start/
+/actions/

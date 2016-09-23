@@ -1,5 +1,7 @@
 package datasDTO;
 
+import java.io.Serializable;
+
 import enums.etc.UserPositionEnum;
 
 public class UserMessageDTO extends AbstractEnumsDTO {

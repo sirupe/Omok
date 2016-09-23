@@ -1,5 +1,7 @@
 package datasDAO;
 
-public class UserStoreSkinInfoDAO {
+import java.io.Serializable;
+
+public class UserStoreSkinInfoDAO implements Serializable {
 	
 }

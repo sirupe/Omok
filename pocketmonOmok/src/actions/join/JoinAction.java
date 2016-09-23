@@ -13,9 +13,9 @@ import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
-import enums.frames.ClientJoinSizesEnum;
-import frames.JoinFrame;
+import enums.frames.JoinSizesEnum;
 import frames.LoginPanel;
+import frames.joinFrames.JoinFrame;
 import utility.RegexCheck;
 import utility.SendEmail;
 
@@ -97,7 +97,6 @@ public class JoinAction extends Adapters {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource().toString().contains("genderManRadio")) {
-			System.out.println("클릭?!");
 			this.gender = 1;
 			this.joinFrame.getGenderErrorLabel().setVisible(false);
 		} else if(e.getSource().toString().contains("genderWomanRadio")) {
@@ -158,7 +157,7 @@ public class JoinAction extends Adapters {
 	public void idSuitabilityCheck() {
 		this.id = this.joinFrame.getIdTextField().getText();
 		String checkMsg = null;
-		Color color = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+		Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		
 		if(id.length() < 3 || id.length() > 15) {
 			checkMsg = "joinID길이";
@@ -168,7 +167,7 @@ public class JoinAction extends Adapters {
 		
 		} else {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-			personalDTO.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
+			personalDTO.setUserAction(UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK);
 			personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
 			try {
 				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
@@ -187,7 +186,7 @@ public class JoinAction extends Adapters {
 		char[] pwChar = this.joinFrame.getPwdTextField().getPassword();
 		this.pw = new String(pwChar, 0, pwChar.length);
 		String checkMsg = null;
-		Color color 	= ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+		Color color 	= JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		
 		if(!this.pw.equals(this.rePw)) {
 			this.joinFrame.labelSetting(this.joinFrame.getRePwdErrorLabel(), color, "joinPW불일치");
@@ -204,7 +203,7 @@ public class JoinAction extends Adapters {
 			
 		} else {
 			checkMsg = "join성공";
-			color 	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+			color 	 = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 		}
 		this.joinFrame.labelSetting(this.joinFrame.getPwdErrorLabel(), color, checkMsg);
 		
@@ -219,10 +218,10 @@ public class JoinAction extends Adapters {
 		
 		if(this.rePw.equals(this.pw)) {
 			checkMsg = "join성공";
-			color	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+			color	 = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 		} else {
 			checkMsg = "joinPW불일치";
-			color	 = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+			color	 = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		}
 		this.joinFrame.labelSetting(this.joinFrame.getRePwdErrorLabel(), color, checkMsg);
 	}
@@ -235,13 +234,13 @@ public class JoinAction extends Adapters {
 		
 		if(this.name.length() < 2) {
 			checkMsg = "joinName길이";
-			color 	 = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+			color 	 = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		} else if(!RegexCheck.nameRegecCheck(this.name)) {
 			checkMsg = "joinName정합성";
-			color	 = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+			color	 = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		} else {
 			checkMsg = "join성공";
-			color	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+			color	 = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 		}
 		this.joinFrame.labelSetting(this.joinFrame.getNameErrorLabel(), color, checkMsg);
 	}
@@ -255,13 +254,13 @@ public class JoinAction extends Adapters {
 		
 		if(!RegexCheck.emailDomainRegexCheck(this.emailAddr)) {
 			checkMsg = "joinMail정합성";
-			color 	 = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+			color 	 = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		} else if(this.joinFrame.getEmailIDTextField().getText().length() == 0) {
 			checkMsg = "joinMail아이디미입력";
-			color 	 = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+			color 	 = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		} else {
 			checkMsg = "join성공";
-			color 	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+			color 	 = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 			this.totalEmail = new StringBuffer();
 			this.totalEmail.append(this.emailID);
 			this.totalEmail.append("@");
@@ -278,7 +277,7 @@ public class JoinAction extends Adapters {
 	public boolean emailIDSuitabilityCheck() {
 		boolean result = true;
 		if(this.joinFrame.getEmailAddrTextField().getText().length() == 0) {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor(), "joinMail도메인미입력");
+			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "joinMail도메인미입력");
 			result = false;
 		}
 		
@@ -299,10 +298,10 @@ public class JoinAction extends Adapters {
 
 	//인증 버튼 눌렀을 시
 	public void confirmAction() {
-		System.out.println("인증번호 클릭!!");
 		if(this.emailAddrSuitabilityCheck() && this.emailIDSuitabilityCheck()) {
 			//인증번호 생성
 			this.confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
+			System.out.println(this.confirmNumber);
 			//이메일발송
 			new SendEmail(this.confirmNumber, this.totalEmail.toString());
 			//시간라벨보여주기
@@ -314,7 +313,7 @@ public class JoinAction extends Adapters {
 				@Override
 				public void run() {
 					StringBuffer time = new StringBuffer();
-					Color color = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+					Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 					
 					for(int i = 3; i >= 0; --i) {
 						for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
@@ -346,12 +345,12 @@ public class JoinAction extends Adapters {
 	public void emailConfirm() {
 		String inputNum = this.joinFrame.getEmailConfTextField().getText();
 		if(this.confirmNumber.equals(inputNum)) {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
+			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
 			this.joinFrame.getEmailTimeLabel().setVisible(false);
 			this.joinFrame.getEmailConfTextField().setEditable(false);
 			this.joinFrame.getConfirmButton().setEnabled(false);
 		} else {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
+			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
 		}
 	}
 	
@@ -378,7 +377,7 @@ public class JoinAction extends Adapters {
 	
 	//회원가입 버튼 눌렀을 시
 	public void joinAction() {
-		Color color = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+		Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 		String msg = "join필수";
 		
 		int errCount = 0;
@@ -441,8 +440,6 @@ public class JoinAction extends Adapters {
 			errCount++;
 		}
 		
-		System.out.println(errCount);
-		
 		if(errCount == 0) {
 			StringBuffer totalBirth = new StringBuffer();
 			totalBirth.append(this.birthYear);
@@ -475,17 +472,6 @@ public class JoinAction extends Adapters {
 				e.printStackTrace();
 			}
 			
-			System.out.println(this.toString());
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return "JoinAction [id=" + id + ", pw=" + pw + ", rePw=" + rePw + ", name=" + name + ", gender=" + gender
-				+ ", birthYear=" + birthYear + ", birthMonth=" + birthMonth + ", birthDate=" + birthDate + ", emailID="
-				+ emailID + ", emailAddr=" + emailAddr + ", telFrontNum=" + telFrontNum + ", telMidNum=" + telMidNum
-				+ ", telLastNum=" + telLastNum + "]";
-	}
-	
-	
 }

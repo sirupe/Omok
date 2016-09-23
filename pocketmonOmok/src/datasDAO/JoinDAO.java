@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 
-public class JoinDAO implements Serializable{
+public class JoinDAO implements Serializable {
 	// ID 중복체크. 리턴이 0이면 사용 가능, 1이면 이미 존재하는 ID.
 	public UserPersonalInfoDTO checkOverlapID(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
@@ -35,7 +36,6 @@ public class JoinDAO implements Serializable{
 			
 			while(resultSet.next()) {
 				resultDTO.setUserID(resultSet.getString("USER_ID"));
-				System.out.println(resultSet.getString("USER_ID"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,9 +54,6 @@ public class JoinDAO implements Serializable{
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		
 		int result = 0;
-		UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-		resultDTO.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
-		
 		try {
 			connection = dbPool.getConnection();
 			StringBuffer sql = new StringBuffer();
@@ -68,7 +65,7 @@ public class JoinDAO implements Serializable{
 			sql.append("USER_BIRTH, ");
 			sql.append("USER_EMAIL, ");
 			sql.append("USER_JOINDATE ");
-			if(resultDTO.getUserPhoneNumber() == null) {
+			if(personalDTO.getUserPhoneNumber() == null) {
 				sql.append(") VALUES ( ");
 				sql.append("?, ?, ?, ?, ?, ?, sysdate )");				
 				ps = connection.prepareStatement(sql.toString());
@@ -92,7 +89,6 @@ public class JoinDAO implements Serializable{
 				ps.setString(6, personalDTO.getUserEmail());
 				ps.setString(7, personalDTO.getUserPhoneNumber());
 			}
-			System.out.println(sql);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,22 +97,5 @@ public class JoinDAO implements Serializable{
 		}
 		
 		return result;
-	}
-	
-	
-	
-	
-	
-	
-	public static void main(String[] args) {
-		UserPersonalInfoDTO udto = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-		udto.setUserBirth("19890726");
-		udto.setUserEmail("sirupe@nate.com");
-		udto.setUserGender(1);
-		udto.setUserID("sirupe11");
-		udto.setUserName("지은정");
-		udto.setUserPasswd("7133");
-		udto.setUserPhoneNumber("010-7123-7123");
-		System.out.println(new JoinDAO().userJoin(udto));
 	}
 }

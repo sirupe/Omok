@@ -7,15 +7,15 @@ import java.net.Socket;
 
 import datasDTO.AbstractEnumsDTO;
 
-public class OmokPersonalServer extends Thread{
+public class OmokPersonalServer extends Thread {
 	private OmokServer omokServer;
 	private Socket personalSocket;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
 	
 	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
-		this.omokServer = omokServer;
-		this.personalSocket = socket;
+		this.omokServer 		= omokServer;
+		this.personalSocket 	= socket;
 		this.serverInputStream  = new ObjectInputStream(this.personalSocket.getInputStream());
 		this.serverOutputStream = new ObjectOutputStream(this.personalSocket.getOutputStream());
 	}
@@ -36,7 +36,6 @@ public class OmokPersonalServer extends Thread{
 					this.omokServer.waitingRoom();
 					break;
 				case POSITION_JOIN :
-					System.out.println("회원가입니다 !!!!");
 					this.omokServer.join(userPosition, this);
 					break;
 				case POSITION_FIND_ID :

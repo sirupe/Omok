@@ -4,21 +4,22 @@ import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import datasDTO.UserPersonalInfoDTO;
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.RoomAndUserListDTO;
+import datasDTO.UserGamedataInfoDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
-import enums.frames.ClientJoinSizesEnum;
+import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
-import frames.LoginPanel;
+import frames.joinFrames.JoinSuccessFrame;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
-@SuppressWarnings("serial")
-public class ClientAccept implements Serializable {
+public class ClientAccept {
 	private Socket clientSocket;
 	private ObjectInputStream clientIS;
 	private ObjectOutputStream clientOS;
@@ -46,25 +47,50 @@ public class ClientAccept implements Serializable {
 		
 	}
 	
+	// 회원가입 화면에 대한 서버의 응답
 	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) {
-		UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
-		
-		if(userPersonalInfoDTO.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
+		// 아이디 중복체크
+		System.out.println(data.getUserAction());
+		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
+			System.out.println("아이디중복체크");
+			UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
 			String checkMsg = null;
 			Color color = null;
 			if(userPersonalInfoDTO.getUserID() == null) {
 				checkMsg = "join성공";
-				color = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
+				color = JoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 			} else {
 				checkMsg = "joinID중복";
-				color = ClientJoinSizesEnum.LABELCOLOR_ERROR.getColor();
+				color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 			}
 			
 			this.basicFrame.getJoinFrame().labelSetting(
 					this.basicFrame.getJoinFrame().getIdErrorLabel(), 
 					color, checkMsg);
-		} else if(userPersonalInfoDTO.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
 			
+		// 회원가입
+		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
+			System.out.println("회원가입");
+			if(data.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
+				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입이 완료되었습니다.");
+				this.basicFrame.getJoinFrame().setVisible(false);
+				this.basicFrame.getJoinFrame().dispose();
+			} else {
+				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "오류가 발생하였습니다 다시 시도해주세요.");
+				this.basicFrame.getJoinFrame().setVisible(false);
+				this.basicFrame.getJoinFrame().dispose();
+				
+			}
+		}
+	}
+	//TODO
+	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+		if(data.getServerAction() == ServerActionEnum.LOGIN_NEWUSER) {
+			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
+			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
+		} else {
+			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
+			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
 		}
 	}
 	

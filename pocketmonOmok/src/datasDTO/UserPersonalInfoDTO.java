@@ -6,7 +6,7 @@ import java.sql.Date;
 import enums.etc.UserPositionEnum;
 
 // 유저 개인정보 DTO (Data Transfer Object)
-public class UserPersonalInfoDTO extends AbstractEnumsDTO implements Serializable{
+public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 	private String userID;			// 유저 아이디
 	private String userPasswd;		// 유저 비밀번호
 	private String userName;		// 유저 이름

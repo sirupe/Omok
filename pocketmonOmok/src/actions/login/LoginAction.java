@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
-import frames.JoinFrame;
 import frames.LoginPanel;
 
 public class LoginAction extends MouseAdapter implements ActionListener{

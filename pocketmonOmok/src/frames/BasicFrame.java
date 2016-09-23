@@ -19,6 +19,8 @@ import datasDTO.AbstractEnumsDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
+import frames.joinFrames.JoinFrame;
+import frames.waitingRoomPanels.WaitingRoomPanel;
 import server.client.ClientAccept;
 
 @SuppressWarnings("serial")
@@ -58,23 +60,23 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.loginPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 
-		this.waitingRoomPanel = new WaitingRoomPanel(){
+		this.waitingRoomPanel = new WaitingRoomPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			try {
-				g.drawImage(ImageIO.read(
-					new File("resources/login/blackhole.png")), 
-					0, 
-					0,
-					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
-					this);
-			} catch (IOException e) {
-				e.printStackTrace();
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/login/blackhole.png")), 
+						0, 
+						0,
+						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-			
-		}};
+		};
 	
 		
 		
@@ -82,8 +84,8 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.newGameRoomPanel();
 		this.setLayout(this.cardLayout);
 
-	//	this.add("loginPanel", this.loginPanel);
-	//	this.add("waitingRoomPanel", this.waitingRoomPanel);
+		this.add("loginPanel", this.loginPanel);
+		this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.add("gameRoomPanel", this.gameRoomPanel);
 
 		this.setTitle("Login");
@@ -150,14 +152,15 @@ public class BasicFrame extends JFrame implements Serializable{
 		return joinFrame;
 	}
 	
-	public static void main(String[] args) {
-		try {
-			new BasicFrame(null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public WaitingRoomPanel getWaitingRoomPanel() {
+		return waitingRoomPanel;
 	}
-
-	
+//	public static void main(String[] args) {
+//		try {
+//			new BasicFrame(null);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

@@ -2,6 +2,7 @@ package server.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 
 import datasDTO.AbstractEnumsDTO;
 import frames.BasicFrame;
@@ -26,10 +27,11 @@ public class ClientReciever extends Thread {
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
-					System.out.println();
 					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
 					break;
-				case POSITION_WAITING_ROOM :      
+				case POSITION_WAITING_ROOM :
+					System.out.println("waitingroom 으로 옵니다.");
+					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame);
 					break;
 				case POSITION_JOIN :
 					this.clientAccept.joinFrameInputAction(userPosition, this.basicFrame);
