@@ -45,7 +45,7 @@ public class LoginDAO implements Serializable {
 			}
 			
 			userPersonalInfo.setServerAction(userPersonalInfo.getUserID() == null ?
-							ServerActionEnum.LOGIN_FAIL : ServerActionEnum.LOGIN_SUCCESS);
+							ServerActionEnum.LOGIN_FAIL_INPUT_ERROR : ServerActionEnum.LOGIN_SUCCESS);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -21,7 +21,7 @@ import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
 import frames.joinFrames.JoinFrame;
 import frames.waitingRoomPanels.WaitingRoomPanel;
-import server.client.ClientAccept;
+import omokGame.client.ClientAccept;
 
 @SuppressWarnings("serial")
 public class BasicFrame extends JFrame implements Serializable{

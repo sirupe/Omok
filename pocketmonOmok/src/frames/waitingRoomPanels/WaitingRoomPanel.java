@@ -5,18 +5,17 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,12 +28,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-
 import datasDTO.UserGamedataInfoDTO;
 import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomSizesEnum;
 
 public class WaitingRoomPanel extends JPanel {	
+	private static int roomNumber;
 	private JPanel background;
 	
 	private JScrollPane waitingRoomListScroll;
@@ -67,7 +66,7 @@ public class WaitingRoomPanel extends JPanel {
 	private JButton correct;
 	
 	private Map<String,ImageIcon> imageMap;
-	private String[] players;
+	private Vector<String> players;
 	public WaitingRoomPanel() throws IOException {
 		this.playerListScroll = new JScrollPane();
 		//==========================대기방 리스트==========================
@@ -131,18 +130,16 @@ public class WaitingRoomPanel extends JPanel {
 		this.roomListPosition();
 			
 	}
-//TODO
+
 	public void userListSetting(List<UserGamedataInfoDTO> list) throws IOException {
 		System.out.println("userListSettings진입");
-		ArrayList<String> usersID = new ArrayList<String>();
 		ArrayList<String> usersGrade = new ArrayList<String>();
-
+		this.players = new Vector<String>();
 		for(UserGamedataInfoDTO gameData : list) {
-			usersID.add(gameData.getUserID());
+			this.players.add(gameData.getUserID());
 			usersGrade.add(gameData.getUserGrade());
 		}
-		
-		this.players = usersID.toArray(new String[usersID.size()]);
+
 		
 		//==========================접속자 리스트==========================
 		this.imageMap = createImage(this.players, usersGrade);
@@ -158,19 +155,20 @@ public class WaitingRoomPanel extends JPanel {
 	}
 
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
-//		playerList.
-		ArrayList<String> usersID = new ArrayList<String>();
-		ArrayList<String> usersGrade = new ArrayList<String>();
-//
-//		for(UserGamedataInfoDTO gameData : list) {
-//			usersID.add(gameData.getUserID());
-//			usersGrade.add(gameData.getUserGrade());
-//		}
-		this.players = usersID.toArray(new String[usersID.size()]);
-		
-		this.imageMap = createImage(this.players, usersGrade);
+		this.players.add(newUser.getUserID());
+		this.playerList.setListData(players);
+		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
+		for(String s : this.imageMap.keySet()) {
+			System.out.println(s);
+		}
+				
 		this.playerList.setCellRenderer(new PlayerRenderer());
-		this.playerListScroll.setViewportView(playerList);
+		
+		this.playerListScroll.setViewportView(this.playerList);
+
+		this.playerListScroll.setOpaque(false);
+		this.playerListScroll.getViewport().setOpaque(false);
+		this.playerList.setOpaque(false);
 	}
 	
 	/***************************접속자 리스트 클래스***************************/
@@ -190,22 +188,36 @@ public class WaitingRoomPanel extends JPanel {
 	}
 	
 	/***************************접속자 리스트 맵***************************/
-	private Map<String, ImageIcon> createImage(String[] player, ArrayList<String> grade) throws IOException {
-	    Map<String, ImageIcon> map = new HashMap<>();
+	private Map<String, ImageIcon> createImage(Vector<String> player, ArrayList<String> grade) throws IOException {
+	    System.out.println("createImage");
+		Map<String, ImageIcon> map = new HashMap<>();
 	    try{
-	    	for(int i = 0, size = grade.size(); i < size; i++) {
-		    	map.put(player[i], new ImageIcon(ImageIO.read(
+    		for(int i = 0, size = player.size(); i < size; i++) {
+		    	map.put(player.get(i), new ImageIcon(ImageIO.read(
             		new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade.get(i)))).getScaledInstance(
     					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
     					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
     					Image.SCALE_AREA_AVERAGING))
 		    	);
-	    	}
-    		
+    		}
 	    } catch (Exception e){
 	    	e.printStackTrace();
 	    }    
 	    return map;
+	}
+	
+	private void addNewUserImage(String player, String grade) throws IOException {
+		try{
+			this.imageMap.put(player, new ImageIcon(ImageIO.read(
+				new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade))).getScaledInstance(
+					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING))
+			);
+		
+		} catch (Exception e){
+			e.printStackTrace();
+		}    
 	}
 
 	/***************************대기실 위치***************************/
@@ -573,4 +585,54 @@ public class WaitingRoomPanel extends JPanel {
 		
 		
 	}
+	
+	public void updateAddRoom() {
+		// 테이블모델을 얻어옴
+		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
+		// 현재 테이블 데이터의 총 row 수를 얻어온다.(생성된 방의 총 갯수)
+		int row = tableModel.getRowCount();
+		
+		Object o = tableModel.getValueAt(2, 1);
+		
+		for(int i = 1; i <= 20; i++) {
+			
+		}
+
+	}
+	
+	public void updateDeleteRoom() {
+		
+	}
+	
+	public JTable getWaitingRoomTable() {
+		return waitingRoomTable;
+	}
+	
+//	public static void main(String[] args) {
+//		int[] arr = new int[] {9, 8, 7, 10, 2, 3, 4, 1};
+//		Arrays.sort(arr);
+//		int j = 1;
+//		for(int i = 0, size = arr.length; i < size; i++) {
+//			if(j == arr[i]) {
+//				j++;
+//			} else {
+//				System.out.println("생성될 방 번호 : " + j);
+//			}
+//		}
+//		
+//		WaitingRoomPanel p = null;
+//		try {
+//			p = new WaitingRoomPanel();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		DefaultTableModel tableModel = (DefaultTableModel) p.getWaitingRoomTable().getModel();
+//		int row = tableModel.getRowCount();
+//		int[] arr2 = p.getWaitingRoomTable().getSelectedColumns();
+//		System.out.println(row);
+//		Object o = tableModel.getValueAt(2, 1);
+//		System.out.println((String)o);
+//		System.out.println(arr2.length);
+//
+//	}
 }
