@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import enums.etc.UserPositionEnum;
 
-public class UserStoreSkinInfoDTO extends AbstractEnumsDTO implements Serializable {
+public class UserStoreSkinInfoDTO extends AbstractEnumsDTO {
 	private String userID;
 	private int skinNyaong;
     private int skinLeesanghaeC;

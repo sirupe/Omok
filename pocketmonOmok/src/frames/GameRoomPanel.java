@@ -51,14 +51,12 @@ public class GameRoomPanel extends JPanel {
 	public void setStonePanel() {
 		this.omokStonePanel.setLayout(null);
 		this.omokStonePanel.setOpaque(false);
-//		this.omokStonePanel.setBackground(new Color(255,255,255,90));
 		JButton[][] stonesLocation = new JButton[15][];
 
 		for(int i = 0, iSize = stonesLocation.length; i < iSize; i++) {
 			stonesLocation[i] = new JButton[15];
 			for(int j = 0, jSize = stonesLocation.length; j < jSize; j++) {
 				stonesLocation[i][j] = new JButton();
-//				stonesLocation[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
 				stonesLocation[i][j].setBounds(new Rectangle(
 						j * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
 						i * GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height,

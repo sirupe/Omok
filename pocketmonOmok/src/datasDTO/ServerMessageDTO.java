@@ -5,7 +5,7 @@ import java.io.Serializable;
 import enums.etc.ServerActionEnum;
 import enums.etc.UserPositionEnum;
 
-public class ServerMessageDTO extends AbstractEnumsDTO implements Serializable {
+public class ServerMessageDTO extends AbstractEnumsDTO {
 	private String serverMessage;
 
 	public ServerMessageDTO(UserPositionEnum position) {

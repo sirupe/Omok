@@ -19,7 +19,7 @@ import enums.frames.GameRoomFullEnum;
 import enums.frames.searchIdEnum;
 import enums.frames.searchRePwdEnum;
 
-public class GameRoomCreateFrame extends JFrame {
+public class CreateGaneRoomFrame extends JFrame {
 	private JLabel createRoomNameLabel;
 	private JLabel createRoomPwdLabel;
 	
@@ -35,7 +35,7 @@ public class GameRoomCreateFrame extends JFrame {
 	
 	private Image backGround;
 	
-	public GameRoomCreateFrame() throws IOException {
+	public CreateGaneRoomFrame() throws IOException {
 		//방이름, 방비밀번호 라벨 생성
 		this.createRoomNameLabel = new JLabel("방이름");
 		this.createRoomPwdLabel  = new JLabel("방비밀번호");
@@ -169,6 +169,6 @@ public class GameRoomCreateFrame extends JFrame {
 	}
 	//========================================================================================================
 	public static void main(String[] args) throws IOException {
-		new GameRoomCreateFrame();
+		new CreateGaneRoomFrame();
 	}
 }

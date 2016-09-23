@@ -9,11 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,9 +29,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+
+import datasDTO.UserGamedataInfoDTO;
+import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomSizesEnum;
 
-public class WaitingRoomPanel extends JPanel implements ActionListener {	
+public class WaitingRoomPanel extends JPanel {	
 	private JPanel background;
 	
 	private JScrollPane waitingRoomListScroll;
@@ -61,22 +67,9 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	private JButton correct;
 	
 	private Map<String,ImageIcon> imageMap;
-
+	private String[] players;
 	public WaitingRoomPanel() throws IOException {
-		//==========================접속자 리스트==========================
-		String[] player = {"yjyj","hello","wowwowwow","OOOOOOOOOOOOOOO","1","2","3","4","5","6","7","8","9","10"};
-		imageMap = createImage(player);
-		this.playerList = new JList(player);
-		playerList.setCellRenderer(new PlayerRenderer());
-		
 		this.playerListScroll = new JScrollPane();
-		this.playerListScroll.setViewportView(this.playerList);
-
-		
-		this.playerListScroll.setOpaque(false);
-		this.playerListScroll.getViewport().setOpaque(false);
-		this.playerList.setOpaque(false);
-		
 		//==========================대기방 리스트==========================
 		
 		Font font = new Font("a으라차차",Font.BOLD,15);
@@ -138,19 +131,56 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.roomListPosition();
 			
 	}
+//TODO
+	public void userListSetting(List<UserGamedataInfoDTO> list) throws IOException {
+		System.out.println("userListSettings진입");
+		ArrayList<String> usersID = new ArrayList<String>();
+		ArrayList<String> usersGrade = new ArrayList<String>();
 
+		for(UserGamedataInfoDTO gameData : list) {
+			usersID.add(gameData.getUserID());
+			usersGrade.add(gameData.getUserGrade());
+		}
+		
+		this.players = usersID.toArray(new String[usersID.size()]);
+		
+		//==========================접속자 리스트==========================
+		this.imageMap = createImage(this.players, usersGrade);
+		this.playerList = new JList<String>(this.players);
+		this.playerList.setCellRenderer(new PlayerRenderer());
+		
+		this.playerListScroll.setViewportView(this.playerList);
 
+		this.playerListScroll.setOpaque(false);
+		this.playerListScroll.getViewport().setOpaque(false);
+		this.playerList.setOpaque(false);
+			
+	}
+
+	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
+//		playerList.
+		ArrayList<String> usersID = new ArrayList<String>();
+		ArrayList<String> usersGrade = new ArrayList<String>();
+//
+//		for(UserGamedataInfoDTO gameData : list) {
+//			usersID.add(gameData.getUserID());
+//			usersGrade.add(gameData.getUserGrade());
+//		}
+		this.players = usersID.toArray(new String[usersID.size()]);
+		
+		this.imageMap = createImage(this.players, usersGrade);
+		this.playerList.setCellRenderer(new PlayerRenderer());
+		this.playerListScroll.setViewportView(playerList);
+	}
+	
 	/***************************접속자 리스트 클래스***************************/
 	public class PlayerRenderer extends DefaultListCellRenderer {
 		
 
 		Font font = new Font("a으라차차", Font.BOLD, 15);
 		
-		public Component getListCellRendererComponent(
-			JList player, Object value, int index,
-			boolean isSelected, boolean cellHasFocus) {
-			JLabel label = (JLabel) super.getListCellRendererComponent(
-                    player, value, index, isSelected, cellHasFocus);
+		public Component getListCellRendererComponent(JList player, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+			JLabel label = (JLabel) super.getListCellRendererComponent(player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
             label.setHorizontalTextPosition(JLabel.RIGHT);
             label.setOpaque(false);
@@ -160,81 +190,18 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 	}
 	
 	/***************************접속자 리스트 맵***************************/
-	private Map<String, ImageIcon> createImage(String[] player) throws IOException {
+	private Map<String, ImageIcon> createImage(String[] player, ArrayList<String> grade) throws IOException {
 	    Map<String, ImageIcon> map = new HashMap<>();
 	    try{
-	    	map.put("yjyj", new ImageIcon(ImageIO.read(
-            		new File("resources/user/userbegining.png")).getScaledInstance(
+	    	for(int i = 0, size = grade.size(); i < size; i++) {
+		    	map.put(player[i], new ImageIcon(ImageIO.read(
+            		new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade.get(i)))).getScaledInstance(
     					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
     					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("hello", new ImageIcon(ImageIO.read(
-            		new File("resources/user/userhero.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("wowwowwow", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usertop.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("OOOOOOOOOOOOOOO", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("1", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("2", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("3", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("4", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("5", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("6", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("7", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("8", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("9", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	map.put("10", new ImageIcon(ImageIO.read(
-            		new File("resources/user/usermorehigh.png")).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING)));
-	    	
-
+    					Image.SCALE_AREA_AVERAGING))
+		    	);
+	    	}
+    		
 	    } catch (Exception e){
 	    	e.printStackTrace();
 	    }    
@@ -605,10 +572,5 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		this.add(myInfo);
 		
 		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-			
 	}
 }

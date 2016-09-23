@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import enums.etc.UserPositionEnum;
 
-public class UserStoreInfoDTO extends AbstractEnumsDTO implements Serializable {
+public class UserStoreInfoDTO extends AbstractEnumsDTO {
 
 	private String userID;
 	private int itemColorMatching;

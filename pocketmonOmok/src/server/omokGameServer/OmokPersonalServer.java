@@ -3,20 +3,19 @@ package server.omokGameServer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 
 import datasDTO.AbstractEnumsDTO;
 
-public class OmokPersonalServer extends Thread implements Serializable {
+public class OmokPersonalServer extends Thread {
 	private OmokServer omokServer;
 	private Socket personalSocket;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
 	
 	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
-		this.omokServer = omokServer;
-		this.personalSocket = socket;
+		this.omokServer 		= omokServer;
+		this.personalSocket 	= socket;
 		this.serverInputStream  = new ObjectInputStream(this.personalSocket.getInputStream());
 		this.serverOutputStream = new ObjectOutputStream(this.personalSocket.getOutputStream());
 	}

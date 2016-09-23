@@ -1,8 +1,6 @@
-/actions/
-/datasDAO/
-/datasDTO/
-/enums/
 /frames/
 /server/
+/enums/
+/datasDTO/
+/datasDAO/
 /start/
-/utility/

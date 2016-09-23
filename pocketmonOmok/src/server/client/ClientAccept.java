@@ -4,11 +4,12 @@ import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.RoomAndUserListDTO;
+import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
@@ -18,7 +19,7 @@ import frames.BasicFrame;
 import frames.joinFrames.JoinSuccessFrame;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
-public class ClientAccept implements Serializable {
+public class ClientAccept {
 	private Socket clientSocket;
 	private ObjectInputStream clientIS;
 	private ObjectOutputStream clientOS;
@@ -80,6 +81,16 @@ public class ClientAccept implements Serializable {
 				this.basicFrame.getJoinFrame().dispose();
 				
 			}
+		}
+	}
+	//TODO
+	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+		if(data.getServerAction() == ServerActionEnum.LOGIN_NEWUSER) {
+			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
+			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
+		} else {
+			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
+			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
 		}
 	}
 	

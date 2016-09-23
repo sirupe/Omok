@@ -1,7 +1,6 @@
 package server.omokGameServer;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -18,17 +17,19 @@ import datasDTO.AbstractEnumsDTO;
 import datasDTO.GameRoomInfoVO;
 import datasDTO.RoomAndUserListDTO;
 import datasDTO.ServerMessageDTO;
+import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 
-public class OmokServer implements Serializable {
+public class OmokServer {
 	private ServerSocket serverSocket;
 	private Socket socket;
 	private Map<String, OmokPersonalServer> loginUsersMap;
 	private List<GameRoomInfoVO> gameRoomList;
+	private List<UserGamedataInfoDTO> userIDList;
 	
 	private JoinDAO joinDAO;
 	private LoginDAO loginDAO;
@@ -46,6 +47,7 @@ public class OmokServer implements Serializable {
 		
 		this.loginUsersMap = new HashMap<String, OmokPersonalServer>();
 		this.gameRoomList  = new ArrayList<GameRoomInfoVO>();
+		this.userIDList    = new ArrayList<UserGamedataInfoDTO>();
 	}
 	
 	public void gameServerOn() throws IOException {
@@ -61,19 +63,38 @@ public class OmokServer implements Serializable {
 	}
 	
 	//TODO 여기에 서버의 분기업무 추가
-	public void login(AbstractEnumsDTO data, OmokPersonalServer personalServer) {
+	public void login(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
+		// 클라이언트에게서 받은 데이터 DTO로 전환
 		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) data;
+		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
 		UserPersonalInfoDTO resultDTO = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
-		this.sendObject(resultDTO, personalServer);
+		// 성공여부 클라이언트에게 전송
+		personalServer.getServerOutputStream().writeObject(resultDTO);
 		
+		
+		// 만약 클라이언트가 로그인 성공했다면
 		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
+			// 서버가 가지고 있을 유저목록에 추가
 			this.loginUsersMap.put(resultDTO.getUserID(), personalServer);
+			// 사용자에게 보낼 현재 접속자 목록에 추가
+			this.userIDList.add(gamedataDAO.getUserGrade(resultDTO));
+			
+			// 접속자리스트 와 게임방 리스트와 현재 접속자의 게임정보를 담아 클라이언트로 발송
 			RoomAndUserListDTO roomAndUserListDTO = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
-			roomAndUserListDTO.setLoginUsersMap(this.loginUsersMap);
+			roomAndUserListDTO.setUserList(this.userIDList);
+
 			roomAndUserListDTO.setGameRoomList(this.gameRoomList);
-//			roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(resultDTO));
-			this.sendObject(roomAndUserListDTO, personalServer);
-			System.out.println("접속자 리스트에 추가된 인원수 : " + loginUsersMap.size());
+			roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(resultDTO));
+			System.out.println("보내기 전 리스트 크기는 : " + roomAndUserListDTO.getUserList().size());
+			
+			roomAndUserListDTO.getUserGameData().setServerAction(ServerActionEnum.LOGIN_NEWUSER);
+			for(String id : this.loginUsersMap.keySet()) {
+				this.loginUsersMap.get(id).getServerOutputStream().writeObject(roomAndUserListDTO.getUserGameData());
+			}
+
+				
+//			personalServer.getServerOutputStream().writeObject(roomAndUserListDTO);
+			
 		}
 	}
 	
@@ -83,12 +104,12 @@ public class OmokServer implements Serializable {
 	
 	
 	//회원가입 프레임에서 넘어온 데이터
-	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) {
+	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
 		// 아이디 중복체크인 경우
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
 			UserPersonalInfoDTO resultDTO = this.joinDAO.checkOverlapID(personalDTO);
-			this.sendObject(resultDTO, personalServer);
+			personalServer.getServerOutputStream().writeObject(resultDTO);
 		
 		// 회원가입인 경우
 		} else {
@@ -103,13 +124,12 @@ public class OmokServer implements Serializable {
 				// 성공적으로 업데이트 된 경우
 				if(result == 1) {
 					serverMessage.setServerAction(ServerActionEnum.JOIN_SUCCESS);
-					this.sendObject(serverMessage, personalServer);
 
 					// 업데이트 실패한 경우
 				} else {
 					serverMessage.setServerAction(ServerActionEnum.JOIN_FAIL);
-					this.sendObject(serverMessage, personalServer);
 				}
+				personalServer.getServerOutputStream().writeObject(serverMessage);
 			}
 		}
 	}
@@ -145,14 +165,6 @@ public class OmokServer implements Serializable {
 		personalServer.getServerOutputStream().close();
 		personalServer.getServerInputStream().close();
 		personalServer.getPersonalSocket().close();
-	}
-	
-	public void sendObject(AbstractEnumsDTO data, OmokPersonalServer personalServer) {
-		try {
-			personalServer.getServerOutputStream().writeObject(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public Socket getSocket() {

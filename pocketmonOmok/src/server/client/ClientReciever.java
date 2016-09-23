@@ -7,7 +7,7 @@ import java.io.Serializable;
 import datasDTO.AbstractEnumsDTO;
 import frames.BasicFrame;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
-public class ClientReciever extends Thread implements Serializable{
+public class ClientReciever extends Thread {
 	private ClientAccept clientAccept;
 	private ObjectInputStream clientIS;
 	private BasicFrame basicFrame;
@@ -30,7 +30,8 @@ public class ClientReciever extends Thread implements Serializable{
 					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
 					break;
 				case POSITION_WAITING_ROOM :
-					System.out.println("여기로 들어옵니까?");
+					System.out.println("waitingroom 으로 옵니다.");
+					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame);
 					break;
 				case POSITION_JOIN :
 					this.clientAccept.joinFrameInputAction(userPosition, this.basicFrame);

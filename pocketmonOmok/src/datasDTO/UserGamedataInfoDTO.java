@@ -5,7 +5,7 @@ import java.io.Serializable;
 import enums.etc.UserPositionEnum;
 
 // 유저 게임데이터 저장 DTO (Data Transfer Object)
-public class UserGamedataInfoDTO extends AbstractEnumsDTO implements Serializable {
+public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 	private String userID;		// 유저아이디
 	private String userGrade;	// 유저등급
 	private int userGameCount;	// 유저 총 게임수

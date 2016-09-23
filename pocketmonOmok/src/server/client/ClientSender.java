@@ -3,7 +3,7 @@ package server.client;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class ClientSender implements Serializable {
+public class ClientSender {
 	private ObjectOutputStream clientOS;
 	
 	
