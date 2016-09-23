@@ -81,15 +81,6 @@ public class WaitingRoomPanel extends JPanel implements ActionListener {
 		
 		Font font = new Font("a으라차차",Font.BOLD,15);
 		WaitingRoomListTable roomListModel = new WaitingRoomListTable();
-
-//		//대기실 List내용 가운데정렬
-//		DefaultListCellRenderer defaultrenderer = new DefaultListCellRenderer();//정렬을 위해 생성
-//		defaultrenderer.setHorizontalTextPosition(SwingConstants.CENTER);       //가운데로 정렬
-//		TableColumnModel centerArray = waitingRoomTable.getColumnModel();		//가운데정렬할 ColumnModel을 가져옴	
-//		for (int i = 0; i < centerArray.getColumnCount(); i++) {     			//반복문으로 가운데정렬
-//			centerArray.getColumn(i).setCellRenderer(defaultrenderer);
-//		}
-
 		
 		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
 		this.waitingRoomTable = new JTable(defaultTableModel) {

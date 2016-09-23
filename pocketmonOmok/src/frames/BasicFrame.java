@@ -83,8 +83,8 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.setLayout(this.cardLayout);
 
 	//	this.add("loginPanel", this.loginPanel);
-		this.add("waitingRoomPanel", this.waitingRoomPanel);
-	//	this.add("gameRoomPanel", this.gameRoomPanel);
+	//	this.add("waitingRoomPanel", this.waitingRoomPanel);
+		this.add("gameRoomPanel", this.gameRoomPanel);
 
 		this.setTitle("Login");
 		this.setVisible(true);
