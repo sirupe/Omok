@@ -65,7 +65,7 @@ public class CreateGaneRoomFrame extends JFrame {
 		
 		
 		//배경화면	
-				backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+				backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 						searchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
 						searchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
 		                Image.SCALE_SMOOTH);
@@ -94,11 +94,6 @@ public class CreateGaneRoomFrame extends JFrame {
 		this.createRoomNameLabel.setForeground(Color.black);
 		this.createRoomPwdLabel.setForeground(Color.black);
 				
-		//텍스트 필드 테두리 없애기
-		this.createRoomNameText.setBorder(GameRoomCreateEnum.LABEL_DEFAULT.getBorder());
-		this.createRoomPwdText.setBorder(GameRoomCreateEnum.LABEL_DEFAULT.getBorder());
-		
-	
 		this.setLabelPosition();
 		this.setTextPosition();
 		this.setButtonPosition();

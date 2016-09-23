@@ -46,6 +46,7 @@ public class ChargePanel extends JPanel {
 	public void setchargePanel() {
 		this.chargePanel.setLayout(null);
 		this.chargePanel.setBounds(ChargeEnum.CHARGE_PANEL_SIZE_RECT.getRect());
+		this.chargePanel.setOpaque(false);
 		
 		Font font = new Font("a으라차차",Font.BOLD, 18);
 		JLabel chargeLabel = new JLabel("충전할금액");
@@ -155,6 +156,7 @@ public class ChargePanel extends JPanel {
 	}
 	
 	public void setemailPanel() {
+		this.emailPanel.setOpaque(false);
 		this.emailPanel.setLayout(null);
 		this.emailPanel.setBounds(ChargeEnum.EMAIL_PANEL_SIZE_RECT.getRect());
 
@@ -193,7 +195,7 @@ public class ChargePanel extends JPanel {
 	}
 	
 	public void setcertifyPanel() {
-		
+		this.certifyPanel.setOpaque(false);
 		Font font = new Font("a으라차차",Font.BOLD, 15);
 		
 		this.certifyPanel.setLayout(null);
@@ -247,6 +249,7 @@ public class ChargePanel extends JPanel {
 	}
 	
 	public void setbuttonsPanel() {
+		this.buttonsPanel.setOpaque(false);
 		this.buttonsPanel.setLayout(null);
 		this.buttonsPanel.setBounds(ChargeEnum.BUTTONS_PANEL_SIZE_RECT.getRect());
 

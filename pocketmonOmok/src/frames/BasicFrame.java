@@ -84,8 +84,8 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.newGameRoomPanel();
 		this.setLayout(this.cardLayout);
 
-		this.add("loginPanel", this.loginPanel);
-		this.add("waitingRoomPanel", this.waitingRoomPanel);
+		//this.add("loginPanel", this.loginPanel);
+		//this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.add("gameRoomPanel", this.gameRoomPanel);
 
 		this.setTitle("Login");
@@ -155,12 +155,12 @@ public class BasicFrame extends JFrame implements Serializable{
 	public WaitingRoomPanel getWaitingRoomPanel() {
 		return waitingRoomPanel;
 	}
-//	public static void main(String[] args) {
-//		try {
-//			new BasicFrame(null);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public static void main(String[] args) {
+		try {
+			new BasicFrame(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

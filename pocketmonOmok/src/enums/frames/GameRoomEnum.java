@@ -3,8 +3,6 @@ package enums.frames;
 import java.awt.Font;
 import java.awt.Rectangle;
 
-import frames.LoginPanel;
-
 public enum GameRoomEnum {
 //오목판 설정값--------------------------------------------------------------
 	GAME_BOARD_PANEL_RECT(new Rectangle(
@@ -126,6 +124,35 @@ public enum GameRoomEnum {
 			GAME_CHATTING_PANEL_RECT.getRect().height / 100 * 13
 	)),
 	
+//기권 팝업창 설정값-------------------------------------------------------------
+	
+	GIVEUP_FRAME_SIZE_RECT(new Rectangle(
+			(int)(GAME_BOARD_PANEL_RECT.getRect().width * 0.9),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().height * 0.5),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().width * 0.6),
+			(int)(GAME_BOARD_PANEL_RECT.getRect().height * 0.4)
+	)),	
+	
+	GIVEUP_TEXT_SIZE_RECT(new Rectangle(
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.28),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.13),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.6),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.4)
+	)),	
+	
+	GIVEUP_YES_BUTTON_RECT(new Rectangle(
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.26),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.5),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.22),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.14)
+	)),	
+	
+	GIVEUP_NO_BUTTON_RECT(new Rectangle(
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.55),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.5),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.22),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.14)
+	)),	
 	
 //폰트설정----------------------------------------------------------------	
 	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 100)),

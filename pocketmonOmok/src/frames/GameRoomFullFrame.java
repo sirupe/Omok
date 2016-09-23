@@ -35,7 +35,7 @@ public class GameRoomFullFrame extends JFrame {
 		
 		
 		//배경화면	
-		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				searchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
 				searchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);

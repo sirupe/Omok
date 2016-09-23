@@ -12,25 +12,23 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import enums.frames.ChargeEnum;
-import enums.frames.GameRoomCreateEnum;
-import enums.frames.searchIdEnum;
+import enums.frames.CorrectEnum;
 
-public class ChargeConfirmFrame extends JFrame{
+public class PayConfirmFrame extends JFrame{
 	private Image backGround;
 	private JLabel success;
 	private JButton confirm;
 	
-	public ChargeConfirmFrame() throws IOException {
+	public PayConfirmFrame() throws IOException {
 		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				ChargeEnum.CHARGE_CONFIRM_FRAME_SIZE_WIDTH.getSize(),
-				ChargeEnum.CHARGE_CONFIRM_FRAME_SIZE_HEIGHT.getSize(),
+				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
+				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
                 Image.SCALE_SMOOTH);
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
-
+		
 		this.setBounds(
 				ChargeEnum.CHARGE_CONFIRM_FRAME_SIZE_POSITION_X.getSize(),
 				ChargeEnum.CHARGE_CONFIRM_FRAME_SIZE_POSITION_Y.getSize(),
@@ -38,9 +36,10 @@ public class ChargeConfirmFrame extends JFrame{
 				ChargeEnum.CHARGE_CONFIRM_FRAME_SIZE_HEIGHT.getSize()
 		);
 		
-		this.success = new JLabel("충전 완료 :)");	
+		this.success = new JLabel("결제 완료 :)");	
 		Font font = new Font("a으라차차" , Font.BOLD , 24);
 		this.success.setFont(font);
+		this.success.setOpaque(false);
 		this.success.setBounds(ChargeEnum.CHARGE_SUCCESS_TEXT_SIZE_RECT.getRect());		
 		
 		this.confirm = new JButton(){
@@ -60,22 +59,23 @@ public class ChargeConfirmFrame extends JFrame{
 		        }      
 		    }
 		};
-		confirm.setFocusPainted(false);
-		confirm.setBorderPainted(false);
-		confirm.setContentAreaFilled(false);
+		this.confirm.setBackground(Color.black);
+		this.confirm.setFocusPainted(false);
+		this.confirm.setBorderPainted(false);
+		this.confirm.setContentAreaFilled(false);
 		this.confirm.setBounds(ChargeEnum.CHARGE_CONFIRM_BUTTON_SIZE_RECT.getRect());
-		
+
 		this.add(success);
 		this.add(confirm);
 		this.setLayout(null);
 		this.setTitle("충전");
 		this.setResizable(false);
 		this.setVisible(true);
-	
+		
 	}
 
 	public static void main(String[] args) throws IOException {
-		new ChargeConfirmFrame();
+		new PayConfirmFrame();
 	}
 
 }

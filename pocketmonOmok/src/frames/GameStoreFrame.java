@@ -14,7 +14,7 @@ public class GameStoreFrame extends JFrame  {
 
 		this.gameStorePanel = new GameStorePanel();
 		
-		gameStorePanel.setOpaque(false);
+		this.gameStorePanel.setOpaque(false);
 		this.setBounds(
 			GameStoreEnum.GAME_STORE_PANEL_POSITION_X.getSize(),
 			GameStoreEnum.GAME_STORE_PANEL_POSITION_Y.getSize(),
@@ -29,7 +29,6 @@ public class GameStoreFrame extends JFrame  {
 		try {
 			new GameStoreFrame();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
