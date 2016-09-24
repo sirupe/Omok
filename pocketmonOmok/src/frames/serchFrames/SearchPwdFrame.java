@@ -70,7 +70,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 				super.paintComponents(g);
 				try {
 					g.drawImage(ImageIO.read(
-						new File("resources/signUp/backg.png")),
+						new File("resources/background/popup.png")),
 							0,
 							0,
 							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
@@ -85,17 +85,10 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		this.newSearchChangePanel();
 //		this.add("searchPwdPanel",this.searchPwdPanel);
 		this.searchPwdPanel.setOpaque(false);
-<<<<<<< HEAD
-//		this.add("searchRePwdPanel", this.searchRePwdPanel);
-//		this.searchRePwdPanel.setOpaque(false);
-//		this.add("searchChangeConfirmPanel", this.searchChangePanel);
-//		this.searchChangePanel.setOpaque(false);
-=======
 		this.add("searchRePwdPanel", this.searchRePwdPanel);
 		this.searchRePwdPanel.setOpaque(false);
 //		this.add("searchChangeConfirmPanel", this.searchChangePanel);
 		this.searchChangePanel.setOpaque(false);
->>>>>>> f9be61cf3e8236573024bfb3815f0502d58d1476
 		this.setLayout(this.cardLayout);
 		this.setTitle("PWÃ£±â");
 		this.setVisible(true);

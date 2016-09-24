@@ -1,5 +1,8 @@
+/actions/
+/datasDAO/
+/datasDTO/
+/enums/
 /frames/
 /omokGame/
-/enums/
-/datasDTO/
-/actions/
+/start/
+/utility/

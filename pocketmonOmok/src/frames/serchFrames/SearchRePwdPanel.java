@@ -24,7 +24,6 @@ public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
 	
-<<<<<<< HEAD
 	private JLabel searchPwdLabel;
 	private JLabel searchRePwdLabel;
 	private JTextField searchPwdText;
@@ -32,23 +31,14 @@ public class SearchRePwdPanel extends JPanel {
 	private JLabel searchRePwdErrorLabel;
 	private JButton searchConfirmButton;
 
-=======
->>>>>>> f9be61cf3e8236573024bfb3815f0502d58d1476
 	public SearchRePwdPanel() throws IOException {
 		this.setLayout(null);
 		
-//		this.searchRePwdPanel   = new JPanel();
 		
 		this.setsearchPwdPanel();
 	} //생성자
-	
-	
-	
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdPanel() throws IOException {
-
-//		this.searchRePwdPanel.setLayout(null);
-//		this.searchRePwdPanel.setOpaque(false);
 		
 		// 패널의 배경이미지
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -71,7 +61,6 @@ public class SearchRePwdPanel extends JPanel {
 		//비밀번호 입력창
 		JTextField searchPwdText = new JTextField();
 		searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
-		searchPwdText.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
 		searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 
 		// 재비밀번호 라벨
@@ -82,7 +71,6 @@ public class SearchRePwdPanel extends JPanel {
 		// 제비밀번호 텍스트창
 		JTextField searchRePwdText = new JTextField();
 		searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
-		searchRePwdText.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
 		searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 에러 메세지 라벨
@@ -90,9 +78,8 @@ public class SearchRePwdPanel extends JPanel {
 				("<html>비밀번호가 일치하지 않습니다. "
 				+ "<br>다시 입력해주세요<br></html>");
 		searchRePwdErrorLabel.setBounds(searchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
-		searchRePwdErrorLabel.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
 		searchRePwdErrorLabel.setFont(searchIdEnum.LABELFONT_ERROR.getFont());
-		
+		searchRePwdErrorLabel.setForeground(searchIdEnum.LABELCOLOR_ERROR.getColor());
 		//확인 버튼창
 		
 		JButton searchConfirmButton = new JButton() {
