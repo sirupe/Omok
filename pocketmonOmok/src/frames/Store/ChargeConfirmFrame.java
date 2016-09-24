@@ -1,7 +1,5 @@
 package frames.Store;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -12,12 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import enums.frames.ChargeEnum;
-import enums.frames.GameRoomCreateEnum;
-import enums.frames.WaitingRoomSizesEnum;
-import enums.frames.searchIdEnum;
 
 public class ChargeConfirmFrame extends JFrame{
 	private Image backGround;

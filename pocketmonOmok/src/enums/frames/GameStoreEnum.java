@@ -20,6 +20,7 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 //-----------------------------------------------------------------------------------------------------
 	
 	//userMoneyPanel 패널크기
+
     STORE_USER_MONEY_PANEL_REC(new Rectangle(
           (int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.07),
           (int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.1),
@@ -43,87 +44,87 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 //--------------------------------------------------------------------------------------
 		//ItemChoicePanel 크기
 		STORE_ITEM_CHOICE_PANEL_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.01),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.4),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.9),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.6)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.01),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.4),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.9),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.6)
+		)),
 		//방해하기 보유숫자
 		STORE_USER_OWN_INTERRUPT_ITEM_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.1),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.5),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.15),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.05)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.1),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.5),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.15),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.05)
+		)),
 		
 		//방해하기 아이템 위치
-				STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC(new Rectangle(
-						(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.03),
-						(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.05),
-						(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
-						(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.23)
-						)),
+		STORE_USER_OWN_INTERRUPT_ITEM_BUTTON_REC(new Rectangle(
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.03),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.05),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.23)
+		)),
 		
 		//무르기 아이템 보유 숫자 X,Y,가로,세로
 		STORE_USER_OWN_RETURN_ITEM_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.1),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 1.12),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.15),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.05)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.1),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 1.12),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.15),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.05)
+		)),
 		
 		//무르기 아이템 X,Y,가로,세로
-				STORE_USER_OWN_RETURN_ITEM_BUTTON_REC(new Rectangle(
-						(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.04),
-						(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.65),
-						(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
-						(int)(GAME_STORE_PANEL_HEIGHT.getSize() *0.23)
-						)),
+		STORE_USER_OWN_RETURN_ITEM_BUTTON_REC(new Rectangle(
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.04),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.65),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() *0.23)
+		)),
 		//시간늘리기 아이템 보유숫자
 		STORE_USER_OWN_TIMEEXTION_ITEM_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.4),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.5),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.15),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize()* 0.05)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.4),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.5),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.15),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize()* 0.05)
+		)),
 		
 		//시간늘리기 아이템 위치
 		STORE_USER_OWN_TIMEEXTION_ITEM_BUtton_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.33),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.05),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.23)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.33),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.05),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.23)
+		)),
 		//스킨 뽑기 라벨
 		STORE_USER_SKIN_CATCH_LABEL_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.39),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 1.14),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.25),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.05)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.39),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 1.14),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.25),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.05)
+		)),
 		//스킨 뽑기 버튼
 		STORE_USER_SKIN_CATCH_BUTTON_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.33),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.65),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.23)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.33),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.65),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.41),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.23)
+		)),
 //-----------------------------------------------------------------------------------
 		//나가기 패널
 		STORE_OUT_PANEL_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.5),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 1.8),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 23),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 10)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.5),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 1.8),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 23),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 10)
+		)),
 		
 		//나가기 아이콘 
 		STORE_OUT_BUTTON_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.01),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.01),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.2),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.1)
-				)),
+			(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.01),
+			(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.01),
+			(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.2),
+			(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.1)
+		)),
 		
 		
 		//일반 폰트

@@ -80,8 +80,9 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 					e.printStackTrace();
 				}
 			}};
-		this.setLayout(null);
+		//this.setLayout(null);
 		
+<<<<<<< HEAD
 //		this.newSearchChangePanel();
 //		this.add("searchPwdPanel",this.searchPwdPanel);
 //		this.searchPwdPanel.setOpaque(false);
@@ -89,10 +90,19 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		this.searchRePwdPanel.setOpaque(false);
 //		this.add("searchChangeConfirmPanel", this.searchChangePanel);
 //		this.searchChangePanel.setOpaque(false);
+=======
+
+		//this.newSearchChangePanel();
+		this.add("searchRePwdPanel", this.searchRePwdPanel);
+		this.searchRePwdPanel.setOpaque(false);
+		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+		this.searchChangePanel.setOpaque(false);
+>>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 		this.setLayout(this.cardLayout);
 		this.setTitle("PW찾기");
 		this.setVisible(true);
 		this.setResizable(false);
+		this.setLayout(null);
 		
 	}
 	//비밀번호 변경 확인 프레임
@@ -117,20 +127,28 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		};
 	}
 	
-	public SearchPwdPanel getsearchPwdPanel() {
-		return searchPwdPanel;
-	}
-	public void insearchRePwdPanel() {
-		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
-	}	
-	public void insearchChangePwdPanel() {
-		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
-	}
-	public static void main(String[] args) {
+//	public SearchPwdPanel getsearchPwdPanel() {
+//		return searchPwdPanel;
+//	}
+//	public void insearchRePwdPanel() {
+//		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
+//	}	
+//	public void insearchChangePwdPanel() {
+//		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
+//	}
+	
+	
+	
+	public static void main(String[] args) throws IOException {
+
 		try {
 			new SearchPwdFrame();
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		new SearchRePwdPanel();
 	}
+	
+
+
 }

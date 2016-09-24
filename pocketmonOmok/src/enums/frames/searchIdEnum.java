@@ -22,55 +22,53 @@ public enum searchIdEnum {
 	
 //이름, 이메일 레이블
 	SEARCH_ID_LABEL(new Rectangle(
-			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 5),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() / 100 * 20),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 16),
-			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 10)
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.13),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.14),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.1),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 	SEARCH_EMAIL_LABEL(new Rectangle(
 			
-			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 5),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() / 100 * 42),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 16),
-			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 10)
+			(int)(SEARCHFRAME_POSITION_X.getSize() *  0.13),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.29),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.15),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 // 에러 레이블
 	SEARCH_ERROR_LABEL(new Rectangle(
 			
-			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 20),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() / 100 * 54),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 50),
-			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 13)
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.19),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.42),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.7),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 // 이름, 이메일 텍스트 필드
 	SEARCH_ID_TEXTFIELD(new Rectangle(
-			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 20),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() / 100 * 22),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 50),
-			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 10)
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.14),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.4),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.10)
 			)),
 	SEARCH_EMAIL_TEXTFIELD(new Rectangle(
-			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 20),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() / 100 * 42),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 50),
-			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 10)
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.29),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.4),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 	
 	//버튼 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
-			(int)(SEARCHFRAME_POSITION_X.getSize() / 100 * 25),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() / 100 * 75),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() / 100 * 30),
-			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() / 100 * 20)
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.26),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.5),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
 			)),
 	
 	//일반 폰트
 	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (searchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
 	//에러 메세지 폰트
 	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD, (int) (searchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.3))),
-	//텍스트 테두리 없애기
-	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
-	
+
 	//에러 메세지색깔
 		LABELCOLOR_ERROR(Color.red),
 	// 일반색깔
@@ -80,7 +78,6 @@ public enum searchIdEnum {
 	private int size;
 	private Color color;
 	private Font font;
-	private EmptyBorder border;
 	private Rectangle rec;
 	
 	
@@ -100,9 +97,7 @@ public enum searchIdEnum {
 	private searchIdEnum(Font font) {
 		this.font = font;
 	}
-	private searchIdEnum(EmptyBorder border) {
-		this.border = border;
-	}
+
 	public Rectangle getRectangle() {
 		return rec;
 	}
@@ -118,9 +113,7 @@ public enum searchIdEnum {
 	public Font getFont() {
 		return font;
 	}
-	public EmptyBorder getBorder() {
-		return border;
-	}
+
 	
 	
 

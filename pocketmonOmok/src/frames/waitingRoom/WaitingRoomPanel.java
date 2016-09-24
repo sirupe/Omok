@@ -162,6 +162,7 @@ public class WaitingRoomPanel extends JPanel {
 	}
 
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
+		
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
 		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
