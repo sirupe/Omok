@@ -69,7 +69,6 @@ public class WaitingRoomPanel extends JPanel {
 	private Vector<String> players;
 	public WaitingRoomPanel() throws IOException {
 		this.playerListScroll = new JScrollPane();
-	
 		//==========================채팅방&내정보==========================
 		
 		this.chattingOutput = new JTextArea();
@@ -159,6 +158,7 @@ public class WaitingRoomPanel extends JPanel {
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
 		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
+
 		for(String s : this.imageMap.keySet()) {
 			System.out.println(s);
 		}
@@ -176,14 +176,13 @@ public class WaitingRoomPanel extends JPanel {
 	public class PlayerRenderer extends DefaultListCellRenderer {
 		
 
-		Font font = new Font("a으라차차", Font.BOLD, 15);
 		
 		public Component getListCellRendererComponent(JList player, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
             label.setHorizontalTextPosition(JLabel.RIGHT);
             label.setOpaque(false);
-            label.setFont(font);
+            label.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
             return label;
 		}
 	}
@@ -551,11 +550,11 @@ public class WaitingRoomPanel extends JPanel {
 		this.correct.setFocusPainted(false);
 		
 		//방정보 폰트
-		this.userID.setFont(new Font("a으라차차", Font.BOLD, 18));
-		this.score.setFont(new Font("a으라차차", Font.BOLD, 16));
-		this.winningRate.setFont(new Font("a으라차차", Font.BOLD, 16));
-		this.point.setFont(new Font("a으라차차", Font.BOLD, 16));
-		this.level.setFont(new Font("a으라차차", Font.BOLD, 18));
+		this.userID.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.score.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.winningRate.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.point.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.level.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
 		
 		
 		

@@ -65,9 +65,9 @@ public enum searchIdEnum {
 			)),
 	
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,15)),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (searchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,20)),
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD, (int) (searchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.3))),
 	//텍스트 테두리 없애기
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
 	

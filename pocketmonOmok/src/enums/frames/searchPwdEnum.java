@@ -143,7 +143,4 @@ public enum searchPwdEnum {
 	public EmptyBorder getBorder() {
 		return border;
 	}
-	
-	
-
 }

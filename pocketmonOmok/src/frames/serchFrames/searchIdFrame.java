@@ -53,13 +53,14 @@ public class searchIdFrame extends JFrame {
 		this.add(searchConfirmButton);
 		
 		//폰트
-		Font font = searchIdEnum.LABELFONT_DEFAULT.getFont();
-		this.searchIdLabel.setFont(font);
-		this.searchemailLabel.setFont(font);
-		this.searchErrorMsgLabel.setFont(font);
+		Font defaultFont = searchIdEnum.LABELFONT_DEFAULT.getFont();
+		Font errorFont = searchIdEnum.LABELFONT_ERROR.getFont();
+		this.searchIdLabel.setFont(defaultFont);
+		this.searchemailLabel.setFont(defaultFont);
+		this.searchErrorMsgLabel.setFont(errorFont);
 		
-		this.searchemailTextField.setFont(font);
-		this.searchIdTextField.setFont(font);
+		this.searchemailTextField.setFont(defaultFont);
+		this.searchIdTextField.setFont(defaultFont);
 		
 		//텍스트 필드 테두리 없애기
 		EmptyBorder emptyBorder = searchIdEnum.LABEL_DEFAULT.getBorder();

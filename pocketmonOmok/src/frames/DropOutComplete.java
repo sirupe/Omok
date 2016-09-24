@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import enums.frames.CorrectEnum;
+import enums.frames.searchIdEnum;
+
+//ENUM은 correctEnum 에 탈퇴완료 프레임을 따다가 그대로씀
 
 public class DropOutComplete extends JFrame{
 	private Image backGround;
@@ -29,9 +32,8 @@ public class DropOutComplete extends JFrame{
 		
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
-		Font font = new Font("a으라차차", Font.BOLD, 20);
 		this.dropOutCompleteLabel = new JLabel("틸퇴 완료");
-		this.dropOutCompleteLabel.setFont(font);
+		this.dropOutCompleteLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.dropOutCompleteLabel.setBounds(CorrectEnum.DROPOUT_COMPLETE_TEXT_SIZE_RECT.getRect());
 		
 		this.confirm = new JButton() {

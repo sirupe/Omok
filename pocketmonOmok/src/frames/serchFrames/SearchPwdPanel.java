@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import enums.frames.searchIdEnum;
 import enums.frames.searchPwdEnum;
 
 public class SearchPwdPanel extends JPanel {
@@ -68,9 +69,9 @@ public class SearchPwdPanel extends JPanel {
 		//this.add(searchConfirmButton);
 		
 		
-		//레이블 폰트
-		Font default_Font  = searchPwdEnum.LABELFONT_DEFAULT.getFont(); //일반
-		Font error_FONT    = searchPwdEnum.LABELFONT_ERROR.getFont(); //에러
+		//레이블 폰트 - searchIdEnum 에서 불러왔습니다.
+		Font default_Font  = searchIdEnum.LABELFONT_DEFAULT.getFont(); //일반
+		Font error_FONT    = searchIdEnum.LABELFONT_ERROR.getFont(); //에러
 		this.searchIdLabel.setFont(default_Font);
 		this.searchemailLabel.setFont(default_Font);
 		this.searchErrorMsgLabel.setFont(error_FONT);
@@ -102,10 +103,15 @@ public class SearchPwdPanel extends JPanel {
 	}
 //	//이름, 이메일 , 에러 메세지  레이블!!!!!! 위치 및 크기
 		public void setLabelPosition() {
+			//아이디라벨 위치및 크기
 			this.searchIdLabel.setBounds(searchPwdEnum.SEARCH_ID_LABEL.getRectangle());
+			//이메일 라벨 위치 및 크기
 			this.searchemailLabel.setBounds(searchPwdEnum.SEARCH_EMAIL_LABEL.getRectangle());
+			//에러 메세지 위치 및 크기
 			this.searchErrorMsgLabel.setBounds(searchPwdEnum.SEARCH_ERROR_LABEL.getRectangle());
+			//
 			this.searchAnswerMsg.setBounds(searchPwdEnum.SEARCH_ANSWER_LABEL.getRectangle());
+			//3분 타임 라인 위치 및 크기
 			this.searchTimeLabel.setBounds(searchPwdEnum.SEARCH_Time_LABEL.getRectangle());
 			this.add(searchIdLabel);
 			this.add(searchemailLabel);
@@ -117,8 +123,11 @@ public class SearchPwdPanel extends JPanel {
 		
 //	// 이름 이메일, 인증 텍스트필드!!!!!!!!!!!!!! 위치 및 크기
 	    public void setTextFieldPosition() {
+	    	//아이디 텍스트 필드
 	    	this.searchIdTextField.setBounds(searchPwdEnum.SEARCH_ID_TEXTFIELD.getRectangle());
+	    	//이메일 입력창 
 	    	this.searchemailTextField.setBounds(searchPwdEnum.SEARCH_EMAIL_TEXTFIELD.getRectangle());
+	    	//인증 번호 입력창
 	    	this.searchConfirmTextField.setBounds(searchPwdEnum.SEARCH_CONFIRM_TEXTFIELD.getRectangle());
 	    	this.add(searchIdTextField);
 	    	this.add(searchemailTextField);

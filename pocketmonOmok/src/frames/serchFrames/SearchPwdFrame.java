@@ -26,7 +26,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	
 	public SearchPwdFrame() throws IOException {
 		
-		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
 				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);

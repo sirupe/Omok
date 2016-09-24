@@ -207,18 +207,18 @@ public enum JoinSizesEnum {
 	//에러 메세지색깔
 	LABELCOLOR_ERROR(Color.red),
 	LABELCOLOR_DEFAULT(Color.green),
-	
+	  
 	CHOICEBACKGROUND(Color.black),
 	
 	//레이블 폰트
 
-	LABELFONT_DEFAULT(new Font("맑은 고딕", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
+	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
 	
 	//컴포넌트 폰트
-	JOIN_COMPFONT_DEFAULT(new Font("맑은 고딕", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
+	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
 
 	//정합성검사 라벨 폰트
-	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("맑은 고딕", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 150)),
+	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 150)),
 	
 	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	

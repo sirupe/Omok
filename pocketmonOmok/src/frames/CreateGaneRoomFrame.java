@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import enums.frames.GamePayRoomEnum;
 import enums.frames.GameRoomCreateEnum;
 import enums.frames.GameRoomFullEnum;
 import enums.frames.searchIdEnum;
@@ -79,17 +80,16 @@ public class CreateGaneRoomFrame extends JFrame {
 						GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize()
 				);
 				
-		//레이블 폰트
-		this.createRoomNameLabel.setFont(GameRoomCreateEnum.LABELFONT_DEFAULT.getFont());		
-		this.createRoomPwdLabel.setFont(GameRoomCreateEnum.LABELFONT_DEFAULT.getFont());
+		//레이블 폰트 -- searchIdEnum 에서 불러옴
+		this.createRoomNameLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());	
+		this.createRoomPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		
-		this.createRoomNameText.setFont(GameRoomCreateEnum.LABELFONT_DEFAULT.getFont());
-		this.createRoomPwdText.setFont(GameRoomCreateEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
-		this.roomCreateOpen.setFont(GameRoomCreateEnum.LABELFONT_DEFAULT.getFont());
-		this.roomCreatePrivate.setFont(GameRoomCreateEnum.LABELFONT_DEFAULT.getFont());
-		
+		this.roomCreateOpen.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreatePrivate.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		//레이블 색깔
 		this.createRoomNameLabel.setForeground(Color.black);
 		this.createRoomPwdLabel.setForeground(Color.black);

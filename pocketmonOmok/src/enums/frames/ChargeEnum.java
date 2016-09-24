@@ -1,6 +1,7 @@
 package enums.frames;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
@@ -216,13 +217,18 @@ public enum ChargeEnum {
 			(int)(CHARGE_CONFIRM_FRAME_SIZE_POSITION_Y.getSize() * 0.45),
 			(int)(CHARGE_CONFIRM_FRAME_SIZE_WIDTH.getSize() * 0.25),
 			(int)(CHARGE_CONFIRM_FRAME_SIZE_HEIGHT.getSize() * 0.13)		
-	));
+	)),
+	
+	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, ChargeEnum.SCREEN_SIZE.getDimension().width / 100 * 2));
+			
+			
 
 	private Rectangle rect;
 	private int size;
 	private Dimension dimension;
 	private String[] strArr;
-	
+	private Font font;
+
 	private ChargeEnum() {}
 	
 	//set
@@ -239,6 +245,10 @@ public enum ChargeEnum {
 		this.strArr = strArr;
 	}
 	
+	private ChargeEnum(Font font) {
+		this.font = font;
+	}
+	
 	//get
 	public int getSize() {
 		return size;
@@ -251,6 +261,9 @@ public enum ChargeEnum {
 	}
 	public String[] getStrArr() {
 		return strArr;
+	}
+	public Font getFont() {
+		return font;
 	}
 	
 }
