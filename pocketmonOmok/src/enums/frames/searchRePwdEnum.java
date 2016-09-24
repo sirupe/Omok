@@ -73,33 +73,7 @@ public enum searchRePwdEnum {
 				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.4),
 				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.15)
 				));
-		
-	
-<<<<<<< HEAD
-//	//일반 폰트
-//	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),
-//	LABELREPWDFONT_DEFAULT(new Font("a으라차차",Font.BOLD,13)),
-//	//에러 메세지 폰트
-//	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,19)),
-//	//텍스트 테두리 없애기
-//	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
-//	
-//	//에러 메세지색깔
-//		LABELCOLOR_ERROR(Color.red),
-//	// 일반색깔
-//		LABELCOLOR_DEFAULT(Color.BLUE);
-=======
-	//일반 폰트
-	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),
-	LABELREPWDFONT_DEFAULT(new Font("a으라차차",Font.BOLD,13)),
-	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,19)),
 
-	//에러 메세지색깔
-		LABELCOLOR_ERROR(Color.red),
-	// 일반색깔
-		LABELCOLOR_DEFAULT(Color.BLUE);
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 	
 	
 	private Dimension dimension;
@@ -125,10 +99,6 @@ public enum searchRePwdEnum {
 	private searchRePwdEnum(Font font) {
 		this.font = font;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 	public Rectangle getRectangle() {
 		return rec;
 	}
@@ -144,10 +114,5 @@ public enum searchRePwdEnum {
 	public Font getFont() {
 		return font;
 	}
-<<<<<<< HEAD
-=======
 
-	
-
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 }

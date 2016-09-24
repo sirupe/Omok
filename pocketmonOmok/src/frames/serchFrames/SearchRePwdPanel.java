@@ -32,13 +32,10 @@ public class SearchRePwdPanel extends JPanel {
 	private JButton searchConfirmButton;
 
 	public SearchRePwdPanel() throws IOException {
-<<<<<<< HEAD
 		
 		this.setLayout(null);
-=======
 		this.setLayout(null);
 
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 		this.setsearchPwdPanel();
 		
 	} //생성자
@@ -65,15 +62,13 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		//비밀번호 입력창
-<<<<<<< HEAD
 		this.searchPwdText = new JTextField();
 		this.searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
 		this.searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-=======
+		
 		JTextField searchPwdText = new JTextField();
 		searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
 		searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 
 		// 재비밀번호 라벨
 		this.searchRePwdLabel = new JLabel("PW재입력");
@@ -81,15 +76,13 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchRePwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 제비밀번호 텍스트창
-<<<<<<< HEAD
 		this.searchRePwdText = new JTextField();
 		this.searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
 		this.searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-=======
+		
 		JTextField searchRePwdText = new JTextField();
 		searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
 		searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 		
 		// 에러 메세지 라벨
 		this.searchRePwdErrorLabel = new JLabel

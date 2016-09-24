@@ -82,22 +82,14 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}};
 		//this.setLayout(null);
 		
-<<<<<<< HEAD
 //		this.newSearchChangePanel();
-//		this.add("searchPwdPanel",this.searchPwdPanel);
-//		this.searchPwdPanel.setOpaque(false);
-		this.add("searchRePwdPanel", this.searchRePwdPanel);
-		this.searchRePwdPanel.setOpaque(false);
+		this.add("searchPwdPanel",this.searchPwdPanel);
+		this.searchPwdPanel.setOpaque(false);
+//		this.add("searchRePwdPanel", this.searchRePwdPanel);
+//		this.searchRePwdPanel.setOpaque(false);
 //		this.add("searchChangeConfirmPanel", this.searchChangePanel);
 //		this.searchChangePanel.setOpaque(false);
-=======
 
-		//this.newSearchChangePanel();
-		this.add("searchRePwdPanel", this.searchRePwdPanel);
-		this.searchRePwdPanel.setOpaque(false);
-		this.add("searchChangeConfirmPanel", this.searchChangePanel);
-		this.searchChangePanel.setOpaque(false);
->>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 		this.setLayout(this.cardLayout);
 		this.setTitle("PWÃ£±â");
 		this.setVisible(true);
