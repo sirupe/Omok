@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import enums.frames.WaitingRoomSizesEnum;
 
 public class GameRoomInfoVO implements Serializable{
+	private static final long serialVersionUID = 123463L;
+	
 	private ImageIcon image;
 	private int roomNumber;
 	private String roomName;

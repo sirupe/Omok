@@ -24,8 +24,8 @@ public enum WaitingRoomSizesEnum {
 	WAITING_ROOM_LIST_BACKGROUND_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.06)),
 	
 	//대기방 O△X 가로 세로 길이
-	ROOMLIST_STATUS_SIZE_WIDTH((int)(WAITING_ROOM_LIST_SIZE_WIDTH.getSize() * 0.08)),
-	ROOMLIST_STATUS_SIZW_HEIGHT((int)(WAITING_ROOM_LIST_SIZE_HEIGHT.getSize() * 0.08)),
+	ROOMLIST_STATUS_SIZE_WIDTH((int)(WAITING_ROOM_LIST_SIZE_WIDTH.getSize() * 0.03)),
+	ROOMLIST_STATUS_SIZW_HEIGHT((int)(WAITING_ROOM_LIST_SIZE_HEIGHT.getSize() * 0.05)),
 	
 	//==================================CHATTING==================================
 	//채팅 출력창 가로,세로 길이 

@@ -19,8 +19,9 @@ import datasDTO.AbstractEnumsDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
+import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
-import frames.waitingRoomPanels.WaitingRoomPanel;
+import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
 
 @SuppressWarnings("serial")

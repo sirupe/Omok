@@ -3,8 +3,6 @@ package enums.etc;
 import java.util.HashMap;
 import java.util.Map;
 
-import oracle.net.aso.i;
-
 public enum ImageEnum {
 //BasieFrame 이미지-----------------------------------------------------
 	BASIC_BACKGROUND("resources/background/background.png"),
@@ -39,11 +37,7 @@ public enum ImageEnum {
 	}),
 	
 	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png"),
-//WaitingRoom 이미지들-------------------------------------------------------
-//	WAITINGROOM_ENTER_POSSIBLE_IMAGE("resources/waitroom/waitingvacancy.jpg"),
-//	WAITINGROOM_ENTER_PRIVATE_IMAGE("resources/waitroom/waitingprivate.jpg"),
-//	WAITINGROOM_ENTER_FULL_IMAGE("resources/waitroom/watingfull.jpg"),
-	
+
 	WAITINGROOM_USER_GRADE_IMAGE_MAP(userGradeImageMap()),
 	WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP(enterRoomCheckImage());
 	

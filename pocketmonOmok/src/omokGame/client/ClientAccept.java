@@ -18,7 +18,7 @@ import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
 import frames.joinFrames.JoinSuccessFrame;
-import frames.waitingRoomPanels.WaitingRoomListTable;
+import frames.waitingRoom.WaitingRoomListTable;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
