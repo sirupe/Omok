@@ -26,6 +26,7 @@ public class ClientAccept {
 	private ObjectInputStream clientIS;
 	private ObjectOutputStream clientOS;
 	private BasicFrame basicFrame;
+	private String userID;
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
@@ -56,6 +57,7 @@ public class ClientAccept {
 		// 로그인에 성공했을 시
 		case LOGIN_SUCCESS :
 			// 대기실로 이동하겠다는 정보를 담아 서버에 전송 (실제로 이동하진 않는다.)
+			this.userID = userPersonalDTO.getUserID();
 			userPersonalDTO.setPosition(UserPositionEnum.POSITION_WAITING_ROOM);
 			userPersonalDTO.setUserAction(UserActionEnum.USER_LOGIN_SUCCESS);
 			this.basicFrame.getClientOS().writeObject(userPersonalDTO);
@@ -141,5 +143,8 @@ public class ClientAccept {
 		return clientOS;
 	}
 	
+	public String getUserID() {
+		return userID;
+	}
 
 }

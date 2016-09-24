@@ -115,7 +115,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
 			
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
 			

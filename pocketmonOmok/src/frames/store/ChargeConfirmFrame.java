@@ -1,4 +1,4 @@
-package frames.Store;
+package frames.store;
 
 import java.awt.Color;
 import java.awt.Font;
