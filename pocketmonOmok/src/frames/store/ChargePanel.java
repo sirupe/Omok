@@ -1,8 +1,6 @@
 package frames.store;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.io.File;
@@ -23,6 +21,27 @@ import enums.frames.searchPwdEnum;
 
 public class ChargePanel extends JPanel {
 	
+	private JLabel chargeLabel;
+	private JButton aThousand;
+	private JButton fiveThousand;
+	private JButton tenThousand;
+	private JButton fiftyThousand;
+	
+	private JLabel emailLabel;
+	private JTextField emailInput;
+	private JLabel at;
+	private JTextField emailAddr;
+	private JComboBox<String> emailAddrComboBox;
+	private String[] emailAddrstr;
+	
+	private JButton certify; 
+	private JTextField certifyText;
+	private JTextArea certifyTextArea;
+	private JTextArea certifyTime;
+	
+	private JButton confirm;
+	private JButton reset;
+
 	private JPanel chargePanel;
 	private JPanel emailPanel;
 	private JPanel certifyPanel;
@@ -51,12 +70,12 @@ public class ChargePanel extends JPanel {
 		this.chargePanel.setBounds(ChargeEnum.CHARGE_PANEL_SIZE_RECT.getRect());
 		this.chargePanel.setOpaque(false);
 		
-		JLabel chargeLabel = new JLabel("충전할금액");
-		chargeLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		chargeLabel.setBounds(ChargeEnum.CHARGE_LABEL_SIZE_RECT.getRect());
+		this.chargeLabel = new JLabel("충전할금액");
+		this.chargeLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.chargeLabel.setBounds(ChargeEnum.CHARGE_LABEL_SIZE_RECT.getRect());
 		
 		//1000원 버튼
-		JButton aThousand = new JButton() {
+		this.aThousand = new JButton() {
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -73,13 +92,13 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }	
 		};
-		aThousand.setFocusPainted(false);
-		aThousand.setBorderPainted(false);
-		aThousand.setContentAreaFilled(false);
-		aThousand.setBounds(ChargeEnum.CHARGE_1000_SIZE_RECT.getRect());
+		this.aThousand.setFocusPainted(false);
+		this.aThousand.setBorderPainted(false);
+		this.aThousand.setContentAreaFilled(false);
+		this.aThousand.setBounds(ChargeEnum.CHARGE_1000_SIZE_RECT.getRect());
 		
 		//5000원 버튼
-		JButton fiveThousand = new JButton() {
+		this.fiveThousand = new JButton() {
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -96,13 +115,13 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }
 		};
-		fiveThousand.setFocusPainted(false);
-		fiveThousand.setBorderPainted(false);
-		fiveThousand.setContentAreaFilled(false);
-		fiveThousand.setBounds(ChargeEnum.CHARGE_5000_SIZE_RECT.getRect());
+		this.fiveThousand.setFocusPainted(false);
+		this.fiveThousand.setBorderPainted(false);
+		this.fiveThousand.setContentAreaFilled(false);
+		this.fiveThousand.setBounds(ChargeEnum.CHARGE_5000_SIZE_RECT.getRect());
 		
 		//10000원 버튼
-		JButton tenThousand = new JButton(){
+		this.tenThousand = new JButton(){
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -119,13 +138,13 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }
 		};
-		tenThousand.setFocusPainted(false);
-		tenThousand.setBorderPainted(false);
-		tenThousand.setContentAreaFilled(false);
-		tenThousand.setBounds(ChargeEnum.CHARGE_10000_SIZE_RECT.getRect());
+		this.tenThousand.setFocusPainted(false);
+		this.tenThousand.setBorderPainted(false);
+		this.tenThousand.setContentAreaFilled(false);
+		this.tenThousand.setBounds(ChargeEnum.CHARGE_10000_SIZE_RECT.getRect());
 		
 		//50000원 버튼
-		JButton fiftyThousand = new JButton(){
+		this.fiftyThousand = new JButton(){
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -142,10 +161,10 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }
 		};
-		fiftyThousand.setFocusPainted(false);
-		fiftyThousand.setBorderPainted(false);
-		fiftyThousand.setContentAreaFilled(false);	
-		fiftyThousand.setBounds(ChargeEnum.CHARGE_50000_SIZE_RECT.getRect());
+		this.fiftyThousand.setFocusPainted(false);
+		this.fiftyThousand.setBorderPainted(false);
+		this.fiftyThousand.setContentAreaFilled(false);	
+		this.fiftyThousand.setBounds(ChargeEnum.CHARGE_50000_SIZE_RECT.getRect());
 		
 		//add
 		this.chargePanel.add(chargeLabel);
@@ -162,26 +181,26 @@ public class ChargePanel extends JPanel {
 		this.emailPanel.setLayout(null);
 		this.emailPanel.setBounds(ChargeEnum.EMAIL_PANEL_SIZE_RECT.getRect());
 
-		JLabel emailLabel = new JLabel("email 입력");
-		emailLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		emailLabel.setBounds(ChargeEnum.EMAIL_LABEL_SIZE_RECT.getRect());
+		this.emailLabel = new JLabel("email 입력");
+		this.emailLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.emailLabel.setBounds(ChargeEnum.EMAIL_LABEL_SIZE_RECT.getRect());
 	
-		JTextField emailInput = new JTextField();
-		emailInput.setBounds(ChargeEnum.EMAIL_INPUT_SIZE_RECT.getRect());
+		this.emailInput = new JTextField();
+		this.emailInput.setBounds(ChargeEnum.EMAIL_INPUT_SIZE_RECT.getRect());
 		
-		JLabel at = new JLabel("@");
-		at.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		at.setBounds(ChargeEnum.EMAIL_AT_SIZE_RECT.getRect());
+		this.at = new JLabel("@");
+		this.at.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.at.setBounds(ChargeEnum.EMAIL_AT_SIZE_RECT.getRect());
 		
-		JTextField emailAddr = new JTextField();
-		emailAddr.setBounds(ChargeEnum.EMAIL_ADDRESS_SIZE_RECT.getRect());
+		this.emailAddr = new JTextField();
+		this.emailAddr.setBounds(ChargeEnum.EMAIL_ADDRESS_SIZE_RECT.getRect());
 		
-		JComboBox<String> emailAddrComboBox = new JComboBox<String>();
-		String[] emailAddrstr = ChargeEnum.EMAIL_ADDRESS.getStrArr();
+		this.emailAddrComboBox = new JComboBox<String>();
+		this.emailAddrstr = ChargeEnum.EMAIL_ADDRESS.getStrArr();
 		for(int i = 0, size = emailAddrstr.length; i < size; i++) {
 			emailAddrComboBox.addItem(emailAddrstr[i]);
 		}
-		emailAddrComboBox.setBounds(ChargeEnum.EMAIL_ADDRESS_COMBOBOX_SIZE_RECT.getRect());
+		this.emailAddrComboBox.setBounds(ChargeEnum.EMAIL_ADDRESS_COMBOBOX_SIZE_RECT.getRect());
 		
 		
 		
@@ -197,12 +216,10 @@ public class ChargePanel extends JPanel {
 	
 	public void setcertifyPanel() {
 		this.certifyPanel.setOpaque(false);
-		Font font = new Font("a으라차차",Font.BOLD, 15);
-		
 		this.certifyPanel.setLayout(null);
 		this.certifyPanel.setBounds(ChargeEnum.CERTIFY_PANEL_SIZE_RECT.getRect());
 
-		JButton certify = new JButton() {
+		this.certify = new JButton() {
 			@Override
 	        protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -219,26 +236,26 @@ public class ChargePanel extends JPanel {
 		        }      
 		    }
 		};
-		certify.setFocusPainted(false);
-		certify.setBorderPainted(false);
-		certify.setContentAreaFilled(false);	
-		certify.setBounds(ChargeEnum.CERTIFY_BUTTON_SIZE_RECT.getRect());
+		this.certify.setFocusPainted(false);
+		this.certify.setBorderPainted(false);
+		this.certify.setContentAreaFilled(false);	
+		this.certify.setBounds(ChargeEnum.CERTIFY_BUTTON_SIZE_RECT.getRect());
 		
-		JTextField certifyText = new JTextField();
-		certifyText.setBounds(ChargeEnum.CERTIFY_NUM_SIZE_RECT.getRect());
+		this.certifyText = new JTextField();
+		this.certifyText.setBounds(ChargeEnum.CERTIFY_NUM_SIZE_RECT.getRect());
 		
-		JTextArea certifyTextArea = new JTextArea("인증번호를 다시 확인하세요");
-		certifyTextArea.setForeground(Color.RED);
-		certifyTextArea.setFont(searchPwdEnum.LABELFONT_DEFAULT.getFont());
-		certifyTextArea.setOpaque(false);
-		certifyTextArea.setBounds(ChargeEnum.CERTIFY_TEXTAREA_SIZE_RECT.getRect());
+		this.certifyTextArea = new JTextArea("인증번호를 다시 확인하세요");
+		this.certifyTextArea.setForeground(Color.RED);
+		this.certifyTextArea.setFont(searchPwdEnum.LABELFONT_DEFAULT.getFont());
+		this.certifyTextArea.setOpaque(false);
+		this.certifyTextArea.setBounds(ChargeEnum.CERTIFY_TEXTAREA_SIZE_RECT.getRect());
 		
 		
-		JTextArea certifyTime = new JTextArea("3:00");
-		certifyTime.setForeground(Color.RED);
-		certifyTime.setFont(JoinSizesEnum.LABELFONT_DEFAULT.getFont());
-		certifyTime.setOpaque(false);
-		certifyTime.setBounds(ChargeEnum.CERTIFY_TIME_SIZE_RECT.getRect());
+		this.certifyTime = new JTextArea("3:00");
+		this.certifyTime.setForeground(Color.RED);
+		this.certifyTime.setFont(JoinSizesEnum.LABELFONT_DEFAULT.getFont());
+		this.certifyTime.setOpaque(false);
+		this.certifyTime.setBounds(ChargeEnum.CERTIFY_TIME_SIZE_RECT.getRect());
 		
 		
 		
@@ -256,7 +273,7 @@ public class ChargePanel extends JPanel {
 		this.buttonsPanel.setBounds(ChargeEnum.BUTTONS_PANEL_SIZE_RECT.getRect());
 
 		//확인버튼
-		JButton confirm = new JButton() {
+		this.confirm = new JButton() {
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -274,13 +291,13 @@ public class ChargePanel extends JPanel {
 	        }	
 		};
 		
-		confirm.setFocusPainted(false);
-		confirm.setBorderPainted(false);
-		confirm.setContentAreaFilled(false);
-		confirm.setBounds(ChargeEnum.CONFIRM_BUTTON_SIZE_RECT.getRect());
+		this.confirm.setFocusPainted(false);
+		this.confirm.setBorderPainted(false);
+		this.confirm.setContentAreaFilled(false);
+		this.confirm.setBounds(ChargeEnum.CONFIRM_BUTTON_SIZE_RECT.getRect());
 		
 		//취소 버튼
-		JButton reset = new JButton() {
+		this.reset = new JButton() {
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -298,18 +315,13 @@ public class ChargePanel extends JPanel {
 	        }	
 		};
 		
-		reset.setFocusPainted(false);
-		reset.setBorderPainted(false);
-		reset.setContentAreaFilled(false);
-		reset.setBounds(ChargeEnum.RESET_BUTTON_SIZE_RECT.getRect());
-		
+		this.reset.setFocusPainted(false);
+		this.reset.setBorderPainted(false);
+		this.reset.setContentAreaFilled(false);
+		this.reset.setBounds(ChargeEnum.RESET_BUTTON_SIZE_RECT.getRect());
 	
-		
 		this.buttonsPanel.add(confirm);
 		this.buttonsPanel.add(reset);
-		this.add(this.buttonsPanel);
-		
+		this.add(this.buttonsPanel);		
 	}
-
-
 }

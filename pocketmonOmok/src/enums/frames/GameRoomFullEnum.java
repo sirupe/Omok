@@ -18,18 +18,18 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	//들어 가려는 방의 정보 --- > 빈방인지 아닌지
 	GAMEROOM_CONFIRM_LABEL(new Rectangle(
-			(int)(GAMEROOMFULLFRAME_POSITION_X.getSize() / 100 * 13),
-			(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() / 100 * 15),
-			(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() / 100 * 70),
-			(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() / 100 * 40)
+			(int)(GAMEROOMFULLFRAME_POSITION_X.getSize() * 0.13),
+			(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() * 0.15),
+			(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() * 0.7),
+			(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() * 0.4)
 			)),
 	
 	//버튼 생성
 	GAMEROOM_CONFIRM_BUTTON(new Rectangle(
-				(int)(GAMEROOMFULLFRAME_POSITION_X.getSize() / 100 * 22),
-				(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() / 100 * 70),
-				(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() / 100 * 25),
-				(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() / 100 * 15)
+				(int)(GAMEROOMFULLFRAME_POSITION_X.getSize() * 0.22),
+				(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() * 0.42),
+				(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() * 0.25),
+				(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() * 0.15)
 				)),
 	
 	//에러 메세지색깔

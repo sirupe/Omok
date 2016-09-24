@@ -76,5 +76,9 @@ public class SearchChangePanel extends JPanel {
 		this.searchChangePanel.add(changeConfirmMsgLabel);
 		this.searchChangePanel.add(changeConfirmButton);
 		}
+	public static void main(String[] args) throws IOException {
+		new SearchChangePanel();
+	}
+	
 		
 	}

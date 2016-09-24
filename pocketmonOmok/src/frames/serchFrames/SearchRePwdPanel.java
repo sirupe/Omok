@@ -24,21 +24,26 @@ public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
 	
+	private JLabel searchPwdLabel;
+	private JLabel searchRePwdLabel;
+	private JTextField searchPwdText;
+	private JTextField searchRePwdText;
+	private JLabel searchRePwdErrorLabel;
+	private JButton searchConfirmButton;
+
 	public SearchRePwdPanel() throws IOException {
+<<<<<<< HEAD
+		
 		this.setLayout(null);
-		
-//		this.searchRePwdPanel   = new JPanel();
-		
+=======
+		this.setLayout(null);
+
+>>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 		this.setsearchPwdPanel();
+		
 	} //생성자
-	
-	
-	
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdPanel() throws IOException {
-
-//		this.searchRePwdPanel.setLayout(null);
-//		this.searchRePwdPanel.setOpaque(false);
 		
 		// 패널의 배경이미지
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -54,38 +59,48 @@ public class SearchRePwdPanel extends JPanel {
 				searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 				);
 		//비밀번호 라벨
-		JLabel searchPwdLabel = new JLabel("PW");
-		searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
-		searchPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		
+		this.searchPwdLabel = new JLabel("PW");
+		this.searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
+		this.searchPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		//비밀번호 입력창
+<<<<<<< HEAD
+		this.searchPwdText = new JTextField();
+		this.searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
+		this.searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+=======
 		JTextField searchPwdText = new JTextField();
 		searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
-		searchPwdText.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
 		searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+>>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 
 		// 재비밀번호 라벨
-		JLabel searchRePwdLabel = new JLabel("PW재입력");
-		searchRePwdLabel.setBounds(searchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
-		searchRePwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchRePwdLabel = new JLabel("PW재입력");
+		this.searchRePwdLabel.setBounds(searchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
+		this.searchRePwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 제비밀번호 텍스트창
+<<<<<<< HEAD
+		this.searchRePwdText = new JTextField();
+		this.searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
+		this.searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+=======
 		JTextField searchRePwdText = new JTextField();
 		searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
-		searchRePwdText.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
 		searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+>>>>>>> c1b9ddef1d3260d234ae45ada6f4dff569088eca
 		
 		// 에러 메세지 라벨
-		JLabel searchRePwdErrorLabel = new JLabel
+		this.searchRePwdErrorLabel = new JLabel
 				("<html>비밀번호가 일치하지 않습니다. "
 				+ "<br>다시 입력해주세요<br></html>");
 		searchRePwdErrorLabel.setBounds(searchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
-		searchRePwdErrorLabel.setBorder(searchRePwdEnum.LABEL_DEFAULT.getBorder());
 		searchRePwdErrorLabel.setFont(searchIdEnum.LABELFONT_ERROR.getFont());
-		
+		searchRePwdErrorLabel.setForeground(searchIdEnum.LABELCOLOR_ERROR.getColor());
 		//확인 버튼창
 		
-		JButton searchConfirmButton = new JButton() {
+		this.searchConfirmButton = new JButton() {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -102,20 +117,19 @@ public class SearchRePwdPanel extends JPanel {
 				}		
 			}
 		};	
+		this.searchConfirmButton.setBounds(searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
+//				
 		this.add(searchPwdLabel);
 		this.add(searchRePwdText);
 		this.add(searchPwdText);
 		this.add(searchRePwdLabel);
 		this.add(searchRePwdErrorLabel);
 		this.add(searchConfirmButton);
+	
 		
-//		this.searchRePwdPanel.add(searchPwdLabel);
-//		this.searchRePwdPanel.add(searchRePwdText);
-//		this.searchRePwdPanel.add(searchPwdText);
-//		this.searchRePwdPanel.add(searchRePwdLabel);
-//		this.searchRePwdPanel.add(searchRePwdErrorLabel);
-//		this.searchRePwdPanel.add(searchConfirmButton);
+
 
 	
 	}
+
 }
