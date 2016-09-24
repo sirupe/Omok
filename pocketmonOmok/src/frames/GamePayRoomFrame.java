@@ -3,14 +3,8 @@ package frames;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -21,8 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GamePayRoomEnum;
-import enums.frames.GameStoreEnum;
-import enums.frames.searchIdEnum;
 
 public class GamePayRoomFrame extends JFrame {
 	private Image icon;
