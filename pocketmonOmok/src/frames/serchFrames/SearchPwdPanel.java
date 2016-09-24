@@ -51,7 +51,7 @@ public class SearchPwdPanel extends JPanel {
 		this.add(searchIdLabel);
 		this.add(searchemailLabel);
 		
-//		//에러 메세지 레이블
+		//에러 메세지 레이블
 		String searchErrorMsg = "<html>3분초과가 되었습니다.<br>다시 인증을 받아 주세요<br></html>";
 		this.searchErrorMsgLabel = new JLabel(searchErrorMsg);
 		this.searchErrorMsgLabel.setForeground(searchPwdEnum.LABELCOLOR_ERROR.getColor());

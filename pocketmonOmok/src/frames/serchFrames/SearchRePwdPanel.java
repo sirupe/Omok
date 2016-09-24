@@ -24,6 +24,7 @@ public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
 	
+<<<<<<< HEAD
 	private JLabel searchPwdLabel;
 	private JLabel searchRePwdLabel;
 	private JTextField searchPwdText;
@@ -31,10 +32,12 @@ public class SearchRePwdPanel extends JPanel {
 	private JLabel searchRePwdErrorLabel;
 	private JButton searchConfirmButton;
 
+=======
+>>>>>>> f9be61cf3e8236573024bfb3815f0502d58d1476
 	public SearchRePwdPanel() throws IOException {
 		this.setLayout(null);
 		
-		this.searchRePwdPanel   = new JPanel();
+//		this.searchRePwdPanel   = new JPanel();
 		
 		this.setsearchPwdPanel();
 	} //생성자
@@ -44,8 +47,8 @@ public class SearchRePwdPanel extends JPanel {
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdPanel() throws IOException {
 
-		this.searchRePwdPanel.setLayout(null);
-		this.searchRePwdPanel.setOpaque(false);
+//		this.searchRePwdPanel.setLayout(null);
+//		this.searchRePwdPanel.setOpaque(false);
 		
 		// 패널의 배경이미지
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -93,29 +96,36 @@ public class SearchRePwdPanel extends JPanel {
 		//확인 버튼창
 		
 		JButton searchConfirmButton = new JButton() {
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			try {
-				g.drawImage(ImageIO.read(
-					new File("resources/signUp/confirm.jpg")), 
-					0, 
-					0, 
-					searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
-					searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
-					this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}		
-		}
-	};	
-		this.searchRePwdPanel.add(searchPwdLabel);
-		this.searchRePwdPanel.add(searchRePwdText);
-		this.searchRePwdPanel.add(searchPwdText);
-		this.searchRePwdPanel.add(searchRePwdLabel);
-		this.searchRePwdPanel.add(searchRePwdErrorLabel);
-		this.searchRePwdPanel.add(searchConfirmButton);
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/signUp/confirm.jpg")), 
+						0, 
+						0, 
+						searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+						searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}		
+			}
+		};	
+		this.add(searchPwdLabel);
+		this.add(searchRePwdText);
+		this.add(searchPwdText);
+		this.add(searchRePwdLabel);
+		this.add(searchRePwdErrorLabel);
+		this.add(searchConfirmButton);
 		
+//		this.searchRePwdPanel.add(searchPwdLabel);
+//		this.searchRePwdPanel.add(searchRePwdText);
+//		this.searchRePwdPanel.add(searchPwdText);
+//		this.searchRePwdPanel.add(searchRePwdLabel);
+//		this.searchRePwdPanel.add(searchRePwdErrorLabel);
+//		this.searchRePwdPanel.add(searchConfirmButton);
+
 	
 	}
 }

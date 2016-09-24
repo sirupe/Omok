@@ -19,6 +19,7 @@ import datasDTO.RoomAndUserListDTO;
 import datasDTO.ServerMessageDTO;
 import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ImageEnum;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
@@ -48,6 +49,24 @@ public class OmokServer {
 		this.loginUsersMap = new HashMap<String, OmokPersonalServer>();
 		this.gameRoomList  = new ArrayList<GameRoomInfoVO>();
 		this.userIDList    = new ArrayList<UserGamedataInfoDTO>();
+		
+//TODO test data ---------------------------------------------------------
+		GameRoomInfoVO vo = new GameRoomInfoVO();
+		vo.setImage(ImageEnum.WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP.getMap().get("O"));
+		vo.setOwner("test");
+		vo.setPersons(1);
+		vo.setRoomName("test중임다");
+		vo.setRoomNumber(1);
+		GameRoomInfoVO vo2 = new GameRoomInfoVO();
+		vo2.setImage(ImageEnum.WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP.getMap().get("X"));
+		vo2.setOwner("test");
+		vo2.setPersons(1);
+		vo2.setRoomName("test중임다");
+		vo2.setRoomNumber(1);
+		
+		this.gameRoomList.add(vo);
+		this.gameRoomList.add(vo2);
+//------------------------------------------------------------------------
 	}
 	
 	public void gameServerOn() throws IOException {
@@ -102,7 +121,6 @@ public class OmokServer {
 			
 			roomAndUserListDTO.setGameRoomList(this.gameRoomList);
 			roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(((UserPersonalInfoDTO)listDTO).getUserID()));
-			System.out.println(this.gamedataDAO.userGameData(((UserPersonalInfoDTO)listDTO).getUserID()));
 			personalServer.getServerOutputStream().writeObject(roomAndUserListDTO);
 			
 			UserGamedataInfoDTO newUserDTO = roomAndUserListDTO.getUserGameData();

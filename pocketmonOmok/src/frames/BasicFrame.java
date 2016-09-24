@@ -19,8 +19,9 @@ import datasDTO.AbstractEnumsDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
+import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
-import frames.waitingRoomPanels.WaitingRoomPanel;
+import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
 
 @SuppressWarnings("serial")
@@ -84,9 +85,9 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.newGameRoomPanel();
 		this.setLayout(this.cardLayout);
 
-		//this.add("loginPanel", this.loginPanel);
+		this.add("loginPanel", this.loginPanel);
 		this.add("waitingRoomPanel", this.waitingRoomPanel);
-		//this.add("gameRoomPanel", this.gameRoomPanel);
+		this.add("gameRoomPanel", this.gameRoomPanel);
 
 		this.setTitle("Login");
 		this.setVisible(true);
