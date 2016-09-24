@@ -1,16 +1,14 @@
 package datasDAO;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import datasDTO.UserPersonalInfoDTO;
-import enums.etc.ServerActionEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 
-public class JoinDAO implements Serializable {
+public class JoinDAO {
 	// ID 중복체크. 리턴이 0이면 사용 가능, 1이면 이미 존재하는 ID.
 	public UserPersonalInfoDTO checkOverlapID(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
@@ -47,7 +45,7 @@ public class JoinDAO implements Serializable {
 		return resultDTO;
 	}
 	
-	public int userJoin(UserPersonalInfoDTO personalDTO) {
+	public int creatUserPersonalInfo(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		
@@ -98,4 +96,107 @@ public class JoinDAO implements Serializable {
 		
 		return result;
 	}
+	
+	public int createUserGameDataInfo(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		int result = 0;
+		
+		try {
+			connection = dbPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("INSERT INTO USER_GAMEDATA_INFO ( ");
+			sql.append("USER_ID, ");
+			sql.append("USER_GRADE, ");
+			sql.append("USER_GAME_COUNT, ");
+			sql.append("USER_WIN_COUNT, ");
+			sql.append("USER_SCORE ");
+			sql.append(") VALUES (?, '초보', 0, 0, 0)");
+			
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserID());
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
+	}
+	
+	public int createUserStoreInfo(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		int result = 0;
+		
+		try {
+			connection = dbPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("INSERT INTO USER_STORE_INFO ( ");
+			sql.append("USER_ID, ");
+			sql.append("ITEM_COLOR_MATCHING, ");
+			sql.append("ITEM_INCREASE_TIME, ");
+			sql.append("ITEM_RETURN, ");
+			sql.append("ITEM_MONEY ");
+			sql.append(") VALUES (?, 0, 0, 0, 0)");
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserID());
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
+	}
+	
+	public int createUserSkinInfo(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		int result = 0;
+		
+		try {
+			connection = dbPool.getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("INSERT INTO USER_STORE_SKIN_INFO ( ");
+			sql.append("USER_ID, ");
+			sql.append("SKIN_NYAONG, ");
+			sql.append("SKIN_LEESANGHAEC, ");
+			sql.append("SKIN_ZAMMANBO, ");
+			sql.append("SKIN_CCOBUGI, ");
+			sql.append("SKIN_PAIRY,");
+			sql.append("SKIN_PICACHU, ");
+			sql.append("SKIN_PURIN ");
+			sql.append(") VALUES (?, 0, 0, 0, 0, 0, 0, 0)");
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserID());
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
+		
+	}
 }
+
+//INSERT INTO USER_STORE_SKIN_INFO (
+//USER_ID,
+//SKIN_NYAONG, 
+//SKIN_LEESANGHAEC, 
+//SKIN_ZAMMANBO, 
+//SKIN_CCOBUGI, 
+//SKIN_PAIRY,
+//SKIN_PICACHU,
+//SKIN_PURIN 
+//) VALUES ('sirupe11', 0, 0, 0, 0, 0, 0, 0);

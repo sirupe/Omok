@@ -9,7 +9,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 
 public class UserGamedataInfoDAO {
-	public UserGamedataInfoDTO userGameData(UserPersonalInfoDTO personalDTO) {
+	public UserGamedataInfoDTO userGameData(String id) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		ResultSet resultSet   = null;
@@ -25,7 +25,7 @@ public class UserGamedataInfoDAO {
 			sql.append("WHERE USER_ID=?");
 			
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, personalDTO.getUserID());
+			ps.setString(1, id);
 			resultSet = ps.executeQuery();
 			
 			while(resultSet.next()) {

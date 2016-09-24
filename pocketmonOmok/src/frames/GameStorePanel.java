@@ -55,13 +55,9 @@ public class GameStorePanel extends JPanel {
 		this.setItemPanel();
 		this.setOutPanel();
 		
-		this.setOpaque(false);
-		
+		this.setOpaque(false);	
 		this.setVisible(true);	
-	}
-
-
-	
+	}	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -116,7 +112,6 @@ public class GameStorePanel extends JPanel {
 		this.userMoneyPanel.add(userConfirm);
 		this.userMoneyPanel.add(userMoney);
 		this.userMoneyPanel.setOpaque(false);
-
 		this.add(this.userMoneyPanel);		
 	}
 //========================================================================================================
@@ -171,7 +166,7 @@ public class GameStorePanel extends JPanel {
 		this.add(this.itemChoicePanel);
 }
 	
-	@SuppressWarnings("serial")
+	@SuppressWarnings({ "serial", "unchecked" })
 	public HashMap<String, List<Map<String, Object>>> getResourceData() {
 		return new HashMap<String, List<Map<String, Object>>>() {
 			{
