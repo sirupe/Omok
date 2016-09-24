@@ -594,8 +594,13 @@ public class WaitingRoomPanel extends JPanel {
 		
 		Object o = tableModel.getValueAt(2, 1);
 		
-		for(int i = 1; i <= 20; i++) {
-			
+		for(int i = 0, size = tableModel.getRowCount(); i < size; i++) {
+			o = tableModel.getValueAt(2, i);
+			for(int j = 1; i <= 20; j++) {
+				if(Integer.parseInt(o.toString()) == j) {
+					
+				}
+			}
 		}
 
 	}
