@@ -1,6 +1,8 @@
 package enums.frames;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public enum WaitingRoomSizesEnum {
 	//로그인창의 x,y 값
@@ -172,12 +174,28 @@ public enum WaitingRoomSizesEnum {
 	MY_INFO_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.36)),
 	//내정보 x,y 위치
 	MY_INFO_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.72)),
-	MY_INFO_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.58));
+	MY_INFO_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.58)),
 
+	
+	//==================================FONTSIZE&COLOR==================================
+	
+	FONTCOLOR_ERROR(Color.red),
+	FONTCOLOR_DEFAULT(Color.green),
+	
+	
+	LABELFONT_SIZE60(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 60)),
+	LABELFONT_SIZE70(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 70)),
+	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 80)),
+	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 90)),
+	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100));
+	
+	
+	
 	
 	
 	private int size;
-	
+	private Font font;
+	private Color color;
 	private Dimension dimension;
 	
 	private WaitingRoomSizesEnum() {}
@@ -188,13 +206,25 @@ public enum WaitingRoomSizesEnum {
 	private WaitingRoomSizesEnum(int x) {
 		this.size = x;
 	}
-	
+	private WaitingRoomSizesEnum(Font font) {
+		this.font = font;
+	}
+	private WaitingRoomSizesEnum(Color color) {
+		this.color = color;
+	}
 	private WaitingRoomSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
+	
 	public int getSize() {
 		return size;
+	}
+	public Font getfont() {
+		return font;
+	}
+	public Color getColot() {	
+		return color;
 	}
 	public Dimension getDimension() {
 		return dimension;

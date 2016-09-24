@@ -65,7 +65,7 @@ public class ClientAccept {
 	}
 	
 	// 회원가입 화면에 대한 서버의 응답
-	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) {
+	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		// 아이디 중복체크
 		System.out.println(data.getUserAction());
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
@@ -91,12 +91,12 @@ public class ClientAccept {
 		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
 			System.out.println("회원가입");
 			if(data.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
-				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입이 완료되었습니다.");
+				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입 완료:)");
 				this.basicFrame.getJoinFrame().setVisible(false);
 				this.basicFrame.getJoinFrame().dispose();
 			
 			} else {
-				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "오류가 발생하였습니다 다시 시도해주세요.");
+				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "오류 발생 :(");
 				this.basicFrame.getJoinFrame().setVisible(false);
 				this.basicFrame.getJoinFrame().dispose();
 				

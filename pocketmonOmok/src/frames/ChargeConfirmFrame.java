@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import enums.frames.ChargeEnum;
 import enums.frames.GameRoomCreateEnum;
+import enums.frames.WaitingRoomSizesEnum;
 import enums.frames.searchIdEnum;
 
 public class ChargeConfirmFrame extends JFrame{
@@ -39,7 +40,12 @@ public class ChargeConfirmFrame extends JFrame{
 		);
 		
 		this.success = new JLabel("충전 완료 :)");	
+<<<<<<< HEAD
 		this.success.setFont(ChargeEnum.LABELFONT_DEFAULT.getFont());
+=======
+		//Font font = new Font("a으라차차" , Font.BOLD , 24);
+		this.success.setFont(font);
+>>>>>>> 9e60f838960ec564081067d8ec1fc901c6eaeb42
 		this.success.setBounds(ChargeEnum.CHARGE_SUCCESS_TEXT_SIZE_RECT.getRect());		
 		
 		this.confirm = new JButton(){

@@ -137,7 +137,17 @@ public enum CorrectEnum {
 			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height * 0.6),
 			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.21),
 			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height  * 0.15)
+	)),
+	
+	/*************************회원가입 완료*************************/
+	//"회원가입 완료 "라벨 위치, 크기
+	JOIN_SUCCESS_TEXT_SIZE_RECT(new Rectangle(
+			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.3 ),
+			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height * 0.24),
+			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.7),
+			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height  * 0.23)
 	));
+	
 	
 	private Rectangle rect;
 	private int size;
