@@ -97,14 +97,15 @@ public class OmokServer {
 				// 사용자에게 보낼 현재 접속자 목록에 추가
 				this.userIDList.add(gamedataDAO.getUserGrade(resultDTO));
 				// 유저에게 로그인 성공정보 전송
-				personalServer.getServerOutputStream().writeObject(resultDTO);
+//				personalServer.getServerOutputStream().writeObject(resultDTO);
 			//클라이언트의 ID가 이미 접속자리스트에 존재한다면
 			} else {
 				resultDTO.setServerAction(ServerActionEnum.LOGIN_FAIL_OVERLAP_ACCEPT);
 				System.out.println(resultDTO.getServerAction());
-				personalServer.getServerOutputStream().writeObject(resultDTO);
-			}			
+//				personalServer.getServerOutputStream().writeObject(resultDTO);
+			}
 		}
+		personalServer.getServerOutputStream().writeObject(resultDTO);
 	}
 	
 //대기실--------------------------------------------------------------------------
@@ -131,6 +132,7 @@ public class OmokServer {
 		roomAndUserListDTO.setUserGameData(this.gamedataDAO.userGameData(((UserPersonalInfoDTO)listDTO).getUserID()));
 		personalServer.getServerOutputStream().writeObject(roomAndUserListDTO);
 		
+		// 현재 접속중인 유저들에게 새로운 접속자의 정보를 전송
 		UserGamedataInfoDTO newUserDTO = roomAndUserListDTO.getUserGameData();
 		newUserDTO.setPosition(UserPositionEnum.POSITION_WAITING_ROOM);
 		newUserDTO.setServerAction(ServerActionEnum.LOGIN_NEW_USER);
@@ -141,10 +143,18 @@ public class OmokServer {
 		}
 	}
 	
-	public void waitingRoom_CreateRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
+	// 유저에게서 방생성하겠다 라는 메세지를 받으면 서버의 게임방리스트에 방을 추가해준 후 사용자에게 결과를 보내준다.
+	// 방이 20개가 넘는다면 방만들기 실패.
+	public void waitingRoom_CreateRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) throws IOException {
 		GameRoomInfoVO gameRoomInfo = (GameRoomInfoVO)listDTO;
+		if(this.gameRoomList.size() < 20) {
+			this.gameRoomList.add(gameRoomInfo);
+			gameRoomInfo.setServerAction(ServerActionEnum.GAME_CREATEROOM_SUCCESS);
+		} else {
+			gameRoomInfo.setServerAction(ServerActionEnum.GAME_CREATEROOM_FAIL);			
+		}
 		
-		
+		personalServer.getServerOutputStream().writeObject(gameRoomInfo);
 	}
 //회원가입--------------------------------------------------------------------------
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {

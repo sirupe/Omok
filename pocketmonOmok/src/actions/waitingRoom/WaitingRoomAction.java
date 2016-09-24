@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import actions.adapters.Adapters;
 import datasDTO.GameRoomInfoVO;
+import enums.etc.ImageEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import frames.BasicFrame;
@@ -66,11 +67,14 @@ public class WaitingRoomAction extends Adapters {
 		gameRoomInfo.setUserAction(UserActionEnum.USER_CREATE_ROOM);
 		gameRoomInfo.setRoomName(this.createRoom.getCreateRoomNameText().getText());
 		gameRoomInfo.setOwner(this.basicFrame.getClientAccept().getUserID());
-//		gameRoomInfo.setRoomNumber(this.basicFrame.);
-		
+		gameRoomInfo.setRoomNumber(this.basicFrame.getWaitingRoomPanel().getRoomNumber());
+		gameRoomInfo.setPersons(1);
 		String roomPwd = null;
 		if(this.openPrivate == 1) {
+			gameRoomInfo.setImage(ImageEnum.WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP.getMap().get("비밀방"));
 			gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
+		} else {
+			gameRoomInfo.setImage(ImageEnum.WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP.getMap().get("입장가능"));
 		}
 		
 		System.out.println(gameRoomInfo.toString());

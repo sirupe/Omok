@@ -27,6 +27,8 @@ public class OmokPersonalServer extends Thread {
 			while(isAccept) {
 				Object object = this.serverInputStream.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO) object;
+				System.out.println("유저의 현재 위치 : " + userPosition.getPosition());
+				System.out.println("유저의 메세지 : " + userPosition.getUserAction());
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.omokServer.login(userPosition, this);

@@ -24,6 +24,8 @@ public class ClientReciever extends Thread {
 			while(isAccept) {
 				Object object = this.clientIS.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
+				System.out.println("유저의 현재위치 : " + userPosition.getPosition());
+				System.out.println("서버에서의 메세지 : " + userPosition.getServerAction());
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);

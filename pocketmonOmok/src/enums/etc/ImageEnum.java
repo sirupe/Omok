@@ -56,9 +56,9 @@ public enum ImageEnum {
 	
 	private static Map<String, String> enterRoomCheckImage() {
 		Map<String, String> images = new HashMap<String, String>();
-		images.put("O", "resources/waitingRoom/admission.png");
-		images.put("=", "resources/waitingRoom/private.png");
-		images.put("X", "resources/waitingRoom/NoAdmittance.png");
+		images.put("입장가능", "resources/waitingRoom/admission.png");
+		images.put("비밀방", "resources/waitingRoom/private.png");
+		images.put("입장불가", "resources/waitingRoom/NoAdmittance.png");
 		
 		return images;
 	}

@@ -40,7 +40,6 @@ public class ClientAccept {
 
 	public void loginSuccessCheck(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)data;
-		System.out.println(userPersonalDTO.getServerAction());
 		
 		// 서버의 메세지
 		switch(userPersonalDTO.getServerAction()) {
@@ -109,22 +108,48 @@ public class ClientAccept {
 
 	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		// 서버에서 보낸 정보가 "새로운 유저가 접속했다" 는 정보라면
-		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
-			System.out.println(data.getServerAction() + "if");
+		switch(data.getServerAction()) {
+		case LOGIN_NEW_USER :
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
 			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
-		
+			break;
+			
 		// 서버에서 보낸 정보가 "대기실 입장" 이라면
-		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
-			System.out.println(data.getServerAction() + "else");
+		case WAITING_ROOM_ENTER :
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			
-			//-----------TODO Test데이터----------------//
+			//----------- Test데이터----------------//
 			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
 			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
 			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
 			this.basicFrame.inWaitingRoom();
+			break;
+		
+		// 서버에서 보낸 정보가 "방생성 성공" 이라면 TODO
+		case GAME_CREATEROOM_SUCCESS :
+			this.basicFrame.getWaitingRoomPanel().getCreateGameRoomFrame().dispose();
+			this.basicFrame.setVisible(true);
+			break;
+			
+		// 서버에서 보낸 정보가 "방생성 실패" 라면
+		case GAME_CREATEROOM_FAIL :
+			break;
+		default:
+			break;
+			
 		}
+//		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
+//		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
+//			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
+//			
+//			//-----------TODO Test데이터----------------//
+//			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
+//			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
+//			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
+//			this.basicFrame.inWaitingRoom();
+//		} else if() {
+//			
+//		}
 	}
 	
 	public void gameExit() throws IOException {

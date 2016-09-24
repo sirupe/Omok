@@ -163,17 +163,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.playerList.setOpaque(false);
 			
 	}
-
+//TODO
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
 		
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
 		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
 
-		for(String s : this.imageMap.keySet()) {
-			System.out.println(s);
-		}
-				
 		this.playerList.setCellRenderer(new PlayerRenderer());
 		
 		this.playerListScroll.setViewportView(this.playerList);
@@ -185,9 +181,6 @@ public class WaitingRoomPanel extends JPanel {
 	
 	/***************************접속자 리스트 클래스***************************/
 	public class PlayerRenderer extends DefaultListCellRenderer {
-		
-
-		
 		public Component getListCellRendererComponent(JList player, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
@@ -617,21 +610,23 @@ public class WaitingRoomPanel extends JPanel {
 	public int getRoomNumber() {
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
 		Object o;
-		int roomNum = 0;
+		int roomNum = 1;
 		
 		// 방번호 구하기. 1 ~ 20 중 가장 작은 생성되지 않은 방번호를 얻어온다.
-		for(int i = 1, j, size; i <= 20; i++) {
-			for(j = 0, size = tableModel.getRowCount(); j <= size; j++) {
-				o = tableModel.getValueAt(2, j);
-				if(Integer.parseInt(o.toString()) == i) {
-					break;
+		if(tableModel.getRowCount() > 0) {			
+			for(int i = 1, j, size; i <= 20; i++) {
+				for(j = 0, size = tableModel.getRowCount(); j <= size; j++) {
+					o = tableModel.getValueAt(2, j);
+					if(Integer.parseInt(o.toString()) == i) {
+						break;
+					}
 				}
+				
+				if(j == size) {
+					roomNum = i;
+					break;
+				}	
 			}
-			
-			if(j == size) {
-				roomNum = i;
-				break;
-			}	
 		}
 		return roomNum;
 	}
@@ -644,11 +639,11 @@ public class WaitingRoomPanel extends JPanel {
 		
 	}
 	
-	public JTable getWaitingRoomTable() {
-		return waitingRoomTable;
-	}
-	
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
+	}
+	
+	public CreateGameRoomFrame getCreateGameRoomFrame() {
+		return createGameRoomFrame;
 	}
 }

@@ -22,6 +22,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 		this.loginPanel = loginPanel;
 	}
 	
+	// 로그인 버튼 액션이 들어오면 실행됨
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// id입력칸이나 pw입력칸 중 하나만 비어있어도 입력하라는 메세지 출력.
