@@ -70,6 +70,19 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 10)
 			)),
 	
+	GAME_ROOM_UP_ADD(new Rectangle(
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 11),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 0),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 8),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 5)
+			)),
+
+	GAME_ROOM_DOWN_SUB(new Rectangle(
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 11),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 8),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 8),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 5)
+			)),
 //=====================================================================	
 	// 결제 버튼
 	GAME_ROOM_PAY_BUTTON(new Rectangle(
@@ -99,7 +112,7 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	//텍스트 테두리 없애기
 	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),
 	
-	LABEL_LINE(new MatteBorder(0,0,0, 0, Color.pink));
+	LABEL_LINE(new MatteBorder(2,2,2, 2, Color.pink));
 
 	private Dimension dimension;
 	private int size;

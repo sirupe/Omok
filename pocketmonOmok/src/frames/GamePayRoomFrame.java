@@ -33,17 +33,15 @@ public class GamePayRoomFrame extends JFrame {
 	private JLabel equalsLabel;
 	private JLabel totalAmountLabel;
 	
-	private JPanel q;
+	private JPanel itemquanity;
 	
 	private JButton payButton;
 	private JButton cancelButton;
 	private Image backGround;
 	
 	public GamePayRoomFrame() throws IOException {
-
 		
-		this.q = new JPanel();
-
+		this.itemquanity = new JPanel();
 		this.imageIcon = new JLabel(""); //안에 구입할 아이템이 들어 가야 한다.
 		
 		this.imageIcon.setOpaque(true);
@@ -57,7 +55,6 @@ public class GamePayRoomFrame extends JFrame {
 		this.equalsLabel      = new JLabel("=");
 		this.totalAmountLabel = new JLabel();
 		this.totalAmountLabel.setOpaque(true);
-		this.totalAmountLabel.setBackground(Color.BLUE);
 	
 		
 		this.payButton = new JButton();
@@ -91,17 +88,64 @@ public class GamePayRoomFrame extends JFrame {
 		this.imageIcon.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
 		this.add(imageIcon);	
 	}
+	//결제라인
 	public void setPayLine() {
-		this.q.setBounds(GamePayRoomEnum.GAME_ROOM_AMOUNT_PANEL.getRectangle());
-		this.q.setLayout(null);
-		this.q.setBackground(Color.blue);
+		//아이템 *수량 -- > 패널로 묶기
+		this.itemquanity.setBounds(GamePayRoomEnum.GAME_ROOM_AMOUNT_PANEL.getRectangle());
+		this.itemquanity.setLayout(null);
+		//this.itemquanity.setBackground(Color.blue);
 		
+		//수량을 넣을 수 있는 텍스트 필드 
 		JTextField userAmountText = new JTextField();
 		userAmountText.setBounds(GamePayRoomEnum.GAME_ROOM_USER_AMOUNT_PANEL.getRectangle());
 		userAmountText.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
-		userAmountText.setBorder(GamePayRoomEnum.LABEL_DEFAULT.getEmptyBorder());
-		userAmountText.setBackground(Color.red);
-				
+		userAmountText.setBorder(GamePayRoomEnum.LABEL_LINE.getMatterBorder());
+		userAmountText.setOpaque(false);
+
+		//증가하는 버튼
+		JButton up = new JButton() {	
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/store/up.png")), 
+						0, 
+						0, 
+						GamePayRoomEnum.GAME_ROOM_UP_ADD.getRectangle().width,
+						GamePayRoomEnum.GAME_ROOM_UP_ADD.getRectangle().height,
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		// 감소하는 버튼
+		JButton down = new JButton() {	
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/store/down.png")), 
+						0, 
+						0, 
+						GamePayRoomEnum.GAME_ROOM_DOWN_SUB.getRectangle().width,
+						GamePayRoomEnum.GAME_ROOM_DOWN_SUB.getRectangle().height,
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		
+		up.setBounds(GamePayRoomEnum.GAME_ROOM_UP_ADD.getRectangle());
+		up.setIconTextGap(up.getIconTextGap() - 15);
+		
+		down.setBounds(GamePayRoomEnum.GAME_ROOM_DOWN_SUB.getRectangle());
+		down.setIconTextGap(down.getIconTextGap() - 15);
+
+		
 
 		this.basicMoneyLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_BASICMONEY_LABEL.getRectangle());
 		this.basicMoneyLabel.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
@@ -115,6 +159,7 @@ public class GamePayRoomFrame extends JFrame {
 		
 		this.totalAmountLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_TOTALMONEY_LABEL.getRectangle());
 		this.totalAmountLabel.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
+		this.totalAmountLabel.setBorder(GamePayRoomEnum.LABEL_LINE.getMatterBorder());
 		
 
 		this.add(totalAmountLabel);
@@ -123,13 +168,24 @@ public class GamePayRoomFrame extends JFrame {
 		this.add(divLabel);
 		//q.setOpaque(false);
 		
-		this.q.add(userAmountText);
-		this.add(q);
+		
+		up.setFocusPainted(false);
+		up.setBorderPainted(false);
+		up.setContentAreaFilled(false);
+		
+		down.setFocusPainted(false);
+		down.setBorderPainted(false);
+		down.setContentAreaFilled(false);
+		
+		this.itemquanity.add(up);
+		this.itemquanity.add(down);
+		this.itemquanity.add(userAmountText);
+		this.add(itemquanity);
 		
 		System.out.println(GamePayRoomEnum.GAME_ROOM_PAY_ITEM_LABEL.getRectangle());
-
 	}
 	public void setButtonLine() throws IOException {
+		//결제 버튼
 		this.payButton.setIconTextGap(this.payButton.getIconTextGap() - 15 );
 		this.payButton.setIcon(
 				new ImageIcon(ImageIO.read(
@@ -141,7 +197,7 @@ public class GamePayRoomFrame extends JFrame {
 						
 		this.payButton.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_BUTTON.getRectangle());
 		
-		
+		//취소 버튼
 		this.cancelButton.setIconTextGap(this.cancelButton.getIconTextGap() - 15 );
 		this.cancelButton.setIcon(
 				new ImageIcon(ImageIO.read(
