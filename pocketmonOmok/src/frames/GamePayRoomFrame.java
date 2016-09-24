@@ -88,7 +88,6 @@ public class GamePayRoomFrame extends JFrame {
 	public void setImageLine() {
 		//상품을 구매하는사람에 따라 아이템이 다르니깐..? 라벨로 처리 했씁니당
 		this.imageIcon.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_ITEM_LABEL.getRectangle());
-		this.imageIcon.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
 		this.add(imageIcon);	
 	}
 	//결제라인
@@ -97,7 +96,7 @@ public class GamePayRoomFrame extends JFrame {
 		this.itemquanity.setBounds(GamePayRoomEnum.GAME_ROOM_AMOUNT_PANEL.getRectangle());
 		this.itemquanity.setLayout(null);
 		this.itemquanity.setOpaque(false);
-		//this.itemquanity.setBackground(Color.blue);
+//		this.itemquanity.setBackground(Color.blue);
 		
 		//수량을 넣을 수 있는 텍스트 필드 
 		JTextField userAmountText = new JTextField();
@@ -173,7 +172,7 @@ public class GamePayRoomFrame extends JFrame {
 		this.add(equalsLabel);
 		this.add(basicMoneyLabel);
 		this.add(divLabel);
-		//q.setOpaque(false);
+//		itemquanity.setOpaque(true);
 		
 		
 		up.setFocusPainted(false);
@@ -189,7 +188,6 @@ public class GamePayRoomFrame extends JFrame {
 		this.itemquanity.add(userAmountText);
 		this.add(itemquanity);
 		
-		System.out.println(GamePayRoomEnum.GAME_ROOM_PAY_ITEM_LABEL.getRectangle());
 	}
 	public void setButtonLine() throws IOException {
 		//결제 버튼

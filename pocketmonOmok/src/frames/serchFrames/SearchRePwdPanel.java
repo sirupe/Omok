@@ -23,6 +23,13 @@ import enums.frames.searchRePwdEnum;
 public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
+	
+	private JLabel searchPwdLabel;
+	private JLabel searchRePwdLabel;
+	private JTextField searchPwdText;
+	private JTextField searchRePwdText;
+	private JLabel searchRePwdErrorLabel;
+	private JButton searchConfirmButton;
 
 	public SearchRePwdPanel() throws IOException {
 		this.setLayout(null);

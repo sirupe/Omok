@@ -18,8 +18,8 @@ public enum searchRePwdEnum {
 	
 //비밀번호, 레이블
 	SEARCH_PWD_LABEL(new Rectangle(
-			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() / 100 * 15),
+			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.07),
+			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.15),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 16),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() / 100 * 8)
 			)),
