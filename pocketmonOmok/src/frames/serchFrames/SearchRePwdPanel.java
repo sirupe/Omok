@@ -24,7 +24,6 @@ public class SearchRePwdPanel extends JPanel {
 	private JPanel searchRePwdPanel;
 	private Image backGround;
 	
-<<<<<<< HEAD
 	private JLabel searchPwdLabel;
 	private JLabel searchRePwdLabel;
 	private JTextField searchPwdText;
@@ -32,17 +31,9 @@ public class SearchRePwdPanel extends JPanel {
 	private JLabel searchRePwdErrorLabel;
 	private JButton searchConfirmButton;
 
-=======
->>>>>>> f9be61cf3e8236573024bfb3815f0502d58d1476
 	public SearchRePwdPanel() throws IOException {
 		this.setLayout(null);
-<<<<<<< HEAD
-//		this.searchRePwdPanel   = new JPanel();
-=======
-		
-//		this.searchRePwdPanel   = new JPanel();
-		
->>>>>>> 8cf735460abd9e7b27bcc563dd1f1773698e29b5
+
 		this.setsearchPwdPanel();
 	} //생성자
 	
@@ -97,24 +88,6 @@ public class SearchRePwdPanel extends JPanel {
 		//확인 버튼창
 		
 		JButton searchConfirmButton = new JButton() {
-<<<<<<< HEAD
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			try {
-				g.drawImage(ImageIO.read(
-					new File("resources/signUp/confirm.jpg")), 
-					0, 
-					0, 
-					searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
-					searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
-					this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}		
-		}
-	};	
-=======
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -131,25 +104,16 @@ public class SearchRePwdPanel extends JPanel {
 				}		
 			}
 		};	
->>>>>>> 8cf735460abd9e7b27bcc563dd1f1773698e29b5
 		this.add(searchPwdLabel);
 		this.add(searchRePwdText);
 		this.add(searchPwdText);
 		this.add(searchRePwdLabel);
 		this.add(searchRePwdErrorLabel);
 		this.add(searchConfirmButton);
-<<<<<<< HEAD
 	
-=======
 		
-//		this.searchRePwdPanel.add(searchPwdLabel);
-//		this.searchRePwdPanel.add(searchRePwdText);
-//		this.searchRePwdPanel.add(searchPwdText);
-//		this.searchRePwdPanel.add(searchRePwdLabel);
-//		this.searchRePwdPanel.add(searchRePwdErrorLabel);
-//		this.searchRePwdPanel.add(searchConfirmButton);
 
->>>>>>> 8cf735460abd9e7b27bcc563dd1f1773698e29b5
+
 	
 	}
 

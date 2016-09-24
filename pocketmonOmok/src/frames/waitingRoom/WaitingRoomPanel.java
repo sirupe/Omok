@@ -162,11 +162,7 @@ public class WaitingRoomPanel extends JPanel {
 	}
 
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
-<<<<<<< HEAD:pocketmonOmok/src/frames/waitingRoomPanels/WaitingRoomPanel.java
 		
-
-=======
->>>>>>> 8cf735460abd9e7b27bcc563dd1f1773698e29b5:pocketmonOmok/src/frames/waitingRoom/WaitingRoomPanel.java
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
 		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
@@ -175,10 +171,6 @@ public class WaitingRoomPanel extends JPanel {
 			System.out.println(s);
 		}
 				
-<<<<<<< HEAD:pocketmonOmok/src/frames/waitingRoomPanels/WaitingRoomPanel.java
-
-=======
->>>>>>> 8cf735460abd9e7b27bcc563dd1f1773698e29b5:pocketmonOmok/src/frames/waitingRoom/WaitingRoomPanel.java
 		this.playerList.setCellRenderer(new PlayerRenderer());
 		
 		this.playerListScroll.setViewportView(this.playerList);
