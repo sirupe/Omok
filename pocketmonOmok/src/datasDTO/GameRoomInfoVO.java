@@ -1,23 +1,36 @@
 package datasDTO;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 
-import enums.etc.ImageEnum;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import enums.frames.WaitingRoomSizesEnum;
 
 public class GameRoomInfoVO implements Serializable{
-	private ImageEnum imageDir;
+	private static final long serialVersionUID = 123463L;
+	
+	private ImageIcon image;
 	private int roomNumber;
 	private String roomName;
 	private String owner;
 	private String guest;
-	private int persons;
+	private String persons;
 	
-	public ImageEnum getImageDir() {
-		return imageDir;
+	public ImageIcon getImage() {
+		return image;
 	}
 	
-	public void setImageDir(ImageEnum imageDir) {
-		this.imageDir = imageDir;
+	public void setImage(String imageEnum) throws IOException {
+		this.image = new ImageIcon(ImageIO.read(
+			new File(imageEnum)).getScaledInstance(
+				WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+				WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
+				Image.SCALE_AREA_AVERAGING)
+		);
 	}
 	
 	public int getRoomNumber() {
@@ -52,11 +65,11 @@ public class GameRoomInfoVO implements Serializable{
 		this.guest = guest;
 	}
 	
-	public int getPersons() {
+	public String getPersons() {
 		return persons;
 	}
 	
 	public void setPersons(int persons) {
-		this.persons = persons;
+		this.persons = "(" + persons + "/2)";
 	}
 }

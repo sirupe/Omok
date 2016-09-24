@@ -20,10 +20,10 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	//===========================================================================
 	//아이템 크기
 	GAME_ROOM_PAY_ITEM_LABEL(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 18),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 10),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 35),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 35)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.18),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.1),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.35),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.35)
 			)),
 	
 	//기본 1000원
@@ -35,59 +35,59 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 			)),
 	// x 
 	GAME_ROOM_PAY_DIV_LABEL(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 14),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 71),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 20),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 13)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.13),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.61),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.2),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.13)
 			)),
 
 	//==
 	GAME_ROOM_PAY_EQUAL_LABEL(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 35),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 76),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 5),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 5)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.33),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.65),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.05),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.05)
 			)),
 	//총금액 계산
 	GAME_ROOM_PAY_TOTALMONEY_LABEL(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 40),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 73),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 28),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 10)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.38),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.62),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.28),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.1)
 			)),
 //==========Panel크기==================================================
 	GAME_ROOM_AMOUNT_PANEL(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 18),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 72),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 27),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 12)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.16),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.62),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.27),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.12)
 			)),
 	
 	GAME_ROOM_USER_AMOUNT_PANEL(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 1),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 1),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 15),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 10)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.01),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.01),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.15),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.1)
 			)),
 	
 	GAME_ROOM_UP_ADD(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 11),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 0),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 8),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 5)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.1),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.0015),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.08),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.05)
 			)),
 
 	GAME_ROOM_DOWN_SUB(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 11),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 8),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 8),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 5)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.1),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.08),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.08),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize()  * 0.05)
 			)),
 //=====================================================================	
 	// 결제 버튼
 	GAME_ROOM_PAY_BUTTON(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 18),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 105),
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.18),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.9),
 			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 16),
 			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 10)
 			)),
@@ -96,17 +96,16 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	//취소 버튼
 	GAME_ROOM_PAY_CANCEL_BUTTON(new Rectangle(
-			(int)(GAME_PAY_ROOM_POSITION_X.getSize() / 100 * 30),
-			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() / 100 * 105),
-			(int)(GAME_PAY_ROOM_WIDTH.getSize() / 100 * 16),
-			(int)(GAME_PAY_ROOM_HEIGHT.getSize() / 100 * 10)
+			(int)(GAME_PAY_ROOM_POSITION_X.getSize() * 0.3),
+			(int)(GAME_PAY_ROOM_POSITION_Y.getSize() * 0.9),
+			(int)(GAME_PAY_ROOM_WIDTH.getSize() * 0.16),
+			(int)(GAME_PAY_ROOM_HEIGHT.getSize() * 0.1)
 			)),
 	
 	
 	
 	
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,22)),
 	// 일반색깔
 	LABELCOLOR_DEFAULT(Color.gray),
 	//텍스트 테두리 없애기
@@ -116,7 +115,6 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 
 	private Dimension dimension;
 	private int size;
-	private Font font;
 	private Color color;
 	private Rectangle rec;
 	private EmptyBorder emptyBorder;
@@ -127,9 +125,6 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	}
 	private GamePayRoomEnum(int size) {
 		this.size = size;
-	}
-	private GamePayRoomEnum(Font font) {
-		this.font = font;
 	}
 	private GamePayRoomEnum(Color color) {
 		this.color = color;
@@ -154,9 +149,6 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	}
 	public Color getColor() {
 		return color;
-	}
-	public Font getFont() {
-		return font;
 	}
 	private Dimension getDimension() {
 		return dimension;

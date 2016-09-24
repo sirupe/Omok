@@ -70,11 +70,7 @@ public class JoinFrame extends JFrame {
 	private JPasswordField pwdField;
 	private JPasswordField rePwdField;
 	private JTextField nameTextField;
-	
-//	private JTextField yearTextField;
-//	private JTextField monthTextField;
-//	private JTextField dateTextField;
-	
+
 	private JTextField emailIDTextField;
 	private JTextField emailAddrTextField;
 	private JTextField emailConfTextField;
@@ -231,8 +227,6 @@ public class JoinFrame extends JFrame {
 		this.addKeyAction(this.telMiddleTextField, 	"telMiddleTextField");
 		this.addKeyAction(this.telLastNumTextField, "telLastNumTextField");
 		this.addKeyAction(this.emailConfTextField,	"emailConfTextField");
-//		this.addMouseAction(this.genderManRadio, 	"genderManRadio");
-//		this.addMouseAction(this.genderWomanRadio, 	"genderWomanRadio");
 		this.addItemAction(this.yearChoice, 		"yearChoice");
 		this.addItemAction(this.monthChoice, 		"monthChoice");
 		this.addItemAction(this.dateChoice, 		"dateChoice");
@@ -436,9 +430,6 @@ public class JoinFrame extends JFrame {
 				JoinSizesEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
 	
-//		this.add(yearTextField); 
-//		this.add(monthTextField); 
-//		this.add(dateTextField);
 		this.add(emailConfTextField);
 	}
 
@@ -691,17 +682,6 @@ public class JoinFrame extends JFrame {
 		this.add(comp);
 	}
 	
-//	public void addMouseAction(JComponent comp, String compName) {
-//		EmptyBorder border = ClientJoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
-//		comp.setName(compName);
-//		comp.setBorder(border);
-//		comp.setFont(ClientJoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
-//		comp.setOpaque(false);
-//		comp.addMouseMotionListener(this.joinAction);
-//		comp.addMouseListener(this.joinAction);
-//		this.add(comp);
-//	}
-	
 	@SuppressWarnings("rawtypes")
 	public void addItemAction(JComboBox comp, String compName) {
 		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
@@ -712,7 +692,6 @@ public class JoinFrame extends JFrame {
 		this.add(comp);
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public void addItemAction(JRadioButton comp, String compName) {
 		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 		comp.setName(compName);
