@@ -20,34 +20,34 @@ public enum searchPwdEnum {
 	
 //이름, 이메일 레이블
 	SEARCH_ID_LABEL(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 15),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 16),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.07),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.15),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.16),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
 			)),
 	SEARCH_EMAIL_LABEL(new Rectangle(
 			
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 37),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 16),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.07),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.34),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.16),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
 			)),
 //// 에러 레이블 -- 3분초과메세지
 	SEARCH_ERROR_LABEL(new Rectangle(
 			
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 15),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 75),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 80),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 13)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.15),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.75),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize()  * 0.8),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.13)
 			)),
 ////인증 레이블
 //	
 //// 이름 텍스트 필드 x,y, 가로 세로 
 	SEARCH_ID_TEXTFIELD(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 22),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 15),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 50),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.22),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.15),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.5),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
 			)),
 	// 이메일 텍스트 필드 x,y, 가로 세로 
 	SEARCH_EMAIL_TEXTFIELD(new Rectangle(
@@ -58,32 +58,32 @@ public enum searchPwdEnum {
 			)),
 	// 인증  텍스트 필드 x,y, 가로 세로 
 	SEARCH_CONFIRM_TEXTFIELD(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 22),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 59),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 35),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.22),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.56),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.35),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
 			)),
 	// 이메일 인증번호가 발송되었다는 텍스트 필드   x,y, 가로 세로 
 	SEARCH_ANSWER_LABEL(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 15),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 98),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 90),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 15)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.15),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.98),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.9),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
 			)),
 	//3분 제한시간 레이블  x,y, 가로 세로 
 	SEARCH_Time_LABEL(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 45),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 55),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 15),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 15)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.5),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.52),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.15),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
 			)),
 	
 //	//인증확인 버튼ㄴ 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
-			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() / 100 * 7),
-			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() / 100 * 59),
-			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() / 100 * 16),
-			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() / 100 * 8)
+			(int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.07),
+			(int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.56),
+			(int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.16),
+			(int)(SEARCH_PWD_FRAME_HEIGHT.getSize() *0.08)
 			)),
 
 	//일반 폰트

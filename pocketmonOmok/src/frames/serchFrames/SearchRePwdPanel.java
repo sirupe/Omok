@@ -32,10 +32,10 @@ public class SearchRePwdPanel extends JPanel {
 	private JButton searchConfirmButton;
 
 	public SearchRePwdPanel() throws IOException {
+		
 		this.setLayout(null);
-		
-		
 		this.setsearchPwdPanel();
+		
 	} //생성자
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdPanel() throws IOException {
@@ -54,27 +54,28 @@ public class SearchRePwdPanel extends JPanel {
 				searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 				);
 		//비밀번호 라벨
-		JLabel searchPwdLabel = new JLabel("PW");
-		searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
-		searchPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		
+		this.searchPwdLabel = new JLabel("PW");
+		this.searchPwdLabel.setBounds(searchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
+		this.searchPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		//비밀번호 입력창
-		JTextField searchPwdText = new JTextField();
-		searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
-		searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchPwdText = new JTextField();
+		this.searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
+		this.searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 
 		// 재비밀번호 라벨
-		JLabel searchRePwdLabel = new JLabel("PW재입력");
-		searchRePwdLabel.setBounds(searchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
-		searchRePwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchRePwdLabel = new JLabel("PW재입력");
+		this.searchRePwdLabel.setBounds(searchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
+		this.searchRePwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 제비밀번호 텍스트창
-		JTextField searchRePwdText = new JTextField();
-		searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
-		searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchRePwdText = new JTextField();
+		this.searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
+		this.searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 에러 메세지 라벨
-		JLabel searchRePwdErrorLabel = new JLabel
+		this.searchRePwdErrorLabel = new JLabel
 				("<html>비밀번호가 일치하지 않습니다. "
 				+ "<br>다시 입력해주세요<br></html>");
 		searchRePwdErrorLabel.setBounds(searchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
@@ -82,7 +83,7 @@ public class SearchRePwdPanel extends JPanel {
 		searchRePwdErrorLabel.setForeground(searchIdEnum.LABELCOLOR_ERROR.getColor());
 		//확인 버튼창
 		
-		JButton searchConfirmButton = new JButton() {
+		this.searchConfirmButton = new JButton() {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -99,6 +100,8 @@ public class SearchRePwdPanel extends JPanel {
 				}		
 			}
 		};	
+		this.searchConfirmButton.setBounds(searchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
+//				
 		this.add(searchPwdLabel);
 		this.add(searchRePwdText);
 		this.add(searchPwdText);
