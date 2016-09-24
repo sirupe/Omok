@@ -8,9 +8,14 @@ import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import enums.etc.UserPositionEnum;
 import enums.frames.WaitingRoomSizesEnum;
 
-public class GameRoomInfoVO implements Serializable{
+public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
+	public GameRoomInfoVO(UserPositionEnum position) {
+		super(position);
+	}
+
 	private static final long serialVersionUID = 123463L;
 	
 	private ImageIcon image;
@@ -19,6 +24,7 @@ public class GameRoomInfoVO implements Serializable{
 	private String owner;
 	private String guest;
 	private String persons;
+	private String pwd;
 	
 	public ImageIcon getImage() {
 		return image;
@@ -33,6 +39,14 @@ public class GameRoomInfoVO implements Serializable{
 		);
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "GameRoomInfoVO [image=" + image + ", roomNumber=" + roomNumber + ", roomName=" + roomName + ", owner="
+				+ owner + ", guest=" + guest + ", persons=" + persons + ", pwd=" + pwd + "]";
+	}
+
 	public int getRoomNumber() {
 		return roomNumber;
 	}
@@ -71,5 +85,13 @@ public class GameRoomInfoVO implements Serializable{
 	
 	public void setPersons(int persons) {
 		this.persons = "(" + persons + "/2)";
+	}
+	
+	public String getPwd() {
+		return pwd;
+	}
+	
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 }

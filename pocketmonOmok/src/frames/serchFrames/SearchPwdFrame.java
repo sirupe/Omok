@@ -118,29 +118,5 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}
 		};
 	}
-	
-//	public SearchPwdPanel getsearchPwdPanel() {
-//		return searchPwdPanel;
-//	}
-//	public void insearchRePwdPanel() {
-//		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
-//	}	
-//	public void insearchChangePwdPanel() {
-//		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
-//	}
-	
-	
-	
-	public static void main(String[] args) throws IOException {
-
-		try {
-			new SearchPwdFrame();
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		new SearchRePwdPanel();
-	}
-	
-
 
 }

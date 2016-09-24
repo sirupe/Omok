@@ -32,8 +32,6 @@ public class SearchRePwdPanel extends JPanel {
 	private JButton searchConfirmButton;
 
 	public SearchRePwdPanel() throws IOException {
-		
-		this.setLayout(null);
 		this.setLayout(null);
 
 		this.setsearchPwdPanel();
@@ -65,10 +63,6 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchPwdText = new JTextField();
 		this.searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
 		this.searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		
-		JTextField searchPwdText = new JTextField();
-		searchPwdText.setBounds(searchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
-		searchPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 
 		// 재비밀번호 라벨
 		this.searchRePwdLabel = new JLabel("PW재입력");
@@ -79,10 +73,6 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchRePwdText = new JTextField();
 		this.searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
 		this.searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		
-		JTextField searchRePwdText = new JTextField();
-		searchRePwdText.setBounds(searchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
-		searchRePwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 에러 메세지 라벨
 		this.searchRePwdErrorLabel = new JLabel
@@ -118,11 +108,5 @@ public class SearchRePwdPanel extends JPanel {
 		this.add(searchRePwdLabel);
 		this.add(searchRePwdErrorLabel);
 		this.add(searchConfirmButton);
-	
-		
-
-
-	
 	}
-
 }

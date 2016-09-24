@@ -61,7 +61,7 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.loginPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 
-		this.waitingRoomPanel = new WaitingRoomPanel() {
+		this.waitingRoomPanel = new WaitingRoomPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -156,12 +156,8 @@ public class BasicFrame extends JFrame implements Serializable{
 	public WaitingRoomPanel getWaitingRoomPanel() {
 		return waitingRoomPanel;
 	}
-	public static void main(String[] args) {
-		try {
-			new BasicFrame(null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	public ClientAccept getClientAccept() {
+		return clientAccept;
 	}
 }

@@ -1,4 +1,4 @@
-package frames.CorrectAndDop;
+package frames.correctAndDop;
 
 import java.awt.Color;
 import java.awt.Font;
