@@ -40,7 +40,7 @@ public class ChargeConfirmFrame extends JFrame{
 		);
 		
 		this.success = new JLabel("충전 완료 :)");	
-		//Font font = new Font("a으라차차" , Font.BOLD , 24);
+		Font font = new Font("a으라차차" , Font.BOLD , 24);
 		this.success.setFont(font);
 		this.success.setBounds(ChargeEnum.CHARGE_SUCCESS_TEXT_SIZE_RECT.getRect());		
 		
