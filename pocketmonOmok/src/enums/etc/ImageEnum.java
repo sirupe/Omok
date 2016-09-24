@@ -40,11 +40,12 @@ public enum ImageEnum {
 	
 	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png"),
 //WaitingRoom 이미지들-------------------------------------------------------
-	WAITINGROOM_ENTER_POSSIBLE_IMAGE("resources/waitroom/waitingvacancy.jpg"),
-	WAITINGROOM_ENTER_PRIVATE_IMAGE("resources/waitroom/waitingprivate.jpg"),
-	WAITINGROOM_ENTER_FULL_IMAGE("resources/waitroom/watingfull.jpg"),
+//	WAITINGROOM_ENTER_POSSIBLE_IMAGE("resources/waitroom/waitingvacancy.jpg"),
+//	WAITINGROOM_ENTER_PRIVATE_IMAGE("resources/waitroom/waitingprivate.jpg"),
+//	WAITINGROOM_ENTER_FULL_IMAGE("resources/waitroom/watingfull.jpg"),
 	
-	WAITINGROOM_USER_GRADE_IMAGE_MAP(userGradeImageMap());
+	WAITINGROOM_USER_GRADE_IMAGE_MAP(userGradeImageMap()),
+	WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP(enterRoomCheckImage());
 	
 	private static Map<String, String> userGradeImageMap() {
 		Map<String, String> images = new HashMap<String, String>();
@@ -55,6 +56,15 @@ public enum ImageEnum {
 		images.put("달인", "resources/user/usermaster.png");
 		images.put("영웅", "resources/user/userhero.png");
 		images.put("신", "resources/user/usertop.png");
+		
+		return images;
+	}
+	
+	private static Map<String, String> enterRoomCheckImage() {
+		Map<String, String> images = new HashMap<String, String>();
+		images.put("O", "resources/waitingRoom/admission.png");
+		images.put("=", "resources/waitingRoom/private.png");
+		images.put("X", "resources/waitingRoom/NoAdmittance.png");
 		
 		return images;
 	}

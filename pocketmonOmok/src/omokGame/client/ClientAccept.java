@@ -18,6 +18,7 @@ import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
 import frames.joinFrames.JoinSuccessFrame;
+import frames.waitingRoomPanels.WaitingRoomListTable;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
@@ -103,17 +104,24 @@ public class ClientAccept {
 			}
 		}
 	}
-	//TODO
+
 	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+		// 서버에서 보낸 정보가 "새로운 유저가 접속했다" 는 정보라면
 		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
 			System.out.println(data.getServerAction() + "if");
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
 			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
+		
+		// 서버에서 보낸 정보가 "대기실 입장" 이라면
 		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
 			System.out.println(data.getServerAction() + "else");
-			this.basicFrame.inWaitingRoom();
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
+			
+			//-----------TODO Test데이터----------------//
+			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
+			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
 			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
+			this.basicFrame.inWaitingRoom();
 		}
 	}
 	

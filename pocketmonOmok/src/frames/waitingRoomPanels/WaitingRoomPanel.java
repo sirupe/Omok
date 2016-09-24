@@ -69,43 +69,7 @@ public class WaitingRoomPanel extends JPanel {
 	private Vector<String> players;
 	public WaitingRoomPanel() throws IOException {
 		this.playerListScroll = new JScrollPane();
-		//==========================대기방 리스트==========================
-		
-		Font font = new Font("a으라차차",Font.BOLD,15);
-		WaitingRoomListTable roomListModel = new WaitingRoomListTable();
-		
-		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
-		this.waitingRoomTable = new JTable(defaultTableModel) {
-			@Override
-			public Class getColumnClass(int column) {
-				return getValueAt(0, column).getClass();
-			}
-			
-			@Override
-			//테이블 수정 금지
-			public boolean isCellEditable(int row, int column){
-			    return false;
-			}
-		};
-		
-		this.waitingRoomTable.getTableHeader().setFont(new Font("a으라차차", Font.BOLD, 20));//방타이틀글꼴
-		this.waitingRoomTable.setFont(font);
-		this.waitingRoomTable.setForeground(Color.WHITE);
-		this.waitingRoomTable.setShowVerticalLines(false);                               //수직선을 그릴것인가
-		this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              //이동불가
-		this.waitingRoomTable.getTableHeader().setResizingAllowed(false);                //크기 조절 불가
-		this.waitingRoomTable.setOpaque(false);
-		this.waitingRoomTable.setBorder(new EmptyBorder(0, 0, 0, 0));
-		this.waitingRoomTable.setBackground(new Color(0, 0, 0, 0));
-		
-		this.waitingRoomTable.getColumn("OX").setPreferredWidth(2);
-		this.waitingRoomTable.getColumn("NO").setPreferredWidth(2);
-		this.waitingRoomTable.getColumn("TITLE").setPreferredWidth(300);
-		this.waitingRoomTable.getColumn("MASTER").setPreferredWidth(150);
-		this.waitingRoomTable.getColumn("NUM").setPreferredWidth(20);
-		this.waitingRoomTable.setRowHeight(50);
-		
-
+	
 		//==========================채팅방&내정보==========================
 		
 		this.chattingOutput = new JTextArea();
@@ -129,6 +93,43 @@ public class WaitingRoomPanel extends JPanel {
 		
 		this.roomListPosition();
 			
+	}
+	//==========================대기방 리스트==========================
+
+	public void roomListSetting(WaitingRoomListTable roomListModel) {
+		
+		//TODO	DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
+			DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
+			this.waitingRoomTable = new JTable(defaultTableModel) {
+				@Override
+				public Class getColumnClass(int column) {
+					return getValueAt(0, column).getClass();
+				}
+				
+				@Override
+				//테이블 수정 금지
+				public boolean isCellEditable(int row, int column){
+				    return false;
+				}
+			};
+			
+			this.waitingRoomTable.getTableHeader().setFont(new Font("a으라차차", Font.BOLD, 20));//방타이틀글꼴
+			this.waitingRoomTable.setFont(new Font("a으라차차",Font.BOLD,15));
+			this.waitingRoomTable.setForeground(Color.WHITE);
+			this.waitingRoomTable.setShowVerticalLines(false);                               //수직선을 그릴것인가
+			this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              //이동불가
+			this.waitingRoomTable.getTableHeader().setResizingAllowed(false);                //크기 조절 불가
+			this.waitingRoomTable.setOpaque(false);
+			this.waitingRoomTable.setBorder(new EmptyBorder(0, 0, 0, 0));
+			this.waitingRoomTable.setBackground(new Color(0, 0, 0, 0));
+			
+			this.waitingRoomTable.getColumn("OX").setPreferredWidth(2);
+			this.waitingRoomTable.getColumn("NO").setPreferredWidth(2);
+			this.waitingRoomTable.getColumn("TITLE").setPreferredWidth(300);
+			this.waitingRoomTable.getColumn("MASTER").setPreferredWidth(150);
+			this.waitingRoomTable.getColumn("NUM").setPreferredWidth(20);
+			this.waitingRoomTable.setRowHeight(50);
+				
 	}
 
 	public void userListSetting(List<UserGamedataInfoDTO> list) throws IOException {
@@ -589,19 +590,26 @@ public class WaitingRoomPanel extends JPanel {
 	public void updateAddRoom() {
 		// 테이블모델을 얻어옴
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
-		// 현재 테이블 데이터의 총 row 수를 얻어온다.(생성된 방의 총 갯수)
-		int row = tableModel.getRowCount();
+		Object o;
+		int roomNum = 0;
 		
-		Object o = tableModel.getValueAt(2, 1);
-		
-		for(int i = 0, size = tableModel.getRowCount(); i < size; i++) {
-			o = tableModel.getValueAt(2, i);
-			for(int j = 1; i <= 20; j++) {
-				if(Integer.parseInt(o.toString()) == j) {
-					
+		// 방번호 구하기. 1 ~ 20 중 가장 작은 생성되지 않은 방번호를 얻어온다.
+		for(int i = 1, j, size; i <= 20; i++) {
+			for(j = 0, size = tableModel.getRowCount(); j <= size; j++) {
+				o = tableModel.getValueAt(2, j);
+				if(Integer.parseInt(o.toString()) == i) {
+					break;
 				}
 			}
+			
+			if(j == size) {
+				roomNum = i;
+				break;
+			}
+			
 		}
+		
+		
 
 	}
 	

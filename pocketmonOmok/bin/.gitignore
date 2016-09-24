@@ -1,6 +1,8 @@
-/certify.kor.png
-/certify.png
-/confirm.kor.png
-/confirm.png
-/frames/
+/actions/
+/datasDAO/
+/datasDTO/
 /enums/
+/frames/
+/omokGame/
+/start/
+/utility/
