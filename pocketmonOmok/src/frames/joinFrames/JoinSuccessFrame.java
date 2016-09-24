@@ -1,69 +1,78 @@
 package frames.joinFrames;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import enums.frames.JoinSizesEnum;
+import enums.frames.CorrectEnum;
 
-//은정/
-@SuppressWarnings("serial")
 public class JoinSuccessFrame extends JFrame {
-	private JLabel textLabel;
-	private JButton checkButton;
+	private Image backGround;
+	private JLabel joinSuccessLabel;
+	private JButton confirm;
 	private JoinFrame joinFrame;
 	
-	public JoinSuccessFrame(JoinFrame joinFrame, String message) {
-		this.textLabel = new JLabel(message);
-		this.checkButton = new JButton("확인");
+	
+	public JoinSuccessFrame(JoinFrame joinFrame, String message) throws IOException {
 		this.joinFrame = joinFrame;
-		this.setFrame();
-		this.setComp();
-	}
-	
-	public void setComp() {
-		this.textLabel.setBounds(
-				JoinSizesEnum.JOIN_SUCCESS_LABEL_X.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_LABEL_Y.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_LABEL_WIDTH.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_LABEL_HEIGHT.getSize()
-		);
+		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
+				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
+				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
+                Image.SCALE_SMOOTH);
+
+		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 		
-		this.checkButton.setBounds(
-				JoinSizesEnum.JOIN_SUCCESS_BUTTON_X.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_BUTTON_Y.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_BUTTON_WIDTH.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_BUTTON_HEIGHT.getSize()
-		);
-		this.checkButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					setVisible(false);
-					dispose();
-					joinFrame.getLoginPanel().getBasicFrame().setVisible(true);
-				}
-			}
-		);
+		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
-		this.add(this.textLabel);
-		this.add(this.checkButton);
-	}
-	
-	public void setFrame() {
+		Font font = new Font("a으라차차", Font.BOLD, 20);
+		this.joinSuccessLabel = new JLabel(message);
+		this.joinSuccessLabel.setFont(font);
+		this.joinSuccessLabel.setBounds(CorrectEnum.JOIN_SUCCESS_TEXT_SIZE_RECT.getRect());
+		
+		this.confirm = new JButton() {
+			@Override
+            protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/myData/confirm.kor.png")), 
+						0, 
+						0, 
+						CorrectEnum.DROPOUT_COMPLETE_BUTTON_SIZE_RECT.getRect().width,
+						CorrectEnum.DROPOUT_COMPLETE_BUTTON_SIZE_RECT.getRect().height,
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+	            }      
+	        }	
+		};
+		this.confirm.setFocusPainted(false);
+		this.confirm.setBorderPainted(false);
+		this.confirm.setContentAreaFilled(false);
+		this.confirm.setBounds(CorrectEnum.DROPOUT_COMPLETE_BUTTON_SIZE_RECT.getRect());
+		
+		this.add(joinSuccessLabel);
+		this.add(confirm);
 		this.setLayout(null);
-		this.setBounds(
-				JoinSizesEnum.JOIN_SUCCESS_FRAME_X.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_FRAME_Y.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_FRAME_WIDTH.getSize(),
-				JoinSizesEnum.JOIN_SUCCESS_FRAME_HEIGHT.getSize()
-		);
-		this.getContentPane().setBackground(Color.white);
-		this.setVisible(true);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.setVisible(true);
+		
+		
+	
+	}
+	
+	public static void main(String[] args) throws IOException {
+		new JoinSuccessFrame(null, "회원가입 완료 :)");
+		
+		
 	}
 }

@@ -207,7 +207,7 @@ public enum JoinSizesEnum {
 	//에러 메세지색깔
 	LABELCOLOR_ERROR(Color.red),
 	LABELCOLOR_DEFAULT(Color.green),
-	
+	  
 	CHOICEBACKGROUND(Color.black),
 	
 	//레이블 폰트

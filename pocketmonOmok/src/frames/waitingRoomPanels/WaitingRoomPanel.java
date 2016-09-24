@@ -72,7 +72,6 @@ public class WaitingRoomPanel extends JPanel {
 		this.playerListScroll = new JScrollPane();
 		//==========================대기방 리스트==========================
 		
-		Font font = new Font("a으라차차",Font.BOLD,15);
 		WaitingRoomListTable roomListModel = new WaitingRoomListTable();
 		
 		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
@@ -89,8 +88,8 @@ public class WaitingRoomPanel extends JPanel {
 			}
 		};
 		
-		this.waitingRoomTable.getTableHeader().setFont(new Font("a으라차차", Font.BOLD, 20));//방타이틀글꼴
-		this.waitingRoomTable.setFont(font);
+		this.waitingRoomTable.getTableHeader().setFont(WaitingRoomSizesEnum.LABELFONT_SIZE80.getfont());//방타이틀글꼴
+		this.waitingRoomTable.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
 		this.waitingRoomTable.setForeground(Color.WHITE);
 		this.waitingRoomTable.setShowVerticalLines(false);                               //수직선을 그릴것인가
 		this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              //이동불가
@@ -158,14 +157,10 @@ public class WaitingRoomPanel extends JPanel {
 	}
 
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
-//		playerList.
+
 		ArrayList<String> usersID = new ArrayList<String>();
 		ArrayList<String> usersGrade = new ArrayList<String>();
-//
-//		for(UserGamedataInfoDTO gameData : list) {
-//			usersID.add(gameData.getUserID());
-//			usersGrade.add(gameData.getUserGrade());
-//		}
+
 		this.players = usersID.toArray(new String[usersID.size()]);
 		
 		this.imageMap = createImage(this.players, usersGrade);
@@ -177,14 +172,13 @@ public class WaitingRoomPanel extends JPanel {
 	public class PlayerRenderer extends DefaultListCellRenderer {
 		
 
-		Font font = new Font("a으라차차", Font.BOLD, 15);
 		
 		public Component getListCellRendererComponent(JList player, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
             label.setHorizontalTextPosition(JLabel.RIGHT);
             label.setOpaque(false);
-            label.setFont(font);
+            label.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
             return label;
 		}
 	}
@@ -538,11 +532,11 @@ public class WaitingRoomPanel extends JPanel {
 		this.correct.setFocusPainted(false);
 		
 		//방정보 폰트
-		this.userID.setFont(new Font("a으라차차", Font.BOLD, 18));
-		this.score.setFont(new Font("a으라차차", Font.BOLD, 16));
-		this.winningRate.setFont(new Font("a으라차차", Font.BOLD, 16));
-		this.point.setFont(new Font("a으라차차", Font.BOLD, 16));
-		this.level.setFont(new Font("a으라차차", Font.BOLD, 18));
+		this.userID.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.score.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.winningRate.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.point.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.level.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
 		
 		
 		

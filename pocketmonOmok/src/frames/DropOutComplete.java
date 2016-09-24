@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 
 import enums.frames.CorrectEnum;
 
+//ENUM은 correctEnum 에 탈퇴완료 프레임을 따다가 그대로씀
+
 public class DropOutComplete extends JFrame{
 	private Image backGround;
 	private JLabel dropOutCompleteLabel;
