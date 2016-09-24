@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 public enum GameStoreEnum {
 Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
@@ -20,40 +21,40 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	//userMoneyPanel 패널크기
 		STORE_USER_MONEY_PANEL_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 3),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 15),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 100),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 10)
+				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.07),
+				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.1),
+				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.9),
+				(int)(GAME_STORE_PANEL_HEIGHT.getSize() *0.3)
 				)),
 	//사용자 보유 금액 
 		STORE_USER_MONEY_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 1),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 3),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 55),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 8)
+				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.03),
+				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.03),
+				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.45),
+				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.08)
 				)),
 	// 충전 버튼
 		STORE_USER_CONFIRM_BUTTON_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 43),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 3),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 20),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 8)
+				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.36),
+				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.03),
+				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.17),
+				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.08)
 				)),
 //--------------------------------------------------------------------------------------
-		//테두리 패널
-		STORE_USER_LINE_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 0),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 0),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 100),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 60)
-				)),
+//		//테두리 패널
+//		STORE_USER_LINE_REC(new Rectangle(
+//				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 0),
+//				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 0),
+//				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 100),
+//				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 60)
+//				)),
 		
 		//ItemChoicePanel 크기
 		STORE_ITEM_CHOICE_PANEL_REC(new Rectangle(
-				(int)(GAME_STORE_PANEL_POSITION_X.getSize() / 100 * 3),
-				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() / 100 * 80),
-				(int)(GAME_STORE_PANEL_WIDTH.getSize() / 100 * 100),
-				(int)(GAME_STORE_PANEL_HEIGHT.getSize() / 100 * 60)
+				(int)(GAME_STORE_PANEL_POSITION_X.getSize() * 0.03),
+				(int)(GAME_STORE_PANEL_POSITION_Y.getSize() * 0.08),
+				(int)(GAME_STORE_PANEL_WIDTH.getSize() * 0.8),
+				(int)(GAME_STORE_PANEL_HEIGHT.getSize() * 0.8)
 				)),
 		//방해하기 보유숫자
 		STORE_USER_OWN_INTERRUPT_ITEM_REC(new Rectangle(
@@ -141,8 +142,8 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 		LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),
 		// 일반색깔
 		LABELCOLOR_DEFAULT(Color.gray),
-		//텍스트 테두리 없애기
-		LABEL_DEFAULT(new EmptyBorder(0,0,0,0));
+		//테두리 라인
+		LABEL_LINE(new MatteBorder(2,2,2,2, Color.pink));
 	
 	
 	private Dimension dimension;
@@ -151,7 +152,11 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	private Color color;
 	private Rectangle rec;
 	private EmptyBorder emptyBorder;
+	private MatteBorder matteBorder;
 	
+	private GameStoreEnum(MatteBorder matteBorder) {
+		this.matteBorder = matteBorder;
+	}
 	private GameStoreEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
@@ -169,6 +174,9 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	}
 	private GameStoreEnum(EmptyBorder emptyBorder) {
 		this.emptyBorder = emptyBorder;
+	}
+	public MatteBorder getMatteBorder() {
+		return matteBorder;
 	}
 	public EmptyBorder getEmptyBorder() {
 		return emptyBorder;

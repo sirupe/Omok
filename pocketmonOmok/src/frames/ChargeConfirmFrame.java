@@ -1,7 +1,5 @@
 package frames;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -12,12 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import enums.frames.ChargeEnum;
-import enums.frames.GameRoomCreateEnum;
-import enums.frames.WaitingRoomSizesEnum;
-import enums.frames.searchIdEnum;
 
 public class ChargeConfirmFrame extends JFrame{
 	private Image backGround;
@@ -40,8 +34,7 @@ public class ChargeConfirmFrame extends JFrame{
 		);
 		
 		this.success = new JLabel("충전 완료 :)");	
-		Font font = new Font("a으라차차" , Font.BOLD , 24);
-		this.success.setFont(font);
+		this.success.setFont(ChargeEnum.LABELFONT_DEFAULT.getFont());
 		this.success.setBounds(ChargeEnum.CHARGE_SUCCESS_TEXT_SIZE_RECT.getRect());		
 		
 		this.confirm = new JButton(){

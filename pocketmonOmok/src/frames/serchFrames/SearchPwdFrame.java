@@ -26,7 +26,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	
 	public SearchPwdFrame() throws IOException {
 		
-		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
 				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
@@ -48,7 +48,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 				super.paintComponents(g);
 				try {
 					g.drawImage(ImageIO.read(
-						new File("resources/signUp/backg.png")),
+						new File("resources/background/popup.png")),
 							0,
 							0,
 							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
@@ -70,7 +70,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 				super.paintComponents(g);
 				try {
 					g.drawImage(ImageIO.read(
-						new File("resources/signUp/backg.png")),
+						new File("resources/background/popup.png")),
 							0,
 							0,
 							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
@@ -80,19 +80,21 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 					e.printStackTrace();
 				}
 			}};
-		this.setLayout(null);
+		//this.setLayout(null);
 		
-		this.newSearchChangePanel();
-		this.add("searchPwdPanel",this.searchPwdPanel);
-		this.searchPwdPanel.setOpaque(false);
+		//this.newSearchChangePanel();
+		
+//		this.add("searchPwdPanel",this.searchPwdPanel);
+//		this.searchPwdPanel.setOpaque(false);
 		this.add("searchRePwdPanel", this.searchRePwdPanel);
 		this.searchRePwdPanel.setOpaque(false);
-		this.add("searchChangeConfirmPanel", this.searchChangePanel);
-		this.searchChangePanel.setOpaque(false);
-		this.setLayout(this.cardLayout);
+//		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+//		this.searchChangePanel.setOpaque(false);
+		//this.setLayout(this.cardLayout);
 		this.setTitle("PW찾기");
 		this.setVisible(true);
 		this.setResizable(false);
+		this.setLayout(null);
 		
 	}
 	//비밀번호 변경 확인 프레임
@@ -117,20 +119,28 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		};
 	}
 	
-	public SearchPwdPanel getsearchPwdPanel() {
-		return searchPwdPanel;
-	}
-	public void insearchRePwdPanel() {
-		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
-	}	
-	public void insearchChangePwdPanel() {
-		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
-	}
-	public static void main(String[] args) {
+//	public SearchPwdPanel getsearchPwdPanel() {
+//		return searchPwdPanel;
+//	}
+//	public void insearchRePwdPanel() {
+//		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
+//	}	
+//	public void insearchChangePwdPanel() {
+//		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
+//	}
+	
+	
+	
+	public static void main(String[] args) throws IOException {
+
 		try {
 			new SearchPwdFrame();
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		new SearchRePwdPanel();
 	}
+	
+
+
 }

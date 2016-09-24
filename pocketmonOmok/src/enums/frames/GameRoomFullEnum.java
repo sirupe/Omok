@@ -18,7 +18,7 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	//들어 가려는 방의 정보 --- > 빈방인지 아닌지
 	GAMEROOM_CONFIRM_LABEL(new Rectangle(
-			(int)(GAMEROOMFULLFRAME_POSITION_X.getSize() / 100 * 15),
+			(int)(GAMEROOMFULLFRAME_POSITION_X.getSize() / 100 * 13),
 			(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() / 100 * 15),
 			(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() / 100 * 70),
 			(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() / 100 * 40)

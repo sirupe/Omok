@@ -154,15 +154,8 @@ public class WaitingRoomPanel extends JPanel {
 	}
 
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
-<<<<<<< HEAD
-
-		ArrayList<String> usersID = new ArrayList<String>();
-		ArrayList<String> usersGrade = new ArrayList<String>();
-
-		this.players = usersID.toArray(new String[usersID.size()]);
 		
-		this.imageMap = createImage(this.players, usersGrade);
-=======
+
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
 		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
@@ -170,7 +163,7 @@ public class WaitingRoomPanel extends JPanel {
 			System.out.println(s);
 		}
 				
->>>>>>> e7f8dd549b98cfeac96b452b6784c64ca20dc324
+
 		this.playerList.setCellRenderer(new PlayerRenderer());
 		
 		this.playerListScroll.setViewportView(this.playerList);

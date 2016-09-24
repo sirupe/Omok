@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 import enums.frames.GameStoreEnum;
 import enums.frames.WaitingRoomSizesEnum;
+import enums.frames.searchIdEnum;
 
 
 public class GameStorePanel extends JPanel {
@@ -63,7 +64,7 @@ public class GameStorePanel extends JPanel {
 		super.paintComponent(g);
 		try {
 			g.drawImage(ImageIO.read(
-					new File("resources/signUp/backg.png")),
+					new File("resources/background/popup.png")),
 					0,
 					0,
 					GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(),
@@ -84,8 +85,8 @@ public class GameStorePanel extends JPanel {
 		
 		JTextField userMoney = new JTextField("보유한 금액");
 		userMoney.setBounds(GameStoreEnum.STORE_USER_MONEY_REC.getRectangle());
-		userMoney.setFont(GameStoreEnum.LABELFONT_DEFAULT.getFont());
-		userMoney.setBorder(GameStoreEnum.LABEL_DEFAULT.getEmptyBorder());
+		userMoney.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		userMoney.setBorder(GameStoreEnum.LABEL_LINE.getMatteBorder());
 		//userMoney.setBackground(Color.red);
 		
 		JButton userConfirm = new JButton() {	
@@ -118,23 +119,8 @@ public class GameStorePanel extends JPanel {
 	
 	//아이템 보유 개수 , 아이템 위치
 	public void setItemPanel() {
-		this.itemChoicePanel = new JPanel(){
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				try {
-					g.drawImage(ImageIO.read(
-						new File("resources/store/skinpink.png")),
-							0,
-							0,
-							GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(), 
-							GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize(), 
-							this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		};
+		this.itemChoicePanel = new JPanel();
+
 		this.itemChoicePanel.setBounds(
 			GameStoreEnum.GAME_STORE_PANEL_POSITION_X.getSize(), 
 			GameStoreEnum.GAME_STORE_PANEL_POSITION_Y.getSize(), 

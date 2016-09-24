@@ -40,7 +40,7 @@ public class searchIdFrame extends JFrame {
 		this.searchemailTextField = new JTextField(10);
 		
 		//에러 메세지 레이블
-		String searchError = "error Mess age";
+		String searchError = "error Message";
 		this.searchErrorMsgLabel = new JLabel(searchError);
 		this.searchErrorMsgLabel.setForeground(searchIdEnum.LABELCOLOR_ERROR.getColor());
 		
@@ -53,24 +53,18 @@ public class searchIdFrame extends JFrame {
 		this.add(searchConfirmButton);
 		
 		//폰트
-		Font font = searchIdEnum.LABELFONT_DEFAULT.getFont();
-		this.searchIdLabel.setFont(font);
-		this.searchemailLabel.setFont(font);
-		this.searchErrorMsgLabel.setFont(font);
+		Font defaultFont = searchIdEnum.LABELFONT_DEFAULT.getFont();
+		Font errorFont = searchIdEnum.LABELFONT_ERROR.getFont();
+		this.searchIdLabel.setFont(defaultFont);
+		this.searchemailLabel.setFont(defaultFont);
+		this.searchErrorMsgLabel.setFont(errorFont);
 		
-		this.searchemailTextField.setFont(font);
-		this.searchIdTextField.setFont(font);
-		
-		//텍스트 필드 테두리 없애기
-		EmptyBorder emptyBorder = searchIdEnum.LABEL_DEFAULT.getBorder();
-		
-		searchIdTextField.setBorder(emptyBorder);
-		searchemailTextField.setBorder(emptyBorder);
-		
-	      
+		this.searchemailTextField.setFont(defaultFont);
+		this.searchIdTextField.setFont(defaultFont);
+	   
 	    //배경화면	
 		
-		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				searchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
 				searchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);

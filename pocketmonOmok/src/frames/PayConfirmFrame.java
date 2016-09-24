@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 
 import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
+import enums.frames.searchIdEnum;
 
 public class PayConfirmFrame extends JFrame{
 	private Image backGround;
@@ -37,8 +38,7 @@ public class PayConfirmFrame extends JFrame{
 		);
 		
 		this.success = new JLabel("결제 완료 :)");	
-		Font font = new Font("a으라차차" , Font.BOLD , 24);
-		this.success.setFont(font);
+		this.success.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.success.setOpaque(false);
 		this.success.setBounds(ChargeEnum.CHARGE_SUCCESS_TEXT_SIZE_RECT.getRect());		
 		

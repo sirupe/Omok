@@ -36,12 +36,11 @@ public class SearchChangePanel extends JPanel {
 		this.searchChangePanel.setOpaque(false);
 		
 		// 패널 배경화면
-		backGround = ImageIO.read(new File("resources/signUp/backg.png")).getScaledInstance(
+		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
 				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 		this.add(new JLabel(new ImageIcon(backGround)));
-		//this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 		
 		this.setBounds(
 				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
@@ -77,5 +76,9 @@ public class SearchChangePanel extends JPanel {
 		this.searchChangePanel.add(changeConfirmMsgLabel);
 		this.searchChangePanel.add(changeConfirmButton);
 		}
+	public static void main(String[] args) throws IOException {
+		new SearchChangePanel();
+	}
+	
 		
 	}

@@ -79,9 +79,7 @@ public enum searchRePwdEnum {
 	LABELREPWDFONT_DEFAULT(new Font("a으라차차",Font.BOLD,13)),
 	//에러 메세지 폰트
 	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,19)),
-	//텍스트 테두리 없애기
-	LABEL_DEFAULT(new EmptyBorder(0,0,0,0)),	
-	
+
 	//에러 메세지색깔
 		LABELCOLOR_ERROR(Color.red),
 	// 일반색깔
@@ -92,7 +90,6 @@ public enum searchRePwdEnum {
 	private int size;
 	private Color color;
 	private Font font;
-	private EmptyBorder border;
 	private Rectangle rec;
 	
 	
@@ -112,9 +109,7 @@ public enum searchRePwdEnum {
 	private searchRePwdEnum(Font font) {
 		this.font = font;
 	}
-	private searchRePwdEnum(EmptyBorder border) {
-		this.border = border;
-	}
+
 	public Rectangle getRectangle() {
 		return rec;
 	}
@@ -130,10 +125,7 @@ public enum searchRePwdEnum {
 	public Font getFont() {
 		return font;
 	}
-	public EmptyBorder getBorder() {
-		return border;
-	}
-	
+
 	
 
 }
