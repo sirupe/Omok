@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.GameRoomEnum;
+import enums.frames.searchIdEnum;
 
 public class GiveUpFrame extends JFrame{
 	private Image backGround;
@@ -34,8 +35,7 @@ public class GiveUpFrame extends JFrame{
 		this.setBounds(GameRoomEnum.GIVEUP_FRAME_SIZE_RECT.getRect());
 		
 		this.giveUpText = new JLabel("기권하시겠습니까?");
-		Font font = new Font("a으라차차", Font.BOLD, 20);
-		this.giveUpText.setFont(font);
+		this.giveUpText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.giveUpText.setBounds(GameRoomEnum.GIVEUP_TEXT_SIZE_RECT.getRect());
 		
 		this.yes = new JButton() {

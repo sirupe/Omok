@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import enums.frames.CorrectEnum;
+import enums.frames.searchIdEnum;
 
 public class DropOutAskFrame extends JFrame{
 	private Image backGround;
@@ -30,9 +31,8 @@ public class DropOutAskFrame extends JFrame{
 		
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
-		Font font = new Font("a으라차차", Font.BOLD, 20);
 		this.dropOutLabel = new JLabel("정말 탈퇴하시겠습니까? :(");
-		this.dropOutLabel.setFont(font);
+		this.dropOutLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.dropOutLabel.setBounds(CorrectEnum.DROPOUT_TEXT_SIZE_RECT.getRect());
 		
 		this.confirm = new JButton() {

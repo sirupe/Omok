@@ -17,6 +17,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import enums.frames.ChargeEnum;
+import enums.frames.JoinSizesEnum;
+import enums.frames.searchIdEnum;
+import enums.frames.searchPwdEnum;
 
 public class ChargePanel extends JPanel {
 	
@@ -48,10 +51,9 @@ public class ChargePanel extends JPanel {
 		this.chargePanel.setBounds(ChargeEnum.CHARGE_PANEL_SIZE_RECT.getRect());
 		this.chargePanel.setOpaque(false);
 		
-		Font font = new Font("a으라차차",Font.BOLD, 18);
 		JLabel chargeLabel = new JLabel("충전할금액");
+		chargeLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		chargeLabel.setBounds(ChargeEnum.CHARGE_LABEL_SIZE_RECT.getRect());
-		chargeLabel.setFont(font);
 		
 		//1000원 버튼
 		JButton aThousand = new JButton() {
@@ -160,16 +162,15 @@ public class ChargePanel extends JPanel {
 		this.emailPanel.setLayout(null);
 		this.emailPanel.setBounds(ChargeEnum.EMAIL_PANEL_SIZE_RECT.getRect());
 
-		Font font = new Font("a으라차차",Font.BOLD, 18);
 		JLabel emailLabel = new JLabel("email 입력");
-		emailLabel.setFont(font);
+		emailLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		emailLabel.setBounds(ChargeEnum.EMAIL_LABEL_SIZE_RECT.getRect());
 	
 		JTextField emailInput = new JTextField();
 		emailInput.setBounds(ChargeEnum.EMAIL_INPUT_SIZE_RECT.getRect());
 		
 		JLabel at = new JLabel("@");
-		at.setFont(font);
+		at.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		at.setBounds(ChargeEnum.EMAIL_AT_SIZE_RECT.getRect());
 		
 		JTextField emailAddr = new JTextField();
@@ -228,13 +229,14 @@ public class ChargePanel extends JPanel {
 		
 		JTextArea certifyTextArea = new JTextArea("인증번호를 다시 확인하세요");
 		certifyTextArea.setForeground(Color.RED);
-		certifyTextArea.setFont(font);
+		certifyTextArea.setFont(searchPwdEnum.LABELFONT_DEFAULT.getFont());
 		certifyTextArea.setOpaque(false);
 		certifyTextArea.setBounds(ChargeEnum.CERTIFY_TEXTAREA_SIZE_RECT.getRect());
 		
+		
 		JTextArea certifyTime = new JTextArea("3:00");
 		certifyTime.setForeground(Color.RED);
-		certifyTime.setFont(font);
+		certifyTime.setFont(JoinSizesEnum.LABELFONT_DEFAULT.getFont());
 		certifyTime.setOpaque(false);
 		certifyTime.setBounds(ChargeEnum.CERTIFY_TIME_SIZE_RECT.getRect());
 		

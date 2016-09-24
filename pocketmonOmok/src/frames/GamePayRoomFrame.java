@@ -3,14 +3,8 @@ package frames;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -21,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GamePayRoomEnum;
-import enums.frames.GameStoreEnum;
 import enums.frames.searchIdEnum;
 
 public class GamePayRoomFrame extends JFrame {
@@ -67,6 +60,16 @@ public class GamePayRoomFrame extends JFrame {
 		this.cancelButton.setFocusPainted(false);
 		this.cancelButton.setContentAreaFilled(false);
 //프레임 화면 크기 위치
+		//배경화면	
+		
+				backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
+						GamePayRoomEnum.GAME_PAY_ROOM_WIDTH.getSize(),
+						GamePayRoomEnum.GAME_PAY_ROOM_HEIGHT.getSize(),
+		                Image.SCALE_SMOOTH);
+
+				this.setContentPane(new JLabel(new ImageIcon(backGround)));
+		
+		
 		this.setBounds(
 				GamePayRoomEnum.GAME_PAY_ROOM_POSITION_X.getSize(),
 				GamePayRoomEnum.GAME_PAY_ROOM_POSITION_Y.getSize(),
@@ -93,12 +96,14 @@ public class GamePayRoomFrame extends JFrame {
 		//아이템 *수량 -- > 패널로 묶기
 		this.itemquanity.setBounds(GamePayRoomEnum.GAME_ROOM_AMOUNT_PANEL.getRectangle());
 		this.itemquanity.setLayout(null);
+		this.itemquanity.setOpaque(false);
 		//this.itemquanity.setBackground(Color.blue);
 		
 		//수량을 넣을 수 있는 텍스트 필드 
 		JTextField userAmountText = new JTextField();
 		userAmountText.setBounds(GamePayRoomEnum.GAME_ROOM_USER_AMOUNT_PANEL.getRectangle());
-		userAmountText.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
+		//폰트  searchIdEnum에서 가져옴
+		userAmountText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		userAmountText.setBorder(GamePayRoomEnum.LABEL_LINE.getMatterBorder());
 		userAmountText.setOpaque(false);
 
@@ -148,19 +153,21 @@ public class GamePayRoomFrame extends JFrame {
 		
 
 		this.basicMoneyLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_BASICMONEY_LABEL.getRectangle());
-		this.basicMoneyLabel.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
+		this.basicMoneyLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.basicMoneyLabel.setOpaque(false);
 		
 		this.divLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_DIV_LABEL.getRectangle());
-		this.divLabel.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
-		
+		this.divLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.divLabel.setOpaque(false);
 		
 		this.equalsLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_EQUAL_LABEL.getRectangle());
-		this.equalsLabel.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
+		this.equalsLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		
 		
 		this.totalAmountLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_TOTALMONEY_LABEL.getRectangle());
-		this.totalAmountLabel.setFont(GamePayRoomEnum.LABELFONT_DEFAULT.getFont());
+		this.totalAmountLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.totalAmountLabel.setBorder(GamePayRoomEnum.LABEL_LINE.getMatterBorder());
-		
+		this.totalAmountLabel.setOpaque(false);
 
 		this.add(totalAmountLabel);
 		this.add(equalsLabel);

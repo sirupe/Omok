@@ -23,7 +23,8 @@ public class GameRoomFullFrame extends JFrame {
 		
 		//방 확인 내용출력 라벨
 		this.RoomConfirmLabel = new JLabel("<html>현재 빈방이 없습니다..<br>방을 만들어 주세요<br></html>");
-		this.RoomConfirmLabel.setFont(GameRoomFullEnum.LABELFONT_ERROR.getFont());
+		//폰트 searchIdEnum 에서 가져옴
+		this.RoomConfirmLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.RoomConfirmLabel.setForeground(GameRoomFullEnum.LABELCOLOR_DEFAULT.getColor());
 		
 		//확인버튼생성

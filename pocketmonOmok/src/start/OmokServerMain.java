@@ -2,6 +2,8 @@ package start;
 
 import java.io.IOException;
 
+import omokGame.server.OmokServer;
+
 
 // Exception in thread "main" java.net.BindException: Address already in use: JVM_Bind
 // 이런 에러 발생시 enums > ServerIPEnum 에서 서버포트 다른 번호로 변경 후 다시 서버 온 시도하세요.
