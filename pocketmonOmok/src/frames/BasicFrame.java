@@ -21,6 +21,8 @@ import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
+import frames.serchFrames.SearchPwdFrame;
+import frames.serchFrames.SearchPwdPanel;
 import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
 
@@ -33,6 +35,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	private WaitingRoomPanel waitingRoomPanel;
 	private GameRoomPanel gameRoomPanel;
 	private JoinFrame joinFrame;
+	private SearchPwdFrame searchPwdFrame;
 	
 	private ClientAccept clientAccept;
 	
@@ -144,6 +147,13 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void newJoinFrame() throws IOException {
 		this.joinFrame = new JoinFrame(this.loginPanel);
 	}
+	public void newSearchPwdFrame() throws IOException {
+		this.searchPwdFrame = new SearchPwdFrame(this.loginPanel);
+	}
+	
+	public SearchPwdFrame getSearchPwdFrame() {
+		return searchPwdFrame;
+	}
 	
 	public ObjectOutputStream getClientOS() {
 		return this.clientAccept.getClientOS();
@@ -164,4 +174,5 @@ public class BasicFrame extends JFrame implements Serializable{
 	public ClientAccept getClientAccept() {
 		return clientAccept;
 	}
+
 }

@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import actions.findIDandPW.FindPWAction;
 import enums.frames.searchIdEnum;
 import enums.frames.searchPwdEnum;
+import frames.LoginPanel;
 
 public class SearchPwdPanel extends JPanel {
 
@@ -33,12 +35,24 @@ public class SearchPwdPanel extends JPanel {
 	//private Image backGround;
 	
 	private SearchPwdFrame searchPwdFrame;
+	private SearchPwdPanel searchPwdPanel;
+	private LoginPanel loginPanel;
+	
+	private FindPWAction findPwdAction;
 	
 	
-	public SearchPwdPanel(SearchPwdFrame searchPwdFrame) throws IOException {
-		this.setLayout(null);
-		this.searchPwdFrame = searchPwdFrame;	     
-	     
+	public SearchPwdPanel(LoginPanel loginPanel) throws IOException {
+		this.searchPwdPanel = searchPwdPanel;
+		this.searchPwdFrame = searchPwdFrame;
+		this.findPwdAction = new FindPWAction(this);
+//		this.addWin
+	
+			     
+	    this.setLayout(null);
+	    
+		
+		
+		
 		//라벨 생성 TODO
 		this.searchIdLabel    = new JLabel("ID");
 		this.searchemailLabel = new JLabel("Email");
@@ -140,12 +154,41 @@ public class SearchPwdPanel extends JPanel {
 	    					Image.SCALE_AREA_AVERAGING))
 	    		);
 	    	this.searchConfirmButton.setBounds(searchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle()); 
-	    	this.add(searchConfirmButton);    	 
+	    	this.add(searchConfirmButton);    
+	    	//확인 버튼 누르면 액션 실행
+//	    	this.searchConfirmButton.addActionListener(this.findPwdAction);
 	    }   
 	    
 	    public SearchPwdFrame getSearchPwdMain() {
 	    	return searchPwdFrame;
 	    }
-	    
+
+	    public JLabel getSearchIdLabel() {
+	    	return searchIdLabel;
+	    }
+	    public JLabel getSearchemailLabel() {
+	    	return searchemailLabel;
+	    }
+	    public JLabel getSearchErrorMsgLabel() {
+	    	return searchErrorMsgLabel;
+	    }
+	    public JLabel getSearchAnswerMsg() {
+	    	return searchAnswerMsg;
+	    }
+	    public JLabel getSearchTimeLabel() {
+	    	return searchTimeLabel;
+	    }
+	    public JTextField getSearchIdTextField() {
+	    	return searchIdTextField;
+	    }
+	    public JTextField getSearchemailTextField() {
+	    	return searchemailTextField;
+	    }
+	    public JTextField getSearchConfirmTextField() {
+	    	return searchConfirmTextField;
+	    }
+	    public JButton getSearchConfirmButton() {
+	    	return searchConfirmButton;
+	    }
 	}
 

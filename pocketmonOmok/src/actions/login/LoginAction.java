@@ -126,9 +126,16 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
 			
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-			
-		}
-	}
+//			if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+				this.loginPanel.getBasicFrame().setVisible(false);
+				System.out.println("dd");
+					try {
+						this.loginPanel.getBasicFrame().newSearchPwdFrame();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}}
 	
 	public void loginAction() {
 		char[] passwd = this.loginPanel.getPwField().getPassword();

@@ -95,7 +95,7 @@ public class JoinFrame extends JFrame {
 		this.loginPanel = loginPanel;
 		this.joinAction = new JoinAction(this.loginPanel, this);
 		this.addWindowListener(this.joinAction);
-		
+
 		this.errMessageMap = JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
 
 		//모든 레이블 

@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import actions.login.LoginAction;
 import enums.etc.ImageEnum;
 import enums.frames.LoginSizesEnum;
+import frames.serchFrames.SearchPwdPanel;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel {
@@ -47,6 +48,8 @@ public class LoginPanel extends JPanel {
 	private BasicFrame basicFrame;
 	
 	private LoginAction loginAction;
+
+	private SearchPwdPanel searchPwdPanel; 
 	
 	public LoginPanel(BasicFrame basicFrame) throws IOException {
 		this.loginAction = new LoginAction(this);
@@ -56,6 +59,7 @@ public class LoginPanel extends JPanel {
 		this.loginPanel.setLayout(null);
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
+		this.searchPwdPanel = searchPwdPanel;
 		this.loginFailLabel = new JLabel();
 		
 		//프레임 화면 출력 위치 설정
@@ -296,4 +300,9 @@ public class LoginPanel extends JPanel {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
+	public SearchPwdPanel getSearchPwdPanel() {
+		return searchPwdPanel;
+	}
+
+
 }

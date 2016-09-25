@@ -1,6 +1,7 @@
 package frames.serchFrames;
 
 import java.awt.CardLayout;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -12,8 +13,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.findIDandPW.FindPWAction;
 import enums.frames.searchPwdEnum;
 import enums.frames.searchRePwdEnum;
+import frames.LoginPanel;
+
 
 
 @SuppressWarnings("serial")
@@ -23,9 +27,14 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	private SearchPwdPanel searchPwdPanel;
 	private SearchRePwdPanel searchRePwdPanel;
 	private SearchChangePanel searchChangePanel;
+	
 	private Image backGround;
 	
-	public SearchPwdFrame() throws IOException {
+	private FindPWAction findPwAction;
+	
+	public SearchPwdFrame(LoginPanel loginPanel) throws IOException {
+		
+		this.findPwAction = new FindPWAction(this);
 		
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
@@ -43,7 +52,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		);
 		
 		//비밀번호 찾기 프레임
-		this.searchPwdPanel = new SearchPwdPanel(this) {
+		this.searchPwdPanel = new SearchPwdPanel(loginPanel) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponents(g);
@@ -120,4 +129,22 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		};
 	}
 
+	
+	public SearchPwdPanel getSearchPwdPanel() {
+		return searchPwdPanel;
+	}
+	public FindPWAction getFindPwdAction() {
+		return findPwAction;
+	}
+	public SearchRePwdPanel getSearchRePanel() {
+		return searchRePwdPanel;
+	}
+	//	public static void main(String[] args) {
+//		try {
+//			new SearchPwdFrame();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }
