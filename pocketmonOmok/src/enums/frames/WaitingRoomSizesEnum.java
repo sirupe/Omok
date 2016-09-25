@@ -176,6 +176,10 @@ public enum WaitingRoomSizesEnum {
 	MY_INFO_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.72)),
 	MY_INFO_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.58)),
 
+	USER_INFO_VIEW_SIZE_X((int)(MY_INFO_IMAGE_WIDTH.getSize() * 0.05)),
+	USER_INFO_VIEW_SIZE_Y((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.05)),
+	USER_INFO_VIEW_SIZE_WIDTH((int)(MY_INFO_IMAGE_WIDTH.getSize() * 0.9)),
+	USER_INFO_VIEW_SIZE_HEIGHT((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.9)),
 	
 	//==================================FONTSIZE&COLOR==================================
 	

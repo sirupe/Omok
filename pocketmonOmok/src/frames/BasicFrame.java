@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
@@ -98,9 +99,10 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				AbstractEnumsDTO index = new AbstractEnumsDTO(UserPositionEnum.POSITION_EXIT);
+				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
+				personalDTO.setUserID(clientAccept.getUserID());
 				try {
-					clientAccept.getClientOS().writeObject(index);
+					clientAccept.getClientOS().writeObject(personalDTO);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -142,7 +144,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	}
 
 	public void newJoinFrame() throws IOException {
-		this.joinFrame = new JoinFrame(this.loginPanel);
+		this.joinFrame = new JoinFrame(this);
 	}
 	
 	public ObjectOutputStream getClientOS() {

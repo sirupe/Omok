@@ -29,7 +29,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import actions.waitingRoom.WaitingRoomAction;
+import datasDTO.AbstractEnumsDTO;
+import datasDTO.GameRoomInfoVO;
 import datasDTO.UserGamedataInfoDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomSizesEnum;
 import frames.BasicFrame;
@@ -53,17 +56,18 @@ public class WaitingRoomPanel extends JPanel {
 	private JScrollPane playerListScroll;
 	
 	private JPanel myInfo;
-	private JPanel myInfoImage;
-	private JLabel userID;
-	private JLabel userIDText;
-	private JLabel score;
-	private JLabel scoreText;
-	private JLabel winningRate;
-	private JLabel winningRateText;
-	private JLabel point;
-	private JLabel pointText;
-	private JLabel level;
-	private JLabel levelText;
+	private JPanel myInfoImageBorder;
+	private JLabel userInfoImageLabel;
+	private JLabel userIDTitleLabel;
+	private JLabel userIDTextLabel;
+	private JLabel scoreTitleLabel;
+	private JLabel scoreTextLabel;
+	private JLabel winningRateTitleLabel;
+	private JLabel winningRateTextLabel;
+	private JLabel pointTitleLabel;
+	private JLabel pointTextLabel;
+	private JLabel levelTitleLabel;
+	private JLabel levelImageLabel;
 	private JButton correct;
 	
 	private WaitingRoomAction waitingRoomAction;
@@ -85,16 +89,19 @@ public class WaitingRoomPanel extends JPanel {
 		this.gamestartButton  = new JButton();
 		this.createRoomButton = new JButton();
 			
-		this.userID 	 	 = new JLabel("ID");
-		this.userIDText  	 = new JLabel("여기에아이디가들어가요label");
-		this.score 		 	 = new JLabel("전적");
-		this.scoreText   	 = new JLabel("12345");
-		this.winningRate 	 = new JLabel("승률");
-		this.winningRateText = new JLabel("123123");
-		this.point 		 	 = new JLabel("승점");
-		this.pointText       = new JLabel("3333333");
-		this.level 		 	 = new JLabel(".LV");
-		this.levelText       = new JLabel();
+		this.userIDTitleLabel 	 	 = new JLabel("ID");
+		this.scoreTitleLabel 		 = new JLabel("전적");
+		this.winningRateTitleLabel 	 = new JLabel("승률");
+		this.pointTitleLabel 		 = new JLabel("승점");
+		this.levelTitleLabel 		 = new JLabel(".LV");
+		
+		this.userIDTextLabel 	  = new JLabel("아이디");
+		this.scoreTextLabel   	  = new JLabel("전적");
+		this.winningRateTextLabel = new JLabel("승률");
+		this.pointTextLabel       = new JLabel("승점");
+		this.levelImageLabel 	  = new JLabel();
+		this.userInfoImageLabel   = new JLabel();
+
 		this.correct 	 	 = new JButton();
 		
 		this.basicFrame 	 = basicFrame;
@@ -142,6 +149,34 @@ public class WaitingRoomPanel extends JPanel {
 		this.roomListPosition();
 	}
 
+	// 방 리스트에 방을 추가
+	public void addGameRoom(GameRoomInfoVO roomInfoVo) {
+		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
+		
+		tableModel.addRow(new Object[] {
+				roomInfoVo.getImage(),
+				roomInfoVo.getRoomNumber(),
+				roomInfoVo.getRoomName(),
+				roomInfoVo.getOwner(),
+				roomInfoVo.getPersons()
+		});
+	}
+	
+	// 방 리스트에서 방을 삭제
+	public void deleteGameRoom(GameRoomInfoVO roomInfoVo) {
+		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
+		
+		tableModel.getRowCount();
+		
+		for(int i = 0, size = tableModel.getRowCount(); i < size; i++) {
+			if(roomInfoVo.getRoomNumber() == (int)tableModel.getValueAt(i, 1)) {
+				tableModel.removeRow(i);
+				break;
+			}
+		}
+	}
+	
+	//==========================접속자 리스트==========================
 	public void userListSetting(List<UserGamedataInfoDTO> list) throws IOException {
 		ArrayList<String> usersGrade = new ArrayList<String>();
 		this.players = new Vector<String>();
@@ -151,9 +186,9 @@ public class WaitingRoomPanel extends JPanel {
 		}
 
 		
-		//==========================접속자 리스트==========================
 		this.imageMap = createImage(this.players, usersGrade);
 		this.playerList = new JList<String>(this.players);
+		this.playerList.addMouseListener(this.waitingRoomAction);
 		this.playerList.setCellRenderer(new PlayerRenderer());
 		
 		this.playerListScroll.setViewportView(this.playerList);
@@ -164,7 +199,7 @@ public class WaitingRoomPanel extends JPanel {
 			
 	}
 //TODO
-	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
+	public void userListAddSetting(UserGamedataInfoDTO newUser) throws IOException {
 		
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
@@ -173,10 +208,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.playerList.setCellRenderer(new PlayerRenderer());
 		
 		this.playerListScroll.setViewportView(this.playerList);
-
-		this.playerListScroll.setOpaque(false);
-		this.playerListScroll.getViewport().setOpaque(false);
-		this.playerList.setOpaque(false);
+	}
+	
+	public void deleteUserSetting(UserPersonalInfoDTO delUser) {
+		this.players.remove(delUser.getUserID());
+		this.imageMap.remove(delUser.getUserID());
+		this.playerList.setCellRenderer(new PlayerRenderer());
+		this.playerListScroll.setViewportView(this.playerList);
 	}
 	
 	/***************************접속자 리스트 클래스***************************/
@@ -223,6 +261,7 @@ public class WaitingRoomPanel extends JPanel {
 			e.printStackTrace();
 		}    
 	}
+	
 
 	/***************************대기실 위치***************************/
 	public void roomListPosition() throws IOException {
@@ -278,6 +317,7 @@ public class WaitingRoomPanel extends JPanel {
 				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
+		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
 		this.chattingInput.setBounds(
 				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_X.getSize(),
@@ -377,26 +417,26 @@ public class WaitingRoomPanel extends JPanel {
 		/******************************************************************************/
 
 		//아이디, 아이디 텍스트
-		this.userID.setBounds(
+		this.userIDTitleLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_USERID_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_USERID_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_USERID_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_USERID_HEIGHT.getSize()
 		);
-		this.userIDText.setBounds(
+		this.userIDTextLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_HEIGHT.getSize()
 		);
 		//전적, 전적 텍스트
-		this.score.setBounds(
+		this.scoreTitleLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_SCORE_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_SCORE_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_SCORE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_SCORE_HEIGHT.getSize()
 		);
-		this.scoreText.setBounds(
+		this.scoreTextLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_WIDTH.getSize(),
@@ -404,13 +444,13 @@ public class WaitingRoomPanel extends JPanel {
 		);
 		
 		//승률, 승률 텍스트
-		this.winningRate.setBounds(
+		this.winningRateTitleLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_HEIGHT.getSize()
 		);
-		this.winningRateText.setBounds(
+		this.winningRateTextLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_WIDTH.getSize(),
@@ -419,13 +459,13 @@ public class WaitingRoomPanel extends JPanel {
 		
 		
 		//승점, 승점 텍스트
-		this.point.setBounds(
+		this.pointTitleLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_POINT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_POINT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_POINT_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_POINT_HEIGHT.getSize()
 		);
-		this.pointText.setBounds(
+		this.pointTextLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_WIDTH.getSize(),
@@ -434,24 +474,17 @@ public class WaitingRoomPanel extends JPanel {
 		
 		
 		//등급, 등급 텍스트 이미지
-		this.level.setBounds(
+		this.levelTitleLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_HEIGHT.getSize()
 		);
-		this.levelText.setBounds(
+		this.levelImageLabel.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
 				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()
-		);
-		this.levelText.setIcon(
-			new ImageIcon(ImageIO.read(
-				new File("resources/user/usermediumgrade.png")).getScaledInstance(
-					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize() ,
-					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(),
-					Image.SCALE_AREA_AVERAGING))
 		);
 		
 		//수정
@@ -472,7 +505,7 @@ public class WaitingRoomPanel extends JPanel {
 
 
 		//내정보 이미지 틀
-		this.myInfoImage = new JPanel(){
+		this.myInfoImageBorder = new JPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -489,14 +522,24 @@ public class WaitingRoomPanel extends JPanel {
 				}
 			}
 		};
+		this.myInfoImageBorder.setLayout(null);
+		this.userInfoImageLabel.setBackground(Color.red);
+		this.userInfoImageLabel.setBounds(
+				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_X.getSize(),
+				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_Y.getSize(),
+				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
+				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize()
+		);
+
+		this.myInfoImageBorder.add(userInfoImageLabel);
 		
-		this.myInfoImage.setBounds(
+		this.myInfoImageBorder.setBounds(
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_X.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_WIDTH.getSize(), 
 				WaitingRoomSizesEnum.MY_INFO_IMAGE_HEIGHT.getSize()
 		);
-		myInfoImage.setOpaque(false);
+		myInfoImageBorder.setOpaque(false);
 		
 		//나의 정보창의 배경 이미지를 불러올 JPanel 생성
 		this.myInfo = new JPanel() {
@@ -554,11 +597,11 @@ public class WaitingRoomPanel extends JPanel {
 		this.correct.setFocusPainted(false);
 		
 		//방정보 폰트
-		this.userID.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
-		this.score.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
-		this.winningRate.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
-		this.point.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
-		this.level.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.userIDTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.scoreTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.winningRateTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.pointTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
+		this.levelTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
 		
 		
 		
@@ -576,22 +619,24 @@ public class WaitingRoomPanel extends JPanel {
 		this.add(createRoomButton);
 		this.playerListBackground.add(playerListScroll);
 		this.add(playerListBackground);
-		this.add(myInfoImage);
-		this.add(userID);
-		this.add(userIDText);
-		this.add(score);
-		this.add(scoreText);
-		this.add(winningRate);
-		this.add(winningRateText);
-		this.add(point);
-		this.add(pointText);
-		this.add(level);
-		this.add(levelText);
+		this.add(myInfoImageBorder);
+		this.add(userIDTitleLabel);
+		this.add(userIDTextLabel);
+		this.add(scoreTitleLabel);
+		this.add(scoreTextLabel);
+		this.add(winningRateTitleLabel);
+		this.add(winningRateTextLabel);
+		this.add(pointTitleLabel);
+		this.add(pointTextLabel);
+		this.add(levelTitleLabel);
+		this.add(levelImageLabel);
 		this.add(correct);
 		this.add(myInfo);
 		
 		
 	}
+	
+// 은정 추가 메소드 ----------------------------------------------------------------------------------------
 	
 	public void addAction(JButton comp, String name) {
 		comp.setName(name);
@@ -614,7 +659,6 @@ public class WaitingRoomPanel extends JPanel {
 		
 		// 방번호 구하기. 1 ~ 20 중 가장 작은 생성되지 않은 방번호를 얻어온다.
 		if(tableModel.getRowCount() > 0) {			
-			System.out.println(tableModel.getValueAt(0, 1));
 			for(int i = 1, j, size; i <= 20; i++) {
 				for(j = 0, size = tableModel.getRowCount(); j < size; j++) {
 					o = tableModel.getValueAt(j, 1);
@@ -638,6 +682,36 @@ public class WaitingRoomPanel extends JPanel {
 		return this.createGameRoomFrame;
 	}
 	
+	// 유저가 유저리스트에서 유저 클릭시 게임데이터를 해당 유저 정보로 바꾸어줌
+	public void setUserInfo(UserGamedataInfoDTO userGameData) throws IOException {
+		int allCount = userGameData.getUserGameCount();
+		int winCount = userGameData.getUserWinCount();
+		double winRate = winCount == 0 ? 0 : ((double)winCount / allCount) * 100;
+		
+		StringBuffer setScore = new StringBuffer();
+		setScore.append(allCount);
+		setScore.append("전");
+		setScore.append(winCount);
+		setScore.append("승");
+				
+		this.pointTextLabel.setText(String.valueOf(userGameData.getUserScore()));
+		this.scoreTextLabel.setText(setScore.toString());
+		this.userIDTextLabel.setText(userGameData.getUserID());
+		this.winningRateTextLabel.setText(String.valueOf(winRate));
+		this.userInfoImageLabel.setIcon(userGameData.getUserImage());
+		
+		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
+		
+		this.levelImageLabel.setIcon(
+			new ImageIcon(ImageIO.read(
+				new File(dir)).getScaledInstance(
+						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(), 
+						Image.SCALE_AREA_AVERAGING)
+			)
+		);
+	}
+	
 	public void updateDeleteRoom() {
 		
 	}
@@ -648,5 +722,13 @@ public class WaitingRoomPanel extends JPanel {
 	
 	public CreateGameRoomFrame getCreateGameRoomFrame() {
 		return createGameRoomFrame;
+	}
+	
+	public JList<String> getPlayerList() {
+		return playerList;
+	}
+	
+	public JTextArea getChattingOutput() {
+		return chattingOutput;
 	}
 }

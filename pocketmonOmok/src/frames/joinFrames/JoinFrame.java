@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import actions.join.JoinAction;
 import enums.frames.JoinSizesEnum;
-import frames.LoginPanel;
+import frames.BasicFrame;
 import utility.JTextFieldNumOnly;
 
 // 수진
@@ -87,13 +87,13 @@ public class JoinFrame extends JFrame {
 //배경
 	private Image backGround;
 	
-	private LoginPanel loginPanel;
+	private BasicFrame basicFrame;
 	private JoinAction joinAction;
 	private Map<String, String> errMessageMap;
 
-	public JoinFrame(LoginPanel loginPanel) throws IOException {
-		this.loginPanel = loginPanel;
-		this.joinAction = new JoinAction(this.loginPanel, this);
+	public JoinFrame(BasicFrame basicFrame) throws IOException {
+		this.basicFrame = basicFrame;
+		this.joinAction = new JoinAction(this.basicFrame, this);
 		this.addWindowListener(this.joinAction);
 		
 		this.errMessageMap = JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
@@ -712,14 +712,6 @@ public class JoinFrame extends JFrame {
 		this.add(comp);
 	}
 	
-	public LoginPanel getLoginPanel() {
-		return loginPanel;
-	}
-
-	public void setLoginPanel(LoginPanel loginPanel) {
-		this.loginPanel = loginPanel;
-	}
-	
 	public JTextField getIdTextField() {
 		return idTextField;
 	}
@@ -815,6 +807,9 @@ public class JoinFrame extends JFrame {
 		return joinAction;
 	}
 	
+	public BasicFrame getBasicFrame() {
+		return basicFrame;
+	}
 	
 	//테스트용
 	public void test() {

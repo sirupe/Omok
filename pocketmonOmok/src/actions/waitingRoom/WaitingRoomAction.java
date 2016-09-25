@@ -2,11 +2,13 @@ package actions.waitingRoom;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import actions.adapters.Adapters;
 import datasDTO.GameRoomInfoVO;
+import datasDTO.UserGamedataInfoDTO;
 import enums.etc.ImageEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
@@ -17,9 +19,11 @@ public class WaitingRoomAction extends Adapters {
 	private BasicFrame basicFrame;
 	private CreateGameRoomFrame createRoom;
 	private int openPrivate;
+	private String listSelectUser; // 접속자 리스트에서 유저가 선택한 정보를 확인하기 위해 사용
 	
 	public WaitingRoomAction(BasicFrame basicFrame) {
 		this.basicFrame = basicFrame;
+		this.listSelectUser = "";
 	}
 	
 	@Override
@@ -57,6 +61,25 @@ public class WaitingRoomAction extends Adapters {
 		}
 	}
 	
+	// 유저 접속자 리스트에서 액션 인입
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		String selectValue = this.basicFrame.getWaitingRoomPanel().getPlayerList().getSelectedValue();
+		if(this.listSelectUser.equals(selectValue)) {
+			UserGamedataInfoDTO gameData = new UserGamedataInfoDTO(UserPositionEnum.POSITION_WAITING_ROOM);
+			gameData.setUserAction(UserActionEnum.USER_CONFIRM_USERINFO);
+			gameData.setUserID(this.listSelectUser);
+			try {
+				this.basicFrame.getClientOS().writeObject(gameData);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			this.listSelectUser = this.basicFrame.getWaitingRoomPanel().getPlayerList().getSelectedValue();
+		}
+		
+	}
+	
 	// 방만들기프레임 new
 	public void createRoomFrameView() {
 		try {
@@ -85,6 +108,5 @@ public class WaitingRoomAction extends Adapters {
 		}
 				
 		this.basicFrame.getClientOS().writeObject(gameRoomInfo);
-	}
-	
+	}	
 }
