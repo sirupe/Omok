@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import enums.frames.LoginSizesEnum;
-import enums.frames.searchPwdEnum;
-import enums.frames.searchRePwdEnum;
+import enums.frames.SearchPwdEnum;
+import enums.frames.SearchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchChangePanel extends JPanel {
@@ -37,21 +37,21 @@ public class SearchChangePanel extends JPanel {
 		
 		// 패널 배경화면
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
+				SearchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
+				SearchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 		this.add(new JLabel(new ImageIcon(backGround)));
 		
 		this.setBounds(
-				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
-				searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
-				searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-				searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
+				SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
+				SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
+				SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+				SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 				);
 		// 변경 완료창 라벨
 		JLabel changeConfirmMsgLabel = new JLabel("<html>비밀번호 변경이 완료 되었습니다."
 				+ "<br>다시 로그인해주세요!<br></html>");
-		changeConfirmMsgLabel.setBounds(searchRePwdEnum.SEARCH_CONFIRM_CHANGE_LABEL.getRectangle());
+		changeConfirmMsgLabel.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_CHANGE_LABEL.getRectangle());
 		
 
 		// 확인 버튼 창
@@ -64,8 +64,8 @@ public class SearchChangePanel extends JPanel {
 						new File("resources/signUp/confirm.jpg")), 
 						0, 
 						0, 
-						searchRePwdEnum.SEARCH__CHANGE_CONFIRM_BUTTON.getRectangle().width,
-						searchRePwdEnum.SEARCH__CHANGE_CONFIRM_BUTTON.getRectangle().height,
+						SearchRePwdEnum.SEARCH__CHANGE_CONFIRM_BUTTON.getRectangle().width,
+						SearchRePwdEnum.SEARCH__CHANGE_CONFIRM_BUTTON.getRectangle().height,
 						this);
 				} catch (IOException e) {
 					e.printStackTrace();

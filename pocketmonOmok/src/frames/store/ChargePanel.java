@@ -1,4 +1,4 @@
-package frames.store;
+package frames.Store;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 
 import enums.frames.ChargeEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.searchIdEnum;
-import enums.frames.searchPwdEnum;
+import enums.frames.SearchIdEnum;
+import enums.frames.SearchPwdEnum;
 
 public class ChargePanel extends JPanel {
 	
@@ -71,7 +71,7 @@ public class ChargePanel extends JPanel {
 		this.chargePanel.setOpaque(false);
 		
 		this.chargeLabel = new JLabel("충전할금액");
-		this.chargeLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.chargeLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.chargeLabel.setBounds(ChargeEnum.CHARGE_LABEL_SIZE_RECT.getRect());
 		
 		//1000원 버튼
@@ -182,14 +182,14 @@ public class ChargePanel extends JPanel {
 		this.emailPanel.setBounds(ChargeEnum.EMAIL_PANEL_SIZE_RECT.getRect());
 
 		this.emailLabel = new JLabel("email 입력");
-		this.emailLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.emailLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.emailLabel.setBounds(ChargeEnum.EMAIL_LABEL_SIZE_RECT.getRect());
 	
 		this.emailInput = new JTextField();
 		this.emailInput.setBounds(ChargeEnum.EMAIL_INPUT_SIZE_RECT.getRect());
 		
 		this.at = new JLabel("@");
-		this.at.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.at.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.at.setBounds(ChargeEnum.EMAIL_AT_SIZE_RECT.getRect());
 		
 		this.emailAddr = new JTextField();
@@ -246,7 +246,7 @@ public class ChargePanel extends JPanel {
 		
 		this.certifyTextArea = new JTextArea("인증번호를 다시 확인하세요");
 		this.certifyTextArea.setForeground(Color.RED);
-		this.certifyTextArea.setFont(searchPwdEnum.LABELFONT_DEFAULT.getFont());
+		this.certifyTextArea.setFont(SearchPwdEnum.LABELFONT_DEFAULT.getFont());
 		this.certifyTextArea.setOpaque(false);
 		this.certifyTextArea.setBounds(ChargeEnum.CERTIFY_TEXTAREA_SIZE_RECT.getRect());
 		

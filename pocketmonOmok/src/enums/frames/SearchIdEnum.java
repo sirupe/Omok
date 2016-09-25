@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.glass.ui.Size;
 
-public enum searchIdEnum {
+public enum SearchIdEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	SEARCHFRAME_SIZE_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
@@ -24,7 +24,7 @@ public enum searchIdEnum {
 	SEARCH_ID_LABEL(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.13),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.14),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.1),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.12),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 	SEARCH_EMAIL_LABEL(new Rectangle(
@@ -63,46 +63,53 @@ public enum searchIdEnum {
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
 			)),
-	
+	//확인 버튼이름
+	BUTTON_NAME_CONFIRM("confirm"),
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (searchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (SearchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD, (int) (searchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.3))),
-
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD, (int) (SearchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.3))),
 	//에러 메세지색깔
-		LABELCOLOR_ERROR(Color.red),
-	// 일반색깔
-		LABELCOLOR_DEFAULT(Color.green);
+	LABELCOLOR_ERROR(Color.red),
+	//일반색깔
+	LABELCOLOR_DEFAULT(Color.green);
 	
 	private Dimension dimension;
+	private String buttonName;
 	private int size;
 	private Color color;
 	private Font font;
 	private Rectangle rec;
-	
-	
-	private searchIdEnum(Rectangle rec) {
+		
+	//set
+	private SearchIdEnum(Rectangle rec) {
 		this.rec = rec;
 	}
-	private searchIdEnum(Dimension dimension) {
+	private SearchIdEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
-	
-	private searchIdEnum(int size) {
+	private SearchIdEnum(String buttonName) {
+		this.buttonName = buttonName;
+	}
+	private SearchIdEnum(int size) {
 		this.size = size;
 	}
-	private searchIdEnum(Color color) {
+	private SearchIdEnum(Color color) {
 		this.color = color;
 	}
-	private searchIdEnum(Font font) {
+	private SearchIdEnum(Font font) {
 		this.font = font;
 	}
-
+	
+	//get
 	public Rectangle getRectangle() {
 		return rec;
 	}
 	public Dimension getDimension() {
 		return dimension;
+	}
+	public String getButtonName() {
+		return buttonName;
 	}
 	public int getSize() {
 		return size;
@@ -113,8 +120,4 @@ public enum searchIdEnum {
 	public Font getFont() {
 		return font;
 	}
-
-	
-	
-
 }

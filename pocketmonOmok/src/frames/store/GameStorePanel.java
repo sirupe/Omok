@@ -1,4 +1,4 @@
-package frames.store;
+package frames.Store;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 import enums.frames.GameStoreEnum;
 import enums.frames.WaitingRoomSizesEnum;
-import enums.frames.searchIdEnum;
+import enums.frames.SearchIdEnum;
 
 
 public class GameStorePanel extends JPanel {
@@ -89,7 +89,7 @@ public class GameStorePanel extends JPanel {
 		
 		JTextField userMoney = new JTextField("보유한 금액");
 		this.userMoney.setBounds(GameStoreEnum.STORE_USER_MONEY_REC.getRectangle());
-		this.userMoney.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.userMoney.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.userMoney.setBorder(GameStoreEnum.LABEL_LINE.getMatteBorder());
 		//userMoney.setBackground(Color.red);
 		
@@ -203,7 +203,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "1/99");
 							put("setBounds", GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_REC.getRectangle());
-							put("setFont", searchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					},
@@ -212,7 +212,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "2/99");
 							put("setBounds", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_REC.getRectangle());
-							put("setFont", searchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					},
@@ -221,7 +221,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "0/99");
 							put("setBounds", GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_REC.getRectangle());
-							put("setFont", searchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					},
@@ -230,7 +230,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "스킨뽑기");
 							put("setBounds", GameStoreEnum.STORE_USER_SKIN_CATCH_LABEL_REC.getRectangle());
-							put("setFont", searchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					}

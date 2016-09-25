@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 
 import enums.frames.GameRoomFullEnum;
 import enums.frames.GameStoreEnum;
-import enums.frames.searchIdEnum;
+import enums.frames.SearchIdEnum;
 
 public class GameRoomFullFrame extends JFrame {
 	private JLabel RoomConfirmLabel;
@@ -24,7 +24,7 @@ public class GameRoomFullFrame extends JFrame {
 		//방 확인 내용출력 라벨
 		this.RoomConfirmLabel = new JLabel("<html>현재 빈방이 없습니다..<br>방을 만들어 주세요<br></html>");
 		//폰트 searchIdEnum 에서 가져옴
-		this.RoomConfirmLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.RoomConfirmLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.RoomConfirmLabel.setForeground(GameRoomFullEnum.LABELCOLOR_DEFAULT.getColor());
 		
 		//확인버튼생성
@@ -37,8 +37,8 @@ public class GameRoomFullFrame extends JFrame {
 		
 		//배경화면	
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				searchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
-				searchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
+				SearchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
+				SearchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));

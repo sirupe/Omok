@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.border.EmptyBorder;
 
-public enum searchRePwdEnum {
+public enum SearchRePwdEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	SEARCH_REPWD_FRAME_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
@@ -94,20 +94,20 @@ public enum searchRePwdEnum {
 	private Rectangle rec;
 	
 	
-	private searchRePwdEnum(Rectangle rec) {
+	private SearchRePwdEnum(Rectangle rec) {
 		this.rec = rec;
 	}
-	private searchRePwdEnum(Dimension dimension) {
+	private SearchRePwdEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
-	private searchRePwdEnum(int size) {
+	private SearchRePwdEnum(int size) {
 		this.size = size;
 	}
-	private searchRePwdEnum(Color color) {
+	private SearchRePwdEnum(Color color) {
 		this.color = color;
 	}
-	private searchRePwdEnum(Font font) {
+	private SearchRePwdEnum(Font font) {
 		this.font = font;
 	}
 
