@@ -614,9 +614,11 @@ public class WaitingRoomPanel extends JPanel {
 		
 		// 방번호 구하기. 1 ~ 20 중 가장 작은 생성되지 않은 방번호를 얻어온다.
 		if(tableModel.getRowCount() > 0) {			
+			System.out.println(tableModel.getValueAt(0, 1));
 			for(int i = 1, j, size; i <= 20; i++) {
-				for(j = 0, size = tableModel.getRowCount(); j <= size; j++) {
-					o = tableModel.getValueAt(2, j);
+				for(j = 0, size = tableModel.getRowCount(); j < size; j++) {
+					o = tableModel.getValueAt(j, 1);
+					System.out.println(size + ": size");
 					if(Integer.parseInt(o.toString()) == i) {
 						break;
 					}
@@ -632,7 +634,8 @@ public class WaitingRoomPanel extends JPanel {
 	}
 	
 	public CreateGameRoomFrame newCreateGameRoomFrame() throws IOException {
-		return new CreateGameRoomFrame(this.waitingRoomAction, this);
+		this.createGameRoomFrame = new CreateGameRoomFrame(this.waitingRoomAction, this);
+		return this.createGameRoomFrame;
 	}
 	
 	public void updateDeleteRoom() {

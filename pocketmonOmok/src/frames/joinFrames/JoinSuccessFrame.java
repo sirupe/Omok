@@ -4,6 +4,8 @@ package frames.joinFrames;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -60,6 +62,15 @@ public class JoinSuccessFrame extends JFrame {
 		this.confirm.setContentAreaFilled(false);
 		this.confirm.setBounds(CorrectEnum.DROPOUT_COMPLETE_BUTTON_SIZE_RECT.getRect());
 		
+		this.confirm.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+				joinFrame.getLoginPanel().getBasicFrame().setVisible(true);
+			}
+		});
+		
 		this.add(joinSuccessLabel);
 		this.add(confirm);
 		this.setLayout(null);
@@ -68,11 +79,5 @@ public class JoinSuccessFrame extends JFrame {
 		
 		
 	
-	}
-	
-	public static void main(String[] args) throws IOException {
-		new JoinSuccessFrame(null, "회원가입 완료 :)");
-		
-		
 	}
 }

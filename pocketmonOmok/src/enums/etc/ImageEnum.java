@@ -8,6 +8,10 @@ public enum ImageEnum {
 	BASIC_BACKGROUND("resources/background/background.png"),
 //Loginpanel 이미지-----------------------------------------------------
 	LOGINPANEL_LOGIN("resources/login/login.jpg"),
+	LOGINPANEL_LOGIN_HOVER("resources/login/gamestartIconchange.png"),
+	LOGINPANEL_SIGNUP_HOVER("resources/login/signup.png"),
+	LOGINPANEL_SEARCHID_HOVER("resources/login/forgotID.png"),
+	LOGINPANEL_SEARCHPW_HOVER("resources/login/forgotPW.png"),
 //GameRoom 이미지들------------------------------------------------------	
 	GAMEROOM_MALE_IMAGE("resources/gameRoom/userImageMale.png"),
 	GAMEROOM_FEMALE_IMAGE("resources/gameRoom/userImageFemale.png"),

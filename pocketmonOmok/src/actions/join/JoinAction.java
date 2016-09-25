@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Random;
 
+import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
+
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
@@ -36,9 +38,11 @@ public class JoinAction extends Adapters {
 	private String telFrontNum;
 	private String telMidNum;
 	private String telLastNum;
+	private String certificationNumber;
 	
 	private StringBuffer totalEmail;
-	private String confirmNumber;
+	
+	private boolean emailConfirmTime;
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinAction(LoginPanel loginPanel, JoinFrame joinFrame){
@@ -47,6 +51,8 @@ public class JoinAction extends Adapters {
 		this.birthYear = "2016";
 		this.birthMonth = "1";
 		this.birthDate = "1";
+		this.emailConfirmTime = false;
+		this.certificationNumber = "0";
 	}
 	
 	// x버튼을 누르면 joinFrame 창이 꺼진 후 BasicFrame이 보이게 하기 위해 따로 설정.
@@ -143,6 +149,7 @@ public class JoinAction extends Adapters {
 		}
 	}
 	
+	// 회원가입 버튼, 메일 인증 버튼, 취소 버튼 입력받기
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String source = e.getSource().toString();
@@ -150,8 +157,12 @@ public class JoinAction extends Adapters {
 			this.joinAction();
 		} else if(source.contains("confirmButton")) {
 			this.confirmAction();
+		} else if(source.contains("cancelButton")) {
+			this.loginPanel.getBasicFrame().setVisible(true);
+			this.joinFrame.setVisible(false);
+			this.joinFrame.dispose();
 		}
-	}
+ 	}
 	
 	//id 유효성 및 정합성 검사
 	public void idSuitabilityCheck() {
@@ -296,14 +307,24 @@ public class JoinAction extends Adapters {
 		}
 	}
 
-	//인증 버튼 눌렀을 시
+	//인증 버튼 눌렀을 시 TODO
 	public void confirmAction() {
 		if(this.emailAddrSuitabilityCheck() && this.emailIDSuitabilityCheck()) {
-			//인증번호 생성
-			this.confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
-			System.out.println(this.confirmNumber);
-			//이메일발송
-			new SendEmail(this.confirmNumber, this.totalEmail.toString());
+			StringBuffer email = new StringBuffer();
+			email.append(this.joinFrame.getEmailIDTextField().getText());
+			email.append("@");
+			email.append(this.joinFrame.getEmailAddrTextField().getText());
+			System.out.println("유저이메일 : " + email.toString());
+			
+			UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION);
+			userPersonalInfoDTO.setUserEmail(email.toString());
+			try {
+				this.loginPanel.getBasicFrame().getClientOS().writeObject(userPersonalInfoDTO);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
 			//시간라벨보여주기
 			this.joinFrame.getEmailTimeLabel().setVisible(true);
 			//메일발송 메세지 보여주기
@@ -325,16 +346,22 @@ public class JoinAction extends Adapters {
 							joinFrame.getEmailTimeLabel().setText(time.toString());
 							try {
 								Thread.sleep(1000);
+								if(emailConfirmTime) {
+									this.interrupt();
+								}
 							} catch (InterruptedException e) {
-								e.printStackTrace();
+								break;
 							}
+						}
+						if(emailConfirmTime) {
+							return;
 						}
 					}
 					joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
 					joinFrame.getEmailTimeLabel().setVisible(false);
 					
-					if(!confirmNumber.equals(joinFrame.getEmailConfTextField().getText())) {
-						confirmNumber = null;
+					if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
+						certificationNumber = null;
 					};
 				}
 			}.start();
@@ -344,11 +371,12 @@ public class JoinAction extends Adapters {
 	//이메일 인증번호 입력 텍스트필드 
 	public void emailConfirm() {
 		String inputNum = this.joinFrame.getEmailConfTextField().getText();
-		if(this.confirmNumber.equals(inputNum)) {
+		if(this.certificationNumber.equals(inputNum)) {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
 			this.joinFrame.getEmailTimeLabel().setVisible(false);
 			this.joinFrame.getEmailConfTextField().setEditable(false);
 			this.joinFrame.getConfirmButton().setEnabled(false);
+			this.emailConfirmTime = true;
 		} else {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
 		}
@@ -434,7 +462,7 @@ public class JoinAction extends Adapters {
 		}
 		
 		//인증번호를 받지 않았을 때
-		if(this.confirmNumber == null) {
+		if(this.certificationNumber == null) {
 			System.out.println("인증번호");
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, "joinMail인증필");
 			errCount++;
@@ -471,7 +499,10 @@ public class JoinAction extends Adapters {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
+	}
+	
+	public void setCertificationNumber(String certificationNumber) {
+		this.certificationNumber = certificationNumber;
 	}
 }

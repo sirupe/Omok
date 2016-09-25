@@ -81,7 +81,7 @@ public class JoinFrame extends JFrame {
 	private JTextField telLastNumTextField;	
 	
 	private JButton joinButton; //회원가입 버튼
-	private JButton resetButton; //취소버튼
+	private JButton cancelButton; //취소버튼
 	private JButton confirmButton; //인증 버큰
 
 //배경
@@ -141,7 +141,7 @@ public class JoinFrame extends JFrame {
 		
 				
 		//회원가입, 취소 버튼	
-		this.resetButton   = new JButton();
+		this.cancelButton   = new JButton();
 		this.joinButton	   = new JButton();
 		this.confirmButton = new JButton();	
 
@@ -234,10 +234,11 @@ public class JoinFrame extends JFrame {
 		this.addItemAction(this.telFrontNumChoice,  "telFrontNumChoice");
 		this.addActionPerform(this.joinButton, 		"joinButton");
 		this.addActionPerform(this.confirmButton, 	"confirmButton");
+		this.addActionPerform(this.cancelButton, 	"cancelButton");
 		this.addItemAction(this.genderManRadio, 	"genderManRadio");
 		this.addItemAction(this.genderWomanRadio, 	"genderWomanRadio");
 		
-		this.test();
+//		this.test();
 	}
 
 	//모든 레이블 위치 -- > 순서대로
@@ -552,7 +553,7 @@ public class JoinFrame extends JFrame {
 	       
 	    			
 	    // 취소 버튼 해상도 맞게 그리기
-		this.resetButton.setIcon(
+		this.cancelButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File("resources/signUp/reset.jpg")).getScaledInstance(
 					JoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
@@ -572,7 +573,7 @@ public class JoinFrame extends JFrame {
 	    					
 	    
 		
-		this.resetButton.setBounds(
+		this.cancelButton.setBounds(
 				JoinSizesEnum.JOIN_RESET_POSITTION_X.getSize(),
 				JoinSizesEnum.JOIN_RESET_POSITTION_Y.getSize(),
 				JoinSizesEnum.BUTTONIMAGE_WIDTH.getSize(),
@@ -810,7 +811,9 @@ public class JoinFrame extends JFrame {
 		return genderWomanRadio;
 	}
 	
-	
+	public JoinAction getJoinAction() {
+		return joinAction;
+	}
 	
 	
 	//테스트용

@@ -42,6 +42,8 @@ public class CreateGameRoomFrame extends JFrame {
 	public CreateGameRoomFrame(WaitingRoomAction waitingRoomAction, WaitingRoomPanel waitingRoomPanel) throws IOException {
 		this.waitingRoomAction = waitingRoomAction;
 		this.waitingRoomPanel  = waitingRoomPanel;
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(this.waitingRoomAction);
 		
 		//방이름, 방비밀번호 라벨 생성
 		this.createRoomNameLabel = new JLabel("방이름");

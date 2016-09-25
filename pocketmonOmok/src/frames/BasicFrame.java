@@ -136,6 +136,10 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void inWaitingRoom() {
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
+	
+	public void inGameRoom() {
+		this.cardLayout.show(this.getContentPane(), "gameRoomPanel");
+	}
 
 	public void newJoinFrame() throws IOException {
 		this.joinFrame = new JoinFrame(this.loginPanel);

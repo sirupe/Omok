@@ -64,6 +64,14 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 							LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(), 
 							Image.SCALE_AREA_AVERAGING))
 				);
+			} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+				this.loginPanel.getSearchPwButton().setIcon(
+					new ImageIcon(ImageIO.read(
+						new File("resources/login/forgotPWYellow.png")).getScaledInstance(
+							LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
+							LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(), 
+							Image.SCALE_AREA_AVERAGING))
+				);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
