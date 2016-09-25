@@ -23,7 +23,6 @@ public class OmokPersonalServer extends Thread {
 	@Override
 	public void run() {
 		boolean isAccept = true;
-		//TODO ¿©±â¼­ 
 		try {
 			while(isAccept) {
 				Object object = this.serverInputStream.readObject();

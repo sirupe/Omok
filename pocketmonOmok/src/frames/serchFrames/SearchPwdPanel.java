@@ -84,7 +84,6 @@ public class SearchPwdPanel extends JPanel {
 		this.searchErrorMsgLabel.setFont(error_FONT);
 		this.searchAnswerMsg.setFont(error_FONT);
 		
-
 		
 //		//레이블, 텍스트, 버튼 불러오기
 		this.setLabelPosition();

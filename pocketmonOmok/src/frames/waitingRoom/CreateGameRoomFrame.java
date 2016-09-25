@@ -14,13 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import enums.frames.GamePayRoomEnum;
+import actions.waitingRoom.WaitingRoomAction;
 import enums.frames.GameRoomCreateEnum;
 import enums.frames.GameRoomFullEnum;
 import enums.frames.SearchIdEnum;
 import enums.frames.SearchRePwdEnum;
+import enums.frames.SearchIdEnum;
 
 public class CreateGameRoomFrame extends JFrame {
+	private static final long serialVersionUID = 36363454L;
+	
 	private JLabel createRoomNameLabel;
 	private JLabel createRoomPwdLabel;
 	
@@ -30,13 +33,21 @@ public class CreateGameRoomFrame extends JFrame {
 	private JButton createRoomConfirmButton;
 	private JButton createRoomCancelButton;
 	
-	private JRadioButton roomCreatePrivate;
 	private JRadioButton roomCreateOpen;
+	private JRadioButton roomCreatePrivate;
 	private ButtonGroup roomCreateGroup;
 	
 	private Image backGround;
 	
-	public CreateGameRoomFrame() throws IOException {
+	private WaitingRoomAction waitingRoomAction;
+	private WaitingRoomPanel waitingRoomPanel;
+	
+	public CreateGameRoomFrame(WaitingRoomAction waitingRoomAction, WaitingRoomPanel waitingRoomPanel) throws IOException {
+		this.waitingRoomAction = waitingRoomAction;
+		this.waitingRoomPanel  = waitingRoomPanel;
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(this.waitingRoomAction);
+		
 		//방이름, 방비밀번호 라벨 생성
 		this.createRoomNameLabel = new JLabel("방이름");
 		this.createRoomPwdLabel  = new JLabel("방비밀번호");
@@ -44,11 +55,18 @@ public class CreateGameRoomFrame extends JFrame {
 		//방이름, 방비밀번호 텍스트 생성
 		this.createRoomNameText = new JTextField(10);
 		this.createRoomPwdText  = new JTextField(10);
+		// 은정 - 비밀번호 입력 기본은 불가
+		this.createRoomPwdText.setEditable(false);
 		
 		//공개 비공개방 라디오 박스
 		this.roomCreateGroup   = new ButtonGroup();
-		this.roomCreatePrivate = new JRadioButton("공개방");
-		this.roomCreateOpen    = new JRadioButton("비밀방");
+		this.roomCreateOpen = new JRadioButton("공개방");
+		this.roomCreatePrivate    = new JRadioButton("비밀방");
+		// 은정 - 기본은 공개방 선택
+		this.roomCreateOpen.setSelected(true);
+		this.roomCreateGroup.add(this.roomCreateOpen);
+		this.roomCreateGroup.add(this.roomCreatePrivate);
+		
 		
 		//버튼 생성
 		//확인 버튼
@@ -66,20 +84,21 @@ public class CreateGameRoomFrame extends JFrame {
 		
 		
 		//배경화면	
-				backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-						SearchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
-						SearchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
-		                Image.SCALE_SMOOTH);
 
-				this.setContentPane(new JLabel(new ImageIcon(backGround)));
-						
-				this.setBounds(
-						GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_POSITION_X.getSize(),
-						GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_POSITION_Y.getSize(),
-						GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize(),
-						GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize()
-				);
+		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
+				SearchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
+				SearchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
+                Image.SCALE_SMOOTH);
+
+		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 				
+		this.setBounds(
+				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_POSITION_X.getSize(),
+				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_POSITION_Y.getSize(),
+				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize(),
+				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize()
+		);
+		
 		//레이블 폰트 -- searchIdEnum 에서 불러옴
 		this.createRoomNameLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());	
 		this.createRoomPwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
@@ -100,8 +119,8 @@ public class CreateGameRoomFrame extends JFrame {
 		this.setRadioPosition();
 		
 		this.setLayout(null);
-		this.setVisible(true);
 		this.setResizable(false);
+		this.setVisible(true);
 		
 	}
 	//========================================================================================================
@@ -148,22 +167,30 @@ public class CreateGameRoomFrame extends JFrame {
     	this.createRoomCancelButton.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle());
     	
     	this.add(createRoomConfirmButton);
-    	this.add(createRoomCancelButton);    	 
+    	this.add(createRoomCancelButton);
+    	
+    	this.waitingRoomPanel.addAction(this.createRoomConfirmButton, "createRoomConfirmButton");
+    	this.waitingRoomPanel.addItemAction(this.roomCreatePrivate, "roomCreatePrivate");
 	}
 	//========================================================================================================
 	public void setRadioPosition() throws IOException {
 		//공개방라디오 박스
-    	this.roomCreateOpen.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_OPEN_RADIO.getRectangle());
-    	this.roomCreatePrivate.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_PRIVATE_RADIO.getRectangle());
+    	this.roomCreatePrivate.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_OPEN_RADIO.getRectangle());
+    	this.roomCreateOpen.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_PRIVATE_RADIO.getRectangle());
     	
     	
-    	this.roomCreateOpen.setOpaque(false);
     	this.roomCreatePrivate.setOpaque(false);
-    	this.add(roomCreatePrivate);
-		this.add(roomCreateOpen);
+    	this.roomCreateOpen.setOpaque(false);
+    	this.add(roomCreateOpen);
+		this.add(roomCreatePrivate);
 	}
 	//========================================================================================================
-	public static void main(String[] args) throws IOException {
-		new CreateGameRoomFrame();
+	
+	public JTextField getCreateRoomPwdText() {
+		return createRoomPwdText;
+	}
+	
+	public JTextField getCreateRoomNameText() {
+		return createRoomNameText;
 	}
 }

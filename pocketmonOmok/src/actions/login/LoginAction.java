@@ -22,15 +22,15 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 		this.loginPanel = loginPanel;
 	}
 	
+	// 로그인 버튼 액션이 들어오면 실행됨
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// id입력칸이나 pw입력칸 중 하나만 비어있어도 입력하라는 메세지 출력.
-		String buttonName = e.getSource().toString();
+		String buttonName = e.getSource().toString(); 
 		if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_LOGIN.getButtonName())) {
 			this.loginAction();
 		}
 	}
-	
 	// 이미지에 마우스를 올리면 버튼 이미지가 바뀝니다.
 	// 입력되는 버튼이 회원가입인 경우, ID찾기인 경우, PW찾기인 경우.
 	@Override
@@ -55,6 +55,14 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 							Image.SCALE_AREA_AVERAGING))
 				);
 				
+			} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+				this.loginPanel.getSearchPwButton().setIcon(
+					new ImageIcon(ImageIO.read(
+						new File("resources/login/forgotPWYellow.png")).getScaledInstance(
+							LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
+							LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(), 
+							Image.SCALE_AREA_AVERAGING))
+				);
 			} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
 				this.loginPanel.getSearchPwButton().setIcon(
 					new ImageIcon(ImageIO.read(

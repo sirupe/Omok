@@ -8,6 +8,10 @@ public enum ImageEnum {
 	BASIC_BACKGROUND("resources/background/background.png"),
 //Loginpanel 이미지-----------------------------------------------------
 	LOGINPANEL_LOGIN("resources/login/login.jpg"),
+	LOGINPANEL_LOGIN_HOVER("resources/login/gamestartIconchange.png"),
+	LOGINPANEL_SIGNUP_HOVER("resources/login/signup.png"),
+	LOGINPANEL_SEARCHID_HOVER("resources/login/forgotID.png"),
+	LOGINPANEL_SEARCHPW_HOVER("resources/login/forgotPW.png"),
 //GameRoom 이미지들------------------------------------------------------	
 	GAMEROOM_MALE_IMAGE("resources/gameRoom/userImageMale.png"),
 	GAMEROOM_FEMALE_IMAGE("resources/gameRoom/userImageFemale.png"),
@@ -56,9 +60,9 @@ public enum ImageEnum {
 	
 	private static Map<String, String> enterRoomCheckImage() {
 		Map<String, String> images = new HashMap<String, String>();
-		images.put("O", "resources/waitingRoom/admission.png");
-		images.put("=", "resources/waitingRoom/private.png");
-		images.put("X", "resources/waitingRoom/NoAdmittance.png");
+		images.put("입장가능", "resources/waitingRoom/admission.png");
+		images.put("비밀방", "resources/waitingRoom/private.png");
+		images.put("입장불가", "resources/waitingRoom/NoAdmittance.png");
 		
 		return images;
 	}

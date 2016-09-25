@@ -26,6 +26,7 @@ public class ClientAccept {
 	private ObjectInputStream clientIS;
 	private ObjectOutputStream clientOS;
 	private BasicFrame basicFrame;
+	private String userID;
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
@@ -39,7 +40,6 @@ public class ClientAccept {
 
 	public void loginSuccessCheck(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)data;
-		System.out.println(userPersonalDTO.getServerAction());
 		
 		// 서버의 메세지
 		switch(userPersonalDTO.getServerAction()) {
@@ -56,6 +56,7 @@ public class ClientAccept {
 		// 로그인에 성공했을 시
 		case LOGIN_SUCCESS :
 			// 대기실로 이동하겠다는 정보를 담아 서버에 전송 (실제로 이동하진 않는다.)
+			this.userID = userPersonalDTO.getUserID();
 			userPersonalDTO.setPosition(UserPositionEnum.POSITION_WAITING_ROOM);
 			userPersonalDTO.setUserAction(UserActionEnum.USER_LOGIN_SUCCESS);
 			this.basicFrame.getClientOS().writeObject(userPersonalDTO);
@@ -68,9 +69,7 @@ public class ClientAccept {
 	// 회원가입 화면에 대한 서버의 응답
 	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		// 아이디 중복체크
-		System.out.println(data.getUserAction());
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
-			System.out.println("아이디중복체크");
 			UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
 			String checkMsg = null;
 			Color color 	= null;
@@ -90,7 +89,6 @@ public class ClientAccept {
 			
 		// 회원가입
 		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
-			System.out.println("회원가입");
 			if(data.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
 				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입 완료:)");
 				this.basicFrame.getJoinFrame().setVisible(false);
@@ -102,27 +100,58 @@ public class ClientAccept {
 				this.basicFrame.getJoinFrame().dispose();
 				
 			}
+		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
+			System.out.println("인증번호 등록중.." + ((UserPersonalInfoDTO)data).getCertificationNumber());
+			this.basicFrame.getJoinFrame().getJoinAction().setCertificationNumber(((UserPersonalInfoDTO)data).getCertificationNumber());
 		}
 	}
 
 	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+		switch(data.getServerAction() != null ? data.getServerAction() : null) {
 		// 서버에서 보낸 정보가 "새로운 유저가 접속했다" 는 정보라면
-		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
-			System.out.println(data.getServerAction() + "if");
+		case LOGIN_NEW_USER :
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
 			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
-		
+			break;
+			
 		// 서버에서 보낸 정보가 "대기실 입장" 이라면
-		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
-			System.out.println(data.getServerAction() + "else");
+		case WAITING_ROOM_ENTER :
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			
-			//-----------TODO Test데이터----------------//
+			//----------- Test데이터----------------//
 			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
 			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
 			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
 			this.basicFrame.inWaitingRoom();
+			break;
+		
+		// 서버에서 보낸 정보가 "방생성 성공" 이라면 TODO
+		case GAME_CREATEROOM_SUCCESS :
+			this.basicFrame.getWaitingRoomPanel().getCreateGameRoomFrame().dispose();
+			this.basicFrame.inGameRoom();
+			this.basicFrame.setVisible(true);
+			break;
+		//TODO 방생성 실패 해야 함.
+		// 서버에서 보낸 정보가 "방 추가" 라면
+		case GAME_ROOM_ADD :
+			
+			break;
+		default:
+			break;
+			
 		}
+//		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
+//		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
+//			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
+//			
+//			//-----------TODO Test데이터----------------//
+//			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
+//			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
+//			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
+//			this.basicFrame.inWaitingRoom();
+//		} else if() {
+//			
+//		}
 	}
 	
 	public void gameExit() throws IOException {
@@ -141,5 +170,8 @@ public class ClientAccept {
 		return clientOS;
 	}
 	
+	public String getUserID() {
+		return userID;
+	}
 
 }

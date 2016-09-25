@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 
+
 @SuppressWarnings("serial")
 public class SearchPwdFrame extends JFrame implements Serializable {
 	
@@ -82,12 +83,14 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}};
 		//this.setLayout(null);
 		
+//		this.newSearchChangePanel();
+		this.add("searchPwdPanel",this.searchPwdPanel);
+		this.searchPwdPanel.setOpaque(false);
+//		this.add("searchRePwdPanel", this.searchRePwdPanel);
+//		this.searchRePwdPanel.setOpaque(false);
+//		this.add("searchChangeConfirmPanel", this.searchChangePanel);
+//		this.searchChangePanel.setOpaque(false);
 
-		//this.newSearchChangePanel();
-		this.add("searchRePwdPanel", this.searchRePwdPanel);
-		this.searchRePwdPanel.setOpaque(false);
-		this.add("searchChangeConfirmPanel", this.searchChangePanel);
-		this.searchChangePanel.setOpaque(false);
 		this.setLayout(this.cardLayout);
 		this.setTitle("PWÃ£±â");
 		this.setVisible(true);
@@ -116,29 +119,5 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}
 		};
 	}
-	
-//	public SearchPwdPanel getsearchPwdPanel() {
-//		return searchPwdPanel;
-//	}
-//	public void insearchRePwdPanel() {
-//		this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
-//	}	
-//	public void insearchChangePwdPanel() {
-//		this.cardLayout.show(this.getContentPane(), "searchChangeConfirmPanel");
-//	}
-	
-	
-	
-	public static void main(String[] args) throws IOException {
-
-		try {
-			new SearchPwdFrame();
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		new SearchRePwdPanel();
-	}
-	
-
 
 }

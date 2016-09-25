@@ -24,7 +24,7 @@ public enum SearchIdEnum {
 	SEARCH_ID_LABEL(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.13),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.14),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.1),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.12),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 	SEARCH_EMAIL_LABEL(new Rectangle(

@@ -17,10 +17,6 @@ public class AbstractEnumsDTO implements Serializable {
 		this.position = position;
 	}
 	
-	public AbstractEnumsDTO(ServerActionEnum serverAction) {
-		this.serverAction = serverAction;
-	}
-	
 	public UserPositionEnum getPosition() {
 		return position;
 	}

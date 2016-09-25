@@ -17,10 +17,10 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -32,6 +32,7 @@ import actions.waitingRoom.WaitingRoomAction;
 import datasDTO.UserGamedataInfoDTO;
 import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomSizesEnum;
+import frames.BasicFrame;
 
 public class WaitingRoomPanel extends JPanel {	
 	private static final long serialVersionUID = 6433378L;
@@ -66,11 +67,14 @@ public class WaitingRoomPanel extends JPanel {
 	private JButton correct;
 	
 	private WaitingRoomAction waitingRoomAction;
+	private BasicFrame basicFrame;
 	
 	private Map<String,ImageIcon> imageMap;
 	private Vector<String> players;
 	
-	public WaitingRoomPanel() {
+	private CreateGameRoomFrame createGameRoomFrame;
+	
+	public WaitingRoomPanel(BasicFrame basicFrame) throws IOException {
 		this.playerListScroll = new JScrollPane();
 		//==========================채팅방&내정보==========================
 		
@@ -93,14 +97,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.levelText       = new JLabel();
 		this.correct 	 	 = new JButton();
 		
-		this.waitingRoomAction = new WaitingRoomAction();
-			
+		this.basicFrame 	 = basicFrame;
+		this.waitingRoomAction   = new WaitingRoomAction(this.basicFrame);
+
 	}
 	//==========================대기방 리스트==========================
 
 	public void roomListSetting(WaitingRoomListTable roomListModel) throws IOException {
-		
-		//TODO	DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
 		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
 		this.waitingRoomTable = new JTable(defaultTableModel) {
 
@@ -160,17 +163,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.playerList.setOpaque(false);
 			
 	}
-
+//TODO
 	public void userAddSetting(UserGamedataInfoDTO newUser) throws IOException {
 		
 		this.players.add(newUser.getUserID());
 		this.playerList.setListData(players);
 		this.addNewUserImage(newUser.getUserID(), newUser.getUserGrade());
 
-		for(String s : this.imageMap.keySet()) {
-			System.out.println(s);
-		}
-				
 		this.playerList.setCellRenderer(new PlayerRenderer());
 		
 		this.playerListScroll.setViewportView(this.playerList);
@@ -182,9 +181,6 @@ public class WaitingRoomPanel extends JPanel {
 	
 	/***************************접속자 리스트 클래스***************************/
 	public class PlayerRenderer extends DefaultListCellRenderer {
-		
-
-		
 		public Component getListCellRendererComponent(JList player, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
@@ -568,7 +564,7 @@ public class WaitingRoomPanel extends JPanel {
 		
 		this.setLayout(null);
 		
-		
+		//TODO 각종 리스너 등록
 		this.addAction(this.createRoomButton, "createRoomButton");
 		
 		this.waitingRoomListBackground.add(waitingRoomListScroll);
@@ -602,65 +598,55 @@ public class WaitingRoomPanel extends JPanel {
 		comp.addActionListener(this.waitingRoomAction);
 	}
 	
+	public void addItemAction(JRadioButton comp, String name) {
+		comp.setName(name);
+		comp.addItemListener(this.waitingRoomAction);
+	}
+	
 	public void updateAddRoom() {
-		// 테이블모델을 얻어옴
+		
+	}
+	
+	public int getRoomNumber() {
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
 		Object o;
-		int roomNum = 0;
+		int roomNum = 1;
 		
 		// 방번호 구하기. 1 ~ 20 중 가장 작은 생성되지 않은 방번호를 얻어온다.
-		for(int i = 1, j, size; i <= 20; i++) {
-			for(j = 0, size = tableModel.getRowCount(); j <= size; j++) {
-				o = tableModel.getValueAt(2, j);
-				if(Integer.parseInt(o.toString()) == i) {
-					break;
+		if(tableModel.getRowCount() > 0) {			
+			System.out.println(tableModel.getValueAt(0, 1));
+			for(int i = 1, j, size; i <= 20; i++) {
+				for(j = 0, size = tableModel.getRowCount(); j < size; j++) {
+					o = tableModel.getValueAt(j, 1);
+					System.out.println(size + ": size");
+					if(Integer.parseInt(o.toString()) == i) {
+						break;
+					}
 				}
+				
+				if(j == size) {
+					roomNum = i;
+					break;
+				}	
 			}
-			
-			if(j == size) {
-				roomNum = i;
-				break;
-			}
-			
 		}
-		
-		
-
+		return roomNum;
+	}
+	
+	public CreateGameRoomFrame newCreateGameRoomFrame() throws IOException {
+		this.createGameRoomFrame = new CreateGameRoomFrame(this.waitingRoomAction, this);
+		return this.createGameRoomFrame;
 	}
 	
 	public void updateDeleteRoom() {
 		
 	}
 	
-	public JTable getWaitingRoomTable() {
-		return waitingRoomTable;
+	public BasicFrame getBasicFrame() {
+		return basicFrame;
 	}
 	
-//	public static void main(String[] args) {
-//		int[] arr = new int[] {9, 8, 7, 10, 2, 3, 4, 1};
-//		Arrays.sort(arr);
-//		int j = 1;
-//		for(int i = 0, size = arr.length; i < size; i++) {
-//			if(j == arr[i]) {
-//				j++;
-//			} else {
-//				System.out.println("생성될 방 번호 : " + j);
-//			}
-//		}
-//		
-//		WaitingRoomPanel p = null;
-//		try {
-//			p = new WaitingRoomPanel();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		DefaultTableModel tableModel = (DefaultTableModel) p.getWaitingRoomTable().getModel();
-//		int row = tableModel.getRowCount();
-//		int[] arr2 = p.getWaitingRoomTable().getSelectedColumns();
-//		System.out.println(row);
-//		Object o = tableModel.getValueAt(2, 1);
-//		System.out.println((String)o);
-//		System.out.println(arr2.length);
-//
-//	}
+	public CreateGameRoomFrame getCreateGameRoomFrame() {
+		return createGameRoomFrame;
+	}
 }

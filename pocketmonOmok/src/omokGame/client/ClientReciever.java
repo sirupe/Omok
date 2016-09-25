@@ -29,7 +29,6 @@ public class ClientReciever extends Thread {
 					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
 					break;
 				case POSITION_WAITING_ROOM :
-					System.out.println("waiting room");
 					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame);
 					break;
 				case POSITION_JOIN :

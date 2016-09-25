@@ -64,7 +64,7 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.loginPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 
-		this.waitingRoomPanel = new WaitingRoomPanel() {
+		this.waitingRoomPanel = new WaitingRoomPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -139,6 +139,10 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void inWaitingRoom() {
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
+	
+	public void inGameRoom() {
+		this.cardLayout.show(this.getContentPane(), "gameRoomPanel");
+	}
 
 	public void newJoinFrame() throws IOException {
 		this.joinFrame = new JoinFrame(this.loginPanel);
@@ -166,12 +170,9 @@ public class BasicFrame extends JFrame implements Serializable{
 	public WaitingRoomPanel getWaitingRoomPanel() {
 		return waitingRoomPanel;
 	}
-//	public static void main(String[] args) {
-//		try {
-//			new BasicFrame(null);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+
+
+	public ClientAccept getClientAccept() {
+		return clientAccept;
+	}
 }
