@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 
 import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
-import enums.frames.searchIdEnum;
-import enums.frames.searchPwdEnum;
+import enums.frames.SearchIdEnum;
+import enums.frames.SearchPwdEnum;
 
 public class CorrectPwdFrame extends JFrame{
 	private Image backGround;
@@ -44,12 +44,12 @@ public class CorrectPwdFrame extends JFrame{
 		
 		this.setBounds(CorrectEnum.PWD_FRAME_SIZE_RECT.getRect());
 		
-		this.pwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.pwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.pwdLabel.setBounds(CorrectEnum.PWD_TEXT_LABEL_RECT.getRect());
 		
 		this.pwdTextField.setBounds(CorrectEnum.PWD_INPUT_RECT.getRect());
 			
-		this.pwderror.setFont(searchPwdEnum.LABELFONT_DEFAULT.getFont());
+		this.pwderror.setFont(SearchPwdEnum.LABELFONT_DEFAULT.getFont());
 		this.pwderror.setForeground(Color.red);
 		this.pwderror.setBounds(CorrectEnum.PWD_ERROR_RECT.getRect());
 		

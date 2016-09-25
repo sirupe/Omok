@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.glass.ui.Size;
 
-public enum searchPwdEnum {
+public enum SearchPwdEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	SEARCH_PWD_FRAME_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
@@ -104,20 +104,20 @@ public enum searchPwdEnum {
 	private Rectangle rec;
 	
 	
-	private searchPwdEnum(Rectangle rec) {
+	private SearchPwdEnum(Rectangle rec) {
 		this.rec = rec;
 	}
-	private searchPwdEnum(Dimension dimension) {
+	private SearchPwdEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
-	private searchPwdEnum(int size) {
+	private SearchPwdEnum(int size) {
 		this.size = size;
 	}
-	private searchPwdEnum(Color color) {
+	private SearchPwdEnum(Color color) {
 		this.color = color;
 	}
-	private searchPwdEnum(Font font) {
+	private SearchPwdEnum(Font font) {
 		this.font = font;
 	}
 

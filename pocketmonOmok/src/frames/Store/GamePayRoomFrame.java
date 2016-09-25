@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GamePayRoomEnum;
-import enums.frames.searchIdEnum;
+import enums.frames.SearchIdEnum;
 
 public class GamePayRoomFrame extends JFrame {
 	private Image icon;
@@ -102,7 +102,7 @@ public class GamePayRoomFrame extends JFrame {
 		JTextField userAmountText = new JTextField();
 		userAmountText.setBounds(GamePayRoomEnum.GAME_ROOM_USER_AMOUNT_PANEL.getRectangle());
 		//폰트  searchIdEnum에서 가져옴
-		userAmountText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		userAmountText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		userAmountText.setBorder(GamePayRoomEnum.LABEL_LINE.getMatterBorder());
 		userAmountText.setOpaque(false);
 
@@ -152,19 +152,19 @@ public class GamePayRoomFrame extends JFrame {
 		
 
 		this.basicMoneyLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_BASICMONEY_LABEL.getRectangle());
-		this.basicMoneyLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.basicMoneyLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.basicMoneyLabel.setOpaque(false);
 		
 		this.divLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_DIV_LABEL.getRectangle());
-		this.divLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.divLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.divLabel.setOpaque(false);
 		
 		this.equalsLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_EQUAL_LABEL.getRectangle());
-		this.equalsLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.equalsLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		
 		this.totalAmountLabel.setBounds(GamePayRoomEnum.GAME_ROOM_PAY_TOTALMONEY_LABEL.getRectangle());
-		this.totalAmountLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.totalAmountLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.totalAmountLabel.setBorder(GamePayRoomEnum.LABEL_LINE.getMatterBorder());
 		this.totalAmountLabel.setOpaque(false);
 

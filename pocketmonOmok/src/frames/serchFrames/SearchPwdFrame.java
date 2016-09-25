@@ -12,8 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import enums.frames.searchPwdEnum;
-import enums.frames.searchRePwdEnum;
+import enums.frames.SearchPwdEnum;
+import enums.frames.SearchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchPwdFrame extends JFrame implements Serializable {
@@ -27,18 +27,18 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	public SearchPwdFrame() throws IOException {
 		
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
+				SearchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
+				SearchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 		
 		this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 		
 		//프레임 화면 출력 위치 설정
 		this.setBounds(
-		searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
-		searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
-		searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-		searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 		);
 		
 		//비밀번호 찾기 프레임
@@ -51,8 +51,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 						new File("resources/background/popup.png")),
 							0,
 							0,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
 				}catch (IOException e) {
 					e.printStackTrace();
@@ -73,8 +73,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 						new File("resources/background/popup.png")),
 							0,
 							0,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
 				}catch (IOException e) {
 					e.printStackTrace();
@@ -107,8 +107,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 						new File("resources/signUp/backg.png")),
 							0,
 							0,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
 				}catch (IOException e) {
 					e.printStackTrace();

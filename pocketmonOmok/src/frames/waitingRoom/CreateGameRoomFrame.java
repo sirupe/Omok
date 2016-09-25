@@ -17,8 +17,8 @@ import javax.swing.JTextField;
 import enums.frames.GamePayRoomEnum;
 import enums.frames.GameRoomCreateEnum;
 import enums.frames.GameRoomFullEnum;
-import enums.frames.searchIdEnum;
-import enums.frames.searchRePwdEnum;
+import enums.frames.SearchIdEnum;
+import enums.frames.SearchRePwdEnum;
 
 public class CreateGameRoomFrame extends JFrame {
 	private JLabel createRoomNameLabel;
@@ -67,8 +67,8 @@ public class CreateGameRoomFrame extends JFrame {
 		
 		//배경화면	
 				backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-						searchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
-						searchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
+						SearchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
+						SearchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
 		                Image.SCALE_SMOOTH);
 
 				this.setContentPane(new JLabel(new ImageIcon(backGround)));
@@ -81,15 +81,15 @@ public class CreateGameRoomFrame extends JFrame {
 				);
 				
 		//레이블 폰트 -- searchIdEnum 에서 불러옴
-		this.createRoomNameLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());	
-		this.createRoomPwdLabel.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());	
+		this.createRoomPwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		
-		this.createRoomNameText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		this.createRoomPwdText.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomPwdText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		
-		this.roomCreateOpen.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
-		this.roomCreatePrivate.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreateOpen.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreatePrivate.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		//레이블 색깔
 		this.createRoomNameLabel.setForeground(Color.black);
 		this.createRoomPwdLabel.setForeground(Color.black);
