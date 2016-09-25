@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import enums.frames.searchPwdEnum;
 import enums.frames.searchRePwdEnum;
 
+
 @SuppressWarnings("serial")
 public class SearchPwdFrame extends JFrame implements Serializable {
 	

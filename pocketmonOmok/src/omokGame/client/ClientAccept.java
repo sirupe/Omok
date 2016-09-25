@@ -69,9 +69,7 @@ public class ClientAccept {
 	// 회원가입 화면에 대한 서버의 응답
 	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
 		// 아이디 중복체크
-		System.out.println(data.getUserAction());
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
-			System.out.println("아이디중복체크");
 			UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
 			String checkMsg = null;
 			Color color 	= null;
@@ -91,7 +89,6 @@ public class ClientAccept {
 			
 		// 회원가입
 		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
-			System.out.println("회원가입");
 			if(data.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
 				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입 완료:)");
 				this.basicFrame.getJoinFrame().setVisible(false);
@@ -103,12 +100,15 @@ public class ClientAccept {
 				this.basicFrame.getJoinFrame().dispose();
 				
 			}
+		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
+			System.out.println("인증번호 등록중.." + ((UserPersonalInfoDTO)data).getCertificationNumber());
+			this.basicFrame.getJoinFrame().getJoinAction().setCertificationNumber(((UserPersonalInfoDTO)data).getCertificationNumber());
 		}
 	}
 
 	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+		switch(data.getServerAction() != null ? data.getServerAction() : null) {
 		// 서버에서 보낸 정보가 "새로운 유저가 접속했다" 는 정보라면
-		switch(data.getServerAction()) {
 		case LOGIN_NEW_USER :
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
 			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
@@ -128,11 +128,13 @@ public class ClientAccept {
 		// 서버에서 보낸 정보가 "방생성 성공" 이라면 TODO
 		case GAME_CREATEROOM_SUCCESS :
 			this.basicFrame.getWaitingRoomPanel().getCreateGameRoomFrame().dispose();
+			this.basicFrame.inGameRoom();
 			this.basicFrame.setVisible(true);
 			break;
+		//TODO 방생성 실패 해야 함.
+		// 서버에서 보낸 정보가 "방 추가" 라면
+		case GAME_ROOM_ADD :
 			
-		// 서버에서 보낸 정보가 "방생성 실패" 라면
-		case GAME_CREATEROOM_FAIL :
 			break;
 		default:
 			break;

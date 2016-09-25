@@ -15,7 +15,6 @@ public class AbstractEnumsDTO implements Serializable {
 	
 	public AbstractEnumsDTO(UserPositionEnum position) {
 		this.position = position;
-		System.out.println("포지션 등록 : " + position);
 	}
 	
 	public UserPositionEnum getPosition() {
@@ -32,16 +31,13 @@ public class AbstractEnumsDTO implements Serializable {
 
 	public void setPosition(UserPositionEnum position) {
 		this.position = position;
-		System.out.println("포지션 등록 : " + position);
 	}
 	
 	public void setUserAction(UserActionEnum userAction) {
 		this.userAction = userAction;
-		System.out.println("유저액션 등록 : " + userAction);
 	}
 	
 	public void setServerAction(ServerActionEnum serverAction) {
 		this.serverAction = serverAction;
-		System.out.println("서버액션 등록 : " + serverAction);
 	}
 }

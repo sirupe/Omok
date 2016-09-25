@@ -1,6 +1,5 @@
 package datasDTO;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import enums.etc.UserPositionEnum;
@@ -15,6 +14,7 @@ public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 	private String userEmail;		// 유저 이메일
 	private String userPhoneNumber;	// 유저 핸드폰번호
 	private Date userJoinDate;		// 유저 가입일자
+	private String certificationNumber;
 	
 	public UserPersonalInfoDTO(UserPositionEnum position) {
 		super(position);
@@ -48,6 +48,10 @@ public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 		this.userPhoneNumber = userPhoneNumber;
 	}
 	
+	public void setCertificationNumber(String certificationNumber) {
+		this.certificationNumber = certificationNumber;
+	}
+	
 	public String getUserID() {
 		return userID;
 	}
@@ -78,5 +82,9 @@ public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 	
 	public Date getUserJoinDate() {
 		return userJoinDate;
+	}
+	
+	public String getCertificationNumber() {
+		return certificationNumber;
 	}
 }

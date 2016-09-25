@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import datasDAO.JoinDAO;
 import datasDAO.LoginDAO;
@@ -24,6 +25,7 @@ import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
+import utility.SendEmail;
 
 public class OmokServer {
 	private ServerSocket serverSocket;
@@ -96,13 +98,9 @@ public class OmokServer {
 				this.loginUsersMap.put(resultDTO.getUserID(), personalServer);
 				// 사용자에게 보낼 현재 접속자 목록에 추가
 				this.userIDList.add(gamedataDAO.getUserGrade(resultDTO));
-				// 유저에게 로그인 성공정보 전송
-//				personalServer.getServerOutputStream().writeObject(resultDTO);
 			//클라이언트의 ID가 이미 접속자리스트에 존재한다면
 			} else {
 				resultDTO.setServerAction(ServerActionEnum.LOGIN_FAIL_OVERLAP_ACCEPT);
-				System.out.println(resultDTO.getServerAction());
-//				personalServer.getServerOutputStream().writeObject(resultDTO);
 			}
 		}
 		personalServer.getServerOutputStream().writeObject(resultDTO);
@@ -137,7 +135,7 @@ public class OmokServer {
 		newUserDTO.setPosition(UserPositionEnum.POSITION_WAITING_ROOM);
 		newUserDTO.setServerAction(ServerActionEnum.LOGIN_NEW_USER);
 		for(String id : this.loginUsersMap.keySet()) {
-			if(id != roomAndUserListDTO.getUserGameData().getUserID()) {
+			if(!id.equals(roomAndUserListDTO.getUserGameData().getUserID())) {
 				this.loginUsersMap.get(id).getServerOutputStream().writeObject(newUserDTO);
 			}
 		}
@@ -153,8 +151,12 @@ public class OmokServer {
 		} else {
 			gameRoomInfo.setServerAction(ServerActionEnum.GAME_CREATEROOM_FAIL);			
 		}
-		
 		personalServer.getServerOutputStream().writeObject(gameRoomInfo);
+		
+		gameRoomInfo.setServerAction(ServerActionEnum.GAME_ROOM_ADD);
+		for(String id : this.loginUsersMap.keySet()) {
+			this.loginUsersMap.get(id).getServerOutputStream().writeObject(gameRoomInfo);
+		}
 	}
 //회원가입--------------------------------------------------------------------------
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
@@ -164,10 +166,20 @@ public class OmokServer {
 			UserPersonalInfoDTO resultDTO = this.joinDAO.checkOverlapID(personalDTO);
 			personalServer.getServerOutputStream().writeObject(resultDTO);
 		
+		// 인증번호 발송인 경우
+		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
+			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO)data;
+			//인증번호 생성
+			String confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
+			//이메일발송
+			new SendEmail(confirmNumber, resultDTO.getUserEmail());
+			
+			resultDTO.setCertificationNumber(confirmNumber);
+			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
+			personalServer.getServerOutputStream().writeObject(resultDTO);
 		// 회원가입인 경우
 		} else {
 			// 아이디가 중복되지 않는다면
-			System.out.println(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null);
 			if(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null) {
 				ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_JOIN);
 				serverMessage.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);

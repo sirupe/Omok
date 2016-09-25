@@ -2,6 +2,7 @@ package actions.waitingRoom;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import actions.adapters.Adapters;
@@ -19,6 +20,13 @@ public class WaitingRoomAction extends Adapters {
 	
 	public WaitingRoomAction(BasicFrame basicFrame) {
 		this.basicFrame = basicFrame;
+	}
+	
+	@Override
+	public void windowClosing(WindowEvent e) {
+		this.basicFrame.setVisible(true);
+		this.createRoom.setVisible(false);
+		this.createRoom.dispose();
 	}
 	
 	@Override
@@ -69,16 +77,13 @@ public class WaitingRoomAction extends Adapters {
 		gameRoomInfo.setOwner(this.basicFrame.getClientAccept().getUserID());
 		gameRoomInfo.setRoomNumber(this.basicFrame.getWaitingRoomPanel().getRoomNumber());
 		gameRoomInfo.setPersons(1);
-		String roomPwd = null;
 		if(this.openPrivate == 1) {
 			gameRoomInfo.setImage(ImageEnum.WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP.getMap().get("비밀방"));
 			gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
 		} else {
 			gameRoomInfo.setImage(ImageEnum.WAITINGROOM_ROOM_ENTERCHECK_IMAGE_MAP.getMap().get("입장가능"));
 		}
-		
-		System.out.println(gameRoomInfo.toString());
-		
+				
 		this.basicFrame.getClientOS().writeObject(gameRoomInfo);
 	}
 	
