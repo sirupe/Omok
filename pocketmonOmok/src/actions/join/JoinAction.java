@@ -43,6 +43,7 @@ public class JoinAction extends Adapters {
 	private StringBuffer totalEmail;
 	
 	private boolean emailConfirmTime;
+
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinAction(LoginPanel loginPanel, JoinFrame joinFrame){

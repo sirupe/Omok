@@ -149,7 +149,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	}
 	
 	public void newSearchIdFrame() throws IOException {
-		this.searchIdFrame = new SearchIdFrame(this.loginPanel);
+		this.searchIdFrame = new SearchIdFrame(this);
 	}
 	
 	public ObjectOutputStream getClientOS() {
