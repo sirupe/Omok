@@ -36,12 +36,12 @@ public enum SearchIdEnum {
 			)),
 // 에러 레이블
 	SEARCH_ERROR_LABEL(new Rectangle(
-			
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.19),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.42),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.7),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
+	
 // 이름, 이메일 텍스트 필드
 	SEARCH_ID_TEXTFIELD(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
@@ -56,13 +56,21 @@ public enum SearchIdEnum {
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 			)),
 	
-	//버튼 생성
+	//취소 버튼 
+	SEARCH_BACK_BUTTON(new Rectangle(
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.38),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.14),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.16)
+		)),
+	
+	//확인버튼 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
-			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.26),
-			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.5),
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.25),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
-			)),
+		)),
 	//확인 버튼이름
 	BUTTON_NAME_CONFIRM("confirm"),
 	//일반 폰트

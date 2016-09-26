@@ -1,6 +1,7 @@
 package frames;
 
 import java.awt.CardLayout;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
@@ -23,6 +24,8 @@ import enums.frames.LoginSizesEnum;
 
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
+import frames.serchFrames.SearchPwdFrame;
+import frames.serchFrames.SearchPwdPanel;
 import frames.serchFrames.SearchIdFrame;
 import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
@@ -36,6 +39,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	private WaitingRoomPanel waitingRoomPanel;
 	private GameRoomPanel gameRoomPanel;
 	private JoinFrame joinFrame;
+	private SearchPwdFrame searchPwdFrame;
 	private SearchIdFrame searchIdFrame;
 	
 	private ClientAccept clientAccept;
@@ -149,9 +153,16 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void newJoinFrame() throws IOException {
 		this.joinFrame = new JoinFrame(this);
 	}
+	public void newSearchPwdFrame() throws IOException {
+		this.searchPwdFrame = new SearchPwdFrame(this);
+	}
+	
+	public SearchPwdFrame getSearchPwdFrame() {
+		return searchPwdFrame;
+	}
 	
 	public void newSearchIdFrame() throws IOException {
-		this.searchIdFrame = new SearchIdFrame(this.loginPanel);
+		this.searchIdFrame = new SearchIdFrame(this);
 	}
 	
 	public ObjectOutputStream getClientOS() {
@@ -178,3 +189,4 @@ public class BasicFrame extends JFrame implements Serializable{
 		return clientAccept;
 	}
 }
+

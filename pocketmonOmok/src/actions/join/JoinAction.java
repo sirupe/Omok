@@ -7,20 +7,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Random;
-
-import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
-
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
-import frames.LoginPanel;
 import frames.joinFrames.JoinFrame;
 import utility.RegexCheck;
-import utility.SendEmail;
 
 public class JoinAction extends Adapters {
 	private BasicFrame basicFrame;
@@ -44,6 +38,7 @@ public class JoinAction extends Adapters {
 	private StringBuffer totalEmail;
 	
 	private boolean emailConfirmTime;
+
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinAction(BasicFrame basicFrame, JoinFrame joinFrame){
@@ -119,6 +114,7 @@ public class JoinAction extends Adapters {
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		String source = e.getSource().toString();
+		
 		if(e.getStateChange() == 1) {
 			if(source.contains("yearChoice")) {
 				this.birthYear = e.getItem().toString();
@@ -154,6 +150,7 @@ public class JoinAction extends Adapters {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String source = e.getSource().toString();
+	
 		if(source.contains("joinButton")) {
 			this.joinAction();
 		} else if(source.contains("confirmButton")) {

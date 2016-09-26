@@ -36,7 +36,7 @@ public enum SearchPwdEnum {
 //// 에러 레이블 -- 3분초과메세지
    SEARCH_ERROR_LABEL(new Rectangle(
          
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.16),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.12),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.75),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 13),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.13)
@@ -86,6 +86,14 @@ public enum SearchPwdEnum {
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.43),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.15),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.1)
+         )),
+   
+   //취소 버튼 생성
+   SEARCH_CANCEL_BUTTON(new Rectangle(
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.23),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 1),
+         (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
+         (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
          )),
 
    //일반 폰트

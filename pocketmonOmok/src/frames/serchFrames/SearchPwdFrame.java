@@ -1,6 +1,8 @@
 package frames.serchFrames;
 
 import java.awt.CardLayout;
+
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -12,8 +14,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.findIDandPW.FindPWAction;
+import datasDTO.UserPersonalInfoDTO;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
+import frames.BasicFrame;
+import frames.LoginPanel;
 
 
 @SuppressWarnings("serial")
@@ -23,9 +29,16 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	private SearchPwdPanel searchPwdPanel;
 	private SearchRePwdPanel searchRePwdPanel;
 	private SearchChangePanel searchChangePanel;
+	
 	private Image backGround;
 	
-	public SearchPwdFrame() throws IOException {
+	private FindPWAction findPwAction;
+	
+	private BasicFrame basicFrame;
+	
+	public SearchPwdFrame(BasicFrame basicFrame) throws IOException {
+		
+		this.basicFrame = basicFrame;
 		
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				SearchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
@@ -46,7 +59,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		this.searchPwdPanel = new SearchPwdPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
-				super.paintComponents(g);
+				super.paintComponents(g); 
 				try {
 					g.drawImage(ImageIO.read(
 						new File("resources/background/popup.png")),
@@ -119,5 +132,36 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}
 		};
 	}
+	//나자신을 꺼주고 basicFrame을 켜준다.
+    public void doCancelButton() {
+    	this.setVisible(false);
+    	this.basicFrame.setVisible(true);
+    }
+    
+    public void getCerficartion(UserPersonalInfoDTO userPersonalInfoDTO) {
+    	try {
+			this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	public SearchPwdPanel getSearchPwdPanel() {
+		return searchPwdPanel;
+	}
+	public FindPWAction getFindPwdAction() {
+		return findPwAction;
+	}
+	public SearchRePwdPanel getSearchRePanel() {
+		return searchRePwdPanel;
+	}
 
+	//	public static void main(String[] args) {
+//		try {
+//			new SearchPwdFrame();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }
