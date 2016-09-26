@@ -67,7 +67,7 @@ public class JoinSuccessFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
-				joinFrame.getLoginPanel().getBasicFrame().setVisible(true);
+				joinFrame.getBasicFrame().setVisible(true);
 			}
 		});
 		

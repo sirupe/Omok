@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.GameRoomInfoVO;
 import datasDTO.RoomAndUserListDTO;
 import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserPersonalInfoDTO;
@@ -107,25 +108,27 @@ public class ClientAccept {
 	}
 
 	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
-		switch(data.getServerAction() != null ? data.getServerAction() : null) {
+		switch(data.getServerAction() != null ? data.getServerAction() : ServerActionEnum.NOTHING) {
 		// 서버에서 보낸 정보가 "새로운 유저가 접속했다" 는 정보라면
 		case LOGIN_NEW_USER :
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
-			this.basicFrame.getWaitingRoomPanel().userAddSetting(newUserData);
+			this.basicFrame.getWaitingRoomPanel().userListAddSetting(newUserData);
+			this.basicFrame.getWaitingRoomPanel().getChattingOutput().append(newUserData.getUserID() + " 님께서 접속하셨습니다.\n");
+			this.basicFrame.getWaitingRoomPanel().getChattingOutput().append("asdfasdfag");
 			break;
 			
-		// 서버에서 보낸 정보가 "대기실 입장" 이라면
+		// 서버에서 보낸 정보가 "대기실 입장" 이라면 TODO
 		case WAITING_ROOM_ENTER :
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			
-			//----------- Test데이터----------------//
 			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
+			this.basicFrame.getWaitingRoomPanel().setUserInfo(waitingRoomInfo.getUserGameData());
 			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
 			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
 			this.basicFrame.inWaitingRoom();
 			break;
 		
-		// 서버에서 보낸 정보가 "방생성 성공" 이라면 TODO
+		// 서버에서 보낸 정보가 "방생성 성공" 이라면
 		case GAME_CREATEROOM_SUCCESS :
 			this.basicFrame.getWaitingRoomPanel().getCreateGameRoomFrame().dispose();
 			this.basicFrame.inGameRoom();
@@ -134,32 +137,30 @@ public class ClientAccept {
 		//TODO 방생성 실패 해야 함.
 		// 서버에서 보낸 정보가 "방 추가" 라면
 		case GAME_ROOM_ADD :
-			
+			this.basicFrame.getWaitingRoomPanel().addGameRoom((GameRoomInfoVO)data);
+			break;
+		// 서버에서 보낸 정보가 다른 유저 정보 보기라면 TODO
+		case OTHER_USER_INFO : 
+			this.basicFrame.getWaitingRoomPanel().setUserInfo((UserGamedataInfoDTO)data);
 			break;
 		default:
 			break;
 			
 		}
-//		if(data.getServerAction() == ServerActionEnum.LOGIN_NEW_USER) {
-//		} else if(data.getServerAction() == ServerActionEnum.WAITING_ROOM_ENTER) {
-//			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
-//			
-//			//-----------TODO Test데이터----------------//
-//			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
-//			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
-//			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
-//			this.basicFrame.inWaitingRoom();
-//		} else if() {
-//			
-//		}
 	}
 	
-	public void gameExit() throws IOException {
-		this.clientOS.close();
-		this.clientIS.close();
-		this.clientSocket.close();
-		this.basicFrame.dispose();
-		System.exit(0);
+	public void gameExit(AbstractEnumsDTO infoDTO) throws IOException {
+		if(infoDTO.getServerAction() == ServerActionEnum.OTHER_USER_EXIT) {
+			this.basicFrame.getWaitingRoomPanel().deleteUserSetting((UserPersonalInfoDTO)infoDTO);
+		} else {
+			
+			
+			this.clientOS.close();
+			this.clientIS.close();
+			this.clientSocket.close();
+			this.basicFrame.dispose();
+			System.exit(0);
+		}
 	}
 	
 	public ObjectInputStream getClientIS() {

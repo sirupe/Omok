@@ -42,12 +42,10 @@ public class ClientReciever extends Thread {
 					break;
 				case POSITION_STORE :             
 					break;
-				case POSITION_OTHER_USER_INFO :   
-					break;
 				case POSITION_MODIFY_MY_INFO :    
 					break;
 				case POSITION_EXIT :  
-					this.clientAccept.gameExit();
+					this.clientAccept.gameExit(userPosition);
 					break;
 				}
 			}

@@ -17,12 +17,21 @@ public class UserGamedataInfoDAO {
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		UserGamedataInfoDTO userGameData = new UserGamedataInfoDTO(UserPositionEnum.POSITION_WAITING_ROOM);
 		
+		//gamedata 테이블의 모든 정보와 personalinfo 테이블의 성별정보를 join 한다.
 		try {
 			connection = dbPool.getConnection();
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT USER_ID, USER_GRADE, USER_WIN_COUNT, USER_SCORE ");
-			sql.append("FROM USER_GAMEDATA_INFO ");
-			sql.append("WHERE USER_ID=?");
+			sql.append("SELECT ");
+			sql.append("GAMEDATA.USER_ID, ");
+			sql.append("GAMEDATA.USER_GRADE, ");
+			sql.append("GAMEDATA.USER_GAME_COUNT, ");
+			sql.append("GAMEDATA.USER_WIN_COUNT, ");
+			sql.append("GAMEDATA.USER_SCORE, ");
+			sql.append("PERSONAL.USER_GENDER ");
+			sql.append("FROM USER_GAMEDATA_INFO GAMEDATA ");
+			sql.append("INNER JOIN USER_PERSONAL_INFO PERSONAL ");
+			sql.append("ON GAMEDATA.USER_ID=PERSONAL.USER_ID ");
+			sql.append("WHERE GAMEDATA.USER_ID=?");
 			
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, id);
@@ -32,7 +41,9 @@ public class UserGamedataInfoDAO {
 				userGameData.setUserID(resultSet.getString("USER_ID"));
 				userGameData.setUserGrade(resultSet.getString("USER_GRADE"));
 				userGameData.setUserWinCount(resultSet.getInt("USER_WIN_COUNT"));
+				userGameData.setUserGameCount(resultSet.getInt("USER_GAME_COUNT"));
 				userGameData.setUserScore(resultSet.getInt("USER_SCORE"));
+				userGameData.setUserImage(resultSet.getInt("USER_GENDER"));
 			}
 
 			

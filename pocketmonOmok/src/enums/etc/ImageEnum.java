@@ -21,7 +21,7 @@ public enum ImageEnum {
 	GAMEROOM_MENU_IMAGES_OWNER(new String[] {
 			"resources/gameroom/start.png",			// gamestart
 			"resources/gameroom/alone.png",			// 혼자하기
-			"resources/gameroom/giveup.png",			// 기권
+			"resources/gameroom/giveup.png",		// 기권
 			"resources/gameroom/itemgameout.png",	// 나가기
 			"resources/gameroom/itemunity.png",		// 돌색 통일시키기
 			"resources/gameroom/itemtimeplus.png",	// 시간추가
@@ -32,7 +32,7 @@ public enum ImageEnum {
 	GAMEROOM_MENU_IMAGES_GUEST(new String[] {
 			"resources/gameroom/ready.png",			// ready
 			"resources/gameroom/alone.png",			// 혼자하기
-			"resources/gameroom/giveup.png",			// 기권
+			"resources/gameroom/giveup.png",		// 기권
 			"resources/gameroom/itemgameout.png",	// 나가기
 			"resources/gameroom/itemunity.png",		// 돌색 통일시키기
 			"resources/gameroom/itemtimeplus.png",	// 시간추가
