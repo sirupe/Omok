@@ -14,5 +14,6 @@ public enum ServerActionEnum {
 	GAME_ROOM_ADD,				// 방 생성시 다른 유저들 화면에 방 추가해주기
 	OTHER_USER_EXIT,			// 다른 유저가 방을 나갔음
 	OTHER_USER_INFO,			// 다른 유저 정보를 볼 때
+	MESSAGE_SEND_SUCCESS,
 	NOTHING;
 }

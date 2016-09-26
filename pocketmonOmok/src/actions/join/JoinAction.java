@@ -7,9 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Random;
-
-import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
 
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
@@ -17,10 +14,8 @@ import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
-import frames.LoginPanel;
 import frames.joinFrames.JoinFrame;
 import utility.RegexCheck;
-import utility.SendEmail;
 
 public class JoinAction extends Adapters {
 	private BasicFrame basicFrame;

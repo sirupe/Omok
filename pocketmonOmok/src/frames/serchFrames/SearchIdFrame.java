@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -14,15 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import actions.findIDandPW.FindIDAction;
-import enums.frames.CorrectEnum;
-import enums.frames.LoginFrameSizesEnum;
-import enums.frames.SearchIdEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 import frames.BasicFrame;
-import frames.LoginPanel;
-import frames.joinFrames.JoinFrame;
-import frames.waitingRoom.WaitingRoomPanel;
 
 
 public class SearchIdFrame extends JFrame  {

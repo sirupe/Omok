@@ -1,4 +1,4 @@
-package frames.store;
+package frames.Store;
 
 import java.awt.Graphics;
 import java.awt.Image;

@@ -810,15 +810,4 @@ public class JoinFrame extends JFrame {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
-	
-	//테스트용
-	public void test() {
-		this.idTextField.setText("sirupe");
-		this.getPwdTextField().setText("xo1004tks!");
-		this.getRePwdField().setText("xo1004tks!");
-		this.getNameTextField().setText("지은정");
-		this.getEmailIDTextField().setText("sirupe");
-		this.getEmailAddrTextField().setText("nate.com");
-		this.genderWomanRadio.setSelected(true);
-	}
 }

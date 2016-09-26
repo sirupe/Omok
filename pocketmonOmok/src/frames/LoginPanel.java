@@ -190,6 +190,7 @@ public class LoginPanel extends JPanel {
 		
 		//나중에 액션 등록 할때 this에 넣으면 됨
 		this.loginButton.addActionListener(this.loginAction);
+		this.loginButton.addMouseListener(this.loginAction);
 		
 		//회원가입 버튼 위치 설정
 		this.joinButton.setBounds(
@@ -232,7 +233,8 @@ public class LoginPanel extends JPanel {
 		this.searchPwButton.setToolTipText("비밀번호 찾기");
 		this.searchPwButton.addMouseListener(this.loginAction);
 
-		this.searchPwButton.addActionListener(this.loginAction);     
+		this.searchPwButton.addActionListener(this.loginAction);
+		
 		
 		this.loginPanel.add(this.loginButton);
 		this.loginPanel.add(this.joinButton);
