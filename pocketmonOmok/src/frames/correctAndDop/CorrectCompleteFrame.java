@@ -1,5 +1,6 @@
 package frames.correctAndDop;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,7 +16,7 @@ import javax.swing.JLabel;
 
 import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
-import enums.frames.searchIdEnum;
+import enums.frames.SearchIdEnum;
 
 public class CorrectCompleteFrame extends JFrame {
 	private Image backGround;
@@ -33,7 +34,7 @@ public class CorrectCompleteFrame extends JFrame {
 		
 		this.setBounds(CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect());
 		this.correctComplete = new JLabel("수정이 완료되었습니다.");
-		this.correctComplete.setFont(searchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.correctComplete.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		this.correctComplete.setBounds(CorrectEnum.CORRECT_COMPLETE_TEXT_SIZE_RECT.getRect());
 
 		this.confirmButton = new JButton() {

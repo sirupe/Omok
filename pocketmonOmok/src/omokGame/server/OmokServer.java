@@ -25,6 +25,7 @@ import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import utility.SendEmail;
 
 public class OmokServer {
@@ -183,7 +184,7 @@ public class OmokServer {
 			if(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null) {
 				ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_JOIN);
 				serverMessage.setUserAction(UserActionEnum.USER_JOIN_JOINACTION);
-				// DB에 데이터 업데이트 
+				// DB에 데이터 업데이트 00
 				int result = this.joinDAO.creatUserPersonalInfo(personalDTO);
 				result += this.joinDAO.createUserGameDataInfo(personalDTO);
 				result += this.joinDAO.createUserStoreInfo(personalDTO);
@@ -208,7 +209,21 @@ public class OmokServer {
 	public void findPW() {
 		System.out.println("비밀번호찾기");
 	}
-	
+	//
+	public void findEmail(AbstractEnumsDTO data, OmokPersonalServer PersonalServer) throws IOException {
+		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
+		if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
+			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO)data;
+			
+			String ConfirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
+			//메일 발송 -- 랜덤 번호와 resultDTO에 담긴 사용자 이메일로 보낸다..
+			new SendEmail(ConfirmNumber, resultDTO.getUserEmail());
+			
+			resultDTO.setCertificationNumber(ConfirmNumber);
+			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
+			PersonalServer.getServerOutputStream().writeObject(resultDTO);
+		}
+	}
 	public void gameRoom() {
 		System.out.println("게임방");
 	}
@@ -241,4 +256,6 @@ public class OmokServer {
 	public Map<String, OmokPersonalServer> getPsersonalServerMap() {
 		return loginUsersMap;
 	}
+
+
 }

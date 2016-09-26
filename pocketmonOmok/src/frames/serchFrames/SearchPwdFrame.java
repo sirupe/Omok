@@ -2,6 +2,7 @@ package frames.serchFrames;
 
 import java.awt.CardLayout;
 
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -14,10 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import actions.findIDandPW.FindPWAction;
-import enums.frames.searchPwdEnum;
-import enums.frames.searchRePwdEnum;
+import datasDTO.UserPersonalInfoDTO;
+import enums.frames.SearchPwdEnum;
+import enums.frames.SearchRePwdEnum;
+import frames.BasicFrame;
 import frames.LoginPanel;
-
 
 
 @SuppressWarnings("serial")
@@ -32,37 +34,39 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	
 	private FindPWAction findPwAction;
 	
-	public SearchPwdFrame(LoginPanel loginPanel) throws IOException {
+	private BasicFrame basicFrame;
+	
+	public SearchPwdFrame(BasicFrame basicFrame) throws IOException {
 		
-		this.findPwAction = new FindPWAction(this);
+		this.basicFrame = basicFrame;
 		
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				searchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
-				searchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
+				SearchPwdEnum.SEARCH_PWD_FRAME_WIDTH.getSize(),
+				SearchPwdEnum.SEARCH_PWD_FRAME_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 		
 		this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 		
 		//프레임 화면 출력 위치 설정
 		this.setBounds(
-		searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
-		searchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
-		searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-		searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_X.getSize(),
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+		SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 		);
 		
 		//비밀번호 찾기 프레임
-		this.searchPwdPanel = new SearchPwdPanel(loginPanel) {
+		this.searchPwdPanel = new SearchPwdPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
-				super.paintComponents(g);
+				super.paintComponents(g); 
 				try {
 					g.drawImage(ImageIO.read(
 						new File("resources/background/popup.png")),
 							0,
 							0,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
 				}catch (IOException e) {
 					e.printStackTrace();
@@ -83,8 +87,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 						new File("resources/background/popup.png")),
 							0,
 							0,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
 				}catch (IOException e) {
 					e.printStackTrace();
@@ -119,8 +123,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 						new File("resources/signUp/backg.png")),
 							0,
 							0,
-							searchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
-							searchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
+							SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize(),
 							this);		
 				}catch (IOException e) {
 					e.printStackTrace();
@@ -128,8 +132,20 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			}
 		};
 	}
-
-	
+	//나자신을 꺼주고 basicFrame을 켜준다.
+    public void doCancelButton() {
+    	this.setVisible(false);
+    	this.basicFrame.setVisible(true);
+    }
+    
+    public void getCerficartion(UserPersonalInfoDTO userPersonalInfoDTO) {
+    	try {
+			this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 	public SearchPwdPanel getSearchPwdPanel() {
 		return searchPwdPanel;
 	}
@@ -139,6 +155,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	public SearchRePwdPanel getSearchRePanel() {
 		return searchRePwdPanel;
 	}
+
 	//	public static void main(String[] args) {
 //		try {
 //			new SearchPwdFrame();

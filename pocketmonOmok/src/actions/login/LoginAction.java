@@ -20,7 +20,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 	
 	public LoginAction(LoginPanel loginPanel){
 		this.loginPanel = loginPanel;
-	}
+	} 
 	
 	// 로그인 버튼 액션이 들어오면 실행됨
 	@Override
@@ -124,7 +124,12 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 				e1.printStackTrace();
 			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
-			
+			this.loginPanel.getBasicFrame().setVisible(false);
+			try {
+				this.loginPanel.getBasicFrame().newSearchIdFrame();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
 //			if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
 				this.loginPanel.getBasicFrame().setVisible(false);

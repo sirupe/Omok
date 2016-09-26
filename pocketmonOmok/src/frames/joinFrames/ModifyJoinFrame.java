@@ -23,7 +23,7 @@ import com.sun.media.sound.MidiOutDeviceProvider;
 
 import enums.frames.JoinSizesEnum;
 import enums.frames.ModifyJoinEnum;
-import enums.frames.searchIdEnum;
+import enums.frames.SearchIdEnum;
 import utility.JTextFieldNumOnly;
 
 public class ModifyJoinFrame extends JFrame {
@@ -147,7 +147,7 @@ public class ModifyJoinFrame extends JFrame {
 				this.dateChoice  = new JComboBox<Integer>();
 				
 				//레이블 폰트
-				Font labelFont = searchIdEnum.LABELFONT_DEFAULT.getFont();
+				Font labelFont = SearchIdEnum.LABELFONT_DEFAULT.getFont();
 				this.userIdLabel.setFont(labelFont);
 				this.pwdLabel.setFont(labelFont);
 				this.rePwdLabel.setFont(labelFont);

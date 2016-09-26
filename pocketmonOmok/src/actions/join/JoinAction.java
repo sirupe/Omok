@@ -9,6 +9,10 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+
 import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
 
 import actions.adapters.Adapters;
@@ -118,6 +122,7 @@ public class JoinAction extends Adapters {
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		String source = e.getSource().toString();
+		
 		if(e.getStateChange() == 1) {
 			if(source.contains("yearChoice")) {
 				this.birthYear = e.getItem().toString();
@@ -153,6 +158,7 @@ public class JoinAction extends Adapters {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String source = e.getSource().toString();
+	
 		if(source.contains("joinButton")) {
 			this.joinAction();
 		} else if(source.contains("confirmButton")) {

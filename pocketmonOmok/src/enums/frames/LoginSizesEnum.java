@@ -110,7 +110,9 @@ public enum LoginSizesEnum {
 	BUTTON_NAME_SIGNUP("signup"),
 	BUTTON_NAME_SEARCHID("searchID"),
 	BUTTON_NAME_SEARCHPW("searchPW"),
-	BUTTON_NAME_LOGIN("login");
+	BUTTON_NAME_LOGIN("login"),
+	BUTTON_NAME_SEARCH_CANCEL("searchCancel"),
+	BUTTON_NAME_SEARCH_CONFIRM("searchConfirm");
 	
 	private String buttonName;
 	private int size;
