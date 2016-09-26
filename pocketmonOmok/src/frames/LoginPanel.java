@@ -157,19 +157,19 @@ public class LoginPanel extends JPanel {
 		               Image.SCALE_AREA_AVERAGING);
 		this.loginButton = new JButton(new ImageIcon(this.loginreimage));
 	  
-		this.joinreimage = ImageIO.read(new File("resources/login/signup.png")).getScaledInstance(
+		this.joinreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SIGHUP.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.joinButton = new JButton(new ImageIcon(this.joinreimage));
 		
-		this.searchidreimage = ImageIO.read(new File("resources/login/forgotID.png")).getScaledInstance(
+		this.searchidreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SEARCHID.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.searchIdButton = new JButton(new ImageIcon(this.searchidreimage));
 		
-		this.searchpwreimage = ImageIO.read(new File("resources/login/forgotPW.png")).getScaledInstance(
+		this.searchpwreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SEARCHPW.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);

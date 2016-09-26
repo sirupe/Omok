@@ -8,6 +8,9 @@ public enum ImageEnum {
 	BASIC_BACKGROUND("resources/background/background.png"),
 //Loginpanel ¿ÃπÃ¡ˆ-----------------------------------------------------
 	LOGINPANEL_LOGIN("resources/login/login.jpg"),
+	LOGINPANEL_SIGHUP("resources/login/signup.png"),
+	LOGINPANEL_SEARCHID("resources/login/forgotID.png"),
+	LOGINPANEL_SEARCHPW("resources/login/forgotPW.png"),
 	LOGINPANEL_LOGIN_HOVER("resources/login/gamestartIconchange.png"),
 	LOGINPANEL_SIGNUP_HOVER("resources/login/signup.png"),
 	LOGINPANEL_SEARCHID_HOVER("resources/login/forgotID.png"),
