@@ -26,8 +26,7 @@ public class UserMessageVO extends AbstractEnumsDTO {
 	}
 
 	public void setMessage(String message) {
-		this.message = message + "\n";
-//		this.message = message;
+		this.message = message;
 	}
 
 	public String getTargetID() {

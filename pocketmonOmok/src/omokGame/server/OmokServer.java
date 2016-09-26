@@ -19,8 +19,8 @@ import datasDTO.GameRoomInfoVO;
 import datasDTO.RoomAndUserListDTO;
 import datasDTO.ServerMessageDTO;
 import datasDTO.UserGamedataInfoDTO;
+import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
-import enums.etc.ImageEnum;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
 import enums.etc.UserActionEnum;
@@ -99,6 +99,13 @@ public class OmokServer {
 			break;
 		case USER_CONFIRM_USERINFO :
 			this.waitingRoomConfirmUSerInfo(dto, personalServer);
+			break;
+		case USER_MESSAGE_DEFAULT :
+			this.waitingRoomDefaultMessage(dto, personalServer);
+			break;
+		case USER_MESSAGE_SECRET :
+			this.waitingRoomSecretMessage(dto, personalServer);
+			break;
 		default :
 			break;
 		}
@@ -143,11 +150,52 @@ public class OmokServer {
 		}
 	}
 	
+	// 다른유저 정보확인
 	public void waitingRoomConfirmUSerInfo(AbstractEnumsDTO dto, OmokPersonalServer personalServer) throws IOException {
 		UserGamedataInfoDTO gamedata = (UserGamedataInfoDTO)dto;
 		UserGamedataInfoDTO userGamedata = this.gamedataDAO.userGameData(gamedata.getUserID());
 		userGamedata.setServerAction(ServerActionEnum.OTHER_USER_INFO);
 		personalServer.getServerOutputStream().writeObject(userGamedata);
+	}
+	
+	// 유저가 메세지를 입력했다.
+	public void waitingRoomDefaultMessage(AbstractEnumsDTO dto, OmokPersonalServer personalServer) throws IOException {
+		UserMessageVO messageVO = (UserMessageVO)dto;
+		
+		StringBuffer message = new StringBuffer();
+		message.append(messageVO.getUserID());
+		message.append(" : ");
+		message.append(messageVO.getMessage());
+		
+		messageVO.setServerAction(ServerActionEnum.MESSAGE_SEND_SUCCESS);
+		messageVO.setMessage(message.toString());
+		for(String id : this.loginUsersMap.keySet()) {
+			this.loginUsersMap.get(id).getServerOutputStream().writeObject(messageVO);
+		}
+		
+	}
+	
+	public void waitingRoomSecretMessage(AbstractEnumsDTO dto, OmokPersonalServer personalServer) throws IOException {
+		UserMessageVO messageVO = (UserMessageVO)dto;
+		
+		StringBuffer targetMessage = new StringBuffer();
+		targetMessage.append(messageVO.getUserID());
+		targetMessage.append(" 님의 귓속말 : ");
+		targetMessage.append(messageVO.getMessage());
+		
+		StringBuffer userMessage = new StringBuffer();
+		userMessage.append(messageVO.getUserID());
+		userMessage.append(" 님에게 귓속말 : ");
+		userMessage.append(messageVO.getMessage());
+		
+		messageVO.setServerAction(ServerActionEnum.MESSAGE_SEND_SUCCESS);
+		
+		messageVO.setMessage(targetMessage.toString());
+		this.loginUsersMap.get(messageVO.getTargetID()).getServerOutputStream().writeObject(messageVO);
+		
+		messageVO.setMessage(userMessage.toString());
+		this.loginUsersMap.get(messageVO.getUserID()).getServerOutputStream().writeObject(messageVO);
+		
 	}
 //회원가입--------------------------------------------------------------------------
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {

@@ -11,6 +11,7 @@ import datasDTO.AbstractEnumsDTO;
 import datasDTO.GameRoomInfoVO;
 import datasDTO.RoomAndUserListDTO;
 import datasDTO.UserGamedataInfoDTO;
+import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
@@ -18,8 +19,11 @@ import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
+import frames.LoginPanel;
+import frames.joinFrames.JoinFrame;
 import frames.joinFrames.JoinSuccessFrame;
 import frames.waitingRoom.WaitingRoomListTable;
+import frames.waitingRoom.WaitingRoomPanel;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
@@ -38,21 +42,21 @@ public class ClientAccept {
 		reciever.start();
 
 	}
-
-	public void loginSuccessCheck(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+//로그인---------------------------------------------------------------------------------------------
+	public void loginSuccessCheck(AbstractEnumsDTO data, LoginPanel loginPanel) throws IOException {
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)data;
 		
 		// 서버의 메세지
 		switch(userPersonalDTO.getServerAction()) {
 		// - 로그인 중 유저가 입력을 잘못했을 시
 		case LOGIN_FAIL_INPUT_ERROR :
-			this.basicFrame.getLoginPanel().loginFailLabelReset();
-			this.basicFrame.getLoginPanel().loginFail("아이디, 패스워드 오류입니다.");
+			loginPanel.loginFailLabelReset();
+			loginPanel.loginFail("아이디, 패스워드 오류입니다.");
 			break;
 		// - 로그인 중 이미 접속한 유저의 정보를 입력했을 시
 		case LOGIN_FAIL_OVERLAP_ACCEPT :
-			this.basicFrame.getLoginPanel().loginFailLabelReset();
-			this.basicFrame.getLoginPanel().loginFail("이미 접속중인 아이디입니다.");
+			loginPanel.loginFailLabelReset();
+			loginPanel.loginFail("이미 접속중인 아이디입니다.");
 			break;
 		// 로그인에 성공했을 시
 		case LOGIN_SUCCESS :
@@ -67,8 +71,8 @@ public class ClientAccept {
 		}
 	}
 	
-	// 회원가입 화면에 대한 서버의 응답
-	public void joinFrameInputAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+//회원가입----------------------------------------------------------------------------------------------------------
+	public void joinFrameInputAction(AbstractEnumsDTO data, JoinFrame joinFrame) throws IOException {
 		// 아이디 중복체크
 		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
 			UserPersonalInfoDTO userPersonalInfoDTO = (UserPersonalInfoDTO)data;
@@ -84,64 +88,68 @@ public class ClientAccept {
 				color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 			}
 			
-			this.basicFrame.getJoinFrame().labelSetting(
-					this.basicFrame.getJoinFrame().getIdErrorLabel(), 
+			joinFrame.labelSetting(
+					joinFrame.getIdErrorLabel(), 
 					color, checkMsg);
 			
 		// 회원가입
 		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_JOINACTION) {
 			if(data.getServerAction() == ServerActionEnum.JOIN_SUCCESS) {
 				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "회원가입 완료:)");
-				this.basicFrame.getJoinFrame().setVisible(false);
-				this.basicFrame.getJoinFrame().dispose();
+				joinFrame.setVisible(false);
+				joinFrame.dispose();
 			
 			} else {
 				new JoinSuccessFrame(this.basicFrame.getJoinFrame(), "오류 발생 :(");
-				this.basicFrame.getJoinFrame().setVisible(false);
-				this.basicFrame.getJoinFrame().dispose();
+				joinFrame.setVisible(false);
+				joinFrame.dispose();
 				
 			}
 		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
 			System.out.println("인증번호 등록중.." + ((UserPersonalInfoDTO)data).getCertificationNumber());
-			this.basicFrame.getJoinFrame().getJoinAction().setCertificationNumber(((UserPersonalInfoDTO)data).getCertificationNumber());
+			joinFrame.getJoinAction().setCertificationNumber(((UserPersonalInfoDTO)data).getCertificationNumber());
 		}
 	}
-
-	public void waitingRoomAction(AbstractEnumsDTO data, BasicFrame basicFrame) throws IOException {
+//대기실------------------------------------------------------------------------------------------
+	public void waitingRoomAction(AbstractEnumsDTO data, WaitingRoomPanel waitingRoomPanel) throws IOException {
 		switch(data.getServerAction() != null ? data.getServerAction() : ServerActionEnum.NOTHING) {
 		// 서버에서 보낸 정보가 "새로운 유저가 접속했다" 는 정보라면
 		case LOGIN_NEW_USER :
 			UserGamedataInfoDTO newUserData = (UserGamedataInfoDTO)data;
-			this.basicFrame.getWaitingRoomPanel().userListAddSetting(newUserData);
-			this.basicFrame.getWaitingRoomPanel().getChattingOutput().append(newUserData.getUserID() + " 님께서 접속하셨습니다.\n");
-			this.basicFrame.getWaitingRoomPanel().getChattingOutput().append("asdfasdfag");
+			waitingRoomPanel.userListAddSetting(newUserData);
+			waitingRoomPanel.getChattingOutput().append(newUserData.getUserID() + " 님께서 접속하셨습니다.\n");
 			break;
 			
-		// 서버에서 보낸 정보가 "대기실 입장" 이라면 TODO
+		// 서버에서 보낸 정보가 "대기실 입장" 이라면 
 		case WAITING_ROOM_ENTER :
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			
 			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
-			this.basicFrame.getWaitingRoomPanel().setUserInfo(waitingRoomInfo.getUserGameData());
-			this.basicFrame.getWaitingRoomPanel().roomListSetting(roomTable);			
-			this.basicFrame.getWaitingRoomPanel().userListSetting(waitingRoomInfo.getUserList());
+			waitingRoomPanel.setUserInfo(waitingRoomInfo.getUserGameData());
+			waitingRoomPanel.roomListSetting(roomTable);			
+			waitingRoomPanel.userListSetting(waitingRoomInfo.getUserList());
+			waitingRoomPanel.getChattingOutput().append(waitingRoomInfo.getUserGameData().getUserID() + " 님, 환영합니다.\n");
 			this.basicFrame.inWaitingRoom();
 			break;
 		
 		// 서버에서 보낸 정보가 "방생성 성공" 이라면
 		case GAME_CREATEROOM_SUCCESS :
-			this.basicFrame.getWaitingRoomPanel().getCreateGameRoomFrame().dispose();
+			waitingRoomPanel.getCreateGameRoomFrame().dispose();
 			this.basicFrame.inGameRoom();
 			this.basicFrame.setVisible(true);
 			break;
 		//TODO 방생성 실패 해야 함.
 		// 서버에서 보낸 정보가 "방 추가" 라면
 		case GAME_ROOM_ADD :
-			this.basicFrame.getWaitingRoomPanel().addGameRoom((GameRoomInfoVO)data);
+			waitingRoomPanel.addGameRoom((GameRoomInfoVO)data);
 			break;
 		// 서버에서 보낸 정보가 다른 유저 정보 보기라면 TODO
 		case OTHER_USER_INFO : 
-			this.basicFrame.getWaitingRoomPanel().setUserInfo((UserGamedataInfoDTO)data);
+			waitingRoomPanel.setUserInfo((UserGamedataInfoDTO)data);
+			break;
+		// 서버에서 메세지를 전송 !!
+		case MESSAGE_SEND_SUCCESS :
+			waitingRoomPanel.getChattingOutput().append(((UserMessageVO)data).getMessage());
 			break;
 		default:
 			break;

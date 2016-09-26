@@ -26,13 +26,13 @@ public class ClientReciever extends Thread {
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
-					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame);
+					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame.getLoginPanel());
 					break;
 				case POSITION_WAITING_ROOM :
-					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame);
+					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame.getWaitingRoomPanel());
 					break;
 				case POSITION_JOIN :
-					this.clientAccept.joinFrameInputAction(userPosition, this.basicFrame);
+					this.clientAccept.joinFrameInputAction(userPosition, this.basicFrame.getJoinFrame());
 					break;
 				case POSITION_FIND_ID :   
 					break;

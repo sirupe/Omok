@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -29,7 +30,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import actions.waitingRoom.WaitingRoomAction;
-import datasDTO.AbstractEnumsDTO;
 import datasDTO.GameRoomInfoVO;
 import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserPersonalInfoDTO;
@@ -48,7 +48,8 @@ public class WaitingRoomPanel extends JPanel {
 	private JButton createRoomButton;
 	
 	private JTextArea chattingOutput;
-	private JTextField chattingInput;
+	private JTextField chattingInputTextField;
+	private JTextField noticeTextField;
 	private JButton sendMessage;
 	
 	private JList<String> playerList;
@@ -82,12 +83,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.playerListScroll = new JScrollPane();
 		//==========================채팅방&내정보==========================
 		
-		this.chattingOutput = new JTextArea();
-		this.chattingInput  = new JTextField();
-		this.sendMessage    = new JButton();
+		this.chattingOutput 		 = new JTextArea();
+		this.chattingInputTextField  = new JTextField();
+		this.noticeTextField		 = new JTextField();
+		this.sendMessage    		 = new JButton();
 						
-		this.gamestartButton  = new JButton();
-		this.createRoomButton = new JButton();
+		this.gamestartButton  		 = new JButton();
+		this.createRoomButton 		 = new JButton();
 			
 		this.userIDTitleLabel 	 	 = new JLabel("ID");
 		this.scoreTitleLabel 		 = new JLabel("전적");
@@ -105,7 +107,7 @@ public class WaitingRoomPanel extends JPanel {
 		this.correct 	 	 = new JButton();
 		
 		this.basicFrame 	 = basicFrame;
-		this.waitingRoomAction   = new WaitingRoomAction(this.basicFrame);
+		this.waitingRoomAction   = new WaitingRoomAction(this);
 
 	}
 	//==========================대기방 리스트==========================
@@ -188,9 +190,8 @@ public class WaitingRoomPanel extends JPanel {
 		
 		this.imageMap = createImage(this.players, usersGrade);
 		this.playerList = new JList<String>(this.players);
-		this.playerList.addMouseListener(this.waitingRoomAction);
 		this.playerList.setCellRenderer(new PlayerRenderer());
-		
+		this.addMouseAction(this.playerList, "playerList");
 		this.playerListScroll.setViewportView(this.playerList);
 
 		this.playerListScroll.setOpaque(false);
@@ -319,12 +320,22 @@ public class WaitingRoomPanel extends JPanel {
 		);
 		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
-		this.chattingInput.setBounds(
+		this.chattingInputTextField.setBounds(
 				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_Y.getSize(),
 				WaitingRoomSizesEnum.CHATTING_INPUT_SIZE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.CHATTING_INPUT_SIZE_HEIGHT.getSize()	
 		);
+		//노티스텍스트필드
+		this.noticeTextField.setBounds(
+				WaitingRoomSizesEnum.NOTICE_TEXTFIELD_POSITION_X.getSize(),
+				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_Y.getSize(),
+				WaitingRoomSizesEnum.NOTICE_TEXTFIELD_WIDTH.getSize(),
+				WaitingRoomSizesEnum.CHATTING_INPUT_SIZE_HEIGHT.getSize()
+		);
+		this.noticeTextField.setEditable(false);
+		this.noticeTextField.setText("전체채팅");
+		
 		//메세지 버튼 위치와 크기를 가져옴
 		this.sendMessage.setBounds(
 				WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_POSITION_X.getSize(),
@@ -602,18 +613,21 @@ public class WaitingRoomPanel extends JPanel {
 		this.winningRateTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
 		this.pointTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
 		this.levelTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
-		
+		this.chattingInputTextField.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE130.getfont());
+		this.chattingOutput.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE130.getfont());
 		
 		
 		this.setLayout(null);
 		
-		//TODO 각종 리스너 등록
 		this.addAction(this.createRoomButton, "createRoomButton");
+		this.addAction(this.chattingInputTextField, "chattingInputTextField");
+		this.addMouseAction(this.noticeTextField, "noticeTextField");
+		this.chattingInputTextField.addActionListener(this.waitingRoomAction);
 		
 		this.waitingRoomListBackground.add(waitingRoomListScroll);
 		this.add(waitingRoomListBackground);
 		this.add(chattingOutput);
-		this.add(chattingInput);
+		this.add(chattingInputTextField);
 		this.add(sendMessage);
 		this.add(gamestartButton);
 		this.add(createRoomButton);
@@ -632,6 +646,7 @@ public class WaitingRoomPanel extends JPanel {
 		this.add(levelImageLabel);
 		this.add(correct);
 		this.add(myInfo);
+		this.add(this.noticeTextField);
 		
 		
 	}
@@ -643,9 +658,19 @@ public class WaitingRoomPanel extends JPanel {
 		comp.addActionListener(this.waitingRoomAction);
 	}
 	
+	public void addAction(JTextField comp, String name) {
+		comp.setName(name);
+		comp.addActionListener(this.waitingRoomAction);
+	}
+	
 	public void addItemAction(JRadioButton comp, String name) {
 		comp.setName(name);
 		comp.addItemListener(this.waitingRoomAction);
+	}
+	
+	public void addMouseAction(JComponent comp, String name) {
+		comp.setName(name);
+		comp.addMouseListener(this.waitingRoomAction);
 	}
 	
 	public void updateAddRoom() {
@@ -730,5 +755,13 @@ public class WaitingRoomPanel extends JPanel {
 	
 	public JTextArea getChattingOutput() {
 		return chattingOutput;
+	}
+	
+	public JTextField getChattingInputTextField() {
+		return chattingInputTextField;
+	}
+	
+	public JTextField getNoticeTextField() {
+		return noticeTextField;
 	}
 }
