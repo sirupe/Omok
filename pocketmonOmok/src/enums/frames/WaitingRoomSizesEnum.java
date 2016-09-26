@@ -36,12 +36,14 @@ public enum WaitingRoomSizesEnum {
 	CHATTING_OUTPUT_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.59)),
 		
 	//채팅 입력창 가로, 세로 길이
-	CHATTING_INPUT_SIZE_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.48)),
+	CHATTING_INPUT_SIZE_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.38)),
 	CHATTING_INPUT_SIZE_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.05)),
 	//채팅 입력창 x,y 위치
-	CHATTING_INPUT_POSITION_X(WAITINGROOM_LABEL_POSITION_X.getSize()),
+	NOTICE_TEXTFIELD_POSITION_X(WAITINGROOM_LABEL_POSITION_X.getSize()),
+	NOTICE_TEXTFIELD_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.08)),
+
+	CHATTING_INPUT_POSITION_X(WAITINGROOM_LABEL_POSITION_X.getSize() + NOTICE_TEXTFIELD_WIDTH.getSize()),
 	CHATTING_INPUT_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.87)),
-	
 	//메시지 보내기 버튼 가로, 세로 길이
 	SEND_MESSAGE_BUTTON_WIDTH((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.08)),
 	SEND_MESSAGE_BUTTON_HEIGHT((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.05)),
@@ -176,6 +178,10 @@ public enum WaitingRoomSizesEnum {
 	MY_INFO_POSITION_X((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.72)),
 	MY_INFO_POSITION_Y((int)(LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.58)),
 
+	USER_INFO_VIEW_SIZE_X((int)(MY_INFO_IMAGE_WIDTH.getSize() * 0.05)),
+	USER_INFO_VIEW_SIZE_Y((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.05)),
+	USER_INFO_VIEW_SIZE_WIDTH((int)(MY_INFO_IMAGE_WIDTH.getSize() * 0.9)),
+	USER_INFO_VIEW_SIZE_HEIGHT((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.9)),
 	
 	//==================================FONTSIZE&COLOR==================================
 	
@@ -187,7 +193,8 @@ public enum WaitingRoomSizesEnum {
 	LABELFONT_SIZE70(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 70)),
 	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 80)),
 	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 90)),
-	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100));
+	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
+	LABELFONT_SIZE130(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 130));
 	
 	
 	

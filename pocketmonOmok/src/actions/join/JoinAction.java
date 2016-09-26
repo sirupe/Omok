@@ -7,26 +7,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Random;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-
-import com.sun.xml.internal.ws.dump.LoggingDumpTube.Position;
-
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
-import frames.LoginPanel;
+import frames.BasicFrame;
 import frames.joinFrames.JoinFrame;
 import utility.RegexCheck;
-import utility.SendEmail;
 
 public class JoinAction extends Adapters {
-	private LoginPanel loginPanel;
+	private BasicFrame basicFrame;
 	private JoinFrame joinFrame;
 	
 	private String id;
@@ -47,10 +38,11 @@ public class JoinAction extends Adapters {
 	private StringBuffer totalEmail;
 	
 	private boolean emailConfirmTime;
+
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
-	public JoinAction(LoginPanel loginPanel, JoinFrame joinFrame){
-		this.loginPanel = loginPanel;
+	public JoinAction(BasicFrame basicFrame, JoinFrame joinFrame){
+		this.basicFrame = basicFrame;
 		this.joinFrame = joinFrame;
 		this.birthYear = "2016";
 		this.birthMonth = "1";
@@ -62,7 +54,7 @@ public class JoinAction extends Adapters {
 	// x버튼을 누르면 joinFrame 창이 꺼진 후 BasicFrame이 보이게 하기 위해 따로 설정.
 	@Override
 	public void windowClosing(WindowEvent e) {
-		this.loginPanel.getBasicFrame().setVisible(true);
+		this.basicFrame.setVisible(true);
 		this.joinFrame.setVisible(false);
 		this.joinFrame.dispose();
 	}
@@ -164,7 +156,7 @@ public class JoinAction extends Adapters {
 		} else if(source.contains("confirmButton")) {
 			this.confirmAction();
 		} else if(source.contains("cancelButton")) {
-			this.loginPanel.getBasicFrame().setVisible(true);
+			this.basicFrame.setVisible(true);
 			this.joinFrame.setVisible(false);
 			this.joinFrame.dispose();
 		}
@@ -187,7 +179,7 @@ public class JoinAction extends Adapters {
 			personalDTO.setUserAction(UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK);
 			personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
 			try {
-				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
+				this.basicFrame.getClientOS().writeObject(personalDTO);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -326,7 +318,7 @@ public class JoinAction extends Adapters {
 			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION);
 			userPersonalInfoDTO.setUserEmail(email.toString());
 			try {
-				this.loginPanel.getBasicFrame().getClientOS().writeObject(userPersonalInfoDTO);
+				this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -501,7 +493,7 @@ public class JoinAction extends Adapters {
 			personalDTO.setUserPhoneNumber(this.telLastNum);
 			
 			try {
-				this.loginPanel.getBasicFrame().getClientOS().writeObject(personalDTO);
+				this.basicFrame.getClientOS().writeObject(personalDTO);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
