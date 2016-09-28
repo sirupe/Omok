@@ -24,12 +24,16 @@ public class JoinSuccessFrame extends JFrame {
 	private JoinFrame joinFrame;
 	
 	
-	public JoinSuccessFrame(JoinFrame joinFrame, String message) throws IOException {
+	public JoinSuccessFrame(JoinFrame joinFrame, String message) {
 		this.joinFrame = joinFrame;
-		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
-				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
-                Image.SCALE_SMOOTH);
+		try {
+			this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
+					CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
+					CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
+			        Image.SCALE_SMOOTH);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 		

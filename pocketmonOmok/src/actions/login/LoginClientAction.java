@@ -16,10 +16,10 @@ import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
 import frames.LoginPanel;
 
-public class LoginAction extends MouseAdapter implements ActionListener{
+public class LoginClientAction extends MouseAdapter implements ActionListener{
 	private LoginPanel loginPanel;
 	
-	public LoginAction(LoginPanel loginPanel){
+	public LoginClientAction(LoginPanel loginPanel){
 		this.loginPanel = loginPanel;
 	} 
 	

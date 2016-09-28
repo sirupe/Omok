@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.GameRoomInfoVO;
+import datasDTO.RoomAndUserListDTO;
 import frames.BasicFrame;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
 public class ClientReciever extends Thread {
@@ -26,19 +28,20 @@ public class ClientReciever extends Thread {
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
-					this.clientAccept.loginSuccessCheck(userPosition, this.basicFrame.getLoginPanel());
+					this.clientAccept.loginSuccessCheck(userPosition);
 					break;
 				case POSITION_WAITING_ROOM :
-					this.clientAccept.waitingRoomAction(userPosition, this.basicFrame.getWaitingRoomPanel());
+					this.clientAccept.waitingRoomAction(userPosition);
 					break;
 				case POSITION_JOIN :
-					this.clientAccept.joinFrameInputAction(userPosition, this.basicFrame.getJoinFrame());
+					this.clientAccept.joinFrameInputAction(userPosition);
 					break;
 				case POSITION_FIND_ID :   
 					break;
 				case POSITION_FIND_PW :  
 					break;
-				case POSITION_GAME_ROOM :         
+				case POSITION_GAME_ROOM :
+					this.clientAccept.inGameRoom(userPosition);
 					break;
 				case POSITION_STORE :             
 					break;
@@ -46,6 +49,8 @@ public class ClientReciever extends Thread {
 					break;
 				case POSITION_EXIT :  
 					this.clientAccept.gameExit(userPosition);
+					break;
+				default:
 					break;
 				}
 			}

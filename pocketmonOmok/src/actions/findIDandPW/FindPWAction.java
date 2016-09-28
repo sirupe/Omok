@@ -1,18 +1,12 @@
 package actions.findIDandPW;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.JButton;
 
 import actions.adapters.Adapters;
-import datasDTO.UserPersonalInfoDTO;
-import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
-import frames.LoginPanel;
-import frames.joinFrames.JoinFrame;
-import frames.serchFrames.SearchPwdFrame;
-import frames.serchFrames.SearchPwdPanel;
+import frames.searchFrames.SearchPwdPanel;
 
 public class FindPWAction extends Adapters {
 	private SearchPwdPanel searchPwdPanel;

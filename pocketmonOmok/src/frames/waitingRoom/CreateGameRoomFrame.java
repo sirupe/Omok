@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import actions.waitingRoom.WaitingRoomAction;
+import actions.waitingRoom.WaitingRoomActionListeners;
 import enums.frames.GameRoomCreateEnum;
 import enums.frames.GameRoomFullEnum;
 import enums.frames.SearchIdEnum;
@@ -39,10 +39,10 @@ public class CreateGameRoomFrame extends JFrame {
 	
 	private Image backGround;
 	
-	private WaitingRoomAction waitingRoomAction;
+	private WaitingRoomActionListeners waitingRoomAction;
 	private WaitingRoomPanel waitingRoomPanel;
 	
-	public CreateGameRoomFrame(WaitingRoomAction waitingRoomAction, WaitingRoomPanel waitingRoomPanel) throws IOException {
+	public CreateGameRoomFrame(WaitingRoomActionListeners waitingRoomAction, WaitingRoomPanel waitingRoomPanel) throws IOException {
 		this.waitingRoomAction = waitingRoomAction;
 		this.waitingRoomPanel  = waitingRoomPanel;
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -169,6 +169,7 @@ public class CreateGameRoomFrame extends JFrame {
     	this.add(createRoomConfirmButton);
     	this.add(createRoomCancelButton);
     	
+    	this.waitingRoomPanel.addAction(this.createRoomCancelButton, "createRoomCancelButton");
     	this.waitingRoomPanel.addAction(this.createRoomConfirmButton, "createRoomConfirmButton");
     	this.waitingRoomPanel.addItemAction(this.roomCreatePrivate, "roomCreatePrivate");
 	}

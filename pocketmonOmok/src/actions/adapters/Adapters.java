@@ -10,9 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 public abstract class Adapters extends MouseAdapter implements KeyListener, WindowListener, ItemListener, ActionListener {
 
 	@Override

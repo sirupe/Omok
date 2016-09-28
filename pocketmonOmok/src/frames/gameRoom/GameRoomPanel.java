@@ -18,19 +18,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import datasDTO.GameRoomInfoVO;
+import datasDTO.UserInGameRoomDTO;
 import enums.etc.ImageEnum;
 import enums.frames.GameRoomEnum;
+import frames.BasicFrame;
 
 @SuppressWarnings("serial")
 public class GameRoomPanel extends JPanel {
+	private BasicFrame basicFrame;
+	
 	private JPanel gameBoardPanel;	// 오목판
 	private JPanel omokStonePanel;	// 돌을 놓을 패널
 	private JPanel timeLimitPanel;	// 시간제한 표시
 	private JPanel userImagePanel;	// 유저이미지
 	private JPanel gameMenuPanel;	// 게임메뉴 및 아이템
 	private JPanel chattingPanel;	// 채팅
+	private Thread timeLimitThread;
 	
-	public GameRoomPanel() {
+	public GameRoomPanel(BasicFrame basicFrame) {
+		this.basicFrame = basicFrame;
+		
 		this.setLayout(null);
 		
 		this.omokStonePanel = new JPanel();
@@ -70,17 +78,17 @@ public class GameRoomPanel extends JPanel {
 				this.omokStonePanel.add(stonesLocation[i][j]);
 			}
 		}
-		try {
-			stonesLocation[7][7].setIcon(
-					new ImageIcon(
-						ImageIO.read(new File(ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir())).getScaledInstance(
-							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
-							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
-							Image.SCALE_AREA_AVERAGING)
-					));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			stonesLocation[7][7].setIcon(
+//					new ImageIcon(
+//						ImageIO.read(new File(ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir())).getScaledInstance(
+//							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
+//							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
+//							Image.SCALE_AREA_AVERAGING)
+//					));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		this.omokStonePanel.setBounds(GameRoomEnum.GAME_STONEPANEL_RECT.getRect());
 	}
 	
@@ -92,7 +100,7 @@ public class GameRoomPanel extends JPanel {
 				super.paintComponent(g);
 				try {
 					g.drawImage(ImageIO.read(
-						new File("resources/gameRoom/gameBoard.png")), 
+						new File(ImageEnum.GAMEROOM_BOARD_IMAGE.getImageDir())), 
 						0, 
 						0, 
 						GameRoomEnum.GAME_BOARD_PANEL_RECT.getRect().width, 
@@ -129,7 +137,7 @@ public class GameRoomPanel extends JPanel {
 		timeLabel.setForeground(Color.red);
 		timeLabel.setFont(GameRoomEnum.GAME_TIMELABEL_FONT.getFont());
 		
-		new Thread() {
+		this.timeLimitThread = new Thread() {
 			@Override
 			public void run() {
 				for(int i = time; i >= 0; i--) {
@@ -142,7 +150,7 @@ public class GameRoomPanel extends JPanel {
 					timeLabel.setText("0:" + String.valueOf(i));
 				}
 			}
-		}.start();
+		};
 		
 		this.timeLimitPanel.add(timeLabel);
 		this.timeLimitPanel.add(timeBar);
@@ -160,7 +168,7 @@ public class GameRoomPanel extends JPanel {
 				super.paintComponent(g);
 				try {
 					g.drawImage(
-						ImageIO.read(new File(ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir())), 
+						ImageIO.read(new File(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir())), 
 						0, 
 						0, 
 						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
@@ -181,7 +189,7 @@ public class GameRoomPanel extends JPanel {
 				super.paintComponent(g);
 				try {
 					g.drawImage(
-						ImageIO.read(new File(ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir())), 
+						ImageIO.read(new File(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir())), 
 						0, 
 						0, 
 						GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect().width, 
@@ -273,4 +281,18 @@ public class GameRoomPanel extends JPanel {
 		this.chattingPanel.add(chattingField);
 		this.add(this.chattingPanel);
 	} // 채팅 패널
+	
+	//TODO
+	public void setEnterUserInfo(UserInGameRoomDTO inGameUserInfo) {
+//		if(this.basicFrame.getUserID().equals(roomVO.getOwner())) {
+//			
+//		} else {
+//			
+//		}
+		
+	}
+	
+	public BasicFrame getBasicFrame() {
+		return basicFrame;
+	}
 }

@@ -16,10 +16,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import actions.login.LoginAction;
+import actions.login.LoginClientAction;
 import enums.etc.ImageEnum;
 import enums.frames.LoginSizesEnum;
-import frames.serchFrames.SearchPwdPanel;
+import frames.searchFrames.SearchPwdPanel;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel {
@@ -47,12 +47,12 @@ public class LoginPanel extends JPanel {
 	private JPanel loginPanel;
 	private BasicFrame basicFrame;
 	
-	private LoginAction loginAction;
+	private LoginClientAction loginAction;
 
 	private SearchPwdPanel searchPwdPanel; 
 	
 	public LoginPanel(BasicFrame basicFrame) throws IOException {
-		this.loginAction = new LoginAction(this);
+		this.loginAction = new LoginClientAction(this);
 		
 		this.loginPanel	= new JPanel();
 		

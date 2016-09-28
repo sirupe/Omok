@@ -13,6 +13,8 @@ import enums.frames.WaitingRoomSizesEnum;
 
 // 유저 게임데이터 저장 DTO (Data Transfer Object)
 public class UserGamedataInfoDTO extends AbstractEnumsDTO {
+	private static final long serialVersionUID = 1767280013075444699L;
+	
 	private String userID;		// 유저아이디
 	private String userGrade;	// 유저등급
 	private int userGameCount;	// 유저 총 게임수

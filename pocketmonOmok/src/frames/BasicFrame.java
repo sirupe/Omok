@@ -24,9 +24,9 @@ import enums.frames.LoginSizesEnum;
 
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
-import frames.serchFrames.SearchPwdFrame;
-import frames.serchFrames.SearchPwdPanel;
-import frames.serchFrames.SearchIdFrame;
+import frames.searchFrames.SearchIdFrame;
+import frames.searchFrames.SearchPwdFrame;
+import frames.searchFrames.SearchPwdPanel;
 import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
 
@@ -44,7 +44,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	
 	private ClientAccept clientAccept;
 	
-	
+	private String userID;
 	
 	public BasicFrame(ClientAccept clientAccept) throws IOException {
 		this.clientAccept = clientAccept;
@@ -107,7 +107,7 @@ public class BasicFrame extends JFrame implements Serializable{
 			@Override
 			public void windowClosing(WindowEvent e) {
 				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
-				personalDTO.setUserID(clientAccept.getUserID());
+				personalDTO.setUserID(userID);
 				try {
 					clientAccept.getClientOS().writeObject(personalDTO);
 				} catch (IOException e1) {
@@ -123,7 +123,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	// GameRoom 도 결국 패널이므로 패널 생성시 익명클래스를 이용하여  paintComponent 를 오버라이드 하면
 	// 굳이 GameRoom 안에서 새로운 패널을 생성하여 배경을 깔아줄 필요가 없게 된다. 
 	public void newGameRoomPanel() {
-		this.gameRoomPanel = new GameRoomPanel() {
+		this.gameRoomPanel = new GameRoomPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -142,6 +142,10 @@ public class BasicFrame extends JFrame implements Serializable{
 		};
 	}
 	
+	public void sendDTO(AbstractEnumsDTO dto) {
+		this.clientAccept.sendDTO(dto);
+	}
+	
 	public void inWaitingRoom() {
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
@@ -157,13 +161,21 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.searchPwdFrame = new SearchPwdFrame(this);
 	}
 	
-	public SearchPwdFrame getSearchPwdFrame() {
-		return searchPwdFrame;
-	}
-	
 	public void newSearchIdFrame() throws IOException {
 		this.searchIdFrame = new SearchIdFrame(this);
 	}
+	
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	
+	public SearchPwdFrame getSearchPwdFrame() {
+		return searchPwdFrame;
+	}	
 	
 	public ObjectOutputStream getClientOS() {
 		return this.clientAccept.getClientOS();
@@ -172,18 +184,22 @@ public class BasicFrame extends JFrame implements Serializable{
 	public LoginPanel getLoginPanel() {
 		return loginPanel;
 	}
+	
 	public JoinFrame getJoinFrame() {
 		return joinFrame;
 	}
+	
 	public SearchIdFrame getSearchIdFrame() {
 		return searchIdFrame;
 	}
-	
 	
 	public WaitingRoomPanel getWaitingRoomPanel() {
 		return waitingRoomPanel;
 	}
 
+	public GameRoomPanel getGameRoomPanel() {
+		return gameRoomPanel;
+	}
 
 	public ClientAccept getClientAccept() {
 		return clientAccept;

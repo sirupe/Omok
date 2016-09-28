@@ -1,4 +1,4 @@
-package frames.serchFrames;
+package frames.searchFrames;
 
 
 import java.awt.CardLayout;

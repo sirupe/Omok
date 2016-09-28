@@ -384,7 +384,6 @@ public class ModifyJoinFrame extends JFrame {
 		try {
 			new ModifyJoinFrame();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

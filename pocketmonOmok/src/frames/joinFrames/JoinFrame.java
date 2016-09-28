@@ -21,7 +21,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import actions.join.JoinAction;
+import actions.join.JoinClientAction;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
 import utility.JTextFieldNumOnly;
@@ -88,12 +88,12 @@ public class JoinFrame extends JFrame {
 	private Image backGround;
 	
 	private BasicFrame basicFrame;
-	private JoinAction joinAction;
+	private JoinClientAction joinAction;
 	private Map<String, String> errMessageMap;
 
 	public JoinFrame(BasicFrame basicFrame) throws IOException {
 		this.basicFrame = basicFrame;
-		this.joinAction = new JoinAction(this.basicFrame, this);
+		this.joinAction = new JoinClientAction(this.basicFrame, this);
 		this.addWindowListener(this.joinAction);
 
 		this.errMessageMap = JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
@@ -803,7 +803,7 @@ public class JoinFrame extends JFrame {
 		return genderWomanRadio;
 	}
 	
-	public JoinAction getJoinAction() {
+	public JoinClientAction getJoinAction() {
 		return joinAction;
 	}
 	
