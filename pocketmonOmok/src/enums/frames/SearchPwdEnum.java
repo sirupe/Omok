@@ -90,12 +90,21 @@ public enum SearchPwdEnum {
    
    //취소 버튼 생성
    SEARCH_CANCEL_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.23),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.2),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 1),
-         (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
+         (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.2),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
          )),
 
+   //확인 버튼 생성
+   SEARCH_CHECK_BUTTON(new Rectangle(
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.35),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.95),
+         (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
+         (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
+         )),
+ 
+   
    //일반 폰트
    LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,16)),
    //에러 메세지 폰트

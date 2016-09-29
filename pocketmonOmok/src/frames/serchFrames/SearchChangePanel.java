@@ -21,9 +21,11 @@ import enums.frames.SearchRePwdEnum;
 public class SearchChangePanel extends JPanel {
 	private JPanel searchChangePanel;
 	private Image backGround;
+	private SearchPwdFrame searchPwdFrame;
 	
-	public SearchChangePanel() throws IOException {
+	public SearchChangePanel(SearchPwdFrame searchPwdFrame) throws IOException {
 		this.setLayout(null);
+//		this.searchPwdFrame = searchPwdFrame;
 		
 		//패널 생성 후 불러오기
 		this.searchChangePanel  = new JPanel(); 	
@@ -32,8 +34,8 @@ public class SearchChangePanel extends JPanel {
 	
 	//변경했다는 패널 생성
 	public void setchangePanel() throws IOException {
-		this.searchChangePanel.setLayout(null);
-		this.searchChangePanel.setOpaque(false);
+		this.setLayout(null);
+
 		
 		// 패널 배경화면
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -70,15 +72,15 @@ public class SearchChangePanel extends JPanel {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
+			}			
 		};
-		
+
 		this.searchChangePanel.add(changeConfirmMsgLabel);
 		this.searchChangePanel.add(changeConfirmButton);
-		}
-	public static void main(String[] args) throws IOException {
-		new SearchChangePanel();
+		
+		this.setVisible(true);
+		this.searchChangePanel.setOpaque(false);
 	}
 	
-		
+	
 	}

@@ -67,6 +67,7 @@ public class BasicFrame extends JFrame implements Serializable{
 		
 		this.loginPanel = new LoginPanel(this);
 		this.loginPanel.setOpaque(false);
+		
 		this.cardLayout = new CardLayout();
 
 		this.waitingRoomPanel = new WaitingRoomPanel(this) {
@@ -189,4 +190,3 @@ public class BasicFrame extends JFrame implements Serializable{
 		return clientAccept;
 	}
 }
-

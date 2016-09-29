@@ -1,6 +1,9 @@
 package frames.serchFrames;
 
 
+import java.awt.Color;
+
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -9,12 +12,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import actions.findIDandPW.FindPWAction;
+import actions.findIDandPW.FindRePwdAction;
+import actions.join.JoinAction;
 import enums.frames.GameRoomEnum;
+import enums.frames.JoinSizesEnum;
+import enums.frames.LoginSizesEnum;
 import enums.frames.SearchIdEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
@@ -31,14 +40,22 @@ public class SearchRePwdPanel extends JPanel {
 	private JLabel searchRePwdErrorLabel;
 	private JButton searchConfirmButton;
 
-	public SearchRePwdPanel() throws IOException {
+	
+	private FindRePwdAction findRePwdAction;
+	private SearchPwdFrame searchPwdFrame;
+	
+	public SearchRePwdPanel(SearchPwdFrame searchPwdFrame) throws IOException {
 		this.setLayout(null);
-
-		this.setsearchPwdPanel();
+		this.searchPwdFrame = searchPwdFrame;
+		this.findRePwdAction = new FindRePwdAction(this);
+		this.setsearchPwdTextLabel();
+		
+		this.addKeyAction(this.searchPwdText, "searchPwdText");
+		this.addKeyAction(this.searchRePwdText, "searchRePwdText");
 		
 	} //생성자
 	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
-	public void setsearchPwdPanel() throws IOException {
+	public void setsearchPwdTextLabel() throws IOException {
 		
 		// 패널의 배경이미지
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -75,16 +92,16 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchRePwdText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 에러 메세지 라벨
-		this.searchRePwdErrorLabel = new JLabel
-				("<html>비밀번호가 일치하지 않습니다. "
-				+ "<br>다시 입력해주세요<br></html>");
-
+		
+		String searchCheckAnswer = "";
+		this.searchRePwdErrorLabel = new JLabel(searchCheckAnswer);
 		searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
 		searchRePwdErrorLabel.setFont(SearchIdEnum.LABELFONT_ERROR.getFont());
 		searchRePwdErrorLabel.setForeground(SearchIdEnum.LABELCOLOR_ERROR.getColor());
+		
 		//확인 버튼창
 		
-		this.searchConfirmButton = new JButton() {
+		this.searchConfirmButton = new JButton(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName()) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -102,12 +119,62 @@ public class SearchRePwdPanel extends JPanel {
 			}
 		};	
 		this.searchConfirmButton.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
+		this.add(searchConfirmButton);
+		this.searchConfirmButton.addActionListener(this.findRePwdAction);
 //				
 		this.add(searchPwdLabel);
-		this.add(searchRePwdText);
-		this.add(searchPwdText);
+		//this.add(searchRePwdText);
+		//this.add(searchPwdText);
 		this.add(searchRePwdLabel);
 		this.add(searchRePwdErrorLabel);
-		this.add(searchConfirmButton);
+		
 	}
+
+	
+		public void pwdMsgLabel(String searchCheckAnswer){
+			this.setLayout(null);
+			this.searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
+//			this.searchRePwdErrorLabel.setOpaque(false);
+			this.searchRePwdErrorLabel.setBackground(Color.red);
+			this.add(this.searchRePwdErrorLabel);
+			
+			this.searchRePwdErrorLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+			this.searchRePwdErrorLabel.setForeground(Color.blue);
+			this.searchRePwdErrorLabel.setText(searchCheckAnswer);
+		}
+		
+		public void pwdMsgLabelReset() {
+			String init = "";
+			this.searchRePwdErrorLabel.setText(init);
+		}
+		
+		public void addKeyAction(JComponent comp, String Name) {
+//			EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+			comp.setName(Name);
+//			comp.setBorder(border);
+			comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+			comp.addKeyListener(this.findRePwdAction);
+			this.add(comp);	
+		}
+		public void doSearchChangeConfirmPanel() {
+			this.searchPwdFrame.doCheckButton();
+		}
+	
+	
+	public SearchPwdFrame getSearchPwdFrame() {
+		return searchPwdFrame;
+	}
+	public JTextField getSearchPwdText() {
+		return searchPwdText;
+	}
+	public JTextField getsearchRePwdText() {
+		return searchRePwdText;
+	}
+	public JLabel getSearchRePwdErrorLabel() {
+		return searchRePwdErrorLabel;
+	}
+	public JButton getSearchConfirmButton() {
+		return searchConfirmButton;
+	}
+	
 }

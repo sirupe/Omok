@@ -140,9 +140,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 				e1.printStackTrace();
 			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-//			if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
 				this.loginPanel.getBasicFrame().setVisible(false);
-				System.out.println("dd");
 					try {
 						this.loginPanel.getBasicFrame().newSearchPwdFrame();
 					} catch (IOException e1) {

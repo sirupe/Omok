@@ -112,7 +112,10 @@ public enum LoginSizesEnum {
 	BUTTON_NAME_SEARCHPW("searchPW"),
 	BUTTON_NAME_LOGIN("login"),
 	BUTTON_NAME_SEARCH_CANCEL("searchCancel"),
-	BUTTON_NAME_SEARCH_CONFIRM("searchConfirm");
+	BUTTON_NAME_SEARCH_CONFIRM("searchConfirm"),
+	BUTTON_NAME_SEARCH_CHECK("searchCheck"),
+	BUTTON_NAME_SEARCH_CONFIRMBUTTON("searchConfirmButton"), // searchRePwdPanel에 있는 버튼 -- > 로그인창으로 간다.
+	SEARCH_CONFIRM_CHECK_BUTTON("confirmButton");
 	
 	private String buttonName;
 	private int size;

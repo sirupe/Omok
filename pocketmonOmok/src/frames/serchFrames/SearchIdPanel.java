@@ -43,10 +43,12 @@ public class SearchIdPanel extends JPanel {
 		this.searchIdLabel = new JLabel("이름");
 		this.searchIdLabel.setFont(defaultFont);
 		this.searchIdLabel.setBounds(SearchIdEnum.SEARCH_ID_LABEL.getRectangle());
+		
 		//이메일
 		this.searchemailLabel = new JLabel("email");
 		this.searchemailLabel.setFont(defaultFont);
 		this.searchemailLabel.setBounds(SearchIdEnum.SEARCH_EMAIL_LABEL.getRectangle());
+		
 		//에러메세지
 		//TODO
 		System.out.println(SearchIdEnum.SEARCH_ERROR_LABEL.getRectangle().toString());
@@ -58,10 +60,12 @@ public class SearchIdPanel extends JPanel {
 		this.searchErrorMsgLabel.setForeground(SearchIdEnum.LABELCOLOR_ERROR.getColor());
 		this.searchErrorMsgLabel.setFont(errorFont);
 		this.searchErrorMsgLabel.setBounds(SearchIdEnum.SEARCH_ERROR_LABEL.getRectangle());
+		
 		//아이디텍스트필드
 		this.searchIdTextField = new JTextField(10);
 		this.searchIdTextField.setFont(defaultFont);
 		this.searchIdTextField.setBounds(SearchIdEnum.SEARCH_ID_TEXTFIELD.getRectangle());
+		
 		//이메일텍스트필드
 		this.searchemailTextField = new JTextField(10);
 		this.searchemailTextField.setFont(defaultFont);

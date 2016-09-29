@@ -40,7 +40,6 @@ public class ClientAccept {
 		this.basicFrame	  = new BasicFrame(this);
 		ClientReciever reciever = new ClientReciever(this, this.basicFrame);
 		reciever.start();
-
 	}
 //·Î±×ÀÎ---------------------------------------------------------------------------------------------
 	public void loginSuccessCheck(AbstractEnumsDTO data, LoginPanel loginPanel) throws IOException {

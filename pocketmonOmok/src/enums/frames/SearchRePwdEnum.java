@@ -32,12 +32,13 @@ public enum SearchRePwdEnum {
 	)),
 	//설정된 비밀번호와 재비밀번호의 에러 결과 메세지 
 		SEARCH_ERROR_LABEL(new Rectangle(
-			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.1),
+			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.08),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.55),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.9),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.2)
 		)),
-	// 비밀번호 바뀌었다는 메세지 -- > 화면 전환(searchChangePanel)
+		
+	// 비밀번호 바뀌었다는 메세지 -- > 화면 전환 후 일어 난후(searchChangePanel)
 		SEARCH_CONFIRM_CHANGE_LABEL(new Rectangle(
 				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.06),
 				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.3),

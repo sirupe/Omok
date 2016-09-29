@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+
+
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
@@ -56,7 +58,7 @@ public class JoinAction extends Adapters {
 	public void windowClosing(WindowEvent e) {
 		this.basicFrame.setVisible(true);
 		this.joinFrame.setVisible(false);
-		this.joinFrame.dispose();
+		this.joinFrame.dispose();	
 	}
 	
 	// 실시간으로 타이핑 감시하여 에러메세지 송출.
