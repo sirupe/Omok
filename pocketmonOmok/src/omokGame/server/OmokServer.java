@@ -11,7 +11,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import datasDAO.JoinDAO;
-import datasDAO.LoginDAO;
+import datasDAO.UserPersonalInfoDAO;
 import datasDAO.UserGamedataInfoDAO;
 import datasDAO.UserStoreInfoDAO;
 import datasDAO.UserStoreSkinInfoDAO;
@@ -38,7 +38,7 @@ public class OmokServer {
 	private ArrayList<UserGamedataInfoDTO> userIDList;
 	
 	private JoinDAO joinDAO;
-	private LoginDAO loginDAO;
+	private UserPersonalInfoDAO loginDAO;
 	private UserGamedataInfoDAO gamedataDAO;
 	private UserStoreInfoDAO storeDAO;
 	private UserStoreSkinInfoDAO skinDAO;
@@ -46,7 +46,7 @@ public class OmokServer {
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
-		this.loginDAO 	  = new LoginDAO();
+		this.loginDAO 	  = new UserPersonalInfoDAO();
 		this.gamedataDAO  = new UserGamedataInfoDAO();
 		this.storeDAO	  = new UserStoreInfoDAO();
 		this.skinDAO	  = new UserStoreSkinInfoDAO();
@@ -223,10 +223,10 @@ public class OmokServer {
 		
 	}
 	
-	// 빈 방 접속
+	// 빈 방 접속 (TODO)
 	public void waitingRoomEnterPossibleGameRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
 		GameRoomInfoVO userChoiceRoom = (GameRoomInfoVO)listDTO;
-		
+		// 게임룸 정보 업데이트
 		for(int i = 0, size = this.gameRoomList.size(); i < size; i++) {
 			if(this.gameRoomList.get(i).getOwner().equals(userChoiceRoom.getOwner())) {
 				this.gameRoomList.get(i).setGuest(userChoiceRoom.getGuest());
@@ -237,7 +237,34 @@ public class OmokServer {
 			}
 		}
 		
+		
 		this.sendEnterRoomSuccessInfo();
+	}
+	
+	// 빈, 비밀방 접속. 접속하지는 않고 비밀번호만 회신한다.
+	public void waitingRoomEnterPrivateGameRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
+		GameRoomInfoVO roomVO = (GameRoomInfoVO)listDTO;
+		String owner = roomVO.getOwner();
+		
+		GameRoomInfoVO serverRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
+		for(GameRoomInfoVO vo : this.gameRoomList) {
+			if(vo.getOwner().equals(owner)) {
+				serverRoomVO.setGuest(vo.getGuest());
+				serverRoomVO.setImage(vo.getImage().getDescription());
+				serverRoomVO.setOwner(vo.getOwner());
+				serverRoomVO.setPersons(vo.getPersonNum());
+				serverRoomVO.setPwd(vo.getPwd());
+				serverRoomVO.setRoomName(vo.getRoomName());
+				serverRoomVO.setRoomNumber(vo.getRoomNumber());
+				serverRoomVO.setServerAction(ServerActionEnum.ENTER_PRIVATE_GAME_ROOM);
+				break;
+			}
+		}
+		try {//TODO
+			personalServer.getServerOutputStream().writeObject(serverRoomVO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void sendEnterRoomSuccessInfo() {
@@ -278,7 +305,6 @@ public class OmokServer {
 			roomOwnerVO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_OWNER);
 			this.loginUsersMap.get(roomOwnerVO.getOwner()).getServerOutputStream().writeObject(roomOwnerVO);
 			
-			
 			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
 			roomGuestVO.setGuest(roomVO.getGuest());
 			roomGuestVO.setImage(roomVO.getImage().getDescription());
@@ -287,39 +313,22 @@ public class OmokServer {
 			roomGuestVO.setPwd(roomVO.getPwd());
 			roomGuestVO.setRoomName(roomVO.getRoomName());
 			roomGuestVO.setRoomNumber(roomVO.getRoomNumber());
-			roomGuestVO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
+			
+			UserInGameRoomDTO userInGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
+			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
+			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
+			userInGameRoomDTO.setUserItemInfo(this.storeDAO.getUserStoreInfo(roomGuestVO.getGuest()));
+			userInGameRoomDTO.setUserSkinInfo(this.skinDAO.getUserSkinInfo(roomGuestVO.getGuest()));
+			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
 			System.out.println("게스트 유저 : " + roomGuestVO.getGuest());
-			this.loginUsersMap.get(roomGuestVO.getGuest()).getServerOutputStream().writeObject(roomGuestVO);			
+			this.loginUsersMap.get(roomGuestVO.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	public void waitingRoomEnterPrivateGameRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
-		GameRoomInfoVO roomVO = (GameRoomInfoVO)listDTO;
-		String owner = roomVO.getOwner();
-		
-		GameRoomInfoVO serverRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-		for(GameRoomInfoVO vo : this.gameRoomList) {
-			if(vo.getOwner().equals(owner)) {
-				serverRoomVO.setGuest(vo.getGuest());
-				serverRoomVO.setImage(vo.getImage().getDescription());
-				serverRoomVO.setOwner(vo.getOwner());
-				serverRoomVO.setPersons(vo.getPersonNum());
-				serverRoomVO.setPwd(vo.getPwd());
-				serverRoomVO.setRoomName(vo.getRoomName());
-				serverRoomVO.setRoomNumber(vo.getRoomNumber());
-				serverRoomVO.setServerAction(ServerActionEnum.ENTER_PRIVATE_GAME_ROOM);
-				break;
-			}
-		}
-		try {//TODO
-			personalServer.getServerOutputStream().writeObject(serverRoomVO);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 //회원가입--------------------------------------------------------------------------
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
@@ -410,7 +419,7 @@ public class OmokServer {
 		
 		
 		this.loginUsersMap.remove(((UserPersonalInfoDTO)index).getUserID());
-		//TODO
+	
 		personalServer.getServerOutputStream().close();
 		personalServer.getServerInputStream().close();
 		personalServer.getPersonalSocket().close();

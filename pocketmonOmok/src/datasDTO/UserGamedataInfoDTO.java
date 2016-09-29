@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 
 import enums.etc.ImageEnum;
 import enums.etc.UserPositionEnum;
+import enums.frames.GameRoomEnum;
 import enums.frames.WaitingRoomSizesEnum;
 
 // 유저 게임데이터 저장 DTO (Data Transfer Object)
@@ -21,8 +22,9 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 	private int userWinCount;	// 유저 이긴 게임수
 	private int userScore;		// 유저 점수
 	private double userWinRate;	// 유저 승률 (DTO에서 총게임수와 이긴게임수로 승률을 계산하여 저장함
-	private ImageIcon userImage;	// 유저 이미지
-
+	private ImageIcon userWaitingRoomImage;	// 유저 대기실 이미지
+	private ImageIcon userGameRoomImage; // 유저 게임방 이미지
+	
 	public UserGamedataInfoDTO(UserPositionEnum position) {
 		super(position);
 	}
@@ -76,18 +78,33 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 		this.userScore = userScore;
 	}
 
-	public ImageIcon getUserImage() {
-		return userImage;
+	public ImageIcon getUserWaitingRoomImage() {
+		return userWaitingRoomImage;
 	}
 
-	public void setUserImage(int gender) throws IOException {
+	public void setUserWaitingRoomImage(int gender) throws IOException {
 		String imageEnum = gender == 1 ? ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
 		
-		this.userImage = new ImageIcon(ImageIO.read(
+		this.userWaitingRoomImage = new ImageIcon(ImageIO.read(
 			new File(imageEnum)).getScaledInstance(
 				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize(),
 				Image.SCALE_AREA_AVERAGING)
 		);
+		
+		this.userGameRoomImage = new ImageIcon(ImageIO.read(
+			new File(imageEnum)).getScaledInstance(
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
+				Image.SCALE_AREA_AVERAGING)
+		);
+		System.out.println(GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width + "/" +
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height);
 	}
+	
+	public ImageIcon getUserGameRoomImage() {
+		return userGameRoomImage;
+	}
+	
+
 }

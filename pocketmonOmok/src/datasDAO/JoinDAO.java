@@ -189,14 +189,3 @@ public class JoinDAO {
 		
 	}
 }
-
-//INSERT INTO USER_STORE_SKIN_INFO (
-//USER_ID,
-//SKIN_NYAONG, 
-//SKIN_LEESANGHAEC, 
-//SKIN_ZAMMANBO, 
-//SKIN_CCOBUGI, 
-//SKIN_PAIRY,
-//SKIN_PICACHU,
-//SKIN_PURIN 
-//) VALUES ('sirupe11', 0, 0, 0, 0, 0, 0, 0);

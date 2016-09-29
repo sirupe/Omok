@@ -31,6 +31,7 @@ public class ClientReciever extends Thread {
 					this.clientAccept.loginSuccessCheck(userPosition);
 					break;
 				case POSITION_WAITING_ROOM :
+					System.out.println("waiting room");
 					this.clientAccept.waitingRoomAction(userPosition);
 					break;
 				case POSITION_JOIN :
@@ -41,6 +42,7 @@ public class ClientReciever extends Thread {
 				case POSITION_FIND_PW :  
 					break;
 				case POSITION_GAME_ROOM :
+					System.out.println("gameroom");
 					this.clientAccept.inGameRoom(userPosition);
 					break;
 				case POSITION_STORE :             

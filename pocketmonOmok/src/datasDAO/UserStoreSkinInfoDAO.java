@@ -30,7 +30,7 @@ public class UserStoreSkinInfoDAO {
 			sql.append("SKIN_PICACHU, ");
 			sql.append("SKIN_PURIN ");
 			sql.append("FROM USER_STORE_SKIN_INFO ");
-			sql.append("WHERE USER_ID='?'");
+			sql.append("WHERE USER_ID=?");
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, id);

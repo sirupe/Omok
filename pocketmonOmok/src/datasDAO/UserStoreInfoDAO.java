@@ -26,8 +26,8 @@ public class UserStoreInfoDAO {
 			sql.append("ITEM_INCREASE_TIME, ");
 			sql.append("ITEM_RETURN, ");
 			sql.append("ITEM_MONEY ");
-			sql.append("FROM USER_STORE_INFO");
-			sql.append("WHERE USER_ID='?'");
+			sql.append("FROM USER_STORE_INFO ");
+			sql.append("WHERE USER_ID=?");
 			
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, id);

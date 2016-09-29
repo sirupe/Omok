@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import datasDTO.GameRoomInfoVO;
 import datasDTO.UserInGameRoomDTO;
 import enums.etc.ImageEnum;
 import enums.frames.GameRoomEnum;
@@ -36,7 +35,11 @@ public class GameRoomPanel extends JPanel {
 	private JPanel chattingPanel;	// 채팅
 	private Thread timeLimitThread;
 	
-	public GameRoomPanel(BasicFrame basicFrame) {
+	private JLabel leftUser;
+	private JLabel rightUser;
+	private JButton[] menuButtons;
+	
+	public GameRoomPanel(BasicFrame basicFrame) throws IOException {
 		this.basicFrame = basicFrame;
 		
 		this.setLayout(null);
@@ -158,53 +161,32 @@ public class GameRoomPanel extends JPanel {
 	} // 시간제한 표시 패널
 	
 	
-	public void setUserImage() {
+	public void setUserImage() throws IOException {
 		this.userImagePanel.setBounds(GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect());
 		this.userImagePanel.setLayout(null);
+			
+		this.leftUser = new JLabel();
+		this.leftUser.setIcon(new ImageIcon(ImageIO.read(
+			new File(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir())).getScaledInstance(
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
+				Image.SCALE_AREA_AVERAGING)));
+		this.leftUser.setBounds(GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect());
+		this.leftUser.setBorder(BorderFactory.createLineBorder(Color.red, 6));
+		this.userImagePanel.add(this.leftUser);
 		
-		JPanel leftUser = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				try {
-					g.drawImage(
-						ImageIO.read(new File(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir())), 
-						0, 
-						0, 
-						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
-						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
-						this);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		leftUser.setBounds(GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect());
-		leftUser.setBorder(BorderFactory.createLineBorder(Color.red, 6));
+		this.rightUser = new JLabel();
+		this.rightUser.setIcon(new ImageIcon(ImageIO.read(
+			new File(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir())).getScaledInstance(
+				GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect().width, 
+				GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect().height,
+				Image.SCALE_AREA_AVERAGING)));		
+		this.rightUser.setBounds(GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect());
+		this.rightUser.setBorder(BorderFactory.createLineBorder(Color.blue, 6));
+		this.userImagePanel.add(this.rightUser);
 		
-		JPanel rightUser = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				try {
-					g.drawImage(
-						ImageIO.read(new File(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir())), 
-						0, 
-						0, 
-						GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect().width, 
-						GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect().height, 
-						this);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		rightUser.setBorder(BorderFactory.createLineBorder(Color.blue, 6));
-		rightUser.setBounds(GameRoomEnum.GAME_USERIMAGE_RIGHT_RECT.getRect());
-		
-		this.userImagePanel.add(leftUser);
-		this.userImagePanel.add(rightUser);
+		this.userImagePanel.add(this.leftUser);
+		this.userImagePanel.add(this.rightUser);
 		this.add(this.userImagePanel);
 		
 	} // 유저이미지 패널
@@ -216,11 +198,11 @@ public class GameRoomPanel extends JPanel {
 		this.gameMenuPanel.setBounds(GameRoomEnum.GAME_MENU_PANEL_RECT.getRect());
 		String[] buttonsName = GameRoomEnum.GAME_BUTTONNAME.getButtonName();
 		String[] buttonsDir = ImageEnum.GAMEROOM_MENU_IMAGES_OWNER.getImages();
-		JButton[] menuButtons = new JButton[buttonsName.length];
+		this.menuButtons = new JButton[buttonsName.length];
 		
 		for(int i = 0, size = buttonsName.length; i < size; i++) {
 			try {
-				menuButtons[i] = new JButton(
+				this.menuButtons[i] = new JButton(
 					new ImageIcon(
 						ImageIO.read(new File(buttonsDir[i])).getScaledInstance(
 							GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
@@ -233,14 +215,14 @@ public class GameRoomPanel extends JPanel {
 			}
 			
 			if(i < 4) {
-				menuButtons[i].setBounds(new Rectangle(
+				this.menuButtons[i].setBounds(new Rectangle(
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().x + (GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width * i),
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().y,
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height
 				));
 			} else {
-				menuButtons[i].setBounds(new Rectangle(
+				this.menuButtons[i].setBounds(new Rectangle(
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().x + (GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width * (i - 4)),
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height,
 						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
@@ -248,11 +230,11 @@ public class GameRoomPanel extends JPanel {
 				));
 				
 			}
-			menuButtons[i].setName(buttonsName[i]);
-			menuButtons[i].setBorderPainted(false);
-			menuButtons[i].setContentAreaFilled(false);
-			menuButtons[i].setFocusPainted(false);
-			this.gameMenuPanel.add(menuButtons[i]);
+			this.menuButtons[i].setName(buttonsName[i]);
+			this.menuButtons[i].setBorderPainted(false);
+			this.menuButtons[i].setContentAreaFilled(false);
+			this.menuButtons[i].setFocusPainted(false);
+			this.gameMenuPanel.add(this.menuButtons[i]);
 		}
 		
 		this.add(this.gameMenuPanel);
@@ -284,11 +266,28 @@ public class GameRoomPanel extends JPanel {
 	
 	//TODO
 	public void setEnterUserInfo(UserInGameRoomDTO inGameUserInfo) {
-//		if(this.basicFrame.getUserID().equals(roomVO.getOwner())) {
-//			
-//		} else {
-//			
-//		}
+		System.out.println("고객들어왔다고");
+		String imageDir = null;
+		if(this.basicFrame.getUserID().equals(inGameUserInfo.getGameRoomInfo().getOwner())) {
+			imageDir = ImageEnum.GAMEROOM_START_GRAY.getImageDir();
+			System.out.println("주인이라고");
+			this.leftUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
+		} else {
+			System.out.println("손님이라고");
+			imageDir = ImageEnum.GAMEROOM_READY_GRAY.getImageDir();
+			this.rightUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
+		}
+		
+		try {
+			this.menuButtons[0].setIcon(new ImageIcon(
+				ImageIO.read(new File(imageDir)).getScaledInstance(
+					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
+					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
+					Image.SCALE_AREA_AVERAGING)
+			));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

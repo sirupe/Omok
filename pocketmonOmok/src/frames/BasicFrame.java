@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserInGameRoomDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
@@ -122,7 +123,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	
 	// GameRoom 도 결국 패널이므로 패널 생성시 익명클래스를 이용하여  paintComponent 를 오버라이드 하면
 	// 굳이 GameRoom 안에서 새로운 패널을 생성하여 배경을 깔아줄 필요가 없게 된다. 
-	public void newGameRoomPanel() {
+	public void newGameRoomPanel() throws IOException {
 		this.gameRoomPanel = new GameRoomPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -146,11 +147,12 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.clientAccept.sendDTO(dto);
 	}
 	
-	public void inWaitingRoom() {
+	public void showWaitingRoom() {
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
 	
-	public void inGameRoom() {
+	public void showGameRoom(UserInGameRoomDTO inGameUserInfo) {
+		this.gameRoomPanel.setEnterUserInfo(inGameUserInfo);
 		this.cardLayout.show(this.getContentPane(), "gameRoomPanel");
 	}
 

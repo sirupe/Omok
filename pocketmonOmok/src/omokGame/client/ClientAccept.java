@@ -1,6 +1,5 @@
 package omokGame.client;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,13 +20,9 @@ import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
-import enums.etc.UserActionEnum;
-import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
-import frames.joinFrames.JoinSuccessFrame;
 import frames.waitingRoom.WaitingRoomListTable;
 import frames.waitingRoom.WaitingRoomPanel;
-import oracle.net.aso.g;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
@@ -109,7 +104,7 @@ public class ClientAccept {
 			panel.roomListSetting(roomTable);			
 			panel.userListSetting(waitingRoomInfo.getUserList());
 			panel.getChattingOutput().append(waitingRoomInfo.getUserGameData().getUserID() + " 님, 환영합니다.\n");
-			this.basicFrame.inWaitingRoom();
+			this.basicFrame.showWaitingRoom();
 			break;
 		
 		// 서버에서 보낸 정보가 "방생성 성공" 이라면
@@ -117,8 +112,7 @@ public class ClientAccept {
 			UserInGameRoomDTO inGameUserInfo = (UserInGameRoomDTO)data;
 			panel.getCreateGameRoomFrame().setVisible(false);
 			panel.getCreateGameRoomFrame().dispose();
-			this.basicFrame.getGameRoomPanel().setEnterUserInfo(inGameUserInfo);
-			this.basicFrame.inGameRoom();
+			this.basicFrame.showGameRoom(inGameUserInfo);
 			this.basicFrame.setVisible(true);
 			break;
 		//TODO 방생성 실패 해야 함.
@@ -148,7 +142,7 @@ public class ClientAccept {
 				String passwd = JOptionPane.showInputDialog("비밀번호를 입력해주세요.");
 				if(roomVO.getPwd().equals(passwd)) {
 					isPasswordFail = false;
-					this.basicFrame.inGameRoom();
+					this.basicFrame.showGameRoom((UserInGameRoomDTO)data);
 				} else if(passwd == null) {
 					isPasswordFail = false;
 				} else {

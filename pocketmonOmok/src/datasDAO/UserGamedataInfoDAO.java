@@ -43,7 +43,7 @@ public class UserGamedataInfoDAO {
 				userGameData.setUserWinCount(resultSet.getInt("USER_WIN_COUNT"));
 				userGameData.setUserGameCount(resultSet.getInt("USER_GAME_COUNT"));
 				userGameData.setUserScore(resultSet.getInt("USER_SCORE"));
-				userGameData.setUserImage(resultSet.getInt("USER_GENDER"));
+				userGameData.setUserWaitingRoomImage(resultSet.getInt("USER_GENDER"));
 			}
 
 			

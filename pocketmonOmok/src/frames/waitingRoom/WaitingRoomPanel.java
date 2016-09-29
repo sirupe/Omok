@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -54,6 +57,7 @@ public class WaitingRoomPanel extends JPanel {
 	private JTextField chattingInputTextField;
 	private JTextField noticeTextField;
 	private JButton sendMessageButton;
+	private JScrollPane chattingScroll;
 	
 	private JList<String> playerList;
 	private JPanel playerListBackground;
@@ -89,6 +93,7 @@ public class WaitingRoomPanel extends JPanel {
 		//==========================채팅방&내정보==========================
 		
 		this.chattingOutput 		 = new JTextArea();
+		this.chattingScroll			 = new JScrollPane(this.chattingOutput);
 		this.chattingInputTextField  = new JTextField();
 		this.noticeTextField		 = new JTextField();
 		this.sendMessageButton    	 = new JButton();
@@ -115,7 +120,6 @@ public class WaitingRoomPanel extends JPanel {
 	//==========================대기방 리스트==========================
 
 	public void roomListSetting(WaitingRoomListTable roomListModel) throws IOException {
-		System.out.println("어딘가에선 호출을 할거란 말이지 !!!!!!");
 		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
 		this.waitingRoomTable = new JTable(defaultTableModel) {
 
@@ -343,11 +347,25 @@ public class WaitingRoomPanel extends JPanel {
 		/******************************************************************************/
 		//채팅 입력창의 위치와 크기를 가져옴
 		this.chattingOutput.setBounds(
+				0,
+				0,
+				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize() - 20,
+				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
+		);
+		this.chattingScroll.setBounds(
 				WaitingRoomSizesEnum.CHATTING_OUTPUT_POSITION_X.getSize(),
 				WaitingRoomSizesEnum.CHATTING_OUTPUT_POSITION_Y.getSize(),
 				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize(),
 				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
+		this.chattingScroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+			
+			@Override
+			public void adjustmentValueChanged(AdjustmentEvent e) {
+				JScrollBar src = (JScrollBar)e.getSource();
+				src.setValue(src.getMaximum());
+			}
+		});
 		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
 		this.chattingInputTextField.setBounds(
@@ -547,7 +565,6 @@ public class WaitingRoomPanel extends JPanel {
 			}
 		};
 		this.myInfoImageBorder.setLayout(null);
-		this.userInfoImageLabel.setBackground(Color.red);
 		this.userInfoImageLabel.setBounds(
 				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_X.getSize(),
 				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_Y.getSize(),
@@ -636,7 +653,7 @@ public class WaitingRoomPanel extends JPanel {
 		
 		this.waitingRoomListBackground.add(waitingRoomListScroll);
 		this.add(waitingRoomListBackground);
-		this.add(chattingOutput);
+		this.add(this.chattingScroll);
 		this.add(chattingInputTextField);
 		this.add(sendMessageButton);
 		this.add(modifyInfoButton);
@@ -732,7 +749,7 @@ public class WaitingRoomPanel extends JPanel {
 		this.scoreTextLabel.setText(setScore.toString());
 		this.userIDTextLabel.setText(userGameData.getUserID());
 		this.winningRateTextLabel.setText(String.valueOf(winRate));
-		this.userInfoImageLabel.setIcon(userGameData.getUserImage());
+		this.userInfoImageLabel.setIcon(userGameData.getUserWaitingRoomImage());
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
 		
