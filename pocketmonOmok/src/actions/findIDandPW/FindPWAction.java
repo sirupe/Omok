@@ -15,7 +15,6 @@ public class FindPWAction extends Adapters {
 
 	public FindPWAction(SearchPwdPanel searchPwdPanel) {
 		this.searchPwdPanel = searchPwdPanel;
-		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

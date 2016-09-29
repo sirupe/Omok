@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import actions.findIDandPW.FindIdResultAction;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIdEnum;
 
@@ -18,18 +19,16 @@ import enums.frames.SearchIdEnum;
 public class SearchIdResultPanel extends JPanel {
 	private JLabel showUserId;
 	private JLabel showUserIdResult;
-	private Image backGround;
-	private JButton confirmButton;
+	private JButton homeButton;
+	
+	private SearchIdFrame searchIdFrame;
+	private FindIdResultAction findIdResultAction;
 
 	public SearchIdResultPanel(SearchIdFrame searchIdFrame) throws IOException {
-		this.setLayout(null);
+		this.searchIdFrame = searchIdFrame;
+		this.findIdResultAction = new FindIdResultAction(this);
 		
 		Font defaultFont = SearchIdEnum.LABELFONT_DEFAULT.getFont();
-		
-		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
-				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
-                Image.SCALE_SMOOTH);
 
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
@@ -41,21 +40,43 @@ public class SearchIdResultPanel extends JPanel {
 		this.showUserIdResult.setFont(defaultFont);
 		this.showUserIdResult.setBounds(CorrectEnum.SHOW_USER_ID_RESULT_RECT.getRect());
 		
-		
+		this.homeButton = new JButton();
+		this.homeButton.setIcon(
+				new ImageIcon(ImageIO.read(
+					new File("resources/forgotID/goHome.png")).getScaledInstance(
+							SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+							SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+							Image.SCALE_AREA_AVERAGING))
+			);
+		this.homeButton.setBounds(SearchIdEnum.GO_HOME_BUTTON.getRectangle());
+		this.homeButton.setBorderPainted(false);
+		this.homeButton.setFocusPainted(false);
+		this.homeButton.setContentAreaFilled(false);
+		this.homeButton.setName(SearchIdEnum.BUTTON_NAME_GOHOME.getButtonName());
+
 		this.add(showUserId);
 		this.add(showUserIdResult);
+		this.add(homeButton);
+		this.homeButton.addActionListener(this.findIdResultAction);
+		this.setLayout(null);
 		
-		this.setVisible(true);
-		
 	}
-
-	public JLabel getshowUserId() {
-		return showUserId;
+	//홈으로버튼시 실행
+	public void doHomeButton(){	
+		//프레임의 취소버튼을 실행, 취소버튼과 동일한 동작수행
+		this.searchIdFrame.doCancleButton();
 	}
-	public JLabel getshowUserIdResult() {
-		return showUserIdResult;
+	public JButton getHomeButton() {
+		return homeButton;
 	}
-
-
-
+	public SearchIdFrame getSearchIdFrame() {
+		return searchIdFrame;
+	}
+	public FindIdResultAction getFindIdResultAction() {
+		return findIdResultAction;
+	}
+	
+	
+	
+	
 }
