@@ -96,6 +96,7 @@ public class UserPersonalInfoDAO {
 	}
 	
 	// 유저 이름과 이메일로 유저 ID찾기
+	// UserPersonalInfoDTO에 유저 ID세팅하여 반환.
 	public UserPersonalInfoDTO findUserID(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
@@ -118,7 +119,6 @@ public class UserPersonalInfoDAO {
 			ps.setString(2, personalDTO.getUserEmail());
 			resultSet = ps.executeQuery();
 			
-			// DAO 에 가져온 값 세팅
 			while(resultSet.next()) {
 				userPersonalInfo.setUserID(resultSet.getString("USER_ID"));
 			}
@@ -133,6 +133,7 @@ public class UserPersonalInfoDAO {
 	}
 	
 	// 유저 아이디와 이메일로 유저 패스워드 찾기
+	// UserPersonalInfoDTO에 유저 패스워드 담아서 반환
 	public UserPersonalInfoDTO findUserPW(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
@@ -154,7 +155,6 @@ public class UserPersonalInfoDAO {
 			ps.setString(2, personalDTO.getUserEmail());
 			resultSet = ps.executeQuery();
 			
-			// DAO 에 가져온 값 세팅
 			while(resultSet.next()) {
 				userPersonalInfo.setUserID(personalDTO.getUserID());
 				userPersonalInfo.setUserPasswd(resultSet.getString("USER_PASSWD"));
