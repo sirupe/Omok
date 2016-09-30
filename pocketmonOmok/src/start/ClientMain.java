@@ -1,18 +1,16 @@
 package start;
 
 import java.io.IOException;
-import java.io.Serializable;
 
-import client.ClientAccept;
+import omokGame.client.ClientAccept;
 
-// 클라이언트 실행
-public class ClientMain implements Serializable {
-	public static void main(String[] args) throws Exception {
+
+public class ClientMain {
+	public static void main(String[] args)  {
 		try {
 			new ClientAccept();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 }

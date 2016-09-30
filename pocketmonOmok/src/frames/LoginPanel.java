@@ -16,9 +16,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import actions.login.LoginAction;
-import enums.ImageEnum;
-import enums.LoginSizesEnum;
+import actions.login.LoginClientAction;
+import enums.etc.ImageEnum;
+import enums.frames.LoginSizesEnum;
+import frames.searchFrames.SearchPwdPanel;
 
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel {
@@ -46,16 +47,19 @@ public class LoginPanel extends JPanel {
 	private JPanel loginPanel;
 	private BasicFrame basicFrame;
 	
-	private LoginAction loginAction;
+	private LoginClientAction loginAction;
+
+	private SearchPwdPanel searchPwdPanel; 
 	
 	public LoginPanel(BasicFrame basicFrame) throws IOException {
-		this.loginAction = new LoginAction(this);
+		this.loginAction = new LoginClientAction(this);
 		
 		this.loginPanel	= new JPanel();
 		
 		this.loginPanel.setLayout(null);
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
+		this.searchPwdPanel = searchPwdPanel;
 		this.loginFailLabel = new JLabel();
 		
 		//프레임 화면 출력 위치 설정
@@ -79,9 +83,7 @@ public class LoginPanel extends JPanel {
 		
 		
 		this.add(this.loginPanel);
-		this.setLayout(new CardLayout());
-
-		
+		this.setLayout(new CardLayout());	
 	}
 	
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
@@ -159,19 +161,19 @@ public class LoginPanel extends JPanel {
 		               Image.SCALE_AREA_AVERAGING);
 		this.loginButton = new JButton(new ImageIcon(this.loginreimage));
 	  
-		this.joinreimage = ImageIO.read(new File("resources/login/signup.png")).getScaledInstance(
+		this.joinreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SIGHUP.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.joinButton = new JButton(new ImageIcon(this.joinreimage));
 		
-		this.searchidreimage = ImageIO.read(new File("resources/login/forgotID.png")).getScaledInstance(
+		this.searchidreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SEARCHID.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.searchIdButton = new JButton(new ImageIcon(this.searchidreimage));
 		
-		this.searchpwreimage = ImageIO.read(new File("resources/login/forgotPW.png")).getScaledInstance(
+		this.searchpwreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SEARCHPW.getImageDir())).getScaledInstance(
 		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
@@ -192,6 +194,7 @@ public class LoginPanel extends JPanel {
 		
 		//나중에 액션 등록 할때 this에 넣으면 됨
 		this.loginButton.addActionListener(this.loginAction);
+		this.loginButton.addMouseListener(this.loginAction);
 		
 		//회원가입 버튼 위치 설정
 		this.joinButton.setBounds(
@@ -234,7 +237,8 @@ public class LoginPanel extends JPanel {
 		this.searchPwButton.setToolTipText("비밀번호 찾기");
 		this.searchPwButton.addMouseListener(this.loginAction);
 
-		this.searchPwButton.addActionListener(this.loginAction);     
+		this.searchPwButton.addActionListener(this.loginAction);
+		
 		
 		this.loginPanel.add(this.loginButton);
 		this.loginPanel.add(this.joinButton);
@@ -298,4 +302,9 @@ public class LoginPanel extends JPanel {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
+	public SearchPwdPanel getSearchPwdPanel() {
+		return searchPwdPanel;
+	}
+
+
 }

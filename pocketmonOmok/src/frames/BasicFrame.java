@@ -1,6 +1,7 @@
 package frames;
 
 import java.awt.CardLayout;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
@@ -15,12 +16,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import client.ClientAccept;
-import datas.UserPositionIndex;
-import enums.LoginFrameSizesEnum;
-import enums.LoginSizesEnum;
-// 태성
-import enums.UserPositionEnum;
+import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserInGameRoomDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.UserPositionEnum;
+import enums.frames.LoginFrameSizesEnum;
+import enums.frames.LoginSizesEnum;
+
+import frames.gameRoom.GameRoomPanel;
+import frames.joinFrames.JoinFrame;
+import frames.searchFrames.SearchIdFrame;
+import frames.searchFrames.SearchPwdFrame;
+import frames.searchFrames.SearchPwdPanel;
+import frames.waitingRoom.WaitingRoomPanel;
+import omokGame.client.ClientAccept;
 
 @SuppressWarnings("serial")
 public class BasicFrame extends JFrame implements Serializable{
@@ -30,10 +39,13 @@ public class BasicFrame extends JFrame implements Serializable{
 	private LoginPanel loginPanel;
 	private WaitingRoomPanel waitingRoomPanel;
 	private GameRoomPanel gameRoomPanel;
+	private JoinFrame joinFrame;
+	private SearchPwdFrame searchPwdFrame;
+	private SearchIdFrame searchIdFrame;
 	
 	private ClientAccept clientAccept;
 	
-	
+	private String userID;
 	
 	public BasicFrame(ClientAccept clientAccept) throws IOException {
 		this.clientAccept = clientAccept;
@@ -58,29 +70,34 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.loginPanel.setOpaque(false);
 		this.cardLayout = new CardLayout();
 
-		this.waitingRoomPanel = new WaitingRoomPanel(){
+		this.waitingRoomPanel = new WaitingRoomPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			try {
-				g.drawImage(ImageIO.read(
-					new File("resources/login/blackhole.png")), 
-					0, 
-					0,
-					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-					LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
-					this);
-			} catch (IOException e) {
-				e.printStackTrace();
+				super.paintComponent(g);
+				try {
+					g.drawImage(ImageIO.read(
+						new File("resources/login/blackhole.png")), 
+						0, 
+						0,
+						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+						this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-		}};
+		};
+	
+		
 		
 		this.gameExit();
 		this.newGameRoomPanel();
 		this.setLayout(this.cardLayout);
-//		this.add("loginPanel", this.loginPanel);
-//		this.add("waitingRoomPanel", this.waitingRoomPanel);
+
+		this.add("loginPanel", this.loginPanel);
+		this.add("waitingRoomPanel", this.waitingRoomPanel);
 		this.add("gameRoomPanel", this.gameRoomPanel);
+
 		this.setTitle("Login");
 		this.setVisible(true);
 		this.setResizable(false);
@@ -90,9 +107,10 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				UserPositionIndex index = new UserPositionIndex(UserPositionEnum.POSITION_EXIT);
+				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
+				personalDTO.setUserID(userID);
 				try {
-					clientAccept.getClientOS().writeObject(index);
+					clientAccept.getClientOS().writeObject(personalDTO);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -105,8 +123,8 @@ public class BasicFrame extends JFrame implements Serializable{
 	
 	// GameRoom 도 결국 패널이므로 패널 생성시 익명클래스를 이용하여  paintComponent 를 오버라이드 하면
 	// 굳이 GameRoom 안에서 새로운 패널을 생성하여 배경을 깔아줄 필요가 없게 된다. 
-	public void newGameRoomPanel() {
-		this.gameRoomPanel = new GameRoomPanel() {
+	public void newGameRoomPanel() throws IOException {
+		this.gameRoomPanel = new GameRoomPanel(this) {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -125,10 +143,42 @@ public class BasicFrame extends JFrame implements Serializable{
 		};
 	}
 	
-	public void inWaitingRoom() {
+	public void sendDTO(AbstractEnumsDTO dto) {
+		this.clientAccept.sendDTO(dto);
+	}
+	
+	public void showWaitingRoom() {
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
+	
+	public void showGameRoom(UserInGameRoomDTO inGameUserInfo) {
+		this.gameRoomPanel.setEnterUserInfo(inGameUserInfo);
+		this.cardLayout.show(this.getContentPane(), "gameRoomPanel");
+	}
 
+	public void newJoinFrame() throws IOException {
+		this.joinFrame = new JoinFrame(this);
+	}
+	public void newSearchPwdFrame() throws IOException {
+		this.searchPwdFrame = new SearchPwdFrame(this);
+	}
+	
+	public void newSearchIdFrame() throws IOException {
+		this.searchIdFrame = new SearchIdFrame(this);
+	}
+	
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	
+	public SearchPwdFrame getSearchPwdFrame() {
+		return searchPwdFrame;
+	}	
+	
 	public ObjectOutputStream getClientOS() {
 		return this.clientAccept.getClientOS();
 	}
@@ -137,13 +187,24 @@ public class BasicFrame extends JFrame implements Serializable{
 		return loginPanel;
 	}
 	
-	// TODO test중 ..
-	public static void main(String[] args) {
-		try {
-			new BasicFrame(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public JoinFrame getJoinFrame() {
+		return joinFrame;
 	}
 	
+	public SearchIdFrame getSearchIdFrame() {
+		return searchIdFrame;
+	}
+	
+	public WaitingRoomPanel getWaitingRoomPanel() {
+		return waitingRoomPanel;
+	}
+
+	public GameRoomPanel getGameRoomPanel() {
+		return gameRoomPanel;
+	}
+
+	public ClientAccept getClientAccept() {
+		return clientAccept;
+	}
 }
+

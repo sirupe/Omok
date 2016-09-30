@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="activation.jar"/>
-	<classpathentry kind="lib" path="additionnal.jar"/>
-	<classpathentry kind="lib" path="mail.jar"/>
-	<classpathentry kind="lib" path="ojdbc6-11.2.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/omok/activation.jar"/>
+	<classpathentry kind="lib" path="C:/omok/additionnal.jar"/>
+	<classpathentry kind="lib" path="C:/omok/mail.jar"/>
+	<classpathentry kind="lib" path="C:/omok/ojdbc6-11.2.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
