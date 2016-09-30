@@ -18,8 +18,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import actions.gameRoom.GameRoomClientAction;
+import datasDTO.AbstractEnumsDTO;
+import datasDTO.GameRoomInfoVO;
 import datasDTO.UserInGameRoomDTO;
+import datasDTO.UserMessageVO;
 import enums.etc.ImageEnum;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import enums.frames.GameRoomEnum;
 import frames.BasicFrame;
 
@@ -32,14 +38,23 @@ public class GameRoomPanel extends JPanel {
 	private JPanel timeLimitPanel;	// 시간제한 표시
 	private JPanel userImagePanel;	// 유저이미지
 	private JPanel gameMenuPanel;	// 게임메뉴 및 아이템
+	
 	private JPanel chattingPanel;	// 채팅
+	private JTextField chattingField;
+	private JTextArea chattingArea;
+	
 	private Thread timeLimitThread;
 	
 	private JLabel leftUser;
 	private JLabel rightUser;
 	private JButton[] menuButtons;
 	
+	private GameRoomClientAction gameRoomAction;
+	private GameRoomInfoVO gameRoomInfo;
+	
 	public GameRoomPanel(BasicFrame basicFrame) throws IOException {
+		this.gameRoomAction = new GameRoomClientAction(this);
+		
 		this.basicFrame = basicFrame;
 		
 		this.setLayout(null);
@@ -196,8 +211,8 @@ public class GameRoomPanel extends JPanel {
 		this.gameMenuPanel.setLayout(null);
 		this.gameMenuPanel.setOpaque(false);
 		this.gameMenuPanel.setBounds(GameRoomEnum.GAME_MENU_PANEL_RECT.getRect());
-		String[] buttonsName = GameRoomEnum.GAME_BUTTONNAME.getButtonName();
-		String[] buttonsDir = ImageEnum.GAMEROOM_MENU_IMAGES_OWNER.getImages();
+		String[] buttonsName = GameRoomEnum.GAME_BUTTONNAME_OWNER.getButtonName();
+		String[] buttonsDir = ImageEnum.GAMEROOM_MENU_IMAGES_GRAY_OWNER.getImages();
 		this.menuButtons = new JButton[buttonsName.length];
 		
 		for(int i = 0, size = buttonsName.length; i < size; i++) {
@@ -234,6 +249,9 @@ public class GameRoomPanel extends JPanel {
 			this.menuButtons[i].setBorderPainted(false);
 			this.menuButtons[i].setContentAreaFilled(false);
 			this.menuButtons[i].setFocusPainted(false);
+			if(!this.menuButtons[i].getName().equals("start")) {
+				this.menuButtons[i].addMouseListener(this.gameRoomAction);
+			}
 			this.gameMenuPanel.add(this.menuButtons[i]);
 		}
 		
@@ -247,15 +265,18 @@ public class GameRoomPanel extends JPanel {
 		this.chattingPanel.setBounds(GameRoomEnum.GAME_CHATTING_PANEL_RECT.getRect());
 		
 		
-		JTextArea chattingArea = new JTextArea();
-		chattingArea.setLineWrap(true);
-		chattingArea.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
-		chattingArea.setEditable(false);
+		this.chattingArea = new JTextArea();
+		this.chattingArea.setLineWrap(true);
+		this.chattingArea.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
+		this.chattingArea.setEditable(false);
 		
-		JTextField chattingField = new JTextField();
-		chattingField.setBounds(GameRoomEnum.GAME_CHATTINGFIELD_RECT.getRect());
-		chattingField.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
-
+		this.chattingField = new JTextField();
+		this.chattingField.setBounds(GameRoomEnum.GAME_CHATTINGFIELD_RECT.getRect());
+		this.chattingField.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
+		this.chattingField.setEditable(false);
+		this.chattingField.setName("chattingField");
+		this.chattingField.addActionListener(this.gameRoomAction);
+		
 		JScrollPane scroll = new JScrollPane(chattingArea);
 		scroll.setBounds(GameRoomEnum.GAME_SCROLL_PANE_RECT.getRect());
 		
@@ -263,31 +284,165 @@ public class GameRoomPanel extends JPanel {
 		this.chattingPanel.add(chattingField);
 		this.add(this.chattingPanel);
 	} // 채팅 패널
-	
-	//TODO
+
 	public void setEnterUserInfo(UserInGameRoomDTO inGameUserInfo) {
-		System.out.println("고객들어왔다고");
-		String imageDir = null;
-		if(this.basicFrame.getUserID().equals(inGameUserInfo.getGameRoomInfo().getOwner())) {
-			imageDir = ImageEnum.GAMEROOM_START_GRAY.getImageDir();
-			System.out.println("주인이라고");
-			this.leftUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
-		} else {
-			System.out.println("손님이라고");
-			imageDir = ImageEnum.GAMEROOM_READY_GRAY.getImageDir();
-			this.rightUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
-		}
-		
+		this.gameRoomInfo = inGameUserInfo.getGameRoomInfo();
+
 		try {
+			System.out.println("고객들어왔다고");
+			String imageDir = null;
+			
+			// 오너인 경우
+			if(this.basicFrame.getUserID().equals(inGameUserInfo.getGameRoomInfo().getOwner())) {
+				imageDir = ImageEnum.GAMEROOM_START_GRAY.getImageDir();
+				this.leftUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
+			
+			// 유저인 경우
+			} else if(this.basicFrame.getUserID().equals(inGameUserInfo.getGameRoomInfo().getGuest())) {
+				this.chattingField.setEditable(true);
+				imageDir = ImageEnum.GAMEROOM_READY_GRAY.getImageDir();
+				this.rightUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
+				
+				String ownerImageDir = inGameUserInfo.getOwnerGender() == 1 ? 
+						ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
+				
+						System.out.println(ownerImageDir);
+				try {
+					this.leftUser.setIcon(new ImageIcon(
+						ImageIO.read(new File(ownerImageDir)).getScaledInstance(
+							GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+							GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
+							Image.SCALE_AREA_AVERAGING)
+					));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
 			this.menuButtons[0].setIcon(new ImageIcon(
 				ImageIO.read(new File(imageDir)).getScaledInstance(
 					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
 					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
 					Image.SCALE_AREA_AVERAGING)
 			));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 오너의 경우 방에 유저가 들어왔을 때 실행됨
+	public void ownerFrameModify(UserInGameRoomDTO userInGameRoomDTO) {
+		this.gameRoomInfo = userInGameRoomDTO.getGameRoomInfo();
+		this.chattingField.setEditable(true);
+		
+		String imageDir = userInGameRoomDTO.getGuestGender() == 1 ? 
+				ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
+		
+		try {
+			this.rightUser.setIcon(new ImageIcon(
+				ImageIO.read(new File(imageDir)).getScaledInstance(
+					GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+					GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
+					Image.SCALE_AREA_AVERAGING)
+			));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 채팅 입력시 서버로 전송
+	public void chattingInfoSendServer() {
+		UserMessageVO userMessage = new UserMessageVO(UserPositionEnum.POSITION_GAME_ROOM);
+		userMessage.setUserAction(UserActionEnum.USER_IN_GAME_ROOM_CHATTING);
+		userMessage.setUserID(this.basicFrame.getUserID());
+		userMessage.setTargetID(this.gameRoomInfo.getOwner().equals(this.basicFrame.getUserID()) ? 
+				this.gameRoomInfo.getGuest() : this.gameRoomInfo.getOwner());
+		userMessage.setMessage(this.chattingField.getText());
+		this.basicFrame.sendDTO(userMessage);
+	}
+	
+	// 채팅에 관련한 서버에서의 응답
+	public void chattingAreaSetting(AbstractEnumsDTO data) {
+		this.chattingField.setText("");
+		UserMessageVO messageVO = (UserMessageVO)data;
+		this.chattingArea.setText(this.chattingArea.getText() + "\n" + messageVO.getMessage());
+		
+	}
+	
+	// 메뉴 영역 밖으로 마우스 포인터가 빠짐
+	public void changeButtonGrayImage(String buttonName) {
+		String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.basicFrame.getUserID()) ? 
+				ImageEnum.GAMEROOM_MENU_IMAGES_GRAY_OWNER.getImages() : ImageEnum.GAMEROOM_MENU_IMAGES_GRAY_GUEST.getImages();
+		// 시작 혹은 레디버튼 제외
+		for(int i = 1, size = this.menuButtons.length; i < size; i++) {
+			if(this.menuButtons[i].getName().equals(buttonName)) {
+				try {
+					this.menuButtons[i].setIcon(
+						new ImageIcon(
+							ImageIO.read(new File(buttonImages[i])).getScaledInstance(
+								GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
+								GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
+								Image.SCALE_AREA_AVERAGING)
+						)
+					);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+	}
+	
+	// 메뉴 영역 안으로 마우스 포인터가 진입
+	public void changeButtonColorImage(String buttonName) {
+		String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.basicFrame.getUserID()) ? 
+				ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_OWNER.getImages() : ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_GUEST.getImages();
+		// 시작 혹은 레디버튼 제외
+		for(int i = 1, size = this.menuButtons.length; i < size; i++) {
+			if(this.menuButtons[i].getName().equals(buttonName)) {
+				try {
+					this.menuButtons[i].setIcon(
+						new ImageIcon(
+							ImageIO.read(new File(buttonImages[i])).getScaledInstance(
+								GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
+								GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
+								Image.SCALE_AREA_AVERAGING)
+						)
+					);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+	}
+	
+	// 레디 버튼에 클릭 이벤트가 들어오면
+	public void changeGameReadyButton() {
+		try {
+			this.menuButtons[0].setIcon(
+				new ImageIcon(
+					ImageIO.read(new File(ImageEnum.GAMEROOM_READY_COLOR.getImageDir())).getScaledInstance(
+						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
+						GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
+						Image.SCALE_AREA_AVERAGING)
+				)
+			);
+			// 데이터 전송용 객체를 새로 만들어 필요 정보를 저장한 후 게스트가 레디를 했다는 정보를 서버로 전송한다.
+			GameRoomInfoVO gameRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+			gameRoomVO.setUserAction(UserActionEnum.USER_GUEST_READY_CHECK);
+			gameRoomVO.setGuest(this.gameRoomInfo.getGuest());
+			gameRoomVO.setOwner(this.gameRoomInfo.getOwner());
+			this.basicFrame.getClientOS().writeObject(gameRoomVO);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//TODO
+	// 게스트가 레디를 눌렀을 때 서버에서 정보가 들어오면 오너의 스타트 버튼 색깔을 바꿔준다. (스타트 버튼 클릭이 가능하게 함.)
+	public void changeStartGuestReadyChekc() {
 		
 	}
 	

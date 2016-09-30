@@ -46,8 +46,10 @@ public enum ImageEnum {
 	GAMEROOM_ITEM_TIME_PLUS_COLOR("resources/gameRoom/itemtimeplus.png"),
 	GAMEROOM_ITEM_RETURN_COLOR("resources/gameRoom/gamereturn.png"),
 	GAMEROOM_ITEM_GIVE_UP_COLOR("resources/gameRoom/giveup.png"),
+	
+	GAMEROOM_START_LAST_COLOR("resources/gameRoom/start3.png"),
 
-	GAMEROOM_MENU_IMAGES_OWNER(new String[] {
+	GAMEROOM_MENU_IMAGES_GRAY_OWNER(new String[] {
 			GAMEROOM_START_GRAY.getImageDir(),			// gamestart
 			GAMEROOM_ALONE_GRAY.getImageDir(),			// 혼자하기
 			GAMEROOM_GIVE_UP_GRAY.getImageDir(),		// 기권
@@ -57,8 +59,20 @@ public enum ImageEnum {
 			GAMEROOM_ITEM_RETURN_GRAY.getImageDir(),	// 턴되돌리기
 			GAMEROOM_SHOP_GRAY.getImageDir(),			// 상점
 	}),
+	
+	GAMEROOM_MENU_IMAGES_COLOR_OWNER(new String[] {
+			GAMEROOM_START_GRAY.getImageDir(),		// gamestart
+			GAMEROOM_ALONE_COLOR.getImageDir(),			// 혼자하기
+			GAMEROOM_ITEM_GIVE_UP_COLOR.getImageDir(),	// 기권
+			GAMEROOM_OUT_COLOR.getImageDir(),			// 나가기
+			GAMEROOM_ITEM_ALL_SAME_COLOR.getImageDir(),	// 돌색 통일시키기
+			GAMEROOM_ITEM_TIME_PLUS_COLOR.getImageDir(),// 시간추가
+			GAMEROOM_ITEM_RETURN_COLOR.getImageDir(),	// 턴되돌리기
+			GAMEROOM_SHOP_COLOR.getImageDir(),			// 상점
+	}),
+	
 
-	GAMEROOM_MENU_IMAGES_GUEST(new String[] {
+	GAMEROOM_MENU_IMAGES_GRAY_GUEST(new String[] {
 			GAMEROOM_READY_GRAY.getImageDir(),			// ready
 			GAMEROOM_ALONE_GRAY.getImageDir(),			// 혼자하기
 			GAMEROOM_GIVE_UP_GRAY.getImageDir(),		// 기권
@@ -67,6 +81,17 @@ public enum ImageEnum {
 			GAMEROOM_ITEM_TIME_PLUS_GRAY.getImageDir(),	// 시간추가
 			GAMEROOM_ITEM_RETURN_GRAY.getImageDir(),	// 턴되돌리기
 			GAMEROOM_SHOP_GRAY.getImageDir(),			// 상점
+	}),
+	
+	GAMEROOM_MENU_IMAGES_COLOR_GUEST(new String[] {
+			GAMEROOM_READY_COLOR.getImageDir(),			// ready
+			GAMEROOM_ALONE_COLOR.getImageDir(),			// 혼자하기
+			GAMEROOM_ITEM_GIVE_UP_COLOR.getImageDir(),	// 기권
+			GAMEROOM_OUT_COLOR.getImageDir(),			// 나가기
+			GAMEROOM_ITEM_ALL_SAME_COLOR.getImageDir(),	// 돌색 통일시키기
+			GAMEROOM_ITEM_TIME_PLUS_COLOR.getImageDir(),// 시간추가
+			GAMEROOM_ITEM_RETURN_COLOR.getImageDir(),	// 턴되돌리기
+			GAMEROOM_SHOP_COLOR.getImageDir(),			// 상점
 	}),
 	
 	

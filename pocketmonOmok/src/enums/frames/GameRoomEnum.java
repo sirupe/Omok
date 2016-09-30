@@ -67,15 +67,26 @@ public enum GameRoomEnum {
 			GAME_MENU_PANEL_RECT.getRect().height / 2 * 1
 	)),
 	
-	GAME_BUTTONNAME(new String[] {
+	GAME_BUTTONNAME_OWNER(new String[] {
 			"start",
 			"lonely",
 			"withdraw",
 			"exit",
-			"itemUnity",
-			"itemTimePlus",
-			"itemReturn",
-			"shop"
+//			"itemUnity",
+//			"itemTimePlus",
+//			"itemReturn",
+//			"shop"
+	}),
+	
+	GAME_BUTTONNAME_GUEST(new String[] {
+			"ready",
+			"lonely",
+			"withdraw",
+			"exit",
+//			"itemUnity",
+//			"itemTimePlus",
+//			"itemReturn",
+//			"shop"
 	}),
 
 	

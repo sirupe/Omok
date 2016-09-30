@@ -3,7 +3,6 @@ package actions.waitingRoom;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import datasDTO.GameRoomInfoVO;
@@ -57,10 +56,10 @@ public class WaitingRoomActions {
 		gameRoomInfo.setRoomNumber(this.waitingRoomPanel.getRoomNumber());
 		gameRoomInfo.setPersons(1);
 		if(this.openPrivate == 1) {
-			gameRoomInfo.setImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
+			gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
 			gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
 		} else {
-			gameRoomInfo.setImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
+			gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
 		}
 		this.waitingRoomPanel.sendDTO(gameRoomInfo);
 	}
@@ -145,8 +144,9 @@ public class WaitingRoomActions {
 			
 			// 입장 가능인 경우
 			if(image.equals(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir())) {
+
 				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-				roomVO.setImage(image);
+				roomVO.setEnterImage(image);
 				roomVO.setRoomNumber((int)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 1));
 				roomVO.setRoomName((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 2));
 				roomVO.setOwner((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 3));
@@ -157,7 +157,7 @@ public class WaitingRoomActions {
 			
 			// 해당 방이 비밀방인 경우
 			} else if(image.equals(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir())) {
-				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_EXIT.POSITION_WAITING_ROOM);
+				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 				roomVO.setUserAction(UserActionEnum.USER_PRIVATE_ROOM_ENTER);
 				roomVO.setOwner((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 3));
 				this.waitingRoomPanel.sendDTO(roomVO);

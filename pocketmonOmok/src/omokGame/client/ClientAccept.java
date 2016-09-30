@@ -162,6 +162,15 @@ public class ClientAccept {
 		case ENTER_ROOM_SUCCESS_GUEST :
 			this.gameRoomRequestAction.guestEnterRoom(data);
 			break;
+		case ENTER_ROOM_SUCCESS_OWNER :
+			this.gameRoomRequestAction.ownerGameRoomModify(data);
+			break;
+		case GAME_ROOM_USER_CHATTING :
+			this.basicFrame.getGameRoomPanel().chattingAreaSetting(data);
+			break;
+		case GAME_ROOM_GUEST_READY_CHECK :
+
+			break;
 		default :
 			break;
 		}

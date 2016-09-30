@@ -10,5 +10,7 @@ public enum UserActionEnum {
 	USER_MESSAGE_DEFAULT,		// 유저님 일반 메세지 전송
 	USER_MESSAGE_SECRET,		// 유저님 귓속말 전송
 	USER_ENTER_ROOM,			// 유저님이 방 들어가신단다
-	USER_PRIVATE_ROOM_ENTER;	// 유저님 비밀방 들어가고 싶으시단다
+	USER_PRIVATE_ROOM_ENTER,	// 유저님 비밀방 들어가고 싶으시단다
+	USER_IN_GAME_ROOM_CHATTING, // 유저님 게임방 안에서 채팅하신단다
+	USER_GUEST_READY_CHECK;
 }

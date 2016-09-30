@@ -43,11 +43,11 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_FIND_PW :
 					this.omokServer.findPW();
 					break;
-				case POSITION_FIND_PW_EMAIL :
-					this.omokServer.findEmail(userPosition, this);
-					break;
+//				case POSITION_FIND_PW_EMAIL :
+//					this.omokServer.findEmail(userPosition, this);
+//					break;
 				case POSITION_GAME_ROOM :
-					this.omokServer.gameRoom();
+					this.omokServer.gameRoom(userPosition, this);
 					break;
 				case POSITION_STORE :
 					this.omokServer.store();
@@ -58,6 +58,8 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_EXIT :
 					isAccept = false;
 					this.omokServer.exitProgram(userPosition, this);
+					break;
+				default:
 					break;
 				}
 			}

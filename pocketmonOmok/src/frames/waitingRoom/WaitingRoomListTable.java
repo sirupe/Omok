@@ -18,7 +18,7 @@ public class WaitingRoomListTable {
 		for(int i = 0, size = waitingRoomListData.length; i < size; i++) {
 			GameRoomInfoVO gameRoomInfo = roomList.get(i);
 			waitingRoomListData[i] = new Object[] {
-					gameRoomInfo.getImage(),
+					gameRoomInfo.getEnterImage(),
 					gameRoomInfo.getRoomNumber(),
 					gameRoomInfo.getRoomName(),
 					gameRoomInfo.getOwner(),

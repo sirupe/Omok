@@ -2,6 +2,7 @@ package actions.gameRoom;
 
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
+import datasDTO.UserMessageVO;
 import frames.gameRoom.GameRoomPanel;
 
 public class GameRoomServerAction {
@@ -13,5 +14,10 @@ public class GameRoomServerAction {
 	
 	public void guestEnterRoom(AbstractEnumsDTO data) {
 		this.gameRoomPanel.getBasicFrame().showGameRoom((UserInGameRoomDTO)data);
+	}
+	
+	public void ownerGameRoomModify(AbstractEnumsDTO data) {
+		UserInGameRoomDTO ownerGameRoomDTO = (UserInGameRoomDTO)data;
+		this.gameRoomPanel.ownerFrameModify(ownerGameRoomDTO);
 	}
 }

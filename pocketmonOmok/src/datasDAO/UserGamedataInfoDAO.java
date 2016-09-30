@@ -46,7 +46,6 @@ public class UserGamedataInfoDAO {
 				userGameData.setUserWaitingRoomImage(resultSet.getInt("USER_GENDER"));
 			}
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

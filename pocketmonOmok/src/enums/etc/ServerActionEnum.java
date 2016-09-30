@@ -19,6 +19,7 @@ public enum ServerActionEnum {
 	ENTER_ROOM_SUCCESS_GUEST,	// 방 입장 성공-게스트
 	ENTER_ROOM_SUCCESS_LIST,	// 방 입장 성공-대기실에 있는 사람들 방목록 변경
 	ENTER_PRIVATE_GAME_ROOM,	// 유저가 비밀방에 입장하고자 할 때 서버에서 해당 비밀방의 정보를 전송
-	
+	GAME_ROOM_USER_CHATTING,	// 게임방에서 유저가 채팅시도
+	GAME_ROOM_GUEST_READY_CHECK,// 게스트가 레디를 클릭했다는 것을 서버가 알았다.
 	NOTHING;
 }

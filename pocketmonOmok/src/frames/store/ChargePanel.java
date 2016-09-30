@@ -1,7 +1,6 @@
 package frames.store;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
