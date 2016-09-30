@@ -1,10 +1,10 @@
 package datasDTO;
 
-import java.io.Serializable;
-
 import enums.etc.UserPositionEnum;
 
 public class UserStoreSkinInfoDTO extends AbstractEnumsDTO {
+	private static final long serialVersionUID = 876410358296226255L;
+
 	private String userID;
 	private int skinNyaong;
     private int skinLeesanghaeC;

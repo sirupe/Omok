@@ -1,32 +1,27 @@
-	package frames.serchFrames;
-	
-	import java.awt.Color;
-	import java.awt.Font;
-	import java.awt.Graphics;
-	import java.awt.Image;
-	import java.io.File;
-	import java.io.IOException;
-	
-	import javax.imageio.ImageIO;
-	import javax.swing.AbstractButton;
-	import javax.swing.ImageIcon;
-	import javax.swing.JButton;
+package frames.searchFrames;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-	import javax.swing.JPanel;
-	import javax.swing.JTextField;
-	import javax.swing.border.EmptyBorder;
-	
-	import actions.findIDandPW.FindPWAction;
-	import datasDTO.UserPersonalInfoDTO;
-	import enums.etc.UserPositionEnum;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import actions.findIDandPW.FindPWAction;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.LoginSizesEnum;
-	import enums.frames.SearchIdEnum;
-	import enums.frames.SearchPwdEnum;
-	import enums.frames.SearchRePwdEnum;
-	import frames.LoginPanel;
-	import utility.RegexCheck;
+import enums.frames.SearchIdEnum;
+import enums.frames.SearchPwdEnum;
+import utility.RegexCheck;
 	
 	public class SearchPwdPanel extends JPanel {
 	
@@ -47,14 +42,15 @@ import enums.frames.LoginSizesEnum;
 	
 	//private Image backGround;
 	
-	private SearchPwdFrame searchPwdFrame;
-	private FindPWAction findPwdAction;
-	
-	
-	private String emailAddr; // 인증메일
-	private String idCheck;
-	private boolean emailConfirmLimitTime;
-	
+		private SearchPwdFrame searchPwdFrame;
+		private FindPWAction findPwdAction;
+		
+		
+		private String emailAddr; // 인증메일
+		private String idCheck;
+		private boolean emailConfirmLimitTime;
+		private String checkMsg;
+		
 	
 	public SearchPwdPanel(SearchPwdFrame searchPwdFrame) throws IOException {
 		this.searchPwdFrame = searchPwdFrame;
@@ -62,6 +58,8 @@ import enums.frames.LoginSizesEnum;
 		this.emailConfirmLimitTime = false;
 	
 	    this.setLayout(null);
+	   
+	    
 	
 		//라벨 생성 TODO
 	this.searchIdLabel    = new JLabel("ID");
@@ -101,6 +99,12 @@ import enums.frames.LoginSizesEnum;
 		this.setButtonPosition();
 		this.userInfoErrorLabelReset(); 
 		this.userNumberMsgReset();
+		
+		
+		this.addKeyAction(this.searchIdTextField, "searchIdTextField");
+		this.addKeyAction(this.searchemailTextField, "searchemailTextField");
+		this.addKeyAction(this.searchConfirmTextField, "confirmNumberText");
+		 
 	}
 	
 	//아이디 또는 이메일 오류 알려주는 텍스트
@@ -172,13 +176,12 @@ import enums.frames.LoginSizesEnum;
 		this.searchConfirmTextField.setBounds(SearchPwdEnum.SEARCH_CONFIRM_TEXTFIELD.getRectangle());
 		this.add(searchIdTextField);
 		this.add(searchemailTextField);
-		this.add(searchConfirmTextField);
+
 	}
 	
 	//버튼 생성
 	public void setButtonPosition() throws IOException {   	
-	
-		
+
 	this.searchConfirmButton  = new JButton(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName());
 	
 	this.searchConfirmButton.setBorderPainted(false);
@@ -224,9 +227,6 @@ import enums.frames.LoginSizesEnum;
 	
 	
 	this.searchCheckButton  = new JButton(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
-	
-	
-	
 	this.searchCheckButton.setIconTextGap(this.searchCheckButton.getIconTextGap() - 15);    	
 	this.searchCheckButton.setIcon(
 			new ImageIcon(ImageIO.read(
@@ -239,47 +239,43 @@ import enums.frames.LoginSizesEnum;
 	this.add(searchCheckButton); 
 	//this.searchCheckButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
 	this.searchCheckButton.addActionListener(this.findPwdAction); 
-	//--------------------------------------------------------------------------------------------------
 	} 
+	
 	//====================액션처리========================================================================================================
 	//취소버튼을 눌렀을 때 처리하는 메소드
 	public void doCancelButton() {
 		this.searchPwdFrame.doCancelButton(); //여기에서 searchPwdFrame에 접근해서 docancel실행
 	}
 	
-	//			public void getChangePanel() {
-	//				this.searchPwdFrame.getgoChangePwdPanel();
-	//			}
+	public void getChangePanel() {
+		this.searchPwdFrame.doCheckButton();
+	}
 	
 	//인증버튼을 눌렀을때 처리하는 메소드
 	public void getCerfication() {
 		this.emailAddr = this.getSearchemailTextField().getText();
 		this.idCheck   = this.getSearchIdTextField().getText();
-		String checkMsg = null;
-	
-		if(this.idCheck.isEmpty() || this.emailAddr.isEmpty()) {
-			this.userNumberMsg("아이디와 이메일 입력해주세요");
-	
-	}if (!RegexCheck.emailRegexCheck(this.emailAddr)) {
+		this.checkMsg = null;
+
+		if(!RegexCheck.emailRegexCheck(this.emailAddr) &&this.idCheck.isEmpty() && this.emailAddr.isEmpty()) {
 		this.userNumberMsgReset();
 		checkMsg = "<html>email형식에 맞지 않습니다..<br>다시 적어주세요<br></html>";
-		this.userNumberMsg(checkMsg);	
-	
-	}if (RegexCheck.emailRegexCheck(this.emailAddr)) {
+		this.userNumberMsg(checkMsg);
+		
+		} 
+		if(RegexCheck.emailRegexCheck(this.emailAddr)) {
 		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW_EMAIL);
 		//맞다면 이메일 인증 보내달라...?
-	personalDTO.setUserID(this.idCheck);
-	personalDTO.setUserEmail(this.emailAddr);
-	
-	System.out.println("여기는들어오나안오나... 들어와라 제발");
-	this.searchPwdFrame.getCerficartion(personalDTO); //action이 보내준 것을 패널이 받아 searchPwdFrame한테 위에 메세지를 보내준다.
-	
-	//3분 쓰레드 ..
-	this.userNumberMsgReset();
-	checkMsg = "<html>인증번호 발생.<br>인증번호 적어주세요<br></html>";
-	this.userNumberMsg(checkMsg);
-	
-	
+			personalDTO.setUserID(this.idCheck);
+			personalDTO.setUserEmail(this.emailAddr);
+			
+			System.out.println("여기는들어오나안오나... 들어와라 제발");
+			this.searchPwdFrame.getCerficartion(personalDTO); //action이 보내준 것을 패널이 받아 searchPwdFrame한테 위에 메세지를 보내준다.
+			
+			//3분 쓰레드 ..
+			this.userNumberMsgReset();
+			checkMsg = "<html>인증번호 발생.<br>인증번호 적어주세요<br></html>";
+			this.userNumberMsg(checkMsg);
 	
 	
 	new Thread() {
@@ -313,11 +309,21 @@ import enums.frames.LoginSizesEnum;
 	String checkMsg = "<html>인증번호가 맞지 않습니다..<br>다시 확인바랍니다.<br></html>";
 	SearchPwdPanel.this.userNumberMsg(checkMsg);
 	//인증번호 초기화 한다.
-		    		SearchPwdPanel.this.searchConfirmButton = null;
+	SearchPwdPanel.this.searchConfirmButton = null;
 		    	}
 		   }.start();
 		    	}
 		    }
+	
+	
+	public void addKeyAction(JComponent comp, String Name) {
+//		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
+		comp.setName(Name);
+//		comp.setBorder(border);
+		comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
+		comp.addKeyListener(this.findPwdAction);
+		this.add(comp);	
+	}
 	
 
 	

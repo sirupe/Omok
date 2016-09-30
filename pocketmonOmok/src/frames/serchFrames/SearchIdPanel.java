@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIdEnum;
+import frames.searchFrames.SearchIdFrame;
 
 public class SearchIdPanel extends JPanel {
 	

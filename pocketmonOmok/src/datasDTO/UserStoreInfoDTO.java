@@ -1,11 +1,10 @@
 package datasDTO;
 
-import java.io.Serializable;
-
 import enums.etc.UserPositionEnum;
 
 public class UserStoreInfoDTO extends AbstractEnumsDTO {
-
+	private static final long serialVersionUID = -4081016818898218349L;
+	
 	private String userID;
 	private int itemColorMatching;
 	private int itemIncreaseTime;

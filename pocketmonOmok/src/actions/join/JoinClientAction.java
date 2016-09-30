@@ -18,7 +18,7 @@ import frames.BasicFrame;
 import frames.joinFrames.JoinFrame;
 import utility.RegexCheck;
 
-public class JoinAction extends Adapters {
+public class JoinClientAction extends Adapters {
 	private BasicFrame basicFrame;
 	private JoinFrame joinFrame;
 	
@@ -43,7 +43,7 @@ public class JoinAction extends Adapters {
 
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
-	public JoinAction(BasicFrame basicFrame, JoinFrame joinFrame){
+	public JoinClientAction(BasicFrame basicFrame, JoinFrame joinFrame){
 		this.basicFrame = basicFrame;
 		this.joinFrame = joinFrame;
 		this.birthYear = "2016";
@@ -438,7 +438,7 @@ public class JoinAction extends Adapters {
 			errCount++;
 		}
 		
-		//성별이 입력이 안되었을 때 TODO
+		//성별이 입력이 안되었을 때 
 		if(this.gender == 0) {
 			System.out.println("성별");
 			this.joinFrame.labelSetting(this.joinFrame.getGenderErrorLabel(), color, msg);

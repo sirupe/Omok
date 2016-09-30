@@ -1,15 +1,10 @@
 package enums.frames;
 
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-
-import javax.swing.border.EmptyBorder;
-
-import com.sun.glass.ui.Size;
 
 public enum SearchIdEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
@@ -71,8 +66,18 @@ public enum SearchIdEnum {
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
 		)),
-	//확인 버튼이름
-	BUTTON_NAME_CONFIRM("confirm"),
+	//홈으로버튼 생성
+	GO_HOME_BUTTON(new Rectangle(
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
+			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
+			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
+		)),
+	
+	//버튼이름
+	BUTTON_NAME_BACK("backButton"),
+	BUTTON_NAME_CONFIRM("confirmButton"),
+	BUTTON_NAME_GOHOME("homeButton"),
 	//일반 폰트
 	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (SearchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
 	//에러 메세지 폰트

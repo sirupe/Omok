@@ -1,5 +1,4 @@
-package frames.serchFrames;
-
+package frames.searchFrames;
 
 import java.awt.CardLayout;
 import java.awt.Graphics;
@@ -12,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import actions.findIDandPW.FindIDAction;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 import frames.BasicFrame;
@@ -23,9 +21,10 @@ public class SearchIdFrame extends JFrame  {
 	private SearchIdPanel searchIdPanel;
 	private SearchIdResultPanel searchIdResultPanel;
 	private Image backGround;
+	
 	private CardLayout cardLayout;
+	
 	private BasicFrame basicFrame;
-	private FindIDAction findIDAction;
 	
 	public SearchIdFrame(BasicFrame basicFrame) throws IOException {
 		this.basicFrame = basicFrame;
@@ -63,6 +62,7 @@ public class SearchIdFrame extends JFrame  {
 			}
 		};
 		
+		this.searchIdPanel.setOpaque(false);
 		
 		//아이디 찾기 결과창 패널
 		this.searchIdResultPanel = new SearchIdResultPanel(this) {
@@ -81,46 +81,46 @@ public class SearchIdFrame extends JFrame  {
 					e.printStackTrace();
 				}
 			}};
-			
-		this.searchIdPanel = new SearchIdPanel(this);
-		this.searchIdPanel.setOpaque(false);
+
 		this.cardLayout = new CardLayout();
-		this.add("searchIdPanel",this.searchIdPanel);
 		this.setLayout(this.cardLayout);
+		this.add("searchIdPanel",this.searchIdPanel);
+		this.add("searchIdResultPanel",this.searchIdResultPanel);
 		this.setTitle("ID찾기");
 		this.setVisible(true);
 		this.setResizable(false);
-		this.setLayout(null);
 
 	}
 	
+	
+	
+	//취소버튼을 누르면 //홈버튼을 누르면
 	public void doCancleButton(){
-		
-		//나를숨겨
 		this.setVisible(false);
-		//그리고 로그인창을 띄워
 		this.basicFrame.setVisible(true);
-		
 	}
 	
+	//ID검색결과 패널로 바꿔주는 매소드
 	public void doConfirmButton(){	
-		//나를숨겨
-		this.setVisible(false);
-		//그리고 확인결과창을 띄워
-		this.searchIdResultPanel.setVisible(true);	
+		this.cardLayout.show(this.getContentPane(), "searchIdResultPanel");
 	}
-
+	//ID검색 패널로 바꿔주는 매소드
+	public void searchIdPanel() {
+		this.cardLayout.show(this.getContentPane(), "searchIdPanel");
+	}
+	
+	//ID검색창 패널로 변환하는 매소드
 	public SearchIdPanel getSearchIdPanel() {
 		return searchIdPanel;
 	}
-	
+	//ID검색 결과창 패널로 변환하는 매소드
 	public SearchIdResultPanel getSearchIdResultPanel() {
 		return searchIdResultPanel;
 	}
+	//베이직프래임을 변환하는 매소드
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
-	public FindIDAction getFindIDAction() {
-		return findIDAction;
-	}
+	
 }
+

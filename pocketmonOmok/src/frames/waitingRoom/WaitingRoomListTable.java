@@ -27,11 +27,15 @@ public class WaitingRoomListTable {
 		}	
 	}
 	
+	public Object[][] getWaitingRoomListData() {
+		return waitingRoomListData;
+	}
+	
 	public String[] getWaitingRoomListColumn() {
 		return waitingRoomListColumn;
 	}
 	
-	public Object[][] getWaitingRoomListData() {
-		return waitingRoomListData;
+	public void setWaitingRoomListData(Object[][] waitingRoomListData) {
+		this.waitingRoomListData = waitingRoomListData;
 	}
 }

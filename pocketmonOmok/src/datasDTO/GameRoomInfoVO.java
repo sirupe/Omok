@@ -12,14 +12,15 @@ import enums.etc.UserPositionEnum;
 import enums.frames.WaitingRoomSizesEnum;
 
 public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
+	private static final long serialVersionUID = 3443624527270954244L;
+
 	public GameRoomInfoVO(UserPositionEnum position) {
 		super(position);
 	}
-
-	private static final long serialVersionUID = 123463L;
 	
 	private ImageIcon image;
 	private int roomNumber;
+	private int personNum;
 	private String roomName;
 	private String owner;
 	private String guest;
@@ -30,21 +31,20 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 		return image;
 	}
 	
-	public void setImage(String imageEnum) throws IOException {
-		this.image = new ImageIcon(ImageIO.read(
-			new File(imageEnum)).getScaledInstance(
-				WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
-				WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
-				Image.SCALE_AREA_AVERAGING)
-		);
-	}
-	
-	
-	
-	@Override
-	public String toString() {
-		return "GameRoomInfoVO [image=" + image + ", roomNumber=" + roomNumber + ", roomName=" + roomName + ", owner="
-				+ owner + ", guest=" + guest + ", persons=" + persons + ", pwd=" + pwd + "]";
+	public void setImage(String imageEnum) {
+		try {
+			this.image = new ImageIcon(ImageIO.read(
+				new File(imageEnum)).getScaledInstance(
+					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
+					Image.SCALE_AREA_AVERAGING)
+			);
+			this.image.setDescription(imageEnum);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.image.setDescription(imageEnum);
 	}
 
 	public int getRoomNumber() {
@@ -84,7 +84,8 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	}
 	
 	public void setPersons(int persons) {
-		this.persons = "(" + persons + "/2)";
+		this.personNum	= persons;
+		this.persons	= "(" + persons + "/2)";
 	}
 	
 	public String getPwd() {
@@ -93,5 +94,9 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	
+	public int getPersonNum() {
+		return personNum;
 	}
 }

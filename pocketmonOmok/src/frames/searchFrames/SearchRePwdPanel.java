@@ -1,4 +1,4 @@
-package frames.serchFrames;
+package frames.searchFrames;
 
 
 import java.awt.Color;
@@ -16,12 +16,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
-import actions.findIDandPW.FindPWAction;
 import actions.findIDandPW.FindRePwdAction;
-import actions.join.JoinAction;
-import enums.frames.GameRoomEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.LoginSizesEnum;
 import enums.frames.SearchIdEnum;

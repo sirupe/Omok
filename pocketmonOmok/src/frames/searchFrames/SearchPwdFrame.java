@@ -1,4 +1,4 @@
-package frames.serchFrames;
+package frames.searchFrames;
 
 import java.awt.CardLayout;
 
@@ -122,9 +122,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
          
           
           	this.add("searchPwdPanel",this.searchPwdPanel);
-          	this.add("searchRePwdPanel", this.searchRePwdPanel);
-          	
-          	this.add("searchChangeConfirmPanel", this.searchChangePanel);
+//          	this.add("searchRePwdPanel", this.searchRePwdPanel);
+//          	this.add("searchChangeConfirmPanel", this.searchChangePanel);
       
           	this.setTitle("PWÃ£±â");
           	this.setVisible(true);

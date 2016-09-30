@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import actions.adapters.Adapters;import enums.frames.LoginSizesEnum;
-import frames.serchFrames.SearchRePwdPanel;
+import frames.searchFrames.SearchRePwdPanel;
 import utility.RegexCheck;
 
 public class FindRePwdAction extends Adapters {

@@ -1,11 +1,9 @@
 package datasDTO;
 
-import java.io.Serializable;
-
-import enums.etc.ServerActionEnum;
 import enums.etc.UserPositionEnum;
 
 public class ServerMessageDTO extends AbstractEnumsDTO {
+	private static final long serialVersionUID = 8353390824060690129L;
 	private String serverMessage;
 
 	public ServerMessageDTO(UserPositionEnum position) {

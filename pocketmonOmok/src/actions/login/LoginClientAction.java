@@ -16,10 +16,10 @@ import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
 import frames.LoginPanel;
 
-public class LoginAction extends MouseAdapter implements ActionListener{
+public class LoginClientAction extends MouseAdapter implements ActionListener{
 	private LoginPanel loginPanel;
 	
-	public LoginAction(LoginPanel loginPanel){
+	public LoginClientAction(LoginPanel loginPanel){
 		this.loginPanel = loginPanel;
 	} 
 	
@@ -87,7 +87,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 			if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
 				this.loginPanel.getJoinButton().setIcon(
 					new ImageIcon(ImageIO.read(
-						new File("resources/login/signup.png")).getScaledInstance(
+						new File(ImageEnum.LOGINPANEL_SIGHUP.getImageDir())).getScaledInstance(
 							LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
 							LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
 							Image.SCALE_AREA_AVERAGING))
@@ -95,7 +95,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 			} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
 				this.loginPanel.getSearchIdButton().setIcon(
 					new ImageIcon(ImageIO.read(
-						new File("resources/login/forgotID.png")).getScaledInstance(
+						new File(ImageEnum.LOGINPANEL_SEARCHID.getImageDir())).getScaledInstance(
 							LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
 							LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(), 
 							Image.SCALE_AREA_AVERAGING))
@@ -103,7 +103,7 @@ public class LoginAction extends MouseAdapter implements ActionListener{
 			} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
 				this.loginPanel.getSearchPwButton().setIcon(
 					new ImageIcon(ImageIO.read(
-						new File("resources/login/forgotPW.png")).getScaledInstance(
+						new File(ImageEnum.LOGINPANEL_SEARCHPW.getImageDir())).getScaledInstance(
 							LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
 							LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(), 
 							Image.SCALE_AREA_AVERAGING))
