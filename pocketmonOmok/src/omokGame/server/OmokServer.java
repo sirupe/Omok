@@ -42,6 +42,8 @@ public class OmokServer {
 	private UserStoreInfoDAO storeDAO;
 	private UserStoreSkinInfoDAO skinDAO;
 	
+	private StonePositionCheck positionCheck;
+	
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
@@ -265,7 +267,7 @@ public class OmokServer {
 				break;
 			}
 		}
-		try {//TODO
+		try {
 			personalServer.getServerOutputStream().writeObject(serverRoomVO);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -362,7 +364,6 @@ public class OmokServer {
 			//이메일발송
 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
 			
-			resultPersonalDTO.setCertificationNumber(confirmNumber);
 			resultPersonalDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
 			personalServer.getServerOutputStream().writeObject(resultPersonalDTO);
 			break;
@@ -425,6 +426,8 @@ public class OmokServer {
 	
 //게임방----------------------------------------------------------------------------------------------------
 	public void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+		this.positionCheck = new StonePositionCheck();
+		
 		switch(index.getUserAction()) {
 		// 유저가 게임방에서 채팅을 보낼 떼
 		case USER_IN_GAME_ROOM_CHATTING :
@@ -527,21 +530,37 @@ public class OmokServer {
 			for (int j = 0, jLen = board[0].length; j < jLen; j++) {
 				board[i][j] = inputBoard[i][j];
 				if(board[i][j] >= 3) {
+					board[i][j] -= 2;
 					x = i;
 					y = j;
 				}
 			}
 		}
 		
-		StonePositionCheck positionCheck = new StonePositionCheck();
-		
-		
+		String nextTurnUser = gameBoard.getNextTurnUser();
 		GameBoardVO sendGameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
 		sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WIN_CHECK);
 		sendGameBoardVO.setGameBoard(board);
-		sendGameBoardVO.setTurnUser(gameBoard.getTurnUser());
 		sendGameBoardVO.setX(x);
 		sendGameBoardVO.setY(y);
+		sendGameBoardVO.setNextTurnUser(nextTurnUser);
+		sendGameBoardVO.setNowTurnUser(gameBoard.getNowTurnUser());
+		sendGameBoardVO.setWinUser(
+			this.positionCheck.stoneDiagonalLeftCheck(x, y, board) < 5 ? 
+				(this.positionCheck.stoneDiagonalRightCheck(x, y, board) < 5 ? 
+					(this.positionCheck.stoneHeightCheck(x, y, board) < 5 ? 
+						(this.positionCheck.stoneWidthCheck(x, y, board) < 5 ? null : gameBoard.getNowTurnUser()) 
+					: gameBoard.getNowTurnUser()) 
+				: gameBoard.getNowTurnUser()) 
+			: gameBoard.getNowTurnUser()
+		);
+		
+		try {
+			personalServer.getServerOutputStream().writeObject(sendGameBoardVO);
+			this.loginUsersMap.get(nextTurnUser).getServerOutputStream().writeObject(sendGameBoardVO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
