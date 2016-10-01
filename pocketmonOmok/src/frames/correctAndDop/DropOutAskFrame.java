@@ -1,6 +1,5 @@
 package frames.correctAndDop;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -13,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import enums.frames.CorrectEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 
 public class DropOutAskFrame extends JFrame{
 	private Image backGround;
@@ -32,7 +31,7 @@ public class DropOutAskFrame extends JFrame{
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
 		this.dropOutLabel = new JLabel("Á¤¸» Å»ÅðÇÏ½Ã°Ú½À´Ï±î? :(");
-		this.dropOutLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.dropOutLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.dropOutLabel.setBounds(CorrectEnum.DROPOUT_TEXT_SIZE_RECT.getRect());
 		
 		this.confirm = new JButton() {

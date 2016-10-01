@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.join.JoinServerAction;
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
 import datasDTO.UserPersonalInfoDTO;
@@ -141,6 +142,10 @@ public class BasicFrame extends JFrame implements Serializable{
 				}
 			}
 		};
+	}
+	
+	public void setJoinServerAction(JoinServerAction serverAction) {
+		this.clientAccept.setJoinRequestAction(serverAction);
 	}
 	
 	public void sendDTO(AbstractEnumsDTO dto) {

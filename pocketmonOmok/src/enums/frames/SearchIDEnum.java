@@ -6,7 +6,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-public enum SearchIdEnum {
+public enum SearchIDEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 	SEARCHFRAME_SIZE_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
@@ -79,11 +79,11 @@ public enum SearchIdEnum {
 	BUTTON_NAME_CONFIRM("confirmButton"),
 	BUTTON_NAME_GOHOME("homeButton"),
 	//텍스트필드폰트
-	TEXTFIELD_FONT(new Font("a으라차차",Font.PLAIN, (int) (SearchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.1))),
+	TEXTFIELD_FONT(new Font("a으라차차",Font.PLAIN, (int) (SearchIDEnum.Screen_SIZE.getDimension().width / 100 * 1.1))),
 	//일반 폰트
-	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (SearchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
+	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (SearchIDEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
 	//에러 메세지 폰트
-	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD, (int) (SearchIdEnum.Screen_SIZE.getDimension().width / 100 * 1.3))),
+	LABELFONT_ERROR(new Font("a으라차차",Font.BOLD, (int) (SearchIDEnum.Screen_SIZE.getDimension().width / 100 * 1.3))),
 	//에러 메세지색깔
 	LABELCOLOR_ERROR(Color.red),
 	//일반색깔
@@ -97,22 +97,22 @@ public enum SearchIdEnum {
 	private Rectangle rec;
 		
 	//set
-	private SearchIdEnum(Rectangle rec) {
+	private SearchIDEnum(Rectangle rec) {
 		this.rec = rec;
 	}
-	private SearchIdEnum(Dimension dimension) {
+	private SearchIDEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
-	private SearchIdEnum(String buttonName) {
+	private SearchIDEnum(String buttonName) {
 		this.buttonName = buttonName;
 	}
-	private SearchIdEnum(int size) {
+	private SearchIDEnum(int size) {
 		this.size = size;
 	}
-	private SearchIdEnum(Color color) {
+	private SearchIDEnum(Color color) {
 		this.color = color;
 	}
-	private SearchIdEnum(Font font) {
+	private SearchIDEnum(Font font) {
 		this.font = font;
 	}
 	

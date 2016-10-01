@@ -4,19 +4,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import datasDTO.AbstractEnumsDTO;
-import datasDTO.GameRoomInfoVO;
-import datasDTO.RoomAndUserListDTO;
-import datasDTO.UserPersonalInfoDTO;
+
 import frames.BasicFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchIdPanel;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
-public class ClientReciever extends Thread {
+public class ClientReceiver extends Thread {
 	private ClientAccept clientAccept;
 	private ObjectInputStream clientIS;
 	private BasicFrame basicFrame;
 	
-	public ClientReciever(ClientAccept accept, BasicFrame basicFrame) {
+	public ClientReceiver(ClientAccept accept, BasicFrame basicFrame) {
 		this.clientAccept = accept;
 		this.clientIS 	  = accept.getClientIS();
 		this.basicFrame   = basicFrame;
@@ -35,7 +33,6 @@ public class ClientReciever extends Thread {
 					this.clientAccept.loginSuccessCheck(userPosition);
 					break;
 				case POSITION_WAITING_ROOM :
-					System.out.println("waiting room");
 					this.clientAccept.waitingRoomAction(userPosition);
 					break;
 				case POSITION_JOIN :
@@ -49,7 +46,6 @@ public class ClientReciever extends Thread {
 				case POSITION_FIND_PW :  
 					break;
 				case POSITION_GAME_ROOM :
-					System.out.println("gameroom");
 					this.clientAccept.inGameRoom(userPosition);
 					break;
 				case POSITION_STORE :             
@@ -65,9 +61,6 @@ public class ClientReciever extends Thread {
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-	
-	
 }

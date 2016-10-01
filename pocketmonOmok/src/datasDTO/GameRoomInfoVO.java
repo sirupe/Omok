@@ -18,7 +18,8 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 		super(position);
 	}
 	
-	private ImageIcon image;
+	private ImageIcon enterImage;
+//	private ImageIcon guestImage;
 	private int roomNumber;
 	private int personNum;
 	private String roomName;
@@ -27,25 +28,45 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	private String persons;
 	private String pwd;
 	
-	public ImageIcon getImage() {
-		return image;
+	public ImageIcon getEnterImage() {
+		return enterImage;
 	}
 	
-	public void setImage(String imageEnum) {
+	public void setEnterImage(String imageEnum) {
 		try {
-			this.image = new ImageIcon(ImageIO.read(
+			this.enterImage = new ImageIcon(ImageIO.read(
 				new File(imageEnum)).getScaledInstance(
 					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
 					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING)
 			);
-			this.image.setDescription(imageEnum);
+			this.enterImage.setDescription(imageEnum);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		this.image.setDescription(imageEnum);
+		this.enterImage.setDescription(imageEnum);
 	}
+//
+//	public ImageIcon getGuestImage() {
+//		return guestImage;
+//	}
+//
+//	public void setGuestImage(String imageEnum) {
+//		try {
+//			this.guestImage = new ImageIcon(ImageIO.read(
+//				new File(imageEnum)).getScaledInstance(
+//					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+//					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
+//					Image.SCALE_AREA_AVERAGING)
+//			);
+//			this.guestImage.setDescription(imageEnum);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		this.guestImage.setDescription(imageEnum);
+//	}
 
 	public int getRoomNumber() {
 		return roomNumber;

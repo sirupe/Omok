@@ -2,34 +2,23 @@ package actions.findIDandPW;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import actions.adapters.Adapters;
-import datasDTO.AbstractEnumsDTO;
-import datasDTO.UserPersonalInfoDTO;
-import enums.etc.ServerActionEnum;
-import enums.etc.UserActionEnum;
-import enums.etc.UserPositionEnum;
-import enums.frames.SearchIdEnum;
-import frames.BasicFrame;
-import frames.searchFrames.SearchIdFrame;
+import enums.frames.SearchIDEnum;
 import frames.searchFrames.SearchIdPanel;
 import frames.searchFrames.SearchIdResultPanel;
 import utility.RegexCheck;
 
-public class FindIdAction  extends Adapters {
+public class FindIDAction  extends Adapters {
 	private SearchIdPanel searchIdPanel;
 	private SearchIdResultPanel searchIdResultPanel;
 	
 	private boolean isNameCheck = false;
 	private boolean isEmailCheck = false;
 	
-	public FindIdAction(SearchIdPanel searchIdPanel){
+	public FindIDAction(SearchIdPanel searchIdPanel){
 		this.searchIdPanel = searchIdPanel;
 	}
 
@@ -37,16 +26,18 @@ public class FindIdAction  extends Adapters {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton)e.getSource()).getName();
+
 		this.checkName();
 		this.checkEmail();
 		
 		//   if 취소 버튼 액션      if else 확인버튼	
-		if(buttonName.equals(SearchIdEnum.BUTTON_NAME_BACK.getButtonName())) {
+		if(buttonName.equals(SearchIDEnum.BUTTON_NAME_BACK.getButtonName())) {
 			this.searchIdPanel.doCancleButton();
-		} else if(buttonName.equals(SearchIdEnum.BUTTON_NAME_CONFIRM.getButtonName())) {
+		} else if(buttonName.equals(SearchIDEnum.BUTTON_NAME_CONFIRM.getButtonName())) {
 			
 			if(this.isNameCheck && this.isEmailCheck) {
 				this.searchIdPanel.doCheckId();
+
 			}
 		}
 	}
