@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -14,6 +15,7 @@ import datasDAO.UserPersonalInfoDAO;
 import datasDAO.UserStoreInfoDAO;
 import datasDAO.UserStoreSkinInfoDAO;
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.GameBoardVO;
 import datasDTO.GameRoomInfoVO;
 import datasDTO.RoomAndUserListDTO;
 import datasDTO.ServerMessageDTO;
@@ -350,11 +352,12 @@ public class OmokServer {
 		
 		// 인증번호 발송인 경우
 		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
-			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO)data;
 			//인증번호 생성
 			String confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
+			UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+			resultDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION);
 			//이메일발송
-			new SendEmail(confirmNumber, resultDTO.getUserEmail());
+			new SendEmail(confirmNumber, personalDTO.getUserEmail());
 			
 			resultDTO.setCertificationNumber(confirmNumber);
 			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
@@ -424,6 +427,10 @@ public class OmokServer {
 		case USER_GAME_START :
 			this.gameStart(index, personalServer);
 			break;
+		// 유저가 돌을 놨다.
+		case USER_GAME_BOARD_INFO :
+			
+			break;
 		default:
 			break;
 		}
@@ -491,6 +498,37 @@ public class OmokServer {
 		}
 		
 	}
+	
+	public void stonePositionCheck(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+		GameBoardVO gameBoard = (GameBoardVO)index;
+		int inputBoard[][] = gameBoard.getGameBoard();
+		int board[][] = new int[15][];
+		
+		int x = 0;
+		int y = 0;
+		
+		for (int i = 0, iLen = board.length; i < iLen; i++) {
+			board[i] = new int[15];
+			for (int j = 0, jLen = board[0].length; j < jLen; j++) {
+				board[i][j] = inputBoard[i][j];
+				if(board[i][j] >= 3) {
+					x = i;
+					y = j;
+				}
+			}
+		}
+		
+		StonePositionCheck positionCheck = new StonePositionCheck();
+		
+		
+		GameBoardVO sendGameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
+		sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WIN_CHECK);
+		sendGameBoardVO.setGameBoard(board);
+		sendGameBoardVO.setTurnUser(gameBoard.getTurnUser());
+		sendGameBoardVO.setX(x);
+		sendGameBoardVO.setY(y);
+	}
+	
 	
 	public void store() {
 		System.out.println("상점");

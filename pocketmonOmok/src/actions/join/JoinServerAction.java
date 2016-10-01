@@ -11,9 +11,11 @@ import frames.joinFrames.JoinSuccessFrame;
 
 public class JoinServerAction {
 	private JoinFrame joinFrame;
+	private JoinClientAction joinClientAction;
 	
 	public JoinServerAction(JoinFrame joinFrame) {
 		this.joinFrame = joinFrame;
+		this.joinClientAction = joinFrame.getJoinAction();
 	}
 	
 	public void joinOverlapCheck(AbstractEnumsDTO data) {
@@ -50,6 +52,11 @@ public class JoinServerAction {
 	}
 	
 	public void cercificationNumber(AbstractEnumsDTO data) {
-		this.joinFrame.getJoinAction().setCertificationNumber(((UserPersonalInfoDTO)data).getCertificationNumber());
+		UserPersonalInfoDTO personalInfoDTO = (UserPersonalInfoDTO)data;
+		
+		
+		System.out.println(joinClientAction);
+		
+		this.joinClientAction.setCertificationNumber(personalInfoDTO.getCertificationNumber());
 	}	
 }

@@ -42,10 +42,10 @@ public class ClientAccept {
 		this.basicFrame	  = new BasicFrame(this);
 		
 		this.loginRequestAction		= new LoginServerAction(this.basicFrame.getLoginPanel());
-		this.joinRequestAction		= new JoinServerAction(this.basicFrame.getJoinFrame());
+//		this.joinRequestAction		= new JoinServerAction(this.basicFrame.getJoinFrame());
 		this.gameRoomRequestAction 	= new GameRoomServerAction(this.basicFrame.getGameRoomPanel());
 		
-		ClientReciever reciever = new ClientReciever(this, this.basicFrame);
+		ClientReceiver reciever = new ClientReceiver(this, this.basicFrame);
 		reciever.start();
 	}
 //·Î±×ÀÎ---------------------------------------------------------------------------------------------
@@ -210,5 +210,9 @@ public class ClientAccept {
 
 	public ObjectOutputStream getClientOS() {
 		return clientOS;
+	}
+	
+	public void setJoinRequestAction(JoinServerAction joinRequestAction) {
+		this.joinRequestAction = joinRequestAction;
 	}
 }

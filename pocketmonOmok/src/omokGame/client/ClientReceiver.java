@@ -6,12 +6,12 @@ import java.io.ObjectInputStream;
 import datasDTO.AbstractEnumsDTO;
 import frames.BasicFrame;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
-public class ClientReciever extends Thread {
+public class ClientReceiver extends Thread {
 	private ClientAccept clientAccept;
 	private ObjectInputStream clientIS;
 	private BasicFrame basicFrame;
 	
-	public ClientReciever(ClientAccept accept, BasicFrame basicFrame) {
+	public ClientReceiver(ClientAccept accept, BasicFrame basicFrame) {
 		this.clientAccept = accept;
 		this.clientIS 	  = accept.getClientIS();
 		this.basicFrame   = basicFrame;

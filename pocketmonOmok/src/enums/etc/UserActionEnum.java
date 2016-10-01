@@ -15,5 +15,6 @@ public enum UserActionEnum {
 	USER_IN_GAME_ROOM_CHATTING, // 유저님 게임방 안에서 채팅하신단다
 	USER_GUEST_READY_CHECK,		// 게스트유저가 레디를 체크했다.
 	USER_GUEST_READY_DECHECK,	// 게스트유저가 레디 체크를 해제했다.
-	USER_GAME_START;			// 드디어 방장이 게임시작을..!!
+	USER_GAME_START,			// 드디어 방장이 게임시작을..!!
+	USER_GAME_BOARD_INFO;		// 유저가 돌을 놓았다.
 }

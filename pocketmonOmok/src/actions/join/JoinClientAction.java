@@ -39,6 +39,7 @@ public class JoinClientAction extends Adapters {
 	
 	private boolean emailConfirmTime;
 
+	private Thread timeThread;
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinClientAction(BasicFrame basicFrame, JoinFrame joinFrame){
@@ -305,7 +306,7 @@ public class JoinClientAction extends Adapters {
 		}
 	}
 
-	//인증 버튼 눌렀을 시 TODO
+	//인증 버튼 눌렀을 시 
 	public void confirmAction() {
 		if(this.emailAddrSuitabilityCheck() && this.emailIDSuitabilityCheck()) {
 			StringBuffer email = new StringBuffer();
@@ -328,41 +329,54 @@ public class JoinClientAction extends Adapters {
 			//메일발송 메세지 보여주기
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), Color.blue, "joinMail발송");
 			//시간 세어주는 쓰레드 생성
-			new Thread() {
+			
+			//사용자가 이메일을 바꾸어 다시 인증하기 버튼을 누른다면 계속 쓰레드가 겹치므로
+			//인증버튼을 눌렀을 때 실행되고 있는 쓰레드가 있는지 확인하여 인터럽으로 쓰레드 삭제한 후
+			//새로운 쓰레드를 돌려준다.
+			if(this.timeThread != null) {
+				this.timeThread.interrupt();
+			}
+			//TODO
+			this.timeThread = new Thread() {
 				@Override
 				public void run() {
 					StringBuffer time = new StringBuffer();
 					Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 					
-					for(int i = 3; i >= 0; --i) {
-						for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
-							time.delete(0, time.length());
-							time.append(i);
-							time.append(" : ");
-							time.append(j < 10 ? "0" + j : j);
-							
-							joinFrame.getEmailTimeLabel().setText(time.toString());
-							try {
-								Thread.sleep(1000);
-								if(emailConfirmTime) {
-									this.interrupt();
+					//인터럽트는 실행중인 쓰레드에 명령을 주면 쓰레드를 정지시키고
+					//실행중이지 않은 쓰레드에 명령을 주면 다시 실행시킨다.
+					while(!timeThread.isInterrupted()) {
+						for(int i = 3; i >= 0; --i) {
+							for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
+								time.delete(0, time.length());
+								time.append(i);
+								time.append(" : ");
+								time.append(j < 10 ? "0" + j : j);
+								
+								joinFrame.getEmailTimeLabel().setText(time.toString());
+								try {
+									Thread.sleep(1000);
+									if(emailConfirmTime) {
+										this.interrupt();
+									}
+								} catch (InterruptedException e) {
+									break;
 								}
-							} catch (InterruptedException e) {
-								break;
+							}
+							if(emailConfirmTime) {
+								return;
 							}
 						}
-						if(emailConfirmTime) {
-							return;
-						}
+						joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
+						joinFrame.getEmailTimeLabel().setVisible(false);
+						
+						if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
+							certificationNumber = "0";
+						};
 					}
-					joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
-					joinFrame.getEmailTimeLabel().setVisible(false);
-					
-					if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
-						certificationNumber = null;
-					};
 				}
-			}.start();
+			};
+			this.timeThread.start();
 		}
 	}
 	
@@ -375,6 +389,7 @@ public class JoinClientAction extends Adapters {
 			this.joinFrame.getEmailConfTextField().setEditable(false);
 			this.joinFrame.getConfirmButton().setEnabled(false);
 			this.emailConfirmTime = true;
+			this.timeThread.interrupt();
 		} else {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
 		}

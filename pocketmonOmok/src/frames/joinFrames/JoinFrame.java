@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import actions.join.JoinClientAction;
+import actions.join.JoinServerAction;
 import enums.frames.JoinSizesEnum;
 import frames.BasicFrame;
 import utility.JTextFieldNumOnly;
@@ -94,6 +95,7 @@ public class JoinFrame extends JFrame {
 	public JoinFrame(BasicFrame basicFrame) throws IOException {
 		this.basicFrame = basicFrame;
 		this.joinAction = new JoinClientAction(this.basicFrame, this);
+		this.basicFrame.setJoinServerAction(new JoinServerAction(this));
 		this.addWindowListener(this.joinAction);
 
 		this.errMessageMap = JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
