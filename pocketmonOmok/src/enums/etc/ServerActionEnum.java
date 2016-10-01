@@ -21,5 +21,7 @@ public enum ServerActionEnum {
 	ENTER_PRIVATE_GAME_ROOM,	// 유저가 비밀방에 입장하고자 할 때 서버에서 해당 비밀방의 정보를 전송
 	GAME_ROOM_USER_CHATTING,	// 게임방에서 유저가 채팅시도
 	GAME_ROOM_GUEST_READY_CHECK,// 게스트가 레디를 클릭했다는 것을 서버가 알았다.
+	GAME_ROOM_GUEST_READY_DECHECK,// 게스트가 레디를 해제하였다.
+	GAME_ROOM_GAME_START,		// 게임방에서 오너가 게임스타트 클릭!
 	NOTHING;
 }

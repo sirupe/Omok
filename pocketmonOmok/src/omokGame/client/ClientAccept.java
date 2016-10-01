@@ -168,8 +168,12 @@ public class ClientAccept {
 		case GAME_ROOM_USER_CHATTING :
 			this.basicFrame.getGameRoomPanel().chattingAreaSetting(data);
 			break;
+		case GAME_ROOM_GUEST_READY_DECHECK :
 		case GAME_ROOM_GUEST_READY_CHECK :
-
+			this.basicFrame.getGameRoomPanel().changeStartGuestReadyCheck(data);
+			break;
+		case GAME_ROOM_GAME_START :
+			this.basicFrame.getGameRoomPanel().gameStart();
 			break;
 		default :
 			break;

@@ -18,7 +18,7 @@ import actions.findIDandPW.FindPWAction;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import frames.LoginPanel;
 import utility.RegexCheck;
@@ -69,8 +69,8 @@ public class SearchPwdPanel extends JPanel {
 		
 		//this.add(searchConfirmButton);
 		//레이블 폰트 - searchIdEnum 에서 불러왔습니다.
-		Font default_Font  = SearchIdEnum.LABELFONT_DEFAULT.getFont(); //일반
-		Font error_FONT    = SearchIdEnum.LABELFONT_ERROR.getFont(); //에러
+		Font default_Font  = SearchIDEnum.LABELFONT_DEFAULT.getFont(); //일반
+		Font error_FONT    = SearchIDEnum.LABELFONT_ERROR.getFont(); //에러
 		this.searchIdLabel.setFont(default_Font);
 		this.searchemailLabel.setFont(default_Font);
 		
@@ -107,7 +107,7 @@ public class SearchPwdPanel extends JPanel {
 		this.searchErrorMsgLabel.setOpaque(false);
 		this.add(this.searchErrorMsgLabel);
 		
-		this.searchErrorMsgLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchErrorMsgLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.searchErrorMsgLabel.setForeground(Color.RED);
 		this.searchErrorMsgLabel.setText(searchErrorMsg);
 	}
@@ -124,7 +124,7 @@ public class SearchPwdPanel extends JPanel {
 		this.searchAnswerMsgLabel.setOpaque(false);
 		this.add(this.searchAnswerMsgLabel);
 		
-		this.searchAnswerMsgLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchAnswerMsgLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.searchAnswerMsgLabel.setForeground(Color.blue);
 		this.searchAnswerMsgLabel.setText(searchAnswer);
 		System.out.println("ANJID..");

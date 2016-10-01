@@ -199,17 +199,17 @@ public class OmokServer {
 		pasteGameRoomInfo.setPwd(gameRoomInfo.getPwd());
 		pasteGameRoomInfo.setRoomName(gameRoomInfo.getRoomName());
 		pasteGameRoomInfo.setRoomNumber(gameRoomInfo.getRoomNumber());
-
+		
 		// 방이 20개가 넘지 않는다면 생성 성공. 방을 생성한 유저에게 게임방 입장시 필요한 정보를 전송.
 		// 방이 20개가 넘는다면 방만들기 실패.
 		if(this.gameRoomList.size() < 20) {
-			this.gameRoomList.add(gameRoomInfo);
+			this.gameRoomList.add(pasteGameRoomInfo);
 			UserInGameRoomDTO userInGameRoom = new UserInGameRoomDTO(UserPositionEnum.POSITION_WAITING_ROOM);
 			userInGameRoom.setServerAction(ServerActionEnum.GAME_CREATEROOM_SUCCESS);
-			userInGameRoom.setGameRoomInfo(gameRoomInfo);
-			userInGameRoom.setUserGameData(this.gamedataDAO.userGameData(gameRoomInfo.getOwner()));
-			userInGameRoom.setUserItemInfo(this.storeDAO.getUserStoreInfo(gameRoomInfo.getOwner()));
-			userInGameRoom.setUserSkinInfo(this.skinDAO.getUserSkinInfo(gameRoomInfo.getOwner()));
+			userInGameRoom.setGameRoomInfo(pasteGameRoomInfo);
+			userInGameRoom.setUserGameData(this.gamedataDAO.userGameData(pasteGameRoomInfo.getOwner()));
+			userInGameRoom.setUserItemInfo(this.storeDAO.getUserStoreInfo(pasteGameRoomInfo.getOwner()));
+			userInGameRoom.setUserSkinInfo(this.skinDAO.getUserSkinInfo(pasteGameRoomInfo.getOwner()));
 			personalServer.getServerOutputStream().writeObject(userInGameRoom);
 		} else {
 			gameRoomInfo.setServerAction(ServerActionEnum.GAME_CREATEROOM_FAIL);			
@@ -412,10 +412,17 @@ public class OmokServer {
 		case USER_IN_GAME_ROOM_CHATTING :
 			this.inGameRoomChatting(index, personalServer);
 			break;
-		
-		// 게임방 내의 게스트가 레디버튼을 누르면
+		// 게임방 내의 게스트가 레디버튼 체크를 해제하면
+		case USER_GUEST_READY_DECHECK : 
+			this.guestReadyClick(index, personalServer);
+			break;
+		// 게임방 내의 게스트가 레디 버튼을 체크하면
 		case USER_GUEST_READY_CHECK :
 			this.guestReadyClick(index, personalServer);
+			break;
+		// 오너가 게임스타트를 했다!
+		case USER_GAME_START :
+			this.gameStart(index, personalServer);
 			break;
 		default:
 			break;
@@ -423,7 +430,6 @@ public class OmokServer {
 	}
 	
 	public void inGameRoomChatting(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
-		System.out.println("서버에도 들어온다.");
 		UserMessageVO messageVO = (UserMessageVO)index;
 		
 		StringBuffer message = new StringBuffer();
@@ -440,7 +446,7 @@ public class OmokServer {
 		
 		// 복사한 데이터를 방 안에 있는 유저와 상대방에게만 전송함.
 		try {
-			this.loginUsersMap.get(pasteMessageVO.getUserID()).getServerOutputStream().writeObject(pasteMessageVO);
+			personalServer.getServerOutputStream().writeObject(pasteMessageVO);
 			this.loginUsersMap.get(pasteMessageVO.getTargetID()).getServerOutputStream().writeObject(pasteMessageVO);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -449,17 +455,38 @@ public class OmokServer {
 	
 	// 게스트 유저가 레디를 눌렀으면 오너 유저에게 게스트가 레디를 눌렀다는 정보를 전송해준다.
 	public void guestReadyClick(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
-		GameRoomInfoVO inputInfo = (GameRoomInfoVO)index;
+		// 유저가 레디를 누른건지 체크를 해제한건지 확인하여 서버에서 보내는 정보를 바꿔준다.
+		ServerActionEnum serverAction = index.getUserAction() == UserActionEnum.USER_GUEST_READY_CHECK ? 
+				ServerActionEnum.GAME_ROOM_GUEST_READY_CHECK : ServerActionEnum.GAME_ROOM_GUEST_READY_DECHECK ;
 		
+		GameRoomInfoVO inputInfo = (GameRoomInfoVO)index;
+			
 		GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
-		gameRoomInfo.setServerAction(ServerActionEnum.GAME_ROOM_GUEST_READY_CHECK);
+		gameRoomInfo.setServerAction(serverAction);
 		gameRoomInfo.setGuest(inputInfo.getGuest());
 		gameRoomInfo.setOwner(inputInfo.getOwner());
 		
 		try {
 			this.loginUsersMap.get(gameRoomInfo.getOwner()).getServerOutputStream().writeObject(gameRoomInfo);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// 게임이 시작되었다는 정보를 게스트와 오너에게 보내준다.
+	public void gameStart(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+		GameRoomInfoVO inputInfo = (GameRoomInfoVO)index;
+		
+		GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+		gameRoomInfo.setServerAction(ServerActionEnum.GAME_ROOM_GAME_START);
+		gameRoomInfo.setOwner(inputInfo.getOwner());
+		gameRoomInfo.setGuest(inputInfo.getGuest());
+		
+		try {
+			this.loginUsersMap.get(gameRoomInfo.getGuest()).getServerOutputStream().writeObject(gameRoomInfo);
+			personalServer.getServerOutputStream().writeObject(gameRoomInfo);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

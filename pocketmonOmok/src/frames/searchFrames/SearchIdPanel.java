@@ -1,5 +1,6 @@
 package frames.searchFrames;
 
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -8,79 +9,80 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import actions.findIDandPW.FindIDAction;
 import enums.frames.CorrectEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.JoinSizesEnum;
+import enums.frames.SearchIDEnum;
 
 public class SearchIdPanel extends JPanel {
 	
-	private JLabel searchIdLabel;
+	private JLabel searchNameLabel;
 	private JLabel searchemailLabel;
 	private JLabel searchErrorMsgLabel;
-	private JTextField searchIdTextField;
-	private JTextField searchemailTextField;
-	private String searchError;
+	private JTextField searchNameTextField;
+	private JTextField searchEmailTextField;
+	
 	private JButton searchConfirmButton;
 	private JButton backButton;
-	private Image backGround;
 	
+	private FindIDAction findIDAction;
 	private SearchIdFrame searchIdFrame;
-	
+	private JPanel cardLayoutPanel;
 	
 	public SearchIdPanel(SearchIdFrame searchIdFrame) throws IOException {
-		
+		this.cardLayoutPanel = new JPanel();
 		this.searchIdFrame = searchIdFrame;
 		
-		Font defaultFont = SearchIdEnum.LABELFONT_DEFAULT.getFont();
-		Font errorFont = SearchIdEnum.LABELFONT_ERROR.getFont();
+		this.findIDAction = new FindIDAction(this);
+		JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
+		Font defaultFont = SearchIDEnum.LABELFONT_DEFAULT.getFont();
 
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
 		//이름
-		this.searchIdLabel = new JLabel("이름");
-		this.searchIdLabel.setFont(defaultFont);
-		this.searchIdLabel.setBounds(SearchIdEnum.SEARCH_ID_LABEL.getRectangle());
+		this.searchNameLabel = new JLabel("이름");
+		this.searchNameLabel.setFont(defaultFont);
+		this.searchNameLabel.setBounds(SearchIDEnum.SEARCH_ID_LABEL.getRectangle());
 		//이메일
 		this.searchemailLabel = new JLabel("email");
 		this.searchemailLabel.setFont(defaultFont);
-		this.searchemailLabel.setBounds(SearchIdEnum.SEARCH_EMAIL_LABEL.getRectangle());
-		//에러메세지
-		//TODO
-		System.out.println(SearchIdEnum.SEARCH_ERROR_LABEL.getRectangle().toString());
-		System.out.println(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
+		this.searchemailLabel.setBounds(SearchIDEnum.SEARCH_EMAIL_LABEL.getRectangle());
 		
-		//에러메시지크기
-		this.searchError = new String("ID,Pwd 입력 오류");
-		this.searchErrorMsgLabel = new JLabel(searchError);
-		this.searchErrorMsgLabel.setForeground(SearchIdEnum.LABELCOLOR_ERROR.getColor());
-		this.searchErrorMsgLabel.setFont(errorFont);
-		this.searchErrorMsgLabel.setBounds(SearchIdEnum.SEARCH_ERROR_LABEL.getRectangle());
+		//에러메시지
+		String searchMsg = "";
+		this.searchErrorMsgLabel = new JLabel(searchMsg);
+		this.searchErrorMsgLabel.setBounds(SearchIDEnum.SEARCH_ERROR_LABEL.getRectangle());
+		this.searchErrorMsgLabel.setForeground(SearchIDEnum.LABELCOLOR_ERROR.getColor());
+		this.searchErrorMsgLabel.setFont(SearchIDEnum.LABELFONT_ERROR.getFont());
+
 		//아이디텍스트필드
-		this.searchIdTextField = new JTextField(10);
-		this.searchIdTextField.setFont(defaultFont);
-		this.searchIdTextField.setBounds(SearchIdEnum.SEARCH_ID_TEXTFIELD.getRectangle());
+		this.searchNameTextField = new JTextField(10);
+		this.searchNameTextField.setFont(defaultFont);
+		this.searchNameTextField.setBounds(SearchIDEnum.SEARCH_ID_TEXTFIELD.getRectangle());
 		//이메일텍스트필드
-		this.searchemailTextField = new JTextField(10);
-		this.searchemailTextField.setFont(defaultFont);
-		this.searchemailTextField.setBounds(SearchIdEnum.SEARCH_EMAIL_TEXTFIELD.getRectangle());
+		this.searchEmailTextField = new JTextField(10);
+		this.searchEmailTextField.setFont(defaultFont);
+		this.searchEmailTextField.setBounds(SearchIDEnum.SEARCH_EMAIL_TEXTFIELD.getRectangle());
 		
 		//확인버튼
 		this.searchConfirmButton = new JButton();
 		this.searchConfirmButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File("resources/signUp/confirm.jpg")).getScaledInstance(
-						SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
-						SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+						SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+						SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
 		);
-		this.searchConfirmButton.setBounds(SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
+		this.searchConfirmButton.setBounds(SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
 		this.searchConfirmButton.setBorderPainted(false);
 		this.searchConfirmButton.setFocusPainted(false);
 		this.searchConfirmButton.setContentAreaFilled(false);
-		this.searchConfirmButton.setName("confirmButton");
+		this.searchConfirmButton.setName(SearchIDEnum.BUTTON_NAME_CONFIRM.getButtonName());
 		this.searchConfirmButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);
 		
     	//취소버튼
@@ -88,34 +90,63 @@ public class SearchIdPanel extends JPanel {
 		this.backButton.setIcon(
 			new ImageIcon(ImageIO.read(
     				new File("resources/forgotID/backButton.png")).getScaledInstance(
-    						SearchIdEnum.SEARCH_BACK_BUTTON.getRectangle().width,
-    						SearchIdEnum.SEARCH_BACK_BUTTON.getRectangle().height,
+    						SearchIDEnum.SEARCH_BACK_BUTTON.getRectangle().width,
+    						SearchIDEnum.SEARCH_BACK_BUTTON.getRectangle().height,
     						Image.SCALE_AREA_AVERAGING))
     		);
-		this.backButton.setBounds(SearchIdEnum.SEARCH_BACK_BUTTON.getRectangle());
+		this.backButton.setBounds(SearchIDEnum.SEARCH_BACK_BUTTON.getRectangle());
 		this.backButton.setBorderPainted(false);
 		this.backButton.setFocusPainted(false);
 		this.backButton.setContentAreaFilled(false);
-		this.searchConfirmButton.setName("backButton");
+		this.backButton.setName(SearchIDEnum.BUTTON_NAME_BACK.getButtonName());
+
 		
-		
-		this.add(searchIdLabel);
-		this.add(searchemailLabel);
-		this.add(searchErrorMsgLabel);
-		this.add(searchIdTextField);
-    	this.add(searchemailTextField);
-    	this.add(searchConfirmButton);
-		this.add(backButton);
-    	
-        this.setLayout(null);
+		this.addKeyAction(this.searchNameTextField, "nameTextField");
+		this.addKeyAction(this.searchEmailTextField, "emailTextField");
+		this.add(this.cardLayoutPanel);
+		this.cardLayoutPanel.setOpaque(false);
+		this.cardLayoutPanel.add(searchNameLabel);
+		this.cardLayoutPanel.add(searchemailLabel);
+		this.cardLayoutPanel.add(searchErrorMsgLabel);
+		this.cardLayoutPanel.add(searchNameTextField);
+    	this.cardLayoutPanel.add(searchEmailTextField);
+    	this.cardLayoutPanel.add(searchConfirmButton);
+		this.cardLayoutPanel.add(backButton);
+		this.searchConfirmButton.addActionListener(this.findIDAction);
+		this.backButton.addActionListener(this.findIDAction);
+        this.cardLayoutPanel.setLayout(null);
+        this.setLayout(new CardLayout());
         this.setVisible(true); 
-
 	}
+	
+	//에러메시지
+	public void errorMsg(String errorMsgLabel) {
+		this.setLayout(null);
+		this.searchErrorMsgLabel.setBounds(SearchIDEnum.SEARCH_ERROR_LABEL.getRectangle());
+		this.add(this.searchErrorMsgLabel);
+		this.searchErrorMsgLabel.setText(errorMsgLabel);
+	}
+	
+	//에러메시지 없애기
+	public void errorMsgReset() {
+		this.searchErrorMsgLabel.setText(null);	
+	}
+	
+	//name, email 텍스트 필드 액션
+	private void addKeyAction(JComponent comp, String name) {
+		comp.setName(name);
+		comp.addKeyListener(this.findIDAction);
+		this.add(comp);
+	}	
+	
 
- 
-	public String getsearchError() {
-    	return searchError;
-    }
+	//취소버튼시 실행
+	public void doCancleButton(){	
+		//프레임의 취소버튼을 실행
+		this.searchIdFrame.doCancleButton();
+	}
+	
+
     public JLabel getErrorMsgLabel(){
     	return searchErrorMsgLabel;
     }
@@ -128,16 +159,19 @@ public class SearchIdPanel extends JPanel {
     	return backButton;
     }
     
-    public JTextField getEmailField() {
-    	return searchemailTextField;
+    public JTextField getEmailTextField() {
+    	return searchEmailTextField;
     }
     
-    public JTextField getIdField() {
-    	return searchIdTextField;
+    public JTextField getNameTextField() {
+    	return searchNameTextField;
     }
-    
+ 
     public SearchIdFrame getSearchIdFrame() {
     	return searchIdFrame;
     }
-
+    
+    public FindIDAction getFindIDAction() {
+		return findIDAction;
+	}
 }
