@@ -2,13 +2,11 @@ package frames.searchFrames;
 
 
 import java.awt.Color;
-
-
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +18,7 @@ import javax.swing.JTextField;
 import actions.findIDandPW.FindRePwdAction;
 import enums.frames.JoinSizesEnum;
 import enums.frames.LoginSizesEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 
@@ -70,31 +68,31 @@ public class SearchRePwdPanel extends JPanel {
 		
 		this.searchPwdLabel = new JLabel("PW");
 		this.searchPwdLabel.setBounds(SearchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
-		this.searchPwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchPwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		//비밀번호 입력창
 		this.searchPwdText = new JTextField();
 		this.searchPwdText.setBounds(SearchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
-		this.searchPwdText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchPwdText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 
 		// 재비밀번호 라벨
 		this.searchRePwdLabel = new JLabel("PW재입력");
 		this.searchRePwdLabel.setBounds(SearchRePwdEnum.SEARCH_REPWD_LABEL.getRectangle());
-		this.searchRePwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchRePwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 제비밀번호 텍스트창
 		this.searchRePwdText = new JTextField();
 		this.searchRePwdText.setBounds(SearchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
-		this.searchRePwdText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchRePwdText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 에러 메세지 라벨
 		
 		String searchCheckAnswer = "";
 		this.searchRePwdErrorLabel = new JLabel(searchCheckAnswer);
 		searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
-		searchRePwdErrorLabel.setFont(SearchIdEnum.LABELFONT_ERROR.getFont());
-		searchRePwdErrorLabel.setForeground(SearchIdEnum.LABELCOLOR_ERROR.getColor());
-		
+
+		searchRePwdErrorLabel.setFont(SearchIDEnum.LABELFONT_ERROR.getFont());
+		searchRePwdErrorLabel.setForeground(SearchIDEnum.LABELCOLOR_ERROR.getColor());
 		//확인 버튼창
 		
 		this.searchConfirmButton = new JButton(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName()) {
@@ -134,7 +132,7 @@ public class SearchRePwdPanel extends JPanel {
 			this.searchRePwdErrorLabel.setBackground(Color.red);
 			this.add(this.searchRePwdErrorLabel);
 			
-			this.searchRePwdErrorLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+			this.searchRePwdErrorLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 			this.searchRePwdErrorLabel.setForeground(Color.blue);
 			this.searchRePwdErrorLabel.setText(searchCheckAnswer);
 		}

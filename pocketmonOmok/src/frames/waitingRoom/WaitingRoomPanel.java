@@ -164,7 +164,7 @@ public class WaitingRoomPanel extends JPanel {
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
 		
 		tableModel.addRow(new Object[] {
-				roomInfoVo.getImage(),
+				roomInfoVo.getEnterImage(),
 				roomInfoVo.getRoomNumber(),
 				roomInfoVo.getRoomName(),
 				roomInfoVo.getOwner(),
@@ -181,20 +181,19 @@ public class WaitingRoomPanel extends JPanel {
 
 		for(int i = 0, size = roomListVo.getGameRoomList().size(); i < size; i++) {
 			GameRoomInfoVO roomInfoVo = roomListVo.getGameRoomList().get(i);
-			System.out.println(roomInfoVo.getImage() + "/" +
+			System.out.println(roomInfoVo.getEnterImage() + "/" +
 					roomInfoVo.getRoomNumber()+ "/" +
 					roomInfoVo.getRoomName()+ "/" +
 					roomInfoVo.getOwner()+ "/" +
 					roomInfoVo.getPersons());
 			
 			tableModel.addRow(new Object[] {
-					roomInfoVo.getImage(),
+					roomInfoVo.getEnterImage(),
 					roomInfoVo.getRoomNumber(),
 					roomInfoVo.getRoomName(),
 					roomInfoVo.getOwner(),
 					roomInfoVo.getPersons()
 			});
-			
 		}
 	}
 	

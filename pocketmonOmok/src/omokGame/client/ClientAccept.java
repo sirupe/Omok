@@ -42,10 +42,10 @@ public class ClientAccept {
 		this.basicFrame	  = new BasicFrame(this);
 		
 		this.loginRequestAction		= new LoginServerAction(this.basicFrame.getLoginPanel());
-		this.joinRequestAction		= new JoinServerAction(this.basicFrame.getJoinFrame());
+//		this.joinRequestAction		= new JoinServerAction(this.basicFrame.getJoinFrame());
 		this.gameRoomRequestAction 	= new GameRoomServerAction(this.basicFrame.getGameRoomPanel());
 		
-		ClientReciever reciever = new ClientReciever(this, this.basicFrame);
+		ClientReceiver reciever = new ClientReceiver(this, this.basicFrame);
 		reciever.start();
 	}
 //·Î±×ÀÎ---------------------------------------------------------------------------------------------
@@ -77,8 +77,11 @@ public class ClientAccept {
 		case USER_JOIN_JOINACTION : 
 			this.joinRequestAction.joinTry(data);
 			break;
-		case USER_JOIN_CERTIFICATION :
-			this.joinRequestAction.cercificationNumber(data);
+		case USER_JOIN_CERTIFICATION_SUCCESS :
+			this.joinRequestAction.certificationNumSuccess();
+			break;
+		case USER_JOIN_CERTIFICATION_FAIL :
+			this.joinRequestAction.certificationNumFail();
 			break;
 		default : 
 			break;
@@ -150,9 +153,9 @@ public class ClientAccept {
 				}
 			}
 			break;
-		default:
-			break;
 			
+		default :
+			break;
 		}
 	}
 	
@@ -161,6 +164,19 @@ public class ClientAccept {
 		switch(data.getServerAction()) {
 		case ENTER_ROOM_SUCCESS_GUEST :
 			this.gameRoomRequestAction.guestEnterRoom(data);
+			break;
+		case ENTER_ROOM_SUCCESS_OWNER :
+			this.gameRoomRequestAction.ownerGameRoomModify(data);
+			break;
+		case GAME_ROOM_USER_CHATTING :
+			this.basicFrame.getGameRoomPanel().chattingAreaSetting(data);
+			break;
+		case GAME_ROOM_GUEST_READY_DECHECK :
+		case GAME_ROOM_GUEST_READY_CHECK :
+			this.basicFrame.getGameRoomPanel().changeStartGuestReadyCheck(data);
+			break;
+		case GAME_ROOM_GAME_START :
+			this.basicFrame.getGameRoomPanel().gameStart();
 			break;
 		default :
 			break;
@@ -197,5 +213,9 @@ public class ClientAccept {
 
 	public ObjectOutputStream getClientOS() {
 		return clientOS;
+	}
+	
+	public void setJoinRequestAction(JoinServerAction joinRequestAction) {
+		this.joinRequestAction = joinRequestAction;
 	}
 }

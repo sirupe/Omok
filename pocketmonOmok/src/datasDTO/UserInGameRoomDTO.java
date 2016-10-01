@@ -8,6 +8,8 @@ public class UserInGameRoomDTO extends AbstractEnumsDTO {
 	private GameRoomInfoVO gameRoomInfo;
 	private UserStoreInfoDTO userItemInfo;
 	private UserStoreSkinInfoDTO userSkinInfo;
+	private int ownerGender;
+	private int guestGender;
 	
 	public UserInGameRoomDTO(UserPositionEnum position) {
 		super(position);
@@ -43,5 +45,23 @@ public class UserInGameRoomDTO extends AbstractEnumsDTO {
 
 	public void setUserSkinInfo(UserStoreSkinInfoDTO userSkinInfo) {
 		this.userSkinInfo = userSkinInfo;
+	}
+
+	public int getOwnerGender() {
+		return ownerGender;
+	}
+
+	public void setOwnerGender(int ownerGender) {
+		this.ownerGender = ownerGender;
+	}
+
+	public int getGuestGender() {
+		return guestGender;
+	}
+
+	public void setGuestGender(int guestGender) {
+		this.guestGender = guestGender;
 	}	
+	
+	
 }

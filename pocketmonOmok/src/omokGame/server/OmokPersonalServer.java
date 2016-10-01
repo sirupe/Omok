@@ -13,6 +13,7 @@ public class OmokPersonalServer extends Thread {
 	private Socket personalSocket;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
+	private String certificationNumber;
 	
 	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
 		this.omokServer 		= omokServer;
@@ -44,11 +45,11 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_FIND_PW :
 					this.omokServer.findPW();
 					break;
-				case POSITION_FIND_PW_EMAIL :
-					this.omokServer.findEmail(userPosition, this);
-					break;
+//				case POSITION_FIND_PW_EMAIL :
+//					this.omokServer.findEmail(userPosition, this);
+//					break;
 				case POSITION_GAME_ROOM :
-					this.omokServer.gameRoom();
+					this.omokServer.gameRoom(userPosition, this);
 					break;
 				case POSITION_STORE :
 					this.omokServer.store();
@@ -59,6 +60,8 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_EXIT :
 					isAccept = false;
 					this.omokServer.exitProgram(userPosition, this);
+					break;
+				default:
 					break;
 				}
 			}
@@ -78,5 +81,13 @@ public class OmokPersonalServer extends Thread {
 
 	public Socket getPersonalSocket() {
 		return personalSocket;
+	}
+	
+	public void setCertificationNumber(String certificationNumber) {
+		this.certificationNumber = certificationNumber;
+	}
+	
+	public String getCertificationNumber() {
+		return certificationNumber;
 	}
 }

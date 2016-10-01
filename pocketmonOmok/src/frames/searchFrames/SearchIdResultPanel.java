@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import actions.findIDandPW.FindIdResultAction;
 import enums.frames.CorrectEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 
 
 public class SearchIdResultPanel extends JPanel {
@@ -28,7 +28,7 @@ public class SearchIdResultPanel extends JPanel {
 		this.searchIdFrame = searchIdFrame;
 		this.findIdResultAction = new FindIdResultAction(this);
 		
-		Font defaultFont = SearchIdEnum.LABELFONT_DEFAULT.getFont();
+		Font defaultFont = SearchIDEnum.LABELFONT_DEFAULT.getFont();
 
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
@@ -44,15 +44,15 @@ public class SearchIdResultPanel extends JPanel {
 		this.homeButton.setIcon(
 				new ImageIcon(ImageIO.read(
 					new File("resources/forgotID/goHome.png")).getScaledInstance(
-							SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
-							SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+							SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+							SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 							Image.SCALE_AREA_AVERAGING))
 			);
-		this.homeButton.setBounds(SearchIdEnum.GO_HOME_BUTTON.getRectangle());
+		this.homeButton.setBounds(SearchIDEnum.GO_HOME_BUTTON.getRectangle());
 		this.homeButton.setBorderPainted(false);
 		this.homeButton.setFocusPainted(false);
 		this.homeButton.setContentAreaFilled(false);
-		this.homeButton.setName(SearchIdEnum.BUTTON_NAME_GOHOME.getButtonName());
+		this.homeButton.setName(SearchIDEnum.BUTTON_NAME_GOHOME.getButtonName());
 
 		this.add(showUserId);
 		this.add(showUserIdResult);

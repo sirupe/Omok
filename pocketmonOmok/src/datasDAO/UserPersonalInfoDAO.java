@@ -166,5 +166,36 @@ public class UserPersonalInfoDAO {
 		}
 		
 		return userPersonalInfo;
-	} 
+	}
+	
+	// 유저 패스워드 정보를 변경합니다. 1을 반환하면 정상적으로 반환한 것, 0을 반환하면 에러가 난 것입니다.
+	public int updateUserPasswd(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		int result = 0;
+		
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		
+		try {
+			connection = dbPool.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE USER_PERSONAL_INFO ");
+			sql.append("SET USER_PASSWD=? ");
+			sql.append("WHERE USER_ID=? ");
+			
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserPasswd());
+			ps.setString(2, personalDTO.getUserID());
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
+	}
 }

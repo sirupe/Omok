@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import actions.adapters.Adapters;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import frames.searchFrames.SearchIdResultPanel;
 
 public class FindIdResultAction extends Adapters {
@@ -21,7 +21,7 @@ public class FindIdResultAction extends Adapters {
 		System.out.println("액션퍼폼드!");
 		//버튼 액션	
 		String buttonName = ((JButton)e.getSource()).getName();
-		if(buttonName.equals(SearchIdEnum.BUTTON_NAME_GOHOME.getButtonName())) {
+		if(buttonName.equals(SearchIDEnum.BUTTON_NAME_GOHOME.getButtonName())) {
 			this.searchIdResultPanel.doHomeButton();
 		}
 	}

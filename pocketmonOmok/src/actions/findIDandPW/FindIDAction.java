@@ -10,7 +10,7 @@ import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import frames.searchFrames.SearchIdPanel;
 import utility.RegexCheck;
 
@@ -35,10 +35,9 @@ public class FindIDAction  extends Adapters {
 	public void actionPerformed(ActionEvent e) {
 		//버튼 액션	
 		String buttonName = ((JButton)e.getSource()).getName();
-		if(buttonName.equals(SearchIdEnum.BUTTON_NAME_BACK.getButtonName())) {
+		if(buttonName.equals(SearchIDEnum.BUTTON_NAME_BACK.getButtonName())) {
 			this.searchIdPanel.doCancleButton();
-			
-		} else if(buttonName.equals(SearchIdEnum.BUTTON_NAME_CONFIRM.getButtonName())) {
+		} else if(buttonName.equals(SearchIDEnum.BUTTON_NAME_CONFIRM.getButtonName())) {
 			this.name = this.searchIdPanel.getNameTextField().getText();
 			this.email = this.searchIdPanel.getEmailTextField().getText();
 			if(!this.name.isEmpty() && !this.email.isEmpty()) {

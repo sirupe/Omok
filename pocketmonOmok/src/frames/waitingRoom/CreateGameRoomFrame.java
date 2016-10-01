@@ -17,9 +17,9 @@ import javax.swing.JTextField;
 import actions.waitingRoom.WaitingRoomActionListeners;
 import enums.frames.GameRoomCreateEnum;
 import enums.frames.GameRoomFullEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import enums.frames.SearchRePwdEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 
 public class CreateGameRoomFrame extends JFrame {
 	private static final long serialVersionUID = 36363454L;
@@ -86,8 +86,8 @@ public class CreateGameRoomFrame extends JFrame {
 		//배경화면	
 
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				SearchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
-				SearchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
+				SearchIDEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
+				SearchIDEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
@@ -100,15 +100,15 @@ public class CreateGameRoomFrame extends JFrame {
 		);
 		
 		//레이블 폰트 -- searchIdEnum 에서 불러옴
-		this.createRoomNameLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());	
-		this.createRoomPwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());	
+		this.createRoomPwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		
-		this.createRoomNameText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
-		this.createRoomPwdText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomPwdText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
-		this.roomCreateOpen.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
-		this.roomCreatePrivate.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreateOpen.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreatePrivate.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		//레이블 색깔
 		this.createRoomNameLabel.setForeground(Color.black);
 		this.createRoomPwdLabel.setForeground(Color.black);

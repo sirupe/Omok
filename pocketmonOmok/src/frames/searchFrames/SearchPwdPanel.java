@@ -16,16 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import actions.findIDandPW.FindPWAction;
-import datasDAO.UserStoreSkinInfoDAO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.LoginSizesEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import frames.BasicFrame;
 import omokGame.client.ClientAccept;
-import utility.RegexCheck;
 	
 	public class SearchPwdPanel extends JPanel {
 	
@@ -80,8 +78,8 @@ import utility.RegexCheck;
 		
 		//this.add(searchConfirmButton);
 		//레이블 폰트 - searchIdEnum 에서 불러왔습니다.
-		Font default_Font  = SearchIdEnum.LABELFONT_DEFAULT.getFont(); //일반
-		Font error_FONT    = SearchIdEnum.LABELFONT_ERROR.getFont(); //에러
+		Font default_Font  = SearchIDEnum.LABELFONT_DEFAULT.getFont(); //일반
+		Font error_FONT    = SearchIDEnum.LABELFONT_ERROR.getFont(); //에러
 		this.searchIdLabel.setFont(default_Font);
 		this.searchemailLabel.setFont(default_Font);
 		
@@ -116,6 +114,7 @@ import utility.RegexCheck;
 	}
 	
 	//아이디 또는 이메일 오류 알려주는 텍스트
+
 	//초기화가 되어서 위에 있는 searchErrorMsg의 메세지를 불러온다.
 	public void userInfoErrorLabelReset() {
 		String init = "";
@@ -129,7 +128,7 @@ import utility.RegexCheck;
 		this.searchAnswerMsgLabel.setOpaque(false);
 		this.add(this.searchAnswerMsgLabel);
 		
-		this.searchAnswerMsgLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchAnswerMsgLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.searchAnswerMsgLabel.setForeground(Color.blue);
 		this.searchAnswerMsgLabel.setText(searchAnswer);
 	}
@@ -146,7 +145,7 @@ import utility.RegexCheck;
 		this.searchTimeLabel.setOpaque(false);
 		this.add(this.searchTimeLabel);
 		
-		this.searchTimeLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.searchTimeLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.searchTimeLabel.setForeground(SearchPwdEnum.LABELCOLOR_ERROR.getColor());
 		this.searchTimeLabel.setText(time);
 	}

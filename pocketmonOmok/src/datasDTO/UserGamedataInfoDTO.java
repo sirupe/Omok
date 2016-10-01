@@ -98,8 +98,6 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
 				Image.SCALE_AREA_AVERAGING)
 		);
-		System.out.println(GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width + "/" +
-				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height);
 	}
 	
 	public ImageIcon getUserGameRoomImage() {
