@@ -7,6 +7,7 @@ public enum ServerActionEnum {
 	LOGIN_SUCCESS,				// 로그인 성공
 	LOGIN_FAIL_INPUT_ERROR,		// 로그인 실패-입력오류
 	LOGIN_FAIL_OVERLAP_ACCEPT,	// 로그인 실패-이미 로그인한 유저
+	SEARCH_PASSWD,				// 패스워드인증시에 서버에게 유저가 입력한 인증번호 보내기
 	LOGIN_NEW_USER,				// 대기실에 새로운 유저가 들어왔을 때
 	WAITING_ROOM_ENTER,			// 현재유저가 로그인 성공하여 대기실 입장시
 	GAME_CREATEROOM_SUCCESS,	// 방 생성 성공

@@ -342,8 +342,10 @@ public class OmokServer {
 			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO)data;
 			//인증번호 생성
 			String confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
+			System.out.println(confirmNumber);
 			//이메일발송
 			new SendEmail(confirmNumber, resultDTO.getUserEmail());
+			System.out.println("인증번호 발송함");
 			
 			resultDTO.setCertificationNumber(confirmNumber);
 			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
@@ -378,20 +380,25 @@ public class OmokServer {
 	public void findPW() {
 		System.out.println("비밀번호찾기");
 	}
-	//
+	
 	public void findEmail(AbstractEnumsDTO data, OmokPersonalServer PersonalServer) throws IOException {
-		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
-		if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
-			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO)data;
+		
+		UserPersonalInfoDTO personalInfo = (UserPersonalInfoDTO) data;
+		PersonalServer.getServerOutputStream().writeObject(data);
+		System.out.println(data + ": data");
+		
+		if(data.getUserAction() == UserActionEnum.USER_SEARCH_PASSWD_CERTIFICATION) {
+			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO) data;
+			//인증번호 생성
+			System.out.println(resultDTO);
+			String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
+			System.out.println(confirmNumber + " : 랜덤번호");
 			
-			String ConfirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
-			//메일 발송 -- 랜덤 번호와 resultDTO에 담긴 사용자 이메일로 보낸다..
-			new SendEmail(ConfirmNumber, resultDTO.getUserEmail());
 			
-			resultDTO.setCertificationNumber(ConfirmNumber);
-			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
-			PersonalServer.getServerOutputStream().writeObject(resultDTO);
+
+			
 		}
+		
 	}
 	public void gameRoom() {
 		System.out.println("게임방");

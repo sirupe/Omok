@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -15,12 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import actions.findIDandPW.FindPWAction;
+import datasDAO.UserStoreSkinInfoDAO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.LoginSizesEnum;
 import enums.frames.SearchIdEnum;
 import enums.frames.SearchPwdEnum;
+import frames.BasicFrame;
+import omokGame.client.ClientAccept;
 import utility.RegexCheck;
 	
 	public class SearchPwdPanel extends JPanel {
@@ -62,38 +66,38 @@ import utility.RegexCheck;
 	    
 	
 		//라벨 생성 TODO
-	this.searchIdLabel    = new JLabel("ID");
-	this.searchemailLabel = new JLabel("Email");
-	
-	//		텍스트 필드생성
-	this.searchIdTextField      = new JTextField(10);
-	this.searchemailTextField   = new JTextField(10);
-	this.searchConfirmTextField = new JTextField(10);
-	
-	
-	this.add(searchIdLabel);
-	this.add(searchemailLabel);
-	
-	//this.add(searchConfirmButton);
-	//레이블 폰트 - searchIdEnum 에서 불러왔습니다.
-	Font default_Font  = SearchIdEnum.LABELFONT_DEFAULT.getFont(); //일반
-	Font error_FONT    = SearchIdEnum.LABELFONT_ERROR.getFont(); //에러
-	this.searchIdLabel.setFont(default_Font);
-	this.searchemailLabel.setFont(default_Font);
-	
-	// 텍스트 폰트
-	this.searchemailTextField.setFont(default_Font);
-	this.searchIdTextField.setFont(default_Font);
-	this.searchConfirmTextField.setFont(default_Font);
-	
-	
-	String searchAnswer = "";
-	this.searchAnswerMsgLabel = new JLabel(searchAnswer);
-	
-	this.searchTimeLabel = new JLabel("3:00");
-	this.searchTimeLabel.setForeground(SearchPwdEnum.LABELCOLOR_ERROR.getColor());
-	
-	//레이블, 텍스트, 버튼 불러오기
+		this.searchIdLabel    = new JLabel("ID");
+		this.searchemailLabel = new JLabel("Email");
+		
+		//		텍스트 필드생성
+		this.searchIdTextField      = new JTextField(10);
+		this.searchemailTextField   = new JTextField(10);
+		this.searchConfirmTextField = new JTextField(10);
+		
+		
+		this.add(searchIdLabel);
+		this.add(searchemailLabel);
+		
+		//this.add(searchConfirmButton);
+		//레이블 폰트 - searchIdEnum 에서 불러왔습니다.
+		Font default_Font  = SearchIdEnum.LABELFONT_DEFAULT.getFont(); //일반
+		Font error_FONT    = SearchIdEnum.LABELFONT_ERROR.getFont(); //에러
+		this.searchIdLabel.setFont(default_Font);
+		this.searchemailLabel.setFont(default_Font);
+		
+		// 텍스트 폰트
+		this.searchemailTextField.setFont(default_Font);
+		this.searchIdTextField.setFont(default_Font);
+		this.searchConfirmTextField.setFont(default_Font);
+		
+		
+		String searchAnswer = "";
+		this.searchAnswerMsgLabel = new JLabel(searchAnswer);
+		
+		this.searchTimeLabel = new JLabel("3:00");
+		this.searchTimeLabel.setForeground(SearchPwdEnum.LABELCOLOR_ERROR.getColor());
+		
+		//레이블, 텍스트, 버튼 불러오기
 		this.setLabelPosition();
 		this.setTextFieldPosition();
 		this.setButtonPosition();
@@ -104,7 +108,11 @@ import utility.RegexCheck;
 		this.addKeyAction(this.searchIdTextField, "searchIdTextField");
 		this.addKeyAction(this.searchemailTextField, "searchemailTextField");
 		this.addKeyAction(this.searchConfirmTextField, "confirmNumberText");
-		 
+		
+		//TODO
+		this.searchIdTextField.setText("sujin");
+		this.searchemailTextField.setText("tnwls@naver.com");
+		this.searchConfirmTextField.setText("000");
 	}
 	
 	//아이디 또는 이메일 오류 알려주는 텍스트
@@ -249,77 +257,33 @@ import utility.RegexCheck;
 	
 	public void getChangePanel() {
 		this.searchPwdFrame.doCheckButton();
+		System.out.println("여기 바뀌는 채널");
 	}
 	
-	//인증버튼을 눌렀을때 처리하는 메소드
+	//인증메일 보내기
 	public void getCerfication() {
-		this.emailAddr = this.getSearchemailTextField().getText();
-		this.idCheck   = this.getSearchIdTextField().getText();
-		this.checkMsg = null;
-
-		if(!RegexCheck.emailRegexCheck(this.emailAddr) &&this.idCheck.isEmpty() && this.emailAddr.isEmpty()) {
-		this.userNumberMsgReset();
-		checkMsg = "<html>email형식에 맞지 않습니다..<br>다시 적어주세요<br></html>";
-		this.userNumberMsg(checkMsg);
+		BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
+		ClientAccept clientAccpet = basicFrame.getClientAccept();
+		ObjectOutputStream oos = clientAccpet.getClientOS(); 
 		
-		} 
-		if(RegexCheck.emailRegexCheck(this.emailAddr)) {
-		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW_EMAIL);
-		//맞다면 이메일 인증 보내달라...?
-			personalDTO.setUserID(this.idCheck);
-			personalDTO.setUserEmail(this.emailAddr);
-			
-			System.out.println("여기는들어오나안오나... 들어와라 제발");
-			this.searchPwdFrame.getCerficartion(personalDTO); //action이 보내준 것을 패널이 받아 searchPwdFrame한테 위에 메세지를 보내준다.
-			
-			//3분 쓰레드 ..
-			this.userNumberMsgReset();
-			checkMsg = "<html>인증번호 발생.<br>인증번호 적어주세요<br></html>";
-			this.userNumberMsg(checkMsg);
-	
-	
-	new Thread() {
-		@Override
-		public void run() {
-			StringBuffer time = new StringBuffer();
-			
-		for(int i = 0; i >= 0; --i) {
-			for(int j = (i >= 3) ? 0 : 59; j >= 0; j--) {
-				time.delete(0, time.length());
-				time.append(i);
-				time.append(" : ");
-		time.append(j < 10 ? "0" +  j : j);
+		String email = this.searchemailTextField.getText();
 		
-		SearchPwdPanel.getSearchTimeLabel().setText(time.toString());
+		
+		UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW_EMAIL);
+		userPersonalInfoDTO.setUserEmail(email);
+		
+		System.out.println(userPersonalInfoDTO.toString() + " :  이메일");
+		
 		try {
-			Thread.sleep(1000);
-			if(emailConfirmLimitTime) {
-				this.interrupt();
-				//userNumberMsg().setEditable(false);
-					}
-				} catch (InterruptedException e) {
-					break;
-				}
-			}
-			if(emailConfirmLimitTime) {
-				return;
-			}
+			oos.writeObject(userPersonalInfoDTO);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	SearchPwdPanel.getSearchTimeLabel().setVisible(false);
-	String checkMsg = "<html>인증번호가 맞지 않습니다..<br>다시 확인바랍니다.<br></html>";
-	SearchPwdPanel.this.userNumberMsg(checkMsg);
-	//인증번호 초기화 한다.
-	SearchPwdPanel.this.searchConfirmButton = null;
-		    	}
-		   }.start();
-		    	}
-		    }
-	
-	
+	}
+
 	public void addKeyAction(JComponent comp, String Name) {
-//		EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 		comp.setName(Name);
-//		comp.setBorder(border);
 		comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
 		comp.addKeyListener(this.findPwdAction);
 		this.add(comp);	
@@ -328,43 +292,42 @@ import utility.RegexCheck;
 
 	
 	
-	    public SearchPwdFrame getSearchPwdFrame() {
-	    	return searchPwdFrame;
-	    }
-	
-	    public JLabel getSearchIdLabel() {
-	    	return searchIdLabel;
-	    }
-	    public JLabel getSearchemailLabel() {
-	    	return searchemailLabel;
-	    }
-	    public JLabel getSearchAnswerMsg() {
-	    	return searchAnswerMsgLabel;
-	    }
-	    public static JLabel getSearchTimeLabel() {
-	    	return searchTimeLabel;
-	    }
-	    public JTextField getSearchIdTextField() {
-	    	return searchIdTextField;
-	    }
-	    public JTextField getSearchemailTextField() {
-	    	return searchemailTextField;
-	    }
-	    public JTextField getSearchConfirmTextField() {
-	    	return searchConfirmTextField;
-	    }
-	    public JButton getSearchConfirmButton() {
-	    	return searchConfirmButton;
-	    }
-	    public JButton getSearchCancelButton() {
-	    	return searchCancelButton;
-	    }
-	    public JButton getConfirmCheckButton() {
-	    	return confirmCheckButton;
-	    }
-	    public JButton getsearchCheckButton() {
-	    	return searchCheckButton;
-	    }
+    public SearchPwdFrame getSearchPwdFrame() {
+    	return searchPwdFrame;
+    }
+    public JLabel getSearchIdLabel() {
+    	return searchIdLabel;
+    }
+    public JLabel getSearchemailLabel() {
+    	return searchemailLabel;
+    }
+    public JLabel getSearchAnswerMsg() {
+    	return searchAnswerMsgLabel;
+    }
+    public static JLabel getSearchTimeLabel() {
+    	return searchTimeLabel;
+    }
+    public JTextField getSearchIdTextField() {
+    	return searchIdTextField;
+    }
+    public JTextField getSearchemailTextField() {
+    	return searchemailTextField;
+    }
+    public JTextField getSearchConfirmTextField() {
+    	return searchConfirmTextField;
+    }
+    public JButton getSearchConfirmButton() {
+    	return searchConfirmButton;
+    }
+    public JButton getSearchCancelButton() {
+    	return searchCancelButton;
+    }
+    public JButton getConfirmCheckButton() {
+    	return confirmCheckButton;
+    }
+    public JButton getsearchCheckButton() {
+    	return searchCheckButton;
+    }
 	
 	
 	    

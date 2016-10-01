@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
 
 public class OmokPersonalServer extends Thread {
 	private OmokServer omokServer;
