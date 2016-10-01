@@ -5,7 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -225,7 +224,7 @@ public class OmokServer {
 		}
 	}
 	
-	// 빈 방 접속 (TODO)
+	// 빈 방 접속 
 	public void waitingRoomEnterPossibleGameRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
 		
 		GameRoomInfoVO userChoiceRoom = (GameRoomInfoVO)listDTO;
@@ -345,25 +344,40 @@ public class OmokServer {
 //회원가입--------------------------------------------------------------------------
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
+		
+		UserPersonalInfoDTO resultPersonalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+		switch(data.getUserAction()) {
 		// 아이디 중복체크인 경우
-		if(data.getUserAction() == UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK) {
+		case USER_JOIN_ID_OVERLAP_CHECK :
 			UserPersonalInfoDTO resultDTO = this.joinDAO.checkOverlapID(personalDTO);
 			personalServer.getServerOutputStream().writeObject(resultDTO);
-		
+			break;
+
 		// 인증번호 발송인 경우
-		} else if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
-			//인증번호 생성
+		case USER_JOIN_CERTIFICATION_CREATE :
 			String confirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
-			UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-			resultDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION);
+			personalServer.setCertificationNumber(confirmNumber);
+			
+			resultPersonalDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION_CREATE);
 			//이메일발송
 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
 			
-			resultDTO.setCertificationNumber(confirmNumber);
-			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
-			personalServer.getServerOutputStream().writeObject(resultDTO);
-		// 회원가입인 경우
-		} else {
+			resultPersonalDTO.setCertificationNumber(confirmNumber);
+			resultPersonalDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
+			personalServer.getServerOutputStream().writeObject(resultPersonalDTO);
+			break;
+			
+		case USER_JOIN_CERTIFICATION_CHECK :
+			String inputCertifNum = personalDTO.getCertificationNumber();
+			String saveCertifNum  = personalServer.getCertificationNumber();
+			resultPersonalDTO.setUserAction(
+					inputCertifNum.equals(saveCertifNum) ?
+					UserActionEnum.USER_JOIN_CERTIFICATION_SUCCESS : UserActionEnum.USER_JOIN_CERTIFICATION_FAIL);
+			personalServer.getServerOutputStream().writeObject(resultPersonalDTO);
+			break;
+
+		//회원가입인 경우
+		default :
 			// 아이디가 중복되지 않는다면
 			if(this.joinDAO.checkOverlapID(personalDTO).getUserID() == null) {
 				ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_JOIN);
@@ -382,6 +396,7 @@ public class OmokServer {
 				}
 				personalServer.getServerOutputStream().writeObject(serverMessage);
 			}
+			break;
 		}
 	}
 	

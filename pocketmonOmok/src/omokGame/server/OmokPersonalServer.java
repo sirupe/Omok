@@ -12,6 +12,7 @@ public class OmokPersonalServer extends Thread {
 	private Socket personalSocket;
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
+	private String certificationNumber;
 	
 	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
 		this.omokServer 		= omokServer;
@@ -79,5 +80,13 @@ public class OmokPersonalServer extends Thread {
 
 	public Socket getPersonalSocket() {
 		return personalSocket;
+	}
+	
+	public void setCertificationNumber(String certificationNumber) {
+		this.certificationNumber = certificationNumber;
+	}
+	
+	public String getCertificationNumber() {
+		return certificationNumber;
 	}
 }

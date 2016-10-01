@@ -77,9 +77,15 @@ public class ClientAccept {
 		case USER_JOIN_JOINACTION : 
 			this.joinRequestAction.joinTry(data);
 			break;
-		case USER_JOIN_CERTIFICATION :
-			this.joinRequestAction.cercificationNumber(data);
+		case USER_JOIN_CERTIFICATION_SUCCESS :
+			this.joinRequestAction.certificationNumSuccess();
 			break;
+		case USER_JOIN_CERTIFICATION_FAIL :
+			this.joinRequestAction.certificationNumFail();
+			break;
+//		case USER_JOIN_CERTIFICATION :
+//			this.joinRequestAction.cercificationNumber(data);
+//			break;
 		default : 
 			break;
 		}

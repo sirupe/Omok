@@ -51,12 +51,26 @@ public class JoinServerAction {
 		}
 	}
 	
-	public void cercificationNumber(AbstractEnumsDTO data) {
-		UserPersonalInfoDTO personalInfoDTO = (UserPersonalInfoDTO)data;
+	public void certificationNumSuccess() {
+		this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
+		this.joinFrame.getEmailTimeLabel().setVisible(false);
+		this.joinFrame.getEmailConfTextField().setEditable(false);
+		this.joinFrame.getConfirmButton().setEnabled(false);
+		this.joinClientAction.setEmailConfirmTime(true);
+		this.joinClientAction.getTimeThread().interrupt();
 		
-		
-		System.out.println(joinClientAction);
-		
-		this.joinClientAction.setCertificationNumber(personalInfoDTO.getCertificationNumber());
-	}	
+	}
+	
+	public void certificationNumFail() {
+		this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
+	}
+	
+//	public void cercificationNumber(AbstractEnumsDTO data) {
+//		UserPersonalInfoDTO personalInfoDTO = (UserPersonalInfoDTO)data;
+//		
+//		
+//		System.out.println(joinClientAction);
+//		
+//		this.joinClientAction.setCertificationNumber(personalInfoDTO.getCertificationNumber());
+//	}	
 }

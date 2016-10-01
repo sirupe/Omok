@@ -61,7 +61,6 @@ public class JoinClientAction extends Adapters {
 	}
 	
 	// 실시간으로 타이핑 감시하여 에러메세지 송출.
-	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		String source = e.getSource().toString();
@@ -316,7 +315,7 @@ public class JoinClientAction extends Adapters {
 			System.out.println("유저이메일 : " + email.toString());
 			
 			UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION);
+			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION_CREATE);
 			userPersonalInfoDTO.setUserEmail(email.toString());
 			try {
 				this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
@@ -382,17 +381,10 @@ public class JoinClientAction extends Adapters {
 	
 	//이메일 인증번호 입력 텍스트필드 
 	public void emailConfirm() {
-		String inputNum = this.joinFrame.getEmailConfTextField().getText();
-		if(this.certificationNumber.equals(inputNum)) {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
-			this.joinFrame.getEmailTimeLabel().setVisible(false);
-			this.joinFrame.getEmailConfTextField().setEditable(false);
-			this.joinFrame.getConfirmButton().setEnabled(false);
-			this.emailConfirmTime = true;
-			this.timeThread.interrupt();
-		} else {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
-		}
+		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+		personalDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION_CHECK);
+		personalDTO.setCertificationNumber(this.joinFrame.getEmailConfTextField().getText());
+		this.basicFrame.sendDTO(personalDTO);
 	}
 	
 	//tel 중간번호 체크
@@ -517,5 +509,13 @@ public class JoinClientAction extends Adapters {
 	
 	public void setCertificationNumber(String certificationNumber) {
 		this.certificationNumber = certificationNumber;
+	}
+	
+	public void setEmailConfirmTime(boolean emailConfirmTime) {
+		this.emailConfirmTime = emailConfirmTime;
+	}
+	
+	public Thread getTimeThread() {
+		return timeThread;
 	}
 }
