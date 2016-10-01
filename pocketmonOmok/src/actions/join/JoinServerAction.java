@@ -64,13 +64,4 @@ public class JoinServerAction {
 	public void certificationNumFail() {
 		this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
 	}
-	
-//	public void cercificationNumber(AbstractEnumsDTO data) {
-//		UserPersonalInfoDTO personalInfoDTO = (UserPersonalInfoDTO)data;
-//		
-//		
-//		System.out.println(joinClientAction);
-//		
-//		this.joinClientAction.setCertificationNumber(personalInfoDTO.getCertificationNumber());
-//	}	
 }

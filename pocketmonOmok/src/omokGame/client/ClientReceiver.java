@@ -54,9 +54,6 @@ public class ClientReceiver extends Thread {
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-	
-	
 }

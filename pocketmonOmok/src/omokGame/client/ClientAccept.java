@@ -83,9 +83,6 @@ public class ClientAccept {
 		case USER_JOIN_CERTIFICATION_FAIL :
 			this.joinRequestAction.certificationNumFail();
 			break;
-//		case USER_JOIN_CERTIFICATION :
-//			this.joinRequestAction.cercificationNumber(data);
-//			break;
 		default : 
 			break;
 		}
@@ -156,9 +153,9 @@ public class ClientAccept {
 				}
 			}
 			break;
-		default:
-			break;
 			
+		default :
+			break;
 		}
 	}
 	
