@@ -8,8 +8,6 @@ public enum UserActionEnum {
 	USER_CREATE_ROOM,			// 유저님 방생성
 	USER_CONFIRM_USERINFO,		// 유저님 다른 유저님 정보 확인하기
 	USER_MESSAGE_DEFAULT,		// 유저님 일반 메세지 전송
-	USER_FIND_ID,				//유저님 아이디 찾는중
-	
 	USER_MESSAGE_SECRET,		// 유저님 귓속말 전송
 	USER_ENTER_ROOM,			// 유저님이 방 들어가신단다
 	USER_PRIVATE_ROOM_ENTER;	// 유저님 비밀방 들어가고 싶으시단다

@@ -3,8 +3,10 @@ package frames.searchFrames;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Label;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -15,9 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import actions.findIDandPW.FindIdAction;
+import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.SearchIdEnum;
+import frames.BasicFrame;
+import omokGame.client.ClientAccept;
 
 public class SearchIdPanel extends JPanel {
 	
@@ -33,6 +41,7 @@ public class SearchIdPanel extends JPanel {
 	private FindIdAction findIDAction;
 	private SearchIdFrame searchIdFrame;
 	private JPanel cardLayoutPanel;
+	private String errMsg;
 	
 	public SearchIdPanel(SearchIdFrame searchIdFrame) throws IOException {
 		this.cardLayoutPanel = new JPanel();
@@ -41,6 +50,7 @@ public class SearchIdPanel extends JPanel {
 		this.findIDAction = new FindIdAction(this);
 		JoinSizesEnum.JOIN_MESSAGE.getMessageMap();
 		Font defaultFont = SearchIdEnum.LABELFONT_DEFAULT.getFont();
+		Font textfieldFont = SearchIdEnum.TEXTFIELD_FONT.getFont();
 
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
@@ -62,12 +72,16 @@ public class SearchIdPanel extends JPanel {
 
 		//아이디텍스트필드
 		this.searchNameTextField = new JTextField(10);
-		this.searchNameTextField.setFont(defaultFont);
+		this.searchNameTextField.setFont(textfieldFont);
 		this.searchNameTextField.setBounds(SearchIdEnum.SEARCH_ID_TEXTFIELD.getRectangle());
 		//이메일텍스트필드
 		this.searchEmailTextField = new JTextField(10);
-		this.searchEmailTextField.setFont(defaultFont);
+		this.searchEmailTextField.setFont(textfieldFont);
 		this.searchEmailTextField.setBounds(SearchIdEnum.SEARCH_EMAIL_TEXTFIELD.getRectangle());
+		
+		//TODO
+		this.searchNameTextField.setText("신연종");
+		this.searchEmailTextField.setText("duswhd@gmail.com");
 		
 		//확인버튼
 		this.searchConfirmButton = new JButton();
@@ -118,6 +132,20 @@ public class SearchIdPanel extends JPanel {
         this.setLayout(new CardLayout());
         this.setVisible(true); 
 	}
+	//findIdResult 에서는 호출만.해봐.
+	public void findIdResult(AbstractEnumsDTO data) {
+		
+		UserPersonalInfoDTO result = (UserPersonalInfoDTO) data;
+		SearchIdResultPanel searchIdResultPanel = this.searchIdFrame.getSearchIdResultPanel();
+		
+		//user ID가 널이 아니면 확인버튼이 실행되도록 하기
+		if(result.getUserID() == null) {
+			searchIdResultPanel.showUserIdLael("정보입력오류:(");
+		} else {
+			searchIdResultPanel.showUserIdLael(result.getUserID());
+		}
+		this.doConfirmButton();
+	}
 	
 	//에러메시지
 	public void errorMsg(String errorMsgLabel) {
@@ -138,12 +166,40 @@ public class SearchIdPanel extends JPanel {
 		comp.addKeyListener(this.findIDAction);
 		this.add(comp);
 	}	
+	//확인번튼시 실행
+	public void doConfirmButton() {
+		this.searchIdFrame.doConfirmButton();
+	}
 	
 
 	//취소버튼시 실행
 	public void doCancleButton(){	
 		//프레임의 취소버튼을 실행
 		this.searchIdFrame.doCancleButton();
+	}
+	
+	//아이디 찾기 메소드
+	public void doCheckId() {
+		String name = this.searchNameTextField.getText();
+		String email = this.searchEmailTextField.getText();
+		
+		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_ID);
+		personalDTO.setUserEmail(email);
+		personalDTO.setUserName(name);
+
+		System.out.println("client data -> " + personalDTO.toString());
+		
+		try {
+			
+			BasicFrame basicFrame = this.searchIdFrame.getBasicFrame();
+			ClientAccept clientAccept = basicFrame.getClientAccept();
+			ObjectOutputStream oos = clientAccept.getClientOS();
+			
+			oos.writeObject(personalDTO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -174,4 +230,5 @@ public class SearchIdPanel extends JPanel {
     public FindIdAction getFindIDAction() {
 		return findIDAction;
 	}
+    
 }

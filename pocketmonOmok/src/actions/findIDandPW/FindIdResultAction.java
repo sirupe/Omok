@@ -18,12 +18,14 @@ public class FindIdResultAction extends Adapters {
 	//홈으로
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("액션퍼폼드!");
 		//버튼 액션	
 		String buttonName = ((JButton)e.getSource()).getName();
 		if(buttonName.equals(SearchIdEnum.BUTTON_NAME_GOHOME.getButtonName())) {
 			this.searchIdResultPanel.doHomeButton();
 		}
 	}
+	
+
+	
 }
 

@@ -139,16 +139,9 @@ public enum CorrectEnum {
 			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height  * 0.15)
 	)),
 	/*************************아이디찾기 결과*************************/
-	SHOW_USER_ID_LABEL_RECT(new Rectangle(
-			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.37 ),
-			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height * 0.24),
-			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.5),
-			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height  * 0.23)
-	)), 
-	
 	SHOW_USER_ID_RESULT_RECT(new Rectangle(
-			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.32),
-			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height * 0.45),
+			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.39),
+			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height * 0.4),
 			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().width * 0.8),
 			(int)(DROPOUT_FRAME_SIZE_RECT.getRect().height  * 0.23)
 	)), 

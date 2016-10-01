@@ -40,4 +40,6 @@ public class AbstractEnumsDTO implements Serializable {
 	public void setServerAction(ServerActionEnum serverAction) {
 		this.serverAction = serverAction;
 	}
+
+	
 }

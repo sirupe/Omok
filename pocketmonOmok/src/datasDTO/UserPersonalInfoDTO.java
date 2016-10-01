@@ -89,4 +89,14 @@ public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 	public String getCertificationNumber() {
 		return certificationNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "UserPersonalInfoDTO [userID=" + userID + ", userPasswd=" + userPasswd + ", userName=" + userName
+				+ ", userGender=" + userGender + ", userBirth=" + userBirth + ", userEmail=" + userEmail
+				+ ", userPhoneNumber=" + userPhoneNumber + ", userJoinDate=" + userJoinDate + ", certificationNumber="
+				+ certificationNumber + "]";
+	}
+	
+	
 }

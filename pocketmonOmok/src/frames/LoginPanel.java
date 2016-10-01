@@ -59,7 +59,6 @@ public class LoginPanel extends JPanel {
 		this.loginPanel.setLayout(null);
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
-		this.searchPwdPanel = searchPwdPanel;
 		this.loginFailLabel = new JLabel();
 		
 		//프레임 화면 출력 위치 설정
