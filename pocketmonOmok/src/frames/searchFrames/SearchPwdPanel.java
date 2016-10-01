@@ -268,7 +268,7 @@ import omokGame.client.ClientAccept;
 		String email = this.searchemailTextField.getText();
 		
 		
-		UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW_EMAIL);
+		UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
 		userPersonalInfoDTO.setUserEmail(email);
 		
 		System.out.println(userPersonalInfoDTO.toString() + " :  ¿Ã∏ﬁ¿œ");

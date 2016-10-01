@@ -362,8 +362,6 @@ public class OmokServer {
 			//이메일발송
 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
 			
-			resultPersonalDTO.setCertificationNumber(confirmNumber);
-			resultPersonalDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
 			personalServer.getServerOutputStream().writeObject(resultPersonalDTO);
 			break;
 			
@@ -404,24 +402,15 @@ public class OmokServer {
 		System.out.println("ID찾기");
 	}
 	
-	public void findPW() {
-		System.out.println("비밀번호찾기");
-	}
-	
-	public void findEmail(AbstractEnumsDTO data, OmokPersonalServer PersonalServer) throws IOException {
-		
-		UserPersonalInfoDTO personalInfo = (UserPersonalInfoDTO) data;
-		PersonalServer.getServerOutputStream().writeObject(data);
-		System.out.println(data + ": data");
-		
+//패스워드 찾기---------------------------------------------------------------------------------------------------
+	public void findPW(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
+//		personalServer.getServerOutputStream().writeObject(data);		
 		
 		UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO) data;
 		//인증번호 생성
 		System.out.println(resultDTO);
 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
 		System.out.println(confirmNumber + " : 랜덤번호");
-	
-			
 	}
 	
 //게임방----------------------------------------------------------------------------------------------------

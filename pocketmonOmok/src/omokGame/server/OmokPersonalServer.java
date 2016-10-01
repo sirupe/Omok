@@ -39,15 +39,15 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_JOIN :
 					this.omokServer.join(userPosition, this);
 					break;
+				//연종
 				case POSITION_FIND_ID :
 					this.omokServer.findID();
 					break;
+				//수진
 				case POSITION_FIND_PW :
-					this.omokServer.findPW();
+					this.omokServer.findPW(userPosition, this);
+					System.out.println("오목서버는 넘어와요");
 					break;
-//				case POSITION_FIND_PW_EMAIL :
-//					this.omokServer.findEmail(userPosition, this);
-//					break;
 				case POSITION_GAME_ROOM :
 					this.omokServer.gameRoom(userPosition, this);
 					break;
