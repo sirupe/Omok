@@ -14,6 +14,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -44,9 +45,17 @@ public class GameRoomPanel extends JPanel {
 	private JPanel gameBoardPanel;	// 오목판
 	private JButton[][] gameBoardButtons;
 	private int[][] gameBoard;
+	private int x;
+	private int y;
 	
 	private JPanel omokStonePanel;	// 돌을 놓을 패널
+	
 	private JPanel timeLimitPanel;	// 시간제한 표시
+	private JProgressBar timeBar;
+	private JLabel timeLabel;
+	private Integer time;
+	private boolean isThreadStart;
+	
 	private JPanel userImagePanel;	// 유저이미지
 	private JPanel gameMenuPanel;	// 게임메뉴 및 아이템
 	
@@ -54,18 +63,17 @@ public class GameRoomPanel extends JPanel {
 	private JTextField chattingField;
 	private JTextArea chattingArea;
 	
-	private Thread timeLimitThread;
-	private boolean isThreadStart;
-	
 	private JLabel leftUser;
 	private JLabel rightUser;
 	private JButton[] menuButtons;
 	
 	private GameRoomClientAction gameRoomAction;
 	private GameRoomInfoVO gameRoomInfo;
+	private StonePositionCheck stonePositionCheck;
 	
 	public GameRoomPanel(BasicFrame basicFrame) throws IOException {
-		this.gameRoomAction = new GameRoomClientAction(this);		
+		this.gameRoomAction = new GameRoomClientAction(this);
+		this.stonePositionCheck = new StonePositionCheck();
 		this.basicFrame 	= basicFrame;
 		this.isThreadStart  = false;
 		
@@ -111,17 +119,6 @@ public class GameRoomPanel extends JPanel {
 				this.omokStonePanel.add(this.gameBoardButtons[i][j]);
 			}
 		}
-//		try {
-//			stonesLocation[7][7].setIcon(
-//					new ImageIcon(
-//						ImageIO.read(new File(ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir())).getScaledInstance(
-//							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
-//							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
-//							Image.SCALE_AREA_AVERAGING)
-//					));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 		this.omokStonePanel.setBounds(GameRoomEnum.GAME_STONEPANEL_RECT.getRect());
 	}
 	
@@ -159,46 +156,18 @@ public class GameRoomPanel extends JPanel {
 		this.timeLimitPanel.setOpaque(false);
 		this.timeLimitPanel.setBounds(GameRoomEnum.GAME_TIMELIMIT_PANEL_RECT.getRect());
 		
-		Integer time = 30;
-		JProgressBar timeBar = new JProgressBar(0, 30);
+		this.time = 30;
+		this.timeBar = new JProgressBar(0, 30);
 		timeBar.setValue(time);
 		timeBar.setBounds(GameRoomEnum.GAME_TIMELIMIT_PROGRESS_RECT.getRect());
 		
 		
-		JLabel timeLabel = new JLabel("0:" + time.toString());
+		this.timeLabel = new JLabel("0:" + time.toString());
 		timeLabel.setBounds(GameRoomEnum.GAME_TIMELIMIT_TIMELABEL_RECT.getRect());
 		timeLabel.setForeground(Color.red);
 		timeLabel.setFont(GameRoomEnum.GAME_TIMELABEL_FONT.getFont());
 		
-		//시간이 점점 줄어든다. TODO
-		this.timeLimitThread = new Thread() {
-			@Override
-			public void run() {
-				// 30초동안 1초 1초 줄어든다. 시간부분과 프로그레스바를 줄어드는 시간에 맞추어 변경시킨다.
-				// 시간이 모두 지나거나 유저가 게임보드에 돌을 놓으면(isThreadStart가 false가 되면)
-				// 현재 유저의 마우스리스너를 삭제하고 현재 게임보드 정보를 서버로 전송하며 턴을 종료한다.
-				for(int i = time; i >= 0 && isThreadStart; i--) {
-					System.out.println("쓰레드 돌고있따..." + i);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					timeBar.setValue(i);
-					timeLabel.setText("0:" + String.valueOf(i));
-				}
-				System.out.println("쓰레드가 끝남");
-				gameBoardPanelDeleteAction();
-				
-				GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
-				gameBoardVO.setUserAction(UserActionEnum.USER_GAME_BOARD_INFO);
-				gameBoardVO.setNowTurnUser(thisUserID);
-				gameBoardVO.setNextTurnUser(gameRoomInfo.getOwner().equals(thisUserID) ? gameRoomInfo.getOwner() : gameRoomInfo.getGuest());
-				gameBoardVO.setGameBoard(gameBoard);
-				
-				basicFrame.sendDTO(gameBoardVO);
-			}
-		};
+		//시간이 점점 줄어든다. 
 		
 		this.timeLimitPanel.add(timeLabel);
 		this.timeLimitPanel.add(timeBar);
@@ -459,18 +428,48 @@ public class GameRoomPanel extends JPanel {
 		}
 	}
 	
+	// 서버에서 정보 도착했을 때 작동
+	// 상대방 턴이 종료된 후 서버로 정보가 전송되었을 때
+	// 서버가 그 정보를 해당 방의 유저들에게 전송해줄 때 이 메소드로 들어오게 된다.
+	public void boardSettingAndMyTurnStart(AbstractEnumsDTO data) {
+		GameBoardVO gameBoardVO = (GameBoardVO)data;
+		this.gameBoard = gameBoardVO.getGameBoard();
+		this.stoneImageSetting(x, y);
+		// 서버에서 보내준 정보 중 내가 현재 턴인 유저라면
+		// (내가 현재 턴인 유저가 아니라면 무시 ^^)
+		if(this.thisUserID.equals(gameBoardVO.getNowTurnUser())) {
+			// 그런데 내가 오너라면
+			if(this.thisUserID.equals(this.gameRoomInfo.getOwner())) {
+				this.thisUserTurn(SoundEnum.GAME_BLACK_TURN.getSound());
+			// 내가 게스트라면
+			} else {
+				this.thisUserTurn(SoundEnum.GAME_WHITE_TURN.getSound());
+			}
+			
+		// 상대방의 턴에는 상대방 돌의 소리를 낼 수 있게끔 else 처리.
+		} else {
+			this.soundPlay(this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 
+					SoundEnum.GAME_WHITE_TURN.getSound() : SoundEnum.GAME_BLACK_TURN.getSound());
+		}
+	}
+
+	// 현재 유저 턴이라면 쓰레드를 멈추는 플래그를 true로 바꿔주고
+	// 시간을 세어주는 쓰레드를 구동시키고
+	// 사운드를 내보내주고 게임패널에 액션리스너를 등록시켜준다.
 	public void thisUserTurn(String soundDir) {
 		this.isThreadStart = true;
-		this.timeLimitThread.start();
-		this.soundPlay(soundDir);
 		this.gameBoardPanelAddAction();
+		this.soundPlay(soundDir);
+		this.timeLimitThread();
 	}
 
 	// 게임보드에 액션을 추가한다.
 	public void gameBoardPanelAddAction() {
 		for(int i = 0, iSize = this.gameBoardButtons.length; i < iSize; i++) {
 			for(int j = 0, jSize = this.gameBoardButtons[0].length; j < jSize; j++) {
-				this.gameBoardButtons[i][j].addMouseListener(this.gameRoomAction);
+				if(this.gameBoard[i][j] == 0) {
+					this.gameBoardButtons[i][j].addMouseListener(this.gameRoomAction);
+				}
 			}
 		}
 	}
@@ -484,32 +483,122 @@ public class GameRoomPanel extends JPanel {
 		}
 	}
 	
+	// 게임보드에 이미지를 추가한다. TODO 착수점을 표시하고 싶으시다.
 	public void stoneImageSetting(int x, int y) {
 		for (int i = 0, iLen = this.gameBoard.length; i < iLen; i++) {
 			for (int j = 0, jLen = gameBoard[i].length; j < jLen; j++) {
-				this.gameBoardButtons[i][j].setIcon(this.getButtonImageIcon(this.gameBoard[i][j] == 1 ? 
-					ImageEnum.GAMEROOM_STONE_PIKACHU.getImageDir() : ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir()
-				));
+				String imageDir = null;
+				if(this.gameBoard[i][j] == 1) {
+					imageDir = ImageEnum.GAMEROOM_STONE_PIKACHU.getImageDir();
+					this.gameBoardButtons[i][j].setIcon(this.getButtonImageIcon(imageDir));
+				} else if(this.gameBoard[i][j] == 2) {
+					imageDir = ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir();
+					this.gameBoardButtons[i][j].setIcon(this.getButtonImageIcon(imageDir));
+				}
 			}
 		}
-	}
-	
-	// 돌을 놓으면 게임보드 위치 세팅한 후 쓰레드 종료시키러 떠난다.(턴 종료) TODO
-	// 쓰레드가 종료되면 입력불가설정, 서버로 DTO보내기 등의 작업이 실행됨.
-	public void turnEnd(int x, int y) {
-		System.out.println("turnEnd");
-		this.gameBoard[x][y] = this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 3 : 4;
-		this.isThreadStart = false;
-//		
-//		GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
-//		gameBoardVO.setUserAction(userAction);
-//		this.basicFrame.sendDTO(dto);
-	}
-	
-	public void userStoneDrop(AbstractEnumsDTO data) {
-		GameBoardVO gameBoardVO = (GameBoardVO)data;
-//		if(gameBoardVO.getNextTurnUser()) 
 		
+		this.gameBoardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.red, 5));
+	}
+	
+	// 턴이 종료되면 (유저가 돌을 놓으면)
+	// 돌을 놓은 자리에 게임보드 배열값을 바꿔주고
+	// 시간 쓰레드를 종료시켜주고
+	// 게임보드 배열값에 따라 게임보드 이미지를 바꿔준다.
+	public void turnEnd(int x, int y) {
+		this.soundPlay(SoundEnum.GAME_STONE_DROP.getSound());
+		this.gameBoard[x][y] = this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 1 : 2;
+		this.x = x;
+		this.y = y;
+		this.isThreadStart = false;
+		this.stoneImageSetting(x, y);
+	}
+	
+	//TODO 게임종료
+	// 한 유저가 이긴 경우 게임이 종료된다.
+	// 이긴 유저가 접속자와 같다면 승리하셨습니다 메세지를 띄워주고 진 유저가 같다면 패배하셨습니다 메세지 띄워준다.
+	// for문을 돌면 돌이 일정하게 사라지지 않기 대문에 setVisible 먼저 보이지 않게 한 후 for문으로 작업하고 다시 true를 준다.
+	// 초기화 해야 할 값이 있다면 초기화 하고 게스트 유저의 레디를 해제해준다.
+	public void gameEnd(AbstractEnumsDTO data) {
+		GameBoardVO gameBoardVO = (GameBoardVO)data;
+		this.gameBoard = gameBoardVO.getGameBoard();
+		this.x = gameBoardVO.getX();
+		this.y = gameBoardVO.getY();
+		
+		System.out.println("winUser : " + gameBoardVO.getWinUser());
+		System.out.println("thisUSer : " + thisUserID);
+		if(gameBoardVO.getWinUser().equals(this.thisUserID)) {
+			JDialog dialog = new GameEndDialog(this.basicFrame,"승리하셨습니다 :D");
+			dialog.setModal(true);
+		} else {
+			JDialog dialog = new GameEndDialog(this.basicFrame, "패배하였습니다 :<");
+			dialog.setModal(true);
+		}
+		
+		this.omokStonePanel.setVisible(false);
+		
+		for (int i = 0, iLen = gameBoard.length; i < iLen; i++) {
+			for (int j = 0, jLen = gameBoard[0].length; j < jLen; j++) {
+				this.gameBoard[i][j] = 0;
+				this.gameBoardButtons[i][j].setIcon(null);
+			}
+		}
+		
+		this.omokStonePanel.setVisible(true);
+		
+		this.x = 0;
+		this.y = 0;
+		
+		if(this.thisUserID.equals(this.gameRoomInfo.getGuest())) {
+			this.menuButtons[0].addMouseListener(this.gameRoomAction);
+		}
+		
+	}
+	
+	public void timeLimitThread() {
+		new Thread() {
+			@Override
+			public void run() {
+				// 30초동안 1초 1초 줄어든다. 시간부분과 프로그레스바를 줄어드는 시간에 맞추어 변경시킨다.
+				// 시간이 모두 지나거나 유저가 게임보드에 돌을 놓으면(isThreadStart가 false가 되면)
+				// 현재 유저의 마우스리스너를 삭제하고 현재 게임보드 정보를 서버로 전송하며 턴을 종료한다.
+				for(int i = time; i >= 0 && isThreadStart; i--) {
+					timeBar.setValue(i);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					timeLabel.setText("0:" + String.valueOf(i));
+				}
+				timeBar.setValue(0);
+				timeLabel.setText("0:00");
+				// 쓰레드가 끝나면 (시간이 다 갔거나 유저가 돌을 놓았거나) - turnEnd 에서 false처리가 되면
+				// 화면에 등록된 액션들을 삭제한다. (클릭이 불가능하게 만듦)
+				gameBoardPanelDeleteAction();
+				// 게임보드VO 에 현재 진행한 유저와 다음턴의 유저와 게임보드에 놓인 돌 정보와 이긴 유저 정보를 담아 보낸다.
+				// (현재 유저의 돌의 위치를 탐색하여 5개가 이어져서 놓여졌는지 판단한다.)
+				GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
+				gameBoardVO.setUserAction(UserActionEnum.USER_GAME_BOARD_INFO);
+				gameBoardVO.setNowTurnUser(thisUserID);
+				gameBoardVO.setNextTurnUser(gameRoomInfo.getOwner().equals(thisUserID) ? gameRoomInfo.getGuest() : gameRoomInfo.getOwner());
+				gameBoardVO.setGameBoard(gameBoard);
+				gameBoardVO.setX(x);
+				gameBoardVO.setY(y);
+				gameBoardVO.setWinUser(
+					stonePositionCheck.stoneDiagonalLeftCheck(x, y, gameBoard) < 5 ? 
+						(stonePositionCheck.stoneDiagonalRightCheck(x, y, gameBoard) < 5 ? 
+							(stonePositionCheck.stoneHeightCheck(x, y, gameBoard) < 5 ? 
+								(stonePositionCheck.stoneWidthCheck(x, y, gameBoard) < 5 ? null : thisUserID) 
+							: thisUserID) 
+						: thisUserID) 
+					: thisUserID);
+				if(gameBoardVO.getWinUser() != null) {
+					gameBoardVO.setLoseUser(otherUserID);
+				}
+				basicFrame.sendDTO(gameBoardVO);
+			}
+		}.start();
 	}
 	
 	// 유저 이미지 세팅
@@ -534,11 +623,11 @@ public class GameRoomPanel extends JPanel {
 		ImageIcon icon = null;
 		try {
 			icon = new ImageIcon(ImageIO.read(
-						new File(imageDir)).getScaledInstance(
-							GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
-							GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
-							Image.SCALE_AREA_AVERAGING)
-					);
+				new File(imageDir)).getScaledInstance(
+					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
+					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
+					Image.SCALE_AREA_AVERAGING)
+			);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -551,11 +640,11 @@ public class GameRoomPanel extends JPanel {
 		ImageIcon icon = null;
 		try {
 			icon = new ImageIcon(
-						ImageIO.read(new File(imageDir)).getScaledInstance(
-							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
-							GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
-							Image.SCALE_AREA_AVERAGING)
-					);
+				ImageIO.read(new File(imageDir)).getScaledInstance(
+					GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
+					GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
+					Image.SCALE_AREA_AVERAGING)
+			);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -26,6 +26,7 @@ public enum ServerActionEnum {
 	GAME_ROOM_GUEST_READY_CHECK,// 게스트가 레디를 클릭했다는 것을 서버가 알았다.
 	GAME_ROOM_GUEST_READY_DECHECK,// 게스트가 레디를 해제하였다.
 	GAME_ROOM_GAME_START,		// 게임방에서 오너가 게임스타트 클릭!
-	GAME_ROOM_WIN_CHECK,
+	GAME_ROOM_SEND_BOARD_INFO,	// 게임방 보드에 놓인 돌 정보를 두 유저에게 보내준다.
+	GAME_ROOM_WINNER_INFO,		// 게임중에 누군가 승리했다. 승리자 정보가 있다.
 	NOTHING;
 }

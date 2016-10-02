@@ -180,8 +180,13 @@ public class ClientAccept {
 		case GAME_ROOM_GAME_START :
 			this.basicFrame.getGameRoomPanel().gameStart();
 			break;
-		case GAME_ROOM_WIN_CHECK :
+		case GAME_ROOM_SEND_BOARD_INFO :
+			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
 			break;
+		case GAME_ROOM_WINNER_INFO :
+			this.basicFrame.getGameRoomPanel().gameEnd(data);
+			break;
+			
 		default :
 			break;
 		}

@@ -12,6 +12,7 @@ public enum GameRoomEnum {
 			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64)			
 	)),
 	
+	GAME_BOARD_SIZE(15),
 
 //바둑알패널 설정-----------------------------------------------------------
 	GAME_STONEPANEL_RECT(new Rectangle(
@@ -163,7 +164,20 @@ public enum GameRoomEnum {
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.5),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.22),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.14)
+	)),
+	
+	DIALOG_CHECK_BUTTON_RECT(new Rectangle(
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.4),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.5),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.22),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.14)
 	)),	
+
+//다이얼로그 내부컴포넌트 설정값------------------------------------------------
+	GAME_END_DIALOG_LABEL_RECT(new Rectangle(
+			
+	)),
+	GAME_END_DIALOG_BUTTON_RECT(),
 	
 //폰트설정----------------------------------------------------------------	
 	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
@@ -172,8 +186,13 @@ public enum GameRoomEnum {
 	private Rectangle rect;
 	private String[] buttonName;
 	private Font font;
+	private int size;
 	
 	private GameRoomEnum() {
+	}
+	
+	private GameRoomEnum(int size) {
+		this.size = size;
 	}
 	
 	private GameRoomEnum(Rectangle rect) {
@@ -198,5 +217,9 @@ public enum GameRoomEnum {
 	
 	public Font getFont() {
 		return font;
+	}
+	
+	public int getSize() {
+		return size;
 	}
 }

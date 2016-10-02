@@ -751,7 +751,7 @@ public class WaitingRoomPanel extends JPanel {
 		this.userInfoImageLabel.setIcon(userGameData.getUserWaitingRoomImage());
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
-		
+		System.out.println(dir);
 		this.levelImageLabel.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File(dir)).getScaledInstance(

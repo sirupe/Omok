@@ -43,8 +43,6 @@ public class OmokServer {
 	private UserStoreInfoDAO storeDAO;
 	private UserStoreSkinInfoDAO skinDAO;
 	
-	private StonePositionCheck positionCheck;
-	
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
@@ -441,8 +439,6 @@ public class OmokServer {
 	
 //게임방----------------------------------------------------------------------------------------------------
 	public void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
-		this.positionCheck = new StonePositionCheck();
-		
 		switch(index.getUserAction()) {
 		// 유저가 게임방에서 채팅을 보낼 떼
 		case USER_IN_GAME_ROOM_CHATTING :
@@ -532,45 +528,44 @@ public class OmokServer {
 		
 	}
 	
-	// 유저의 돌 위치 정보가 들어오면 승리 검사 후 데이터를 가공하여 보냄.
+	// 유저가 돌을 놓으면 클라이언트 측에서 위치 검사 후 서버에게 결과를 회신한다. 
+	// 서버는 매
 	public void stonePositionCheck(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		GameBoardVO gameBoard = (GameBoardVO)index;
 		int inputBoard[][] = gameBoard.getGameBoard();
 		int board[][] = new int[15][];
 		
-		int x = 0;
-		int y = 0;
-		
+		// 정보의 안정성을 위해 모든 값을 일일히 복사하여 저장시킨다.
 		for (int i = 0, iLen = board.length; i < iLen; i++) {
 			board[i] = new int[15];
 			for (int j = 0, jLen = board[0].length; j < jLen; j++) {
 				board[i][j] = inputBoard[i][j];
-				if(board[i][j] >= 3) {
-					board[i][j] -= 2;
-					x = i;
-					y = j;
-				}
 			}
 		}
 		
+		// 서버에서 돌을 놓았다는 정보를 받아 현재 진행중인 유저와 다음턴 유저를 바꾸어주고
+		// 정보를 게임 진행중인 두 유저에게 보낸다.
 		String nextTurnUser = gameBoard.getNextTurnUser();
+		String nowTurnUser  = gameBoard.getNowTurnUser();
 		GameBoardVO sendGameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
-		sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WIN_CHECK);
+		if(gameBoard.getWinUser() == null) {
+			sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_SEND_BOARD_INFO);
+		} else {
+			// win 유저정보가 있다면 DAO 에 이긴 유저의 정보를 업데이트 한다.
+			System.out.println("winUser : " + sendGameBoardVO.getWinUser());
+			sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WINNER_INFO);
+			this.gamedataDAO.winUserGameDataUpdate(sendGameBoardVO.getWinUser());
+			this.gamedataDAO.loseUserGameDataUpdate(sendGameBoardVO.getLoseUser());
+			sendGameBoardVO.setWinUser(gameBoard.getWinUser());
+			sendGameBoardVO.setLoseUser(gameBoard.getLoseUser());
+		}
+		// 사용자에게 보낼 정보에 돌 5개를 놓은 유저의 정보가 있다면 승리정보, 아니라면 그냥 맵 업데이트 하는 정보(Enum)를 담는다.
 		sendGameBoardVO.setGameBoard(board);
-		sendGameBoardVO.setX(x);
-		sendGameBoardVO.setY(y);
-		sendGameBoardVO.setNextTurnUser(nextTurnUser);
-		sendGameBoardVO.setNowTurnUser(gameBoard.getNowTurnUser());
-		sendGameBoardVO.setWinUser(
-			this.positionCheck.stoneDiagonalLeftCheck(x, y, board) < 5 ? 
-				(this.positionCheck.stoneDiagonalRightCheck(x, y, board) < 5 ? 
-					(this.positionCheck.stoneHeightCheck(x, y, board) < 5 ? 
-						(this.positionCheck.stoneWidthCheck(x, y, board) < 5 ? null : gameBoard.getNowTurnUser()) 
-					: gameBoard.getNowTurnUser()) 
-				: gameBoard.getNowTurnUser()) 
-			: gameBoard.getNowTurnUser()
-		);
-		
+		sendGameBoardVO.setX(gameBoard.getX());
+		sendGameBoardVO.setY(gameBoard.getY());
+		sendGameBoardVO.setNextTurnUser(nowTurnUser);
+		sendGameBoardVO.setNowTurnUser(nextTurnUser);
+
 		try {
 			personalServer.getServerOutputStream().writeObject(sendGameBoardVO);
 			this.loginUsersMap.get(nextTurnUser).getServerOutputStream().writeObject(sendGameBoardVO);
