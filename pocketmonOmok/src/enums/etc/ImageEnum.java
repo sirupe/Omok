@@ -16,7 +16,7 @@ public enum ImageEnum {
 	LOGINPANEL_SEARCHID_HOVER("resources/login/forgotID.png"),
 	LOGINPANEL_SEARCHPW_HOVER("resources/login/forgotPW.png"),
 //WaitingRoom 이미지들---------------------------------------------------
-	WAITINGROOM_MYINFO_MODIFY("resources/waitingroom/correct.png"),
+	WAITINGROOM_MYINFO_MODIFY("resources/waitingroom/correctInfo.png"),
 	WAITINGROOM_ENTER_POSSIBLE("resources/waitingRoom/admission.png"),
 	WAITINGROOM_ENTER_PRIVATE("resources/waitingRoom/private.png"),
 	WAITINGROOM_ENTER_IMPOSSIBLE("resources/waitingRoom/NoAdmittance.png"),
