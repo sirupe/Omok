@@ -447,7 +447,7 @@ public class OmokServer {
 			break;
 		// 유저가 돌을 놨다.
 		case USER_GAME_BOARD_INFO :
-			
+			this.stonePositionCheck(index, personalServer);
 			break;
 		default:
 			break;
@@ -517,6 +517,7 @@ public class OmokServer {
 		
 	}
 	
+	// 유저의 돌 위치 정보가 들어오면 승리 검사 후 데이터를 가공하여 보냄.
 	public void stonePositionCheck(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		GameBoardVO gameBoard = (GameBoardVO)index;
 		int inputBoard[][] = gameBoard.getGameBoard();

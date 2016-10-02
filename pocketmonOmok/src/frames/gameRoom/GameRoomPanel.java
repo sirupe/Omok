@@ -67,7 +67,7 @@ public class GameRoomPanel extends JPanel {
 	public GameRoomPanel(BasicFrame basicFrame) throws IOException {
 		this.gameRoomAction = new GameRoomClientAction(this);		
 		this.basicFrame 	= basicFrame;
-		this.isThreadStart  = true;
+		this.isThreadStart  = false;
 		
 		this.omokStonePanel = new JPanel();
 		this.timeLimitPanel = new JPanel();
@@ -170,7 +170,7 @@ public class GameRoomPanel extends JPanel {
 		timeLabel.setForeground(Color.red);
 		timeLabel.setFont(GameRoomEnum.GAME_TIMELABEL_FONT.getFont());
 		
-		//시간이 점점 줄어든다.
+		//시간이 점점 줄어든다. TODO
 		this.timeLimitThread = new Thread() {
 			@Override
 			public void run() {
@@ -187,6 +187,7 @@ public class GameRoomPanel extends JPanel {
 					timeBar.setValue(i);
 					timeLabel.setText("0:" + String.valueOf(i));
 				}
+				System.out.println("쓰레드가 끝남");
 				gameBoardPanelDeleteAction();
 				
 				GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
@@ -422,7 +423,7 @@ public class GameRoomPanel extends JPanel {
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 	}
 	
-	// 게임 시작한다는 정보를 서버에게 보낸다.
+	// 게임 시작한다는 정보를 서버에게 보낸다. 
 	public void startReadyButtonRemoveAction() {
 		GameRoomInfoVO gameRoomInfoVO = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
 		gameRoomInfoVO.setUserAction(UserActionEnum.USER_GAME_START);
@@ -444,7 +445,7 @@ public class GameRoomPanel extends JPanel {
 		
 		this.chattingArea.setText(this.chattingArea.getText() + "\n<게임을 시작합니다.>");
 		
-		this.SoundPlay(SoundEnum.GAME_START_SOUND.getSound());
+		this.soundPlay(SoundEnum.GAME_START_SOUND.getSound());
 		
 		try {
 			Thread.sleep(700);
@@ -455,24 +456,16 @@ public class GameRoomPanel extends JPanel {
 		// 오너 먼저 시작 (흑돌)
 		if(this.thisUserID.equals(this.gameRoomInfo.getOwner())) {
 			this.thisUserTurn(SoundEnum.GAME_BLACK_TURN.getSound());
-		} else {
-			this.thisUserTurn(SoundEnum.GAME_WHITE_TURN.getSound());
 		}
 	}
 	
 	public void thisUserTurn(String soundDir) {
-		System.out.println("thisUserTurn");
-		this.gameBoardPanelAddAction();
-		this.SoundPlay(soundDir);
+		this.isThreadStart = true;
 		this.timeLimitThread.start();
+		this.soundPlay(soundDir);
+		this.gameBoardPanelAddAction();
 	}
 
-//	public void guestTurn() {
-//		this.gameBoardPanelAddAction();
-//		this.SoundPlay(SoundEnum.GAME_WHITE_TURN.getSound());
-//		this.timeLimitThread.start();
-//	}
-	
 	// 게임보드에 액션을 추가한다.
 	public void gameBoardPanelAddAction() {
 		for(int i = 0, iSize = this.gameBoardButtons.length; i < iSize; i++) {
@@ -502,10 +495,21 @@ public class GameRoomPanel extends JPanel {
 	}
 	
 	// 돌을 놓으면 게임보드 위치 세팅한 후 쓰레드 종료시키러 떠난다.(턴 종료) TODO
+	// 쓰레드가 종료되면 입력불가설정, 서버로 DTO보내기 등의 작업이 실행됨.
 	public void turnEnd(int x, int y) {
 		System.out.println("turnEnd");
 		this.gameBoard[x][y] = this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 3 : 4;
 		this.isThreadStart = false;
+//		
+//		GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
+//		gameBoardVO.setUserAction(userAction);
+//		this.basicFrame.sendDTO(dto);
+	}
+	
+	public void userStoneDrop(AbstractEnumsDTO data) {
+		GameBoardVO gameBoardVO = (GameBoardVO)data;
+		if(gameBoardVO.getNextTurnUser()))
+		
 	}
 	
 	// 유저 이미지 세팅
@@ -560,7 +564,7 @@ public class GameRoomPanel extends JPanel {
 	}
 	
 	// 사운드 세팅
-	public void SoundPlay(String soundDir) {
+	public void soundPlay(String soundDir) {
 		try {
 			AudioInputStream gameStartSound = AudioSystem.getAudioInputStream(new File(soundDir));
 			Clip clip = AudioSystem.getClip();

@@ -52,6 +52,8 @@ public class GameRoomClientAction extends Adapters {
 			this.gameRoomPanel.startReadyButtonRemoveAction();
 		
 		// 눌린 버튼이 게임 돌 놓는 작업이라면
+		// 버튼의 위치값을 가져와 저장하고
+		// 턴을 종료하는 메소드를 실행한다.
 		} else {
 			String[] xy = button.getName().split(",");
 			int x = Integer.parseInt(xy[0]);
@@ -59,6 +61,5 @@ public class GameRoomClientAction extends Adapters {
 			this.gameRoomPanel.turnEnd(x, y);
 			System.out.println(x + " / " + y);
 		}
-
 	}
 }

@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import actions.findIDandPW.FindIdResultAction;
+import actions.findIDandPW.FindIDResultAction;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 
@@ -22,11 +22,11 @@ public class SearchIdResultPanel extends JPanel {
 	private JButton homeButton;
 	
 	private SearchIdFrame searchIdFrame;
-	private FindIdResultAction findIdResultAction;
+	private FindIDResultAction findIdResultAction;
 
 	public SearchIdResultPanel(SearchIdFrame searchIdFrame) throws IOException {
 		this.searchIdFrame = searchIdFrame;
-		this.findIdResultAction = new FindIdResultAction(this);
+		this.findIdResultAction = new FindIDResultAction(this);
 		
 		Font defaultFont = SearchIDEnum.LABELFONT_DEFAULT.getFont();
 
@@ -72,7 +72,7 @@ public class SearchIdResultPanel extends JPanel {
 	public SearchIdFrame getSearchIdFrame() {
 		return searchIdFrame;
 	}
-	public FindIdResultAction getFindIdResultAction() {
+	public FindIDResultAction getFindIdResultAction() {
 		return findIdResultAction;
 	}
 	

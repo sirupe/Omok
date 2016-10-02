@@ -8,10 +8,10 @@ import actions.adapters.Adapters;
 import enums.frames.SearchIDEnum;
 import frames.searchFrames.SearchIdResultPanel;
 
-public class FindIdResultAction extends Adapters {
+public class FindIDResultAction extends Adapters {
 	private SearchIdResultPanel searchIdResultPanel;
 	
-	public FindIdResultAction(SearchIdResultPanel searchIdResultPanel) {
+	public FindIDResultAction(SearchIdResultPanel searchIdResultPanel) {
 		this.searchIdResultPanel = searchIdResultPanel;
 	}
 	
