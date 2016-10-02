@@ -365,6 +365,7 @@ public class WaitingRoomPanel extends JPanel {
 				src.setValue(src.getMaximum());
 			}
 		});
+		
 		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
 		this.chattingInputTextField.setBounds(
@@ -400,14 +401,14 @@ public class WaitingRoomPanel extends JPanel {
 		);
 		
 		/******************************************************************************/
-		//게임시작 버튼 위치와 크기를 가져옴
+		//내정보수정 버튼 위치와 크기를 가져옴
 		this.modifyInfoButton.setBounds(
 				WaitingRoomSizesEnum.GAMESTART_JBUTTON_POSITION_X.getSize(), 
 				WaitingRoomSizesEnum.GAMESTART_JBUTTON_POSITION_Y.getSize(), 
 				WaitingRoomSizesEnum.GAMESTART_JBUTTON_WIDTH.getSize(),
 				WaitingRoomSizesEnum.GAMESTART_JBUTTON_HEIGHT.getSize()
 		);
-		//게임시작 버튼의 이미지를 불러옴
+		//내정보수정 버튼의 이미지를 불러옴
 		this.modifyInfoButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File(ImageEnum.WAITINGROOM_MYINFO_MODIFY.getImageDir())).getScaledInstance(

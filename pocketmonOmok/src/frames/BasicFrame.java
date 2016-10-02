@@ -26,6 +26,7 @@ import enums.frames.LoginSizesEnum;
 
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
+import frames.joinFrames.ModifyJoinFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchPwdFrame;
 import frames.searchFrames.SearchPwdPanel;
@@ -43,6 +44,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	private JoinFrame joinFrame;
 	private SearchPwdFrame searchPwdFrame;
 	private SearchIdFrame searchIdFrame;
+	private ModifyJoinFrame modifyJoinFrame;
 	
 	private ClientAccept clientAccept;
 	
@@ -172,9 +174,15 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.searchIdFrame = new SearchIdFrame(this);
 	}
 	
+	public void newModifyJoinFrame() throws IOException {
+		this.modifyJoinFrame = new ModifyJoinFrame(this);
+	}
+	
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+	
+	
 	
 	public String getUserID() {
 		return userID;
@@ -210,6 +218,9 @@ public class BasicFrame extends JFrame implements Serializable{
 
 	public ClientAccept getClientAccept() {
 		return clientAccept;
+	}
+	public ModifyJoinFrame getModifyJoinFrame() {
+		return modifyJoinFrame;
 	}
 }
 

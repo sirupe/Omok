@@ -244,10 +244,10 @@ public class LoginPanel extends JPanel {
 		this.loginPanel.add(this.searchIdButton);
 		this.loginPanel.add(this.searchPwButton);
 	}
-	
+	//TODO
 	public void setTextFieldPosition(){		
-		this.idField = new JTextField("", 10);
-		this.pwField = new JPasswordField("", 10);
+		this.idField = new JTextField("test3", 10);
+		this.pwField = new JPasswordField("3333", 10);
 		
 		//아이디 입력창
 		this.idField.setBounds(

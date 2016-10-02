@@ -1,5 +1,5 @@
 package actions.modifyMyInfo;
 
-public class ModifyMyInfoAction {
+public class ModifyMyInfoAction  {
 
 }

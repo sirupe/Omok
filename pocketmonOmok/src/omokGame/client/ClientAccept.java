@@ -35,7 +35,6 @@ public class ClientAccept {
 	private LoginServerAction loginRequestAction;
 	private JoinServerAction joinRequestAction;
 	private GameRoomServerAction gameRoomRequestAction;
-	private FindIDAction findIdAction;
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());

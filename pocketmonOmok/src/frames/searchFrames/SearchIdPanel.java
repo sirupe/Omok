@@ -77,11 +77,7 @@ public class SearchIdPanel extends JPanel {
 		this.searchEmailTextField = new JTextField(10);
 		this.searchEmailTextField.setFont(defaultFont);
 		this.searchEmailTextField.setBounds(SearchIDEnum.SEARCH_EMAIL_TEXTFIELD.getRectangle());
-		
-		//TODO
-		this.searchNameTextField.setText("신연종");
-		this.searchEmailTextField.setText("duswhd@gmail.com");
-		
+	
 		//확인버튼
 		this.searchConfirmButton = new JButton();
 		this.searchConfirmButton.setIcon(
@@ -131,6 +127,7 @@ public class SearchIdPanel extends JPanel {
         this.setLayout(new CardLayout());
         this.setVisible(true); 
 	}
+	
 	//findIdResult 에서는 호출만.해봐.
 	public void findIdResult(AbstractEnumsDTO data) {
 		
@@ -139,11 +136,12 @@ public class SearchIdPanel extends JPanel {
 		
 		//user ID가 널이 아니면 확인버튼이 실행되도록 하기
 		if(result.getUserID() == null) {
-			searchIdResultPanel.showUserIdLael("정보입력오류:(");
+			//서치아이디 패널의Lable창에 떠야하
+			this.errorMsg("정보입력오류:(");
 		} else {
 			searchIdResultPanel.showUserIdLael(result.getUserID());
+			this.doConfirmButton();
 		}
-		this.doConfirmButton();
 	}
 	
 	//에러메시지
@@ -170,7 +168,6 @@ public class SearchIdPanel extends JPanel {
 		this.searchIdFrame.doConfirmButton();
 	}
 	
-
 	//취소버튼시 실행
 	public void doCancleButton(){	
 		//프레임의 취소버튼을 실행

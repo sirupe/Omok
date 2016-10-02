@@ -24,6 +24,7 @@ import com.sun.media.sound.MidiOutDeviceProvider;
 import enums.frames.JoinSizesEnum;
 import enums.frames.ModifyJoinEnum;
 import enums.frames.SearchIDEnum;
+import frames.BasicFrame;
 import utility.JTextFieldNumOnly;
 
 public class ModifyJoinFrame extends JFrame {
@@ -83,7 +84,7 @@ public class ModifyJoinFrame extends JFrame {
 	
 	private Image background;
 
-	public ModifyJoinFrame() throws IOException {
+	public ModifyJoinFrame(BasicFrame basicFrame) throws IOException {
 		//모든 레이블 
 				this.userIdLabel 	 = new JLabel("아이디"); 
 				this.pwdLabel         = new JLabel("비밀번호");
@@ -380,13 +381,6 @@ public class ModifyJoinFrame extends JFrame {
 			this.add(dropoutButton);
 		
 	}
-	public static void main(String[] args) {
-		try {
-			new ModifyJoinFrame();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-	}
 
 }
