@@ -14,7 +14,7 @@ public enum ServerActionEnum {
 	GAME_CREATEROOM_SUCCESS,	// 방 생성 성공
 	GAME_CREATEROOM_FAIL,		// 방 생성 실패
 	GAME_ROOM_ADD,				// 방 생성시 다른 유저들 화면에 방 추가해주기
-	OTHER_USER_EXIT,			// 다른 유저가 방을 나갔음
+	OTHERS_UER_EXIT,			// 다른 유저가 방을 나갔음
 	OTHER_USER_INFO,			// 다른 유저 정보를 볼 때
 	MESSAGE_SEND_SUCCESS,		// 메세지 전송 성공
 	

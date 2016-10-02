@@ -1,6 +1,7 @@
 package omokGame.server;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -401,9 +402,23 @@ public class OmokServer {
 		}
 	}
 	
-	public void findID() {
-		System.out.println("ID찾기");
+	
+	
+	public void findID(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
+		// 클라이언트에게서 받은 데이터 DTO로 전환
+		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data;
+		System.out.println("server data - > " + data.toString());
+		
+		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
+		UserPersonalInfoDTO resultDTO = this.loginDAO.findUserID(personalDTO);
+		
+		System.out.println("server resultData - >" + resultDTO);
+		
+		ObjectOutputStream oos = personalServer.getServerOutputStream();
+		
+		oos.writeObject(resultDTO);
 	}
+	
 	
 	public void findPW() {
 		System.out.println("비밀번호찾기");
@@ -592,7 +607,7 @@ public class OmokServer {
 		personalServer.getServerInputStream().close();
 		personalServer.getPersonalSocket().close();
 		
-		index.setServerAction(ServerActionEnum.OTHER_USER_EXIT);
+		index.setServerAction(ServerActionEnum.OTHERS_UER_EXIT);
 		for(String id : this.loginUsersMap.keySet()) {
 			this.loginUsersMap.get(id).getServerOutputStream().writeObject(index);
 		}

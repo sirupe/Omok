@@ -508,7 +508,7 @@ public class GameRoomPanel extends JPanel {
 	
 	public void userStoneDrop(AbstractEnumsDTO data) {
 		GameBoardVO gameBoardVO = (GameBoardVO)data;
-		if(gameBoardVO.getNextTurnUser()))
+//		if(gameBoardVO.getNextTurnUser()) 
 		
 	}
 	

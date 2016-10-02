@@ -14,6 +14,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
+import frames.BasicFrame;
 import frames.LoginPanel;
 
 public class LoginClientAction extends MouseAdapter implements ActionListener{
@@ -126,30 +127,32 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 	public void mouseClicked(MouseEvent e) {
 		String buttonName = e.getComponent().toString();
 		if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
-			this.loginPanel.getBasicFrame().setVisible(false);
 			try {
-				this.loginPanel.getBasicFrame().newJoinFrame();
+				BasicFrame basicFrame = this.loginPanel.getBasicFrame();
+				basicFrame.setVisible(false);
+				basicFrame.newJoinFrame();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
-			this.loginPanel.getBasicFrame().setVisible(false);
 			try {
-				this.loginPanel.getBasicFrame().newSearchIdFrame();
+				BasicFrame basicFrame = this.loginPanel.getBasicFrame();
+				basicFrame.setVisible(false);
+				basicFrame.newSearchIdFrame();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-//			if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-				this.loginPanel.getBasicFrame().setVisible(false);
-				System.out.println("dd");
-					try {
-						this.loginPanel.getBasicFrame().newSearchPwdFrame();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}}
+			System.out.println("dd");
+				try {
+					BasicFrame basicFrame = this.loginPanel.getBasicFrame();
+					basicFrame.setVisible(false);
+					basicFrame.newSearchPwdFrame();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+		}
+	}
 	
 	public void loginAction() {
 		char[] passwd = this.loginPanel.getPwField().getPassword();

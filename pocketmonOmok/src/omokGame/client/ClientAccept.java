@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
+import actions.findIDandPW.FindIDAction;
 import actions.gameRoom.GameRoomServerAction;
 import actions.join.JoinServerAction;
 import actions.login.LoginServerAction;
@@ -20,6 +21,7 @@ import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
+import enums.etc.UserPositionEnum;
 import frames.BasicFrame;
 import frames.waitingRoom.WaitingRoomListTable;
 import frames.waitingRoom.WaitingRoomPanel;
@@ -33,7 +35,7 @@ public class ClientAccept {
 	private LoginServerAction loginRequestAction;
 	private JoinServerAction joinRequestAction;
 	private GameRoomServerAction gameRoomRequestAction;
-//	private String userID;
+	private FindIDAction findIdAction;
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
@@ -185,10 +187,8 @@ public class ClientAccept {
 		}
 	}
 
-	
-	
 	public void gameExit(AbstractEnumsDTO infoDTO) throws IOException {
-		if(infoDTO.getServerAction() == ServerActionEnum.OTHER_USER_EXIT) {
+		if(infoDTO.getServerAction() == ServerActionEnum.OTHERS_UER_EXIT) {
 			this.basicFrame.getWaitingRoomPanel().deleteUserSetting((UserPersonalInfoDTO)infoDTO);
 		} else {
 			this.clientOS.close();
@@ -198,6 +198,8 @@ public class ClientAccept {
 			System.exit(0);
 		}
 	}
+
+
 	
 	
 	

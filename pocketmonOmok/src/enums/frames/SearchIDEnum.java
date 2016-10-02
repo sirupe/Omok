@@ -68,7 +68,7 @@ public enum SearchIDEnum {
 		)),
 	//홈으로버튼 생성
 	GO_HOME_BUTTON(new Rectangle(
-			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
+			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.25),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
@@ -78,6 +78,8 @@ public enum SearchIDEnum {
 	BUTTON_NAME_BACK("backButton"),
 	BUTTON_NAME_CONFIRM("confirmButton"),
 	BUTTON_NAME_GOHOME("homeButton"),
+	//텍스트필드폰트
+	TEXTFIELD_FONT(new Font("a으라차차",Font.PLAIN, (int) (SearchIDEnum.Screen_SIZE.getDimension().width / 100 * 1.1))),
 	//일반 폰트
 	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD, (int) (SearchIDEnum.Screen_SIZE.getDimension().width / 100 * 1.4))),
 	//에러 메세지 폰트

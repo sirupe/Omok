@@ -28,6 +28,7 @@ public class OmokPersonalServer extends Thread {
 			while(isAccept) {
 				Object object = this.serverInputStream.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO) object;
+				
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.omokServer.login(userPosition, this);
@@ -39,7 +40,7 @@ public class OmokPersonalServer extends Thread {
 					this.omokServer.join(userPosition, this);
 					break;
 				case POSITION_FIND_ID :
-					this.omokServer.findID();
+					this.omokServer.findID(userPosition, this);
 					break;
 				case POSITION_FIND_PW :
 					this.omokServer.findPW();

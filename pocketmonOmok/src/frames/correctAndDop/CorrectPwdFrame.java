@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
