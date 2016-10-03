@@ -201,7 +201,7 @@ public enum JoinSizesEnum {
 	
 	//ErrorMessage 크기
 
-	SIZE_ERROR_WIDTH(220),
+	SIZE_ERROR_WIDTH(300),
 	SIZE_ERROR_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 3.5)),
 	
 	//에러 메세지색깔
@@ -218,7 +218,7 @@ public enum JoinSizesEnum {
 	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
 
 	//정합성검사 라벨 폰트
-	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 150)),
+	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 125)),
 	
 	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	

@@ -138,8 +138,8 @@ public class WaitingRoomPanel extends JPanel {
 			}
 		};
 		
-		this.waitingRoomTable.getTableHeader().setFont(new Font("a으라차차", Font.BOLD, 20));//방타이틀글꼴
-		this.waitingRoomTable.setFont(new Font("a으라차차",Font.BOLD,15));
+		this.waitingRoomTable.getTableHeader().setFont(WaitingRoomSizesEnum.LABELFONT_SIZE80.getfont());//방타이틀글꼴
+		this.waitingRoomTable.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
 		this.waitingRoomTable.setForeground(Color.WHITE);
 		this.waitingRoomTable.setShowVerticalLines(false);                               //수직선을 그릴것인가
 		this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              //이동불가
@@ -151,8 +151,8 @@ public class WaitingRoomPanel extends JPanel {
 		this.waitingRoomTable.getColumn("OX").setPreferredWidth(1);
 		this.waitingRoomTable.getColumn("NO").setPreferredWidth(1);
 		this.waitingRoomTable.getColumn("TITLE").setPreferredWidth(300);
-		this.waitingRoomTable.getColumn("MASTER").setPreferredWidth(150);
-		this.waitingRoomTable.getColumn("NUM").setPreferredWidth(20);
+		this.waitingRoomTable.getColumn("MASTER").setPreferredWidth(140);
+		this.waitingRoomTable.getColumn("NUM").setPreferredWidth(30);
 		this.waitingRoomTable.setRowHeight(50);
 		this.waitingRoomTable.addMouseListener(this.waitingRoomActionListener);
 		
@@ -633,13 +633,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.sendMessageButton.setFocusPainted(false);
 		
 		//방정보 폰트
-		this.userIDTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.userIDTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE80.getfont());
 		this.scoreTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
 		this.winningRateTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
 		this.pointTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
 		this.levelTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
-		this.chattingInputTextField.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE130.getfont());
-		this.chattingOutput.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE130.getfont());
+		this.chattingInputTextField.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.chattingOutput.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
 		
 		
 		this.setLayout(null);
