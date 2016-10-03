@@ -108,8 +108,8 @@ import omokGame.client.ClientAccept;
 			this.searchConfirmTextField.setVisible(false);
 			
 			//TODO
-//			this.searchIdTextField.setText("test4");
-//			this.searchemailTextField.setText("tnwls@daum.net");
+			this.searchIdTextField.setText("test4");
+			this.searchemailTextField.setText("tnwls@daum.net");
 			
 		}
 		
@@ -137,8 +137,7 @@ import omokGame.client.ClientAccept;
 			this.searchAnswerMsgLabel.setText(init);
 		}
 		
-		
-		
+
 		//3분 스레드
 		public void limitTimeMsg(String time) {
 			this.setLayout(null);
@@ -300,7 +299,8 @@ import omokGame.client.ClientAccept;
 			
 			if(data.getUserCount() == 0) {
 				this.getSearchIdTextField().setEditable(true);
-				this.userNumberMsg("등록된 아이디가 없습니다, 아이디 확인 해주세요");
+				this.userNumberMsg("<html>등록된 아이디가 없습니다.." 
+						+"<br>아이디 확인하세요<br></html>");
 				
 			} else {
 				this.searchPwdFrame.doCheckButton();
@@ -427,7 +427,8 @@ import omokGame.client.ClientAccept;
 			UserPersonalInfoDTO data = (UserPersonalInfoDTO) userPosition;
 			
 			if(data.isCertificationNumber()) {
-				this.userNumberMsg("인증완료!비밀번호 재설정 해주세요!");
+				this.userNumberMsg("<html>인증완료!!." 
+						+"<br>비밀번호다시설정해주세요.<br></html>");
 				this.CheckNumberButton.setVisible(false);
 				this.searchConfirmTextField.setEditable(false);
 				//시간이 지난 후 카운트 삭제
@@ -450,7 +451,7 @@ import omokGame.client.ClientAccept;
 				btn = this.getCheckNumberButton();
 				btn.setVisible(true);
 				this.searchConfirmTextField.setVisible(true);
-				this.userNumberMsg("<html>비밀번호 설정 실패" 
+				this.userNumberMsg("<html>인증번호일치하지 않습니다." 
 									+"<br>다시설정해주세요.<br></html>");
 				this.isConfirmNumberSuccess = false;
 				return;
