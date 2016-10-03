@@ -195,6 +195,5 @@ public class SearchPwdFrame extends JFrame implements Serializable {
     	return basicFrame;
     }
 
-
  
 }

@@ -21,14 +21,14 @@ public enum SearchPwdEnum {
 
 	//이름 레이블
    SEARCH_ID_LABEL(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.1),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.12),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.1),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.2),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.2)
          )),
    //이메일 레이블
    SEARCH_EMAIL_LABEL(new Rectangle(  
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.1),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.12),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.23),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.3),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.2)
@@ -36,7 +36,7 @@ public enum SearchPwdEnum {
    
    //에러 레이블 -- 3분초과메세지
    SEARCH_ERROR_LABEL(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.07),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.072),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.65),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 13),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.13)
@@ -44,7 +44,7 @@ public enum SearchPwdEnum {
 
    //이름 텍스트 필드 x,y, 가로 세로 
    SEARCH_ID_TEXTFIELD(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.23),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.25),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.17),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.4),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
@@ -52,14 +52,14 @@ public enum SearchPwdEnum {
    
    //이메일 텍스트 필드 x,y, 가로 세로 
    SEARCH_EMAIL_TEXTFIELD(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.23),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.25),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.3),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.4),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
          )),
    //인증  텍스트 필드 x,y, 가로 세로 
    SEARCH_CONFIRM_TEXTFIELD(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.23),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.25),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.44),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.4),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.08)
@@ -67,7 +67,7 @@ public enum SearchPwdEnum {
    
    //이메일 인증번호가 발송되었다는 텍스트 필드   x,y, 가로 세로 
    SEARCH_ANSWER_LABEL(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.16),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.18),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.6),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 13),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.13)
@@ -75,7 +75,7 @@ public enum SearchPwdEnum {
    
    //3분 제한시간 레이블  x,y, 가로 세로 
    SEARCH_Time_LABEL(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize()  * 0.51),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize()  * 0.53),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.4),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.15),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
@@ -83,7 +83,7 @@ public enum SearchPwdEnum {
    
    //인증 버튼 생성
    SEARCH_CONFIRM_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.1),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.12),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.43),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.6),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.1)
@@ -91,7 +91,7 @@ public enum SearchPwdEnum {
    
    //인증번호 확인 버튼 생성
    SEARCH_CONFIRM_CHECK_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.1),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.12),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.43),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.15),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.1)
@@ -99,16 +99,16 @@ public enum SearchPwdEnum {
    
    //취소 버튼 생성
    SEARCH_CANCEL_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.2),
-         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.97),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.35),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.81),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.2),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.14)
          )),
 
    //확인 버튼 생성
    SEARCH_CHECK_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.35),
-         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.95),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.22),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.81),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
          )),
@@ -170,4 +170,6 @@ public enum SearchPwdEnum {
     public Font getFont() {
       return font;
     }
+    
+    
  }
