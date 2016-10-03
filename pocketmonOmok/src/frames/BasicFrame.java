@@ -15,7 +15,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
+import ModifyMyInfo.ModifyMyInfoFrame;
 import actions.join.JoinServerAction;
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
@@ -23,10 +25,8 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
-
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
-import frames.joinFrames.ModifyJoinFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchPwdFrame;
 import frames.searchFrames.SearchPwdPanel;
@@ -44,13 +44,15 @@ public class BasicFrame extends JFrame implements Serializable{
 	private JoinFrame joinFrame;
 	private SearchPwdFrame searchPwdFrame;
 	private SearchIdFrame searchIdFrame;
-	private ModifyJoinFrame modifyJoinFrame;
+	private ModifyMyInfoFrame modifyJoinFrame;
 	
 	private ClientAccept clientAccept;
 	
 	private String userID;
+	private boolean isExitCheck;
 	
 	public BasicFrame(ClientAccept clientAccept) throws IOException {
+		this.isExitCheck = true;
 		this.clientAccept = clientAccept;
 		
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
@@ -107,9 +109,12 @@ public class BasicFrame extends JFrame implements Serializable{
 	}
 	
 	public void gameExit() {
-		this.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
+		this.addWindowListener(new WindowAction());
+	}
+	class WindowAction extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent e) {
+			if(isExitCheck) {
 				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
 				personalDTO.setUserID(userID);
 				try {
@@ -119,9 +124,10 @@ public class BasicFrame extends JFrame implements Serializable{
 				}
 				
 				e.getWindow().setVisible(false);
+			} else {
+				gameRoomPanel.exitGame();
 			}
-		
-		});
+		}
 	}
 	
 	// GameRoom 도 결국 패널이므로 패널 생성시 익명클래스를 이용하여  paintComponent 를 오버라이드 하면
@@ -155,10 +161,12 @@ public class BasicFrame extends JFrame implements Serializable{
 	}
 	
 	public void showWaitingRoom() {
+		this.isExitCheck = true;
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
 	
 	public void showGameRoom(UserInGameRoomDTO inGameUserInfo) {
+		this.isExitCheck = false;
 		this.gameRoomPanel.setEnterUserInfo(inGameUserInfo);
 		this.cardLayout.show(this.getContentPane(), "gameRoomPanel");
 	}
@@ -175,7 +183,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	}
 	
 	public void newModifyJoinFrame() throws IOException {
-		this.modifyJoinFrame = new ModifyJoinFrame(this);
+		this.modifyJoinFrame = new ModifyMyInfoFrame(this);
 	}
 	
 	public void setUserID(String userID) {
@@ -219,7 +227,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	public ClientAccept getClientAccept() {
 		return clientAccept;
 	}
-	public ModifyJoinFrame getModifyJoinFrame() {
+	public ModifyMyInfoFrame getModifyJoinFrame() {
 		return modifyJoinFrame;
 	}
 }

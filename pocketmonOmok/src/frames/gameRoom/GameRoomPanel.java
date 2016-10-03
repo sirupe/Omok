@@ -8,12 +8,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -34,12 +32,14 @@ import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.GameRoomEnum;
 import frames.BasicFrame;
+import utility.GetResources;
 
 @SuppressWarnings("serial")
 public class GameRoomPanel extends JPanel {
 	private BasicFrame basicFrame;
 	private String thisUserID;
 	private String otherUserID;
+	private ImageIcon myImage;
 	
 	private JPanel gameBoardPanel;	// 오목판
 	private JButton[][] gameBoardButtons;
@@ -190,6 +190,8 @@ public class GameRoomPanel extends JPanel {
 		this.rightUser.setBorder(BorderFactory.createLineBorder(Color.blue, 6));
 		this.userImagePanel.add(this.rightUser);
 		
+		this.basicFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		this.userImagePanel.add(this.leftUser);
 		this.userImagePanel.add(this.rightUser);
 		this.add(this.userImagePanel);
@@ -272,12 +274,14 @@ public class GameRoomPanel extends JPanel {
 			
 			// 오너인 경우
 			if(this.thisUserID.equals(inGameUserInfo.getGameRoomInfo().getOwner())) {
-				imageDir = ImageEnum.GAMEROOM_START_GRAY.getImageDir();
+				System.out.println("나는 오너 : " + this.thisUserID);
+				imageDir 		 = ImageEnum.GAMEROOM_START_GRAY.getImageDir();
 				this.leftUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
 				this.otherUserID = this.gameRoomInfo.getGuest();
-			
+				this.myImage 	 = inGameUserInfo.getUserGameData().getUserGameRoomImage();
 			// 게스트인 경우
 			} else if(this.thisUserID.equals(inGameUserInfo.getGameRoomInfo().getGuest())) {
+				System.out.println("나는 게스트 : " + this.thisUserID);
 				this.chattingField.setEditable(true);
 				imageDir = ImageEnum.GAMEROOM_READY_GRAY.getImageDir();
 				this.rightUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
@@ -291,8 +295,10 @@ public class GameRoomPanel extends JPanel {
 				
 				this.leftUser.setIcon(this.getUserImageIcon(ownerImageDir));
 				this.otherUserID = this.gameRoomInfo.getOwner();
+				this.myImage 	 = inGameUserInfo.getUserGameData().getUserGameRoomImage();
 			}
 			
+			this.addTextNotice("게임방에 입장하였습니다.");
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -303,11 +309,13 @@ public class GameRoomPanel extends JPanel {
 	public void ownerFrameModify(UserInGameRoomDTO userInGameRoomDTO) {
 		this.gameRoomInfo = userInGameRoomDTO.getGameRoomInfo();
 		this.chattingField.setEditable(true);
-		
+		System.out.println("게스트가 입장하였다. : " + this.gameRoomInfo.getGuest());
+		this.otherUserID = this.gameRoomInfo.getGuest();
 		String imageDir = userInGameRoomDTO.getGuestGender() == 1 ? 
 				ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
 		
 		this.rightUser.setIcon(this.getUserImageIcon(imageDir));
+		this.addTextNotice(this.gameRoomInfo.getGuest() + "님께서 입장하셨습니다.");
 	}
 	
 	// 채팅 입력시 서버로 전송
@@ -414,7 +422,7 @@ public class GameRoomPanel extends JPanel {
 		this.menuButtons[1].addMouseListener(this.gameRoomAction);
 		this.chattingArea.setText(this.chattingArea.getText() + "\n<게임을 시작합니다.>");
 		
-		this.soundPlay(SoundEnum.GAME_START_SOUND.getSound());
+		GetResources.soundPlay(SoundEnum.GAME_START_SOUND.getSound());
 		
 		try {
 			Thread.sleep(700);
@@ -448,7 +456,7 @@ public class GameRoomPanel extends JPanel {
 			
 		// 상대방의 턴에는 상대방 돌의 소리를 낼 수 있게끔 else 처리.
 		} else {
-			this.soundPlay(this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 
+			GetResources.soundPlay(this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 
 					SoundEnum.GAME_WHITE_TURN.getSound() : SoundEnum.GAME_BLACK_TURN.getSound());
 		}
 	}
@@ -459,7 +467,7 @@ public class GameRoomPanel extends JPanel {
 	public void thisUserTurn(String soundDir) {
 		this.isThreadStart = true;
 		this.gameBoardPanelAddAction();
-		this.soundPlay(soundDir);
+		GetResources.soundPlay(soundDir);
 		this.timeLimitThread();
 	}
 
@@ -506,7 +514,7 @@ public class GameRoomPanel extends JPanel {
 	// 시간 쓰레드를 종료시켜주고
 	// 게임보드 배열값에 따라 게임보드 이미지를 바꿔준다.
 	public void turnEnd(int x, int y) {
-		this.soundPlay(SoundEnum.GAME_STONE_DROP.getSound());
+		GetResources.soundPlay(SoundEnum.GAME_STONE_DROP.getSound());
 		this.gameBoard[x][y] = this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 1 : 2;
 		this.x = x;
 		this.y = y;
@@ -529,7 +537,6 @@ public class GameRoomPanel extends JPanel {
 		}
 	}
 
-	
 	// 한 유저가 이긴 경우 게임이 종료된다.
 	// 이긴 유저가 접속자와 같다면 승리하셨습니다 메세지를 띄워주고 진 유저가 같다면 패배하셨습니다 메세지 띄워준다.
 	// for문을 돌면 돌이 일정하게 사라지지 않기 대문에 setVisible 먼저 보이지 않게 한 후 for문으로 작업하고 다시 true를 준다.
@@ -575,30 +582,71 @@ public class GameRoomPanel extends JPanel {
 		this.omokStonePanel.setVisible(true);
 	}
 	
-	// 나가기 버튼을 눌렀을 때
+	// 나가기 버튼을 눌렀을 때 TODO RoomExit
 	public void exitGame() {
 		// 뜨는 팝업창에서 Yes 가 눌린 경우
 		if(new ConfirmDialog(this.basicFrame, "게임방을 나가시겠습니까?").isYesNoCheck()) {
-			// 오너인 경우
-			if(this.thisUserID.equals(this.gameRoomInfo.getOwner())) {
-				GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
-				gameRoomInfo.setUserAction(UserActionEnum.USER_GAME_ROOM_EXIT);
-				gameRoomInfo.setRoomNumber(this.gameRoomInfo.getRoomNumber());
+			GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+			gameRoomInfo.setUserAction(UserActionEnum.USER_GAME_ROOM_EXIT);
+			gameRoomInfo.setRoomNumber(this.gameRoomInfo.getRoomNumber());
+			gameRoomInfo.setRoomName(this.gameRoomInfo.getRoomName());
+			
+			// 게임방에 2명이 모두 들어온 경우
+			if(this.gameRoomInfo.getPersonNum() == 2) {
 				gameRoomInfo.setPersons(1);
-				gameRoomInfo.setRoomName(this.gameRoomInfo.getRoomName());
-				gameRoomInfo.setOwner(this.otherUserID);
+				// 오너인 경우
+				if(this.thisUserID.equals(this.gameRoomInfo.getOwner())) {
+					System.out.println("나는 오너입니다." + this.thisUserID + " / " + this.gameRoomInfo.getOwner());
+					System.out.println("남아있을 유저는 : " + this.otherUserID);
+					gameRoomInfo.setOwner(this.otherUserID);
 				
+				// 게스트인 경우
+				} else {
+					System.out.println("나는 게스트입니다." + this.thisUserID + " / " + this.gameRoomInfo.getGuest());
+					gameRoomInfo.setOwner(this.otherUserID);
+				}
+					
+				// 게임방 패널의 유저이미지와 돌 이미지 초기화
 				this.setUserImage();
 				this.stoneInit();
-				
-				this.basicFrame.sendDTO(gameRoomInfo);
-			// 게스트인 경우
+			
+			// 게임방에 혼자 있었던 경우
 			} else {
-			
+				System.out.println("나는 혼자 있었습니다.");
+				gameRoomInfo.setOwner(null);
+				this.setUserImage();
+				gameRoomInfo.setPersons(0);
 			}
+			// 서버에게 내가 방을 나가겠다는 정보를 보낸다. 
+			this.basicFrame.sendDTO(gameRoomInfo);
 			
+			// 대기실로 나감.
 			this.basicFrame.showWaitingRoom();
 		}
+	}
+	
+	// 다른 유저가 방을 나가면 서버에서 내려준 바뀐 방정보를 내 게임방정보에 저장하고
+	// 접속자 이미지를 내 이미지와 빈 이미지로 변경하고
+	// 메뉴버튼 첫번쨰를 시작버튼으로 바꾸고 등록된 액션을 삭제한다.
+	public void otherUserExitGame(AbstractEnumsDTO data) {
+		this.addTextNotice(otherUserID + " 님이 방을 나갔습니다.");
+		this.otherUserID = null;
+		
+		GameRoomInfoVO gameRoomInfo = (GameRoomInfoVO)data;
+		this.gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+		this.gameRoomInfo.setGuest(null);
+		this.gameRoomInfo.setOwner(this.thisUserID);
+		this.gameRoomInfo.setPersons(1);
+		this.gameRoomInfo.setRoomName(gameRoomInfo.getRoomName());
+		this.gameRoomInfo.setRoomNumber(gameRoomInfo.getRoomNumber());
+		
+		this.rightUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));		
+		this.leftUser.setIcon(this.myImage);
+
+		String imageDir = ImageEnum.GAMEROOM_START_GRAY.getImageDir();
+		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
+		this.menuButtons[0].setName(GameRoomEnum.GAME_BUTTONNAME_OWNER.getButtonName()[0]);
+		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
 	}
 	
 	public void timeLimitThread() {
@@ -650,67 +698,23 @@ public class GameRoomPanel extends JPanel {
 	
 	// 유저 이미지 세팅
 	public ImageIcon getUserImageIcon(String imageDir) {
-		ImageIcon icon = null;
-		try {
-			icon = new ImageIcon(ImageIO.read(
-				new File(imageDir)).getScaledInstance(
-					GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
-					GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
-					Image.SCALE_AREA_AVERAGING)
-			);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return icon;
+		return GetResources.getImageIcon(imageDir, 
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height);
 	}
 	
 	// 버튼 이미지 세팅
 	public ImageIcon getButtonImageIcon(String imageDir) {
-		ImageIcon icon = null;
-		try {
-			icon = new ImageIcon(ImageIO.read(
-				new File(imageDir)).getScaledInstance(
-					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width,
-					GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height, 
-					Image.SCALE_AREA_AVERAGING)
-			);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return icon;
+		return GetResources.getImageIcon(imageDir, 
+				GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().width, 
+				GameRoomEnum.GAME_BUTTON_SIZE_RECT.getRect().height);
 	}
 	
 	// 돌 이미지 세팅
 	public ImageIcon getStoneImageIcon(String imageDir) {
-		ImageIcon icon = null;
-		try {
-			icon = new ImageIcon(
-				ImageIO.read(new File(imageDir)).getScaledInstance(
-					GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width,
-					GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height, 
-					Image.SCALE_AREA_AVERAGING)
-			);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return icon;
-	}
-	
-	// 사운드 세팅
-	public void soundPlay(String soundDir) {
-		try {
-			AudioInputStream gameStartSound = AudioSystem.getAudioInputStream(new File(soundDir));
-			Clip clip = AudioSystem.getClip();
-			
-			clip.stop();
-			clip.open(gameStartSound);
-			clip.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return GetResources.getImageIcon(imageDir, 
+				GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width, 
+				GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height);
 	}
 
 	public BasicFrame getBasicFrame() {
@@ -719,5 +723,9 @@ public class GameRoomPanel extends JPanel {
 	
 	public void setThreadStart(boolean isThreadStart) {
 		this.isThreadStart = isThreadStart;
+	}
+	
+	public void addTextNotice(String message) {
+		this.chattingArea.setText(this.chattingArea.getText() + "\n" + message);
 	}
 }

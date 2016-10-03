@@ -297,7 +297,7 @@ public class OmokServer {
 			
 			// 모든 접속자에게 변경된 방 정보 전송(포지션 대기실)
 			RoomAndUserListDTO roomListInfo = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
-			roomListInfo.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_LIST);
+			roomListInfo.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
 			roomListInfo.setGameRoomList(roomList);
 			for(String user : this.loginUsersMap.keySet()) {
 				this.loginUsersMap.get(user).getServerOutputStream().writeObject(roomListInfo);
@@ -457,6 +457,10 @@ public class OmokServer {
 		case USER_GAME_BOARD_INFO :
 			this.stonePositionCheck(index, personalServer);
 			break;
+		// 유저가 방을 나가려 한다.
+		case USER_GAME_ROOM_EXIT :
+			this.userExitRoom(index, personalServer);
+			break;
 		default:
 			break;
 		}
@@ -526,7 +530,6 @@ public class OmokServer {
 	}
 	
 	// 유저가 돌을 놓으면 클라이언트 측에서 위치 검사 후 서버에게 결과를 회신한다. 
-	// 서버는 매
 	public void stonePositionCheck(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		GameBoardVO gameBoard = (GameBoardVO)index;
 		int inputBoard[][] = gameBoard.getGameBoard();
@@ -573,6 +576,73 @@ public class OmokServer {
 		}
 	}
 	
+	// 유저가 게임방을 나갔을 때.
+	public void userExitRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+		GameRoomInfoVO gameRoomInfoVO = (GameRoomInfoVO)index;
+		// 유저가 넘겨준 데이터 복사하여 사용
+		GameRoomInfoVO pasteRoomInfoVO = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+		pasteRoomInfoVO.setGuest(gameRoomInfoVO.getGuest());
+		pasteRoomInfoVO.setOwner(gameRoomInfoVO.getOwner());
+		pasteRoomInfoVO.setPersons(gameRoomInfoVO.getPersonNum());
+		pasteRoomInfoVO.setPwd(gameRoomInfoVO.getPwd());
+		pasteRoomInfoVO.setRoomName(gameRoomInfoVO.getRoomName());
+		pasteRoomInfoVO.setRoomNumber(gameRoomInfoVO.getRoomNumber());
+		
+		try {			
+			// 방이 없어진 것이 아니라면 남겨진 유저에게 정보를 전달해주어야 한다.
+			if(pasteRoomInfoVO.getPersonNum() > 0) {
+				System.out.println("유저 두 명 중 한명이 나갔다.");
+				for(int i = 0, len = this.gameRoomList.size(); i < len; i++) {
+					if(this.gameRoomList.get(i).getRoomNumber() == gameRoomInfoVO.getRoomNumber()) {
+						pasteRoomInfoVO.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
+						this.gameRoomList.set(i, pasteRoomInfoVO);
+						pasteRoomInfoVO.setServerAction(ServerActionEnum.GAME_ROOM_EXIT_OTHER_USER);
+						System.out.println("남아있는 유저는 : " + pasteRoomInfoVO.getOwner());
+						this.loginUsersMap.get(pasteRoomInfoVO.getOwner()).getServerOutputStream().writeObject(pasteRoomInfoVO);
+						break;
+					}
+				}
+
+			// 방이 없어진 것이라면 현재 리스트에서 삭제하여야 한다.
+			} else {
+				// 유저가 모두 나갔다.
+				for(int i = 0, len = this.gameRoomList.size(); i < len; i++) {
+					if(this.gameRoomList.get(i).getRoomNumber() == gameRoomInfoVO.getRoomNumber()) {
+						this.gameRoomList.remove(i);
+						break;
+					}
+				}
+			}
+		// 방 리스트 정보 갱신 후 모든 유저에게 방리스트 갱신정보를 전달해주어야 한다.
+			RoomAndUserListDTO roomList = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
+			
+			ArrayList<GameRoomInfoVO> pasteGameRoomList = new ArrayList<GameRoomInfoVO>();
+			for(GameRoomInfoVO roomInfo : this.gameRoomList) {
+				GameRoomInfoVO pasteRoomInfo = new GameRoomInfoVO(null);
+				pasteRoomInfo.setPosition(roomInfo.getPosition());
+				pasteRoomInfo.setServerAction(roomInfo.getServerAction());
+				pasteRoomInfo.setUserAction(roomInfo.getUserAction());
+				pasteRoomInfo.setGuest(roomInfo.getGuest());
+				pasteRoomInfo.setOwner(roomInfo.getOwner());
+				pasteRoomInfo.setPersons(roomInfo.getPersonNum());
+				pasteRoomInfo.setPwd(roomInfo.getPwd());
+				pasteRoomInfo.setRoomName(roomInfo.getRoomName());
+				pasteRoomInfo.setRoomNumber(roomInfo.getRoomNumber());
+				pasteRoomInfo.setEnterImage(roomInfo.getEnterImage().getDescription());
+				pasteGameRoomList.add(pasteRoomInfo);
+			}
+			//TODO
+			
+			roomList.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
+			roomList.setGameRoomList(pasteGameRoomList);
+			System.out.println("현재 게임방 리스트 : " + roomList.getGameRoomList().size());
+			for(String userID : this.loginUsersMap.keySet()) {
+				this.loginUsersMap.get(userID).getServerOutputStream().writeObject(roomList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 //	public void store() {
 //	}
@@ -601,6 +671,7 @@ public class OmokServer {
 		personalServer.getPersonalSocket().close();
 		
 		index.setServerAction(ServerActionEnum.OTHERS_UER_EXIT);
+		
 		for(String id : this.loginUsersMap.keySet()) {
 			this.loginUsersMap.get(id).getServerOutputStream().writeObject(index);
 		}

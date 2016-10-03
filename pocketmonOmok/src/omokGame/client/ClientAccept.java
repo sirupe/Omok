@@ -8,7 +8,6 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
-import actions.findIDandPW.FindIDAction;
 import actions.gameRoom.GameRoomServerAction;
 import actions.join.JoinServerAction;
 import actions.login.LoginServerAction;
@@ -21,7 +20,6 @@ import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
-import enums.etc.UserPositionEnum;
 import frames.BasicFrame;
 import frames.waitingRoom.WaitingRoomListTable;
 import frames.waitingRoom.WaitingRoomPanel;
@@ -132,8 +130,8 @@ public class ClientAccept {
 		case MESSAGE_SEND_SUCCESS :
 			panel.getChattingOutput().append(((UserMessageVO)data).getMessage());
 			break;
-		// 방리스트 정보 변경 (다른 유저가 게임방에 입장함) 
-		case ENTER_ROOM_SUCCESS_LIST :
+		// 방리스트 정보에 변경이 생겼다.
+		case GAME_ROOM_LIST_MODIFY :
 			RoomAndUserListDTO waitingRoomModInfo = (RoomAndUserListDTO)data;
 			panel.modGameRoom(waitingRoomModInfo);
 			break;
@@ -183,10 +181,11 @@ public class ClientAccept {
 			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
 			break;
 		case GAME_ROOM_WINNER_INFO :
-			System.out.println("이넘을 타고 들어옵니다.");
 			this.basicFrame.getGameRoomPanel().gameEnd(data);
 			break;
-			
+		case GAME_ROOM_EXIT_OTHER_USER :
+			System.out.println("다른 유저가 방을 나갔따고");
+			this.basicFrame.getGameRoomPanel().otherUserExitGame(data);
 		default :
 			break;
 		}

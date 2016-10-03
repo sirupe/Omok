@@ -1,4 +1,4 @@
-package frames.correctAndDop;
+package ModifyMyInfo;
 
 import java.awt.Graphics;
 import java.awt.Image;
