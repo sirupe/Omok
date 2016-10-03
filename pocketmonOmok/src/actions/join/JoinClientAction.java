@@ -477,11 +477,11 @@ public class JoinClientAction extends Adapters {
 		if(errCount == 0) {
 			StringBuffer totalBirth = new StringBuffer();
 			totalBirth.append(this.birthYear);
-			totalBirth.append("³â ");
+			totalBirth.append(".");
 			totalBirth.append(this.birthMonth);
-			totalBirth.append("¿ù ");
+			totalBirth.append(".");
 			totalBirth.append(this.birthDate);
-			totalBirth.append("ÀÏ");
+			totalBirth.append(".");
 		
 			StringBuffer totalTel = new StringBuffer();
 			totalTel.append(this.telFrontNum);
