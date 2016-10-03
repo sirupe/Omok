@@ -17,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import ModifyMyInfo.ModifyMyInfoFrame;
 import actions.join.JoinServerAction;
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
@@ -27,6 +26,7 @@ import enums.frames.LoginFrameSizesEnum;
 import enums.frames.LoginSizesEnum;
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
+import frames.modifyMyInfo.ModifyMyInfoFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchPwdFrame;
 import frames.searchFrames.SearchPwdPanel;

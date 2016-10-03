@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import datasDTO.GameRoomInfoVO;
 import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserMessageVO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
@@ -74,12 +75,18 @@ public class WaitingRoomActions {
 	//회원정보 수정창이 뜨게해
 	public void correctMyInfo() {
 		BasicFrame basicFrame = this.waitingRoomPanel.getBasicFrame();
-		try {
-			basicFrame.newModifyJoinFrame();
-			basicFrame.setVisible(false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
+		personalDTO.setUserAction(UserActionEnum.USER_MODIFY_GET_MY_INFO);
+		personalDTO.setUserID(basicFrame.getUserID());
+		basicFrame.sendDTO(personalDTO);
+		
+		//		try {
+//			basicFrame.newModifyJoinFrame();
+//			basicFrame.setVisible(false);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	// 채팅 메세지가 들어옴

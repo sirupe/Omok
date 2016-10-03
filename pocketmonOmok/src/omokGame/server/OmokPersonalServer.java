@@ -57,7 +57,7 @@ public class OmokPersonalServer extends Thread {
 //					this.omokServer.store();
 //					break;
 				case POSITION_MODIFY_MY_INFO :
-					this.omokServer.modifyMyInfo();
+					this.omokServer.modifyMyInfo(userPosition, this);
 					break;
 				case POSITION_EXIT :
 					isAccept = false;

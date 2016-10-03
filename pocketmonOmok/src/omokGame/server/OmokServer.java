@@ -39,7 +39,7 @@ public class OmokServer {
 	private ArrayList<UserGamedataInfoDTO> userIDList;
 	
 	private JoinDAO joinDAO;
-	private UserPersonalInfoDAO loginDAO;
+	private UserPersonalInfoDAO userPersonalDAO;
 	private UserGamedataInfoDAO gamedataDAO;
 	private UserStoreInfoDAO storeDAO;
 	private UserStoreSkinInfoDAO skinDAO;
@@ -48,7 +48,7 @@ public class OmokServer {
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
-		this.loginDAO 	  = new UserPersonalInfoDAO();
+		this.userPersonalDAO 	  = new UserPersonalInfoDAO();
 		this.gamedataDAO  = new UserGamedataInfoDAO();
 		this.storeDAO	  = new UserStoreInfoDAO();
 		this.skinDAO	  = new UserStoreSkinInfoDAO();
@@ -75,7 +75,7 @@ public class OmokServer {
 		// 클라이언트에게서 받은 데이터 DTO로 전환
 		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) data;
 		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
-		UserPersonalInfoDTO resultDTO = this.loginDAO.checkIDMatchesPW(inputUserPersonalInfo);
+		UserPersonalInfoDTO resultDTO = this.userPersonalDAO.checkIDMatchesPW(inputUserPersonalInfo);
 		
 		// 만약 클라이언트의 정보가 DB에 있다면 
 		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
@@ -292,8 +292,8 @@ public class OmokServer {
 		}
 
 		try {
-			int ownerGender = this.loginDAO.getUserGender(roomVO.getOwner());
-			int guestGender = this.loginDAO.getUserGender(roomVO.getGuest());
+			int ownerGender = this.userPersonalDAO.getUserGender(roomVO.getOwner());
+			int guestGender = this.userPersonalDAO.getUserGender(roomVO.getGuest());
 			
 			// 모든 접속자에게 변경된 방 정보 전송(포지션 대기실)
 			RoomAndUserListDTO roomListInfo = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
@@ -315,7 +315,9 @@ public class OmokServer {
 			UserInGameRoomDTO ownerGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
 			ownerGameRoomDTO.setGameRoomInfo(roomOwnerVO);
 			ownerGameRoomDTO.setGuestGender(guestGender);
+			ownerGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getGuest()));
 			ownerGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_OWNER);
+			System.out.println("오너 - 다른유저 등급 : " + this.gamedataDAO.userGameData(roomVO.getGuest()).getUserGrade());
 			this.loginUsersMap.get(roomOwnerVO.getOwner()).getServerOutputStream().writeObject(ownerGameRoomDTO);
 			
 			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(null);
@@ -330,6 +332,7 @@ public class OmokServer {
 			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
 			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
 			userInGameRoomDTO.setOwnerGender(ownerGender);
+			userInGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getOwner()));
 			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
 			this.loginUsersMap.get(roomGuestVO.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
 		} catch (IOException e) {
@@ -404,7 +407,7 @@ public class OmokServer {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data;
 		
 		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
-		UserPersonalInfoDTO resultDTO = this.loginDAO.findUserID(personalDTO);
+		UserPersonalInfoDTO resultDTO = this.userPersonalDAO.findUserID(personalDTO);
 		
 		
 		ObjectOutputStream oos = personalServer.getServerOutputStream();
@@ -465,7 +468,7 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 	 		
 	 	//아이디 이메일 체크
 	 	case USER_SEARCH_ID_EMAIL_CHECK :
-	 		UserPersonalInfoDTO resultDTOPersonal = this.loginDAO.findUserPW(personalDTO);
+	 		UserPersonalInfoDTO resultDTOPersonal = this.userPersonalDAO.findUserPW(personalDTO);
 	 		oos = personalServer.getServerOutputStream();
 	 		oos.writeObject(resultDTOPersonal);
 	 		break;
@@ -475,7 +478,7 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 
 	 		ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
 	 		serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
-	 		int result = this.loginDAO.updateUserPasswd(personalDTO);
+	 		int result = this.userPersonalDAO.updateUserPasswd(personalDTO);
 	 		
 	 		if(result == 1) {
 	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
@@ -706,9 +709,16 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 	
 //	public void store() {
 //	}
-//	
-	public void modifyMyInfo() {
-		System.out.println("내정보보기");
+//개인정보 수정------------------------------------------------------------------------------------------------
+	public void modifyMyInfo(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)index;
+		UserPersonalInfoDTO resultDTO = this.userPersonalDAO.getUserPersonalInfo(personalDTO.getUserID());
+		resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_PERSONAL_INFO);
+		try {
+			personalServer.getServerOutputStream().writeObject(resultDTO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 //게임종료---------------------------------------------------------------------------------------------------
 	public void exitProgram(AbstractEnumsDTO index, OmokPersonalServer personalServer) throws IOException {

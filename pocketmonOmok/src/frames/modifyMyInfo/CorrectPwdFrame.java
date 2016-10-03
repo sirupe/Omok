@@ -1,5 +1,8 @@
-package ModifyMyInfo;
+package frames.modifyMyInfo;
 
+
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -10,17 +13,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
+import enums.frames.SearchPwdEnum;
 
-public class DropOutAskFrame extends JFrame{
+public class CorrectPwdFrame extends JFrame{
 	private Image backGround;
-	private JLabel dropOutLabel;
+	private JLabel pwdLabel;
+	private JLabel pwderror;
+	private JTextField pwdTextField;
 	private JButton confirm;
 	private JButton reset;
 	
-	public DropOutAskFrame() throws IOException {
+		
+	public CorrectPwdFrame() throws IOException {
 		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
 				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
@@ -28,11 +36,23 @@ public class DropOutAskFrame extends JFrame{
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 		
-		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
+		this.pwdLabel	 = new JLabel("PW 입력");
+		this.pwderror  	 = new JLabel("비밀번호 오류 입니다.");
+		this.pwdTextField = new JTextField();
+		Font pwdLabelfont = new Font("a으라차차", Font.BOLD, 18);
+		Font pwderrorfont = new Font("a으라차차", Font.BOLD, 15);
 		
-		this.dropOutLabel = new JLabel("정말 탈퇴하시겠습니까? :(");
-		this.dropOutLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
-		this.dropOutLabel.setBounds(CorrectEnum.DROPOUT_TEXT_SIZE_RECT.getRect());
+		this.setBounds(CorrectEnum.PWD_FRAME_SIZE_RECT.getRect());
+		
+		this.pwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
+		this.pwdLabel.setBounds(CorrectEnum.PWD_TEXT_LABEL_RECT.getRect());
+		
+		this.pwdTextField.setBounds(CorrectEnum.PWD_INPUT_RECT.getRect());
+			
+		this.pwderror.setFont(SearchPwdEnum.LABELFONT_DEFAULT.getFont());
+		this.pwderror.setForeground(Color.red);
+		this.pwderror.setBounds(CorrectEnum.PWD_ERROR_RECT.getRect());
+		
 		
 		this.confirm = new JButton() {
 			@Override
@@ -43,8 +63,8 @@ public class DropOutAskFrame extends JFrame{
 						new File("resources/myData/confirm.kor.png")), 
 						0, 
 						0, 
-						CorrectEnum.DROPOUT_CONFIRM_BUTTON_RECT.getRect().width,
-						CorrectEnum.DROPOUT_CONFIRM_BUTTON_RECT.getRect().height,
+						CorrectEnum.PWD_CONFIRM_RECT.getRect().width,
+						CorrectEnum.PWD_CONFIRM_RECT.getRect().height,
 						this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -54,9 +74,9 @@ public class DropOutAskFrame extends JFrame{
 		this.confirm.setFocusPainted(false);
 		this.confirm.setBorderPainted(false);
 		this.confirm.setContentAreaFilled(false);
-		this.confirm.setBounds(CorrectEnum.DROPOUT_CONFIRM_BUTTON_RECT.getRect());
-		
-		this.reset = new  JButton() {
+		this.confirm.setBounds(CorrectEnum.PWD_CONFIRM_RECT.getRect());
+
+		this.reset = new JButton() {
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -65,8 +85,8 @@ public class DropOutAskFrame extends JFrame{
 						new File("resources/myData/reset.kor.png")), 
 						0, 
 						0, 
-						CorrectEnum.DROPOUT_RESET_BUTTON_RECT.getRect().width,
-						CorrectEnum.DROPOUT_RESET_BUTTON_RECT.getRect().height,
+						CorrectEnum.PWD_RESET_RECT.getRect().width,
+						CorrectEnum.PWD_RESET_RECT.getRect().height,
 						this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -76,9 +96,11 @@ public class DropOutAskFrame extends JFrame{
 		this.reset.setFocusPainted(false);
 		this.reset.setBorderPainted(false);
 		this.reset.setContentAreaFilled(false);
-		this.reset.setBounds(CorrectEnum.DROPOUT_RESET_BUTTON_RECT.getRect());
+		this.reset.setBounds(CorrectEnum.PWD_RESET_RECT.getRect());
 		
-		this.add(dropOutLabel);
+		this.add(pwdLabel);
+		this.add(pwderror);
+		this.add(pwdTextField);
 		this.add(confirm);
 		this.add(reset);
 		this.setLayout(null);
@@ -88,7 +110,8 @@ public class DropOutAskFrame extends JFrame{
 	}
 
 	public static void main(String[] args) throws IOException {
-		new DropOutAskFrame();
+		new CorrectPwdFrame();
+
 	}
 
 }
