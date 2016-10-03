@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.annotation.Resources;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -41,6 +40,7 @@ public class GameRoomPanel extends JPanel {
 	private String thisUserID;
 	private String otherUserID;
 	private ImageIcon myImage;
+	private ImageIcon myGradeImage;
 	
 	private JPanel gameBoardPanel;	// 오목판
 	private JButton[][] gameBoardButtons;
@@ -71,9 +71,6 @@ public class GameRoomPanel extends JPanel {
 	private JLabel leftUser;
 	private JLabel rightUser;
 	private JButton[] menuButtons;
-	
-	
-	
 	
 	private GameRoomClientAction gameRoomAction;
 	private GameRoomInfoVO gameRoomInfo;
@@ -199,7 +196,6 @@ public class GameRoomPanel extends JPanel {
 		this.rightUser.setBorder(BorderFactory.createLineBorder(Color.blue, 6));
 		this.userImagePanel.add(this.rightUser);
 		
-		//TODO
 		//유저 이미지 하단 아이디 세팅
 		this.rightUserId = new JLabel();
 		this.rightUserId.setBounds(GameRoomEnum.GAME_USERID_RIGHT_LABEL_RECT.getRect());
@@ -229,7 +225,6 @@ public class GameRoomPanel extends JPanel {
 		
 	} // 유저이미지 패널
 	
-
 	// 메뉴버튼 세팅
 	public void setInGameMenuButtons() {
 		this.gameMenuPanel.setLayout(null);
@@ -304,16 +299,13 @@ public class GameRoomPanel extends JPanel {
 		try {
 			Map<String, String> gradeImageMap = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap();
 			String imageDir = null;
-			//TODO
+			this.myGradeImage = this.getUserLevelIcon(gradeImageMap.get(inGameUserInfo.getUserGameData().getUserGrade()));
 			// 오너인 경우
 			if(this.thisUserID.equals(inGameUserInfo.getGameRoomInfo().getOwner())) {
 				imageDir 		 = ImageEnum.GAMEROOM_START.getImageDir();
 				this.leftUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
 				this.leftUserId.setText(this.thisUserID);
-				this.leftUserLevel.setIcon(GetResources.getImageIcon(
-						gradeImageMap.get(inGameUserInfo.getUserGameData().getUserGrade()), 
-						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().width, 
-						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().height));
+				this.leftUserLevel.setIcon(myGradeImage);
 				
 				this.otherUserID = this.gameRoomInfo.getGuest();
 				this.myImage 	 = inGameUserInfo.getUserGameData().getUserGameRoomImage();
@@ -323,10 +315,7 @@ public class GameRoomPanel extends JPanel {
 				imageDir = ImageEnum.GAMEROOM_READY.getImageDir();
 				this.rightUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
 				this.rightUserId.setText(this.thisUserID);
-				this.rightUserId.setIcon(GetResources.getImageIcon(
-						gradeImageMap.get(inGameUserInfo.getUserGameData().getUserGrade()), 
-						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().width, 
-						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().height));
+				this.rightUserLevel.setIcon(myGradeImage);
 				
 				String ownerImageDir = inGameUserInfo.getOwnerGender() == 1 ? 
 						ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
@@ -338,9 +327,13 @@ public class GameRoomPanel extends JPanel {
 				this.otherUserID = this.gameRoomInfo.getOwner();
 				this.leftUser.setIcon(this.getUserImageIcon(ownerImageDir));
 				this.leftUserId.setText(this.otherUserID);
+				System.out.println("그래서시발 오너 등급이 뭐야 " + inGameUserInfo.getOtherGameData().getUserGrade());
+				this.leftUserLevel.setIcon(GetResources.getImageIcon(
+						gradeImageMap.get(inGameUserInfo.getOtherGameData().getUserGrade()), 
+						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().width, 
+						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().height));
 				this.myImage 	 = inGameUserInfo.getUserGameData().getUserGameRoomImage();
 			}
-			
 			this.addTextNotice("게임방에 입장하였습니다.");
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		} catch(Exception e) {
@@ -361,8 +354,8 @@ public class GameRoomPanel extends JPanel {
 		
 		this.rightUser.setIcon(this.getUserImageIcon(imageDir));
 		this.rightUserId.setText(this.otherUserID);
-		this.rightUserId.setIcon(GetResources.getImageIcon(
-				gradeImageMap.get(userInGameRoomDTO.getUserGameData().getUserGrade()), 
+		this.rightUserLevel.setIcon(GetResources.getImageIcon(
+				gradeImageMap.get(userInGameRoomDTO.getOtherGameData().getUserGrade()), 
 				GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().width, 
 				GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().height));
 		this.addTextNotice(this.gameRoomInfo.getGuest() + "님께서 입장하셨습니다.");
@@ -648,13 +641,10 @@ public class GameRoomPanel extends JPanel {
 				gameRoomInfo.setPersons(1);
 				// 오너인 경우
 				if(this.thisUserID.equals(this.gameRoomInfo.getOwner())) {
-					System.out.println("나는 오너입니다." + this.thisUserID + " / " + this.gameRoomInfo.getOwner());
-					System.out.println("남아있을 유저는 : " + this.otherUserID);
 					gameRoomInfo.setOwner(this.otherUserID);
 				
 				// 게스트인 경우
 				} else {
-					System.out.println("나는 게스트입니다." + this.thisUserID + " / " + this.gameRoomInfo.getGuest());
 					gameRoomInfo.setOwner(this.otherUserID);
 				}
 					
@@ -664,7 +654,6 @@ public class GameRoomPanel extends JPanel {
 			
 			// 게임방에 혼자 있었던 경우
 			} else {
-				System.out.println("나는 혼자 있었습니다.");
 				gameRoomInfo.setOwner(null);
 				this.setUserImage();
 				gameRoomInfo.setPersons(0);
@@ -692,8 +681,13 @@ public class GameRoomPanel extends JPanel {
 		this.gameRoomInfo.setRoomName(gameRoomInfo.getRoomName());
 		this.gameRoomInfo.setRoomNumber(gameRoomInfo.getRoomNumber());
 		
-		this.rightUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));		
 		this.leftUser.setIcon(this.myImage);
+		this.leftUserId.setText(this.thisUserID);
+		this.leftUserLevel.setIcon(this.myGradeImage);
+		// TODO 여기가 안됨
+		this.rightUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));
+		this.rightUserId.setText(null);
+		this.rightUserLevel.setIcon(null);
 
 		String imageDir = ImageEnum.GAMEROOM_START.getImageDir();
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
@@ -772,7 +766,6 @@ public class GameRoomPanel extends JPanel {
 		return icon;
 	}
 	
-	
 	// 버튼 이미지 세팅
 	public ImageIcon getButtonImageIcon(String imageDir) {
 		return GetResources.getImageIcon(imageDir, 
@@ -785,9 +778,7 @@ public class GameRoomPanel extends JPanel {
 		return GetResources.getImageIcon(imageDir, 
 				GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().width, 
 				GameRoomEnum.GAME_STONE_LOCATION_RECT.getRect().height);
-	}
-	
-	
+	}	
 
 	public BasicFrame getBasicFrame() {
 		return basicFrame;

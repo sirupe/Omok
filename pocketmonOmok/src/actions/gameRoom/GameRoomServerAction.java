@@ -2,7 +2,6 @@ package actions.gameRoom;
 
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
-import datasDTO.UserMessageVO;
 import frames.gameRoom.GameRoomPanel;
 
 public class GameRoomServerAction {

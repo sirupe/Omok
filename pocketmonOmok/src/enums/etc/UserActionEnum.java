@@ -20,5 +20,8 @@ public enum UserActionEnum {
 	USER_GUEST_READY_DECHECK,	// 게스트유저가 레디 체크를 해제했다.
 	USER_GAME_START,			// 드디어 방장이 게임시작을..!!
 	USER_GAME_BOARD_INFO,		// 유저가 돌을 놓았다.
-	USER_GAME_ROOM_EXIT;		// 유저님 게임방 나가심
+	USER_GAME_ROOM_EXIT,		// 유저님 게임방 나가심
+	
+	USER_MODIFY_GET_MY_INFO;	// 유저님 수정하기 클릭하심 (내정보 가져오기)
+	
 }

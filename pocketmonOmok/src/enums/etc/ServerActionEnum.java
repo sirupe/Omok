@@ -29,5 +29,7 @@ public enum ServerActionEnum {
 	GAME_ROOM_SEND_BOARD_INFO,	// 게임방 보드에 놓인 돌 정보를 두 유저에게 보내준다.
 	GAME_ROOM_WINNER_INFO,		// 게임중에 누군가 승리했다. 승리자 정보가 있다.
 	GAME_ROOM_EXIT_OTHER_USER,	// 현재 게임방의 다른 유저가 방을 나갔다.
+	
+	MODIFY_USER_PERSONAL_INFO,	// DB에서 유저의 개인정보를 찾아서 반환
 	NOTHING;
 }

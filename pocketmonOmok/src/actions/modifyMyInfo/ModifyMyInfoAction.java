@@ -1,5 +1,7 @@
 package actions.modifyMyInfo;
 
-public class ModifyMyInfoAction  {
+import actions.adapters.Adapters;
+
+public class ModifyMyInfoAction extends Adapters {
 
 }
