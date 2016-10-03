@@ -1,7 +1,6 @@
 package frames;
 
 import java.awt.CardLayout;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
@@ -15,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import actions.join.JoinServerAction;
 import datasDTO.AbstractEnumsDTO;
@@ -29,7 +27,6 @@ import frames.joinFrames.JoinFrame;
 import frames.modifyMyInfo.ModifyMyInfoFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchPwdFrame;
-import frames.searchFrames.SearchPwdPanel;
 import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
 
@@ -44,7 +41,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	private JoinFrame joinFrame;
 	private SearchPwdFrame searchPwdFrame;
 	private SearchIdFrame searchIdFrame;
-	private ModifyMyInfoFrame modifyJoinFrame;
+	private ModifyMyInfoFrame modifyMyInfoFrame;
 	
 	private ClientAccept clientAccept;
 	
@@ -181,8 +178,13 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.searchIdFrame = new SearchIdFrame(this);
 	}
 	
-	public void newModifyJoinFrame() throws IOException {
-		this.modifyJoinFrame = new ModifyMyInfoFrame(this);
+	public void newModifyMyInfoFrame(UserPersonalInfoDTO personalInfo) {
+		this.setVisible(false);
+		try {
+			new ModifyMyInfoFrame(this).setUserInfo(personalInfo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setUserID(String userID) {
@@ -226,8 +228,8 @@ public class BasicFrame extends JFrame implements Serializable{
 	public ClientAccept getClientAccept() {
 		return clientAccept;
 	}
-	public ModifyMyInfoFrame getModifyJoinFrame() {
-		return modifyJoinFrame;
+	public ModifyMyInfoFrame getModifyMyInfoFrame() {
+		return modifyMyInfoFrame;
 	}
 }
 

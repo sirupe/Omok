@@ -50,7 +50,8 @@ public class ClientReceiver extends Thread {
 					break;
 				case POSITION_STORE :             
 					break;
-				case POSITION_MODIFY_MY_INFO :    
+				case POSITION_MODIFY_MY_INFO :
+					this.clientAccept.modifyAction(userPosition);
 					break;
 				case POSITION_EXIT :  
 					this.clientAccept.gameExit(userPosition);
