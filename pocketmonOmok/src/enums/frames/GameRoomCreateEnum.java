@@ -80,8 +80,8 @@ public enum GameRoomCreateEnum {
 //	
 //	LABELCOLOR_ERROR(Color.red),
 //	
-//	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,18)),
-//	LABELCOLOR_DEFAULT(Color.blue),
+//	GAMEROOM_USERID_FONT(new Font("a으라차차",Font.BOLD,10)),
+//	GAMEROOM_USERIF_FONT_COLOR(Color.white);
 //	LABEL_DEFAULT(new EmptyBorder(0,0,0,0));
 	
 	
@@ -103,6 +103,7 @@ public enum GameRoomCreateEnum {
 	private GameRoomCreateEnum(EmptyBorder border) {
 		this.border = border;
 	}
+	
 	public Rectangle getRectangle() {
 		return rec;
 	}
@@ -115,5 +116,4 @@ public enum GameRoomCreateEnum {
 	public EmptyBorder getBorder() {
 		return border;
 	}
-	
 }
