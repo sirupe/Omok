@@ -45,8 +45,8 @@ public enum ModifyJoinEnum {
 			)),
 	//비밀번호 재비밀번호 일치 하지 않을시 나타나는 에러 메세지
 	MODIFY_REPWDERROR_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.38),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.7),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.30),
+			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.3),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 			)),
@@ -99,6 +99,13 @@ public enum ModifyJoinEnum {
 			MODIFY_BIRTH_LABEL.getRectangle().y + DISTANCE.getSize(),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
+	)),
+	
+	MODIFY_EMAIL_ERR_LABEL(new Rectangle(
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
+			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3),
+			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.25),
+			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.03)
 	)),
 	
 	MODIFY_AT_LABEL(new Rectangle(
@@ -345,6 +352,6 @@ public enum ModifyJoinEnum {
 	public String[] getStrArr() {
 		return strArr;
 	}
-	
+
 }
 

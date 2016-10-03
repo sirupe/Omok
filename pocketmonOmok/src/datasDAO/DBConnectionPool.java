@@ -26,7 +26,7 @@ public class DBConnectionPool {
 	private String url    = "jdbc:oracle:thin:@localhost:1521:xe";   
 	private String user   = "system";   
 	private String passwd = "system";
-	
+
 	private boolean traceOn = true;;
 	private boolean initialized = false;
 	private int openConnections = 10;
