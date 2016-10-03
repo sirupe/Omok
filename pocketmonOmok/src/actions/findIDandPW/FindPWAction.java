@@ -1,49 +1,167 @@
 package actions.findIDandPW;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 
 import actions.adapters.Adapters;
+import enums.frames.JoinSizesEnum;
+import enums.frames.LoginSizesEnum;
+import utility.RegexCheck;
 import enums.frames.LoginSizesEnum;
 import frames.searchFrames.SearchPwdPanel;
+import sun.util.logging.resources.logging;
 
 public class FindPWAction extends Adapters {
 	private SearchPwdPanel searchPwdPanel;
-	private SearchPwdPanel searchPwdFrame;
 	
+	private boolean emailCheck;
+	private boolean idCheck;
+	private boolean confirmCheck;
 
+	
 	public FindPWAction(SearchPwdPanel searchPwdPanel) {
 		this.searchPwdPanel = searchPwdPanel;
 	}
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
-		String buttonName = ((JButton) e.getSource()).getText();
-		//취소버튼 눌렀을때
+		String buttonName = ((JButton) e.getSource()).getName();
+		
 		if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName())) {
-			//1. 취소 버튼이 눌렸다.
-			//2. searchPwdFrame을 꺼준다.
-			//3. 나는 panel밖에 모른다. 그렇기 때문에 panel에 있는 메소드를 실행해 줄 수 밖에 없다.
-			//4. panel에서 searchFrame을 숨겨주는 메소드를 만든다.
-			//5. frame에서 basic을 숨길 수 있는 호출을 하고 자기를 숨길 수 있는 호출을 한다.
 			this.searchPwdPanel.doCancelButton();
-			//인증 버튼 눌렀을때
+			
+		//인증버튼이 눌렸을때
 		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName())) {
-			this.searchPwdPanel.getCerfication(); //프레임한테 보내준다 -- > action은 frame을 모르므로 panel가서 불러온다,
+			this.emailCheck();
+			
+			//이메일이 있고 형식에 맞을때
+			if(this.emailCheck) {
+				this.searchPwdPanel.getCerfication();
+			} 
+		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName())) {
+			//인증번호 확인 눌렀을때
+			this.certification();
+	
+			//TODO 
+			if(this.confirmCheck) {
+				this.searchPwdPanel.confirmNumberCheck();
+			} 
+			
+		//확인버튼	
+		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName())) {
+			//아이디를 체크하고 그 결과 값을 가지고 하단으로 안내려 보낼 수 있다면 
+			if(this.idCheck()) {
+				return;
+			}
+			
+			if(this.emailCheck()) {
+				return;
+			}
+			
+			if(this.certification()) {
+				return;
+			}
+	
+			//모두다 확인이 되면 
+			if(this.idCheck && this.emailCheck && this.confirmCheck &&
+					this.searchPwdPanel.isEmailConfirmLimitTime() 
+					&& this.searchPwdPanel.isConfirmNumberSuccess()) {
+				//인증이 다됬을 때 넘어간다...
+				this.searchPwdPanel.checkIdEmail();
+			}
+		}
+	}//액션 끝남
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		JTextField textField = (JTextField) e.getSource();
+		String id = textField.getName();
+		
+		if(id.equals("searchIdTextField")) {
+			this.idCheck();
+		} else {
+			this.emailCheck();
 		}
 	}
 	
-	public void findPwdAction() {
-
-	
-	//메세지 출력
-	
-	//3분 돌아가는ㄴ중
-
-//		try {
-//			this.loginPanel.getBasicFrame().getClientOS().defaultWriteObject();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
+	//아이디 검사
+	public boolean idCheck() { 
+		JTextField idTextField = this.searchPwdPanel.getSearchIdTextField(); 
+		String id = idTextField.getText();
+		
+		System.out.println("아이디 테스트 : " + id);
+		
+		if(id.isEmpty()) {
+			this.searchPwdPanel.userNumberMsg("아이디입력해주세요");
+			this.idCheck = false;
+			return true;
+		}
+		
+		if(!RegexCheck.idRegexCheck(id)) {
+			this.searchPwdPanel.userNumberMsg("<html>영소문자, 특수문자구분<br>다시확인하세여<br></html>");
+			this.idCheck = false;
+			return true;
+		}
+		
+		this.searchPwdPanel.userNumberMsgReset();
+		this.idCheck = true;	
+		return false;
 	}
+	
+	//이메일 검사
+	public boolean emailCheck() { 
+		JTextField emailTextField = this.searchPwdPanel.getSearchemailTextField(); 
+		String email = emailTextField.getText();
+		
+		
+		if(email.isEmpty()) {
+			this.searchPwdPanel.userNumberMsg("이메일 작성해주세요.");
+			this.emailCheck = false;
+			return true;
+		}
+		
+		if(!RegexCheck.emailRegexCheck(email)) {
+			this.searchPwdPanel.userNumberMsg("이메일 형식 체크해주세요!");
+			this.emailCheck = false;
+			return true;
+		} 
+		
+		this.searchPwdPanel.userNumberMsgReset();
+		this.emailCheck = true;
+		return false;
+		
+	}
+	
+	//인증번호 검사
+	public boolean certification() { 
+		JTextField confirmNumberTextField = this.searchPwdPanel.getSearchConfirmTextField();
+		String confirmNumberNumber = confirmNumberTextField.getText();
+		
+		if(confirmNumberNumber.isEmpty()) {
+			this.searchPwdPanel.userNumberMsg("인증번호 써주세요");
+			this.confirmCheck = false;
+			return true;
+		} 
+		
+		this.searchPwdPanel.userNumberMsgReset();
+		this.confirmCheck = true;
+		this.searchPwdPanel.setEmailConfirmLimitTime(true);
+		return false;
+	}
+	
+	public void mouseKey(MouseEvent e) {
+		JButton button = this.searchPwdPanel.getsearchCheckButton();
+		String buttonName = button.getText();
+	}
+	
+	public void confirmNumberCheckButton() {
+		
+	}
+	
+	
 }

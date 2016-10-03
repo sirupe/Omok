@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import datasDTO.AbstractEnumsDTO;
 
 import frames.BasicFrame;
+import frames.searchFrames.SearchPwdFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchIdPanel;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
@@ -43,7 +44,9 @@ public class ClientReceiver extends Thread {
 					SearchIdPanel searchIdPanel = searchIdFrame.getSearchIdPanel();
 					searchIdPanel.findIdResult(userPosition);
 					break;
-				case POSITION_FIND_PW :  
+				case POSITION_FIND_PW : 
+					SearchPwdFrame searchPwdFrame = this.basicFrame.getSearchPwdFrame();
+					searchPwdFrame.receiverSuccess(userPosition);
 					break;
 				case POSITION_GAME_ROOM :
 					this.clientAccept.inGameRoom(userPosition);

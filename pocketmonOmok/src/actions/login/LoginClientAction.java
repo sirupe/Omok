@@ -127,32 +127,29 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 	public void mouseClicked(MouseEvent e) {
 		String buttonName = e.getComponent().toString();
 		if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
+			this.loginPanel.getBasicFrame().setVisible(false);
 			try {
-				BasicFrame basicFrame = this.loginPanel.getBasicFrame();
-				basicFrame.setVisible(false);
-				basicFrame.newJoinFrame();
+				this.loginPanel.getBasicFrame().newJoinFrame();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
+			this.loginPanel.getBasicFrame().setVisible(false);
 			try {
-				BasicFrame basicFrame = this.loginPanel.getBasicFrame();
-				basicFrame.setVisible(false);
-				basicFrame.newSearchIdFrame();
+				this.loginPanel.getBasicFrame().newSearchIdFrame();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		} else if(buttonName.contains(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-			System.out.println("dd");
-				try {
-					BasicFrame basicFrame = this.loginPanel.getBasicFrame();
-					basicFrame.setVisible(false);
-					basicFrame.newSearchPwdFrame();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-		}
-	}
+				this.loginPanel.getBasicFrame().setVisible(false);
+					try {
+						this.loginPanel.getBasicFrame().newSearchPwdFrame();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}}
+
 	
 	public void loginAction() {
 		char[] passwd = this.loginPanel.getPwField().getPassword();

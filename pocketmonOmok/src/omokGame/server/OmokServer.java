@@ -1,6 +1,7 @@
 package omokGame.server;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -43,6 +44,7 @@ public class OmokServer {
 	private UserStoreInfoDAO storeDAO;
 	private UserStoreSkinInfoDAO skinDAO;
 	
+
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
@@ -413,25 +415,87 @@ public class OmokServer {
 		oos.writeObject(resultDTO);
 	}
 	
+
+//패스워드 찾기---------------------------------------------------------------------------------------------------
+public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
+	 UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
+	 UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+	 ObjectOutputStream oos;
+	 
+	 switch(data.getUserAction()) {
+	 	
+	 	//인증 번호 발송
+	 	case USER_SEARCH_CERTIFICATION_CHECK :
+		 	
+		 	resultDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
+	 	
+	 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
+	 		personalServer.setCertificationNumber(confirmNumber);
+	 		
+	 		System.out.println(confirmNumber + " : 랜덤번호");
+	 		
+	 		//TODO
+	 		//이메일 발송
+//	 		try {
+//	 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
+//	 			resultDTO.setEmailSuccess(true);
+//			} catch (Throwable e) {
+//				resultDTO.setEmailSuccess(false);
+//			}
+//	 		
+	 		//TODO 테스트 코드 추후 반드시 삭제.
+	 		resultDTO.setEmailSuccess(true);
+	 		
+	 		oos = personalServer.getServerOutputStream();
+	 		oos.writeObject(resultDTO);
+	 		break;
+	 		
+	 	//인증번호 비교
+	 	case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
+	 		String RandomNumber = personalServer.getCertificationNumber();
+	 		String clientNumebr = personalDTO.getCertificationNumber();
+	 		
+	 		resultDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER);
+
+	 		if(RandomNumber.equals(clientNumebr)) {
+	 			resultDTO.setCertificationNumber(true);
+	 		} else {
+	 			resultDTO.setCertificationNumber(false);
+	 		}
+	 		oos = personalServer.getServerOutputStream();
+	 		oos.writeObject(resultDTO);
+	 		break;
+	 		
+	 	//아이디 이메일 체크
+	 	case USER_SEARCH_ID_EMAIL_CHECK :
+	 		UserPersonalInfoDTO resultDTOPersonal = this.userPersonalDAO.findUserPW(personalDTO);
+	 		oos = personalServer.getServerOutputStream();
+	 		oos.writeObject(resultDTOPersonal);
+	 		break;
+
+	 	// 변경된 패스워드확인.
+	 	case USER_SEARCH_PASSWD :
+
+	 		ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
+	 		serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+	 		int result = this.userPersonalDAO.updateUserPasswd(personalDTO);
+	 		
+	 		if(result == 1) {
+	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+	 		} else {
+	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+	 		}	 		
+	 		personalServer.getServerOutputStream().writeObject(serverMessage);
+	 		
+	 	default: //do nothing..
+	 	}
+}
+
 	
 	public void findPW() {
 		System.out.println("비밀번호찾기");
 	}
-	//
-//	public void findEmail(AbstractEnumsDTO data, OmokPersonalServer PersonalServer) throws IOException {
-//		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
-//		if(data.getUserAction() == UserActionEnum.USER_JOIN_CERTIFICATION) {
-//			UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO)data;
-//			
-//			String ConfirmNumber = String.valueOf(new Random().nextInt(900000) + 100000);
-//			//메일 발송 -- 랜덤 번호와 resultDTO에 담긴 사용자 이메일로 보낸다..
-//			new SendEmail(ConfirmNumber, resultDTO.getUserEmail());
-//			
-//			resultDTO.setCertificationNumber(ConfirmNumber);
-//			resultDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
-//			PersonalServer.getServerOutputStream().writeObject(resultDTO);
-//		}
-//	}
+	
 	
 //게임방----------------------------------------------------------------------------------------------------
 	public void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
