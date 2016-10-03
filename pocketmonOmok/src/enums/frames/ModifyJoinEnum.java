@@ -45,8 +45,8 @@ public enum ModifyJoinEnum {
 			)),
 	//비밀번호 재비밀번호 일치 하지 않을시 나타나는 에러 메세지
 	MODIFY_REPWDERROR_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.38),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.7),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.30),
+			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.3),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 			)),
@@ -101,6 +101,13 @@ public enum ModifyJoinEnum {
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	
+	MODIFY_EMAIL_ERR_LABEL(new Rectangle(
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
+			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.95),
+			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.8),
+			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.03)
+	)),
+	
 	MODIFY_AT_LABEL(new Rectangle(
 			MODIFY_YEAR_LABEL.getRectangle().x,
 			MODIFY_EMAIL_LABEL.getRectangle().y,
@@ -109,7 +116,7 @@ public enum ModifyJoinEnum {
 	)),
 	MODIFY_TELNAME_LABELMID(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
-			MODIFY_AT_LABEL.getRectangle().y + DISTANCE.getSize(),
+			(int)(MODIFY_AT_LABEL.getRectangle().y * 1.16),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
@@ -224,14 +231,14 @@ public enum ModifyJoinEnum {
 	//전화번호 앞자리
 	MODIFY_TELFRONTNUM_COMBO(new Rectangle(
 			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
-			(int)(MODIFY_TELHYPHEN1_LABEL.getRectangle().y * 0.98),
+			(int)(MODIFY_TELHYPHEN1_LABEL.getRectangle().y * 0.99),
 			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	//이메일주소
 	MODIFY_EMAILADDR_COMBO(new Rectangle(
 			MODIFY_TELEND_TEXT.getRectangle().x,
-			MODIFY_AT_LABEL.getRectangle().y,
+			(int)(MODIFY_AT_LABEL.getRectangle().y * 0.99),
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
@@ -345,6 +352,6 @@ public enum ModifyJoinEnum {
 	public String[] getStrArr() {
 		return strArr;
 	}
-	
+
 }
 

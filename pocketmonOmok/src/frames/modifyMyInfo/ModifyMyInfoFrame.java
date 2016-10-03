@@ -42,7 +42,6 @@ public class ModifyMyInfoFrame extends JFrame {
 	private JRadioButton genderManRadio;
 	private JRadioButton genderWomanRadio;
 	private ButtonGroup genderButtonGroup;
-	private JLabel genderErrorLabel;
 
 	private JLabel birthLabel;
 	private JComboBox<Integer> yearChoice;
@@ -53,14 +52,12 @@ public class ModifyMyInfoFrame extends JFrame {
 	private JLabel dateLabel;
 	
 	private JLabel emailLabel;
-	private JLabel emailTimeLabel;
-	private JLabel emailErrorLabel;
+	private JLabel emailErrLabel;
 	
 	private JLabel telLabel;
 	private JLabel telHyphen1Label;
 	private JLabel telHyphen2Label;
 	private JLabel atLabel;
-	private JLabel telErrorLabel;
 	
 	private JTextField idTextField;
 	private JPasswordField pwdField;
@@ -108,7 +105,7 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.yearLabel    	  = new JLabel("년");
 		this.monthLabel   	  = new JLabel("월");
 		this.dateLabel    	  = new JLabel("일");
-		this.emailTimeLabel	  = new JLabel("3:00");
+		this.emailErrLabel	  = new JLabel("asdflaksdjgal;kdsjlasd");
 		
 		// 모든 텍스트 필드
 		this.idTextField    = new JTextField(10);
@@ -158,7 +155,7 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.genderLabel.setFont(labelFont);
 		this.emailLabel.setFont(labelFont);
 		this.telLabel.setFont(labelFont);
-		this.emailTimeLabel.setFont(labelFont);
+		this.emailErrLabel.setFont(labelFont);
 		
 		//텍스트필드
 		Font textFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
@@ -217,7 +214,6 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.pwdLabel.setBounds(ModifyJoinEnum.MODIFY_PWD_LABEL.getRectangle());	
 		this.rePwdLabel.setBounds(ModifyJoinEnum.MODIFY_REPWD_LABEL.getRectangle());	
 		this.PwdLabelError.setBounds(ModifyJoinEnum.MODIFY_REPWDERROR_LABEL.getRectangle());
-		this.PwdLabelError.setForeground(Color.red);
 		
 		this.nameLabel.setBounds(ModifyJoinEnum.MODIFY_NAME_LABEL.getRectangle());
 		this.genderLabel.setBounds(ModifyJoinEnum.MODIFY_GENDER_LABEL.getRectangle());
@@ -226,15 +222,16 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.monthLabel.setBounds(ModifyJoinEnum.MODIFY_MONTH_LABEL.getRectangle());
 		this.dateLabel.setBounds(ModifyJoinEnum.MODIFY_DATE_LABEL.getRectangle());
 	
-		
 		this.emailLabel.setBounds(ModifyJoinEnum.MODIFY_EMAIL_LABEL.getRectangle());
+		this.emailErrLabel.setBounds(ModifyJoinEnum.MODIFY_EMAIL_ERR_LABEL.getRectangle());
+		this.emailErrLabel.setBackground(Color.red);
 		
 		this.telLabel.setBounds(ModifyJoinEnum.MODIFY_TELNAME_LABELMID.getRectangle());
 		this.telHyphen1Label.setBounds(ModifyJoinEnum.MODIFY_TELHYPHEN1_LABEL.getRectangle());
 		this.telHyphen2Label.setBounds(ModifyJoinEnum.MODIFY_TELHYPHEN2_LABEL.getRectangle());
 		this.atLabel.setBounds(ModifyJoinEnum.MODIFY_AT_LABEL.getRectangle());
 		
-		
+		this.add(emailErrLabel);
 		this.add(userIdLabel);
 		this.add(pwdLabel);
 		this.add(rePwdLabel);
@@ -375,7 +372,7 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.add(dropoutButton);
 		
 		this.cancelButton.setName("cancelButton");
-		this.modifyButton.setName("cancelButton");
+		this.modifyButton.setName("modifyButton");
 		this.dropoutButton.setName("dropoutButton");
 		
 		this.cancelButton.addActionListener(this.modifyAction);
@@ -411,8 +408,5 @@ public class ModifyMyInfoFrame extends JFrame {
 			this.telMiddleTextField.setText(phoneNum[1]);
 			this.telLastNumTextField.setText(phoneNum[2]);
 		}
-	}
-	public static void main(String[] args) throws IOException {
-		new ModifyMyInfoFrame(null);
 	}
 }
