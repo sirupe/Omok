@@ -183,6 +183,7 @@ public class ClientAccept {
 			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
 			break;
 		case GAME_ROOM_WINNER_INFO :
+			System.out.println("이넘을 타고 들어옵니다.");
 			this.basicFrame.getGameRoomPanel().gameEnd(data);
 			break;
 			

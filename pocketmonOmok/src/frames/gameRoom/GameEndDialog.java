@@ -66,16 +66,13 @@ public class GameEndDialog extends JDialog{
 		this.yes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				setVisible(false);
 				dispose();
-				
 			}
 		});
 		
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-//				setVisible(false);
 				dispose();
 			}
 		});

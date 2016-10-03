@@ -70,7 +70,7 @@ public enum GameRoomEnum {
 	
 	GAME_BUTTONNAME_OWNER(new String[] {
 			"start",
-			"lonely",
+//			"lonely",
 			"withdraw",
 			"exit",
 //			"itemUnity",
@@ -81,7 +81,7 @@ public enum GameRoomEnum {
 	
 	GAME_BUTTONNAME_GUEST(new String[] {
 			"ready",
-			"lonely",
+//			"lonely",
 			"withdraw",
 			"exit",
 //			"itemUnity",
