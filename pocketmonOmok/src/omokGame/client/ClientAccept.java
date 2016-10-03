@@ -184,10 +184,20 @@ public class ClientAccept {
 			this.basicFrame.getGameRoomPanel().gameEnd(data);
 			break;
 		case GAME_ROOM_EXIT_OTHER_USER :
-			System.out.println("다른 유저가 방을 나갔따고");
 			this.basicFrame.getGameRoomPanel().otherUserExitGame(data);
 		default :
 			break;
+		}
+	}
+
+//개인정보 수정---------------------------------------------------------------------------------------------
+	public void modifyAction(AbstractEnumsDTO infoDTO) {
+		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)infoDTO;
+		switch(userPersonalDTO.getServerAction()) {
+		case MODIFY_USER_PERSONAL_INFO :
+			this.basicFrame.newModifyMyInfoFrame(userPersonalDTO);
+			break;
+		
 		}
 	}
 

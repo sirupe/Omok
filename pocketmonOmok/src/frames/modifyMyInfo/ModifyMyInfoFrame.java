@@ -19,6 +19,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import actions.modifyMyInfo.ModifyMyInfoAction;
+import datasDTO.UserPersonalInfoDTO;
 import enums.frames.JoinSizesEnum;
 import enums.frames.ModifyJoinEnum;
 import frames.BasicFrame;
@@ -77,12 +79,13 @@ public class ModifyMyInfoFrame extends JFrame {
 	private JButton modifyButton; //회원가입 버튼
 	private JButton cancelButton; //취소버튼
 	private JButton dropoutButton; //인증 버큰
-
-	
 	
 	private Image background;
-
+	private ModifyMyInfoAction modifyAction;
+	
 	public ModifyMyInfoFrame(BasicFrame basicFrame) throws IOException {
+		this.modifyAction = new ModifyMyInfoAction();
+		
 		//모든 레이블 
 		this.userIdLabel 	 = new JLabel("아이디"); 
 		this.pwdLabel         = new JLabel("비밀번호");
@@ -169,7 +172,8 @@ public class ModifyMyInfoFrame extends JFrame {
 		
 		//배경화면
 		background = ImageIO.read(
-			  new File("resources/signUp/joinn.jpg")).getScaledInstance(
+				//배경이미지 join.png로 바꾸세욤
+			  new File("resources/signUp/join.png")).getScaledInstance(
 		          JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 		          JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 		          Image.SCALE_SMOOTH);
@@ -344,33 +348,70 @@ public class ModifyMyInfoFrame extends JFrame {
 		comboBox.setFont(ModifyJoinEnum.LABELFONT_DEFAULT.getFont());
 	}
 	//=========================================================================================================
-		public void setButtonPosition() throws IOException {
-			this.modifyButton.setIconTextGap(this.modifyButton.getIconTextGap() - 15);
-			
-			// 수정 버튼 해상도 맞게 그리기
-			this.modifyButton.setIcon(GetResources.getImageIcon("resources/myData/correct.kor.png", 
-					ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
-					ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height));
-			
-		    //취소 해상도 맞기 그리기
-			this.cancelButton.setIcon(GetResources.getImageIcon("resources/myData/reset.Kor.png", 
-	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
-	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
-		    
-			//탈퇴 해상도 맞기 그리기
-			this.dropoutButton.setIcon(GetResources.getImageIcon("resources/myData/quit.Kor.png", 
-	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
-	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
-			
-			this.modifyButton.setBounds(ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle());
-			this.cancelButton.setBounds(ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle());
-			this.dropoutButton.setBounds(ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle());
-			this.add(cancelButton);
-			this.add(modifyButton);
-			this.add(dropoutButton);
+	public void setButtonPosition() throws IOException {
+		this.modifyButton.setIconTextGap(this.modifyButton.getIconTextGap() - 15);
+		
+		// 수정 버튼 해상도 맞게 그리기
+		this.modifyButton.setIcon(GetResources.getImageIcon("resources/myData/correct.kor.png", 
+				ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
+				ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height));
+		
+	    //취소 해상도 맞기 그리기
+		this.cancelButton.setIcon(GetResources.getImageIcon("resources/myData/reset.Kor.png", 
+    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
+    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
+	    
+		//탈퇴 해상도 맞기 그리기
+		this.dropoutButton.setIcon(GetResources.getImageIcon("resources/myData/quit.Kor.png", 
+    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
+    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
+		
+		this.modifyButton.setBounds(ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle());
+		this.cancelButton.setBounds(ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle());
+		this.dropoutButton.setBounds(ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle());
+		
+		this.add(cancelButton);
+		this.add(modifyButton);
+		this.add(dropoutButton);
+		
+		this.cancelButton.setName("cancelButton");
+		this.modifyButton.setName("cancelButton");
+		this.dropoutButton.setName("dropoutButton");
+		
+		this.cancelButton.addActionListener(this.modifyAction);
+		this.modifyButton.addActionListener(this.modifyAction);
+		this.dropoutButton.addActionListener(this.modifyAction);
 		
 	}
+	
+	// 회원정보 수정 버튼을 누르면 실행되며 클라이언트의 정보를 세팅한다.
+	public void setUserInfo(UserPersonalInfoDTO userPersonalInfo) {
+		this.idTextField.setText(userPersonalInfo.getUserID());
+		this.nameTextField.setText(userPersonalInfo.getUserName());
 		
+		if(userPersonalInfo.getUserGender() == 1) {
+			this.genderManRadio.setSelected(true);
+		} else {
+			this.genderWomanRadio.setSelected(true);
+		}
+		
+		String[] birth = userPersonalInfo.getUserBirth().split("\\.");
+		this.yearChoice.setSelectedItem(Integer.parseInt(birth[0]));
+		this.monthChoice.setSelectedItem(Integer.parseInt(birth[1]));
+		this.dateChoice.setSelectedItem(Integer.parseInt(birth[2]));
+		
+		String[] email = userPersonalInfo.getUserEmail().split("@");
+		
+		this.emailIDTextField.setText(email[0]);
+		this.emailAddrTextField.setText(email[1]);
+		
+		if(userPersonalInfo.getUserPhoneNumber() != null) {
+			String[] phoneNum = userPersonalInfo.getUserPhoneNumber().split("-");
+			this.telFrontNumChoice.setSelectedItem(phoneNum[0]);
+			this.telMiddleTextField.setText(phoneNum[1]);
+			this.telLastNumTextField.setText(phoneNum[2]);
+		}
+	}
 	public static void main(String[] args) throws IOException {
 		new ModifyMyInfoFrame(null);
 	}

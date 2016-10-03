@@ -36,7 +36,7 @@ public enum SearchPwdEnum {
    
    //에러 레이블 -- 3분초과메세지
    SEARCH_ERROR_LABEL(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.072),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.15),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.65),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 13),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.13)
@@ -86,7 +86,7 @@ public enum SearchPwdEnum {
          (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.12),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.43),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.6),
-         (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.1)
+         (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.13)
          )),
    
    //인증번호 확인 버튼 생성
@@ -99,16 +99,16 @@ public enum SearchPwdEnum {
    
    //취소 버튼 생성
    SEARCH_CANCEL_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.35),
-         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.81),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.18),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.95),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.2),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.14)
          )),
 
    //확인 버튼 생성
    SEARCH_CHECK_BUTTON(new Rectangle(
-         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.22),
-         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.81),
+         (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.35),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.93),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
          )),

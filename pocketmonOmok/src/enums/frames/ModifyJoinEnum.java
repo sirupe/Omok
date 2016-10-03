@@ -74,14 +74,14 @@ public enum ModifyJoinEnum {
 			)),
 	//년도 라벨
 	MODIFY_YEAR_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.44),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.42),
 			MODIFY_BIRTH_LABEL.getRectangle().y,
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	//월 라벨
 	MODIFY_MONTH_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.62),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.61),
 			MODIFY_BIRTH_LABEL.getRectangle().y,
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
@@ -96,7 +96,7 @@ public enum ModifyJoinEnum {
 	//이메일 라벨
 	MODIFY_EMAIL_LABEL(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
-			MODIFY_BIRTH_LABEL.getRectangle().y + DISTANCE.getSize(),
+			(int)(MODIFY_BIRTH_LABEL.getRectangle().y * 1.19),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
@@ -104,7 +104,7 @@ public enum ModifyJoinEnum {
 	MODIFY_AT_LABEL(new Rectangle(
 			MODIFY_YEAR_LABEL.getRectangle().x,
 			MODIFY_EMAIL_LABEL.getRectangle().y,
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
+			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.135),
 			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
 	)),
 	MODIFY_TELNAME_LABELMID(new Rectangle(
@@ -129,14 +129,14 @@ public enum ModifyJoinEnum {
 	)),
 //=================================gender라디오박스=================================
 	MODIFY_GENDERMAN_RADIOBUTTON(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.26),
 			MODIFY_GENDER_LABEL.getRectangle().y,
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	
 	MODIFY_GENDERWOMAN_RADIOBUTTON(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.5),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.45),
 			MODIFY_GENDER_LABEL.getRectangle().y,
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
@@ -145,7 +145,7 @@ public enum ModifyJoinEnum {
 //=====================================텍스트====================================================================TODO
 	//아이디 텍스트필드
 	MODIFY_ID_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.34),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.32),
 			MODIFY_ID_LABEL.getRectangle().y,
 			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
@@ -174,58 +174,58 @@ public enum ModifyJoinEnum {
 	
 	MODIFY_EAMILID_TEXT(new Rectangle(
 			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
-			MODIFY_AT_LABEL.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_AT_LABEL.getRectangle().y * 0.99),
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_EAMILADDR_TEXT(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.48),
-			MODIFY_AT_LABEL.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_AT_LABEL.getRectangle().y * 0.99),
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_TELMID_TEXT(new Rectangle(
-			MODIFY_EAMILADDR_TEXT.getRectangle().x,
-			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_EAMILADDR_TEXT.getRectangle().x * 0.98),
+			(int)(MODIFY_TELHYPHEN1_LABEL.getRectangle().y * 0.99),
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_TELEND_TEXT(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.65),
-			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_TELHYPHEN1_LABEL.getRectangle().y * 0.99),
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	//===================================초이스박스===================================
 	//년도
 	MODIFY_YEAR_COMBOBOX(new Rectangle(
 			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
-			MODIFY_BIRTH_LABEL.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_BIRTH_LABEL.getRectangle().y * 0.98),
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//월
 	MODIFY_MONTH_COMBOBOX(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.47),
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.45),
 			MODIFY_YEAR_COMBOBOX.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//도
 	MODIFY_DATE_COMBOBOX(new Rectangle(
-			MODIFY_TELEND_TEXT.getRectangle().x,
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.64),
 			MODIFY_YEAR_COMBOBOX.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//전화번호 앞자리
 	MODIFY_TELFRONTNUM_COMBO(new Rectangle(
 			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
-			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
-			MODIFY_AT_LABEL.getRectangle().width,
+			(int)(MODIFY_TELHYPHEN1_LABEL.getRectangle().y * 0.98),
+			(int)(MODIFY_AT_LABEL.getRectangle().width * 1.2),
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	//이메일주소
