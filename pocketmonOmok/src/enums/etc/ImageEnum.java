@@ -36,6 +36,7 @@ public enum ImageEnum {
 	GAMEROOM_START_CH("resources/gameRoom/start_ch.png"),
 	//게임이 시작되면 게스트의 레디버튼과 방장의 스타트 버튼이 
 	//비활성화 되면서 BATTLING 이미지로 바뀌어요
+//	GAMEROOM_START_BATTILING("resources/gameRoom/battling.png"),
 	GAMEROOM_START_BATTILING("resources/gameRoom/battling.png"),
 	
 //GameRoom 이미지들------------------------------------------------------	
@@ -44,33 +45,26 @@ public enum ImageEnum {
 	GAMEROOM_FEMALE_IMAGE("resources/gameRoom/userImageFemale.png"),
 	GAMEROOM_DEFALT_USER_IMAGE("resources/gameRoom/logo.png"),
 	
-	GAMEROOM_READY_GRAY("resources/gameRoom/ready_gray.png"),
-	GAMEROOM_START_GRAY("resources/gameRoom/start_gray.png"),
 	GAMEROOM_SHOP_GRAY("resources/gameRoom/gamecoin_gray.png"),
 	GAMEROOM_ALONE_GRAY("resources/gameRoom/alone_gray.png"),
-	GAMEROOM_OUT_GRAY("resources/gameRoom/itemgameout_gray.png"),	
 	GAMEROOM_ITEM_ALL_SAME_GRAY("resources/gameRoom/itemunity_gray.png"),
 	GAMEROOM_ITEM_TIME_PLUS_GRAY("resources/gameRoom/itemtimeplus_gray.png"),
 	GAMEROOM_ITEM_RETURN_GRAY("resources/gameRoom/gamereturn_gray.png"),
 	GAMEROOM_GIVE_UP_GRAY("resources/gameRoom/giveup_gray.png"),
 	
-	GAMEROOM_READY_COLOR("resources/gameRoom/ready.png"),
-	GAMEROOM_START_COLOR("resources/gameRoom/start.png"),
 	GAMEROOM_SHOP_COLOR("resources/gameRoom/gamecoin.png"),
 	GAMEROOM_ALONE_COLOR("resources/gameRoom/alone.png"),
-	GAMEROOM_OUT_COLOR("resources/gameRoom/itemgameout.png"),	
 	GAMEROOM_ITEM_ALL_SAME_COLOR("resources/gameRoom/itemunity.png"),
 	GAMEROOM_ITEM_TIME_PLUS_COLOR("resources/gameRoom/itemtimeplus.png"),
 	GAMEROOM_ITEM_RETURN_COLOR("resources/gameRoom/gamereturn.png"),
 	GAMEROOM_ITEM_GIVE_UP_COLOR("resources/gameRoom/giveup.png"),
 	
-	GAMEROOM_START_LAST_COLOR("resources/gameRoom/start3.png"),
 
 	GAMEROOM_MENU_IMAGES_GRAY_OWNER(new String[] {
-			GAMEROOM_START.getImageDir(),			// gamestart
+			GAMEROOM_START.getImageDir(),				// gamestart
 //			GAMEROOM_ALONE_GRAY.getImageDir(),			// 혼자하기
-			GAMEROOM_GIVEUP.getImageDir(),		// 기권
-			GAMEROOM_EXIT.getImageDir(),			// 나가기
+			GAMEROOM_GIVEUP.getImageDir(),				// 기권
+			GAMEROOM_EXIT.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_GRAY.getImageDir(),	// 돌색 통일시키기
 			GAMEROOM_ITEM_TIME_PLUS_GRAY.getImageDir(),	// 시간추가
 			GAMEROOM_ITEM_RETURN_GRAY.getImageDir(),	// 턴되돌리기
@@ -78,10 +72,10 @@ public enum ImageEnum {
 	}),
 	
 	GAMEROOM_MENU_IMAGES_COLOR_OWNER(new String[] {
-			GAMEROOM_START_CH.getImageDir(),		// gamestart
+			GAMEROOM_START_CH.getImageDir(),			// gamestart
 //			GAMEROOM_ALONE_COLOR.getImageDir(),			// 혼자하기
-			GAMEROOM_GIVEUP_CH.getImageDir(),	// 기권
-			GAMEROOM_EXIT_CH.getImageDir(),			// 나가기
+			GAMEROOM_GIVEUP_CH.getImageDir(),			// 기권
+			GAMEROOM_EXIT_CH.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_COLOR.getImageDir(),	// 돌색 통일시키기
 			GAMEROOM_ITEM_TIME_PLUS_COLOR.getImageDir(),// 시간추가
 			GAMEROOM_ITEM_RETURN_COLOR.getImageDir(),	// 턴되돌리기
@@ -90,10 +84,10 @@ public enum ImageEnum {
 	
 
 	GAMEROOM_MENU_IMAGES_GRAY_GUEST(new String[] {
-			GAMEROOM_READY.getImageDir(),			// ready
+			GAMEROOM_READY.getImageDir(),				// ready
 //			GAMEROOM_ALONE_GRAY.getImageDir(),			// 혼자하기
-			GAMEROOM_GIVEUP.getImageDir(),		// 기권
-			GAMEROOM_EXIT.getImageDir(),			// 나가기
+			GAMEROOM_GIVEUP.getImageDir(),				// 기권
+			GAMEROOM_EXIT.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_GRAY.getImageDir(),	// 돌색 통일시키기
 			GAMEROOM_ITEM_TIME_PLUS_GRAY.getImageDir(),	// 시간추가
 			GAMEROOM_ITEM_RETURN_GRAY.getImageDir(),	// 턴되돌리기
@@ -103,8 +97,8 @@ public enum ImageEnum {
 	GAMEROOM_MENU_IMAGES_COLOR_GUEST(new String[] {
 			GAMEROOM_READY_CH.getImageDir(),			// ready
 //			GAMEROOM_ALONE_COLOR.getImageDir(),			// 혼자하기
-			GAMEROOM_GIVEUP_CH.getImageDir(),	// 기권
-			GAMEROOM_EXIT_CH.getImageDir(),			// 나가기
+			GAMEROOM_GIVEUP_CH.getImageDir(),			// 기권
+			GAMEROOM_EXIT_CH.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_COLOR.getImageDir(),	// 돌색 통일시키기
 			GAMEROOM_ITEM_TIME_PLUS_COLOR.getImageDir(),// 시간추가
 			GAMEROOM_ITEM_RETURN_COLOR.getImageDir(),	// 턴되돌리기

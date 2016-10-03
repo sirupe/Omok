@@ -42,6 +42,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomSizesEnum;
 import frames.BasicFrame;
+import utility.GetResources;
 
 public class WaitingRoomPanel extends JPanel {	
 	private static final long serialVersionUID = 6433378L;
@@ -747,15 +748,9 @@ public class WaitingRoomPanel extends JPanel {
 		this.userInfoImageLabel.setIcon(userGameData.getUserWaitingRoomImage());
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
-		System.out.println(dir);
-		this.levelImageLabel.setIcon(
-			new ImageIcon(ImageIO.read(
-				new File(dir)).getScaledInstance(
-						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
-						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(), 
-						Image.SCALE_AREA_AVERAGING)
-			)
-		);
+		this.levelImageLabel.setIcon(GetResources.getImageIcon(dir, 
+					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()));
 	}
 	
 	public void updateDeleteRoom() {

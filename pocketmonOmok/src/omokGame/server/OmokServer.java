@@ -210,8 +210,6 @@ public class OmokServer {
 			userInGameRoom.setServerAction(ServerActionEnum.GAME_CREATEROOM_SUCCESS);
 			userInGameRoom.setGameRoomInfo(pasteGameRoomInfo);
 			userInGameRoom.setUserGameData(this.gamedataDAO.userGameData(pasteGameRoomInfo.getOwner()));
-			userInGameRoom.setUserItemInfo(this.storeDAO.getUserStoreInfo(pasteGameRoomInfo.getOwner()));
-			userInGameRoom.setUserSkinInfo(this.skinDAO.getUserSkinInfo(pasteGameRoomInfo.getOwner()));
 			personalServer.getServerOutputStream().writeObject(userInGameRoom);
 		} else {
 			gameRoomInfo.setServerAction(ServerActionEnum.GAME_CREATEROOM_FAIL);			
@@ -330,8 +328,6 @@ public class OmokServer {
 			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
 			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
 			userInGameRoomDTO.setOwnerGender(ownerGender);
-			userInGameRoomDTO.setUserItemInfo(this.storeDAO.getUserStoreInfo(roomGuestVO.getGuest()));
-			userInGameRoomDTO.setUserSkinInfo(this.skinDAO.getUserSkinInfo(roomGuestVO.getGuest()));
 			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
 			this.loginUsersMap.get(roomGuestVO.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
 		} catch (IOException e) {

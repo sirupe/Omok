@@ -54,7 +54,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	public BasicFrame(ClientAccept clientAccept) throws IOException {
 		this.isExitCheck = true;
 		this.clientAccept = clientAccept;
-		
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 		this.reimage = ImageIO.read(new File("resources/login/background.jpg")).getScaledInstance(
 					LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
@@ -114,6 +114,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	class WindowAction extends WindowAdapter {
 		@Override
 		public void windowClosing(WindowEvent e) {
+			System.out.println("windowClosing");
 			if(isExitCheck) {
 				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
 				personalDTO.setUserID(userID);
@@ -124,8 +125,6 @@ public class BasicFrame extends JFrame implements Serializable{
 				}
 				
 				e.getWindow().setVisible(false);
-			} else {
-				gameRoomPanel.exitGame();
 			}
 		}
 	}
