@@ -108,8 +108,8 @@ import omokGame.client.ClientAccept;
 			this.searchConfirmTextField.setVisible(false);
 			
 			//TODO
-			this.searchIdTextField.setText("test4");
-			this.searchemailTextField.setText("tnwls@daum.net");
+//			this.searchIdTextField.setText("test4");
+//			this.searchemailTextField.setText("tnwls@daum.net");
 			
 		}
 		
@@ -254,7 +254,7 @@ import omokGame.client.ClientAccept;
 		this.searchCancelButton.setIconTextGap(this.searchConfirmButton.getIconTextGap() - 15);    	
 		this.searchCancelButton.setIcon(
 				new ImageIcon(ImageIO.read(
-					new File("resources/login/back.png")).getScaledInstance(
+					new File("resources/myData/reset.Kor.png")).getScaledInstance(
 							SearchPwdEnum.SEARCH_CANCEL_BUTTON.getRectangle().width,
 							SearchPwdEnum.SEARCH_CANCEL_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
@@ -277,6 +277,11 @@ import omokGame.client.ClientAccept;
 							SearchPwdEnum.SEARCH_CHECK_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
 		);
+		
+		this.searchCheckButton.setBorderPainted(false);
+		this.searchCheckButton.setFocusPainted(false);
+		this.searchCheckButton.setContentAreaFilled(false);
+		
 		this.searchCheckButton.setBounds(SearchPwdEnum.SEARCH_CHECK_BUTTON.getRectangle()); 
 		this.add(searchCheckButton); 
 		this.searchCheckButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
@@ -356,9 +361,9 @@ import omokGame.client.ClientAccept;
 			new Thread(() -> {
 				StringBuffer time = new StringBuffer();
 				
-				for(int i = 0; i >= 0; --i) {
+				for(int i = 2; i >= 0; --i) {
 					
-					for(int j = (i >= 3) ? 0 : 9; j >= 0; j--) {
+					for(int j = (i >= 3) ? 0 : 59 ; j >= 0; j--) {
 						time.delete(0, time.length());
 						time.append(i);
 						time.append(" : ");
