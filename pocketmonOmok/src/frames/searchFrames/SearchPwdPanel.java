@@ -382,6 +382,8 @@ import omokGame.client.ClientAccept;
 				//인증번호 초기화 한다.
 				this.searchConfirmTextField.setText("");
 				this.searchConfirmTextField.setVisible(false);
+				this.CheckNumberButton.setVisible(false);
+				this.searchConfirmButton.setVisible(true); 
 				
 				if(this.isEmailConfirmLimitTime) {
 					return;
@@ -443,7 +445,8 @@ import omokGame.client.ClientAccept;
 				btn = this.getCheckNumberButton();
 				btn.setVisible(true);
 				this.searchConfirmTextField.setVisible(true);
-				this.userNumberMsg("인증번호가 다릅니다! 다시 설정해주세요");
+				this.userNumberMsg("<html>비밀번호 설정 실패" 
+									+"<br>다시설정해주세요.<br></html>");
 				this.isConfirmNumberSuccess = false;
 				return;
 			}
