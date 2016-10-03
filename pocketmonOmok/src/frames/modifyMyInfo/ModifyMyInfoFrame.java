@@ -1,4 +1,4 @@
-package frames.joinFrames;
+package frames.modifyMyInfo;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,15 +19,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.media.sound.MidiOutDeviceProvider;
-
 import enums.frames.JoinSizesEnum;
 import enums.frames.ModifyJoinEnum;
-import enums.frames.SearchIDEnum;
 import frames.BasicFrame;
+import utility.GetResources;
 import utility.JTextFieldNumOnly;
 
-public class ModifyJoinFrame extends JFrame {
+public class ModifyMyInfoFrame extends JFrame {
 
 	private JLabel userIdLabel;
 	
@@ -84,127 +82,128 @@ public class ModifyJoinFrame extends JFrame {
 	
 	private Image background;
 
-	public ModifyJoinFrame(BasicFrame basicFrame) throws IOException {
+	public ModifyMyInfoFrame(BasicFrame basicFrame) throws IOException {
 		//모든 레이블 
-				this.userIdLabel 	 = new JLabel("아이디"); 
-				this.pwdLabel         = new JLabel("비밀번호");
-				this.rePwdLabel      = new JLabel("비밀번호재입력");
-				
-				this.PwdLabelError   = new JLabel("ERROR MESSAGE"); //에러 입히기
-				this.PwdLabelError.setBackground(Color.pink);
-				
-				
-				this.nameLabel   = new JLabel("이름");
-				this.genderLabel = new JLabel("성별");
-				this.birthLabel  = new JLabel("생년월일");
-				this.emailLabel  = new JLabel("이메일");
-				this.telLabel    = new JLabel("전화번호");
-			
-				this.telHyphen1Label  = new JLabel("-");
-				this.telHyphen2Label  = new JLabel("-");		
-				this.atLabel      	  = new JLabel("@");
-				
-				this.yearLabel    	  = new JLabel("년");
-				this.monthLabel   	  = new JLabel("월");
-				this.dateLabel    	  = new JLabel("일");
-				this.emailTimeLabel	  = new JLabel("3:00");
-				
-				// 모든 텍스트 필드
-				this.idTextField    = new JTextField(10);
-
-				this.pwdField       = new JPasswordField(10);
-				this.rePwdField     = new JPasswordField(10);
-				this.nameTextField  = new JTextField(10);
-
-				this.emailIDTextField    	= new JTextField(10); 
-				this.emailAddrTextField 	= new JTextField(10);
-				this.telMiddleTextField		= new JTextField(new JTextFieldNumOnly(4), "", 0);
-				this.telLastNumTextField    = new JTextField(new JTextFieldNumOnly(4), "", 0);
-				this.emailConfTextField     = new JTextField(new JTextFieldNumOnly(6), "", 0);
-
-				// 성별 여자남자 라디오 박스
-				this.genderButtonGroup = new ButtonGroup();
-				this.genderWomanRadio  = new JRadioButton("여자");
-				this.genderManRadio    = new JRadioButton("남자");
-				this.genderWomanRadio.setOpaque(false);
-				this.genderManRadio.setOpaque(false);
-				
-
-				this.genderButtonGroup = new ButtonGroup();
-				this.genderButtonGroup.add(this.genderManRadio);
-				this.genderButtonGroup.add(this.genderWomanRadio);
-				
-				//이메일 전화번호 콤보박스
-				this.emailAddrChoice = new JComboBox<String>();
-				this.telFrontNumChoice = new JComboBox<String>();
-				
-				//수정, 취소, 탈퇴버튼
-				this.modifyButton   = new JButton();
-				this.cancelButton	= new JButton();
-				this.dropoutButton  = new JButton();	
-
-				this.yearChoice  = new JComboBox<Integer>();
-				this.monthChoice = new JComboBox<Integer>();
-				this.dateChoice  = new JComboBox<Integer>();
-				
-				//레이블 폰트
-				Font labelFont = SearchIDEnum.LABELFONT_DEFAULT.getFont();
-				this.userIdLabel.setFont(labelFont);
-				this.pwdLabel.setFont(labelFont);
-				this.rePwdLabel.setFont(labelFont);
-				this.nameLabel.setFont(labelFont);
-				this.birthLabel.setFont(labelFont);
-				this.genderLabel.setFont(labelFont);
-				this.emailLabel.setFont(labelFont);
-				this.telLabel.setFont(labelFont);
-				this.emailTimeLabel.setFont(labelFont);
-				
-				//텍스트필드
-				Font textFont = JoinSizesEnum.LABELFONT_DEFAULT.getFont();
-				this.idTextField.setFont(textFont);
-				this.pwdField.setFont(textFont);
-				this.rePwdField.setFont(textFont);
-				this.nameTextField.setFont(textFont);
-
-				this.emailIDTextField.setFont(textFont);
-				this.emailAddrTextField.setFont(textFont);
-				
+		this.userIdLabel 	 = new JLabel("아이디"); 
+		this.pwdLabel         = new JLabel("비밀번호");
+		this.rePwdLabel      = new JLabel("비밀번호재입력");
+		
+		this.PwdLabelError   = new JLabel("ERROR MESSAGE"); //에러 입히기
+		this.PwdLabelError.setBackground(Color.pink);
+		
+		
+		this.nameLabel   = new JLabel("이름");
+		this.genderLabel = new JLabel("성별");
+		this.birthLabel  = new JLabel("생년월일");
+		this.emailLabel  = new JLabel("이메일");
+		this.telLabel    = new JLabel("전화번호");
+		
+		this.telHyphen1Label  = new JLabel("-");
+		this.telHyphen2Label  = new JLabel("-");		
+		this.atLabel      	  = new JLabel("@");
+		
+		this.yearLabel    	  = new JLabel("년");
+		this.monthLabel   	  = new JLabel("월");
+		this.dateLabel    	  = new JLabel("일");
+		this.emailTimeLabel	  = new JLabel("3:00");
+		
+		// 모든 텍스트 필드
+		this.idTextField    = new JTextField(10);
+		
+		this.pwdField       = new JPasswordField(10);
+		this.rePwdField     = new JPasswordField(10);
+		this.nameTextField  = new JTextField(10);
+		
+		this.emailIDTextField    	= new JTextField(10); 
+		this.emailAddrTextField 	= new JTextField(10);
+		this.telMiddleTextField		= new JTextField(new JTextFieldNumOnly(4), "", 0);
+		this.telLastNumTextField    = new JTextField(new JTextFieldNumOnly(4), "", 0);
+		this.emailConfTextField     = new JTextField(new JTextFieldNumOnly(6), "", 0);
+		
+		// 성별 여자남자 라디오 박스
+		this.genderButtonGroup = new ButtonGroup();
+		this.genderWomanRadio  = new JRadioButton("여자");
+		this.genderManRadio    = new JRadioButton("남자");
+		this.genderWomanRadio.setOpaque(false);
+		this.genderManRadio.setOpaque(false);
+		
+		
+		this.genderButtonGroup = new ButtonGroup();
+		this.genderButtonGroup.add(this.genderManRadio);
+		this.genderButtonGroup.add(this.genderWomanRadio);
+		
+		//이메일 전화번호 콤보박스
+		this.emailAddrChoice = new JComboBox<String>();
+		this.telFrontNumChoice = new JComboBox<String>();
+		
+		//수정, 취소, 탈퇴버튼
+		this.modifyButton   = new JButton();
+		this.cancelButton	= new JButton();
+		this.dropoutButton  = new JButton();	
+		
+		this.yearChoice  = new JComboBox<Integer>();
+		this.monthChoice = new JComboBox<Integer>();
+		this.dateChoice  = new JComboBox<Integer>();
+		
+		//레이블 폰트
+		Font labelFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
+		this.userIdLabel.setFont(labelFont);
+		this.pwdLabel.setFont(labelFont);
+		this.rePwdLabel.setFont(labelFont);
+		this.nameLabel.setFont(labelFont);
+		this.birthLabel.setFont(labelFont);
+		this.genderLabel.setFont(labelFont);
+		this.emailLabel.setFont(labelFont);
+		this.telLabel.setFont(labelFont);
+		this.emailTimeLabel.setFont(labelFont);
+		
+		//텍스트필드
+		Font textFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
+		this.idTextField.setFont(textFont);
+		this.pwdField.setFont(textFont);
+		this.rePwdField.setFont(textFont);
+		this.nameTextField.setFont(textFont);
+		
+		this.emailIDTextField.setFont(textFont);
+		this.emailAddrTextField.setFont(textFont);
+		
 		//배경화면
-				background = ImageIO.read(
-			   		  new File("resources/signUp/joinn.jpg")).getScaledInstance(
-		                  JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
-		                  JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
-		                  Image.SCALE_SMOOTH);
-	
-				this.setContentPane(new JLabel(new ImageIcon(background))); 
-				
-				this.setBounds(				
-					ModifyJoinEnum.MODIFY_JOINFRMAE_POSITION_X.getSize(),
-					ModifyJoinEnum.MODIFY_JOINFRMAE_POSITION_Y.getSize(),
-					ModifyJoinEnum.MODIFY_JOINFRAME_SIZE_WIDTH.getSize(),
-					ModifyJoinEnum.MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize()		
-				);
-				
-				this.calSetDate(2016, 12);			//캘린더
-				for(int i = 2016; i >= 1900; i-- ) {
-					yearChoice.addItem(i);
-				}
-				for(int j = 1; j <= 12; j++) {
-					monthChoice.addItem(j);
-				}
+		background = ImageIO.read(
+			  new File("resources/signUp/joinn.jpg")).getScaledInstance(
+		          JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
+		          JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
+		          Image.SCALE_SMOOTH);
+		
+		this.setContentPane(new JLabel(new ImageIcon(background))); 
+		
+		this.setBounds(				
+			ModifyJoinEnum.MODIFY_JOINFRMAE_POSITION_X.getSize(),
+			ModifyJoinEnum.MODIFY_JOINFRMAE_POSITION_Y.getSize(),
+			ModifyJoinEnum.MODIFY_JOINFRAME_SIZE_WIDTH.getSize(),
+			ModifyJoinEnum.MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize()		
+		);
+		
+		this.calSetDate(2016, 12);			//캘린더
+		for(int i = 2016; i >= 1900; i-- ) {
+			yearChoice.addItem(i);
+		}
+		
+		for(int j = 1; j <= 12; j++) {
+			monthChoice.addItem(j);
+		}
 		  
-				  //부를 메소드 추가 
-				  this.setLabelPosition();
-				  this.setTextFieldPosition();
-				  this.setButtonGroup();
-				  this.setButtonPosition();
-				  this.setChoicePosition();
-			  
-			 
-				  this.setLayout(null);
-				  this.setVisible(true);
-				  this.setTitle("회원가입수정");
-				  this.setResizable(false);
+		//부를 메소드 추가 
+		this.setLabelPosition();
+		this.setTextFieldPosition();
+		this.setButtonGroup();
+		this.setButtonPosition();
+		this.setChoicePosition();
+			
+			
+		this.setLayout(null);
+		this.setVisible(true);
+		this.setTitle("회원가입수정");
+		this.setResizable(false);
 		  
 		
 	}
@@ -349,29 +348,19 @@ public class ModifyJoinFrame extends JFrame {
 			this.modifyButton.setIconTextGap(this.modifyButton.getIconTextGap() - 15);
 			
 			// 수정 버튼 해상도 맞게 그리기
-			this.modifyButton.setIcon(
-				new ImageIcon(ImageIO.read(
-					new File("resources/myData/correct.kor.png")).getScaledInstance(
-						ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
-						ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height,
-		    		    Image.SCALE_AREA_AVERAGING))
-			);
+			this.modifyButton.setIcon(GetResources.getImageIcon("resources/myData/correct.kor.png", 
+					ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
+					ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height));
+			
 		    //취소 해상도 맞기 그리기
-			this.cancelButton.setIcon(
-	    		new ImageIcon(ImageIO.read(
-	    			new File("resources/myData/reset.Kor.png")).getScaledInstance(
+			this.cancelButton.setIcon(GetResources.getImageIcon("resources/myData/reset.Kor.png", 
 	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
-	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height,
-						Image.SCALE_AREA_AVERAGING))
-		    );
+	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
+		    
 			//탈퇴 해상도 맞기 그리기
-			this.dropoutButton.setIcon(
-	    		new ImageIcon(ImageIO.read(
-	    			new File("resources/myData/quit.Kor.png")).getScaledInstance(
-	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width,
-	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height,
-						Image.SCALE_AREA_AVERAGING))
-		    );
+			this.dropoutButton.setIcon(GetResources.getImageIcon("resources/myData/quit.Kor.png", 
+	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
+	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
 			
 			this.modifyButton.setBounds(ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle());
 			this.cancelButton.setBounds(ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle());
@@ -381,6 +370,8 @@ public class ModifyJoinFrame extends JFrame {
 			this.add(dropoutButton);
 		
 	}
-
-
+		
+	public static void main(String[] args) throws IOException {
+		new ModifyMyInfoFrame(null);
+	}
 }

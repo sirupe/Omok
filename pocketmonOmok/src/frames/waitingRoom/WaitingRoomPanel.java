@@ -42,6 +42,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomSizesEnum;
 import frames.BasicFrame;
+import utility.GetResources;
 
 public class WaitingRoomPanel extends JPanel {	
 	private static final long serialVersionUID = 6433378L;
@@ -174,18 +175,14 @@ public class WaitingRoomPanel extends JPanel {
 	// 방리스트 정보변경 TODO
 	public void modGameRoom(RoomAndUserListDTO roomListVo) {
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
-		// 현재 생성되어있는 테이블 전체를 검색 (rowCount 만큼)
+		// 현재 생성되어있는 테이블 전체를 검색하여 삭제 (rowCount 만큼)
+		System.out.println("로카운트 : " + tableModel.getRowCount());
 		for(int i = 0, size = tableModel.getRowCount(); i < size; i++) {
 			tableModel.removeRow(i);
 		}
-
+		System.out.println("클라이언트에 넘어온 사이즈는 : " + roomListVo.getGameRoomList().size());
 		for(int i = 0, size = roomListVo.getGameRoomList().size(); i < size; i++) {
 			GameRoomInfoVO roomInfoVo = roomListVo.getGameRoomList().get(i);
-			System.out.println(roomInfoVo.getEnterImage() + "/" +
-					roomInfoVo.getRoomNumber()+ "/" +
-					roomInfoVo.getRoomName()+ "/" +
-					roomInfoVo.getOwner()+ "/" +
-					roomInfoVo.getPersons());
 			
 			tableModel.addRow(new Object[] {
 					roomInfoVo.getEnterImage(),
@@ -266,7 +263,6 @@ public class WaitingRoomPanel extends JPanel {
 	/***************************접속자 리스트 맵***************************/
 	private Map<String, ImageIcon> createImage(Vector<String> player, ArrayList<String> grade) throws IOException {
 		Map<String, ImageIcon> map = new HashMap<>();
-		System.out.println(new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade.get(0))));
 	    try{
     		for(int i = 0, size = player.size(); i < size; i++) {
 		    	map.put(player.get(i), new ImageIcon(ImageIO.read(
@@ -619,7 +615,6 @@ public class WaitingRoomPanel extends JPanel {
 		this.modifyInfoButton.setFocusPainted(false);
 		//게임시작 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
 		this.modifyInfoButton.setIconTextGap(this.createRoomButton.getIconTextGap() - 15);
-		
 		//방생성 버튼테두리 효과를 없애줌
 		this.createRoomButton.setBorderPainted(false);
 		this.createRoomButton.setContentAreaFilled(false);
@@ -713,7 +708,6 @@ public class WaitingRoomPanel extends JPanel {
 			for(int i = 1, j, size; i <= 20; i++) {
 				for(j = 0, size = tableModel.getRowCount(); j < size; j++) {
 					o = tableModel.getValueAt(j, 1);
-					System.out.println(size + ": size");
 					if(Integer.parseInt(o.toString()) == i) {
 						break;
 					}
@@ -752,15 +746,9 @@ public class WaitingRoomPanel extends JPanel {
 		this.userInfoImageLabel.setIcon(userGameData.getUserWaitingRoomImage());
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
-		System.out.println(dir);
-		this.levelImageLabel.setIcon(
-			new ImageIcon(ImageIO.read(
-				new File(dir)).getScaledInstance(
-						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
-						WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize(), 
-						Image.SCALE_AREA_AVERAGING)
-			)
-		);
+		this.levelImageLabel.setIcon(GetResources.getImageIcon(dir, 
+					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()));
 	}
 	
 	public void updateDeleteRoom() {

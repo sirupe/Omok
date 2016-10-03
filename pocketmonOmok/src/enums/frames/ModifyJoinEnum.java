@@ -12,249 +12,251 @@ import javax.swing.border.EmptyBorder;
 
 public enum ModifyJoinEnum {
 	
-Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
-	MODIFY_JOINFRAME_SIZE_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.3)),
+	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
+	DISTANCE((int)(SCREEN_SIZE.getDimension().height * 0.07)),
+	
+	MODIFY_JOINFRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.3)),
 	MODIFY_JOINFRMAE_SIZE_HEIGHT((int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 1.4)),	
-	MODIFY_JOINFRMAE_POSITION_X((int)((Screen_SIZE.getDimension().getWidth() / 2) - (MODIFY_JOINFRAME_SIZE_WIDTH.getSize() / 2 ))),
-	MODIFY_JOINFRMAE_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() / 2))),
+	MODIFY_JOINFRMAE_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (MODIFY_JOINFRAME_SIZE_WIDTH.getSize() / 2 ))),
+	MODIFY_JOINFRMAE_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2) - (MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() / 2))),
 	
 //======================================라벨=====================================================================
 	//아이디 라벨
 	MODIFY_ID_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
 			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 0.2),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.3),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.25),
+			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.03)
 			)),
 	//비밀번호라벨
 	MODIFY_PWD_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 0.8),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.3),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_ID_LABEL.getRectangle().y + DISTANCE.getSize(),
+			MODIFY_ID_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 			)),
 	//재비밀번호라벨
 	MODIFY_REPWD_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.4),
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_PWD_LABEL.getRectangle().y + DISTANCE.getSize(),
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().height
 			)),
 	//비밀번호 재비밀번호 일치 하지 않을시 나타나는 에러 메세지
 	MODIFY_REPWDERROR_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.38),
 			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 			)),
 	//이름
 	MODIFY_NAME_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_REPWD_LABEL.getRectangle().y + DISTANCE.getSize(),
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 			)),
 	//성별 라벨
 	MODIFY_GENDER_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.3),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_NAME_LABEL.getRectangle().y + DISTANCE.getSize(),
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 			)),
 	
 	//생일 라벨
 	MODIFY_BIRTH_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_GENDER_LABEL.getRectangle().y + DISTANCE.getSize(),
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 			)),
 	//년도 라벨
 	MODIFY_YEAR_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.44),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_BIRTH_LABEL.getRectangle().y,
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	//월 라벨
 	MODIFY_MONTH_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.62),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_BIRTH_LABEL.getRectangle().y,
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	//일라벨
 	MODIFY_DATE_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.8),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_BIRTH_LABEL.getRectangle().y,
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	//이메일 라벨
 	MODIFY_EMAIL_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.4),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_BIRTH_LABEL.getRectangle().y + DISTANCE.getSize(),
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	
 	MODIFY_AT_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.44),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.6),
+			MODIFY_YEAR_LABEL.getRectangle().x,
+			MODIFY_EMAIL_LABEL.getRectangle().y,
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
 			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
 	)),
 	MODIFY_TELNAME_LABELMID(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.03),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.9),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_ID_LABEL.getRectangle().x,
+			MODIFY_AT_LABEL.getRectangle().y + DISTANCE.getSize(),
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 		
 	MODIFY_TELHYPHEN1_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.44),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4),
+			MODIFY_YEAR_LABEL.getRectangle().x,
+			MODIFY_TELNAME_LABELMID.getRectangle().y,
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	MODIFY_TELHYPHEN2_LABEL(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.62),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_MONTH_LABEL.getRectangle().x,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 //=================================gender라디오박스=================================
 	MODIFY_GENDERMAN_RADIOBUTTON(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.3),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_GENDER_LABEL.getRectangle().y,
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	
 	MODIFY_GENDERWOMAN_RADIOBUTTON(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.3),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.1)
+			MODIFY_GENDER_LABEL.getRectangle().y,
+			MODIFY_REPWD_LABEL.getRectangle().width,
+			MODIFY_ID_LABEL.getRectangle().height
 	)),
 
-//=====================================텍스트====================================================================
+//=====================================텍스트====================================================================TODO
 	//아이디 텍스트필드
 	MODIFY_ID_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.32),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 0.3),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.34),
+			MODIFY_ID_LABEL.getRectangle().y,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	//비밀번호 텍스트 필드
 	MODIFY_PWD_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.32),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 0.9),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_ID_TEXT.getRectangle().x,
+			MODIFY_PWD_LABEL.getRectangle().y,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 
 	MODIFY_REPWD_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.32),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.5),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_ID_TEXT.getRectangle().x,
+			MODIFY_REPWD_LABEL.getRectangle().y,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_NAME_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.32),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.1),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_ID_TEXT.getRectangle().x,
+			MODIFY_NAME_LABEL.getRectangle().y,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	
 	MODIFY_EAMILID_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.6),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
+			MODIFY_AT_LABEL.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_EAMILADDR_TEXT(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.48),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.6),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_AT_LABEL.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_TELMID_TEXT(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.48),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_EAMILADDR_TEXT.getRectangle().x,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	MODIFY_TELEND_TEXT(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.65),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	//===================================초이스박스===================================
 	//년도
 	MODIFY_YEAR_COMBOBOX(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.8),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
+			MODIFY_BIRTH_LABEL.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//월
 	MODIFY_MONTH_COMBOBOX(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.47),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.8),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_YEAR_COMBOBOX.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//도
 	MODIFY_DATE_COMBOBOX(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.65),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 2.8),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_TELEND_TEXT.getRectangle().x,
+			MODIFY_YEAR_COMBOBOX.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//전화번호 앞자리
 	MODIFY_TELFRONTNUM_COMBO(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
+			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	//이메일주소
 	MODIFY_EMAILADDR_COMBO(new Rectangle(
-			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.65),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.6),
+			MODIFY_TELEND_TEXT.getRectangle().x,
+			MODIFY_AT_LABEL.getRectangle().y,
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.2),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
+			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
 	//=======================================버튼=====================================
 	//수정버튼
 	MODIFY_MODIFY_BUTTON(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.25),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
+			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.5),
+			MODIFY_AT_LABEL.getRectangle().width,
 			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.07)
 	)),
 	//취소
 	MODIFY_CANCEL_BUTTON(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.4),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.07)
+			MODIFY_MODIFY_BUTTON.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_MODIFY_BUTTON.getRectangle().height
 	)),
 	//탈퇴버튼
 	MODIFY_DROPOUT_BUTTON(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.55),
-			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4.7),
-			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
-			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.07)
+			MODIFY_MODIFY_BUTTON.getRectangle().y,
+			MODIFY_AT_LABEL.getRectangle().width,
+			MODIFY_MODIFY_BUTTON.getRectangle().height
 	)),
 	
 	//레이블 폰트
@@ -272,13 +274,13 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 			"선택", "010", "011", "016", "019", "017"
 	}),
 	
-	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyJoinEnum.Screen_SIZE.getDimension().width / 100)),
+	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyJoinEnum.SCREEN_SIZE.getDimension().width / 100)),
 	
 	//컴포넌트 폰트
-	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, ModifyJoinEnum.Screen_SIZE.getDimension().width / 120)),
+	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, ModifyJoinEnum.SCREEN_SIZE.getDimension().width / 120)),
 
 	//정합성검사 라벨 폰트
-	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyJoinEnum.Screen_SIZE.getDimension().width / 150)),
+	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyJoinEnum.SCREEN_SIZE.getDimension().width / 150)),
 	
 	//콤보박스 배경화면
 	CHOICEBACKGROUND(Color.black),

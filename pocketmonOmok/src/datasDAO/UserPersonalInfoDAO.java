@@ -198,4 +198,56 @@ public class UserPersonalInfoDAO {
 		
 		return result;
 	}
+	
+	// 유저 수정시 사용할 유저 정보 가져오기
+	public UserPersonalInfoDTO getUserPersonalInfo(String id) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		ResultSet resultSet   = null;
+
+		// DB Pool 없으면 생성, 있으면 인스턴스 가져오기
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		
+		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
+		try {
+			// 연결 요청
+			connection = dbPool.getConnection();
+			
+			// sql 문
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT ");
+			sql.append("USER_ID, ");
+			sql.append("USER_NAME, ");
+			sql.append("USER_GENDER, ");
+			sql.append("USER_BIRTH, ");
+			sql.append("USER_EMAIL, ");
+			sql.append("USER_PHONENUMBER ");
+			sql.append("FROM USER_PERSONAL_INFO ");
+			sql.append("WHERE USER_ID=?");
+			
+			// 쿼리 날리고 값 가져오기
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, id);
+			resultSet = ps.executeQuery();
+			
+			// DAO 에 가져온 값 세팅
+			while(resultSet.next()) {
+				userPersonalInfo.setUserID(resultSet.getString("USER_ID"));
+				userPersonalInfo.setUserName(resultSet.getString("USER_NAME"));
+				userPersonalInfo.setUserGender(resultSet.getInt("USER_GENDER"));
+				userPersonalInfo.setUserBirth(resultSet.getString("USER_BIRTH"));
+				userPersonalInfo.setUserEmail(resultSet.getString("USER_EMAIL"));
+				userPersonalInfo.setUserPhoneNumber(resultSet.getString("USER_PHONENUMBER"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 무조건 dbPool 의 커넥션을 free.
+			dbPool.freeConnection(connection, ps, resultSet);
+		}
+		
+		// 사용자에게 DTO 반환
+		return userPersonalInfo;
+	}
 }

@@ -75,12 +75,6 @@ public class WaitingRoomActionListeners extends Adapters {
 			}
 		} else {
 			this.waitingRoomActions.userListSelectAction(e.getSource() instanceof JTextField);
-		}
-		
-		
-		
-			
-		
-		
+		}		
 	}
 }

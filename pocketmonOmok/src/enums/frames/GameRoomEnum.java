@@ -62,7 +62,7 @@ public enum GameRoomEnum {
 			
 	)),
 	GAME_USERID_RIGHT_LABEL_RECT(new Rectangle(
-			GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width + 40,
+			GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width + 50,
 			GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 65,
 			GAME_USERIMAGE_PANEL_RECT.getRect().width / 3,
 			GAME_USERIMAGE_PANEL_RECT.getRect().height / 10
