@@ -43,6 +43,7 @@ public class FindPWAction extends Adapters {
 			if(this.emailCheck) {
 				this.searchPwdPanel.getCerfication();
 			} 
+			
 		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName())) {
 			//인증번호 확인 눌렀을때
 			this.certification();
@@ -54,6 +55,7 @@ public class FindPWAction extends Adapters {
 			
 		//확인버튼	
 		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName())) {
+			
 			//아이디를 체크하고 그 결과 값을 가지고 하단으로 안내려 보낼 수 있다면 
 			if(this.idCheck()) {
 				return;
@@ -71,7 +73,7 @@ public class FindPWAction extends Adapters {
 			if(this.idCheck && this.emailCheck && this.confirmCheck &&
 					this.searchPwdPanel.isEmailConfirmLimitTime() 
 					&& this.searchPwdPanel.isConfirmNumberSuccess()) {
-				//인증이 다됬을 때 넘어간다...
+				//인증이 다됬을 때 넘어감
 				this.searchPwdPanel.checkIdEmail();
 			}
 		}
@@ -94,8 +96,6 @@ public class FindPWAction extends Adapters {
 		JTextField idTextField = this.searchPwdPanel.getSearchIdTextField(); 
 		String id = idTextField.getText();
 		
-		System.out.println("아이디 테스트 : " + id);
-		
 		if(id.isEmpty()) {
 			this.searchPwdPanel.userNumberMsg("아이디입력해주세요");
 			this.idCheck = false;
@@ -117,7 +117,6 @@ public class FindPWAction extends Adapters {
 	public boolean emailCheck() { 
 		JTextField emailTextField = this.searchPwdPanel.getSearchemailTextField(); 
 		String email = emailTextField.getText();
-		
 		
 		if(email.isEmpty()) {
 			this.searchPwdPanel.userNumberMsg("이메일 작성해주세요.");
@@ -153,15 +152,5 @@ public class FindPWAction extends Adapters {
 		this.searchPwdPanel.setEmailConfirmLimitTime(true);
 		return false;
 	}
-	
-	public void mouseKey(MouseEvent e) {
-		JButton button = this.searchPwdPanel.getsearchCheckButton();
-		String buttonName = button.getText();
-	}
-	
-	public void confirmNumberCheckButton() {
-		
-	}
-	
-	
+
 }

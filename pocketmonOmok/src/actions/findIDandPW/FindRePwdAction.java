@@ -35,8 +35,8 @@ public class FindRePwdAction extends Adapters {
 			if(this.rePwdCheck()) {
 				return;
 			}
-			//모두 확인이 되면
 			
+			//모두 확인이 되면
 			if(this.pwdCheck && this.pwdReCheck) {
 				this.searchRePwdPanel.getSearchPwdText().setEditable(false);
 				this.searchRePwdPanel.getsearchRePwdText().setEditable(false);
