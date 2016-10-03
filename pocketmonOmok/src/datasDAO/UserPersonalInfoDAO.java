@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
+import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 
 public class UserPersonalInfoDAO {
@@ -142,11 +143,12 @@ public class UserPersonalInfoDAO {
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		
 		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+		userPersonalInfo.setUserAction(UserActionEnum.USER_SEARCH_ID_EMAIL_CHECK);
 		try {
 			connection = dbPool.getConnection();
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT USER_PASSWD ");
+			sql.append("SELECT COUNT(USER_ID) AS COUNT ");
 			sql.append("FROM USER_PERSONAL_INFO ");
 			sql.append("WHERE USER_ID=? AND USER_EMAIL=?");
 			
@@ -156,8 +158,8 @@ public class UserPersonalInfoDAO {
 			resultSet = ps.executeQuery();
 			
 			while(resultSet.next()) {
-				userPersonalInfo.setUserID(personalDTO.getUserID());
-				userPersonalInfo.setUserPasswd(resultSet.getString("USER_PASSWD"));
+				System.out.println("DAO 쿼리 진입");
+				userPersonalInfo.setUserCount(resultSet.getInt("COUNT"));
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -176,6 +178,9 @@ public class UserPersonalInfoDAO {
 		
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		
+		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+		userPersonalInfo.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+		
 		try {
 			connection = dbPool.getConnection();
 			
@@ -189,6 +194,12 @@ public class UserPersonalInfoDAO {
 			ps.setString(2, personalDTO.getUserID());
 			
 			result = ps.executeUpdate();
+			
+			System.out.println(userPersonalInfo.getUserID() + " : 아이디");
+			System.out.println(userPersonalInfo.getUserPasswd() + ": 비밀번호");
+			System.out.println(result + " : 요건 답이 무야");
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

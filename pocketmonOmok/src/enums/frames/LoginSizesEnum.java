@@ -111,9 +111,12 @@ public enum LoginSizesEnum {
 	BUTTON_NAME_SEARCHID("searchID"),
 	BUTTON_NAME_SEARCHPW("searchPW"),
 	BUTTON_NAME_LOGIN("login"),
+	
 	BUTTON_NAME_SEARCH_CANCEL("searchCancel"),
 	BUTTON_NAME_SEARCH_CONFIRM("searchConfirm"), // 인증 버튼
-	BUTTON_NAME_SEARCH_CHECK("searchCheck"), // 확인버튼
+	BUTTON_NAME_SEARCH_CHECK("searchCheck"), 	 // 확인버튼
+	BUTTON_NAVE_CONFIRM_NUMBER("confirmnumber"), // 같은 인증번호인지 확인하는 버튼...
+	BUTTON_NAME_CHANGE_CONFIRM("changeconfirm"), // 변경된 패스워드확인창에서 홈으로 가는 버튼
 	
 	BUTTON_NAME_SEARCH_CONFIRMBUTTON("searchConfirmButton"), // searchRePwdPanel에 있는 버튼 -- > 로그인창으로 간다.
 	SEARCH_CONFIRM_CHECK_BUTTON("confirmButton");

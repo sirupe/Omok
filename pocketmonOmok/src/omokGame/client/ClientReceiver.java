@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 
 import datasDTO.AbstractEnumsDTO;
 import frames.BasicFrame;
+import frames.searchFrames.SearchPwdFrame;
+import frames.searchFrames.SearchPwdPanel;
 // 서버에서 보내주는 데이터를 읽어들이는 녀석.
 public class ClientReceiver extends Thread {
 	private ClientAccept clientAccept;
@@ -24,6 +26,8 @@ public class ClientReceiver extends Thread {
 			while(isAccept) {
 				Object object = this.clientIS.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
+				System.out.println(userPosition + " :포오지이셔언 위치");
+				
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.clientAccept.loginSuccessCheck(userPosition);
@@ -36,7 +40,9 @@ public class ClientReceiver extends Thread {
 					break;
 				case POSITION_FIND_ID :   
 					break;
-				case POSITION_FIND_PW :  
+				case POSITION_FIND_PW : 
+					SearchPwdFrame searchPwdFrame = this.basicFrame.getSearchPwdFrame();
+					searchPwdFrame.receiverSuccess(userPosition);
 					break;
 				case POSITION_GAME_ROOM :
 					this.clientAccept.inGameRoom(userPosition);

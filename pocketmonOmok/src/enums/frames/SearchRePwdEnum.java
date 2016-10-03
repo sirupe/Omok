@@ -68,14 +68,15 @@ public enum SearchRePwdEnum {
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.1)
 			)),
 		//searchChangePwd 버튼 생성
-		SEARCH__CHANGE_CONFIRM_BUTTON(new Rectangle(
-				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.2),
-				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.9),
-				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.4),
+		SEARCH_CHANGE_CONFIRM_BUTTON(new Rectangle(
+				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.275),
+				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.75),
+				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.15),
 				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.15)
 				)),
 		
-
+		
+	
 	//일반 폰트
 	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),
 	LABELREPWDFONT_DEFAULT(new Font("a으라차차",Font.BOLD,13)),

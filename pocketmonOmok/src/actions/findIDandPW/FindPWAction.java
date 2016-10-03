@@ -1,7 +1,9 @@
 package actions.findIDandPW;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -13,6 +15,7 @@ import enums.frames.LoginSizesEnum;
 import utility.RegexCheck;
 import enums.frames.LoginSizesEnum;
 import frames.searchFrames.SearchPwdPanel;
+import sun.util.logging.resources.logging;
 
 public class FindPWAction extends Adapters {
 	private SearchPwdPanel searchPwdPanel;
@@ -27,31 +30,48 @@ public class FindPWAction extends Adapters {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String buttonName = ((JButton) e.getSource()).getText();
+		String buttonName = ((JButton) e.getSource()).getName();
 		
 		if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName())) {
 			this.searchPwdPanel.doCancelButton();
 			
-		//인증메일보내기
+		//인증버튼이 눌렸을때
 		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName())) {
 			this.emailCheck();
 			
 			//이메일이 있고 형식에 맞을때
 			if(this.emailCheck) {
 				this.searchPwdPanel.getCerfication();
-			}
-			
+			} 
+		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName())) {
+			//인증번호 확인 눌렀을때
+			this.certification();
+	
+			//TODO 
+			if(this.confirmCheck) {
+				this.searchPwdPanel.confirmNumberCheck();
+			} 
 			
 		//확인버튼	
 		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName())) {
+			//아이디를 체크하고 그 결과 값을 가지고 하단으로 안내려 보낼 수 있다면 
+			if(this.idCheck()) {
+				return;
+			}
 			
-			this.certification();
-			this.emailCheck();
-			this.idCheck();
+			if(this.emailCheck()) {
+				return;
+			}
 			
+			if(this.certification()) {
+				return;
+			}
+	
 			//모두다 확인이 되면 
-			if(this.idCheck && this.emailCheck && this.confirmCheck) {
-				this.searchPwdPanel.getChangePanel();
+			if(this.idCheck && this.emailCheck && this.confirmCheck &&
+					this.searchPwdPanel.isEmailConfirmLimitTime() ) {
+				//인증이 다됬을 때 넘어간다...
+				this.searchPwdPanel.checkIdEmail();
 			}
 		}
 	}//액션 끝남
@@ -69,7 +89,7 @@ public class FindPWAction extends Adapters {
 	}
 	
 	//아이디 검사
-	public void idCheck() { 
+	public boolean idCheck() { 
 		JTextField idTextField = this.searchPwdPanel.getSearchIdTextField(); 
 		String id = idTextField.getText();
 		
@@ -78,21 +98,22 @@ public class FindPWAction extends Adapters {
 		if(id.isEmpty()) {
 			this.searchPwdPanel.userNumberMsg("아이디입력해주세요");
 			this.idCheck = false;
-			return;
+			return true;
 		}
 		
 		if(!RegexCheck.idRegexCheck(id)) {
 			this.searchPwdPanel.userNumberMsg("<html>영소문자, 특수문자구분<br>다시확인하세여<br></html>");
 			this.idCheck = false;
-			return;
+			return true;
 		}
 		
 		this.searchPwdPanel.userNumberMsgReset();
 		this.idCheck = true;	
+		return false;
 	}
 	
 	//이메일 검사
-	public void emailCheck() { 
+	public boolean emailCheck() { 
 		JTextField emailTextField = this.searchPwdPanel.getSearchemailTextField(); 
 		String email = emailTextField.getText();
 		
@@ -100,32 +121,47 @@ public class FindPWAction extends Adapters {
 		if(email.isEmpty()) {
 			this.searchPwdPanel.userNumberMsg("이메일 작성해주세요.");
 			this.emailCheck = false;
-			return;
+			return true;
 		}
 		
 		if(!RegexCheck.emailRegexCheck(email)) {
 			this.searchPwdPanel.userNumberMsg("이메일 형식 체크해주세요!");
 			this.emailCheck = false;
-			return;
+			return true;
 		} 
 		
 		this.searchPwdPanel.userNumberMsgReset();
 		this.emailCheck = true;
+		return false;
 		
 	}
 	
 	//인증번호 검사
-	public void certification() { 
+	public boolean certification() { 
 		JTextField confirmNumberTextField = this.searchPwdPanel.getSearchConfirmTextField();
 		String confirmNumberNumber = confirmNumberTextField.getText();
 		
 		if(confirmNumberNumber.isEmpty()) {
 			this.searchPwdPanel.userNumberMsg("인증번호 써주세요");
 			this.confirmCheck = false;
-			return;
-		}
-	
+			return true;
+		} 
+		
 		this.searchPwdPanel.userNumberMsgReset();
 		this.confirmCheck = true;
+		this.searchPwdPanel.setEmailConfirmLimitTime(true);
+		return false;
 	}
+	
+	public void mouseKey(MouseEvent e) {
+		JButton button = this.searchPwdPanel.getsearchCheckButton();
+		String buttonName = button.getText();
+		System.out.println(buttonName + "넘어오나");
+	}
+	
+	public void confirmNumberCheckButton() {
+		
+	}
+	
+	
 }

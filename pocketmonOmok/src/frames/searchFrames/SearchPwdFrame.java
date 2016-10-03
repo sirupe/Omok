@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import actions.findIDandPW.FindPWAction;
+import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
@@ -144,7 +145,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 	
     public void doCheckButton() {
 	 	this.cardLayout.show(this.getContentPane(), "searchRePwdPanel");
-	 	System.out.println("재 비밀번호");
+	 	
     }
 
     public void getCerficartion(UserPersonalInfoDTO userPersonalInfoDTO) {
@@ -153,7 +154,28 @@ public class SearchPwdFrame extends JFrame implements Serializable {
      } catch (IOException e) {
     	 e.printStackTrace();
      }
-   }
+    }
+    
+    public void receiverSuccess(AbstractEnumsDTO userPosition) {
+    	System.out.println(userPosition + "유저 포지션");
+    	
+    	switch (userPosition.getUserAction()) {
+		case USER_SEARCH_CERTIFICATION_CHECK :
+			this.searchPwdPanel.emailSuccess(userPosition);
+			break;
+		case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
+			this.searchPwdPanel.confirmNumberSuccess(userPosition);
+			break;
+		case USER_SEARCH_ID_EMAIL_CHECK:
+			this.searchPwdPanel.getChangePanel(userPosition);
+			break;
+		case USER_SEARCH_PASSWD :
+			this.searchRePwdPanel.searchPwdSuccess(userPosition);
+			break;
+		default:
+			break;
+		}
+    }
    
     public void inSearchRePwdFrame() {
   	  	System.out.println("");

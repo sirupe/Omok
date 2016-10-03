@@ -258,10 +258,10 @@ public class JoinClientAction extends Adapters {
 	
 	//email 유효성 및 정합성 검사
 	public boolean emailAddrSuitabilityCheck() {
-		this.emailAddr = this.joinFrame.getEmailAddrTextField().getText();
+		this.emailAddr  = this.joinFrame.getEmailAddrTextField().getText();
 		String checkMsg = null;
 		Color color 	= null;
-		boolean result = false;
+		boolean result  = false;
 		
 		if(!RegexCheck.emailDomainRegexCheck(this.emailAddr)) {
 			checkMsg = "joinMail정합성";

@@ -5,7 +5,8 @@ import enums.etc.UserPositionEnum;
 public class GameBoardVO extends AbstractEnumsDTO {
 	private static final long serialVersionUID = 3970343263986324779L;
 
-	private String turnUser;
+	private String nowTurnUser;
+	private String nextTurnUser;
 	private String winUser;
 	private String loseUser;
 	private int gameBoard[][];
@@ -16,12 +17,20 @@ public class GameBoardVO extends AbstractEnumsDTO {
 		super(position);
 	}
 
-	public String getTurnUser() {
-		return turnUser;
+	public String getNowTurnUser() {
+		return nowTurnUser;
 	}
 
-	public void setTurnUser(String turnUser) {
-		this.turnUser = turnUser;
+	public void setNowTurnUser(String nowTurnUser) {
+		this.nowTurnUser = nowTurnUser;
+	}
+
+	public String getNextTurnUser() {
+		return nextTurnUser;
+	}
+
+	public void setNextTurnUser(String nextTurnUser) {
+		this.nextTurnUser = nextTurnUser;
 	}
 
 	public int[][] getGameBoard() {
@@ -63,4 +72,6 @@ public class GameBoardVO extends AbstractEnumsDTO {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	
 }

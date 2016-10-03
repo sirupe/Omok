@@ -95,7 +95,8 @@ public enum ImageEnum {
 	}),
 	
 	
-	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png");
+	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png"),
+	GAMEROOM_STONE_PIKACHU("resources/omokball/pikachu.png");
 
 	
 	private static Map<String, String> userGradeImageMap() {

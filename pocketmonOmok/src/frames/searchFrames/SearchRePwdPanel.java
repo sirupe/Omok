@@ -6,8 +6,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
+import javax.sound.midi.Synthesizer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -16,11 +18,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import actions.findIDandPW.FindRePwdAction;
+import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.ServerActionEnum;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.LoginSizesEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
+import frames.BasicFrame;
+import omokGame.client.ClientAccept;
 
 @SuppressWarnings("serial")
 public class SearchRePwdPanel extends JPanel {
@@ -35,6 +44,8 @@ public class SearchRePwdPanel extends JPanel {
 	private JButton searchConfirmButton;
 
 	
+	private String userId;
+	
 	private FindRePwdAction findRePwdAction;
 	private SearchPwdFrame searchPwdFrame;
 	
@@ -43,6 +54,7 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchPwdFrame = searchPwdFrame;
 		this.findRePwdAction = new FindRePwdAction(this);
 		this.setsearchPwdTextLabel();
+		this.userId = this.getSearchPwdFrame().getSearchPwdPanel().getSearchIdTextField().getText();
 		
 		this.addKeyAction(this.searchPwdText, "searchPwdText");
 		this.addKeyAction(this.searchRePwdText, "searchRePwdText");
@@ -95,7 +107,7 @@ public class SearchRePwdPanel extends JPanel {
 		searchRePwdErrorLabel.setForeground(SearchIDEnum.LABELCOLOR_ERROR.getColor());
 		//확인 버튼창
 		
-		this.searchConfirmButton = new JButton(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName()) {
+		this.searchConfirmButton = new JButton() {
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -113,6 +125,7 @@ public class SearchRePwdPanel extends JPanel {
 			}
 		};	
 		this.searchConfirmButton.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
+		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName());
 		this.add(searchConfirmButton);
 		this.searchConfirmButton.addActionListener(this.findRePwdAction);
 //				
@@ -151,7 +164,46 @@ public class SearchRePwdPanel extends JPanel {
 			this.add(comp);	
 		}
 		public void doSearchChangeConfirmPanel() {
-			this.searchPwdFrame.doCheckButton();
+			this.searchPwdFrame.doSearchChangeConfirmPanel();
+		}
+		
+		//재비밀번호 저장해서 서버로 보냄
+		public void pwdChange() {
+			BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
+			ClientAccept clientAccpet = basicFrame.getClientAccept();
+			ObjectOutputStream oos = clientAccpet.getClientOS();
+			
+			String pwd = this.searchPwdText.getText();
+			
+			System.out.println("비밀번호 : " + pwd);
+			System.out.println("아이디 : " + userId);
+			
+			UserPersonalInfoDTO userPersonalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+			
+			userPersonalDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+			userPersonalDTO.setUserID(userId);
+			userPersonalDTO.setUserPasswd(pwd);
+			
+			try {
+				oos.writeObject(userPersonalDTO);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}
+		
+		//비밀번호 디비에 보낸 후 결과 값 나오기
+		public void searchPwdSuccess(AbstractEnumsDTO data) {
+			if(data.getServerAction() == ServerActionEnum.SEARCH_PASSWD_SUCCESS) {
+				this.pwdMsgLabel("<html>비밀번호 변경 성공");
+				this.searchPwdFrame.doSearchChangeConfirmPanel();
+			} else {
+				this.pwdMsgLabel("<html>비밀번호 설정 실패" 
+						+"<br>다시설정해주세요.<br></html>");
+				this.getSearchPwdText().setEditable(true);
+				this.getsearchRePwdText().setEditable(true);
+			}
+			
 		}
 	
 	

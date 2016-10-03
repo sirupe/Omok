@@ -1,6 +1,8 @@
 package omokGame.server;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -41,6 +43,10 @@ public class OmokServer {
 	private UserGamedataInfoDAO gamedataDAO;
 	private UserStoreInfoDAO storeDAO;
 	private UserStoreSkinInfoDAO skinDAO;
+	
+	private StonePositionCheck positionCheck;
+	
+//	private boolean numberDTO;
 	
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
@@ -265,7 +271,7 @@ public class OmokServer {
 				break;
 			}
 		}
-		try {//TODO
+		try {
 			personalServer.getServerOutputStream().writeObject(serverRoomVO);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -362,6 +368,7 @@ public class OmokServer {
 			//이메일발송
 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
 			
+			resultPersonalDTO.setServerAction(ServerActionEnum.JOIN_CERTIFICATION);
 			personalServer.getServerOutputStream().writeObject(resultPersonalDTO);
 			break;
 			
@@ -403,18 +410,84 @@ public class OmokServer {
 	}
 	
 //패스워드 찾기---------------------------------------------------------------------------------------------------
-	public void findPW(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
-//		personalServer.getServerOutputStream().writeObject(data);		
-		
-		UserPersonalInfoDTO resultDTO = (UserPersonalInfoDTO) data;
-		//인증번호 생성
-		System.out.println(resultDTO);
-		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
-		System.out.println(confirmNumber + " : 랜덤번호");
-	}
+ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
+	 UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
+	 UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+	 ObjectOutputStream oos;
+	 
+	 switch(data.getUserAction()) {
+	 	
+	 	//인증 번호 발송
+	 	case USER_SEARCH_CERTIFICATION_CHECK :
+		 	
+		 	resultDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
+	 	
+	 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
+	 		personalServer.setCertificationNumber(confirmNumber);
+	 		
+	 		System.out.println(confirmNumber + " : 랜덤번호");
+	 		
+	 		//TODO
+	 		//이메일 발송
+//	 		try {
+//	 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
+//	 			resultDTO.setEmailSuccess(true);
+//			} catch (Throwable e) {
+//				resultDTO.setEmailSuccess(false);
+//			}
+//	 		
+	 		//TODO 테스트 코드 추후 반드시 삭제.
+	 		resultDTO.setEmailSuccess(true);
+	 		
+	 		oos = personalServer.getServerOutputStream();
+	 		oos.writeObject(resultDTO);
+	 		break;
+	 		
+	 	//인증번호 비교
+	 	case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
+	 		String RandomNumber = personalServer.getCertificationNumber();
+	 		String clientNumebr = personalDTO.getCertificationNumber();
+	 		
+	 		resultDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER);
+
+	 		if(RandomNumber.equals(clientNumebr)) {
+	 			resultDTO.setCertificationNumber(true);
+	 		} else {
+	 			resultDTO.setCertificationNumber(false);
+	 		}
+	 		oos = personalServer.getServerOutputStream();
+	 		oos.writeObject(resultDTO);
+	 		break;
+	 		
+	 	//아이디 이메일 체크
+	 	case USER_SEARCH_ID_EMAIL_CHECK :
+	 		UserPersonalInfoDTO resultDTOPersonal = this.loginDAO.findUserPW(personalDTO);
+	 		oos = personalServer.getServerOutputStream();
+	 		oos.writeObject(resultDTOPersonal);
+	 		break;
+
+	 	case USER_SEARCH_PASSWD :
+
+	 		ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
+	 		serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+	 		int result = this.loginDAO.updateUserPasswd(personalDTO);
+	 		
+	 		if(result == 1) {
+	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+	 		} else {
+	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+	 		}
+	 		personalServer.getServerOutputStream().writeObject(serverMessage);
+	 		
+	 	default: //do nothing..
+	 	}
+ }
+	 	
 	
 //게임방----------------------------------------------------------------------------------------------------
 	public void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+		this.positionCheck = new StonePositionCheck();
+		
 		switch(index.getUserAction()) {
 		// 유저가 게임방에서 채팅을 보낼 떼
 		case USER_IN_GAME_ROOM_CHATTING :
@@ -517,21 +590,37 @@ public class OmokServer {
 			for (int j = 0, jLen = board[0].length; j < jLen; j++) {
 				board[i][j] = inputBoard[i][j];
 				if(board[i][j] >= 3) {
+					board[i][j] -= 2;
 					x = i;
 					y = j;
 				}
 			}
 		}
 		
-		StonePositionCheck positionCheck = new StonePositionCheck();
-		
-		
+		String nextTurnUser = gameBoard.getNextTurnUser();
 		GameBoardVO sendGameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
 		sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WIN_CHECK);
 		sendGameBoardVO.setGameBoard(board);
-		sendGameBoardVO.setTurnUser(gameBoard.getTurnUser());
 		sendGameBoardVO.setX(x);
 		sendGameBoardVO.setY(y);
+		sendGameBoardVO.setNextTurnUser(nextTurnUser);
+		sendGameBoardVO.setNowTurnUser(gameBoard.getNowTurnUser());
+		sendGameBoardVO.setWinUser(
+			this.positionCheck.stoneDiagonalLeftCheck(x, y, board) < 5 ? 
+				(this.positionCheck.stoneDiagonalRightCheck(x, y, board) < 5 ? 
+					(this.positionCheck.stoneHeightCheck(x, y, board) < 5 ? 
+						(this.positionCheck.stoneWidthCheck(x, y, board) < 5 ? null : gameBoard.getNowTurnUser()) 
+					: gameBoard.getNowTurnUser()) 
+				: gameBoard.getNowTurnUser()) 
+			: gameBoard.getNowTurnUser()
+		);
+		
+		try {
+			personalServer.getServerOutputStream().writeObject(sendGameBoardVO);
+			this.loginUsersMap.get(nextTurnUser).getServerOutputStream().writeObject(sendGameBoardVO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

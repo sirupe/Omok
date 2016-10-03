@@ -9,8 +9,8 @@ import enums.etc.UserPositionEnum;
 // 유저의 현재 위치를 알려줄 인덱스 클래스 (추상)
 @SuppressWarnings("serial")
 public class AbstractEnumsDTO implements Serializable {
-	private UserPositionEnum position;
-	private UserActionEnum userAction;
+	private UserPositionEnum position; //receiver가 어디로 보낼건지를 판단하죠?
+	private UserActionEnum userAction; //server 메소드에서 뭐할지를 판단하죠 ?ㄴ
 	private ServerActionEnum serverAction;
 	
 	public AbstractEnumsDTO(UserPositionEnum position) {
