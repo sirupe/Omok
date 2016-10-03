@@ -2,136 +2,101 @@ package actions.findIDandPW;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import actions.adapters.Adapters;
-import datasDTO.UserPersonalInfoDTO;
-import enums.etc.UserActionEnum;
-import enums.etc.UserPositionEnum;
 import enums.frames.SearchIDEnum;
 import frames.searchFrames.SearchIdPanel;
+import frames.searchFrames.SearchIdResultPanel;
 import utility.RegexCheck;
 
 public class FindIDAction  extends Adapters {
 	private SearchIdPanel searchIdPanel;
-	
-	private String checkMsg;
-	private String name;
-	private String email;
-	
-	private boolean isNameCheck;
-	private boolean isEmailCheck;
+	private boolean isNameCheck = false;
+	private boolean isEmailCheck = false;
 	
 	public FindIDAction(SearchIdPanel searchIdPanel){
 		this.searchIdPanel = searchIdPanel;
-		this.isNameCheck = false;
-		this.isEmailCheck = false;	
 	}
 
-	//취소버튼, 확인버튼b p
+	//취소버튼, 확인버튼
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//버튼 액션	
 		String buttonName = ((JButton)e.getSource()).getName();
+		
 		if(buttonName.equals(SearchIDEnum.BUTTON_NAME_BACK.getButtonName())) {
 			this.searchIdPanel.doCancleButton();
 		} else if(buttonName.equals(SearchIDEnum.BUTTON_NAME_CONFIRM.getButtonName())) {
-			this.name = this.searchIdPanel.getNameTextField().getText();
-			this.email = this.searchIdPanel.getEmailTextField().getText();
-			if(!this.name.isEmpty() && !this.email.isEmpty()) {
-				if(this.isNameCheck && this.isEmailCheck) {
-					this.searchIdPanel.getSearchIdFrame().doConfirmButton();
-					this.findIdAction();
-					System.out.println("확인버튼눌러서 PersonDTO로가야한다!!!");
-				}
-			} else if(!this.email.isEmpty()) {
-				this.checkEmail();
-			} else {
-				this.checkEmail();
+			//이름체크메소드가 끝났을때 밑으로실행시지말기
+			if(this.checkName()) {
+				return;
+			}
+			
+			if(this.checkEmail()) {
+				return;
+			}
+			
+			if(this.isNameCheck && this.isEmailCheck) {
+				this.searchIdPanel.doCheckId();
 			}
 		}
-	}	
+	}
+	
 	//실시간 타이핑 에러메시지 송출
 	@Override
 	public void keyReleased(KeyEvent e) {
 		String source = e.getSource().toString();
 		if(source.contains("nameTextField")) {
-			this.chechkName();
+			this.checkName();
 		} else if(source.contains("emailTextField")) {
 			this.checkEmail();
-		} else
-			this.chechkName();
+		}
 	}
 	
 	//이름 정합성 검사
-	public void chechkName() {
-		String str = this.searchIdPanel.getNameTextField().getText();
-		this.name = str.isEmpty() ? null : str;
-		this.checkMsg = null;
-		if(this.name == null) {
-			this.checkMsg = "이름 입력하세요";
-			this.searchIdPanel.errorMsg(checkMsg);
-			return;
+	public boolean checkName() {
+		JTextField getNameTextField = this.searchIdPanel.getNameTextField();
+		String name = getNameTextField.getText();
+		
+		//네임 택스트필드 정합성 검사
+		if(name.isEmpty()) {
+			this.searchIdPanel.errorMsg("이름 입력하세요");
+			this.isEmailCheck = false;
+			return true;
 		}
 		
-		if(RegexCheck.nameRegecCheck(this.name)) {
-			this.isNameCheck = true;
-			this.searchIdPanel.errorMsgReset();
-			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_ID);
-			personalDTO.setUserAction(UserActionEnum.USER_FIND_ID);
-			personalDTO.setUserName(this.searchIdPanel.getNameTextField().getText());
-			try {
-				this.searchIdPanel.getSearchIdFrame().getBasicFrame().getClientOS().writeObject(personalDTO);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else {
-			this.checkMsg = "한글만 입력됩니다.";
-			this.searchIdPanel.errorMsg(checkMsg);
-		}
+		if(!RegexCheck.nameRegecCheck(name)) {
+			this.searchIdPanel.errorMsg("한글만 입력됩니다.");
+			this.isEmailCheck = false;
+			return true;
+		} 
+		
+		this.searchIdPanel.errorMsgReset();
+		this.isNameCheck = true;
+		return false;
 	}
 	
 	//이메일 정합성 검사
-	public void checkEmail() {
-		String str = this.searchIdPanel.getEmailTextField().getText();
-		this.email = str.isEmpty() ? null : str;
-		this.checkMsg = null;
-		if(this.email == null) {
-			this.checkMsg = "이메일 입력하세요";
-			this.searchIdPanel.errorMsg(checkMsg);
-			return;
+	public boolean checkEmail() {
+		String email = this.searchIdPanel.getEmailTextField().getText();
+		//이메일 필드가 비어있을때 에러메시지 출력
+		if(email.isEmpty()) {
+			this.searchIdPanel.errorMsg("이메일 입력하세요");
+			this.isEmailCheck = false;
+			return true;
 		}
-		if(RegexCheck.emailRegexCheck(this.email)) {
-			this.isEmailCheck = true;
-			this.searchIdPanel.errorMsgReset();
-			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_ID);
-			personalDTO.setUserAction(UserActionEnum.USER_FIND_ID);
-			personalDTO.setUserEmail(this.searchIdPanel.getEmailTextField().getText());
-			try {
-				this.searchIdPanel.getSearchIdFrame().getBasicFrame().getClientOS().writeObject(personalDTO);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else {
-			this.checkMsg = "이메일 형식 오류입니다";
-			this.searchIdPanel.errorMsg(checkMsg);
-		}
-	}
+		
+		if(!RegexCheck.emailRegexCheck(email)) {
+			this.searchIdPanel.errorMsg("이메일 형식 오류입니다");
+			this.isEmailCheck = false;
+			return true;
+		} 
+		
+		this.searchIdPanel.errorMsgReset();
+		this.isEmailCheck = true;
+		return false;
 	
-	//이름, 이메일 맞게입력하고 확인버튼 눌렀을시
-	public void findIdAction() {
-		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_ID);
-		personalDTO.setUserAction(UserActionEnum.USER_FIND_ID);
-		personalDTO.setUserEmail(this.email.toString());
-		personalDTO.setUserName(this.name);
-		System.out.println("이얍");
-		try {
-			this.searchIdPanel.getSearchIdFrame().getBasicFrame().getClientOS().writeObject(personalDTO);
-			System.out.println("try");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

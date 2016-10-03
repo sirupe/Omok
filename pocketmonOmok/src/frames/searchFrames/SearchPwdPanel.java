@@ -44,13 +44,12 @@ import omokGame.client.ClientAccept;
 		private JButton searchCheckButton; // 확인버튼
 		private JButton CheckNumberButton; // 인증 번호와 일치하는지 보는확인 버튼
 	
-	//private Image backGround;
 	
 		private SearchPwdFrame searchPwdFrame;
 		private FindPWAction findPwdAction;
 		
 		private boolean isEmailConfirmLimitTime;
-		private String checkMsg;
+		private boolean isConfirmNumberSuccess;
 		
 		
 	
@@ -114,14 +113,13 @@ import omokGame.client.ClientAccept;
 			
 		}
 		
-		//아이디 또는 이메일 오류 알려주는 텍스트
-	
 		//초기화가 되어서 위에 있는 searchErrorMsg의 메세지를 불러온다.
 		public void userInfoErrorLabelReset() {
 			String init = "";
 			this.searchAnswerMsgLabel.setText(init);
 		}
-		//-----------------------------------------------------------------------------------------------------------------------------------------
+		
+		
 		//인증번호가 발송 되었다면 나타나는 메세지
 		public void userNumberMsg(String searchAnswer){
 			this.setLayout(null);
@@ -138,7 +136,9 @@ import omokGame.client.ClientAccept;
 			String init = "";
 			this.searchAnswerMsgLabel.setText(init);
 		}
-		//-----------------------------------------------------------------------------
+		
+		
+		
 		//3분 스레드
 		public void limitTimeMsg(String time) {
 			this.setLayout(null);
@@ -156,15 +156,17 @@ import omokGame.client.ClientAccept;
 			this.searchTimeLabel.setText(init);
 		
 		}
-		//이름, 이메일 , 에러 메세지  레이블!!!!!! 위치 및 크기
+		
+		//이름, 이메일 , 에러 메세지  레이블 위치 및 크기
 		public void setLabelPosition() {
 			//아이디라벨 위치및 크기
 		this.searchIdLabel.setBounds(SearchPwdEnum.SEARCH_ID_LABEL.getRectangle());
 		//이메일 라벨 위치 및 크기
 		this.searchemailLabel.setBounds(SearchPwdEnum.SEARCH_EMAIL_LABEL.getRectangle());
+		
 		//에러 메세지 위치 및 크기
-		//
 		this.searchAnswerMsgLabel.setBounds(SearchPwdEnum.SEARCH_ANSWER_LABEL.getRectangle());
+		
 		//3분 타임 라인 위치 및 크기
 			this.searchTimeLabel.setBounds(SearchPwdEnum.SEARCH_Time_LABEL.getRectangle());
 			this.add(searchIdLabel);
@@ -174,18 +176,21 @@ import omokGame.client.ClientAccept;
 			this.searchIdLabel.setOpaque(false);
 		}
 		
-		//	// 이름 이메일, 인증 텍스트필드!!!!!!!!!!!!!! 위치 및 크기
+		//이름 이메일, 인증 텍스트필드 위치 및 크기
 		public void setTextFieldPosition() {
-			//아이디 텍스트 필드
+			
+		//아이디 텍스트 필드
 		this.searchIdTextField.setBounds(SearchPwdEnum.SEARCH_ID_TEXTFIELD.getRectangle());
+		
 		//이메일 입력창 
 		this.searchemailTextField.setBounds(SearchPwdEnum.SEARCH_EMAIL_TEXTFIELD.getRectangle());
+		
 		//인증 번호 입력창
 			this.searchConfirmTextField.setBounds(SearchPwdEnum.SEARCH_CONFIRM_TEXTFIELD.getRectangle());
 			this.add(searchIdTextField);
 			this.add(searchemailTextField);
-	
-		}
+			
+		} // 생성자 끝
 		
 		//버튼 생성 -- 인증버튼
 		public void setButtonPosition() throws IOException {   	
@@ -207,11 +212,13 @@ import omokGame.client.ClientAccept;
 		
 		this.searchConfirmButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle()); 
 		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName());
+		
 		this.add(searchConfirmButton);
 		this.getSearchConfirmButton().setVisible(true);
+		
 		this.searchConfirmButton.addActionListener(this.findPwdAction);
 		
-	//--------------------------------------------------------------------------------------------------
+		
 		//인증 버튼을 누른 후 바뀌는 확인 버튼
 		this.CheckNumberButton  = new JButton();
 		
@@ -230,11 +237,12 @@ import omokGame.client.ClientAccept;
 		
 		this.CheckNumberButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_CHECK_BUTTON.getRectangle()); 
 		this.CheckNumberButton.setName(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
+		
 		this.add(CheckNumberButton);
 		this.CheckNumberButton.setVisible(false);
+		
 		this.CheckNumberButton.addActionListener(this.findPwdAction);
 		
-	//------------------------------------------------------------------------------------------------------------
 		
 		//취소버튼
 		this.searchCancelButton  = new JButton();
@@ -253,11 +261,11 @@ import omokGame.client.ClientAccept;
 		);
 		this.searchCancelButton.setBounds(SearchPwdEnum.SEARCH_CANCEL_BUTTON.getRectangle()); 
 		this.add(searchCancelButton); 
+		
 		this.searchCancelButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName());
 		this.searchCancelButton.addActionListener(this.findPwdAction); 
 		
 		
-		//-------------------------------------------------------------------------------------------------
 		//확인 버튼 -- > 누르면 비밀변경 카드레이아웃으로 간다.
 	
 		this.searchCheckButton  = new JButton();
@@ -275,7 +283,7 @@ import omokGame.client.ClientAccept;
 		this.searchCheckButton.addActionListener(this.findPwdAction); 
 		} 
 		
-		//====================액션처리========================================================================================================
+//====================액션처리========================================================================================================
 		//취소버튼을 눌렀을 때 처리하는 메소드
 		public void doCancelButton() {
 			this.searchPwdFrame.doCancelButton(); //여기에서 searchPwdFrame에 접근해서 docancel실행
@@ -284,8 +292,6 @@ import omokGame.client.ClientAccept;
 		public void getChangePanel(AbstractEnumsDTO userPosition) {
 			// 아이디값 + 이메일값을 서버로 보내서.
 			UserPersonalInfoDTO data = (UserPersonalInfoDTO) userPosition;
-				
-			
 			
 			if(data.getUserCount() == 0) {
 				this.getSearchIdTextField().setEditable(true);
@@ -293,7 +299,6 @@ import omokGame.client.ClientAccept;
 				
 			} else {
 				this.searchPwdFrame.doCheckButton();
-				System.out.println("여기 바뀌는 채널");
 			}
 		}
 		
@@ -310,7 +315,6 @@ import omokGame.client.ClientAccept;
 			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
 			userPersonalInfoDTO.setUserEmail(email);
 			userPersonalInfoDTO.setUserID(id);
-			
 			
 			try {
 				oos.writeObject(userPersonalInfoDTO);
@@ -344,6 +348,7 @@ import omokGame.client.ClientAccept;
 			}
 	
 		}
+		
 		//3분스레드 메소드
 		public void timeLimit() {
 			this.searchTimeLabel.setVisible(true);
@@ -391,8 +396,6 @@ import omokGame.client.ClientAccept;
 		
 		//확인 버튼 누를시 발생하는 메소드 -- > 인증번호이 입력된 후 발생 되는 메소드
 		public void confirmNumberCheck() {
-	
-			
 			String certificationNumber = getSearchConfirmTextField().getText();
 			System.out.println(certificationNumber + " : 이건 사용자가 쓴 번호");
 			
@@ -410,9 +413,9 @@ import omokGame.client.ClientAccept;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
 		}
+		
+		//확인을 누를때 인증 번호가 맞을때 
 		public void confirmNumberSuccess(AbstractEnumsDTO userPosition) {
 			UserPersonalInfoDTO data = (UserPersonalInfoDTO) userPosition;
 			
@@ -427,6 +430,8 @@ import omokGame.client.ClientAccept;
 				//인증번호 초기화 한다.
 				this.searchConfirmTextField.setVisible(false);
 				this.isEmailConfirmLimitTime = true;
+				this.isConfirmNumberSuccess = true;
+				return;
 				
 			} else {
 				this.getSearchemailTextField().setEditable(false);
@@ -439,6 +444,8 @@ import omokGame.client.ClientAccept;
 				btn.setVisible(true);
 				this.searchConfirmTextField.setVisible(true);
 				this.userNumberMsg("인증번호가 다릅니다! 다시 설정해주세요");
+				this.isConfirmNumberSuccess = false;
+				return;
 			}
 		}
 		
@@ -517,6 +524,15 @@ import omokGame.client.ClientAccept;
 		public boolean isEmailConfirmLimitTime() {
 			return isEmailConfirmLimitTime;
 		}
+
+		public boolean isConfirmNumberSuccess() {
+			return isConfirmNumberSuccess;
+		}
+
+		public void setConfirmNumberSuccess(boolean isConfirmNumberSuccess) {
+			this.isConfirmNumberSuccess = isConfirmNumberSuccess;
+		}
+
 
 		
 	}

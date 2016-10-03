@@ -69,7 +69,8 @@ public class FindPWAction extends Adapters {
 	
 			//모두다 확인이 되면 
 			if(this.idCheck && this.emailCheck && this.confirmCheck &&
-					this.searchPwdPanel.isEmailConfirmLimitTime() ) {
+					this.searchPwdPanel.isEmailConfirmLimitTime() 
+					&& this.searchPwdPanel.isConfirmNumberSuccess()) {
 				//인증이 다됬을 때 넘어간다...
 				this.searchPwdPanel.checkIdEmail();
 			}
@@ -156,7 +157,6 @@ public class FindPWAction extends Adapters {
 	public void mouseKey(MouseEvent e) {
 		JButton button = this.searchPwdPanel.getsearchCheckButton();
 		String buttonName = button.getText();
-		System.out.println(buttonName + "넘어오나");
 	}
 	
 	public void confirmNumberCheckButton() {

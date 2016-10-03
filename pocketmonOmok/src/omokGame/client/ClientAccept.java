@@ -33,7 +33,6 @@ public class ClientAccept {
 	private LoginServerAction loginRequestAction;
 	private JoinServerAction joinRequestAction;
 	private GameRoomServerAction gameRoomRequestAction;
-//	private String userID;
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
@@ -131,8 +130,8 @@ public class ClientAccept {
 		case MESSAGE_SEND_SUCCESS :
 			panel.getChattingOutput().append(((UserMessageVO)data).getMessage());
 			break;
-		// 방리스트 정보 변경 (다른 유저가 게임방에 입장함) 
-		case ENTER_ROOM_SUCCESS_LIST :
+		// 방리스트 정보에 변경이 생겼다.
+		case GAME_ROOM_LIST_MODIFY :
 			RoomAndUserListDTO waitingRoomModInfo = (RoomAndUserListDTO)data;
 			panel.modGameRoom(waitingRoomModInfo);
 			break;
@@ -178,15 +177,22 @@ public class ClientAccept {
 		case GAME_ROOM_GAME_START :
 			this.basicFrame.getGameRoomPanel().gameStart();
 			break;
+		case GAME_ROOM_SEND_BOARD_INFO :
+			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
+			break;
+		case GAME_ROOM_WINNER_INFO :
+			this.basicFrame.getGameRoomPanel().gameEnd(data);
+			break;
+		case GAME_ROOM_EXIT_OTHER_USER :
+			System.out.println("다른 유저가 방을 나갔따고");
+			this.basicFrame.getGameRoomPanel().otherUserExitGame(data);
 		default :
 			break;
 		}
 	}
 
-	
-	
 	public void gameExit(AbstractEnumsDTO infoDTO) throws IOException {
-		if(infoDTO.getServerAction() == ServerActionEnum.OTHER_USER_EXIT) {
+		if(infoDTO.getServerAction() == ServerActionEnum.OTHERS_UER_EXIT) {
 			this.basicFrame.getWaitingRoomPanel().deleteUserSetting((UserPersonalInfoDTO)infoDTO);
 		} else {
 			this.clientOS.close();
@@ -196,6 +202,8 @@ public class ClientAccept {
 			System.exit(0);
 		}
 	}
+
+
 	
 	
 	

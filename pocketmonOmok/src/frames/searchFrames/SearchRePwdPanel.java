@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import actions.findIDandPW.FindRePwdAction;
@@ -38,8 +39,8 @@ public class SearchRePwdPanel extends JPanel {
 	
 	private JLabel searchPwdLabel;
 	private JLabel searchRePwdLabel;
-	private JTextField searchPwdText;
-	private JTextField searchRePwdText;
+	private JPasswordField searchPwdText;
+	private JPasswordField searchRePwdText;
 	private JLabel searchRePwdErrorLabel;
 	private JButton searchConfirmButton;
 
@@ -60,7 +61,9 @@ public class SearchRePwdPanel extends JPanel {
 		this.addKeyAction(this.searchRePwdText, "searchRePwdText");
 		
 	} //생성자
-	// 패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
+	
+	
+	//패널 생성 -- 비밀번호 입력, 재비밀번호 입력 텍스트
 	public void setsearchPwdTextLabel() throws IOException {
 		
 		// 패널의 배경이미지
@@ -76,14 +79,15 @@ public class SearchRePwdPanel extends JPanel {
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
 				);
-		//비밀번호 라벨
 		
+		
+		//비밀번호 라벨
 		this.searchPwdLabel = new JLabel("PW");
 		this.searchPwdLabel.setBounds(SearchRePwdEnum.SEARCH_PWD_LABEL.getRectangle());
 		this.searchPwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		//비밀번호 입력창
-		this.searchPwdText = new JTextField();
+		this.searchPwdText = new JPasswordField(10);
 		this.searchPwdText.setBounds(SearchRePwdEnum.SEARCH_PWD_TEXTFIELD.getRectangle());
 		this.searchPwdText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 
@@ -93,12 +97,11 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchRePwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 제비밀번호 텍스트창
-		this.searchRePwdText = new JTextField();
+		this.searchRePwdText = new JPasswordField(10);
 		this.searchRePwdText.setBounds(SearchRePwdEnum.SEARCH_REPWD_TEXTFIELD.getRectangle());
 		this.searchRePwdText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		// 에러 메세지 라벨
-		
 		String searchCheckAnswer = "";
 		this.searchRePwdErrorLabel = new JLabel(searchCheckAnswer);
 		searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
@@ -124,14 +127,13 @@ public class SearchRePwdPanel extends JPanel {
 				}		
 			}
 		};	
+		
 		this.searchConfirmButton.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
 		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName());
 		this.add(searchConfirmButton);
 		this.searchConfirmButton.addActionListener(this.findRePwdAction);
-//				
+			
 		this.add(searchPwdLabel);
-		//this.add(searchRePwdText);
-		//this.add(searchPwdText);
 		this.add(searchRePwdLabel);
 		this.add(searchRePwdErrorLabel);
 		
@@ -141,7 +143,6 @@ public class SearchRePwdPanel extends JPanel {
 		public void pwdMsgLabel(String searchCheckAnswer){
 			this.setLayout(null);
 			this.searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
-//			this.searchRePwdErrorLabel.setOpaque(false);
 			this.searchRePwdErrorLabel.setBackground(Color.red);
 			this.add(this.searchRePwdErrorLabel);
 			
@@ -156,13 +157,13 @@ public class SearchRePwdPanel extends JPanel {
 		}
 		
 		public void addKeyAction(JComponent comp, String Name) {
-//			EmptyBorder border = JoinSizesEnum.LABEL_DEFAULT_BORDER.getBorder();
 			comp.setName(Name);
-//			comp.setBorder(border);
 			comp.setFont(JoinSizesEnum.JOIN_COMPFONT_DEFAULT.getFont());
 			comp.addKeyListener(this.findRePwdAction);
 			this.add(comp);	
 		}
+		
+		//변경된 패스워드 확인창 
 		public void doSearchChangeConfirmPanel() {
 			this.searchPwdFrame.doSearchChangeConfirmPanel();
 		}
@@ -174,9 +175,6 @@ public class SearchRePwdPanel extends JPanel {
 			ObjectOutputStream oos = clientAccpet.getClientOS();
 			
 			String pwd = this.searchPwdText.getText();
-			
-			System.out.println("비밀번호 : " + pwd);
-			System.out.println("아이디 : " + userId);
 			
 			UserPersonalInfoDTO userPersonalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
 			
@@ -192,11 +190,12 @@ public class SearchRePwdPanel extends JPanel {
 			
 		}
 		
-		//비밀번호 디비에 보낸 후 결과 값 나오기
+		//비밀번호  DB에 보낸 후 결과 값 나오기
 		public void searchPwdSuccess(AbstractEnumsDTO data) {
 			if(data.getServerAction() == ServerActionEnum.SEARCH_PASSWD_SUCCESS) {
 				this.pwdMsgLabel("<html>비밀번호 변경 성공");
 				this.searchPwdFrame.doSearchChangeConfirmPanel();
+				
 			} else {
 				this.pwdMsgLabel("<html>비밀번호 설정 실패" 
 						+"<br>다시설정해주세요.<br></html>");
@@ -205,7 +204,6 @@ public class SearchRePwdPanel extends JPanel {
 			}
 			
 		}
-	
 	
 	public SearchPwdFrame getSearchPwdFrame() {
 		return searchPwdFrame;

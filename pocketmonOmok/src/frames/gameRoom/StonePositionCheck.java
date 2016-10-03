@@ -1,7 +1,4 @@
-package omokGame.server;
-
-import datasDTO.AbstractEnumsDTO;
-import datasDTO.GameBoardVO;
+package frames.gameRoom;
 
 public class StonePositionCheck {	
 	// 가로 체크
@@ -26,18 +23,17 @@ public class StonePositionCheck {
 	public int stoneHeightCheck(int x, int y, int[][] arr) {
 		int check = 0;
 		int i = 0;
-		try {
-			
+		try {			
+			while(arr[x + i][y] == arr[x][y]) {
+				check++;
+				i++;
+			}
+			i = 1;
+			while(arr[x - i][y] == arr[x][y]) {
+				check++;
+				i++;
+			}
 		} catch (Exception e) {
-		}
-		while(arr[x + i][y] == arr[x][y]) {
-			check++;
-			i++;
-		}
-		i = 1;
-		while(arr[x - i][y] == arr[x][y]) {
-			check++;
-			i++;
 		}
 		return check;
 	}

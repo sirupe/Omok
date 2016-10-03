@@ -1,4 +1,4 @@
-package frames.joinFrames;
+package ModifyMyInfo;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -24,9 +24,11 @@ import com.sun.media.sound.MidiOutDeviceProvider;
 import enums.frames.JoinSizesEnum;
 import enums.frames.ModifyJoinEnum;
 import enums.frames.SearchIDEnum;
+import frames.BasicFrame;
+import utility.GetResources;
 import utility.JTextFieldNumOnly;
 
-public class ModifyJoinFrame extends JFrame {
+public class ModifyMyInfoFrame extends JFrame {
 
 	private JLabel userIdLabel;
 	
@@ -83,7 +85,7 @@ public class ModifyJoinFrame extends JFrame {
 	
 	private Image background;
 
-	public ModifyJoinFrame() throws IOException {
+	public ModifyMyInfoFrame(BasicFrame basicFrame) throws IOException {
 		//모든 레이블 
 				this.userIdLabel 	 = new JLabel("아이디"); 
 				this.pwdLabel         = new JLabel("비밀번호");
@@ -147,7 +149,7 @@ public class ModifyJoinFrame extends JFrame {
 				this.dateChoice  = new JComboBox<Integer>();
 				
 				//레이블 폰트
-				Font labelFont = SearchIDEnum.LABELFONT_DEFAULT.getFont();
+				Font labelFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
 				this.userIdLabel.setFont(labelFont);
 				this.pwdLabel.setFont(labelFont);
 				this.rePwdLabel.setFont(labelFont);
@@ -159,7 +161,7 @@ public class ModifyJoinFrame extends JFrame {
 				this.emailTimeLabel.setFont(labelFont);
 				
 				//텍스트필드
-				Font textFont = JoinSizesEnum.LABELFONT_DEFAULT.getFont();
+				Font textFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
 				this.idTextField.setFont(textFont);
 				this.pwdField.setFont(textFont);
 				this.rePwdField.setFont(textFont);
@@ -348,29 +350,19 @@ public class ModifyJoinFrame extends JFrame {
 			this.modifyButton.setIconTextGap(this.modifyButton.getIconTextGap() - 15);
 			
 			// 수정 버튼 해상도 맞게 그리기
-			this.modifyButton.setIcon(
-				new ImageIcon(ImageIO.read(
-					new File("resources/myData/correct.kor.png")).getScaledInstance(
-						ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
-						ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height,
-		    		    Image.SCALE_AREA_AVERAGING))
-			);
+			this.modifyButton.setIcon(GetResources.getImageIcon("resources/myData/correct.kor.png", 
+					ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
+					ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height));
+			
 		    //취소 해상도 맞기 그리기
-			this.cancelButton.setIcon(
-	    		new ImageIcon(ImageIO.read(
-	    			new File("resources/myData/reset.Kor.png")).getScaledInstance(
+			this.cancelButton.setIcon(GetResources.getImageIcon("resources/myData/reset.Kor.png", 
 	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
-	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height,
-						Image.SCALE_AREA_AVERAGING))
-		    );
+	    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
+		    
 			//탈퇴 해상도 맞기 그리기
-			this.dropoutButton.setIcon(
-	    		new ImageIcon(ImageIO.read(
-	    			new File("resources/myData/quit.Kor.png")).getScaledInstance(
-	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width,
-	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height,
-						Image.SCALE_AREA_AVERAGING))
-		    );
+			this.dropoutButton.setIcon(GetResources.getImageIcon("resources/myData/quit.Kor.png", 
+	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
+	    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
 			
 			this.modifyButton.setBounds(ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle());
 			this.cancelButton.setBounds(ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle());
@@ -380,13 +372,8 @@ public class ModifyJoinFrame extends JFrame {
 			this.add(dropoutButton);
 		
 	}
-	public static void main(String[] args) {
-		try {
-			new ModifyJoinFrame();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		
+	public static void main(String[] args) throws IOException {
+		new ModifyMyInfoFrame(null);
 	}
-
 }

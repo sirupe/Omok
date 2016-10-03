@@ -11,6 +11,7 @@ import datasDTO.UserMessageVO;
 import enums.etc.ImageEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
+import frames.BasicFrame;
 import frames.waitingRoom.CreateGameRoomFrame;
 import frames.waitingRoom.WaitingRoomPanel;
 
@@ -67,6 +68,18 @@ public class WaitingRoomActions {
 	// 메세지전송버튼이 텍스트필드의 엔터와 동일한 역할을 하게 하기 위해 값을 추가해줌.
 	public void inputCheckPlus() {
 		this.userListInputCheck = 1;
+	}
+	//TODO
+	//MYInfo 창 생성
+	//회원정보 수정창이 뜨게해
+	public void correctMyInfo() {
+		BasicFrame basicFrame = this.waitingRoomPanel.getBasicFrame();
+		try {
+			basicFrame.newModifyJoinFrame();
+			basicFrame.setVisible(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// 채팅 메세지가 들어옴
@@ -169,5 +182,6 @@ public class WaitingRoomActions {
 		}
 		
 	}
+
 	
 }

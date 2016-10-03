@@ -157,7 +157,6 @@ public class SearchPwdFrame extends JFrame implements Serializable {
     }
     
     public void receiverSuccess(AbstractEnumsDTO userPosition) {
-    	System.out.println(userPosition + "유저 포지션");
     	
     	switch (userPosition.getUserAction()) {
 		case USER_SEARCH_CERTIFICATION_CHECK :

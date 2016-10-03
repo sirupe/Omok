@@ -32,7 +32,6 @@ public class OmokPersonalServer extends Thread {
 			while(isAccept) {
 				Object object = this.serverInputStream.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO) object;
-				System.out.println(userPosition + " : 유저 포지션 위치");
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.omokServer.login(userPosition, this);
@@ -45,19 +44,18 @@ public class OmokPersonalServer extends Thread {
 					break;
 				//연종
 				case POSITION_FIND_ID :
-					this.omokServer.findID();
+					this.omokServer.findID(userPosition, this);
 					break;
 				//수진
 				case POSITION_FIND_PW :
 					this.omokServer.findPw(userPosition, this);
-					System.out.println("여기는 재비밀번호창..");
 					break;
 				case POSITION_GAME_ROOM :
 					this.omokServer.gameRoom(userPosition, this);
 					break;
-				case POSITION_STORE :
-					this.omokServer.store();
-					break;
+//				case POSITION_STORE :
+//					this.omokServer.store();
+//					break;
 				case POSITION_MODIFY_MY_INFO :
 					this.omokServer.modifyMyInfo();
 					break;

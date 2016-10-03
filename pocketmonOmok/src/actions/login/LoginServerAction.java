@@ -34,5 +34,4 @@ public class LoginServerAction {
 		userPersonalDTO.setUserAction(UserActionEnum.USER_LOGIN_SUCCESS);
 		this.loginPanel.getBasicFrame().sendDTO(userPersonalDTO);
 	}
-	
 }

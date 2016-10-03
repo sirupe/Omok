@@ -16,66 +16,70 @@ public enum SearchRePwdEnum {
 	SEARCH_REPWD_FRAME_POSITION_X((int)((Screen_SIZE.getDimension().getWidth() / 2) - (SEARCH_REPWD_FRAME_WIDTH.getSize() / 2 ))),
 	SEARCH_REPWD_FRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (SEARCH_REPWD_FRAME_HEIGHT.getSize() / 2))),
 	
-//비밀번호, 레이블
+	//비밀번호, 레이블
 	SEARCH_PWD_LABEL(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.07),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.15),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.2),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.08)
 	)),
+	
 	//재비밀번호 레이블
 	SEARCH_REPWD_LABEL(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.07),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.37),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.3),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() *0.08)
-	)),
+		)),
+	
 	//설정된 비밀번호와 재비밀번호의 에러 결과 메세지 
-		SEARCH_ERROR_LABEL(new Rectangle(
+	SEARCH_ERROR_LABEL(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.08),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.55),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.9),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.2)
-		)),
-		
-	// 비밀번호 바뀌었다는 메세지 -- > 화면 전환 후 일어 난후(searchChangePanel)
-		SEARCH_CONFIRM_CHANGE_LABEL(new Rectangle(
+	)),
+
+	//비밀번호 바뀌었다는 메세지 -- > 화면 전환 후 일어 난후(searchChangePanel)
+	SEARCH_CONFIRM_CHANGE_LABEL(new Rectangle(
 				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.06),
 				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.3),
 				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() / 100 * 100),
 				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.35)
-		)),
-		
-		//비밀번호 재비밀번호 텍스트s
-		SEARCH_PWD_TEXTFIELD(new Rectangle(
+	)),
+	
+	//비밀번호 비밀번호 텍스트s
+	SEARCH_PWD_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.28),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.15),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.5),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.08)
-		)),
-		SEARCH_REPWD_TEXTFIELD(new Rectangle(
+	)),
+	
+	//재비밀번호 텍스트
+	SEARCH_REPWD_TEXTFIELD(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.28),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.37),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.5),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.08)
-				)),
+	)),
 		
-		//searchRePwd 확인 버튼 생성
-		SEARCH_CONFIRM_BUTTON(new Rectangle(
+	//searchRePwd 확인 버튼 생성
+	SEARCH_CONFIRM_BUTTON(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.2),
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.9),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.4),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.1)
-			)),
-		//searchChangePwd 버튼 생성
-		SEARCH_CHANGE_CONFIRM_BUTTON(new Rectangle(
+	)),
+	
+	//searchChangePwd 버튼 생성
+	SEARCH_CHANGE_CONFIRM_BUTTON(new Rectangle(
 				(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.275),
 				(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.75),
 				(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.15),
 				(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.15)
-				)),
-		
-		
+	)),
+
 	
 	//일반 폰트
 	LABELFONT_DEFAULT(new Font("a으라차차",Font.BOLD,17)),

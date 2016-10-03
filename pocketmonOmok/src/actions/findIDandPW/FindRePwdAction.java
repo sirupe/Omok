@@ -29,7 +29,6 @@ public class FindRePwdAction extends Adapters {
 		//확인 버튼 눌렀을때
 		if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName())) {
 			if(this.pwCheck()) {
-				System.out.println("여긴오냐");
 				return;
 			}
 			
@@ -111,11 +110,8 @@ public class FindRePwdAction extends Adapters {
 			this.pwdReCheck = false;
 			return true;
 		} 
-			
-			this.searchRePwdPanel.pwdMsgLabel("비밀번호 설정이 가능합니다.");
-			this.searchRePwdPanel.pwdMsgLabelReset();
+			this.searchRePwdPanel.pwdMsgLabel("<html>비밀번호 일치합니다.!");
 			this.pwdReCheck = true;
-			 return false;
-		
+			return false;
 	}
 }

@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 import frames.BasicFrame;
@@ -80,7 +82,8 @@ public class SearchIdFrame extends JFrame  {
 				}catch (IOException e) {
 					e.printStackTrace();
 				}
-			}};
+			}
+		};
 
 		this.cardLayout = new CardLayout();
 		this.setLayout(this.cardLayout);
@@ -121,6 +124,8 @@ public class SearchIdFrame extends JFrame  {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
+	
+
 	
 }
 

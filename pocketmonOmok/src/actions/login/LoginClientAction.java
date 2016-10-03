@@ -14,6 +14,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginSizesEnum;
+import frames.BasicFrame;
 import frames.LoginPanel;
 
 public class LoginClientAction extends MouseAdapter implements ActionListener{
@@ -148,6 +149,7 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 						e1.printStackTrace();
 					}
 			}}
+
 	
 	public void loginAction() {
 		char[] passwd = this.loginPanel.getPwField().getPassword();

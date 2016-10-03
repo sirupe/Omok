@@ -335,9 +335,10 @@ public class JoinClientAction extends Adapters {
 			//인증버튼을 눌렀을 때 실행되고 있는 쓰레드가 있는지 확인하여 인터럽으로 쓰레드 삭제한 후
 			//새로운 쓰레드를 돌려준다.
 			if(this.timeThread != null) {
+				System.out.println(timeThread);
 				this.timeThread.interrupt();
 			}
-			//TODO
+			
 			this.timeThread = new Thread() {
 				@Override
 				public void run() {
@@ -346,35 +347,33 @@ public class JoinClientAction extends Adapters {
 					
 					//인터럽트는 실행중인 쓰레드에 명령을 주면 쓰레드를 정지시키고
 					//실행중이지 않은 쓰레드에 명령을 주면 다시 실행시킨다.
-					while(!timeThread.isInterrupted()) {
-						for(int i = 3; i >= 0; --i) {
-							for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
-								time.delete(0, time.length());
-								time.append(i);
-								time.append(" : ");
-								time.append(j < 10 ? "0" + j : j);
-								
-								joinFrame.getEmailTimeLabel().setText(time.toString());
-								try {
-									Thread.sleep(1000);
-									if(emailConfirmTime) {
-										this.interrupt();
-									}
-								} catch (InterruptedException e) {
-									break;
+					for(int i = 3; i >= 0; --i) {
+						for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
+							time.delete(0, time.length());
+							time.append(i);
+							time.append(" : ");
+							time.append(j < 10 ? "0" + j : j);
+							
+							joinFrame.getEmailTimeLabel().setText(time.toString());
+							try {
+								Thread.sleep(1000);
+								if(emailConfirmTime) {
+									this.interrupt();
 								}
-							}
-							if(emailConfirmTime) {
-								return;
+							} catch (InterruptedException e) {
+								break;
 							}
 						}
-						joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
-						joinFrame.getEmailTimeLabel().setVisible(false);
-						
-						if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
-							certificationNumber = "0";
-						};
+						if(emailConfirmTime) {
+							return;
+						}
 					}
+					joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
+					joinFrame.getEmailTimeLabel().setVisible(false);
+					
+					if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
+						certificationNumber = "0";
+					};
 				}
 			};
 			this.timeThread.start();

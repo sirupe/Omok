@@ -6,8 +6,6 @@ public class UserInGameRoomDTO extends AbstractEnumsDTO {
 	private static final long serialVersionUID = -4745744281528295153L;
 	private UserGamedataInfoDTO userGameData;
 	private GameRoomInfoVO gameRoomInfo;
-	private UserStoreInfoDTO userItemInfo;
-	private UserStoreSkinInfoDTO userSkinInfo;
 	private int ownerGender;
 	private int guestGender;
 	
@@ -29,22 +27,6 @@ public class UserInGameRoomDTO extends AbstractEnumsDTO {
 
 	public void setGameRoomInfo(GameRoomInfoVO gameRoomInfo) {
 		this.gameRoomInfo = gameRoomInfo;
-	}
-
-	public UserStoreInfoDTO getUserItemInfo() {
-		return userItemInfo;
-	}
-
-	public void setUserItemInfo(UserStoreInfoDTO userItemInfo) {
-		this.userItemInfo = userItemInfo;
-	}
-
-	public UserStoreSkinInfoDTO getUserSkinInfo() {
-		return userSkinInfo;
-	}
-
-	public void setUserSkinInfo(UserStoreSkinInfoDTO userSkinInfo) {
-		this.userSkinInfo = userSkinInfo;
 	}
 
 	public int getOwnerGender() {
