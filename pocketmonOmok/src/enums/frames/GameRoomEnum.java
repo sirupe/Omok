@@ -1,5 +1,6 @@
 package enums.frames;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 
@@ -35,42 +36,71 @@ public enum GameRoomEnum {
 			(int) (GAME_BOARD_PANEL_RECT.getRect().getMaxX() + 10),
 			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 8,
 			LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 34,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 25
+			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 30
 	)),
 
 	GAME_USERIMAGE_LEFT_RECT(new Rectangle(
 			0,
 			0,
 			GAME_USERIMAGE_PANEL_RECT.getRect().width / 2,
-			GAME_USERIMAGE_PANEL_RECT.getRect().height
+			GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 60
 	)),
 	
 	GAME_USERIMAGE_RIGHT_RECT(new Rectangle (
 			GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width,
 			0,
-			GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width,
-			GAME_USERIMAGE_PANEL_RECT.getRect().height			
+			GAME_USERIMAGE_PANEL_RECT.getRect().width / 2,
+			GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 60	
+	)),
+//유저의 등급과 아이디-----------------------------------------------------------
+	
+	GAME_USERID_LEFT_LABEL_RECT(new Rectangle(
+			GAME_USERIMAGE_PANEL_RECT.getRect().width / 10 + 8 ,
+			GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 65,
+			GAME_USERIMAGE_PANEL_RECT.getRect().width / 3,
+			GAME_USERIMAGE_PANEL_RECT.getRect().height / 10
+			
+	)),
+	GAME_USERID_RIGHT_LABEL_RECT(new Rectangle(
+			GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width + 40,
+			GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 65,
+			GAME_USERIMAGE_PANEL_RECT.getRect().width / 3,
+			GAME_USERIMAGE_PANEL_RECT.getRect().height / 10
 	)),
 	
+	GAME_USERLEVEL_LEFT_IMAGE_RECT(new Rectangle(
+			0,
+			GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 65,
+			GAME_USERIMAGE_PANEL_RECT.getRect().width / 9,
+			GAME_USERIMAGE_PANEL_RECT.getRect().height / 7
+	)),
 	
+	GAME_USERLEVEL_RIGHT_IMAGE_RECT(new Rectangle(
+			GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width,
+			GameRoomEnum.GAME_USERIMAGE_PANEL_RECT.getRect().height / 2 + 65,
+			GAME_USERIMAGE_PANEL_RECT.getRect().width / 9,
+			GAME_USERIMAGE_PANEL_RECT.getRect().height / 7
+	)),
+	
+
 //게임메뉴 및 아이템 버튼 설정값---------------------------------------------------	
 	GAME_MENU_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
-			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().getMaxY() + 10),
+			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().getMaxY() + 32),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
 			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 20
 	)),
-	
+	//TODO 
 	GAME_BUTTON_SIZE_RECT(new Rectangle(
 			0,
 			0,
-			GAME_MENU_PANEL_RECT.getRect().width / 4 * 1,
-			GAME_MENU_PANEL_RECT.getRect().height / 2 * 1
+			GAME_MENU_PANEL_RECT.getRect().width / 3 * 1,
+			GAME_MENU_PANEL_RECT.getRect().height / 5 * 3
 	)),
 	
 	GAME_BUTTONNAME_OWNER(new String[] {
 			"start",
-			"lonely",
+//			"lonely",
 			"withdraw",
 			"exit",
 //			"itemUnity",
@@ -81,7 +111,7 @@ public enum GameRoomEnum {
 	
 	GAME_BUTTONNAME_GUEST(new String[] {
 			"ready",
-			"lonely",
+//			"lonely",
 			"withdraw",
 			"exit",
 //			"itemUnity",
@@ -117,9 +147,9 @@ public enum GameRoomEnum {
 //채팅 패널 설정값-------------------------------------------------------------
 	GAME_CHATTING_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
-			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY() + 10),
+			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY()- 25),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 39
+			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 45
 	)),
 	
 	GAME_SCROLL_PANE_RECT(new Rectangle(
@@ -180,6 +210,8 @@ public enum GameRoomEnum {
 	GAME_END_DIALOG_BUTTON_RECT(),
 	
 //폰트설정----------------------------------------------------------------	
+	GAMEROOM_USERID_FONT(new Font("a으라차차",Font.BOLD,20)),
+	GAMEROOM_USERIF_FONT_COLOR(Color.white),
 	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
 	GAME_CHATTING_FONT(new Font("돋움", Font.PLAIN, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 130));
 //======================================================================
@@ -187,6 +219,7 @@ public enum GameRoomEnum {
 	private String[] buttonName;
 	private Font font;
 	private int size;
+	private Color color;
 	
 	private GameRoomEnum() {
 	}
@@ -207,6 +240,10 @@ public enum GameRoomEnum {
 		this.font = font;
 	}
 	
+	private GameRoomEnum(Color color) {
+		this.color = color;
+	}
+	
 	public Rectangle getRect() {
 		return rect;
 	}
@@ -221,5 +258,9 @@ public enum GameRoomEnum {
 	
 	public int getSize() {
 		return size;
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 }

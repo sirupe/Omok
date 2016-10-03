@@ -327,7 +327,6 @@ public class OmokServer {
 			roomGuestVO.setRoomName(roomVO.getRoomName());
 			roomGuestVO.setRoomNumber(roomVO.getRoomNumber());
 			UserInGameRoomDTO userInGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
-			System.out.println(roomGuestVO.getGuest());
 			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
 			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
 			userInGameRoomDTO.setOwnerGender(ownerGender);
@@ -405,12 +404,10 @@ public class OmokServer {
 	public void findID(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		// 클라이언트에게서 받은 데이터 DTO로 전환
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data;
-		System.out.println("server data - > " + data.toString());
 		
 		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
 		UserPersonalInfoDTO resultDTO = this.loginDAO.findUserID(personalDTO);
 		
-		System.out.println("server resultData - >" + resultDTO);
 		
 		ObjectOutputStream oos = personalServer.getServerOutputStream();
 		
@@ -549,15 +546,16 @@ public class OmokServer {
 		String nowTurnUser  = gameBoard.getNowTurnUser();
 		GameBoardVO sendGameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
 		if(gameBoard.getWinUser() == null) {
+			System.out.println("이긴사람 없음");
 			sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_SEND_BOARD_INFO);
 		} else {
 			// win 유저정보가 있다면 DAO 에 이긴 유저의 정보를 업데이트 한다.
-			System.out.println("winUser : " + sendGameBoardVO.getWinUser());
+			System.out.println("이긴사람  : " + gameBoard.getWinUser());
 			sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WINNER_INFO);
-			this.gamedataDAO.winUserGameDataUpdate(sendGameBoardVO.getWinUser());
-			this.gamedataDAO.loseUserGameDataUpdate(sendGameBoardVO.getLoseUser());
 			sendGameBoardVO.setWinUser(gameBoard.getWinUser());
 			sendGameBoardVO.setLoseUser(gameBoard.getLoseUser());
+			this.gamedataDAO.winUserGameDataUpdate(sendGameBoardVO.getWinUser());
+			this.gamedataDAO.loseUserGameDataUpdate(sendGameBoardVO.getLoseUser());
 		}
 		// 사용자에게 보낼 정보에 돌 5개를 놓은 유저의 정보가 있다면 승리정보, 아니라면 그냥 맵 업데이트 하는 정보(Enum)를 담는다.
 		sendGameBoardVO.setGameBoard(board);
@@ -567,6 +565,7 @@ public class OmokServer {
 		sendGameBoardVO.setNowTurnUser(nextTurnUser);
 
 		try {
+			System.out.println(nextTurnUser);
 			personalServer.getServerOutputStream().writeObject(sendGameBoardVO);
 			this.loginUsersMap.get(nextTurnUser).getServerOutputStream().writeObject(sendGameBoardVO);
 		} catch (IOException e) {
@@ -575,10 +574,9 @@ public class OmokServer {
 	}
 	
 	
-	public void store() {
-		System.out.println("상점");
-	}
-	
+//	public void store() {
+//	}
+//	
 	public void modifyMyInfo() {
 		System.out.println("내정보보기");
 	}

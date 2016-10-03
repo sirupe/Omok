@@ -51,9 +51,9 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_GAME_ROOM :
 					this.omokServer.gameRoom(userPosition, this);
 					break;
-				case POSITION_STORE :
-					this.omokServer.store();
-					break;
+//				case POSITION_STORE :
+//					this.omokServer.store();
+//					break;
 				case POSITION_MODIFY_MY_INFO :
 					this.omokServer.modifyMyInfo();
 					break;

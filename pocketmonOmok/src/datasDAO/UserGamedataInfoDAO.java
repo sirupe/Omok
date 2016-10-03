@@ -89,6 +89,7 @@ public class UserGamedataInfoDAO {
 	}
 	
 	public int winUserGameDataUpdate(String userID) {
+		System.out.println("이긴사람DAO : " + userID);
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		PreparedStatement ps2 = null;
@@ -126,9 +127,7 @@ public class UserGamedataInfoDAO {
 			sql2.append("USER_WIN_COUNT=USER_WIN_COUNT+1, ");
 			sql2.append("USER_SCORE=USER_SCORE+10 ");
 			sql2.append("WHERE USER_ID=?");
-			
-			System.out.println(sql2.toString());
-			
+						
 			ps2 = connection.prepareStatement(sql2.toString());
 			ps2.setString(1, userID);
 			result = ps2.executeUpdate();
@@ -147,6 +146,7 @@ public class UserGamedataInfoDAO {
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		int result = 0;
+		System.out.println("진사람DAO : " + userID);
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		try {
 			connection = dbPool.getConnection();
