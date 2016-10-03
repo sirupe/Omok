@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+
+
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
@@ -57,7 +59,7 @@ public class JoinClientAction extends Adapters {
 	public void windowClosing(WindowEvent e) {
 		this.basicFrame.setVisible(true);
 		this.joinFrame.setVisible(false);
-		this.joinFrame.dispose();
+		this.joinFrame.dispose();	
 	}
 	
 	// 실시간으로 타이핑 감시하여 에러메세지 송출.
@@ -256,10 +258,10 @@ public class JoinClientAction extends Adapters {
 	
 	//email 유효성 및 정합성 검사
 	public boolean emailAddrSuitabilityCheck() {
-		this.emailAddr = this.joinFrame.getEmailAddrTextField().getText();
+		this.emailAddr  = this.joinFrame.getEmailAddrTextField().getText();
 		String checkMsg = null;
 		Color color 	= null;
-		boolean result = false;
+		boolean result  = false;
 		
 		if(!RegexCheck.emailDomainRegexCheck(this.emailAddr)) {
 			checkMsg = "joinMail정합성";

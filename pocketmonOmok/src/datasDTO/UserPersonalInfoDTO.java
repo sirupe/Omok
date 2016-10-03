@@ -17,7 +17,36 @@ public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 	private String userPhoneNumber;	// 유저 핸드폰번호
 	private Date userJoinDate;		// 유저 가입일자
 	private String certificationNumber;
+	private boolean isEmailSuccess;
+	private boolean isCertificationNumber;
+	private int userCount;
 	
+
+
+	public int getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(int userCount) {
+		this.userCount = userCount;
+	}
+
+	public boolean isEmailSuccess() {
+		return isEmailSuccess;
+	}
+
+	public void setEmailSuccess(boolean isEmailSuccess) {
+		this.isEmailSuccess = isEmailSuccess;
+	}
+
+	public boolean isCertificationNumber() {
+		return isCertificationNumber;
+	}
+
+	public void setCertificationNumber(boolean isCertificationNumber) {
+		this.isCertificationNumber = isCertificationNumber;
+	}                            
+
 	public UserPersonalInfoDTO(UserPositionEnum position) {
 		super(position);
 	}
@@ -90,13 +119,4 @@ public class UserPersonalInfoDTO extends AbstractEnumsDTO {
 		return certificationNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "UserPersonalInfoDTO [userID=" + userID + ", userPasswd=" + userPasswd + ", userName=" + userName
-				+ ", userGender=" + userGender + ", userBirth=" + userBirth + ", userEmail=" + userEmail
-				+ ", userPhoneNumber=" + userPhoneNumber + ", userJoinDate=" + userJoinDate + ", certificationNumber="
-				+ certificationNumber + "]";
-	}
-	
-	
 }

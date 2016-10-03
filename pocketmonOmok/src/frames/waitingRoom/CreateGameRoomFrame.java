@@ -16,9 +16,6 @@ import javax.swing.JTextField;
 
 import actions.waitingRoom.WaitingRoomActionListeners;
 import enums.frames.GameRoomCreateEnum;
-import enums.frames.GameRoomFullEnum;
-import enums.frames.SearchIDEnum;
-import enums.frames.SearchRePwdEnum;
 import enums.frames.SearchIDEnum;
 
 public class CreateGameRoomFrame extends JFrame {

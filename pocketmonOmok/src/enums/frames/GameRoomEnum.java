@@ -36,7 +36,7 @@ public enum GameRoomEnum {
 			(int) (GAME_BOARD_PANEL_RECT.getRect().getMaxX() + 10),
 			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 8,
 			LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 34,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 30
+			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 35
 	)),
 
 	GAME_USERIMAGE_LEFT_RECT(new Rectangle(
@@ -86,9 +86,9 @@ public enum GameRoomEnum {
 //게임메뉴 및 아이템 버튼 설정값---------------------------------------------------	
 	GAME_MENU_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
-			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().getMaxY() + 32),
+			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().getMaxY() * 1.05),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 20
+			(int) (LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.15)
 	)),
 	//TODO 
 	GAME_BUTTON_SIZE_RECT(new Rectangle(
@@ -147,9 +147,9 @@ public enum GameRoomEnum {
 //채팅 패널 설정값-------------------------------------------------------------
 	GAME_CHATTING_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
-			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY()- 25),
+			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY() * 0.96),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 45
+			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 48
 	)),
 	
 	GAME_SCROLL_PANE_RECT(new Rectangle(
@@ -176,21 +176,21 @@ public enum GameRoomEnum {
 	)),	
 	
 	GIVEUP_TEXT_SIZE_RECT(new Rectangle(
-			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.28),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.21),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.13),
-			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.6),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.7),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.4)
 	)),	
 	
 	GIVEUP_YES_BUTTON_RECT(new Rectangle(
-			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.26),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.24),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.5),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.22),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.14)
 	)),	
 	
 	GIVEUP_NO_BUTTON_RECT(new Rectangle(
-			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.55),
+			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.53),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.5),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().width * 0.22),
 			(int)(GIVEUP_FRAME_SIZE_RECT.getRect().height * 0.14)

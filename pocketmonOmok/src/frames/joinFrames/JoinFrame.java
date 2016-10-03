@@ -1,6 +1,7 @@
 package frames.joinFrames;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
@@ -130,7 +131,7 @@ public class JoinFrame extends JFrame {
 		this.emailAddrTextField 	= new JTextField(10);
 		this.telMiddleTextField		= new JTextField(new JTextFieldNumOnly(4), "", 0);
 		this.telLastNumTextField    = new JTextField(new JTextFieldNumOnly(4), "", 0);
-		this.emailConfTextField  = new JTextField(new JTextFieldNumOnly(6), "", 0);
+		this.emailConfTextField     = new JTextField(new JTextFieldNumOnly(6), "", 0);
 
 		// 성별 여자남자 라디오 박스
 		this.genderButtonGroup = new ButtonGroup();

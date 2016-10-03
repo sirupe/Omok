@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import datasDTO.AbstractEnumsDTO;
+import datasDTO.UserPersonalInfoDTO;
 
 public class OmokPersonalServer extends Thread {
 	private OmokServer omokServer;
@@ -13,7 +14,10 @@ public class OmokPersonalServer extends Thread {
 	private ObjectInputStream serverInputStream;
 	private ObjectOutputStream serverOutputStream;
 	private String certificationNumber;
+	private int idCheck;
 	
+
+
 	public OmokPersonalServer(OmokServer omokServer, Socket socket) throws IOException {
 		this.omokServer 		= omokServer;
 		this.personalSocket 	= socket;
@@ -28,7 +32,6 @@ public class OmokPersonalServer extends Thread {
 			while(isAccept) {
 				Object object = this.serverInputStream.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO) object;
-				
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.omokServer.login(userPosition, this);
@@ -39,15 +42,14 @@ public class OmokPersonalServer extends Thread {
 				case POSITION_JOIN :
 					this.omokServer.join(userPosition, this);
 					break;
+				//연종
 				case POSITION_FIND_ID :
 					this.omokServer.findID(userPosition, this);
 					break;
+				//수진
 				case POSITION_FIND_PW :
-					this.omokServer.findPW();
+					this.omokServer.findPw(userPosition, this);
 					break;
-//				case POSITION_FIND_PW_EMAIL :
-//					this.omokServer.findEmail(userPosition, this);
-//					break;
 				case POSITION_GAME_ROOM :
 					this.omokServer.gameRoom(userPosition, this);
 					break;
@@ -90,4 +92,14 @@ public class OmokPersonalServer extends Thread {
 	public String getCertificationNumber() {
 		return certificationNumber;
 	}
+	
+	public int getIdCheck() {
+		return idCheck;
+	}
+
+	public void setIdCheck(int idCheck) {
+		this.idCheck = idCheck;
+	}
+	
+	
 }
