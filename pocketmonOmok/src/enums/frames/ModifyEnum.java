@@ -14,7 +14,7 @@ public enum ModifyEnum {
    
    
    SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-   DISTANCE((int)(SCREEN_SIZE.getDimension().height * 0.07)),
+   DISTANCE((int)(SCREEN_SIZE.getDimension().height * 0.065)),
    
    MODIFY_JOINFRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.3)),
    MODIFY_JOINFRMAE_SIZE_HEIGHT((int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 1.4)),   
@@ -272,7 +272,7 @@ public enum ModifyEnum {
    //수정버튼
    MODIFY_MODIFY_BUTTON(new Rectangle(
          (int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.25),
-         (int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4.4),
+         MODIFY_TELFRONTNUM_COMBO.getRectangle().y + DISTANCE.getSize(),
          MODIFY_AT_LABEL.getRectangle().width,
          (int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.07)
    )),
