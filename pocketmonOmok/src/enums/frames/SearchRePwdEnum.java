@@ -67,7 +67,7 @@ public enum SearchRePwdEnum {
 	//searchRePwd 확인 버튼 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.2),
-			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.9),
+			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.87),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.4),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.1)
 	)),
