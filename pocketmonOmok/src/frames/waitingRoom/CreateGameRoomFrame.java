@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -17,6 +18,7 @@ import javax.swing.JTextField;
 import actions.waitingRoom.WaitingRoomActionListeners;
 import enums.frames.CreateGameRoomEnum;
 import enums.frames.SearchIDEnum;
+import enums.frames.WaitingRoomEnum;
 
 public class CreateGameRoomFrame extends JFrame {
 	private static final long serialVersionUID = 36363454L;
@@ -132,8 +134,12 @@ public class CreateGameRoomFrame extends JFrame {
 	
 	//텍스트필드 위치
 	public void setTextPosition() {
+		String[] roomName = WaitingRoomEnum.ROOM_NAMES.getRandomRoomName();
+		int rand = new Random().nextInt(roomName.length);
 		this.createRoomNameText.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_NAME_TEXT.getRectangle());
 		this.createRoomPwdText.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_PWD_TEXT.getRectangle());
+		this.createRoomNameText.setText(roomName[rand]);
+		
 		this.add(createRoomNameText);
 		this.add(createRoomPwdText);
 		
