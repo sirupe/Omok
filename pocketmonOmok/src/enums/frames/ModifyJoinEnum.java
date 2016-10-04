@@ -315,8 +315,11 @@ public enum ModifyJoinEnum {
 	//콤보박스 배경화면
 	CHOICEBACKGROUND(Color.black),
 	//콤보박스 이메일 배경화면
-	MODIFY_EMAIL_COMBOBOX_BACKGROUND(Color.white);
+	MODIFY_EMAIL_COMBOBOX_BACKGROUND(Color.white),
 
+	ERROR_MESSAGE_COLOR(Color.red),
+	DEFAULT_MESSAGE_COLOR(Color.green);
+	
 	private Dimension dimension;
 	private int size;
 	private Color color;

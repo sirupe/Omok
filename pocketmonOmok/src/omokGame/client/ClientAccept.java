@@ -197,7 +197,23 @@ public class ClientAccept {
 		case MODIFY_USER_PERSONAL_INFO :
 			this.basicFrame.newModifyMyInfoFrame(userPersonalDTO);
 			break;
-		
+		case MODIFY_USER_DROPCHECK_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropPwCheckFail();
+			break;
+		case MODIFY_USER_DROPCHECK_SUCCESS :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropPwCheckSuccess();
+			break;
+		case MODIFY_USER_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().updateFail();
+			break;
+		case MODIFY_USER_PASSWD_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().passwdFail();
+			break;
+		case MODIFY_USER_SUCCESS :
+			this.basicFrame.getModifyMyInfoFrame().updateSuccess();
+			break;
+		default:
+			break;
 		}
 	}
 

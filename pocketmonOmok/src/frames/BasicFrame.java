@@ -183,7 +183,8 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void newModifyMyInfoFrame(UserPersonalInfoDTO personalInfo) {
 		this.setVisible(false);
 		try {
-			new ModifyMyInfoFrame(this).setUserInfo(personalInfo);
+			this.modifyMyInfoFrame = new ModifyMyInfoFrame(this);
+			this.modifyMyInfoFrame.setUserInfo(personalInfo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

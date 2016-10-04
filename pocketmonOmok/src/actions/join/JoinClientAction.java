@@ -42,6 +42,7 @@ public class JoinClientAction extends Adapters {
 	private boolean emailConfirmTime;
 
 	private Thread timeThread;
+	private boolean isThreadCheck;
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinClientAction(BasicFrame basicFrame, JoinFrame joinFrame){
@@ -330,19 +331,18 @@ public class JoinClientAction extends Adapters {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), Color.blue, "joinMail발송");
 			//시간 세어주는 쓰레드 생성
 			
-			//사용자가 이메일을 바꾸어 다시 인증하기 버튼을 누른다면 계속 쓰레드가 겹치므로
-			//인증버튼을 눌렀을 때 실행되고 있는 쓰레드가 있는지 확인하여 인터럽으로 쓰레드 삭제한 후
-			//새로운 쓰레드를 돌려준다.
-			if(this.timeThread != null) {
-				System.out.println(timeThread);
-				this.timeThread.interrupt();
-			}
+//			//사용자가 이메일을 바꾸어 다시 인증하기 버튼을 누른다면 계속 쓰레드가 겹치므로 TODO
+//			//플래그를 사용하여 쓰레드 중지 시도
+//			if(this.timeThread != null) {
+//				this.isThreadCheck = false;
+//			}
 			
 			this.timeThread = new Thread() {
 				@Override
 				public void run() {
 					StringBuffer time = new StringBuffer();
 					Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
+					joinFrame.getConfirmButton().removeActionListener(joinFrame.getJoinAction());
 					
 					//인터럽트는 실행중인 쓰레드에 명령을 주면 쓰레드를 정지시키고
 					//실행중이지 않은 쓰레드에 명령을 주면 다시 실행시킨다.
@@ -369,7 +369,7 @@ public class JoinClientAction extends Adapters {
 					}
 					joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
 					joinFrame.getEmailTimeLabel().setVisible(false);
-					
+					joinFrame.getConfirmButton().addActionListener(joinFrame.getJoinAction());
 					if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
 						certificationNumber = "0";
 					};

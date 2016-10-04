@@ -11,10 +11,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import actions.modifyMyInfo.ModifyMyInfoAction;
+import datasDTO.UserPersonalInfoDTO;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
@@ -26,13 +32,20 @@ public class CorrectPwdFrame extends JFrame{
 	private JTextField pwdTextField;
 	private JButton confirm;
 	private JButton reset;
-	
+	private ModifyMyInfoAction modifyAction;
+	private ModifyMyInfoFrame modifyFrame;
 		
-	public CorrectPwdFrame() throws IOException {
-		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
-				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
-                Image.SCALE_SMOOTH);
+	public CorrectPwdFrame(ModifyMyInfoFrame modifyFrame, ModifyMyInfoAction modifyAction) {
+		this.modifyAction = modifyAction;
+		this.modifyFrame = modifyFrame;
+		try {
+			this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
+					CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
+					CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
+			        Image.SCALE_SMOOTH);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 		
@@ -99,13 +112,45 @@ public class CorrectPwdFrame extends JFrame{
 		this.reset.setBounds(CorrectEnum.PWD_RESET_RECT.getRect());
 		
 		this.add(pwdLabel);
-		this.add(pwderror);
+//		this.add(pwderror);
 		this.add(pwdTextField);
 		this.add(confirm);
 		this.add(reset);
+		this.confirm.setName("confirm");
+		this.reset.setName("reset");
+		this.confirm.addActionListener(this.modifyAction);
+		this.reset.addActionListener(this.modifyAction);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+	
+	public void confirmButtonClick() {
+		String id = this.modifyFrame.getBasicFrame().getUserID();
+		String pw = this.pwdTextField.getText();
 		
+		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
+		personalDTO.setUserAction(UserActionEnum.USER_MODIFY_DROP);
+		personalDTO.setUserID(id);
+		personalDTO.setUserPasswd(pw);
+		
+		this.modifyFrame.getBasicFrame().sendDTO(personalDTO);	
+	}
+	public void dropPwCheckFail() {
+		JOptionPane.showMessageDialog(this, "패스워드가 일치하지 않습니다.");
+	}
+	
+	public void dropPwCheckSuccess() {
+		int result = JOptionPane.showConfirmDialog(this, "정말로 탈퇴하시겠습니까?");
+		if(result == JOptionPane.YES_OPTION) {
+			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
+			personalDTO.setUserAction(UserActionEnum.USER_DROP_CERTAIN);
+			personalDTO.setUserID(this.modifyFrame.getBasicFrame().getUserID());
+			
+			this.modifyFrame.getBasicFrame().sendDTO(personalDTO);
+			
+		} else {
+			
+		}
 	}
 }

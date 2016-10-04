@@ -700,13 +700,55 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 //개인정보 수정------------------------------------------------------------------------------------------------
 	public void modifyMyInfo(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)index;
-		UserPersonalInfoDTO resultDTO = this.userPersonalDAO.getUserPersonalInfo(personalDTO.getUserID());
-		resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_PERSONAL_INFO);
+		UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
 		try {
-			personalServer.getServerOutputStream().writeObject(resultDTO);
-		} catch (IOException e) {
+			switch(personalDTO.getUserAction()) {
+			case USER_MODIFY_GET_MY_INFO :
+				resultDTO = this.userPersonalDAO.getUserPersonalInfo(personalDTO.getUserID());
+				resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_PERSONAL_INFO);
+				personalServer.getServerOutputStream().writeObject(resultDTO);
+				break;
+			
+			case USER_MODIFY_UPDATE :
+				String dbPasswd = this.userPersonalDAO.checkIDMatchesPW(personalDTO).getUserPasswd();
+				
+				// DB의 패스워드가 일치할 때
+				if(dbPasswd != null) {
+					int result = this.userPersonalDAO.updateUserInfo(personalDTO);
+					// DB에 정상적으로 업데이트 됨
+					if(result == 1) {
+						resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_SUCCESS);
+						System.out.println("성공을 넣어줬어");
+					
+					// DB에 업데이트 실패
+					} else {
+						resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_FAIL);
+						System.out.println("실패를 넣어줬어");
+					}
+				// DB의 패스워드와 불일치
+				} else {
+					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_PASSWD_FAIL);
+					System.out.println("실패를 넣어줬어");
+				}
+				personalServer.getServerOutputStream().writeObject(resultDTO);
+				break;
+				
+			case USER_MODIFY_DROP :
+				resultDTO = this.userPersonalDAO.checkIDMatchesPW(personalDTO);
+				if(resultDTO.getUserID().length() == 0) {
+					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_DROPCHECK_FAIL);
+				} else {
+					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_DROPCHECK_SUCCESS);
+				}
+				break;
+			//회원탈퇴 쿼리땜에 잠시 보류 TODO 유저삭제 쿼리..
+			case USER_DROP_CERTAIN :
+				break;
+			}
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 //게임종료---------------------------------------------------------------------------------------------------
 	public void exitProgram(AbstractEnumsDTO index, OmokPersonalServer personalServer) throws IOException {

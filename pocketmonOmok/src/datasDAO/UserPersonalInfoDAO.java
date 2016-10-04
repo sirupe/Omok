@@ -254,4 +254,49 @@ public class UserPersonalInfoDAO {
 		// 사용자에게 DTO 반환
 		return userPersonalInfo;
 	}
+	
+	public int updateUserInfo(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		int result = 0;
+		
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		
+		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+		userPersonalInfo.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+		
+		try {
+			connection = dbPool.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE USER_PERSONAL_INFO ");
+			sql.append("SET USER_NAME=?, ");
+			sql.append("USER_GENDER=?, ");
+			sql.append("USER_BIRTH=?, ");
+			sql.append("USER_EMAIL=?, ");
+			sql.append("USER_PHONENUMBER=? ");
+			sql.append("WHERE USER_ID=?");
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserName());
+			ps.setInt(2, personalDTO.getUserGender());
+			ps.setString(3, personalDTO.getUserBirth());
+			ps.setString(4, personalDTO.getUserEmail());
+			ps.setString(5, personalDTO.getUserPhoneNumber());
+			ps.setString(6, personalDTO.getUserID());
+			result = ps.executeUpdate();			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
+	}
 }
+
+
+//SELECT USER_ID
+//FROM USER_PERSONAL_INFO
+//WHERE USER_ID='test' AND USER_PASSWD='5555';
