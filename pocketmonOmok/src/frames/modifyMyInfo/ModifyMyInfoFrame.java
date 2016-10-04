@@ -181,6 +181,7 @@ public class ModifyMyInfoFrame extends JFrame {
 		background = ImageIO.read(
 				//배경이미지 join.png로 바꾸세욤
 			  new File("resources/signUp/join.png")).getScaledInstance(
+
 		          JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 		          JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 		          Image.SCALE_SMOOTH);
@@ -417,7 +418,6 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.emailIDTextField.setText(email[0]);
 		this.emailAddrTextField.setText(email[1]);
 		
-		System.out.println(userPersonalInfo.getUserPhoneNumber());
 		if(userPersonalInfo.getUserPhoneNumber() != null) {
 			String[] phoneNum = userPersonalInfo.getUserPhoneNumber().split("-");
 			this.telFrontNumChoice.setSelectedItem(phoneNum[0]);
@@ -438,7 +438,6 @@ public class ModifyMyInfoFrame extends JFrame {
 		int errCheck = 0;
 		String errMsg = null;
 		if(!(telFrontNum.equals("선택") && telMidNum.length() == 0 && telLastNum.length() == 0)) {
-			System.out.println("무사패스기원 ㅠㅠ");
 			if((telMidNum.length() == 0 && telLastNum.length() == 0) || 
 				(telMidNum.length() == 0 && telLastNum.length() == 0) || 
 				telFrontNum.equals("선택")) {
@@ -542,5 +541,9 @@ public class ModifyMyInfoFrame extends JFrame {
 	
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		new ModifyMyInfoFrame(null);
 	}
 }

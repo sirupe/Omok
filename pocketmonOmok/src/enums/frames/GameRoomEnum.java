@@ -147,23 +147,23 @@ public enum GameRoomEnum {
 //채팅 패널 설정값-------------------------------------------------------------
 	GAME_CHATTING_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
-			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY() * 0.96),
-			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 48
+			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY() * 0.94),
+			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().width * 0.93),
+			(int) (LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.44)//스크로로
 	)),
 	
 	GAME_SCROLL_PANE_RECT(new Rectangle(
 			0,
 			0,
 			GAME_CHATTING_PANEL_RECT.getRect().width,
-			GAME_CHATTING_PANEL_RECT.getRect().height / 10 * 9
+			(int) (GAME_CHATTING_PANEL_RECT.getRect().height * 0.82)
 	)),
 	
 	GAME_CHATTINGFIELD_RECT(new Rectangle(
 			GAME_SCROLL_PANE_RECT.getRect().x,
 			GAME_SCROLL_PANE_RECT.getRect().height,
 			GAME_CHATTING_PANEL_RECT.getRect().width,
-			GAME_CHATTING_PANEL_RECT.getRect().height / 100 * 13
+			(int) (GAME_CHATTING_PANEL_RECT.getRect().height * 0.1)
 	)),
 	
 //기권 팝업창 설정값-------------------------------------------------------------

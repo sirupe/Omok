@@ -103,7 +103,7 @@ public class FindPWAction extends Adapters {
 		}
 		
 		if(!RegexCheck.idRegexCheck(id)) {
-			this.searchPwdPanel.userNumberMsg("<html>영소문자, 특수문자구분<br>다시확인하세여<br></html>");
+			this.searchPwdPanel.userNumberMsg("<html>영소문자, 특수문자구분<br>다시확인하세요<br></html>");
 			this.idCheck = false;
 			return true;
 		}
