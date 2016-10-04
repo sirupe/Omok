@@ -194,9 +194,17 @@ public enum WaitingRoomEnum {
 	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01))),
 	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01))),
 	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01))),
-	LABELFONT_SIZE130(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 130));
+	LABELFONT_SIZE130(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 130)),
+
 	
-	
+	ROOM_NAMES(new String[] {
+			"즐거운 오목게임",
+			"게임 한 판 !",
+			"어서 들어오세요~",
+			"연종이수지니마니피고나니",
+			"상오야",
+			"뚜디니야"
+	});
 	
 	
 	
@@ -204,6 +212,7 @@ public enum WaitingRoomEnum {
 	private Font font;
 	private Color color;
 	private Dimension dimension;
+	private String[] randomRoomName;
 	
 	private WaitingRoomEnum() {}
 	
@@ -222,7 +231,9 @@ public enum WaitingRoomEnum {
 	private WaitingRoomEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
-	
+	private WaitingRoomEnum(String[] randomRoomName) {
+		this.randomRoomName = randomRoomName;
+	}
 	
 	public int getSize() {
 		return size;
@@ -236,6 +247,8 @@ public enum WaitingRoomEnum {
 	public Dimension getDimension() {
 		return dimension;
 	}
-	
+	public String[] getRandomRoomName() {
+		return randomRoomName;
+	}
 
 }

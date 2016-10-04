@@ -21,6 +21,7 @@ public enum ImageEnum {
 	WAITINGROOM_ENTER_PRIVATE("resources/waitingRoom/private.png"),
 	WAITINGROOM_ENTER_IMPOSSIBLE("resources/waitingRoom/NoAdmittance.png"),
 	WAITINGROOM_USER_GRADE_IMAGE_MAP(userGradeImageMap()),
+//GameRoom 이미지들------------------------------------------------------	
 //gameRoom 이미지들 수정한것입니다.
 //뒤에 "CH" 가 붙은것은 마우스를 버튼위에 올렸을때 변하는 것 입니다.
 	GAMEROOM_READY("resources/gameRoom/ready.png"),
@@ -39,7 +40,6 @@ public enum ImageEnum {
 //	GAMEROOM_START_BATTILING("resources/gameRoom/battling.png"),
 	GAMEROOM_START_BATTILING("resources/gameRoom/battling.png"),
 	
-//GameRoom 이미지들------------------------------------------------------	
 	GAMEROOM_BOARD_IMAGE("resources/gameRoom/gameBoard.png"),
 	GAMEROOM_MALE_IMAGE("resources/gameRoom/userImageMale.png"),
 	GAMEROOM_FEMALE_IMAGE("resources/gameRoom/userImageFemale.png"),
@@ -108,9 +108,10 @@ public enum ImageEnum {
 	//TODO
 	GAMEROOM_TEST_IMAGE_LEVEL("resources/user/usermediumgrade.png"),
 	
-	
 	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png"),
-	GAMEROOM_STONE_PIKACHU("resources/omokball/pikachu.png");
+	GAMEROOM_STONE_PIKACHU("resources/omokball/pikachu.png"),
+	GAMEROOM_STONE_ROUND_PIKA("resources/omokball/pika.png"),
+	GAMEROOM_STONE_ROUND_KOBOOK("resources/omokball/kobook.png");
 	
 
 	
