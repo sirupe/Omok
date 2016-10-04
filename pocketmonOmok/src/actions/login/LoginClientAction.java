@@ -16,6 +16,7 @@ import enums.etc.UserPositionEnum;
 import enums.frames.LoginPanelEnum;
 import frames.BasicFrame;
 import frames.LoginPanel;
+import utility.GetResources;
 
 public class LoginClientAction extends MouseAdapter implements ActionListener{
 	private LoginPanel loginPanel;
@@ -38,44 +39,20 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		String buttonName = e.getComponent().toString();
-		try {
-			if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
-				this.loginPanel.getJoinButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File("resources/login/signupYellow.png")).getScaledInstance(
-							LoginPanelEnum.ICON_SIZE_WIDTH.getSize(),
-							LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(),
-							Image.SCALE_AREA_AVERAGING))
-				);
-				
-			} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
-				this.loginPanel.getSearchIdButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File("resources/login/forgotIDYellow.png")).getScaledInstance(
-							LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
-							LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(), 
-							Image.SCALE_AREA_AVERAGING))
-				);
-				
-			} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-				this.loginPanel.getSearchPwButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File("resources/login/forgotPWYellow.png")).getScaledInstance(
-							LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
-							LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(), 
-							Image.SCALE_AREA_AVERAGING))
-				);
-			} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_LOGIN.getButtonName())) {
-				this.loginPanel.getLoginButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File(ImageEnum.LOGINPANEL_LOGIN_HOVER.getImageDir())).getScaledInstance(
-								LoginPanelEnum.LOGIN_ICON_WIDTH.getSize(),
-					            LoginPanelEnum.LOGIN_ICON_HEIGHT.getSize(),
-							Image.SCALE_AREA_AVERAGING))
-				);
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
+			this.loginPanel.getJoinButton().setIcon(this.iconButtonImage(ImageEnum.LOGINPANEL_SIGNUP_HOVER.getImageDir()));
+			
+		} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
+			this.loginPanel.getSearchIdButton().setIcon(this.iconButtonImage(ImageEnum.LOGINPANEL_SEARCHID_HOVER.getImageDir()));
+			
+		} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+			this.loginPanel.getSearchPwButton().setIcon(this.iconButtonImage(ImageEnum.LOGINPANEL_SEARCHPW_HOVER.getImageDir()));
+			
+		} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_LOGIN.getButtonName())) {
+			this.loginPanel.getLoginButton().setIcon(GetResources.getImageIcon(ImageEnum.LOGINPANEL_LOGIN_HOVER.getImageDir(),
+				LoginPanelEnum.LOGIN_ICON_WIDTH.getSize(),
+	            LoginPanelEnum.LOGIN_ICON_HEIGHT.getSize())
+			);
 		}
 	}
 	
@@ -86,29 +63,14 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 		String buttonName = e.getComponent().toString();
 		try {
 			if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
-				this.loginPanel.getJoinButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File(ImageEnum.LOGINPANEL_SIGHUP.getImageDir())).getScaledInstance(
-							LoginPanelEnum.ICON_SIZE_WIDTH.getSize(),
-							LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(),
-							Image.SCALE_AREA_AVERAGING))
-				);
+				this.loginPanel.getJoinButton().setIcon(this.iconButtonImage(ImageEnum.LOGINPANEL_SIGHUP.getImageDir()));
+			
 			} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
-				this.loginPanel.getSearchIdButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File(ImageEnum.LOGINPANEL_SEARCHID.getImageDir())).getScaledInstance(
-							LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
-							LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(), 
-							Image.SCALE_AREA_AVERAGING))
-				);
+				this.loginPanel.getSearchIdButton().setIcon(this.iconButtonImage(ImageEnum.LOGINPANEL_SEARCHID.getImageDir()));
+			
 			} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
-				this.loginPanel.getSearchPwButton().setIcon(
-					new ImageIcon(ImageIO.read(
-						new File(ImageEnum.LOGINPANEL_SEARCHPW.getImageDir())).getScaledInstance(
-							LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
-							LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(), 
-							Image.SCALE_AREA_AVERAGING))
-				);
+				this.loginPanel.getSearchPwButton().setIcon(this.iconButtonImage(ImageEnum.LOGINPANEL_SEARCHPW.getImageDir()));
+				
 			} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_LOGIN.getButtonName())) {
 				this.loginPanel.getLoginButton().setIcon(
 					new ImageIcon(ImageIO.read(
@@ -145,7 +107,6 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 					try {
 						this.loginPanel.getBasicFrame().newSearchPwdFrame();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 			}}
@@ -167,5 +128,11 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+	}
+	
+	public ImageIcon iconButtonImage(String imageDir) {
+		return GetResources.getImageIcon(imageDir, 
+				LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
+				LoginPanelEnum.ICON_SIZE_HEIGHT.getSize());
 	}
 }
