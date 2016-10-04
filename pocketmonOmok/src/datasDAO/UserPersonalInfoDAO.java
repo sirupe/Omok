@@ -324,4 +324,38 @@ public class UserPersonalInfoDAO {
 		
 		return result;
 	}
+	
+	// 회원탈퇴된 유저 정보 검색
+	public int loginDropUserCheck(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		ResultSet resultSet   = null;
+		
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		
+		int result = 0;
+		try {
+			connection = dbPool.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT USER_DROP_OUT ");
+			sql.append("FROM USER_PERSONAL_INFO ");
+			sql.append("WHERE USER_ID=?");
+			
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserID());
+			resultSet = ps.executeQuery();
+			
+			while(resultSet.next()) {
+				result = resultSet.getInt("USER_DROP_OUT");
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();		
+		} finally {
+			dbPool.freeConnection(connection, ps, resultSet);
+		}
+		
+		return result;
+	}
+	
 }

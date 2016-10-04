@@ -41,17 +41,12 @@ public class OmokServer {
 	private JoinDAO joinDAO;
 	private UserPersonalInfoDAO userPersonalDAO;
 	private UserGamedataInfoDAO gamedataDAO;
-	private UserStoreInfoDAO storeDAO;
-	private UserStoreSkinInfoDAO skinDAO;
 	
-
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
 		this.userPersonalDAO 	  = new UserPersonalInfoDAO();
 		this.gamedataDAO  = new UserGamedataInfoDAO();
-		this.storeDAO	  = new UserStoreInfoDAO();
-		this.skinDAO	  = new UserStoreSkinInfoDAO();
 		
 		this.loginUsersMap = new HashMap<String, OmokPersonalServer>();
 		this.gameRoomList  = new ArrayList<GameRoomInfoVO>();
@@ -79,8 +74,11 @@ public class OmokServer {
 		
 		// 만약 클라이언트의 정보가 DB에 있다면 
 		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
+			//사용자정보가 탈퇴유저라면
+			if(this.userPersonalDAO.loginDropUserCheck(inputUserPersonalInfo) == 0) {
+				resultDTO.setServerAction(ServerActionEnum.LOGIN_DROP_USER);
 			//클라이언트의 ID가 처음 인입된 것이라면
-			if(this.loginUsersMap.get(resultDTO.getUserID()) == null) {
+			} else if(this.loginUsersMap.get(resultDTO.getUserID()) == null) {
 				// 서버가 가지고 있을 유저목록에 추가
 				this.loginUsersMap.put(resultDTO.getUserID(), personalServer);
 				// 사용자에게 보낼 현재 접속자 목록에 추가

@@ -12,9 +12,9 @@ public enum ImageEnum {
 	LOGINPANEL_SEARCHID("resources/login/forgotID.png"),
 	LOGINPANEL_SEARCHPW("resources/login/forgotPW.png"),
 	LOGINPANEL_LOGIN_HOVER("resources/login/gamestartIconchange.png"),
-	LOGINPANEL_SIGNUP_HOVER("resources/login/signup.png"),
-	LOGINPANEL_SEARCHID_HOVER("resources/login/forgotID.png"),
-	LOGINPANEL_SEARCHPW_HOVER("resources/login/forgotPW.png"),
+	LOGINPANEL_SIGNUP_HOVER("resources/login/signupYellow.png"),
+	LOGINPANEL_SEARCHID_HOVER("resources/login/forgotIDYellow.png"),
+	LOGINPANEL_SEARCHPW_HOVER("resources/login/forgotPWYellow.png"),
 //WaitingRoom 이미지들---------------------------------------------------
 	WAITINGROOM_MYINFO_MODIFY("resources/waitingroom/correctInfo.png"),
 	WAITINGROOM_ENTER_POSSIBLE("resources/waitingRoom/admission.png"),
