@@ -189,12 +189,13 @@ public enum WaitingRoomEnum {
 	FONTCOLOR_DEFAULT(Color.green),
 	
 	
-	LABELFONT_SIZE60(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 60)),
+	LABELFONT_SIZE60(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.06))),
 	LABELFONT_SIZE70(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 70)),
-	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 80)),
-	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 90)),
-	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 100)),
+	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01))),
+	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01))),
+	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01))),
 	LABELFONT_SIZE130(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 130)),
+
 	
 	ROOM_NAMES(new String[] {
 			"즐거운 오목게임",
