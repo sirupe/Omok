@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -15,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -163,14 +166,14 @@ public class GameRoomPanel extends JPanel {
 		
 		this.time = 30;
 		this.timeBar = new JProgressBar(0, 30);
-		timeBar.setValue(time);
-		timeBar.setBounds(GameRoomEnum.GAME_TIMELIMIT_PROGRESS_RECT.getRect());
+		this.timeBar.setValue(time);
+		this.timeBar.setBounds(GameRoomEnum.GAME_TIMELIMIT_PROGRESS_RECT.getRect());
 		
 		
 		this.timeLabel = new JLabel("0:" + time.toString());
-		timeLabel.setBounds(GameRoomEnum.GAME_TIMELIMIT_TIMELABEL_RECT.getRect());
-		timeLabel.setForeground(Color.red);
-		timeLabel.setFont(GameRoomEnum.GAME_TIMELABEL_FONT.getFont());
+		this.timeLabel.setBounds(GameRoomEnum.GAME_TIMELIMIT_TIMELABEL_RECT.getRect());
+		this.timeLabel.setForeground(Color.red);
+		this.timeLabel.setFont(GameRoomEnum.GAME_TIMELABEL_FONT.getFont());
 		
 		//시간이 점점 줄어든다. 
 		
@@ -286,6 +289,14 @@ public class GameRoomPanel extends JPanel {
 		
 		JScrollPane scroll = new JScrollPane(chattingArea);
 		scroll.setBounds(GameRoomEnum.GAME_SCROLL_PANE_RECT.getRect());
+		scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+			
+			@Override
+			public void adjustmentValueChanged(AdjustmentEvent e) {
+				JScrollBar src = (JScrollBar)e.getSource();
+				src.setValue(src.getMaximum());
+			}
+		});
 		
 		this.chattingPanel.add(scroll);
 		this.chattingPanel.add(chattingField);
@@ -624,7 +635,7 @@ public class GameRoomPanel extends JPanel {
 		this.omokStonePanel.setVisible(true);
 	}
 	
-	// 나가기 버튼을 눌렀을 때 TODO RoomExit
+	// 나가기 버튼을 눌렀을 때 
 	public void exitGame() {
 		// 뜨는 팝업창에서 Yes 가 눌린 경우
 		if(new ConfirmDialog(this.basicFrame, "게임방을 나가시겠습니까?").isYesNoCheck()) {
@@ -636,23 +647,16 @@ public class GameRoomPanel extends JPanel {
 			// 게임방에 2명이 모두 들어온 경우
 			if(this.gameRoomInfo.getPersonNum() == 2) {
 				gameRoomInfo.setPersons(1);
-				// 오너인 경우
-				if(this.thisUserID.equals(this.gameRoomInfo.getOwner())) {
-					gameRoomInfo.setOwner(this.otherUserID);
+				gameRoomInfo.setOwner(this.otherUserID);
 				
-				// 게스트인 경우
-				} else {
-					gameRoomInfo.setOwner(this.otherUserID);
-				}
-					
 				// 게임방 패널의 유저이미지와 돌 이미지 초기화
-				this.setUserImage();
+				this.initUserGameRoomInfo();
 				this.stoneInit();
 			
 			// 게임방에 혼자 있었던 경우
 			} else {
 				gameRoomInfo.setOwner(null);
-				this.setUserImage();
+				this.initUserGameRoomInfo();
 				gameRoomInfo.setPersons(0);
 			}
 			// 서버에게 내가 방을 나가겠다는 정보를 보낸다. 
@@ -661,6 +665,19 @@ public class GameRoomPanel extends JPanel {
 			// 대기실로 나감.
 			this.basicFrame.showWaitingRoom();
 		}
+	}
+	
+	// 게임방 초기화
+	public void initUserGameRoomInfo() {// TODO
+		this.leftUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));
+		this.rightUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));
+		this.timeBar.setValue(time);
+		this.timeLabel.setText("0:30");
+		this.chattingArea.setText("");
+		this.rightUserId.setText(null);
+		this.rightUserLevel.setIcon(null);
+		this.leftUserId.setText(null);
+		this.leftUserLevel.setIcon(null);
 	}
 	
 	// 다른 유저가 방을 나가면 서버에서 내려준 바뀐 방정보를 내 게임방정보에 저장하고
@@ -681,7 +698,7 @@ public class GameRoomPanel extends JPanel {
 		this.leftUser.setIcon(this.myImage);
 		this.leftUserId.setText(this.thisUserID);
 		this.leftUserLevel.setIcon(this.myGradeImage);
-		// TODO 여기가 안됨
+
 		this.rightUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));
 		this.rightUserId.setText(null);
 		this.rightUserLevel.setIcon(null);

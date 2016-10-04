@@ -1,5 +1,6 @@
 package actions.waitingRoom;
 
+import java.awt.JobAttributes;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -57,13 +58,21 @@ public class WaitingRoomActions {
 		gameRoomInfo.setOwner(this.waitingRoomPanel.getBasicFrame().getUserID());
 		gameRoomInfo.setRoomNumber(this.waitingRoomPanel.getRoomNumber());
 		gameRoomInfo.setPersons(1);
+		
+		// 비밀방인 경우
 		if(this.openPrivate == 1) {
-			gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
-			gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
+			if(this.createRoom.getCreateRoomPwdText().getText().length() == 0) {
+				JOptionPane.showMessageDialog(this.createRoom, "비밀번호를 입력해주세요.", "", JOptionPane.WARNING_MESSAGE);
+			} else {
+				gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
+				gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
+				this.waitingRoomPanel.sendDTO(gameRoomInfo);
+			}
+		// 일반방인경우
 		} else {
 			gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
+			this.waitingRoomPanel.sendDTO(gameRoomInfo);
 		}
-		this.waitingRoomPanel.sendDTO(gameRoomInfo);
 	}
 	
 	// 메세지전송버튼이 텍스트필드의 엔터와 동일한 역할을 하게 하기 위해 값을 추가해줌.
