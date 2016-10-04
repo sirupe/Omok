@@ -272,7 +272,7 @@ public enum ModifyEnum {
    //수정버튼
    MODIFY_MODIFY_BUTTON(new Rectangle(
          (int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.25),
-         (int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4.4),
+         MODIFY_TELFRONTNUM_COMBO.getRectangle().y + DISTANCE.getSize(),
          MODIFY_AT_LABEL.getRectangle().width,
          (int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.07)
    )),
