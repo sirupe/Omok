@@ -53,9 +53,15 @@ public class ClientAccept {
 		switch(data.getServerAction()) {
 		// - 로그인 중 유저가 입력을 잘못했을 시
 		case LOGIN_FAIL_INPUT_ERROR :
+			this.loginRequestAction.loginFail("아이디, 패스워드를 제대로 입력해주세요.");
+			break;
+		// - 이미 탈퇴한 유저의 정보라면
+		case LOGIN_DROP_USER :
+			this.loginRequestAction.loginFail("이미 탈퇴한 유저입니다.");
+			break;
 		// - 로그인 중 이미 접속한 유저의 정보를 입력했을 시
 		case LOGIN_FAIL_OVERLAP_ACCEPT :
-			this.loginRequestAction.loginFail(data);
+			this.loginRequestAction.loginFail("이미 접속중인 유저입니다.");
 			break;
 		// 로그인에 성공했을 시
 		case LOGIN_SUCCESS :
