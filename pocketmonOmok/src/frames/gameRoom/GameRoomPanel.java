@@ -537,10 +537,10 @@ public class GameRoomPanel extends JPanel {
 			for (int j = 0, jLen = gameBoard[i].length; j < jLen; j++) {
 				String imageDir = null;
 				if(this.gameBoard[i][j] == 1) {
-					imageDir = ImageEnum.GAMEROOM_STONE_PIKACHU.getImageDir();
+					imageDir = ImageEnum.GAMEROOM_STONE_ROUND_PIKA.getImageDir();
 					this.gameBoardButtons[i][j].setIcon(this.getStoneImageIcon(imageDir));
 				} else if(this.gameBoard[i][j] == 2) {
-					imageDir = ImageEnum.GAMEROOM_STONE_CHARMANDER.getImageDir();
+					imageDir = ImageEnum.GAMEROOM_STONE_ROUND_KOBOOK.getImageDir();
 					this.gameBoardButtons[i][j].setIcon(this.getStoneImageIcon(imageDir));
 				}
 			}
