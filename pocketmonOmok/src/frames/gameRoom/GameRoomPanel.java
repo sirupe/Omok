@@ -600,11 +600,12 @@ public class GameRoomPanel extends JPanel {
 		this.y = 0;
 		
 		this.menuButtons[1].removeMouseListener(this.gameRoomAction);
+		
 		if(this.thisUserID.equals(this.gameRoomInfo.getGuest())) {
 			this.menuButtons[0].addMouseListener(this.gameRoomAction);
-			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START.getImageDir()));
+			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY.getImageDir()));
 		} else {
-			
+			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START.getImageDir()));
 		}
 		
 	}

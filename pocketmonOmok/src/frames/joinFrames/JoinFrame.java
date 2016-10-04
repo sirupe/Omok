@@ -786,11 +786,7 @@ public class JoinFrame extends JFrame {
 	public JLabel getEmailTimeLabel() {
 		return emailTimeLabel;
 	}
-	
-	
-	
-	
-	
+
 	public JComboBox<Integer> getDateChoice() {
 		return dateChoice;
 	}
