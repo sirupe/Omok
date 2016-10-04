@@ -337,6 +337,8 @@ import omokGame.client.ClientAccept;
 	
 			if(data.isEmailSuccess()) {
 				this.getSearchemailTextField().setEditable(false);
+				this.userNumberMsg("<html>인증번호 발송되었습니다." 
+						+"<br>인증번호 입력 바랍니다.<br></html>");
 				
 				JButton btn;
 				btn = this.searchConfirmButton;
@@ -429,7 +431,7 @@ import omokGame.client.ClientAccept;
 			UserPersonalInfoDTO data = (UserPersonalInfoDTO) userPosition;
 			
 			if(data.isCertificationNumber()) {
-				this.userNumberMsg("<html>인증완료!!." 
+				this.userNumberMsg("<html>인증완료!!" 
 						+"<br>비밀번호다시설정해주세요.<br></html>");
 				this.CheckNumberButton.setVisible(false);
 				this.searchConfirmTextField.setEditable(false);
