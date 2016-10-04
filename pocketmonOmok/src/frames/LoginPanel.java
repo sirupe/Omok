@@ -89,7 +89,7 @@ public class LoginPanel extends JPanel {
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
 	public void loginFail(String errMsg){
 		this.setLayout(null);
-		this.textFieldFont = new Font("", Font.BOLD, 20);      
+		this.textFieldFont = new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01));    
 		this.loginFailLabel.setBounds(
 					LoginPanelEnum.LOGIN_FAIL_TEXT_POSITION_X.getSize(),
 					LoginPanelEnum.LOGIN_FAIL_TEXT_POSITION_Y.getSize(),
@@ -99,7 +99,7 @@ public class LoginPanel extends JPanel {
 		this.loginFailLabel.setOpaque(false);
 		this.add(this.loginFailLabel);
 		
-		this.loginFailLabel.setFont(new Font("", Font.PLAIN, 13));
+		this.loginFailLabel.setFont(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.011)));   
 		this.loginFailLabel.setForeground(Color.RED);
 		this.loginFailLabel.setText(errMsg);
 	}
@@ -258,7 +258,7 @@ public class LoginPanel extends JPanel {
 					LoginPanelEnum.SIZE_TEXT_WIDTH.getSize(), 
 					LoginPanelEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
-		this.idField.setFont(this.textFieldFont);
+		this.idField.setFont(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.011)));   
 		
 		//비밀번호 입력창
 		this.pwField.setBounds(
@@ -267,7 +267,7 @@ public class LoginPanel extends JPanel {
 					LoginPanelEnum.SIZE_TEXT_WIDTH.getSize(), 
 					LoginPanelEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
-		this.pwField.setFont(this.textFieldFont);
+		this.pwField.setFont(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.011)));
 		
 		this.loginPanel.add(this.idField);
 		this.loginPanel.add(this.pwField);

@@ -83,9 +83,9 @@ public enum LoginPanelEnum {
 	//로그인 실패시 오류 알림 텍스트 표시 Y위치
 	LOGIN_FAIL_TEXT_POSITION_Y((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.455)),
 	//로그인 실패시 오류 알림 텍스트 표시 가로 크기
-	LOGIN_FAIL_TEXT_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.2)),
+	LOGIN_FAIL_TEXT_WIDTH((int)(LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.32)),
 	//로그인 실패시 오류 알림 텍스트 표시 세로 크기
-	LOGIN_FAIL_TEXT_HEIGTH((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.02)),
+	LOGIN_FAIL_TEXT_HEIGTH((int)(LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.022)),
 	
 	//============================================================================================
 	
