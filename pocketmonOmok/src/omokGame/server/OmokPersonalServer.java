@@ -67,7 +67,6 @@ public class OmokPersonalServer extends Thread {
 					break;
 				}
 			}
-			System.out.println("ÄÄ¿Â");
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}

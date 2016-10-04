@@ -26,6 +26,8 @@ public enum UserActionEnum {
 	USER_GAME_BOARD_INFO,		// 유저가 돌을 놓았다.
 	USER_GAME_ROOM_EXIT,		// 유저님 게임방 나가심
 	
-	USER_MODIFY_GET_MY_INFO;	// 유저님 수정하기 클릭하심 (내정보 가져오기)
-	
+	USER_MODIFY_GET_MY_INFO,	// 유저님 수정하기 클릭하심 (내정보 가져오기)
+	USER_MODIFY_UPDATE,			// 유저님 수정 정보 업데이트
+	USER_MODIFY_DROP,			// 회원탈퇴
+	USER_DROP_CERTAIN;			// 유저가 탈퇴하기로...
 }

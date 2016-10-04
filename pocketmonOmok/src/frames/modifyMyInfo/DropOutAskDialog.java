@@ -8,19 +8,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 
-public class DropOutAskFrame extends JFrame{
+public class DropOutAskDialog extends JDialog{
 	private Image backGround;
 	private JLabel dropOutLabel;
 	private JButton confirm;
 	private JButton reset;
 	
-	public DropOutAskFrame() throws IOException {
+	public DropOutAskDialog() throws IOException {
+		super();
 		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().width,
 				CorrectEnum.CORRECT_COMPLETE_FRAME_SIZE_RECT.getRect().height,
@@ -88,7 +90,7 @@ public class DropOutAskFrame extends JFrame{
 	}
 
 	public static void main(String[] args) throws IOException {
-		new DropOutAskFrame();
+		new DropOutAskDialog();
 	}
 
 }
