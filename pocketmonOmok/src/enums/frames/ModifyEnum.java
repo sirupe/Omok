@@ -10,7 +10,7 @@ import java.util.Map;
 
 import javax.swing.border.EmptyBorder;
 
-public enum ModifyJoinEnum {
+public enum ModifyEnum {
 	
 	
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
@@ -281,13 +281,13 @@ public enum ModifyJoinEnum {
 			"선택", "010", "011", "016", "019", "017"
 	}),
 	
-	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyJoinEnum.SCREEN_SIZE.getDimension().width / 100)),
+	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyEnum.SCREEN_SIZE.getDimension().width / 100)),
 	
 	//컴포넌트 폰트
-	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, ModifyJoinEnum.SCREEN_SIZE.getDimension().width / 120)),
+	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, ModifyEnum.SCREEN_SIZE.getDimension().width / 120)),
 
 	//정합성검사 라벨 폰트
-	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyJoinEnum.SCREEN_SIZE.getDimension().width / 150)),
+	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, ModifyEnum.SCREEN_SIZE.getDimension().width / 150)),
 	
 	//콤보박스 배경화면
 	CHOICEBACKGROUND(Color.black),
@@ -305,31 +305,31 @@ public enum ModifyJoinEnum {
 	private Rectangle rec;
 	private String[] strArr;
 	
-	private ModifyJoinEnum(Color color) {
+	private ModifyEnum(Color color) {
 		this.color = color;
 	}
-	private ModifyJoinEnum(Font font) {
+	private ModifyEnum(Font font) {
 		this.font = font;
 	}
-	private ModifyJoinEnum(EmptyBorder border) {
+	private ModifyEnum(EmptyBorder border) {
 		this.border = border;
 	}
 	
-	private ModifyJoinEnum(int size) {
+	private ModifyEnum(int size) {
 		this.size = size;
 	}
 	
-	private ModifyJoinEnum(Dimension dimension) {
+	private ModifyEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
-	private ModifyJoinEnum(Rectangle rec) {
+	private ModifyEnum(Rectangle rec) {
 		this.rec = rec;
 	}
 	public Rectangle getRectangle() {
 		return rec;
 	}
 	
-	private ModifyJoinEnum(String[] strArr) {
+	private ModifyEnum(String[] strArr) {
 		this.strArr = strArr;
 	}
 	

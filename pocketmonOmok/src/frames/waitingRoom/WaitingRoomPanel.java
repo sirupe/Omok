@@ -40,7 +40,7 @@ import datasDTO.RoomAndUserListDTO;
 import datasDTO.UserGamedataInfoDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
-import enums.frames.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomEnum;
 import frames.BasicFrame;
 import utility.GetResources;
 
@@ -139,8 +139,8 @@ public class WaitingRoomPanel extends JPanel {
 			}
 		};
 		
-		this.waitingRoomTable.getTableHeader().setFont(WaitingRoomSizesEnum.LABELFONT_SIZE80.getfont());//방타이틀글꼴
-		this.waitingRoomTable.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.waitingRoomTable.getTableHeader().setFont(WaitingRoomEnum.LABELFONT_SIZE80.getfont());//방타이틀글꼴
+		this.waitingRoomTable.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
 		this.waitingRoomTable.setForeground(Color.WHITE);
 		this.waitingRoomTable.setShowVerticalLines(false);                               //수직선을 그릴것인가
 		this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              //이동불가
@@ -255,7 +255,7 @@ public class WaitingRoomPanel extends JPanel {
             label.setIcon(imageMap.get((String) value));
             label.setHorizontalTextPosition(JLabel.RIGHT);
             label.setOpaque(false);
-            label.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+            label.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
             return label;
 		}
 	}
@@ -267,8 +267,8 @@ public class WaitingRoomPanel extends JPanel {
     		for(int i = 0, size = player.size(); i < size; i++) {
 		    	map.put(player.get(i), new ImageIcon(ImageIO.read(
             		new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade.get(i)))).getScaledInstance(
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+    					WaitingRoomEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+    					WaitingRoomEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
     					Image.SCALE_AREA_AVERAGING))
 		    	);
     		}
@@ -282,8 +282,8 @@ public class WaitingRoomPanel extends JPanel {
 		try{
 			this.imageMap.put(player, new ImageIcon(ImageIO.read(
 				new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade))).getScaledInstance(
-					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-					WaitingRoomSizesEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
+					WaitingRoomEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+					WaitingRoomEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING))
 			);
 		
@@ -305,8 +305,8 @@ public class WaitingRoomPanel extends JPanel {
 						new File("resources/waitingroom/waitingRoomList.png")),
 							0,
 							0,
-							WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_WIDTH.getSize(), 
-							WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_HEIGHT.getSize(), 
+							WaitingRoomEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_WIDTH.getSize(), 
+							WaitingRoomEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_HEIGHT.getSize(), 
 							this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -317,10 +317,10 @@ public class WaitingRoomPanel extends JPanel {
 		
 		//방리스트 배경 이미지를 가져옴
 		this.waitingRoomListBackground.setBounds(
-				WaitingRoomSizesEnum.WAITING_ROOM_LIST_BACKGROUND_POSITION_X.getSize(), 
-				WaitingRoomSizesEnum.WAITING_ROOM_LIST_BACKGROUND_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_WIDTH.getSize(), 
-				WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_HEIGHT.getSize()
+				WaitingRoomEnum.WAITING_ROOM_LIST_BACKGROUND_POSITION_X.getSize(), 
+				WaitingRoomEnum.WAITING_ROOM_LIST_BACKGROUND_POSITION_Y.getSize(), 
+				WaitingRoomEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_WIDTH.getSize(), 
+				WaitingRoomEnum.WAITING_ROOM_LIST_SIZE_BACKGROUND_HEIGHT.getSize()
 		);
 		
 		this.waitingRoomListScroll = new JScrollPane(this.waitingRoomTable);
@@ -329,8 +329,8 @@ public class WaitingRoomPanel extends JPanel {
 		//방리스트 위치와 크기를 가져옴
 				this.waitingRoomListScroll.setBounds(
 						0,0,
-						WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_WIDTH.getSize(),
-						WaitingRoomSizesEnum.WAITING_ROOM_LIST_SIZE_HEIGHT.getSize()
+						WaitingRoomEnum.WAITING_ROOM_LIST_SIZE_WIDTH.getSize(),
+						WaitingRoomEnum.WAITING_ROOM_LIST_SIZE_HEIGHT.getSize()
 				);	
 	
 		this.waitingRoomListBackground.setLayout(null);
@@ -344,14 +344,14 @@ public class WaitingRoomPanel extends JPanel {
 		this.chattingOutput.setBounds(
 				0,
 				0,
-				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize() - 20,
-				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
+				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize() - 20,
+				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
 		this.chattingScroll.setBounds(
-				WaitingRoomSizesEnum.CHATTING_OUTPUT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.CHATTING_OUTPUT_POSITION_Y.getSize(),
-				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize(),
-				WaitingRoomSizesEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
+				WaitingRoomEnum.CHATTING_OUTPUT_POSITION_X.getSize(),
+				WaitingRoomEnum.CHATTING_OUTPUT_POSITION_Y.getSize(),
+				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize(),
+				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
 		this.chattingScroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 			
@@ -365,76 +365,76 @@ public class WaitingRoomPanel extends JPanel {
 		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
 		this.chattingInputTextField.setBounds(
-				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_Y.getSize(),
-				WaitingRoomSizesEnum.CHATTING_INPUT_SIZE_WIDTH.getSize(),
-				WaitingRoomSizesEnum.CHATTING_INPUT_SIZE_HEIGHT.getSize()	
+				WaitingRoomEnum.CHATTING_INPUT_POSITION_X.getSize(),
+				WaitingRoomEnum.CHATTING_INPUT_POSITION_Y.getSize(),
+				WaitingRoomEnum.CHATTING_INPUT_SIZE_WIDTH.getSize(),
+				WaitingRoomEnum.CHATTING_INPUT_SIZE_HEIGHT.getSize()	
 		);
 		//노티스텍스트필드
 		this.noticeTextField.setBounds(
-				WaitingRoomSizesEnum.NOTICE_TEXTFIELD_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.CHATTING_INPUT_POSITION_Y.getSize(),
-				WaitingRoomSizesEnum.NOTICE_TEXTFIELD_WIDTH.getSize(),
-				WaitingRoomSizesEnum.CHATTING_INPUT_SIZE_HEIGHT.getSize()
+				WaitingRoomEnum.NOTICE_TEXTFIELD_POSITION_X.getSize(),
+				WaitingRoomEnum.CHATTING_INPUT_POSITION_Y.getSize(),
+				WaitingRoomEnum.NOTICE_TEXTFIELD_WIDTH.getSize(),
+				WaitingRoomEnum.CHATTING_INPUT_SIZE_HEIGHT.getSize()
 		);
 		this.noticeTextField.setEditable(false);
 		this.noticeTextField.setText("전체채팅");
 		
 		//메세지 버튼 위치와 크기를 가져옴
 		this.sendMessageButton.setBounds(
-				WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_POSITION_Y.getSize(),
-				WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_WIDTH.getSize(),
-				WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_HEIGHT.getSize()
+				WaitingRoomEnum.SEND_MESSAGE_BUTTON_POSITION_X.getSize(),
+				WaitingRoomEnum.SEND_MESSAGE_BUTTON_POSITION_Y.getSize(),
+				WaitingRoomEnum.SEND_MESSAGE_BUTTON_WIDTH.getSize(),
+				WaitingRoomEnum.SEND_MESSAGE_BUTTON_HEIGHT.getSize()
 		);
 		//메시지 버튼의 이미지를 불러옴
 		this.sendMessageButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File("resources/waitingroom/send.png")).getScaledInstance(
-					WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_WIDTH.getSize(),
-					WaitingRoomSizesEnum.SEND_MESSAGE_BUTTON_HEIGHT.getSize(),
+					WaitingRoomEnum.SEND_MESSAGE_BUTTON_WIDTH.getSize(),
+					WaitingRoomEnum.SEND_MESSAGE_BUTTON_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING))
 		);
 		
 		/******************************************************************************/
 		//내정보수정 버튼 위치와 크기를 가져옴
 		this.modifyInfoButton.setBounds(
-				WaitingRoomSizesEnum.GAMESTART_JBUTTON_POSITION_X.getSize(), 
-				WaitingRoomSizesEnum.GAMESTART_JBUTTON_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.GAMESTART_JBUTTON_WIDTH.getSize(),
-				WaitingRoomSizesEnum.GAMESTART_JBUTTON_HEIGHT.getSize()
+				WaitingRoomEnum.GAMESTART_JBUTTON_POSITION_X.getSize(), 
+				WaitingRoomEnum.GAMESTART_JBUTTON_POSITION_Y.getSize(), 
+				WaitingRoomEnum.GAMESTART_JBUTTON_WIDTH.getSize(),
+				WaitingRoomEnum.GAMESTART_JBUTTON_HEIGHT.getSize()
 		);
 		//내정보수정 버튼의 이미지를 불러옴
 		this.modifyInfoButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File(ImageEnum.WAITINGROOM_MYINFO_MODIFY.getImageDir())).getScaledInstance(
-					WaitingRoomSizesEnum.GAMESTART_JBUTTON_WIDTH.getSize(),
-					WaitingRoomSizesEnum.GAMESTART_JBUTTON_HEIGHT.getSize(),
+					WaitingRoomEnum.GAMESTART_JBUTTON_WIDTH.getSize(),
+					WaitingRoomEnum.GAMESTART_JBUTTON_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING))
 		);
 		/******************************************************************************/
 		//방생성 버튼 위치와 크기를 가져옴
 		this.createRoomButton.setBounds(
-				WaitingRoomSizesEnum.MODIFYINFO_JBUTTON_POSITION_X.getSize(), 
-				WaitingRoomSizesEnum.MODIFYINFO_JBUTTON_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MODIFYINFO_JBUTTON_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MODIFYINFO_JBUTTON_HEIGHT.getSize()
+				WaitingRoomEnum.MODIFYINFO_JBUTTON_POSITION_X.getSize(), 
+				WaitingRoomEnum.MODIFYINFO_JBUTTON_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MODIFYINFO_JBUTTON_WIDTH.getSize(),
+				WaitingRoomEnum.MODIFYINFO_JBUTTON_HEIGHT.getSize()
 		);
 		//방생성 버튼의 이미지를 불러옴
 		this.createRoomButton.setIcon(
 			new ImageIcon(ImageIO.read(
 				new File("resources/waitingroom/_createRoom.jpg")).getScaledInstance(
-					WaitingRoomSizesEnum.MODIFYINFO_JBUTTON_WIDTH.getSize() ,
-					WaitingRoomSizesEnum.MODIFYINFO_JBUTTON_HEIGHT.getSize(),
+					WaitingRoomEnum.MODIFYINFO_JBUTTON_WIDTH.getSize() ,
+					WaitingRoomEnum.MODIFYINFO_JBUTTON_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING))
 		);
 		/******************************************************************************/
 		
 		this.playerListScroll.setBounds(
-				WaitingRoomSizesEnum.PLAYERS_LIST_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.PLAYERS_LIST_POSITION_Y.getSize(),				
-				WaitingRoomSizesEnum.PLAYERS_LIST_WIDTH.getSize(),
-				WaitingRoomSizesEnum.PLAYERS_LIST_HEIGHT.getSize()		
+				WaitingRoomEnum.PLAYERS_LIST_POSITION_X.getSize(),
+				WaitingRoomEnum.PLAYERS_LIST_POSITION_Y.getSize(),				
+				WaitingRoomEnum.PLAYERS_LIST_WIDTH.getSize(),
+				WaitingRoomEnum.PLAYERS_LIST_HEIGHT.getSize()		
 		);
 				
 		//현재 접속중인 플래이어 배경 이미지를 불러올 JPanel 생성
@@ -447,8 +447,8 @@ public class WaitingRoomPanel extends JPanel {
 						new File("resources/waitingroom/waitingRoomInfo.png")),
 							0,
 							0,
-							WaitingRoomSizesEnum.PLAYERS_LIST_BACKGROUND_WIDTH.getSize(), 
-							WaitingRoomSizesEnum.PLAYERS_LIST_BACKGROUND_HEIGHT.getSize(), 
+							WaitingRoomEnum.PLAYERS_LIST_BACKGROUND_WIDTH.getSize(), 
+							WaitingRoomEnum.PLAYERS_LIST_BACKGROUND_HEIGHT.getSize(), 
 							this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -461,10 +461,10 @@ public class WaitingRoomPanel extends JPanel {
 		
 		//현재 접속중인 플래이어 배경 이미지 크기와 위치
 		this.playerListBackground.setBounds(
-				WaitingRoomSizesEnum.PLAYERS_LIST_BACKGROUND_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.PLAYERS_LIST_BACKGROUND_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.PLAYERS_LIST_BACKGROUND_WIDTH.getSize(),
-				WaitingRoomSizesEnum.PLAYERS_LIST_BACKGROUND_HEIGHT.getSize()
+				WaitingRoomEnum.PLAYERS_LIST_BACKGROUND_POSITION_X.getSize(),
+				WaitingRoomEnum.PLAYERS_LIST_BACKGROUND_POSITION_Y.getSize(), 
+				WaitingRoomEnum.PLAYERS_LIST_BACKGROUND_WIDTH.getSize(),
+				WaitingRoomEnum.PLAYERS_LIST_BACKGROUND_HEIGHT.getSize()
 		);
 		
 		this.playerListBackground.setOpaque(false);
@@ -473,73 +473,73 @@ public class WaitingRoomPanel extends JPanel {
 
 		//아이디, 아이디 텍스트
 		this.userIDTitleLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_USERID_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_USERID_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_USERID_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_USERID_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_USERID_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_USERID_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_USERID_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_USERID_HEIGHT.getSize()
 		);
 		this.userIDTextLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_USERID_TEXT_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_USERID_TEXT_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_USERID_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_USERID_TEXT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_USERID_TEXT_HEIGHT.getSize()
 		);
 		//전적, 전적 텍스트
 		this.scoreTitleLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_SCORE_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_SCORE_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_SCORE_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_SCORE_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_SCORE_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_SCORE_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_SCORE_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_SCORE_HEIGHT.getSize()
 		);
 		this.scoreTextLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_SCORE_TEXT_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_SCORE_TEXT_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_SCORE_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_SCORE_TEXT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_SCORE_TEXT_HEIGHT.getSize()
 		);
 		
 		//승률, 승률 텍스트
 		this.winningRateTitleLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_HEIGHT.getSize()
 		);
 		this.winningRateTextLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_WINNINGRATE_TEXT_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_TEXT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_WINNINGRATE_TEXT_HEIGHT.getSize()
 		);
 		
 		
 		//승점, 승점 텍스트
 		this.pointTitleLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_POINT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_POINT_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_POINT_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_POINT_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_POINT_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_POINT_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_POINT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_POINT_HEIGHT.getSize()
 		);
 		this.pointTextLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_POINT_TEXT_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_POINT_TEXT_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_POINT_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_POINT_TEXT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_POINT_TEXT_HEIGHT.getSize()
 		);
 		
 		
 		//등급, 등급 텍스트 이미지
 		this.levelTitleLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_LEVEL_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_LEVEL_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_LEVEL_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_LEVEL_HEIGHT.getSize()
 		);
 		this.levelImageLabel.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_POSITION_X.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
-				WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_LEVEL_TEXT_POSITION_X.getSize(),
+				WaitingRoomEnum.MY_INFO_LEVEL_TEXT_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()
 		);
 
 		//내정보 이미지 틀
@@ -552,8 +552,8 @@ public class WaitingRoomPanel extends JPanel {
 						new File("resources/waitingroom/imageframe.png")),
 							0,
 							0,
-							WaitingRoomSizesEnum.MY_INFO_IMAGE_WIDTH.getSize(), 
-							WaitingRoomSizesEnum.MY_INFO_IMAGE_HEIGHT.getSize(), 
+							WaitingRoomEnum.MY_INFO_IMAGE_WIDTH.getSize(), 
+							WaitingRoomEnum.MY_INFO_IMAGE_HEIGHT.getSize(), 
 							this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -562,19 +562,19 @@ public class WaitingRoomPanel extends JPanel {
 		};
 		this.myInfoImageBorder.setLayout(null);
 		this.userInfoImageLabel.setBounds(
-				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_X.getSize(),
-				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_Y.getSize(),
-				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
-				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize()
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_X.getSize(),
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_Y.getSize(),
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize()
 		);
 
 		this.myInfoImageBorder.add(userInfoImageLabel);
 		
 		this.myInfoImageBorder.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_X.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_IMAGE_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_IMAGE_WIDTH.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_IMAGE_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_IMAGE_POSITION_X.getSize(), 
+				WaitingRoomEnum.MY_INFO_IMAGE_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_IMAGE_WIDTH.getSize(), 
+				WaitingRoomEnum.MY_INFO_IMAGE_HEIGHT.getSize()
 		);
 		myInfoImageBorder.setOpaque(false);
 		
@@ -588,8 +588,8 @@ public class WaitingRoomPanel extends JPanel {
 						new File("resources/waitingroom/waitingRoomInfo.png")),
 							0,
 							0,
-							WaitingRoomSizesEnum.MY_INFO_WIDTH.getSize(), 
-							WaitingRoomSizesEnum.MY_INFO_HEIGHT.getSize(), 
+							WaitingRoomEnum.MY_INFO_WIDTH.getSize(), 
+							WaitingRoomEnum.MY_INFO_HEIGHT.getSize(), 
 							this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -599,10 +599,10 @@ public class WaitingRoomPanel extends JPanel {
 		
 		//나의 정보창의 위치와 크기를 불러옴
 		this.myInfo.setBounds(
-				WaitingRoomSizesEnum.MY_INFO_POSITION_X.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_POSITION_Y.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_WIDTH.getSize(), 
-				WaitingRoomSizesEnum.MY_INFO_HEIGHT.getSize()
+				WaitingRoomEnum.MY_INFO_POSITION_X.getSize(), 
+				WaitingRoomEnum.MY_INFO_POSITION_Y.getSize(), 
+				WaitingRoomEnum.MY_INFO_WIDTH.getSize(), 
+				WaitingRoomEnum.MY_INFO_HEIGHT.getSize()
 		);
 		
 		this.myInfo.setOpaque(false);
@@ -628,13 +628,13 @@ public class WaitingRoomPanel extends JPanel {
 		this.sendMessageButton.setFocusPainted(false);
 		
 		//방정보 폰트
-		this.userIDTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE80.getfont());
-		this.scoreTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
-		this.winningRateTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
-		this.pointTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE100.getfont());
-		this.levelTitleLabel.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
-		this.chattingInputTextField.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
-		this.chattingOutput.setFont(WaitingRoomSizesEnum.LABELFONT_SIZE90.getfont());
+		this.userIDTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE80.getfont());
+		this.scoreTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		this.winningRateTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		this.pointTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		this.levelTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
+		this.chattingInputTextField.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
+		this.chattingOutput.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
 		
 		
 		this.setLayout(null);
@@ -747,8 +747,8 @@ public class WaitingRoomPanel extends JPanel {
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
 		this.levelImageLabel.setIcon(GetResources.getImageIcon(dir, 
-					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
-					WaitingRoomSizesEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()));
+					WaitingRoomEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+					WaitingRoomEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()));
 	}
 	
 	public void updateDeleteRoom() {

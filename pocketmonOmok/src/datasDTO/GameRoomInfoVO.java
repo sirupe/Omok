@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import enums.etc.UserPositionEnum;
-import enums.frames.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomEnum;
 
 public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	private static final long serialVersionUID = 3443624527270954244L;
@@ -36,8 +36,8 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 		try {
 			this.enterImage = new ImageIcon(ImageIO.read(
 				new File(imageEnum)).getScaledInstance(
-					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
-					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
+					WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+					WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
 					Image.SCALE_AREA_AVERAGING)
 			);
 			this.enterImage.setDescription(imageEnum);

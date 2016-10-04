@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.border.EmptyBorder;
 
-public enum GameRoomCreateEnum {
+public enum CreateGameRoomEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	//전체 크기 지정
 	GAMEROOM_CREATE_FRAME_SIZE_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
@@ -90,17 +90,17 @@ public enum GameRoomCreateEnum {
 	private Rectangle rec;
 	private EmptyBorder border;
 
-	private GameRoomCreateEnum(Rectangle rec) {
+	private CreateGameRoomEnum(Rectangle rec) {
 		this.rec = rec;
 	}
-	private GameRoomCreateEnum(Dimension dimension) {
+	private CreateGameRoomEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
-	private GameRoomCreateEnum(int size) {
+	private CreateGameRoomEnum(int size) {
 		this.size = size;
 	}
-	private GameRoomCreateEnum(EmptyBorder border) {
+	private CreateGameRoomEnum(EmptyBorder border) {
 		this.border = border;
 	}
 	

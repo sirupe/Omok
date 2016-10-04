@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import actions.adapters.Adapters;import enums.frames.LoginSizesEnum;
+import actions.adapters.Adapters;import enums.frames.LoginPanelEnum;
 import frames.searchFrames.SearchRePwdPanel;
 import utility.RegexCheck;
 
@@ -27,7 +27,7 @@ public class FindRePwdAction extends Adapters {
 		String buttonName = ((JButton) e.getSource()).getName();
 		
 		//확인 버튼 눌렀을때
-		if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName())) {
+		if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName())) {
 			if(this.pwCheck()) {
 				return;
 			}

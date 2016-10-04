@@ -20,8 +20,7 @@ import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
-import enums.frames.LoginFrameSizesEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
 import frames.modifyMyInfo.ModifyMyInfoFrame;
@@ -54,18 +53,18 @@ public class BasicFrame extends JFrame implements Serializable{
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 		this.reimage = ImageIO.read(new File("resources/login/background.jpg")).getScaledInstance(
-					LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-					LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 					Image.SCALE_SMOOTH);
 		
 		this.setContentPane(new JLabel(new ImageIcon(reimage)));   
 		
 		//프레임 화면 출력 위치 설정
 		this.setBounds(   
-					LoginSizesEnum.LOGIN_FRAME_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_FRAME_POSITION_Y.getSize(),
-					LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
-					LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_FRAME_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_POSITION_Y.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
+					LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
 		);
 		
 		this.loginPanel = new LoginPanel(this);
@@ -82,8 +81,8 @@ public class BasicFrame extends JFrame implements Serializable{
 						new File("resources/login/blackhole.png")), 
 						0, 
 						0,
-						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+						LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+						LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 						this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -139,7 +138,7 @@ public class BasicFrame extends JFrame implements Serializable{
 						new File("resources/background/background.png")), 
 						0, 
 						0, 
-						LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+						LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 						this
 					);
 				} catch (IOException e) {
