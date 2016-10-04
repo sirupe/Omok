@@ -272,10 +272,11 @@ public enum ModifyEnum {
    //수정버튼
    MODIFY_MODIFY_BUTTON(new Rectangle(
          (int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.25),
-         (int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3.5),
+         (int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 4.4),
          MODIFY_AT_LABEL.getRectangle().width,
          (int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.07)
    )),
+   
    //취소
    MODIFY_CANCEL_BUTTON(new Rectangle(
          (int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.4),
@@ -283,6 +284,7 @@ public enum ModifyEnum {
          MODIFY_AT_LABEL.getRectangle().width,
          MODIFY_MODIFY_BUTTON.getRectangle().height
    )),
+   
    //탈퇴버튼
    MODIFY_DROPOUT_BUTTON(new Rectangle(
          (int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.55),
