@@ -24,7 +24,6 @@ public class ModifyMyInfoAction extends Adapters {
 			this.modifyFrame.clickCancelButton();
 			break;
 		case "modifyButton" :
-			System.out.println("이 버튼이 아닌거여 ?");
 			this.modifyFrame.confirmButtonCheck();
 			break;
 		case "dropoutButton" :
@@ -34,6 +33,7 @@ public class ModifyMyInfoAction extends Adapters {
 			this.modifyFrame.getCorrectPwdFrame().confirmButtonClick();
 			break;
 		case "reset" :
+//			this.modifyFrame.getCorrectPwdFrame().reset
 			break;
 			
 		}

@@ -192,6 +192,8 @@ public class ClientAccept {
 
 //개인정보 수정---------------------------------------------------------------------------------------------
 	public void modifyAction(AbstractEnumsDTO infoDTO) {
+		System.out.println("포지션 : " + infoDTO.getPosition());
+		System.out.println("서버액션 : " + infoDTO.getServerAction());
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)infoDTO;
 		switch(userPersonalDTO.getServerAction()) {
 		case MODIFY_USER_PERSONAL_INFO :
@@ -211,6 +213,12 @@ public class ClientAccept {
 			break;
 		case MODIFY_USER_SUCCESS :
 			this.basicFrame.getModifyMyInfoFrame().updateSuccess();
+			break;
+		case MODIFY_USER_DROPOUT_SUCCESS :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropOutSuccess();
+			break;
+		case MODIFY_USER_DROPOUT_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropOutFail();
 			break;
 		default:
 			break;
