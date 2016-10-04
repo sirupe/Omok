@@ -181,8 +181,8 @@ public class JoinFrame extends JFrame {
 		//전체 프레임 크기 출력
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 	    backGround = ImageIO.read(
-	    		//배경이미지 join.png로 바꾸세욤
-	   		  new File("resources/signUp/join.png")).getScaledInstance(
+
+	   		  new File("resources/backGround/join.png")).getScaledInstance(
 	                   JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 	                   JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 	                   Image.SCALE_SMOOTH
@@ -787,11 +787,7 @@ public class JoinFrame extends JFrame {
 	public JLabel getEmailTimeLabel() {
 		return emailTimeLabel;
 	}
-	
-	
-	
-	
-	
+
 	public JComboBox<Integer> getDateChoice() {
 		return dateChoice;
 	}

@@ -181,21 +181,21 @@ public enum WaitingRoomSizesEnum {
 	USER_INFO_VIEW_SIZE_X((int)(MY_INFO_IMAGE_WIDTH.getSize() * 0.05)),
 	USER_INFO_VIEW_SIZE_Y((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.05)),
 	USER_INFO_VIEW_SIZE_WIDTH((int)(MY_INFO_IMAGE_WIDTH.getSize() * 0.9)),
-	USER_INFO_VIEW_SIZE_HEIGHT((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.9)),
+	USER_INFO_VIEW_SIZE_HEIGHT((int)(MY_INFO_IMAGE_HEIGHT.getSize() * 0.9));
 	
 	//==================================FONTSIZE&COLOR==================================
 	
-	FONTCOLOR_ERROR(Color.red),
-	FONTCOLOR_DEFAULT(Color.green),
-	
-	
-	LABELFONT_SIZE60(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 60)),
-	LABELFONT_SIZE70(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 70)),
-	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 80)),
-	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 90)),
-	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 100)),
-	LABELFONT_SIZE130(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 130));
-	
+//	FONTCOLOR_ERROR(Color.red),
+//	FONTCOLOR_DEFAULT(Color.green),
+//	
+//	
+//	LABELFONT_SIZE60(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 60)),
+//	LABELFONT_SIZE70(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 70)),
+//	LABELFONT_SIZE80(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 80)),
+//	LABELFONT_SIZE90(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 90)),
+//	LABELFONT_SIZE100(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 100)),
+//	LABELFONT_SIZE130(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 130));
+//	
 	
 	
 	

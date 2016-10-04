@@ -14,7 +14,7 @@ public enum ModifyEnum {
    
    
    SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-   DISTANCE((int)(SCREEN_SIZE.getDimension().height * 0.07)),
+   DISTANCE((int)(SCREEN_SIZE.getDimension().height * 0.065)),
    
    MODIFY_JOINFRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.3)),
    MODIFY_JOINFRMAE_SIZE_HEIGHT((int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 1.4)),   
