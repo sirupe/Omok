@@ -51,8 +51,8 @@ public class ClientReceiver extends Thread {
 				case POSITION_GAME_ROOM :
 					this.clientAccept.inGameRoom(userPosition);
 					break;
-				case POSITION_STORE :             
-					break;
+//				case POSITION_STORE :             
+//					break;
 				case POSITION_MODIFY_MY_INFO :
 					this.clientAccept.modifyAction(userPosition);
 					break;
