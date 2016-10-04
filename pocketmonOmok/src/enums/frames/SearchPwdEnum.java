@@ -101,14 +101,14 @@ public enum SearchPwdEnum {
    SEARCH_CANCEL_BUTTON(new Rectangle(
          (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.18),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.95),
-         (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.2),
-         (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.14)
+         (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
+         (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
          )),
 
    //확인 버튼 생성
    SEARCH_CHECK_BUTTON(new Rectangle(
          (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.35),
-         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.93),
+         (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.95),
          (int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.18),
          (int)(SEARCH_PWD_FRAME_HEIGHT.getSize() * 0.15)
          )),
