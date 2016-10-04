@@ -627,11 +627,17 @@ public class WaitingRoomPanel extends JPanel {
 		
 		//방정보 폰트
 		this.userIDTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE80.getfont());
+		
 		this.scoreTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		
 		this.winningRateTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		
 		this.pointTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		
 		this.levelTitleLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
+		
 		this.chattingInputTextField.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
+		
 		this.chattingOutput.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
 		
 		
@@ -742,6 +748,11 @@ public class WaitingRoomPanel extends JPanel {
 		this.userIDTextLabel.setText(userGameData.getUserID());
 		this.winningRateTextLabel.setText(String.valueOf(winRate));
 		this.userInfoImageLabel.setIcon(userGameData.getUserWaitingRoomImage());
+		
+		this.userIDTextLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE80.getfont());
+		this.pointTextLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		this.scoreTextLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
+		this.winningRateTextLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
 		this.levelImageLabel.setIcon(GetResources.getImageIcon(dir, 
