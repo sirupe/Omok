@@ -21,7 +21,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import frames.BasicFrame;
@@ -59,8 +59,7 @@ import omokGame.client.ClientAccept;
 			
 			
 		    this.setLayout(null);
-		     
-		
+
 			//라벨 생성 TODO
 			this.searchIdLabel    = new JLabel("ID");
 			this.searchemailLabel = new JLabel("Email");
@@ -75,6 +74,7 @@ import omokGame.client.ClientAccept;
 			this.add(searchemailLabel);
 			
 			//this.add(searchConfirmButton);
+			
 			//레이블 폰트 - searchIdEnum 에서 불러왔습니다.
 			Font default_Font  = SearchIDEnum.LABELFONT_DEFAULT.getFont(); //일반
 			Font error_FONT    = SearchIDEnum.LABELFONT_ERROR.getFont(); //에러
@@ -158,8 +158,10 @@ import omokGame.client.ClientAccept;
 		
 		//이름, 이메일 , 에러 메세지  레이블 위치 및 크기
 		public void setLabelPosition() {
-			//아이디라벨 위치및 크기
+			
+		//아이디라벨 위치및 크기
 		this.searchIdLabel.setBounds(SearchPwdEnum.SEARCH_ID_LABEL.getRectangle());
+		
 		//이메일 라벨 위치 및 크기
 		this.searchemailLabel.setBounds(SearchPwdEnum.SEARCH_EMAIL_LABEL.getRectangle());
 		
@@ -207,10 +209,10 @@ import omokGame.client.ClientAccept;
 							SearchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
 							SearchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
-			);
+				);
 		
 		this.searchConfirmButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle()); 
-		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName());
+		this.searchConfirmButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName());
 		
 		this.add(searchConfirmButton);
 		this.getSearchConfirmButton().setVisible(true);
@@ -235,7 +237,7 @@ import omokGame.client.ClientAccept;
 			);
 		
 		this.CheckNumberButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_CHECK_BUTTON.getRectangle()); 
-		this.CheckNumberButton.setName(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
+		this.CheckNumberButton.setName(LoginPanelEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
 		
 		this.add(CheckNumberButton);
 		this.CheckNumberButton.setVisible(false);
@@ -258,10 +260,11 @@ import omokGame.client.ClientAccept;
 							SearchPwdEnum.SEARCH_CANCEL_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
 		);
+		
 		this.searchCancelButton.setBounds(SearchPwdEnum.SEARCH_CANCEL_BUTTON.getRectangle()); 
 		this.add(searchCancelButton); 
 		
-		this.searchCancelButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName());
+		this.searchCancelButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName());
 		this.searchCancelButton.addActionListener(this.findPwdAction); 
 		
 		
@@ -275,7 +278,7 @@ import omokGame.client.ClientAccept;
 							SearchPwdEnum.SEARCH_CHECK_BUTTON.getRectangle().width,
 							SearchPwdEnum.SEARCH_CHECK_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
-		);
+				);
 		
 		this.searchCheckButton.setBorderPainted(false);
 		this.searchCheckButton.setFocusPainted(false);
@@ -283,18 +286,18 @@ import omokGame.client.ClientAccept;
 		
 		this.searchCheckButton.setBounds(SearchPwdEnum.SEARCH_CHECK_BUTTON.getRectangle()); 
 		this.add(searchCheckButton); 
-		this.searchCheckButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
+		this.searchCheckButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
 		this.searchCheckButton.addActionListener(this.findPwdAction); 
 		} 
 		
 //====================액션처리========================================================================================================
+		
 		//취소버튼을 눌렀을 때 처리하는 메소드
 		public void doCancelButton() {
 			this.searchPwdFrame.doCancelButton(); //여기에서 searchPwdFrame에 접근해서 docancel실행
 		}
 		
 		public void getChangePanel(AbstractEnumsDTO userPosition) {
-			// 아이디값 + 이메일값을 서버로 보내서.
 			UserPersonalInfoDTO data = (UserPersonalInfoDTO) userPosition;
 			
 			if(data.getUserCount() == 0) {
@@ -324,7 +327,6 @@ import omokGame.client.ClientAccept;
 			try {
 				oos.writeObject(userPersonalInfoDTO);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -378,8 +380,7 @@ import omokGame.client.ClientAccept;
 						}
 					}
 				}
-				
-				
+
 				//시간이 지난 후 카운트 삭제
 				this.searchTimeLabel.setText("");
 				this.searchTimeLabel.setVisible(false);
@@ -404,6 +405,8 @@ import omokGame.client.ClientAccept;
 		//확인 버튼 누를시 발생하는 메소드 -- > 인증번호이 입력된 후 발생 되는 메소드
 		public void confirmNumberCheck() {
 			String certificationNumber = getSearchConfirmTextField().getText();
+			
+			//TODO
 			System.out.println(certificationNumber + " : 이건 사용자가 쓴 번호");
 			
 			BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
@@ -417,7 +420,6 @@ import omokGame.client.ClientAccept;
 			try {
 				oos.writeObject(userPersonalInfoDTO);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -431,6 +433,7 @@ import omokGame.client.ClientAccept;
 						+"<br>비밀번호다시설정해주세요.<br></html>");
 				this.CheckNumberButton.setVisible(false);
 				this.searchConfirmTextField.setEditable(false);
+				
 				//시간이 지난 후 카운트 삭제
 				this.searchTimeLabel.setText("");
 				this.searchTimeLabel.setVisible(false);
@@ -479,7 +482,7 @@ import omokGame.client.ClientAccept;
 			try {
 				oos.writeObject(userPersonalDTO);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		
@@ -494,42 +497,55 @@ import omokGame.client.ClientAccept;
 	    public SearchPwdFrame getSearchPwdFrame() {
 	    	return searchPwdFrame;
 	    }
+	    
 	    public JLabel getSearchIdLabel() {
 	    	return searchIdLabel;
 	    }
+	    
 	    public JLabel getSearchemailLabel() {
 	    	return searchemailLabel;
 	    }
+	    
 	    public JLabel getSearchAnswerMsg() {
 	    	return searchAnswerMsgLabel;
 	    }
+	    
 	    public JLabel getSearchTimeLabel() {
 	    	return searchTimeLabel;
 	    }
+	    
 	    public JTextField getSearchIdTextField() {
 	    	return searchIdTextField;
 	    }
+	    
 	    public JTextField getSearchemailTextField() {
 	    	return searchemailTextField;
 	    }
+	    
 	    public JTextField getSearchConfirmTextField() {
 	    	return searchConfirmTextField;
 	    }
+	    
 	    public JButton getSearchConfirmButton() { //인증버튼
 	    	return searchConfirmButton;
 	    }
+	    
 	    public JButton getSearchCancelButton() { //취소버튼
 	    	return searchCancelButton;
 	    }
+	    
 	    public JButton getCheckNumberButton() { //인증번호와 맞는지 보는 확인버튼
 	    	return CheckNumberButton;
 	    }
+	    
 	    public JButton getsearchCheckButton() { //마지막 확인 버튼
 	    	return searchCheckButton;
 	    }
+	    
 		public void setEmailConfirmLimitTime(boolean isEmailConfirmLimitTime) {
 			this.isEmailConfirmLimitTime = isEmailConfirmLimitTime;
 		}
+		
 		public boolean isEmailConfirmLimitTime() {
 			return isEmailConfirmLimitTime;
 		}

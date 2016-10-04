@@ -120,10 +120,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
           
           
         this.setLayout(this.cardLayout);
-         
-         
-          
-      	this.add("searchPwdPanel",this.searchPwdPanel);
+        this.add("searchPwdPanel",this.searchPwdPanel);
       	this.add("searchRePwdPanel", this.searchRePwdPanel);
       	this.add("searchChangeConfirmPanel", this.searchChangePanel);
   
@@ -149,13 +146,12 @@ public class SearchPwdFrame extends JFrame implements Serializable {
     }
 
     public void getCerficartion(UserPersonalInfoDTO userPersonalInfoDTO) {
-      try {
-         this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
-     } catch (IOException e) {
-    	 e.printStackTrace();
-     }
+    	try {
+    		this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
+    	} catch (IOException e) {
+    	 	e.printStackTrace();
+    	}
     }
-    
     public void receiverSuccess(AbstractEnumsDTO userPosition) {
     	
     	switch (userPosition.getUserAction()) {
@@ -175,11 +171,7 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 			break;
 		}
     }
-   
-    public void inSearchRePwdFrame() {
-  	  	System.out.println("");
-    }
-
+    
     public SearchPwdPanel getSearchPwdPanel() {
       return searchPwdPanel;
     }
@@ -191,9 +183,8 @@ public class SearchPwdFrame extends JFrame implements Serializable {
     public SearchRePwdPanel getSearchRePanel() {
       return searchRePwdPanel;
     }
+    
     public BasicFrame getBasicFrame() {
     	return basicFrame;
     }
-
- 
 }

@@ -158,7 +158,6 @@ public class UserPersonalInfoDAO {
 			resultSet = ps.executeQuery();
 			
 			while(resultSet.next()) {
-				System.out.println("DAO 쿼리 진입");
 				userPersonalInfo.setUserCount(resultSet.getInt("COUNT"));
 			}	
 		} catch (Exception e) {
@@ -194,13 +193,7 @@ public class UserPersonalInfoDAO {
 			ps.setString(2, personalDTO.getUserID());
 			
 			result = ps.executeUpdate();
-			
-			System.out.println(userPersonalInfo.getUserID() + " : 아이디");
-			System.out.println(userPersonalInfo.getUserPasswd() + ": 비밀번호");
-			System.out.println(result + " : 요건 답이 무야");
-			
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

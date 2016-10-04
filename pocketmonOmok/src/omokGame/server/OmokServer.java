@@ -317,7 +317,6 @@ public class OmokServer {
 			ownerGameRoomDTO.setGuestGender(guestGender);
 			ownerGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getGuest()));
 			ownerGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_OWNER);
-			System.out.println("오너 - 다른유저 등급 : " + this.gamedataDAO.userGameData(roomVO.getGuest()).getUserGrade());
 			this.loginUsersMap.get(roomOwnerVO.getOwner()).getServerOutputStream().writeObject(ownerGameRoomDTO);
 			
 			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(null);
@@ -492,11 +491,6 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 }
 
 	
-	public void findPW() {
-		System.out.println("비밀번호찾기");
-	}
-	
-	
 //게임방----------------------------------------------------------------------------------------------------
 	public void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		switch(index.getUserAction()) {
@@ -612,11 +606,9 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 		String nowTurnUser  = gameBoard.getNowTurnUser();
 		GameBoardVO sendGameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
 		if(gameBoard.getWinUser() == null) {
-			System.out.println("이긴사람 없음");
 			sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_SEND_BOARD_INFO);
 		} else {
 			// win 유저정보가 있다면 DAO 에 이긴 유저의 정보를 업데이트 한다.
-			System.out.println("이긴사람  : " + gameBoard.getWinUser());
 			sendGameBoardVO.setServerAction(ServerActionEnum.GAME_ROOM_WINNER_INFO);
 			sendGameBoardVO.setWinUser(gameBoard.getWinUser());
 			sendGameBoardVO.setLoseUser(gameBoard.getLoseUser());
@@ -631,7 +623,6 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 		sendGameBoardVO.setNowTurnUser(nextTurnUser);
 
 		try {
-			System.out.println(nextTurnUser);
 			personalServer.getServerOutputStream().writeObject(sendGameBoardVO);
 			this.loginUsersMap.get(nextTurnUser).getServerOutputStream().writeObject(sendGameBoardVO);
 		} catch (IOException e) {
@@ -654,13 +645,11 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 		try {			
 			// 방이 없어진 것이 아니라면 남겨진 유저에게 정보를 전달해주어야 한다.
 			if(pasteRoomInfoVO.getPersonNum() > 0) {
-				System.out.println("유저 두 명 중 한명이 나갔다.");
 				for(int i = 0, len = this.gameRoomList.size(); i < len; i++) {
 					if(this.gameRoomList.get(i).getRoomNumber() == gameRoomInfoVO.getRoomNumber()) {
 						pasteRoomInfoVO.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
 						this.gameRoomList.set(i, pasteRoomInfoVO);
 						pasteRoomInfoVO.setServerAction(ServerActionEnum.GAME_ROOM_EXIT_OTHER_USER);
-						System.out.println("남아있는 유저는 : " + pasteRoomInfoVO.getOwner());
 						this.loginUsersMap.get(pasteRoomInfoVO.getOwner()).getServerOutputStream().writeObject(pasteRoomInfoVO);
 						break;
 					}
@@ -698,7 +687,6 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 			
 			roomList.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
 			roomList.setGameRoomList(pasteGameRoomList);
-			System.out.println("현재 게임방 리스트 : " + roomList.getGameRoomList().size());
 			for(String userID : this.loginUsersMap.keySet()) {
 				this.loginUsersMap.get(userID).getServerOutputStream().writeObject(roomList);
 			}

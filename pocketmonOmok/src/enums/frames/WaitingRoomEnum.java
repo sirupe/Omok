@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
-public enum WaitingRoomSizesEnum {
+public enum WaitingRoomEnum {
 	//로그인창의 x,y 값
 	WAITINGROOM_LABEL_POSITION_X((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.01)),
 	WAITINGROOM_LABEL_POSITION_Y((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03)),
@@ -205,24 +205,21 @@ public enum WaitingRoomSizesEnum {
 	private Color color;
 	private Dimension dimension;
 	
-	private WaitingRoomSizesEnum() {}
+	private WaitingRoomEnum() {}
 	
 
 	
 	//()<- 이안에 들어갈 것들이 문자형인데 이것을 정수형으로 바꿔주기위해 
-	private WaitingRoomSizesEnum(int x) {
+	private WaitingRoomEnum(int x) {
 		this.size = x;
 	}
-	
-	private WaitingRoomSizesEnum(Font font) {
+	private WaitingRoomEnum(Font font) {
 		this.font = font;
 	}
-	
-	private WaitingRoomSizesEnum(Color color) {
+	private WaitingRoomEnum(Color color) {
 		this.color = color;
 	}
-	
-	private WaitingRoomSizesEnum(Dimension dimension) {
+	private WaitingRoomEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
 	
@@ -230,15 +227,12 @@ public enum WaitingRoomSizesEnum {
 	public int getSize() {
 		return size;
 	}
-	
 	public Font getfont() {
 		return font;
 	}
-	
 	public Color getColot() {	
 		return color;
 	}
-	
 	public Dimension getDimension() {
 		return dimension;
 	}

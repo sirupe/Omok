@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GameStoreEnum;
-import enums.frames.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomEnum;
 import enums.frames.SearchIDEnum;
 
 
@@ -63,6 +63,7 @@ public class GameStorePanel extends JPanel {
 		this.setOpaque(false);	
 		this.setVisible(true);	
 	}	
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -79,19 +80,15 @@ public class GameStorePanel extends JPanel {
 		}
 	}
 
-
-
 	//사용자 보유 금액, 충전하기 
 	public void setUserPanel() throws IOException {
 		this.userMoneyPanel.setBounds(GameStoreEnum.STORE_USER_MONEY_PANEL_REC.getRectangle());
 		this.userMoneyPanel.setLayout(null);
-		//this.userMoneyPanel.setBackground(Color.black);
 		
 		JTextField userMoney = new JTextField("보유한 금액");
 		this.userMoney.setBounds(GameStoreEnum.STORE_USER_MONEY_REC.getRectangle());
 		this.userMoney.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.userMoney.setBorder(GameStoreEnum.LABEL_LINE.getMatteBorder());
-		//userMoney.setBackground(Color.red);
 		
 		JButton userConfirm = new JButton() {	
 			@Override
@@ -131,6 +128,7 @@ public class GameStorePanel extends JPanel {
 			GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(), 
 			GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize()
 		);
+		
 		this.itemChoicePanel.setOpaque(false);
 		this.itemChoicePanel.setLayout(null);
 		this.itemChoicePanel.setBounds(GameStoreEnum.STORE_ITEM_CHOICE_PANEL_REC.getRectangle());
@@ -284,7 +282,6 @@ public class GameStorePanel extends JPanel {
 	public void setOutPanel() {
 		this.outPanel.setLayout(null);
 		this.outPanel.setBounds(GameStoreEnum.STORE_OUT_PANEL_REC.getRectangle());
-		//this.outPanel.setBackground(Color.PINK);
 		
 		JButton OutButton = new JButton() {
 			@Override

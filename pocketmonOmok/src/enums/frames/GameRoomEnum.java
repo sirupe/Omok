@@ -7,10 +7,10 @@ import java.awt.Rectangle;
 public enum GameRoomEnum {
 //오목판 설정값--------------------------------------------------------------
 	GAME_BOARD_PANEL_RECT(new Rectangle(
-			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.01),
-			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03),
-			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64),
-			(int)(LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64)			
+			(int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.01),
+			(int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.03),
+			(int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64),
+			(int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.64)			
 	)),
 	
 	GAME_BOARD_SIZE(15),
@@ -34,9 +34,9 @@ public enum GameRoomEnum {
 //유저이미지 설정값------------------------------------------------------------	
 	GAME_USERIMAGE_PANEL_RECT(new Rectangle(
 			(int) (GAME_BOARD_PANEL_RECT.getRect().getMaxX() + 10),
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 8,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 34,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 35
+			LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 8,
+			LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() / 100 * 34,
+			LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 35
 	)),
 
 	GAME_USERIMAGE_LEFT_RECT(new Rectangle(
@@ -88,7 +88,7 @@ public enum GameRoomEnum {
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
 			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().getMaxY() * 1.05),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			(int) (LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.15)
+			(int) (LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.15)
 	)),
 	//TODO 
 	GAME_BUTTON_SIZE_RECT(new Rectangle(
@@ -126,7 +126,7 @@ public enum GameRoomEnum {
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
 			GAME_BOARD_PANEL_RECT.getRect().y,
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 4
+			LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 4
 	)),
 	
 	GAME_TIMELIMIT_PROGRESS_RECT(new Rectangle(
@@ -149,7 +149,7 @@ public enum GameRoomEnum {
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
 			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY() * 0.96),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
-			LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 48
+			LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() / 100 * 48
 	)),
 	
 	GAME_SCROLL_PANE_RECT(new Rectangle(
@@ -212,8 +212,8 @@ public enum GameRoomEnum {
 //폰트설정----------------------------------------------------------------	
 	GAMEROOM_USERID_FONT(new Font("a으라차차",Font.BOLD,20)),
 	GAMEROOM_USERIF_FONT_COLOR(Color.white),
-	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
-	GAME_CHATTING_FONT(new Font("돋움", Font.PLAIN, LoginSizesEnum.SCREEN_SIZE.getDimension().width / 130));
+	GAME_TIMELABEL_FONT(new Font("Consolas", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 100)),
+	GAME_CHATTING_FONT(new Font("돋움", Font.PLAIN, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 130));
 //======================================================================
 	private Rectangle rect;
 	private String[] buttonName;

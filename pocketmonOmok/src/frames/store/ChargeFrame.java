@@ -13,7 +13,6 @@ import enums.frames.ChargeEnum;
 public class ChargeFrame extends JFrame {
 	
 	private ChargePanel chargePanel;
-	private Image backGround;
 	
 	public ChargeFrame() throws IOException {
 		
@@ -41,8 +40,8 @@ public class ChargeFrame extends JFrame {
 				ChargeEnum.CHARGE_FRAME_SIZE_WIDTH.getSize(),
 				ChargeEnum.CHARGE_FRAME_SIZE_HEIGHT.getSize()
 		);
-		this.chargePanel.setOpaque(false);
 		
+		this.chargePanel.setOpaque(false);
 		this.setBounds(
 				ChargeEnum.CHARGE_FRAME_SIZE_POSITION_X.getSize(),
 				ChargeEnum.CHARGE_FRAME_SIZE_POSITION_Y.getSize(),
@@ -50,16 +49,9 @@ public class ChargeFrame extends JFrame {
 				ChargeEnum.CHARGE_FRAME_SIZE_HEIGHT.getSize()
 		);
 		
-
 		this.getContentPane().add(chargePanel);
 		this.setTitle("ÃæÀü");
 		this.setResizable(false);
 		this.setVisible(true);
-	}
-	
-
-	
-	public static void main(String[] args) throws IOException {
-		new ChargeFrame();
 	}
 }

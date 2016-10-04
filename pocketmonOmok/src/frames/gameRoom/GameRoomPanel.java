@@ -327,7 +327,6 @@ public class GameRoomPanel extends JPanel {
 				this.otherUserID = this.gameRoomInfo.getOwner();
 				this.leftUser.setIcon(this.getUserImageIcon(ownerImageDir));
 				this.leftUserId.setText(this.otherUserID);
-				System.out.println("그래서시발 오너 등급이 뭐야 " + inGameUserInfo.getOtherGameData().getUserGrade());
 				this.leftUserLevel.setIcon(GetResources.getImageIcon(
 						gradeImageMap.get(inGameUserInfo.getOtherGameData().getUserGrade()), 
 						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().width, 
@@ -347,7 +346,6 @@ public class GameRoomPanel extends JPanel {
 		
 		this.gameRoomInfo = userInGameRoomDTO.getGameRoomInfo();
 		this.chattingField.setEditable(true);
-		System.out.println("게스트가 입장하였다. : " + this.gameRoomInfo.getGuest());
 		this.otherUserID = this.gameRoomInfo.getGuest();
 		String imageDir = userInGameRoomDTO.getGuestGender() == 1 ? 
 				ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
@@ -588,9 +586,7 @@ public class GameRoomPanel extends JPanel {
 		this.gameBoard = gameBoardVO.getGameBoard();
 		this.x = gameBoardVO.getX();
 		this.y = gameBoardVO.getY();
-		
-		System.out.println("winUser : " + gameBoardVO.getWinUser());
-		System.out.println("thisUSer : " + thisUserID);
+
 		if(gameBoardVO.getWinUser().equals(this.thisUserID)) {
 			new GameEndDialog(this.basicFrame,"승리하셨습니다 :D");
 		} else {
@@ -733,7 +729,6 @@ public class GameRoomPanel extends JPanel {
 							: thisUserID) 
 						: thisUserID) 
 					: thisUserID);
-				System.out.println("클라이언트 측 이긴 유저 정보 : " + gameBoardVO.getWinUser());
 				if(gameBoardVO.getWinUser() != null) {
 					gameBoardVO.setLoseUser(otherUserID);
 				}

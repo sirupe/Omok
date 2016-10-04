@@ -107,6 +107,7 @@ public class SearchIdFrame extends JFrame  {
 	public void doConfirmButton(){	
 		this.cardLayout.show(this.getContentPane(), "searchIdResultPanel");
 	}
+	
 	//ID검색 패널로 바꿔주는 매소드
 	public void searchIdPanel() {
 		this.cardLayout.show(this.getContentPane(), "searchIdPanel");
@@ -116,10 +117,12 @@ public class SearchIdFrame extends JFrame  {
 	public SearchIdPanel getSearchIdPanel() {
 		return searchIdPanel;
 	}
+	
 	//ID검색 결과창 패널로 변환하는 매소드
 	public SearchIdResultPanel getSearchIdResultPanel() {
 		return searchIdResultPanel;
 	}
+	
 	//베이직프래임을 변환하는 매소드
 	public BasicFrame getBasicFrame() {
 		return basicFrame;

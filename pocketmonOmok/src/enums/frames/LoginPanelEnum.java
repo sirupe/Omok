@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 // 태성(경로)
 
-public enum LoginSizesEnum {
+public enum LoginPanelEnum {
 
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	     
@@ -125,17 +125,17 @@ public enum LoginSizesEnum {
 	private int size;
 	private Dimension dimension;
 	
-	private LoginSizesEnum() {}
+	private LoginPanelEnum() {}
 	
-	private LoginSizesEnum(int x) {
+	private LoginPanelEnum(int x) {
 	   this.size = x;
 	}
 	
-	private LoginSizesEnum(Dimension dimension) {
+	private LoginPanelEnum(Dimension dimension) {
 	   this.dimension = dimension;
 	}
 	
-	private LoginSizesEnum(String buttonName) {
+	private LoginPanelEnum(String buttonName) {
 		this.buttonName = buttonName;
 	}
 	

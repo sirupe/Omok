@@ -30,7 +30,7 @@ public enum SearchRePwdEnum {
 			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.37),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.3),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() *0.08)
-		)),
+    )),
 	
 	//설정된 비밀번호와 재비밀번호의 에러 결과 메세지 
 	SEARCH_ERROR_LABEL(new Rectangle(
@@ -67,7 +67,7 @@ public enum SearchRePwdEnum {
 	//searchRePwd 확인 버튼 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
 			(int)(SEARCH_REPWD_FRAME_POSITION_X.getSize() * 0.2),
-			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.9),
+			(int)(SEARCH_REPWD_FRAME_POSITION_Y.getSize() * 0.87),
 			(int)(SEARCH_REPWD_FRAME_WIDTH.getSize() * 0.4),
 			(int)(SEARCH_REPWD_FRAME_HEIGHT.getSize() * 0.1)
 	)),
@@ -103,6 +103,7 @@ public enum SearchRePwdEnum {
 	private SearchRePwdEnum(Rectangle rec) {
 		this.rec = rec;
 	}
+	
 	private SearchRePwdEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
@@ -110,9 +111,11 @@ public enum SearchRePwdEnum {
 	private SearchRePwdEnum(int size) {
 		this.size = size;
 	}
+	
 	private SearchRePwdEnum(Color color) {
 		this.color = color;
 	}
+	
 	private SearchRePwdEnum(Font font) {
 		this.font = font;
 	}
@@ -120,15 +123,19 @@ public enum SearchRePwdEnum {
 	public Rectangle getRectangle() {
 		return rec;
 	}
+	
 	public Dimension getDimension() {
 		return dimension;
 	}
+	
 	public int getSize() {
 		return size;
 	}
+	
 	public Color getColor() {
 		return color;
 	}
+	
 	public Font getFont() {
 		return font;
 	}

@@ -136,7 +136,6 @@ public class CorrectPwdFrame extends JFrame{
 		
 		this.modifyFrame.getBasicFrame().sendDTO(personalDTO);	
 	}
-	
 	public void dropPwCheckFail() {
 		JOptionPane.showMessageDialog(this, "패스워드가 일치하지 않습니다.");
 	}

@@ -25,7 +25,7 @@ import enums.etc.ServerActionEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
@@ -78,7 +78,7 @@ public class SearchRePwdPanel extends JPanel {
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
-				);
+		);
 		
 		
 		//비밀번호 라벨
@@ -108,8 +108,8 @@ public class SearchRePwdPanel extends JPanel {
 
 		searchRePwdErrorLabel.setFont(SearchIDEnum.LABELFONT_ERROR.getFont());
 		searchRePwdErrorLabel.setForeground(SearchIDEnum.LABELCOLOR_ERROR.getColor());
-		//확인 버튼창
 		
+		//확인 버튼창
 		this.searchConfirmButton = new JButton() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -129,7 +129,7 @@ public class SearchRePwdPanel extends JPanel {
 		};	
 		
 		this.searchConfirmButton.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
-		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName());
+		this.searchConfirmButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName());
 		this.add(searchConfirmButton);
 		this.searchConfirmButton.addActionListener(this.findRePwdAction);
 			
@@ -139,7 +139,6 @@ public class SearchRePwdPanel extends JPanel {
 		
 	}
 
-	
 		public void pwdMsgLabel(String searchCheckAnswer){
 			this.setLayout(null);
 			this.searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
@@ -185,7 +184,7 @@ public class SearchRePwdPanel extends JPanel {
 			try {
 				oos.writeObject(userPersonalDTO);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			
 		}
@@ -208,15 +207,19 @@ public class SearchRePwdPanel extends JPanel {
 	public SearchPwdFrame getSearchPwdFrame() {
 		return searchPwdFrame;
 	}
+	
 	public JTextField getSearchPwdText() {
 		return searchPwdText;
 	}
+	
 	public JTextField getsearchRePwdText() {
 		return searchRePwdText;
 	}
+	
 	public JLabel getSearchRePwdErrorLabel() {
 		return searchRePwdErrorLabel;
 	}
+	
 	public JButton getSearchConfirmButton() {
 		return searchConfirmButton;
 	}

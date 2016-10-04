@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import enums.etc.ImageEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.GameRoomEnum;
-import enums.frames.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomEnum;
 
 // 유저 게임데이터 저장 DTO (Data Transfer Object)
 public class UserGamedataInfoDTO extends AbstractEnumsDTO {
@@ -87,8 +87,8 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 		
 		this.userWaitingRoomImage = new ImageIcon(ImageIO.read(
 			new File(imageEnum)).getScaledInstance(
-				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
-				WaitingRoomSizesEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize(),
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize(),
 				Image.SCALE_AREA_AVERAGING)
 		);
 		

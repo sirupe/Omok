@@ -25,7 +25,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.ModifyJoinEnum;
+import enums.frames.ModifyEnum;
 import frames.BasicFrame;
 import utility.GetResources;
 import utility.JTextFieldNumOnly;
@@ -156,7 +156,7 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.dateChoice  = new JComboBox<Integer>();
 		
 		//레이블 폰트
-		Font labelFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
+		Font labelFont = ModifyEnum.LABELFONT_DEFAULT.getFont();
 		this.userIdLabel.setFont(labelFont);
 		this.pwdLabel.setFont(labelFont);
 		this.rePwdLabel.setFont(labelFont);
@@ -168,7 +168,7 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.emailErrLabel.setFont(labelFont);
 		
 		//텍스트필드
-		Font textFont = ModifyJoinEnum.LABELFONT_DEFAULT.getFont();
+		Font textFont = ModifyEnum.LABELFONT_DEFAULT.getFont();
 		this.idTextField.setFont(textFont);
 		this.pwdField.setFont(textFont);
 		this.rePwdField.setFont(textFont);
@@ -188,10 +188,10 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.setContentPane(new JLabel(new ImageIcon(background))); 
 		
 		this.setBounds(				
-			ModifyJoinEnum.MODIFY_JOINFRMAE_POSITION_X.getSize(),
-			ModifyJoinEnum.MODIFY_JOINFRMAE_POSITION_Y.getSize(),
-			ModifyJoinEnum.MODIFY_JOINFRAME_SIZE_WIDTH.getSize(),
-			ModifyJoinEnum.MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize()		
+			ModifyEnum.MODIFY_JOINFRMAE_POSITION_X.getSize(),
+			ModifyEnum.MODIFY_JOINFRMAE_POSITION_Y.getSize(),
+			ModifyEnum.MODIFY_JOINFRAME_SIZE_WIDTH.getSize(),
+			ModifyEnum.MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize()		
 		);
 		
 		this.calSetDate(2016, 12);			//캘린더
@@ -218,27 +218,29 @@ public class ModifyMyInfoFrame extends JFrame {
 		  
 		
 	}
+	
+	
 	//라벨 위치 -- > 순서대로
 	public void setLabelPosition() {
-		this.userIdLabel.setBounds(ModifyJoinEnum.MODIFY_ID_LABEL.getRectangle());
-		this.pwdLabel.setBounds(ModifyJoinEnum.MODIFY_PWD_LABEL.getRectangle());	
-		this.rePwdLabel.setBounds(ModifyJoinEnum.MODIFY_REPWD_LABEL.getRectangle());	
-		this.pwdLabelError.setBounds(ModifyJoinEnum.MODIFY_REPWDERROR_LABEL.getRectangle());
+		this.userIdLabel.setBounds(ModifyEnum.MODIFY_ID_LABEL.getRectangle());
+		this.pwdLabel.setBounds(ModifyEnum.MODIFY_PWD_LABEL.getRectangle());	
+		this.rePwdLabel.setBounds(ModifyEnum.MODIFY_REPWD_LABEL.getRectangle());	
+		this.pwdLabelError.setBounds(ModifyEnum.MODIFY_REPWDERROR_LABEL.getRectangle());
 		
-		this.nameLabel.setBounds(ModifyJoinEnum.MODIFY_NAME_LABEL.getRectangle());
-		this.genderLabel.setBounds(ModifyJoinEnum.MODIFY_GENDER_LABEL.getRectangle());
-		this.birthLabel.setBounds(ModifyJoinEnum.MODIFY_BIRTH_LABEL.getRectangle());
-		this.yearLabel.setBounds(ModifyJoinEnum.MODIFY_YEAR_LABEL.getRectangle());
-		this.monthLabel.setBounds(ModifyJoinEnum.MODIFY_MONTH_LABEL.getRectangle());
-		this.dateLabel.setBounds(ModifyJoinEnum.MODIFY_DATE_LABEL.getRectangle());
+		this.nameLabel.setBounds(ModifyEnum.MODIFY_NAME_LABEL.getRectangle());
+		this.genderLabel.setBounds(ModifyEnum.MODIFY_GENDER_LABEL.getRectangle());
+		this.birthLabel.setBounds(ModifyEnum.MODIFY_BIRTH_LABEL.getRectangle());
+		this.yearLabel.setBounds(ModifyEnum.MODIFY_YEAR_LABEL.getRectangle());
+		this.monthLabel.setBounds(ModifyEnum.MODIFY_MONTH_LABEL.getRectangle());
+		this.dateLabel.setBounds(ModifyEnum.MODIFY_DATE_LABEL.getRectangle());
 	
-		this.emailLabel.setBounds(ModifyJoinEnum.MODIFY_EMAIL_LABEL.getRectangle());
-		this.emailErrLabel.setBounds(ModifyJoinEnum.MODIFY_EMAIL_ERR_LABEL.getRectangle());
+		this.emailLabel.setBounds(ModifyEnum.MODIFY_EMAIL_LABEL.getRectangle());
+		this.emailErrLabel.setBounds(ModifyEnum.MODIFY_EMAIL_ERR_LABEL.getRectangle());
 		
-		this.telLabel.setBounds(ModifyJoinEnum.MODIFY_TELNAME_LABELMID.getRectangle());
-		this.telHyphen1Label.setBounds(ModifyJoinEnum.MODIFY_TELHYPHEN1_LABEL.getRectangle());
-		this.telHyphen2Label.setBounds(ModifyJoinEnum.MODIFY_TELHYPHEN2_LABEL.getRectangle());
-		this.atLabel.setBounds(ModifyJoinEnum.MODIFY_AT_LABEL.getRectangle());
+		this.telLabel.setBounds(ModifyEnum.MODIFY_TELNAME_LABELMID.getRectangle());
+		this.telHyphen1Label.setBounds(ModifyEnum.MODIFY_TELHYPHEN1_LABEL.getRectangle());
+		this.telHyphen2Label.setBounds(ModifyEnum.MODIFY_TELHYPHEN2_LABEL.getRectangle());
+		this.atLabel.setBounds(ModifyEnum.MODIFY_AT_LABEL.getRectangle());
 		
 		this.add(emailErrLabel);
 		this.add(userIdLabel);
@@ -262,15 +264,15 @@ public class ModifyMyInfoFrame extends JFrame {
 	
 	//텍스트필드
 	public void setTextFieldPosition() {
-		this.idTextField.setBounds(ModifyJoinEnum.MODIFY_ID_TEXT.getRectangle());
-		this.pwdField.setBounds(ModifyJoinEnum.MODIFY_PWD_TEXT.getRectangle());
-		this.rePwdField.setBounds(ModifyJoinEnum.MODIFY_REPWD_TEXT.getRectangle());
-		this.nameTextField.setBounds(ModifyJoinEnum.MODIFY_NAME_TEXT.getRectangle());
+		this.idTextField.setBounds(ModifyEnum.MODIFY_ID_TEXT.getRectangle());
+		this.pwdField.setBounds(ModifyEnum.MODIFY_PWD_TEXT.getRectangle());
+		this.rePwdField.setBounds(ModifyEnum.MODIFY_REPWD_TEXT.getRectangle());
+		this.nameTextField.setBounds(ModifyEnum.MODIFY_NAME_TEXT.getRectangle());
 		
-		this.telMiddleTextField.setBounds(ModifyJoinEnum.MODIFY_TELMID_TEXT.getRectangle());
-		this.telLastNumTextField.setBounds(ModifyJoinEnum.	MODIFY_TELEND_TEXT.getRectangle());
-		this.emailIDTextField.setBounds(ModifyJoinEnum.MODIFY_EAMILID_TEXT.getRectangle());
-		this.emailAddrTextField.setBounds(ModifyJoinEnum.MODIFY_EAMILADDR_TEXT.getRectangle());
+		this.telMiddleTextField.setBounds(ModifyEnum.MODIFY_TELMID_TEXT.getRectangle());
+		this.telLastNumTextField.setBounds(ModifyEnum.	MODIFY_TELEND_TEXT.getRectangle());
+		this.emailIDTextField.setBounds(ModifyEnum.MODIFY_EAMILID_TEXT.getRectangle());
+		this.emailAddrTextField.setBounds(ModifyEnum.MODIFY_EAMILADDR_TEXT.getRectangle());
 		
 		this.add(idTextField);
 		this.add(pwdField);
@@ -289,8 +291,8 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.pwdLabelError.setVisible(false);
 	}
 	public void setButtonGroup() {
-		this.genderManRadio.setBounds(ModifyJoinEnum.MODIFY_GENDERMAN_RADIOBUTTON.getRectangle());
-		this.genderWomanRadio.setBounds(ModifyJoinEnum.MODIFY_GENDERWOMAN_RADIOBUTTON.getRectangle());
+		this.genderManRadio.setBounds(ModifyEnum.MODIFY_GENDERMAN_RADIOBUTTON.getRectangle());
+		this.genderWomanRadio.setBounds(ModifyEnum.MODIFY_GENDERWOMAN_RADIOBUTTON.getRectangle());
 		
 		this.add(genderWomanRadio);
 		this.add(genderManRadio);
@@ -309,73 +311,76 @@ public class ModifyMyInfoFrame extends JFrame {
 	}
 	public void setChoicePosition() {
 		//이메일과 전화번호를 이넘을 받아 배열로 나열하고 for문으로 반복하여 넘겨 받았습니다..?
-		String[] emailAddr = ModifyJoinEnum.MODIFY_EMAIL_COMBO_ADDRESS.getStrArr();
+		String[] emailAddr = ModifyEnum.MODIFY_EMAIL_COMBO_ADDRESS.getStrArr();
 		for(int i = 0, size = emailAddr.length; i < size; i++) {
 			this.emailAddrChoice.addItem(emailAddr[i]);
 		}
-		String[] telFrontNum = ModifyJoinEnum.MODIFY_TEL_FRONT_NUM_COMBO.getStrArr();
+		String[] telFrontNum = ModifyEnum.MODIFY_TEL_FRONT_NUM_COMBO.getStrArr();
 		for(int i = 0, size = telFrontNum.length; i < size; i++) {
 			this.telFrontNumChoice.addItem(telFrontNum[i]);
 		}
 		
 		//이메일주소
-		this.emailAddrChoice.setBounds(ModifyJoinEnum.MODIFY_EMAILADDR_COMBO.getRectangle());
+		this.emailAddrChoice.setBounds(ModifyEnum.MODIFY_EMAILADDR_COMBO.getRectangle());
 		this.setComboBoxStr(this.emailAddrChoice);
 		this.add(emailAddrChoice);
 		
 		//전화번호 앞자리
-		this.telFrontNumChoice.setBounds(ModifyJoinEnum.MODIFY_TELFRONTNUM_COMBO.getRectangle());
+		this.telFrontNumChoice.setBounds(ModifyEnum.MODIFY_TELFRONTNUM_COMBO.getRectangle());
 		this.setComboBoxStr(this.telFrontNumChoice);
 		this.add(telFrontNumChoice);
 
 		//년
-		this.yearChoice.setBounds(ModifyJoinEnum.MODIFY_YEAR_COMBOBOX.getRectangle());
+		this.yearChoice.setBounds(ModifyEnum.MODIFY_YEAR_COMBOBOX.getRectangle());
 		this.setComboBoxInt(this.yearChoice);
 		this.add(yearChoice);
 		//월
-		this.monthChoice.setBounds(ModifyJoinEnum.MODIFY_MONTH_COMBOBOX.getRectangle());
+		this.monthChoice.setBounds(ModifyEnum.MODIFY_MONTH_COMBOBOX.getRectangle());
 		this.setComboBoxInt(this.monthChoice);
 		this.add(monthChoice);
 		//일
-		this.dateChoice.setBounds(ModifyJoinEnum.MODIFY_DATE_COMBOBOX.getRectangle());
+		this.dateChoice.setBounds(ModifyEnum.MODIFY_DATE_COMBOBOX.getRectangle());
 		this.setComboBoxInt(this.dateChoice);
 		this.add(dateChoice);
 		this.addWindowListener(this.modifyAction);
 	 }
+	
 	public void setComboBoxInt(JComboBox<Integer> comboBox) {
-		comboBox.setBackground(ModifyJoinEnum.MODIFY_EMAIL_COMBOBOX_BACKGROUND.getColor());
+		comboBox.setBackground(ModifyEnum.MODIFY_EMAIL_COMBOBOX_BACKGROUND.getColor());
 		comboBox.setBorder(new EmptyBorder(0,0,0,0));
-		comboBox.setForeground(ModifyJoinEnum.CHOICEBACKGROUND.getColor());
-		comboBox.setFont(ModifyJoinEnum.LABELFONT_DEFAULT.getFont());
+		comboBox.setForeground(ModifyEnum.CHOICEBACKGROUND.getColor());
+		comboBox.setFont(ModifyEnum.LABELFONT_DEFAULT.getFont());
 	 }
+	
 	public void setComboBoxStr(JComboBox<String> comboBox) {
-		comboBox.setBackground(ModifyJoinEnum.MODIFY_EMAIL_COMBOBOX_BACKGROUND.getColor());
+		comboBox.setBackground(ModifyEnum.MODIFY_EMAIL_COMBOBOX_BACKGROUND.getColor());
 		comboBox.setBorder(new EmptyBorder(0,0,0,0));
-		comboBox.setForeground(ModifyJoinEnum.CHOICEBACKGROUND.getColor());
-		comboBox.setFont(ModifyJoinEnum.LABELFONT_DEFAULT.getFont());
+		comboBox.setForeground(ModifyEnum.CHOICEBACKGROUND.getColor());
+		comboBox.setFont(ModifyEnum.LABELFONT_DEFAULT.getFont());
 	}
+	
 	//=========================================================================================================
 	public void setButtonPosition() throws IOException {
 		this.modifyButton.setIconTextGap(this.modifyButton.getIconTextGap() - 15);
 		
 		// 수정 버튼 해상도 맞게 그리기
 		this.modifyButton.setIcon(GetResources.getImageIcon("resources/myData/correct.kor.png", 
-				ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
-				ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle().height));
+				ModifyEnum.MODIFY_MODIFY_BUTTON.getRectangle().width,
+				ModifyEnum.MODIFY_MODIFY_BUTTON.getRectangle().height));
 		
 	    //취소 해상도 맞기 그리기
 		this.cancelButton.setIcon(GetResources.getImageIcon("resources/myData/reset.Kor.png", 
-    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
-    				ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
+    				ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
+    				ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
 	    
 		//탈퇴 해상도 맞기 그리기
 		this.dropoutButton.setIcon(GetResources.getImageIcon("resources/myData/quit.Kor.png", 
-    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
-    				ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
+    				ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
+    				ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
 		
-		this.modifyButton.setBounds(ModifyJoinEnum.MODIFY_MODIFY_BUTTON.getRectangle());
-		this.cancelButton.setBounds(ModifyJoinEnum.MODIFY_CANCEL_BUTTON.getRectangle());
-		this.dropoutButton.setBounds(ModifyJoinEnum.MODIFY_DROPOUT_BUTTON.getRectangle());
+		this.modifyButton.setBounds(ModifyEnum.MODIFY_MODIFY_BUTTON.getRectangle());
+		this.cancelButton.setBounds(ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle());
+		this.dropoutButton.setBounds(ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle());
 		
 		this.add(cancelButton);
 		this.add(modifyButton);
@@ -443,13 +448,13 @@ public class ModifyMyInfoFrame extends JFrame {
 		} 
 		
 		if(this.emailIDTextField.getText().length() == 0 || !RegexCheck.emailDomainRegexCheck(this.emailAddrTextField.getText())) {
-			this.pwdLabelError.setForeground(ModifyJoinEnum.ERROR_MESSAGE_COLOR.getColor());
+			this.pwdLabelError.setForeground(ModifyEnum.ERROR_MESSAGE_COLOR.getColor());
 			errMsg = "이메일이 정확하지 않습니다.";
 			errCheck++;
 		}
 
 		if(!pwdStr.equals(rePwdStr)) {
-			this.pwdLabelError.setForeground(ModifyJoinEnum.ERROR_MESSAGE_COLOR.getColor());
+			this.pwdLabelError.setForeground(ModifyEnum.ERROR_MESSAGE_COLOR.getColor());
 			errMsg = "두 패스워드를 정확히 입력해주세요.";
 			errCheck++;
 		}

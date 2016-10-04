@@ -152,7 +152,7 @@ public class JoinFrame extends JFrame {
 		this.monthChoice = new JComboBox<Integer>();
 		this.dateChoice  = new JComboBox<Integer>();
 
-//레이블 폰트
+		//레이블 폰트
 		Font labelFont = JoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idLabel.setFont(labelFont);
 		this.pwLabel.setFont(labelFont);
@@ -164,7 +164,7 @@ public class JoinFrame extends JFrame {
 		this.telLabel.setFont(labelFont);
 		this.emailTimeLabel.setFont(labelFont);
 
-//텍스트필드
+		//텍스트필드
 		Font textFont = JoinSizesEnum.LABELFONT_DEFAULT.getFont();
 		this.idTextField.setFont(textFont);
 		this.pwdField.setFont(textFont);
@@ -174,18 +174,19 @@ public class JoinFrame extends JFrame {
 		this.emailIDTextField.setFont(textFont);
 		this.emailAddrTextField.setFont(textFont);
 		
-// 이메일 전화번호 콤보 박스
+		// 이메일 전화번호 콤보 박스
 		this.emailAddrChoice = new JComboBox<String>();
 		this.telFrontNumChoice = new JComboBox<String>();
-//전체 프레임 크기 출력
 		
+		//전체 프레임 크기 출력
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 	    backGround = ImageIO.read(
 	    		//배경이미지 join.png로 바꾸세욤
 	   		  new File("resources/signUp/join.png")).getScaledInstance(
 	                   JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 	                   JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
-	                   Image.SCALE_SMOOTH);
+	                   Image.SCALE_SMOOTH
+	          );
 
 	    this.setContentPane(new JLabel(new ImageIcon(backGround))); 
 	    
@@ -371,6 +372,7 @@ public class JoinFrame extends JFrame {
 		this.add(this.atLabel);
 	}
 	
+	//각 텍스트필드
 	public void setTextFieldPosition() {
 		this.idTextField.setBounds(
 				JoinSizesEnum.JOIN_IDT_POSITION_X.getSize(),
@@ -454,7 +456,7 @@ public class JoinFrame extends JFrame {
 		}
 
 	}
-// 이메일 핸드폰 콤보 박스 출력
+	// 이메일 핸드폰 콤보 박스 출력
 	public void setChoicePosition() {
 		String[] emailAddr = JoinSizesEnum.JOIN_EMAIL_ADDRESS.getStrArr();
 		for(int i = 0, size = emailAddr.length; i < size; i++) {
@@ -599,8 +601,7 @@ public class JoinFrame extends JFrame {
 	
 	//에러 메세지 출력
 	public void setErrorPosition() {
-		// 에러 레이블
-		
+		// 에러 레이블 폰트
 		Font font = JoinSizesEnum.JOIN_CHECKLABEL_FONT_DEFAULT.getFont();
 		this.idErrorLabel	  = new JLabel();	
 		this.idErrorLabel.setFont(font);

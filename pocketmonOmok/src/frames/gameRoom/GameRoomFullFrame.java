@@ -58,6 +58,7 @@ public class GameRoomFullFrame extends JFrame {
 	    this.setVisible(true);
 	    this.setResizable(false);	
 	}
+	
 	//만들려는 방의 상태 라벨 ㅁ생성
 	public void getLabelFrame() {
 		this.RoomConfirmLabel.setBounds(GameRoomFullEnum.GAMEROOM_CONFIRM_LABEL.getRectangle());
@@ -80,10 +81,5 @@ public class GameRoomFullFrame extends JFrame {
     		);
     	this.RoomConfirmButton.setBounds(GameRoomFullEnum.GAMEROOM_CONFIRM_BUTTON.getRectangle());
     	this.add(RoomConfirmButton);    	 
-    }
-	public static void main(String[] args) throws IOException {
-		new GameRoomFullFrame();
-
 	}
-
 }

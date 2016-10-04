@@ -15,41 +15,45 @@ public enum SearchIDEnum {
 	SEARCHFRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (SEARCHFRAME_SIZE_HEIGHT.getSize() / 2))),
 	
 	
-//이름, 이메일 레이블
+    //아이디 레이블
 	SEARCH_ID_LABEL(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.13),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.14),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.12),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
-			)),
+	)),
+	
+	//이메일 레이블
 	SEARCH_EMAIL_LABEL(new Rectangle(
 			
 			(int)(SEARCHFRAME_POSITION_X.getSize() *  0.13),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.29),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.15),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
-			)),
-// 에러 레이블
+	)),
+	
+    //에러 레이블
 	SEARCH_ERROR_LABEL(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.19),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.42),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.7),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
-			)),
+	)),
 	
-// 이름, 이메일 텍스트 필드
+    //이이디  텍스트 필드
 	SEARCH_ID_TEXTFIELD(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.14),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.4),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.10)
-			)),
+	)),
+	//이메일 텍스트 필드
 	SEARCH_EMAIL_TEXTFIELD(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.27),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.29),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.4),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
-			)),
+	)),
 	
 	//취소 버튼 
 	SEARCH_BACK_BUTTON(new Rectangle(
@@ -57,7 +61,7 @@ public enum SearchIDEnum {
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.14),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.16)
-		)),
+	)),
 	
 	//확인버튼 생성
 	SEARCH_CONFIRM_BUTTON(new Rectangle(
@@ -65,14 +69,15 @@ public enum SearchIDEnum {
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
-		)),
+	)),
+	
 	//홈으로버튼 생성
 	GO_HOME_BUTTON(new Rectangle(
 			(int)(SEARCHFRAME_POSITION_X.getSize() * 0.25),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.54),
 			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.17)
-		)),
+	)),
 	
 	//버튼이름
 	BUTTON_NAME_BACK("backButton"),

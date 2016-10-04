@@ -89,8 +89,4 @@ public class DropOutAskDialog extends JDialog{
 		
 	}
 
-	public static void main(String[] args) throws IOException {
-		new DropOutAskDialog();
 	}
-
-}
