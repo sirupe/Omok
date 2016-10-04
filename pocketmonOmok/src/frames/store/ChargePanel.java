@@ -64,6 +64,7 @@ public class ChargePanel extends JPanel {
 		
 	}
 	
+	//충전하는 메소드
 	public void setchargePanel() {
 		this.chargePanel.setLayout(null);
 		this.chargePanel.setBounds(ChargeEnum.CHARGE_PANEL_SIZE_RECT.getRect());
@@ -91,6 +92,7 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }	
 		};
+		
 		this.aThousand.setFocusPainted(false);
 		this.aThousand.setBorderPainted(false);
 		this.aThousand.setContentAreaFilled(false);
@@ -119,6 +121,7 @@ public class ChargePanel extends JPanel {
 		this.fiveThousand.setContentAreaFilled(false);
 		this.fiveThousand.setBounds(ChargeEnum.CHARGE_5000_SIZE_RECT.getRect());
 		
+		
 		//10000원 버튼
 		this.tenThousand = new JButton(){
 			@Override
@@ -137,6 +140,7 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }
 		};
+		
 		this.tenThousand.setFocusPainted(false);
 		this.tenThousand.setBorderPainted(false);
 		this.tenThousand.setContentAreaFilled(false);
@@ -209,8 +213,6 @@ public class ChargePanel extends JPanel {
 		this.emailPanel.add(emailInput);
 		this.emailPanel.add(emailLabel);
 		this.add(this.emailPanel);
-		
-			
 	}
 	
 	public void setcertifyPanel() {
@@ -263,7 +265,6 @@ public class ChargePanel extends JPanel {
 		this.certifyPanel.add(certifyText);
 		this.certifyPanel.add(certify);
 		this.add(this.certifyPanel);
-		
 	}
 	
 	public void setbuttonsPanel() {

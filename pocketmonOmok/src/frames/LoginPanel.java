@@ -245,6 +245,7 @@ public class LoginPanel extends JPanel {
 		this.loginPanel.add(this.searchIdButton);
 		this.loginPanel.add(this.searchPwButton);
 	}
+	
 	//TODO
 	public void setTextFieldPosition(){		
 		this.idField = new JTextField("test3", 10);
@@ -273,8 +274,7 @@ public class LoginPanel extends JPanel {
 	   
 	}
 
-	
-	
+
 	public JButton getSearchIdButton() {
 		return searchIdButton;
 	}
@@ -302,6 +302,7 @@ public class LoginPanel extends JPanel {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
+	
 	public SearchPwdPanel getSearchPwdPanel() {
 		return searchPwdPanel;
 	}

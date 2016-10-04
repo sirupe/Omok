@@ -108,10 +108,10 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void gameExit() {
 		this.addWindowListener(new WindowAction());
 	}
+	
 	class WindowAction extends WindowAdapter {
 		@Override
 		public void windowClosing(WindowEvent e) {
-			System.out.println("windowClosing");
 			if(isExitCheck) {
 				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
 				personalDTO.setUserID(userID);
@@ -174,6 +174,7 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void newJoinFrame() throws IOException {
 		this.joinFrame = new JoinFrame(this);
 	}
+	
 	public void newSearchPwdFrame() throws IOException {
 		this.searchPwdFrame = new SearchPwdFrame(this);
 	}
@@ -195,8 +196,6 @@ public class BasicFrame extends JFrame implements Serializable{
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-	
-	
 	
 	public String getUserID() {
 		return userID;

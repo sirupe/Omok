@@ -39,7 +39,6 @@ public class SearchIdPanel extends JPanel {
 	private FindIDAction findIDAction;
 	private SearchIdFrame searchIdFrame;
 	private JPanel cardLayoutPanel;
-	private String errMsg;
 	
 	public SearchIdPanel(SearchIdFrame searchIdFrame) throws IOException {
 		this.cardLayoutPanel = new JPanel();
@@ -56,6 +55,7 @@ public class SearchIdPanel extends JPanel {
 		this.searchNameLabel = new JLabel("이름");
 		this.searchNameLabel.setFont(defaultFont);
 		this.searchNameLabel.setBounds(SearchIDEnum.SEARCH_ID_LABEL.getRectangle());
+		
 		//이메일
 		this.searchemailLabel = new JLabel("email");
 		this.searchemailLabel.setFont(defaultFont);
@@ -87,6 +87,7 @@ public class SearchIdPanel extends JPanel {
 						SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
 		);
+		
 		this.searchConfirmButton.setBounds(SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
 		this.searchConfirmButton.setBorderPainted(false);
 		this.searchConfirmButton.setFocusPainted(false);
@@ -136,7 +137,7 @@ public class SearchIdPanel extends JPanel {
 		
 		//user ID가 널이 아니면 확인버튼이 실행되도록 하기
 		if(result.getUserID() == null) {
-			//서치아이디 패널의Lable창에 떠야하
+			//서치아이디 패널의Label창에 떠야하
 			this.errorMsg("정보입력오류:(");
 		} else {
 			searchIdResultPanel.showUserIdLael(result.getUserID());
@@ -163,6 +164,7 @@ public class SearchIdPanel extends JPanel {
 		comp.addKeyListener(this.findIDAction);
 		this.add(comp);
 	}	
+	
 	//확인번튼시 실행
 	public void doConfirmButton() {
 		this.searchIdFrame.doConfirmButton();
@@ -183,8 +185,6 @@ public class SearchIdPanel extends JPanel {
 		personalDTO.setUserEmail(email);
 		personalDTO.setUserName(name);
 
-		System.out.println("client data -> " + personalDTO.toString());
-		
 		try {
 			
 			BasicFrame basicFrame = this.searchIdFrame.getBasicFrame();

@@ -43,7 +43,8 @@ public class SearchIdResultPanel extends JPanel {
 							SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
 							SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 							Image.SCALE_AREA_AVERAGING))
-			);
+		);
+		
 		this.homeButton.setBounds(SearchIDEnum.GO_HOME_BUTTON.getRectangle());
 		this.homeButton.setBorderPainted(false);
 		this.homeButton.setFocusPainted(false);
@@ -56,11 +57,13 @@ public class SearchIdResultPanel extends JPanel {
 		this.setLayout(null);
 		
 	}
+	
 	//홈으로버튼시 실행
 	public void doHomeButton(){	
 		//프레임의 취소버튼을 실행, 취소버튼과 동일한 동작수행
 		this.searchIdFrame.doCancleButton();
 	}
+	
 	//라벨값을 바꿔주는 메소드를만들어
 	public void showUserIdLael(String IdMsg) {
 		
@@ -71,24 +74,20 @@ public class SearchIdResultPanel extends JPanel {
 	
 	}
 
-	
-
 	//DB에서 가져온 userID를 줌
 	public JLabel getSearchIdLabel (){
 		return showUserIdLabel;	
 	}
+	
 	public JButton getHomeButton() {
 		return homeButton;
 	}
+	
 	public SearchIdFrame getSearchIdFrame() {
 		return searchIdFrame;
 	}
+	
 	public FindIDResultAction getFindIdResultAction() {
 		return findIdResultAction;
 	}
-	
-	
-	
-	
-	
 }

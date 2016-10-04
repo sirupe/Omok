@@ -89,7 +89,6 @@ public class UserGamedataInfoDAO {
 	}
 	
 	public int winUserGameDataUpdate(String userID) {
-		System.out.println("이긴사람DAO : " + userID);
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		PreparedStatement ps2 = null;
@@ -146,7 +145,6 @@ public class UserGamedataInfoDAO {
 		Connection connection = null;
 		PreparedStatement ps  = null;
 		int result = 0;
-		System.out.println("진사람DAO : " + userID);
 		DBConnectionPool dbPool = DBConnectionPool.getInstance();
 		try {
 			connection = dbPool.getConnection();

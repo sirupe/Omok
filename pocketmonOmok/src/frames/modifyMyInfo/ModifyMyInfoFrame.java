@@ -217,6 +217,8 @@ public class ModifyMyInfoFrame extends JFrame {
 		  
 		
 	}
+	
+	
 	//라벨 위치 -- > 순서대로
 	public void setLabelPosition() {
 		this.userIdLabel.setBounds(ModifyEnum.MODIFY_ID_LABEL.getRectangle());
@@ -341,18 +343,21 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.add(dateChoice);
 		this.addWindowListener(this.modifyAction);
 	 }
+	
 	public void setComboBoxInt(JComboBox<Integer> comboBox) {
 		comboBox.setBackground(ModifyEnum.MODIFY_EMAIL_COMBOBOX_BACKGROUND.getColor());
 		comboBox.setBorder(new EmptyBorder(0,0,0,0));
 		comboBox.setForeground(ModifyEnum.CHOICEBACKGROUND.getColor());
 		comboBox.setFont(ModifyEnum.LABELFONT_DEFAULT.getFont());
 	 }
+	
 	public void setComboBoxStr(JComboBox<String> comboBox) {
 		comboBox.setBackground(ModifyEnum.MODIFY_EMAIL_COMBOBOX_BACKGROUND.getColor());
 		comboBox.setBorder(new EmptyBorder(0,0,0,0));
 		comboBox.setForeground(ModifyEnum.CHOICEBACKGROUND.getColor());
 		comboBox.setFont(ModifyEnum.LABELFONT_DEFAULT.getFont());
 	}
+	
 	//=========================================================================================================
 	public void setButtonPosition() throws IOException {
 		this.modifyButton.setIconTextGap(this.modifyButton.getIconTextGap() - 15);

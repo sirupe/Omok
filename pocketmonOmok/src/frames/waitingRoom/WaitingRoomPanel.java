@@ -176,11 +176,9 @@ public class WaitingRoomPanel extends JPanel {
 	public void modGameRoom(RoomAndUserListDTO roomListVo) {
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
 		// 현재 생성되어있는 테이블 전체를 검색하여 삭제 (rowCount 만큼)
-		System.out.println("로카운트 : " + tableModel.getRowCount());
 		for(int i = 0, size = tableModel.getRowCount(); i < size; i++) {
 			tableModel.removeRow(i);
 		}
-		System.out.println("클라이언트에 넘어온 사이즈는 : " + roomListVo.getGameRoomList().size());
 		for(int i = 0, size = roomListVo.getGameRoomList().size(); i < size; i++) {
 			GameRoomInfoVO roomInfoVo = roomListVo.getGameRoomList().get(i);
 			

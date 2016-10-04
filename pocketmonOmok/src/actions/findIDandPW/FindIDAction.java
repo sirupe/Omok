@@ -29,6 +29,7 @@ public class FindIDAction  extends Adapters {
 		if(buttonName.equals(SearchIDEnum.BUTTON_NAME_BACK.getButtonName())) {
 			this.searchIdPanel.doCancleButton();
 		} else if(buttonName.equals(SearchIDEnum.BUTTON_NAME_CONFIRM.getButtonName())) {
+			
 			//이름체크메소드가 끝났을때 밑으로실행시지말기
 			if(this.checkName()) {
 				return;
@@ -81,6 +82,7 @@ public class FindIDAction  extends Adapters {
 	//이메일 정합성 검사
 	public boolean checkEmail() {
 		String email = this.searchIdPanel.getEmailTextField().getText();
+		
 		//이메일 필드가 비어있을때 에러메시지 출력
 		if(email.isEmpty()) {
 			this.searchIdPanel.errorMsg("이메일 입력하세요");

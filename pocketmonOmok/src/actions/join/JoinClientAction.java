@@ -315,7 +315,6 @@ public class JoinClientAction extends Adapters {
 			email.append(this.joinFrame.getEmailIDTextField().getText());
 			email.append("@");
 			email.append(this.joinFrame.getEmailAddrTextField().getText());
-			System.out.println("유저이메일 : " + email.toString());
 			
 			UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
 			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION_CREATE);
@@ -418,42 +417,36 @@ public class JoinClientAction extends Adapters {
 		
 		//아이디가 공란일 때
 		if(this.id == null) {
-			System.out.println("아이디가공란");
 			this.joinFrame.labelSetting(this.joinFrame.getIdErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//패스워드가 공란일 때
 		if(this.pw == null) {
-			System.out.println("패스워드가공란");
 			this.joinFrame.labelSetting(this.joinFrame.getPwdErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//rePw가 공란일 때
 		if(this.rePw == null) {
-			System.out.println("리패스워드가공란");
 			this.joinFrame.labelSetting(this.joinFrame.getRePwdErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//이름이 공란일 때
 		if(this.name == null) {
-			System.out.println("이름이 공란");
 			this.joinFrame.labelSetting(this.joinFrame.getNameErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//성별이 입력이 안되었을 때 
 		if(this.gender == 0) {
-			System.out.println("성별");
 			this.joinFrame.labelSetting(this.joinFrame.getGenderErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//이메일 아이디나 주소가 입력 안되었을 때
 		if(this.emailID == null || this.emailAddr == null) {
-			System.out.println("이메일 입력안됨");
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, msg);
 			errCount++;
 		}
@@ -461,7 +454,6 @@ public class JoinClientAction extends Adapters {
 		//전화번호가 앞번호, 뒷번호 중 하나만 입력되었을 때
 		if(!(this.telFrontNum == null && this.telMidNum == null && this.telLastNum == null)) {
 			if((this.telMidNum != null && this.telLastNum == null) || (this.telMidNum == null && this.telLastNum != null) || this.telFrontNum.equals("선택")) {
-				System.out.println("전화번호 입력에러");
 				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
 				errCount++;
 			}
@@ -469,7 +461,6 @@ public class JoinClientAction extends Adapters {
 		
 		//인증번호를 받지 않았을 때
 		if(this.certificationNumber == null) {
-			System.out.println("인증번호");
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, "joinMail인증필");
 			errCount++;
 		}

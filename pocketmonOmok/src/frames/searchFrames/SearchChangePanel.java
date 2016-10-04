@@ -72,12 +72,12 @@ public class SearchChangePanel extends JPanel {
 	
 	public void goHome() {
 		this.searchPwdFrame.doCancelButton();
-		System.out.println("집으로 가댱");
 	}
 
 	public JButton getChangeConfirmButton() {
 		return changeConfirmButton;
 	}
+	
 	public SearchPwdFrame getSearchPwdFrame() {
 		return searchPwdFrame;
 	}

@@ -78,7 +78,7 @@ public class SearchRePwdPanel extends JPanel {
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_POSITION_Y.getSize(),
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_WIDTH.getSize(),
 				SearchRePwdEnum.SEARCH_REPWD_FRAME_HEIGHT.getSize()
-				);
+		);
 		
 		
 		//비밀번호 라벨
@@ -108,8 +108,8 @@ public class SearchRePwdPanel extends JPanel {
 
 		searchRePwdErrorLabel.setFont(SearchIDEnum.LABELFONT_ERROR.getFont());
 		searchRePwdErrorLabel.setForeground(SearchIDEnum.LABELCOLOR_ERROR.getColor());
-		//확인 버튼창
 		
+		//확인 버튼창
 		this.searchConfirmButton = new JButton() {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -139,7 +139,6 @@ public class SearchRePwdPanel extends JPanel {
 		
 	}
 
-	
 		public void pwdMsgLabel(String searchCheckAnswer){
 			this.setLayout(null);
 			this.searchRePwdErrorLabel.setBounds(SearchRePwdEnum.SEARCH_ERROR_LABEL.getRectangle());
@@ -185,7 +184,7 @@ public class SearchRePwdPanel extends JPanel {
 			try {
 				oos.writeObject(userPersonalDTO);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			
 		}
@@ -208,15 +207,19 @@ public class SearchRePwdPanel extends JPanel {
 	public SearchPwdFrame getSearchPwdFrame() {
 		return searchPwdFrame;
 	}
+	
 	public JTextField getSearchPwdText() {
 		return searchPwdText;
 	}
+	
 	public JTextField getsearchRePwdText() {
 		return searchRePwdText;
 	}
+	
 	public JLabel getSearchRePwdErrorLabel() {
 		return searchRePwdErrorLabel;
 	}
+	
 	public JButton getSearchConfirmButton() {
 		return searchConfirmButton;
 	}

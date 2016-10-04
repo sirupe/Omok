@@ -31,7 +31,7 @@ public class DropOutComplete extends JFrame{
 		
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
-		this.dropOutCompleteLabel = new JLabel("Æ¿Åð ¿Ï·á");
+		this.dropOutCompleteLabel = new JLabel("Å»Åð ¿Ï·á");
 		this.dropOutCompleteLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.dropOutCompleteLabel.setBounds(CorrectEnum.DROPOUT_COMPLETE_TEXT_SIZE_RECT.getRect());
 		
@@ -64,9 +64,4 @@ public class DropOutComplete extends JFrame{
 		this.setVisible(true);
 		
 	}
-
-	public static void main(String[] args) throws IOException {	
-		new DropOutComplete();
-	}
-
 }

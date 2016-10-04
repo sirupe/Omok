@@ -28,42 +28,47 @@ public enum ModifyEnum {
 			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 0.2),
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.25),
 			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.03)
-			)),
+	)),
+	
 	//비밀번호라벨
 	MODIFY_PWD_LABEL(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
 			MODIFY_ID_LABEL.getRectangle().y + DISTANCE.getSize(),
 			MODIFY_ID_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
-			)),
+	)),
+	
 	//재비밀번호라벨
 	MODIFY_REPWD_LABEL(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
 			MODIFY_PWD_LABEL.getRectangle().y + DISTANCE.getSize(),
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.5),
 			MODIFY_ID_LABEL.getRectangle().height
-			)),
+	)),
+	
 	//비밀번호 재비밀번호 일치 하지 않을시 나타나는 에러 메세지
 	MODIFY_REPWDERROR_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.30),
 			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 1.3),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
-			)),
+	)),
+	
 	//이름
 	MODIFY_NAME_LABEL(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
 			MODIFY_REPWD_LABEL.getRectangle().y + DISTANCE.getSize(),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
-			)),
+	)),
+	
 	//성별 라벨
 	MODIFY_GENDER_LABEL(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
 			MODIFY_NAME_LABEL.getRectangle().y + DISTANCE.getSize(),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
-			)),
+	)),
 	
 	//생일 라벨
 	MODIFY_BIRTH_LABEL(new Rectangle(
@@ -71,7 +76,8 @@ public enum ModifyEnum {
 			MODIFY_GENDER_LABEL.getRectangle().y + DISTANCE.getSize(),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
-			)),
+	)),
+	
 	//년도 라벨
 	MODIFY_YEAR_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.44),
@@ -79,6 +85,7 @@ public enum ModifyEnum {
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
+	
 	//월 라벨
 	MODIFY_MONTH_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.62),
@@ -86,6 +93,7 @@ public enum ModifyEnum {
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
+	
 	//일라벨
 	MODIFY_DATE_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.8),
@@ -93,6 +101,7 @@ public enum ModifyEnum {
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
+	
 	//이메일 라벨
 	MODIFY_EMAIL_LABEL(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
@@ -101,6 +110,7 @@ public enum ModifyEnum {
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
 	
+	//이메일 에러 메세지
 	MODIFY_EMAIL_ERR_LABEL(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.3),
 			(int)(MODIFY_JOINFRMAE_POSITION_Y.getSize() * 3),
@@ -108,19 +118,23 @@ public enum ModifyEnum {
 			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.03)
 	)),
 	
+	//이메일 @ 라벨
 	MODIFY_AT_LABEL(new Rectangle(
 			MODIFY_YEAR_LABEL.getRectangle().x,
 			MODIFY_EMAIL_LABEL.getRectangle().y,
 			(int)(MODIFY_JOINFRAME_SIZE_WIDTH.getSize() * 0.15),
 			(int)(MODIFY_JOINFRMAE_SIZE_HEIGHT.getSize() * 0.05)
 	)),
+	
+	//전화번호 수정
 	MODIFY_TELNAME_LABELMID(new Rectangle(
 			MODIFY_ID_LABEL.getRectangle().x,
 			MODIFY_AT_LABEL.getRectangle().y + DISTANCE.getSize(),
 			MODIFY_REPWD_LABEL.getRectangle().width,
 			MODIFY_ID_LABEL.getRectangle().height
 	)),
-		
+	
+	//- 라벨
 	MODIFY_TELHYPHEN1_LABEL(new Rectangle(
 			MODIFY_YEAR_LABEL.getRectangle().x,
 			MODIFY_TELNAME_LABELMID.getRectangle().y,
@@ -157,6 +171,7 @@ public enum ModifyEnum {
 			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
+	
 	//비밀번호 텍스트 필드
 	MODIFY_PWD_TEXT(new Rectangle(
 			MODIFY_ID_TEXT.getRectangle().x,
@@ -165,12 +180,15 @@ public enum ModifyEnum {
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 
+	//수정 패스워드 재입력 텍스트
 	MODIFY_REPWD_TEXT(new Rectangle(
 			MODIFY_ID_TEXT.getRectangle().x,
 			MODIFY_REPWD_LABEL.getRectangle().y,
 			MODIFY_TELHYPHEN1_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
+	
+	//수정 이름 텍스트
 	MODIFY_NAME_TEXT(new Rectangle(
 			MODIFY_ID_TEXT.getRectangle().x,
 			MODIFY_NAME_LABEL.getRectangle().y,
@@ -178,31 +196,38 @@ public enum ModifyEnum {
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
 	
-	
+	//수정 이메일 아이디 텍스트
 	MODIFY_EAMILID_TEXT(new Rectangle(
 			MODIFY_GENDERMAN_RADIOBUTTON.getRectangle().x,
 			MODIFY_AT_LABEL.getRectangle().y,
 			MODIFY_AT_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
+	
+	//수정 이메일 주소 텍스트
 	MODIFY_EAMILADDR_TEXT(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.48),
 			MODIFY_AT_LABEL.getRectangle().y,
 			MODIFY_AT_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
+	
+	//수정 전화번호 가운데 텍스트
 	MODIFY_TELMID_TEXT(new Rectangle(
 			MODIFY_EAMILADDR_TEXT.getRectangle().x,
 			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
 			MODIFY_AT_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
+	
+	//수정 전화번호 끝자리 텍스트
 	MODIFY_TELEND_TEXT(new Rectangle(
 			(int)(MODIFY_JOINFRMAE_POSITION_X.getSize() * 0.65),
 			MODIFY_TELHYPHEN1_LABEL.getRectangle().y,
 			MODIFY_AT_LABEL.getRectangle().width,
 			MODIFY_AT_LABEL.getRectangle().height
 	)),
+	
 	//===================================초이스박스===================================
 	//년도
 	MODIFY_YEAR_COMBOBOX(new Rectangle(
@@ -266,8 +291,6 @@ public enum ModifyEnum {
 			MODIFY_MODIFY_BUTTON.getRectangle().height
 	)),
 	
-	//레이블 폰트
-
 	//이메일 및 전화번호 정보
 	MODIFY_EMAIL_COMBO_ADDRESS(new String[] {
 			"직접입력",
@@ -308,9 +331,11 @@ public enum ModifyEnum {
 	private ModifyEnum(Color color) {
 		this.color = color;
 	}
+	
 	private ModifyEnum(Font font) {
 		this.font = font;
 	}
+	
 	private ModifyEnum(EmptyBorder border) {
 		this.border = border;
 	}
@@ -322,9 +347,11 @@ public enum ModifyEnum {
 	private ModifyEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
+	
 	private ModifyEnum(Rectangle rec) {
 		this.rec = rec;
 	}
+	
 	public Rectangle getRectangle() {
 		return rec;
 	}
@@ -352,6 +379,7 @@ public enum ModifyEnum {
 	public EmptyBorder getBorder() {
 		return border;
 	}
+	
 	public String[] getStrArr() {
 		return strArr;
 	}

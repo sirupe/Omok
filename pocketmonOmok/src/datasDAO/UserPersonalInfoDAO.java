@@ -158,7 +158,6 @@ public class UserPersonalInfoDAO {
 			resultSet = ps.executeQuery();
 			
 			while(resultSet.next()) {
-				System.out.println("DAO Äõ¸® ÁøÀÔ");
 				userPersonalInfo.setUserCount(resultSet.getInt("COUNT"));
 			}	
 		} catch (Exception e) {
@@ -194,7 +193,6 @@ public class UserPersonalInfoDAO {
 			ps.setString(2, personalDTO.getUserID());
 			
 			result = ps.executeUpdate();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -327,8 +325,3 @@ public class UserPersonalInfoDAO {
 		return result;
 	}
 }
-
-
-//SELECT USER_ID
-//FROM USER_PERSONAL_INFO
-//WHERE USER_ID='test' AND USER_PASSWD='5555';

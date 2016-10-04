@@ -21,10 +21,12 @@ public class GameStoreFrame extends JFrame  {
 			GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(),
 			GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize()
 		);
+		
 		this.add(gameStorePanel);
 		this.setVisible(true);
 		this.setResizable(false);
 	}
+	
 	public static void main(String[] args) {	
 		try {
 			new GameStoreFrame();
