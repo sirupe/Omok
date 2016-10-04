@@ -11,9 +11,9 @@ import javax.swing.JTextField;
 
 import actions.adapters.Adapters;
 import enums.frames.JoinSizesEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import utility.RegexCheck;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import frames.searchFrames.SearchPwdPanel;
 import sun.util.logging.resources.logging;
 
@@ -32,19 +32,19 @@ public class FindPWAction extends Adapters {
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton) e.getSource()).getName();
 		
-		if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName())) {
+		if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName())) {
 			this.searchPwdPanel.doCancelButton();
 			
 		//인증버튼이 눌렸을때
-		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName())) {
+		} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName())) {
 			this.emailCheck();
 			
 			//이메일이 있고 형식에 맞을때
 			if(this.emailCheck) {
 				this.searchPwdPanel.getCerfication();
 			} 
-			
-		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName())) {
+
+		} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName())) {
 			//인증번호 확인 눌렀을때
 			this.certification();
 	
@@ -54,8 +54,8 @@ public class FindPWAction extends Adapters {
 			} 
 			
 		//확인버튼	
-		} else if(buttonName.equals(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName())) {
-			
+
+		} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName())) {
 			//아이디를 체크하고 그 결과 값을 가지고 하단으로 안내려 보낼 수 있다면 
 			if(this.idCheck()) {
 				return;

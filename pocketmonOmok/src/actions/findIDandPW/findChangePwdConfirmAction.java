@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 import actions.adapters.Adapters;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import frames.searchFrames.SearchChangePanel;
 
 public class findChangePwdConfirmAction extends Adapters{
@@ -20,7 +20,7 @@ public class findChangePwdConfirmAction extends Adapters{
 	public void actionPerformed(ActionEvent e) {
 		String button = ((JButton) e.getSource()).getName();
 		
-		if(button.equals(LoginSizesEnum.BUTTON_NAME_CHANGE_CONFIRM.getButtonName())) {
+		if(button.equals(LoginPanelEnum.BUTTON_NAME_CHANGE_CONFIRM.getButtonName())) {
 			this.searchChangePanel.goHome();
 		}	
 	}

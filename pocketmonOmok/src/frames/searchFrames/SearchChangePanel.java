@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import actions.findIDandPW.findChangePwdConfirmAction;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
@@ -62,7 +62,7 @@ public class SearchChangePanel extends JPanel {
 			this.changeConfirmButton.setBorderPainted(false);
 			this.changeConfirmButton.setFocusPainted(false);
 			this.changeConfirmButton.setContentAreaFilled(false);
-			this.changeConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_CHANGE_CONFIRM.getButtonName());
+			this.changeConfirmButton.setName(LoginPanelEnum.BUTTON_NAME_CHANGE_CONFIRM.getButtonName());
 			this.changeConfirmButton.addActionListener(this.findchangepwdconfirmAction);
 			
 			this.add(changeConfirmMsgLabel);

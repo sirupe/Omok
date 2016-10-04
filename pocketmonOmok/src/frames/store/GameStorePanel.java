@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GameStoreEnum;
-import enums.frames.WaitingRoomSizesEnum;
+import enums.frames.WaitingRoomEnum;
 import enums.frames.SearchIDEnum;
 
 

@@ -25,7 +25,7 @@ import enums.etc.ServerActionEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
@@ -129,7 +129,7 @@ public class SearchRePwdPanel extends JPanel {
 		};	
 		
 		this.searchConfirmButton.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
-		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName());
+		this.searchConfirmButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CONFIRMBUTTON.getButtonName());
 		this.add(searchConfirmButton);
 		this.searchConfirmButton.addActionListener(this.findRePwdAction);
 			

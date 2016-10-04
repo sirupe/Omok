@@ -21,7 +21,7 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import frames.BasicFrame;
@@ -212,7 +212,7 @@ import omokGame.client.ClientAccept;
 				);
 		
 		this.searchConfirmButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_BUTTON.getRectangle()); 
-		this.searchConfirmButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName());
+		this.searchConfirmButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CONFIRM.getButtonName());
 		
 		this.add(searchConfirmButton);
 		this.getSearchConfirmButton().setVisible(true);
@@ -237,7 +237,7 @@ import omokGame.client.ClientAccept;
 			);
 		
 		this.CheckNumberButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_CHECK_BUTTON.getRectangle()); 
-		this.CheckNumberButton.setName(LoginSizesEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
+		this.CheckNumberButton.setName(LoginPanelEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
 		
 		this.add(CheckNumberButton);
 		this.CheckNumberButton.setVisible(false);
@@ -264,7 +264,7 @@ import omokGame.client.ClientAccept;
 		this.searchCancelButton.setBounds(SearchPwdEnum.SEARCH_CANCEL_BUTTON.getRectangle()); 
 		this.add(searchCancelButton); 
 		
-		this.searchCancelButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName());
+		this.searchCancelButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CANCEL.getButtonName());
 		this.searchCancelButton.addActionListener(this.findPwdAction); 
 		
 		
@@ -286,7 +286,7 @@ import omokGame.client.ClientAccept;
 		
 		this.searchCheckButton.setBounds(SearchPwdEnum.SEARCH_CHECK_BUTTON.getRectangle()); 
 		this.add(searchCheckButton); 
-		this.searchCheckButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
+		this.searchCheckButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName());
 		this.searchCheckButton.addActionListener(this.findPwdAction); 
 		} 
 		
