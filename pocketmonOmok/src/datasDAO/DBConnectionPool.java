@@ -24,8 +24,9 @@ public class DBConnectionPool {
 	private Vector<ConnectionObject> connections = new Vector<ConnectionObject>(10);
 	private String driver = "oracle.jdbc.driver.OracleDriver";       
 	private String url    = "jdbc:oracle:thin:@localhost:1521:xe";   
-	private String user   = "hr";   
-	private String passwd = "hr";
+
+	private String user   = "sirupe";   
+	private String passwd = "7133";
 
 	private boolean traceOn = true;;
 	private boolean initialized = false;

@@ -193,7 +193,6 @@ public class UserPersonalInfoDAO {
 			ps.setString(2, personalDTO.getUserID());
 			
 			result = ps.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -255,6 +254,7 @@ public class UserPersonalInfoDAO {
 		return userPersonalInfo;
 	}
 	
+	//고객 정보 수장
 	public int updateUserInfo(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
@@ -294,9 +294,34 @@ public class UserPersonalInfoDAO {
 		
 		return result;
 	}
+	
+	//유저 탈퇴처리. db데이터를 삭제하지 않고 상태값을 변경한다.
+	public int userDropOut(UserPersonalInfoDTO personalDTO) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		int result = 0;
+		
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		
+		try {
+			connection = dbPool.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE USER_PERSONAL_INFO ");
+			sql.append("SET USER_DROP_OUT=0 ");
+			sql.append("WHERE USER_ID=?");
+			
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, personalDTO.getUserID());
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
+	}
 }
-
-
-//SELECT USER_ID
-//FROM USER_PERSONAL_INFO
-//WHERE USER_ID='test' AND USER_PASSWD='5555';

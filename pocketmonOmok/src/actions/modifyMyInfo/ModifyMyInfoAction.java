@@ -33,6 +33,7 @@ public class ModifyMyInfoAction extends Adapters {
 			this.modifyFrame.getCorrectPwdFrame().confirmButtonClick();
 			break;
 		case "reset" :
+//			this.modifyFrame.getCorrectPwdFrame().reset
 			break;
 			
 		}

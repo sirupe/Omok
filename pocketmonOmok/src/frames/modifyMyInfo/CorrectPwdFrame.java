@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import actions.modifyMyInfo.ModifyMyInfoAction;
@@ -29,13 +32,23 @@ public class CorrectPwdFrame extends JFrame{
 	private Image backGround;
 	private JLabel pwdLabel;
 	private JLabel pwderror;
-	private JTextField pwdTextField;
+	private JPasswordField pwdField;
 	private JButton confirm;
 	private JButton reset;
 	private ModifyMyInfoAction modifyAction;
 	private ModifyMyInfoFrame modifyFrame;
-		
+	private String id;
+	
 	public CorrectPwdFrame(ModifyMyInfoFrame modifyFrame, ModifyMyInfoAction modifyAction) {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				modifyFrame.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		
 		this.modifyAction = modifyAction;
 		this.modifyFrame = modifyFrame;
 		try {
@@ -51,7 +64,7 @@ public class CorrectPwdFrame extends JFrame{
 		
 		this.pwdLabel	 = new JLabel("PW 입력");
 		this.pwderror  	 = new JLabel("비밀번호 오류 입니다.");
-		this.pwdTextField = new JTextField();
+		this.pwdField = new JPasswordField();
 		Font pwdLabelfont = new Font("a으라차차", Font.BOLD, 18);
 		Font pwderrorfont = new Font("a으라차차", Font.BOLD, 15);
 		
@@ -60,7 +73,7 @@ public class CorrectPwdFrame extends JFrame{
 		this.pwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.pwdLabel.setBounds(CorrectEnum.PWD_TEXT_LABEL_RECT.getRect());
 		
-		this.pwdTextField.setBounds(CorrectEnum.PWD_INPUT_RECT.getRect());
+		this.pwdField.setBounds(CorrectEnum.PWD_INPUT_RECT.getRect());
 			
 		this.pwderror.setFont(SearchPwdEnum.LABELFONT_DEFAULT.getFont());
 		this.pwderror.setForeground(Color.red);
@@ -113,7 +126,7 @@ public class CorrectPwdFrame extends JFrame{
 		
 		this.add(pwdLabel);
 //		this.add(pwderror);
-		this.add(pwdTextField);
+		this.add(pwdField);
 		this.add(confirm);
 		this.add(reset);
 		this.confirm.setName("confirm");
@@ -126,8 +139,9 @@ public class CorrectPwdFrame extends JFrame{
 	}
 	
 	public void confirmButtonClick() {
-		String id = this.modifyFrame.getBasicFrame().getUserID();
-		String pw = this.pwdTextField.getText();
+		this.id = this.modifyFrame.getBasicFrame().getUserID();
+		char[] pwArr = this.pwdField.getPassword();
+		String pw = new String(pwArr, 0, pwArr.length);
 		
 		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
 		personalDTO.setUserAction(UserActionEnum.USER_MODIFY_DROP);
@@ -140,17 +154,36 @@ public class CorrectPwdFrame extends JFrame{
 		JOptionPane.showMessageDialog(this, "패스워드가 일치하지 않습니다.");
 	}
 	
+	public void resetClick() {
+		this.modifyFrame.setVisible(true);
+		this.setVisible(false);
+		this.dispose();
+	}
+	
 	public void dropPwCheckSuccess() {
-		int result = JOptionPane.showConfirmDialog(this, "정말로 탈퇴하시겠습니까?");
+		int result = JOptionPane.showConfirmDialog(this, "정말로 탈퇴하시겠습니까?", "", JOptionPane.YES_NO_OPTION);
 		if(result == JOptionPane.YES_OPTION) {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
 			personalDTO.setUserAction(UserActionEnum.USER_DROP_CERTAIN);
-			personalDTO.setUserID(this.modifyFrame.getBasicFrame().getUserID());
+			personalDTO.setUserID(this.id);
 			
 			this.modifyFrame.getBasicFrame().sendDTO(personalDTO);
 			
 		} else {
 			
 		}
+	}
+	
+	public void dropOutSuccess() {
+		JOptionPane.showMessageDialog(this, "회원탈퇴가 완료되었습니다.");
+		this.setVisible(false);
+		this.dispose();
+		this.modifyFrame.getBasicFrame().setVisible(true);
+		this.modifyFrame.getBasicFrame().showLoginPanel();
+	}
+	
+	public void dropOutFail() {
+		JOptionPane.showMessageDialog(this, "처리시 에러가 발생하였습니다. 다시 시도해주세요.","에러", JOptionPane.WARNING_MESSAGE);
+		
 	}
 }

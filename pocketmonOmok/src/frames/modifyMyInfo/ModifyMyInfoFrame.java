@@ -540,4 +540,8 @@ public class ModifyMyInfoFrame extends JFrame {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
+	
+	public static void main(String[] args) throws IOException {
+		new ModifyMyInfoFrame(null);
+	}
 }

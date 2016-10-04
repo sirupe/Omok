@@ -37,6 +37,8 @@ public enum ServerActionEnum {
 	MODIFY_USER_PERSONAL_INFO,	// DB에서 유저의 개인정보를 찾아서 반환
 	MODIFY_USER_DROPCHECK_FAIL,		// 탈퇴-입력한 패스워드가 틀렸을 떼
 	MODIFY_USER_DROPCHECK_SUCCESS,	// 패스워드를 제대로 입력했을 떄
+	MODIFY_USER_DROPOUT_SUCCESS,	// 회원탈퇴 성공
+	MODIFY_USER_DROPOUT_FAIL,		// 회원탈퇴 실패 
 	MODIFY_USER_FAIL,			// 수정실패
 	MODIFY_USER_PASSWD_FAIL,
 	MODIFY_USER_SUCCESS,		// 수정성공

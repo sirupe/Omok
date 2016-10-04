@@ -706,7 +706,6 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 			case USER_MODIFY_GET_MY_INFO :
 				resultDTO = this.userPersonalDAO.getUserPersonalInfo(personalDTO.getUserID());
 				resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_PERSONAL_INFO);
-				personalServer.getServerOutputStream().writeObject(resultDTO);
 				break;
 			
 			case USER_MODIFY_UPDATE :
@@ -723,28 +722,35 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 					// DB에 업데이트 실패
 					} else {
 						resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_FAIL);
-						System.out.println("실패를 넣어줬어");
 					}
 				// DB의 패스워드와 불일치
 				} else {
 					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_PASSWD_FAIL);
-					System.out.println("실패를 넣어줬어");
 				}
-				personalServer.getServerOutputStream().writeObject(resultDTO);
 				break;
 				
 			case USER_MODIFY_DROP :
 				resultDTO = this.userPersonalDAO.checkIDMatchesPW(personalDTO);
-				if(resultDTO.getUserID().length() == 0) {
+				if(resultDTO.getUserID() == null) {
 					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_DROPCHECK_FAIL);
 				} else {
 					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_DROPCHECK_SUCCESS);
 				}
 				break;
-			//회원탈퇴 쿼리땜에 잠시 보류 TODO 유저삭제 쿼리..
+			//회원탈퇴
 			case USER_DROP_CERTAIN :
+				int result = this.userPersonalDAO.userDropOut(personalDTO);
+				if(result == 1) {
+					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_DROPOUT_SUCCESS);
+				} else {
+					resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_DROPOUT_FAIL);
+				}
+				break;
+			default:
 				break;
 			}
+			resultDTO.setPosition(UserPositionEnum.POSITION_MODIFY_MY_INFO);
+			personalServer.getServerOutputStream().writeObject(resultDTO);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
