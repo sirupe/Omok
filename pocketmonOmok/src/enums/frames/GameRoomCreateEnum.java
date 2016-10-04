@@ -17,14 +17,15 @@ public enum GameRoomCreateEnum {
 	GAMEROOM_CREATE_FRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() / 2))),
 	
 	//방이름 라벨
-		GAMEROOM_CREATE_ROOM_NAME_LABEL(new Rectangle(
+	GAMEROOM_CREATE_ROOM_NAME_LABEL(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.13),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.03),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.2),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.4)
-				)),
+	)),
+		
 	//방 비밀번호 라벨	
-		GAMEROOM_CREATE_ROOM_PWD_NAME_LABEL(new Rectangle(
+	GAMEROOM_CREATE_ROOM_PWD_NAME_LABEL(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.06),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.29),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.3),
@@ -32,49 +33,53 @@ public enum GameRoomCreateEnum {
 				)),
 	//===========================================================================
 	//방이름 텍스트필드
-		GAMEROOM_CREATE_ROOM_NAME_TEXT(new Rectangle(
+	GAMEROOM_CREATE_ROOM_NAME_TEXT(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.25),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.15),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.5),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.12)
-				)),
+	)),
+	
 	//방비밀번호 텍스트필드
-		GAMEROOM_CREATE_ROOM_PWD_TEXT(new Rectangle(
+	GAMEROOM_CREATE_ROOM_PWD_TEXT(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.25),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.41),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.5),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.12)
-				)),
+	)),
 	//===========================================================================
 	//확인 버튼
-		GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON(new Rectangle(
+	GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.18),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.55),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.2),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.12)
-				)),
-		//취소버튼
-		GAMEROOM_CREATE_ROOM_CANCEL_BUTTON(new Rectangle(
+	)),
+	
+	//취소버튼
+	GAMEROOM_CREATE_ROOM_CANCEL_BUTTON(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.35),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.55),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.2),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.12)
-				)),
-		//=========================================================================
-		//공개방  라디오 버튼
-		GAMEROOM_CREATE_ROOM_PRIVATE_RADIO(new Rectangle(
+	)),
+	
+	//=========================================================================
+	//공개방  라디오 버튼
+	GAMEROOM_CREATE_ROOM_PRIVATE_RADIO(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.15),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize()* 0.25),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.3),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.2)
-				)),
-		//비공개방
-		GAMEROOM_CREATE_ROOM_OPEN_RADIO(new Rectangle(
+	)),
+	
+	//비공개방
+	GAMEROOM_CREATE_ROOM_OPEN_RADIO(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.35),
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.25),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.3),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.2)
-				));
+	));
 //		
 //		
 //	
@@ -93,6 +98,7 @@ public enum GameRoomCreateEnum {
 	private GameRoomCreateEnum(Rectangle rec) {
 		this.rec = rec;
 	}
+	
 	private GameRoomCreateEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
@@ -107,12 +113,15 @@ public enum GameRoomCreateEnum {
 	public Rectangle getRectangle() {
 		return rec;
 	}
+	
 	public Dimension getDimension() {
 		return dimension;
 	}
+	
 	public int getSize() {
 		return size;
 	}
+	
 	public EmptyBorder getBorder() {
 		return border;
 	}

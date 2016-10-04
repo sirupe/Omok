@@ -108,10 +108,4 @@ public class CorrectPwdFrame extends JFrame{
 		this.setVisible(true);
 		
 	}
-
-	public static void main(String[] args) throws IOException {
-		new CorrectPwdFrame();
-
-	}
-
 }

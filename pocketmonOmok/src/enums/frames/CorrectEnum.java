@@ -166,9 +166,11 @@ public enum CorrectEnum {
 	private CorrectEnum(int x) {
 		   this.size = x;
 	}
+	
 	private CorrectEnum(Rectangle rect) {
 		this.rect = rect;
 	}
+	
 	private CorrectEnum(Dimension dimension) {
 		  this.dimension = dimension;
 	}
@@ -177,9 +179,11 @@ public enum CorrectEnum {
 	public int getSize() {
 		return size;
 	}
+	
 	public Rectangle getRect() {
 		return rect;
 	}
+	
 	public Dimension getDimension() {
 		  return dimension;
 	}

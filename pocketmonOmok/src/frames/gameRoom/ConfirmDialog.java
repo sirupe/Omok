@@ -105,7 +105,6 @@ public class ConfirmDialog extends JDialog{
 		this.yes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("yesyes");
 				isWithdrawCheck = true;
 				dispose();
 			}

@@ -213,12 +213,15 @@ public enum WaitingRoomSizesEnum {
 	private WaitingRoomSizesEnum(int x) {
 		this.size = x;
 	}
+	
 	private WaitingRoomSizesEnum(Font font) {
 		this.font = font;
 	}
+	
 	private WaitingRoomSizesEnum(Color color) {
 		this.color = color;
 	}
+	
 	private WaitingRoomSizesEnum(Dimension dimension) {
 		this.dimension = dimension;
 	}
@@ -227,12 +230,15 @@ public enum WaitingRoomSizesEnum {
 	public int getSize() {
 		return size;
 	}
+	
 	public Font getfont() {
 		return font;
 	}
+	
 	public Color getColot() {	
 		return color;
 	}
+	
 	public Dimension getDimension() {
 		return dimension;
 	}

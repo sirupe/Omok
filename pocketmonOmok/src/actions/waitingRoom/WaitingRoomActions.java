@@ -112,7 +112,6 @@ public class WaitingRoomActions {
 	// 방만들기프레임에서 공개방 비밀방 선택시 인입
 	public void createRoomSelectPrivateRoom(int index) {
 		this.openPrivate = index;
-		System.out.println(index);
 		if(index == 1) { // 비밀방인 경우
 			this.createRoom.getCreateRoomPwdText().setEditable(true);
 		} else { // 공개방인 경우

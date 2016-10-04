@@ -22,12 +22,6 @@ public class findChangePwdConfirmAction extends Adapters{
 		
 		if(button.equals(LoginSizesEnum.BUTTON_NAME_CHANGE_CONFIRM.getButtonName())) {
 			this.searchChangePanel.goHome();
-		}
-		
+		}	
 	}
-	
-
-
-
-
 }

@@ -1,6 +1,7 @@
 package frames.serchFrames;
 
 import java.awt.Font;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +27,6 @@ public class SearchIdPanel extends JPanel {
 	private String searchError;
 	private JButton searchConfirmButton;
 	private JButton backButton;
-	private Image backGround;
 	
 	private SearchIdFrame searchIdFrame;
 	
@@ -81,6 +81,7 @@ public class SearchIdPanel extends JPanel {
 						SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 						Image.SCALE_AREA_AVERAGING))
 		);
+		
 		this.searchConfirmButton.setBounds(SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle());
 		this.searchConfirmButton.setBorderPainted(false);
 		this.searchConfirmButton.setFocusPainted(false);
@@ -121,6 +122,7 @@ public class SearchIdPanel extends JPanel {
 	public String getsearchError() {
     	return searchError;
     }
+	
     public JLabel getErrorMsgLabel(){
     	return searchErrorMsgLabel;
     }

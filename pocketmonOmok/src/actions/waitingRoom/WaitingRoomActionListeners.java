@@ -66,7 +66,6 @@ public class WaitingRoomActionListeners extends Adapters {
 	// 방리스트, 유저 접속자 리스트, 노티스 필드(전체채팅) 에서 액션 인입
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("난똥이다.");
 		if(e.getSource() instanceof JTable) {
 			try {
 				this.waitingRoomActions.enterGameRoom();
