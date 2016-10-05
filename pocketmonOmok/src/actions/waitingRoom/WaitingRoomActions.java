@@ -1,6 +1,5 @@
 package actions.waitingRoom;
 
-import java.awt.JobAttributes;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -52,6 +51,7 @@ public class WaitingRoomActions {
 	
 	// 방만들기- 새로운 방 생성
 	public void createRoomNewGameRoom() {
+		
 		GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 		gameRoomInfo.setUserAction(UserActionEnum.USER_CREATE_ROOM);
 		gameRoomInfo.setRoomName(this.createRoom.getCreateRoomNameText().getText());
@@ -59,19 +59,23 @@ public class WaitingRoomActions {
 		gameRoomInfo.setRoomNumber(this.waitingRoomPanel.getRoomNumber());
 		gameRoomInfo.setPersons(1);
 		
-		// 비밀방인 경우
-		if(this.openPrivate == 1) {
-			if(this.createRoom.getCreateRoomPwdText().getText().length() == 0) {
-				JOptionPane.showMessageDialog(this.createRoom, "비밀번호를 입력해주세요.", "", JOptionPane.WARNING_MESSAGE);
+		if(this.createRoom.getCreateRoomNameText().getText().length() != 0) {
+			// 비밀방인 경우
+			if(this.openPrivate == 1) {
+				if(this.createRoom.getCreateRoomPwdText().getText().length() == 0) {
+					JOptionPane.showMessageDialog(this.createRoom, "비밀번호를 입력해주세요.", "", JOptionPane.WARNING_MESSAGE);
+				} else {
+					gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
+					gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
+					this.waitingRoomPanel.sendDTO(gameRoomInfo);
+				}
+			// 일반방인경우
 			} else {
-				gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
-				gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
+				gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
 				this.waitingRoomPanel.sendDTO(gameRoomInfo);
 			}
-		// 일반방인경우
 		} else {
-			gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
-			this.waitingRoomPanel.sendDTO(gameRoomInfo);
+			JOptionPane.showMessageDialog(this.createRoom, "방 이름을 입력해주세요.", "", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
@@ -124,6 +128,7 @@ public class WaitingRoomActions {
 		if(index == 1) { // 비밀방인 경우
 			this.createRoom.getCreateRoomPwdText().setEditable(true);
 		} else { // 공개방인 경우
+			this.createRoom.getCreateRoomPwdText().setText("");
 			this.createRoom.getCreateRoomPwdText().setEditable(false);
 		}
 	}
