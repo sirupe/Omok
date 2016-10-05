@@ -11,7 +11,6 @@ import frames.gameRoom.GameRoomPanel;
 public class GameRoomClientAction extends Adapters {
 	private GameRoomPanel gameRoomPanel;
 	private int readyCheck;
-	private boolean isStoneButtonCheck;
 	
 	public GameRoomClientAction(GameRoomPanel gameRoomPanel) {
 		this.gameRoomPanel = gameRoomPanel;
@@ -25,13 +24,17 @@ public class GameRoomClientAction extends Adapters {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		JButton button = (JButton)e.getSource();
-		this.gameRoomPanel.changeButtonColorImage(button.getName());
+		if(this.readyCheck == 0) {
+			this.gameRoomPanel.changeButtonImageMouseIn(button.getName());
+		}
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		JButton button = (JButton)e.getSource();
-		this.gameRoomPanel.changeButtonGrayImage(button.getName());
+		if(this.readyCheck == 0) {
+			this.gameRoomPanel.changeButtonImageMouseOut(button.getName());
+		}
 	}
 	//TODO
 	@Override
@@ -45,25 +48,29 @@ public class GameRoomClientAction extends Adapters {
 				this.gameRoomPanel.changeGameReadyButton(false);
 			} else {
 				this.gameRoomPanel.changeGameReadyButton(true);
-				this.readyCheck++;				
+				this.readyCheck++;
 			}
 		
 		// 오너가 스타트를 누르면 버튼을 누를 수 없는 상태로 만들고 서버로 게임을 시작한다는 메세지를 보낸다.
 		} else if(buttonName.equals("start")) {
 			this.gameRoomPanel.startReadyButtonRemoveAction();
 		
-		// 눌린 버튼이 게임 돌 놓는 작업이라면
-		// 버튼의 위치값을 가져와 저장하고
-		// 턴을 종료하는 메소드를 실행한다.
 		} else if(buttonName.equals("withdraw")) {
 			this.gameRoomPanel.clickWithDraw();
 		} else if(buttonName.equals("exit")) {
 			this.gameRoomPanel.exitGame();
+		// 눌린 버튼이 게임 돌 놓는 작업이라면
+		// 버튼의 위치값을 가져와 저장하고
+		// 턴을 종료하는 메소드를 실행한다.
+		// 돌을 한 턴에 두번 놓는 것을 방지하기 위해 플래그를 false 로 바꾸어준다.
 		} else {
-			String[] xy = button.getName().split(",");
-			int x = Integer.parseInt(xy[0]);
-			int y = Integer.parseInt(xy[1]);
-			this.gameRoomPanel.turnEnd(x, y);
+			if(this.gameRoomPanel.isStoneClickCheck()) {
+				this.gameRoomPanel.setStoneClickCheck(false);
+				String[] xy = button.getName().split(",");
+				int x = Integer.parseInt(xy[0]);
+				int y = Integer.parseInt(xy[1]);
+				this.gameRoomPanel.turnEnd(x, y);
+			}
 		}
 	}
 }

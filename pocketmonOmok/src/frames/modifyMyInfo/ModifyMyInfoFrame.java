@@ -212,10 +212,8 @@ public class ModifyMyInfoFrame extends JFrame {
 			
 		this.setLayout(null);
 		this.setVisible(true);
-		this.setTitle("회원가입수정");
+		this.setTitle("회원정보수정");
 		this.setResizable(false);
-		  
-		
 	}
 	
 	
