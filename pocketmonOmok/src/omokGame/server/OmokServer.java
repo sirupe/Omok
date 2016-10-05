@@ -73,6 +73,7 @@ public class OmokServer {
 		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
 			//사용자정보가 탈퇴유저라면
 			if(this.userPersonalDAO.loginDropUserCheck(inputUserPersonalInfo) == 0) {
+				System.out.println("그럼시발여기계속들어온다는거야?");
 				resultDTO.setServerAction(ServerActionEnum.LOGIN_DROP_USER);
 			//클라이언트의 ID가 처음 인입된 것이라면
 			} else if(this.loginUsersMap.get(resultDTO.getUserID()) == null) {
@@ -712,7 +713,6 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 					// DB에 정상적으로 업데이트 됨
 					if(result == 1) {
 						resultDTO.setServerAction(ServerActionEnum.MODIFY_USER_SUCCESS);
-						System.out.println("성공을 넣어줬어");
 					
 					// DB에 업데이트 실패
 					} else {
