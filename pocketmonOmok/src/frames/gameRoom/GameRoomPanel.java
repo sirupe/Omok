@@ -78,6 +78,8 @@ public class GameRoomPanel extends JPanel {
 	private GameRoomClientAction gameRoomAction;
 	private GameRoomInfoVO gameRoomInfo;
 	private StonePositionCheck stonePositionCheck;
+	private boolean isStoneClickCheck;
+	private boolean isGameIngCheck;
 	
 	public GameRoomPanel(BasicFrame basicFrame) {
 		this.gameRoomAction = new GameRoomClientAction(this);
@@ -305,6 +307,8 @@ public class GameRoomPanel extends JPanel {
 
 	// 게임방에 접속한 유저의 정보 세팅
 	public void setEnterUserInfo(UserInGameRoomDTO inGameUserInfo) {
+		// 레디버튼 안에 마우스 진입시 색깔이 바뀌어아 하며 사용자가 클릭했다면 더이상 변경되지 말아야 하므로 상태값을 boolean으로 주었다.
+		// 그 boolean 값을 유저가 방에 들어오면 일단 무조건 true 로 만들어준다.
 		this.gameRoomInfo = inGameUserInfo.getGameRoomInfo();
 		this.thisUserID = this.basicFrame.getUserID();
 		try {
@@ -388,9 +392,11 @@ public class GameRoomPanel extends JPanel {
 	}
 	
 	// 메뉴 영역 밖으로 마우스 포인터가 빠짐
-	public void changeButtonGrayImage(String buttonName) {
+	public void changeButtonImageMouseOut(String buttonName) {
 		if(buttonName.equals("start")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START_CH.getImageDir()));
+		} else if(buttonName.equals("ready")) {
+			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY.getImageDir()));
 		} else {
 			String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.thisUserID) ? 
 					ImageEnum.GAMEROOM_MENU_IMAGES_GRAY_OWNER.getImages() : ImageEnum.GAMEROOM_MENU_IMAGES_GRAY_GUEST.getImages();
@@ -405,9 +411,11 @@ public class GameRoomPanel extends JPanel {
 	}
 	
 	// 메뉴 영역 안으로 마우스 포인터가 진입
-	public void changeButtonColorImage(String buttonName) {
+	public void changeButtonImageMouseIn(String buttonName) {
 		if(buttonName.equals("start")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START_GO.getImageDir()));
+		} else if(buttonName.equals("ready")) {
+			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY_BLUE.getImageDir()));
 		} else {
 			String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.thisUserID) ? 
 					ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_OWNER.getImages() : ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_GUEST.getImages();
@@ -426,7 +434,7 @@ public class GameRoomPanel extends JPanel {
 	public void changeGameReadyButton(boolean check) {
 		String imageDir = check ? ImageEnum.GAMEROOM_READY_CH.getImageDir() : ImageEnum.GAMEROOM_READY.getImageDir() ;
 		UserActionEnum userAction = check ? UserActionEnum.USER_GUEST_READY_CHECK : UserActionEnum.USER_GUEST_READY_DECHECK ;
-	
+		
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		
 		// 데이터 전송용 객체를 새로 만들어 필요 정보를 저장한 후 게스트가 레디를 했다는 정보를 서버로 전송한다.
@@ -476,7 +484,7 @@ public class GameRoomPanel extends JPanel {
 		GetResources.soundPlay(SoundEnum.GAME_START_SOUND.getSound());
 		
 		try {
-			Thread.sleep(700);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -591,8 +599,10 @@ public class GameRoomPanel extends JPanel {
 	// 한 유저가 이긴 경우 게임이 종료된다.
 	// 이긴 유저가 접속자와 같다면 승리하셨습니다 메세지를 띄워주고 진 유저가 같다면 패배하셨습니다 메세지 띄워준다.
 	// for문을 돌면 돌이 일정하게 사라지지 않기 대문에 setVisible 먼저 보이지 않게 한 후 for문으로 작업하고 다시 true를 준다.
-	// 초기화 해야 할 값이 있다면 초기화 하고 게스트 유저의 레디를 해제해준다.
+	// 초기화 해야 할 값이 있다면 초기화 하고 게스트 유저의 레디를 해제해준다.//TODO
 	public void gameEnd(AbstractEnumsDTO data) {
+		this.isThreadStart = false;
+		this.isGameIngCheck = false;
 		GameBoardVO gameBoardVO = (GameBoardVO)data;
 		this.gameBoard = gameBoardVO.getGameBoard();
 		this.x = gameBoardVO.getX();
@@ -605,6 +615,7 @@ public class GameRoomPanel extends JPanel {
 			new GameEndDialog(this.basicFrame, "패배하였습니다 :<");
 		}
 		
+		this.timeBar.setValue(0);
 		this.stoneInit();
 		
 		this.x = 0;
@@ -668,7 +679,7 @@ public class GameRoomPanel extends JPanel {
 	}
 	
 	// 게임방 초기화
-	public void initUserGameRoomInfo() {// TODO
+	public void initUserGameRoomInfo() {
 		this.leftUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));
 		this.rightUser.setIcon(this.getUserImageIcon(ImageEnum.GAMEROOM_DEFALT_USER_IMAGE.getImageDir()));
 		this.timeBar.setValue(time);
@@ -709,48 +720,62 @@ public class GameRoomPanel extends JPanel {
 		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
 	}
 	
-	public void timeLimitThread() {
+	public void timeLimitThread() {//TODO
 		new Thread() {
 			@Override
 			public void run() {
 				// 30초동안 1초 1초 줄어든다. 시간부분과 프로그레스바를 줄어드는 시간에 맞추어 변경시킨다.
 				// 시간이 모두 지나거나 유저가 게임보드에 돌을 놓으면(isThreadStart가 false가 되면)
 				// 현재 유저의 마우스리스너를 삭제하고 현재 게임보드 정보를 서버로 전송하며 턴을 종료한다.
-				for(int i = time; i >= 0 && isThreadStart; i--) {
+				// 시간이 시작하면 클릭이 가능하고 턴이 종료되면 불가능하게 하는 플래그 설정
+				isStoneClickCheck = true;
+				int i = 0;
+				for(i = time; i >= 0 && isThreadStart; i--) {
 					timeBar.setValue(i);
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					timeLabel.setText("0:" + String.valueOf(i));
+					timeLabel.setText("0:" + String.valueOf(i > 9 ? i : "0" + i));
 				}
 				timeBar.setValue(0);
 				timeLabel.setText("0:00");
 				// 쓰레드가 끝나면 (시간이 다 갔거나 유저가 돌을 놓았거나) - turnEnd 에서 false처리가 되면
 				// 화면에 등록된 액션들을 삭제한다. (클릭이 불가능하게 만듦)
 				gameBoardPanelDeleteAction();
-				// 게임보드VO 에 현재 진행한 유저와 다음턴의 유저와 게임보드에 놓인 돌 정보와 이긴 유저 정보를 담아 보낸다.
-				// (현재 유저의 돌의 위치를 탐색하여 5개가 이어져서 놓여졌는지 판단한다.)
-				GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
-				gameBoardVO.setUserAction(UserActionEnum.USER_GAME_BOARD_INFO);
-				gameBoardVO.setNowTurnUser(thisUserID);
-				gameBoardVO.setNextTurnUser(gameRoomInfo.getOwner().equals(thisUserID) ? gameRoomInfo.getGuest() : gameRoomInfo.getOwner());
-				gameBoardVO.setGameBoard(gameBoard);
-				gameBoardVO.setX(x);
-				gameBoardVO.setY(y);
-				gameBoardVO.setWinUser(
-					stonePositionCheck.stoneDiagonalLeftCheck(x, y, gameBoard) < 5 ? 
-						(stonePositionCheck.stoneDiagonalRightCheck(x, y, gameBoard) < 5 ? 
-							(stonePositionCheck.stoneHeightCheck(x, y, gameBoard) < 5 ? 
-								(stonePositionCheck.stoneWidthCheck(x, y, gameBoard) < 5 ? null : thisUserID) 
-							: thisUserID) 
-						: thisUserID) 
-					: thisUserID);
-				if(gameBoardVO.getWinUser() != null) {
-					gameBoardVO.setLoseUser(otherUserID);
+
+				// 쓰레드 종료보다 게임종료가 먼저 일어났는지 판단하여 아래 결과를 실행한다.
+				// 게임종료가 먼저 일어났다면 서버에 두 번 요청을 보낼 수 있기 때문.
+				// (기권 등의 상황)
+				if(isGameIngCheck) {
+					// 게임보드VO 에 현재 진행한 유저와 다음턴의 유저와 게임보드에 놓인 돌 정보와 이긴 유저 정보를 담아 보낸다.
+					// (현재 유저의 돌의 위치를 탐색하여 5개가 이어져서 놓여졌는지 판단한다.)
+					GameBoardVO gameBoardVO = new GameBoardVO(UserPositionEnum.POSITION_GAME_ROOM);
+					gameBoardVO.setUserAction(UserActionEnum.USER_GAME_BOARD_INFO);
+					gameBoardVO.setNowTurnUser(thisUserID);
+					gameBoardVO.setNextTurnUser(gameRoomInfo.getOwner().equals(thisUserID) ? gameRoomInfo.getGuest() : gameRoomInfo.getOwner());
+					gameBoardVO.setGameBoard(gameBoard);
+					gameBoardVO.setX(x);
+					gameBoardVO.setY(y);
+					
+					if(i > 0) {
+						gameBoardVO.setWinUser(
+							stonePositionCheck.stoneDiagonalLeftCheck(x, y, gameBoard) < 5 ? 
+								(stonePositionCheck.stoneDiagonalRightCheck(x, y, gameBoard) < 5 ? 
+									(stonePositionCheck.stoneHeightCheck(x, y, gameBoard) < 5 ? 
+										(stonePositionCheck.stoneWidthCheck(x, y, gameBoard) < 5 ? null : thisUserID) 
+									: thisUserID) 
+								: thisUserID) 
+							: thisUserID);
+					}
+					
+					if(gameBoardVO.getWinUser() != null) {
+						gameBoardVO.setLoseUser(otherUserID);
+					}
+					basicFrame.sendDTO(gameBoardVO);
 				}
-				basicFrame.sendDTO(gameBoardVO);
+				isGameIngCheck = true;
 			}
 		}.start();
 	}
@@ -803,5 +828,13 @@ public class GameRoomPanel extends JPanel {
 	
 	public void addTextNotice(String message) {
 		this.chattingArea.setText(this.chattingArea.getText() + "\n" + message);
+	}
+	
+	public void setStoneClickCheck(boolean isStoneClickCheck) {
+		this.isStoneClickCheck = isStoneClickCheck;
+	}
+	
+	public boolean isStoneClickCheck() {
+		return isStoneClickCheck;
 	}
 }

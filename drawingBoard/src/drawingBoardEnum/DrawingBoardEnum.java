@@ -15,21 +15,21 @@ public enum DrawingBoardEnum {
 	DRAWINGBOARD_SIZE_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (DRAWINGBOARD_SIZE_WIDTH.getSize() / 2 ))),
 	DRAWINGBOARD_SIZE_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2) - (DRAWINGBOARD_SIZE_HEIGHT.getSize() / 2))),
 	
-	
-	
-		
 	//DRAWINGBOARD프레임의  x, y 위치와 가로, 세로 사이즈 RECT
 	DRAWINGBOARD_FRMAE_RECT(new Rectangle(
 			(int)(DRAWINGBOARD_SIZE_POSITION_X.getSize()),
 			(int)(DRAWINGBOARD_SIZE_POSITION_Y.getSize()),
 			(int)(DRAWINGBOARD_SIZE_WIDTH.getSize()),
 			(int)(DRAWINGBOARD_SIZE_HEIGHT.getSize())
-		)),
+	));
 	
 	//DrawingTypePanel패널의 x, y 위치와  가로, 세로 사이즈
-	DRAWINGTYPE_PANEL_RECT(new Rectangle(
-			
-	));
+//	DRAWINGTYPE_PANEL_RECT(new Rectangle(
+//			(int)(DRAWINGBOARD_FRMAE_RECT),
+//			(int)(),
+//			(int)(),
+//			(int)(),
+//	));
 	
 	
 	

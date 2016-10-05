@@ -20,11 +20,13 @@ import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
+import enums.etc.SoundEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import frames.BasicFrame;
 import frames.waitingRoom.WaitingRoomListTable;
 import frames.waitingRoom.WaitingRoomPanel;
+import utility.GetResources;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
@@ -114,6 +116,7 @@ public class ClientAccept {
 			panel.roomListSetting(roomTable);			
 			panel.userListSetting(waitingRoomInfo.getUserList());
 			panel.getChattingOutput().append(waitingRoomInfo.getUserGameData().getUserID() + " 님, 환영합니다.\n");
+			GetResources.soundPlay(SoundEnum.LOGIN_SUCCESS_SOUND.getSound());
 			this.basicFrame.showWaitingRoom();
 			break;
 		
@@ -153,7 +156,7 @@ public class ClientAccept {
 				//TODO ingameroom 에러픽스
 				if(roomVO.getPwd().equals(passwd)) {
 					isPasswordFail = false;
-					GameRoomInfoVO enterRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+					GameRoomInfoVO enterRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 					enterRoomVO.setEnterImage(roomVO.getEnterImage().getDescription());
 					enterRoomVO.setRoomNumber(roomVO.getRoomNumber());
 					enterRoomVO.setRoomName(roomVO.getRoomName());
@@ -198,6 +201,7 @@ public class ClientAccept {
 			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
 			break;
 		case GAME_ROOM_WINNER_INFO :
+			System.out.println("여기로 온다.");
 			this.basicFrame.getGameRoomPanel().gameEnd(data);
 			break;
 		case GAME_ROOM_EXIT_OTHER_USER :

@@ -22,10 +22,10 @@ public enum ImageEnum {
 	WAITINGROOM_ENTER_IMPOSSIBLE("resources/waitingRoom/NoAdmittance.png"),
 	WAITINGROOM_USER_GRADE_IMAGE_MAP(userGradeImageMap()),
 //GameRoom 이미지들------------------------------------------------------	
-//gameRoom 이미지들 수정한것입니다.
 //뒤에 "CH" 가 붙은것은 마우스를 버튼위에 올렸을때 변하는 것 입니다.
 	GAMEROOM_READY("resources/gameRoom/ready.png"),
 	GAMEROOM_READY_CH("resources/gameRoom/ready_ch.png"),
+	GAMEROOM_READY_BLUE("resources/gameRoom/ready_blue.png"),
 	GAMEROOM_EXIT("resources/gameRoom/exit.png"),
 	GAMEROOM_EXIT_CH("resources/gameRoom/exit_ch.png"),
 	GAMEROOM_GIVEUP("resources/gameRoom/giveup.png"),
@@ -37,7 +37,6 @@ public enum ImageEnum {
 	GAMEROOM_START_CH("resources/gameRoom/start_ch.png"),
 	//게임이 시작되면 게스트의 레디버튼과 방장의 스타트 버튼이 
 	//비활성화 되면서 BATTLING 이미지로 바뀌어요
-//	GAMEROOM_START_BATTILING("resources/gameRoom/battling.png"),
 	GAMEROOM_START_BATTILING("resources/gameRoom/battling.png"),
 	
 	GAMEROOM_BOARD_IMAGE("resources/gameRoom/gameBoard.png"),
