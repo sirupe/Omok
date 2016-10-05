@@ -43,12 +43,13 @@ public class GameRoomClientAction extends Adapters {
 		String buttonName = button.getName();
 		// 게스트가 레디를 누르면 게스트 레디 버튼의 이미지를 바꿔주고 사용자가 레디를 눌렀다고 서버에 전송한다.
 		if(buttonName.equals("ready")) {
-			if(readyCheck > 0) {
-				this.readyCheck = 0;
-				this.gameRoomPanel.changeGameReadyButton(false);
-			} else {
+			readyCheck++;
+			if(readyCheck == 2) {
 				this.gameRoomPanel.changeGameReadyButton(true);
-				this.readyCheck++;
+			} 
+			if(readyCheck == 4) {
+				this.gameRoomPanel.changeGameReadyButton(false);
+				this.readyCheck = 0;
 			}
 		
 		// 오너가 스타트를 누르면 버튼을 누를 수 없는 상태로 만들고 서버로 게임을 시작한다는 메세지를 보낸다.
@@ -72,5 +73,9 @@ public class GameRoomClientAction extends Adapters {
 				this.gameRoomPanel.turnEnd(x, y);
 			}
 		}
+	}
+	
+	public void setReadyCheck(int readyCheck) {
+		this.readyCheck = readyCheck;
 	}
 }

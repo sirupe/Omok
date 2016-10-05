@@ -19,6 +19,7 @@ import actions.waitingRoom.WaitingRoomActionListeners;
 import enums.frames.CreateGameRoomEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.WaitingRoomEnum;
+import utility.GetResources;
 
 public class CreateGameRoomFrame extends JFrame {
 	private static final long serialVersionUID = 36363454L;
@@ -149,24 +150,20 @@ public class CreateGameRoomFrame extends JFrame {
 	public void setButtonPosition() throws IOException {
 		//확인 버튼
 		this.createRoomConfirmButton.setIconTextGap(this.createRoomConfirmButton.getIconTextGap() - 15);
-    	this.createRoomConfirmButton.setIcon(
-    			new ImageIcon(ImageIO.read(
-    				new File("resources/signUp/confirm.jpg")).getScaledInstance(
-    						CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().width,
-    						CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().height,
-    						Image.SCALE_AREA_AVERAGING))
-    		);
+    	this.createRoomConfirmButton.setIcon(GetResources.getImageIcon("resources/signUp/confirm.jpg", 
+    			CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().width,
+    			CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().height)
+    	);
+    	
     	this.createRoomConfirmButton.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle());
     	
-    //취소버튼
+    	//취소버튼
     	this.createRoomCancelButton.setIconTextGap(this.createRoomCancelButton.getIconTextGap() - 15);
-    	this.createRoomCancelButton.setIcon(
-    			new ImageIcon(ImageIO.read(
-    				new File("resources/signUp/reset.jpg")).getScaledInstance(
-    						CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().width,
-    						CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().height,
-    						Image.SCALE_AREA_AVERAGING))
-    		);
+    	this.createRoomCancelButton.setIcon(GetResources.getImageIcon("resources/signUp/reset.jpg", 
+    			CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().width,
+				CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().height)
+    			
+    	);
     	this.createRoomCancelButton.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle());
     	
     	this.add(createRoomConfirmButton);
