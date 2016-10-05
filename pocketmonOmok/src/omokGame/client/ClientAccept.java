@@ -163,6 +163,7 @@ public class ClientAccept {
 					enterRoomVO.setOwner(roomVO.getOwner());
 					enterRoomVO.setPersons(1);
 					enterRoomVO.setGuest(this.basicFrame.getUserID());
+					System.out.println("현재의 유저는 : " + enterRoomVO.getGuest());
 					enterRoomVO.setUserAction(UserActionEnum.USER_ENTER_ROOM);
 					this.basicFrame.sendDTO(enterRoomVO);
 				} else if(passwd == null) {

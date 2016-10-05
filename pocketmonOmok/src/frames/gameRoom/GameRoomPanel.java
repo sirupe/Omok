@@ -86,6 +86,7 @@ public class GameRoomPanel extends JPanel {
 		this.stonePositionCheck = new StonePositionCheck();
 		this.basicFrame 	= basicFrame;
 		this.isThreadStart  = false;
+		this.isGameIngCheck = true;
 		
 		this.omokStonePanel = new JPanel();
 		this.timeLimitPanel = new JPanel();
@@ -478,6 +479,7 @@ public class GameRoomPanel extends JPanel {
 		
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
+		this.menuButtons[2].removeMouseListener(this.gameRoomAction);
 		this.menuButtons[1].addMouseListener(this.gameRoomAction);
 		this.chattingArea.setText(this.chattingArea.getText() + "\n<게임을 시작합니다.>");
 		
@@ -626,10 +628,12 @@ public class GameRoomPanel extends JPanel {
 		if(this.thisUserID.equals(this.gameRoomInfo.getGuest())) {
 			this.menuButtons[0].addMouseListener(this.gameRoomAction);
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY.getImageDir()));
+			this.gameRoomAction.setReadyCheck(0);
 		} else {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START.getImageDir()));
 		}
 		
+		this.menuButtons[2].addMouseListener(this.gameRoomAction);
 	}
 	
 	// 놓였던 돌 초기화
