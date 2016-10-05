@@ -20,6 +20,8 @@ import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import frames.BasicFrame;
 import frames.waitingRoom.WaitingRoomListTable;
 import frames.waitingRoom.WaitingRoomPanel;
@@ -148,9 +150,18 @@ public class ClientAccept {
 			
 			while(isPasswordFail) {
 				String passwd = JOptionPane.showInputDialog("비밀번호를 입력해주세요.");
+				//TODO ingameroom 에러픽스
 				if(roomVO.getPwd().equals(passwd)) {
 					isPasswordFail = false;
-					this.basicFrame.showGameRoom((UserInGameRoomDTO)data);
+					GameRoomInfoVO enterRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
+					enterRoomVO.setEnterImage(roomVO.getEnterImage().getDescription());
+					enterRoomVO.setRoomNumber(roomVO.getRoomNumber());
+					enterRoomVO.setRoomName(roomVO.getRoomName());
+					enterRoomVO.setOwner(roomVO.getOwner());
+					enterRoomVO.setPersons(1);
+					enterRoomVO.setGuest(this.basicFrame.getUserID());
+					enterRoomVO.setUserAction(UserActionEnum.USER_ENTER_ROOM);
+					this.basicFrame.sendDTO(enterRoomVO);
 				} else if(passwd == null) {
 					isPasswordFail = false;
 				} else {
