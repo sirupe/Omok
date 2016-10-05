@@ -1,8 +1,6 @@
 package frames.modifyMyInfo;
 
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
@@ -13,12 +11,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import actions.modifyMyInfo.ModifyMyInfoAction;
 import datasDTO.UserPersonalInfoDTO;
@@ -26,12 +22,11 @@ import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
-import enums.frames.SearchPwdEnum;
 
 public class CorrectPwdFrame extends JFrame{
+	private static final long serialVersionUID = -3504170481873643135L;
 	private Image backGround;
 	private JLabel pwdLabel;
-	private JLabel pwderror;
 	private JPasswordField pwdField;
 	private JButton confirm;
 	private JButton reset;
@@ -63,10 +58,7 @@ public class CorrectPwdFrame extends JFrame{
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 		
 		this.pwdLabel	 = new JLabel("PW 입력");
-		this.pwderror  	 = new JLabel("비밀번호 오류 입니다.");
 		this.pwdField = new JPasswordField();
-		Font pwdLabelfont = new Font("a으라차차", Font.BOLD, 18);
-		Font pwderrorfont = new Font("a으라차차", Font.BOLD, 15);
 		
 		this.setBounds(CorrectEnum.PWD_FRAME_SIZE_RECT.getRect());
 		
@@ -75,12 +67,9 @@ public class CorrectPwdFrame extends JFrame{
 		
 		this.pwdField.setBounds(CorrectEnum.PWD_INPUT_RECT.getRect());
 			
-		this.pwderror.setFont(SearchPwdEnum.LABELFONT_DEFAULT.getFont());
-		this.pwderror.setForeground(Color.red);
-		this.pwderror.setBounds(CorrectEnum.PWD_ERROR_RECT.getRect());
-		
-		
 		this.confirm = new JButton() {
+			private static final long serialVersionUID = 3025507784681545072L;
+
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -103,6 +92,8 @@ public class CorrectPwdFrame extends JFrame{
 		this.confirm.setBounds(CorrectEnum.PWD_CONFIRM_RECT.getRect());
 
 		this.reset = new JButton() {
+			private static final long serialVersionUID = -7608441903566885325L;
+
 			@Override
             protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -125,7 +116,6 @@ public class CorrectPwdFrame extends JFrame{
 		this.reset.setBounds(CorrectEnum.PWD_RESET_RECT.getRect());
 		
 		this.add(pwdLabel);
-//		this.add(pwderror);
 		this.add(pwdField);
 		this.add(confirm);
 		this.add(reset);
