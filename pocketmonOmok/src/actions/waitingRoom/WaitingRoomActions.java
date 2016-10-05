@@ -189,6 +189,7 @@ public class WaitingRoomActions {
 				roomVO.setUserAction(UserActionEnum.USER_PRIVATE_ROOM_ENTER);
 				roomVO.setOwner((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 3));
 				this.waitingRoomPanel.sendDTO(roomVO);
+			
 			// 입장 불가능한 경우
 			} else {
 				JOptionPane.showMessageDialog(null, "인원이 초과되었습니다.", "입장불가", JOptionPane.ERROR_MESSAGE);
