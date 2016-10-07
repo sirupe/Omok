@@ -2,7 +2,6 @@ package frames.waitingRoom;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.AdjustmentEvent;
@@ -262,19 +261,18 @@ public class WaitingRoomPanel extends JPanel {
 	/***************************접속자 리스트 맵***************************/
 	private Map<String, ImageIcon> createImage(Vector<String> player, ArrayList<String> grade) throws IOException {
 		Map<String, ImageIcon> map = new HashMap<>();
-	    try{
-    		for(int i = 0, size = player.size(); i < size; i++) {
-		    	map.put(player.get(i), new ImageIcon(ImageIO.read(
-            		new File(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade.get(i)))).getScaledInstance(
-    					WaitingRoomEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
-    					WaitingRoomEnum.LEVEL_ICON_SIZE_HEIGHT.getSize(),
-    					Image.SCALE_AREA_AVERAGING))
+		try{
+		   	for(int i = 0, size = player.size(); i < size; i++) {
+		    	map.put(player.get(i), GetResources.getImageIcon(ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(grade.get(i)), 
+		    			WaitingRoomEnum.LEVEL_ICON_SIZE_WIDTH.getSize(),
+		    			WaitingRoomEnum.LEVEL_ICON_SIZE_HEIGHT.getSize())
 		    	);
-    		}
-	    } catch (Exception e){
-	    	e.printStackTrace();
-	    }    
-	    return map;
+		   	}
+		} catch (Exception e){
+			e.printStackTrace();
+		}  
+		
+		return map;
 	}
 	
 	private void addNewUserImage(String player, String grade) throws IOException {
@@ -795,5 +793,9 @@ public class WaitingRoomPanel extends JPanel {
 	
 	public JTable getWaitingRoomTable() {
 		return waitingRoomTable;
+	}
+	
+	public WaitingRoomActions getWaitingRoomActions() {
+		return waitingRoomActions;
 	}
 }

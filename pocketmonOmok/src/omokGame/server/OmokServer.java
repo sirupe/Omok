@@ -226,88 +226,98 @@ public class OmokServer {
 	
 	// 빈 방 접속 
 	public void waitingRoomEnterPossibleGameRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
-		
 		GameRoomInfoVO userChoiceRoom = (GameRoomInfoVO)listDTO;
+		System.out.println("최초에 게스트 정보는 ? " + userChoiceRoom.getGuest());
+		GameRoomInfoVO pasteGameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
+		pasteGameRoomInfo.setGuest(userChoiceRoom.getGuest());
+		pasteGameRoomInfo.setOwner(userChoiceRoom.getOwner());
+		pasteGameRoomInfo.setPersons(2);
+		pasteGameRoomInfo.setPwd(userChoiceRoom.getPwd());
+		pasteGameRoomInfo.setRoomName(userChoiceRoom.getRoomName());
+		pasteGameRoomInfo.setRoomNumber(userChoiceRoom.getRoomNumber());
+		pasteGameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_IMPOSSIBLE.getImageDir());
 		
 		// 게임룸 정보 업데이트
 		for(int i = 0, size = this.gameRoomList.size(); i < size; i++) {
 			if(this.gameRoomList.get(i).getOwner().equals(userChoiceRoom.getOwner())) {
-				System.out.println("서버로 넘어와서 리스트 정보 업데이트 중 : " + userChoiceRoom.getGuest());
-				this.gameRoomList.get(i).setGuest(userChoiceRoom.getGuest());
-				this.gameRoomList.get(i).setPersons(2);
-				this.gameRoomList.get(i).setEnterImage(ImageEnum.WAITINGROOM_ENTER_IMPOSSIBLE.getImageDir());
-				
+				this.gameRoomList.set(i, pasteGameRoomInfo);				
 				break;
 			}
 		}
 		
-		
-		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
-		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-		
-		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
-			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
-			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
-			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
-			roomVO.setPersons(2);
-			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
-			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
-			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
-			roomList.add(roomVO);
-		}
+//		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
+//		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
+//		
+//		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
+//			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
+//			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
+//			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
+//			roomVO.setPersons(2);
+//			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
+//			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
+//			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
+//			roomList.add(roomVO);
+//		}
 
 		try {
-			int ownerGender = this.userPersonalDAO.getUserGender(roomVO.getOwner());
-			int guestGender = this.userPersonalDAO.getUserGender(roomVO.getGuest());
+			int ownerGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getOwner());
+			int guestGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getGuest());
 			
 			// 모든 접속자에게 변경된 방 정보 전송(포지션 대기실)
 			RoomAndUserListDTO roomListInfo = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
 			roomListInfo.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
-			roomListInfo.setGameRoomList(roomList);
+			roomListInfo.setGameRoomList(this.gameRoomList);
 			for(String user : this.loginUsersMap.keySet()) {
 				this.loginUsersMap.get(user).getServerOutputStream().writeObject(roomListInfo);
 			}
 			
+			
+			System.out.println("게스트 : " + pasteGameRoomInfo.getGuest());
+			System.out.println("이미지 : " + pasteGameRoomInfo.getEnterImage().getDescription());
+			System.out.println("오너 : " + pasteGameRoomInfo.getOwner());
+			System.out.println("패스워드 : " + pasteGameRoomInfo.getPwd());
+			System.out.println("방이름 : " + pasteGameRoomInfo.getRoomName());
+			System.out.println("방번호 : " + pasteGameRoomInfo.getRoomNumber());
+			System.out.println("-----------------------------------------------");
+			System.out.println("게스트 성별 : " + guestGender);
+			System.out.println("오너 성별 : " + ownerGender);
 			// 각각 오너와 게스트에게 정보 전송(포지션 게임룸)
 			GameRoomInfoVO roomOwnerVO = new GameRoomInfoVO(null);
-			roomOwnerVO.setGuest(roomVO.getGuest());
-			roomOwnerVO.setEnterImage(roomVO.getEnterImage().getDescription());
-			roomOwnerVO.setOwner(roomVO.getOwner());
+			roomOwnerVO.setGuest(pasteGameRoomInfo.getGuest());
+			roomOwnerVO.setEnterImage(pasteGameRoomInfo.getEnterImage().getDescription());
+			roomOwnerVO.setOwner(pasteGameRoomInfo.getOwner());
 			roomOwnerVO.setPersons(2);
-			roomOwnerVO.setPwd(roomVO.getPwd());
-			roomOwnerVO.setRoomName(roomVO.getRoomName());
-			roomOwnerVO.setRoomNumber(roomVO.getRoomNumber());
+			roomOwnerVO.setPwd(pasteGameRoomInfo.getPwd());
+			roomOwnerVO.setRoomName(pasteGameRoomInfo.getRoomName());
+			roomOwnerVO.setRoomNumber(pasteGameRoomInfo.getRoomNumber());
 			UserInGameRoomDTO ownerGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
 			ownerGameRoomDTO.setGameRoomInfo(roomOwnerVO);
 			ownerGameRoomDTO.setGuestGender(guestGender);
-			ownerGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getGuest()));
+			ownerGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(pasteGameRoomInfo.getGuest()));
 			ownerGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_OWNER);
 			this.loginUsersMap.get(roomOwnerVO.getOwner()).getServerOutputStream().writeObject(ownerGameRoomDTO);
 			
 			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(null);
-			roomGuestVO.setGuest(roomVO.getGuest());
-			roomGuestVO.setEnterImage(roomVO.getEnterImage().getDescription());
-			roomGuestVO.setOwner(roomVO.getOwner());
+			roomGuestVO.setGuest(pasteGameRoomInfo.getGuest());
+			roomGuestVO.setEnterImage(pasteGameRoomInfo.getEnterImage().getDescription());
+			roomGuestVO.setOwner(pasteGameRoomInfo.getOwner());
 			roomGuestVO.setPersons(2);
-			roomGuestVO.setPwd(roomVO.getPwd());
-			roomGuestVO.setRoomName(roomVO.getRoomName());
-			roomGuestVO.setRoomNumber(roomVO.getRoomNumber());
+			roomGuestVO.setPwd(pasteGameRoomInfo.getPwd());
+			roomGuestVO.setRoomName(pasteGameRoomInfo.getRoomName());
+			roomGuestVO.setRoomNumber(pasteGameRoomInfo.getRoomNumber());
 			UserInGameRoomDTO userInGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
 			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
 			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
 			userInGameRoomDTO.setOwnerGender(ownerGender);
-			userInGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getOwner()));
+			userInGameRoomDTO.setGuestGender(guestGender);
+			userInGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(pasteGameRoomInfo.getOwner()));
 			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
 			//TODO 여기서 게스트가 없다.
 			this.loginUsersMap.get(userChoiceRoom.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		this.sendEnterRoomSuccessInfo();
+//		this.sendEnterRoomSuccessInfo(); TODO 두번씩 들어가고 있는 형국이므로 최종적으로 문제가 없으면 삭제하도록 한다.
 	}
 	
 	// 빈, 비밀방 접속. 접속하지는 않고 비밀번호만 회신한다.
@@ -336,78 +346,78 @@ public class OmokServer {
 		}
 	}
 	
-	public void sendEnterRoomSuccessInfo() {
-		// 데이터가 제대로 전송되고 있지 않기 때문에 모두 새로운 객체에 담아 전송한다.
-		
-		// 현재 서버에 저장되어있는 리스트를 roomList에 복사
-		
-		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
-		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
-			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
-			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
-			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
-			roomVO.setPersons(2);
-			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
-			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
-			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
-			roomList.add(roomVO);
-		}
-
-		try {
-			int ownerGender = this.userPersonalDAO.getUserGender(roomVO.getOwner());
-			int guestGender = this.userPersonalDAO.getUserGender(roomVO.getGuest());
-			
-			// 모든 접속자에게 변경된 방 정보 전송(포지션 대기실)
-			RoomAndUserListDTO roomListInfo = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
-			roomListInfo.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
-			roomListInfo.setGameRoomList(roomList);
-			for(String user : this.loginUsersMap.keySet()) {
-				this.loginUsersMap.get(user).getServerOutputStream().writeObject(roomListInfo);
-			}
-			
-			// 각각 오너와 게스트에게 정보 전송(포지션 게임룸)
-			GameRoomInfoVO roomOwnerVO = new GameRoomInfoVO(null);
-			roomOwnerVO.setGuest(roomVO.getGuest());
-			roomOwnerVO.setEnterImage(roomVO.getEnterImage().getDescription());
-			roomOwnerVO.setOwner(roomVO.getOwner());
-			roomOwnerVO.setPersons(2);
-			roomOwnerVO.setPwd(roomVO.getPwd());
-			roomOwnerVO.setRoomName(roomVO.getRoomName());
-			roomOwnerVO.setRoomNumber(roomVO.getRoomNumber());
-			UserInGameRoomDTO ownerGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
-			ownerGameRoomDTO.setGameRoomInfo(roomOwnerVO);
-			ownerGameRoomDTO.setGuestGender(guestGender);
-			ownerGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getGuest()));
-			ownerGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_OWNER);
-			this.loginUsersMap.get(roomOwnerVO.getOwner()).getServerOutputStream().writeObject(ownerGameRoomDTO);
-			
-			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(null);
-			roomGuestVO.setGuest(roomVO.getGuest());
-			roomGuestVO.setEnterImage(roomVO.getEnterImage().getDescription());
-			roomGuestVO.setOwner(roomVO.getOwner());
-			roomGuestVO.setPersons(2);
-			roomGuestVO.setPwd(roomVO.getPwd());
-			roomGuestVO.setRoomName(roomVO.getRoomName());
-			roomGuestVO.setRoomNumber(roomVO.getRoomNumber());
-			UserInGameRoomDTO userInGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
-			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
-			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
-			userInGameRoomDTO.setOwnerGender(ownerGender);
-			userInGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getOwner()));
-			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
-			//TODO 여기서 게스트가 없다.
-			System.out.println("1.룸VO : " + roomVO.getGuest());
-			System.out.println("2.룸게스트VO : " + roomGuestVO.getGuest());
-			System.out.println("3.유저리스트맵 : " + this.loginUsersMap.get(roomGuestVO.getGuest()));
-			System.out.println(userInGameRoomDTO == null);
-			this.loginUsersMap.get(roomGuestVO.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
+//	public void sendEnterRoomSuccessInfo() {
+//		System.out.println("sendEnterRoomSuccessInfo");
+//		// 데이터가 제대로 전송되고 있지 않기 때문에 모두 새로운 객체에 담아 전송한다.
+//		
+//		// 현재 서버에 저장되어있는 리스트를 roomList에 복사
+//		
+//		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
+//		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
+//		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
+//			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
+//			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
+//			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
+//			roomVO.setPersons(2);
+//			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
+//			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
+//			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
+//			roomList.add(roomVO);
+//		}
+//
+//		try {
+//			int ownerGender = this.userPersonalDAO.getUserGender(roomVO.getOwner());
+//			int guestGender = this.userPersonalDAO.getUserGender(roomVO.getGuest());
+//			
+//			// 모든 접속자에게 변경된 방 정보 전송(포지션 대기실)
+//			RoomAndUserListDTO roomListInfo = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
+//			roomListInfo.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
+//			roomListInfo.setGameRoomList(roomList);
+//			for(String user : this.loginUsersMap.keySet()) {
+//				this.loginUsersMap.get(user).getServerOutputStream().writeObject(roomListInfo);
+//			}
+//			
+//			// 각각 오너와 게스트에게 정보 전송(포지션 게임룸)
+//			GameRoomInfoVO roomOwnerVO = new GameRoomInfoVO(null);
+//			roomOwnerVO.setGuest(roomVO.getGuest());
+//			roomOwnerVO.setEnterImage(roomVO.getEnterImage().getDescription());
+//			roomOwnerVO.setOwner(roomVO.getOwner());
+//			roomOwnerVO.setPersons(2);
+//			roomOwnerVO.setPwd(roomVO.getPwd());
+//			roomOwnerVO.setRoomName(roomVO.getRoomName());
+//			roomOwnerVO.setRoomNumber(roomVO.getRoomNumber());
+//			UserInGameRoomDTO ownerGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
+//			ownerGameRoomDTO.setGameRoomInfo(roomOwnerVO);
+//			ownerGameRoomDTO.setGuestGender(guestGender);
+//			ownerGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getGuest()));
+//			ownerGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_OWNER);
+//			this.loginUsersMap.get(roomOwnerVO.getOwner()).getServerOutputStream().writeObject(ownerGameRoomDTO);
+//			
+//			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(null);
+//			roomGuestVO.setGuest(roomVO.getGuest());
+//			roomGuestVO.setEnterImage(roomVO.getEnterImage().getDescription());
+//			roomGuestVO.setOwner(roomVO.getOwner());
+//			roomGuestVO.setPersons(2);
+//			roomGuestVO.setPwd(roomVO.getPwd());
+//			roomGuestVO.setRoomName(roomVO.getRoomName());
+//			roomGuestVO.setRoomNumber(roomVO.getRoomNumber());
+//			UserInGameRoomDTO userInGameRoomDTO = new UserInGameRoomDTO(UserPositionEnum.POSITION_GAME_ROOM);
+//			userInGameRoomDTO.setUserGameData(this.gamedataDAO.userGameData(roomGuestVO.getGuest()));
+//			userInGameRoomDTO.setGameRoomInfo(roomGuestVO);
+//			userInGameRoomDTO.setOwnerGender(ownerGender);
+//			userInGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(roomVO.getOwner()));
+//			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
+//			System.out.println("1.룸VO : " + roomVO.getGuest());
+//			System.out.println("2.룸게스트VO : " + roomGuestVO.getGuest());
+//			System.out.println("3.유저리스트맵 : " + this.loginUsersMap.get(roomGuestVO.getGuest()));
+//			System.out.println(userInGameRoomDTO == null);
+//			this.loginUsersMap.get(roomGuestVO.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
+//	
 
 //회원가입--------------------------------------------------------------------------
 	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
@@ -702,6 +712,7 @@ public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) thr
 			// 방이 없어진 것이 아니라면 남겨진 유저에게 정보를 전달해주어야 한다.
 			if(pasteRoomInfoVO.getPersonNum() > 0) {
 				for(int i = 0, len = this.gameRoomList.size(); i < len; i++) {
+					System.out.println(i + "번");
 					if(this.gameRoomList.get(i).getRoomNumber() == gameRoomInfoVO.getRoomNumber()) {
 						pasteRoomInfoVO.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
 						this.gameRoomList.set(i, pasteRoomInfoVO);

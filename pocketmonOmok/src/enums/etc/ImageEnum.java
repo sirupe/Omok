@@ -61,7 +61,6 @@ public enum ImageEnum {
 
 	GAMEROOM_MENU_IMAGES_GRAY_OWNER(new String[] {
 			GAMEROOM_START.getImageDir(),				// gamestart
-//			GAMEROOM_ALONE_GRAY.getImageDir(),			// 혼자하기
 			GAMEROOM_GIVEUP.getImageDir(),				// 기권
 			GAMEROOM_EXIT.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_GRAY.getImageDir(),	// 돌색 통일시키기
@@ -72,7 +71,6 @@ public enum ImageEnum {
 	
 	GAMEROOM_MENU_IMAGES_COLOR_OWNER(new String[] {
 			GAMEROOM_START_CH.getImageDir(),			// gamestart
-//			GAMEROOM_ALONE_COLOR.getImageDir(),			// 혼자하기
 			GAMEROOM_GIVEUP_CH.getImageDir(),			// 기권
 			GAMEROOM_EXIT_CH.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_COLOR.getImageDir(),	// 돌색 통일시키기
@@ -84,7 +82,6 @@ public enum ImageEnum {
 
 	GAMEROOM_MENU_IMAGES_GRAY_GUEST(new String[] {
 			GAMEROOM_READY.getImageDir(),				// ready
-//			GAMEROOM_ALONE_GRAY.getImageDir(),			// 혼자하기
 			GAMEROOM_GIVEUP.getImageDir(),				// 기권
 			GAMEROOM_EXIT.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_GRAY.getImageDir(),	// 돌색 통일시키기
@@ -95,7 +92,6 @@ public enum ImageEnum {
 	
 	GAMEROOM_MENU_IMAGES_COLOR_GUEST(new String[] {
 			GAMEROOM_READY_CH.getImageDir(),			// ready
-//			GAMEROOM_ALONE_COLOR.getImageDir(),			// 혼자하기
 			GAMEROOM_GIVEUP_CH.getImageDir(),			// 기권
 			GAMEROOM_EXIT_CH.getImageDir(),				// 나가기
 			GAMEROOM_ITEM_ALL_SAME_COLOR.getImageDir(),	// 돌색 통일시키기
