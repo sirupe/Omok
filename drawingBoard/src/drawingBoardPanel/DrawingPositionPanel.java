@@ -56,6 +56,7 @@ public class DrawingPositionPanel extends JPanel{
 		this.y2Label = new JLabel("Y2");
 		this.z1Label = new JLabel("Z1");
 		this.z2Label = new JLabel("Z2");
+		
 		//LABELÀ§Ä¡
 		this.x1Label.setBounds(DrawingPositionPanelEnum.X1_LABEL.getRectangle());
 		this.x2Label.setBounds(DrawingPositionPanelEnum.X2_LABEL.getRectangle());

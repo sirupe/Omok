@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Label;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import drawingBoardDTO.DrawingBoardDTO;
 import drawingBoardEnum.DrawingBoardFrameEnum;
 import drawingBoardFrame.DrawingBoaradFrame;
 
@@ -15,6 +17,7 @@ import drawingBoardFrame.DrawingBoaradFrame;
 public class CanvasPanel extends JPanel{
 	private DrawingPositionPanel drawingPositionPanel;
 	private Label lb;
+		
 	private boolean isDrag;
 	int x1,x2,y1,y2;
 	
@@ -39,6 +42,7 @@ public class CanvasPanel extends JPanel{
 			public void mouseReleased(MouseEvent e){
 				isDrag = false; //드래그 땜
 			}
+			
 			public void mousePressed(MouseEvent e) {
 				x1 = e.getX();	//시작 지점x
 				y1 = e.getY();	//시작 지점y
@@ -55,6 +59,7 @@ public class CanvasPanel extends JPanel{
 				drawingPositionPanel.getY2Value().setText(e.getX() + "");	//y2TF에 종료값을 저장
 			}
 		});
+		
 		
 		
 	}
