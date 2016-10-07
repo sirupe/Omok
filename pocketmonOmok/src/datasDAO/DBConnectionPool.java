@@ -28,6 +28,7 @@ public class DBConnectionPool {
 	private String passwd = "oracle"; 
 
 	private boolean traceOn = true;
+
 	private boolean initialized = false;
 	private int openConnections = 10;
 	
@@ -51,11 +52,11 @@ public class DBConnectionPool {
 		
 		try {
 			if(this.user == null) {
-				this.user = "";
+				this.user = "hr";
 			}
 			
 			if(this.passwd == null) {
-				this.passwd = "";
+				this.passwd = "hr";
 			}
 			
 			Properties propers = new Properties();

@@ -224,7 +224,6 @@ public class OmokServer {
 	// 빈 방 접속 
 	public void waitingRoomEnterPossibleGameRoom(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) {
 		GameRoomInfoVO userChoiceRoom = (GameRoomInfoVO)listDTO;
-		System.out.println("최초에 게스트 정보는 ? " + userChoiceRoom.getGuest());
 		GameRoomInfoVO pasteGameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 		pasteGameRoomInfo.setGuest(userChoiceRoom.getGuest());
 		pasteGameRoomInfo.setOwner(userChoiceRoom.getOwner());
@@ -242,19 +241,19 @@ public class OmokServer {
 			}
 		}
 		
-//		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
-//		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-//		
-//		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
-//			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
-//			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
-//			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
-//			roomVO.setPersons(2);
-//			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
-//			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
-//			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
-//			roomList.add(roomVO);
-//		}
+		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
+		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
+		
+		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
+			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
+			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
+			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
+			roomVO.setPersons(2);
+			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
+			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
+			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
+			roomList.add(roomVO);
+		}
 
 		try {
 			int ownerGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getOwner());
@@ -263,21 +262,11 @@ public class OmokServer {
 			// 모든 접속자에게 변경된 방 정보 전송(포지션 대기실)
 			RoomAndUserListDTO roomListInfo = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
 			roomListInfo.setServerAction(ServerActionEnum.GAME_ROOM_LIST_MODIFY);
-			roomListInfo.setGameRoomList(this.gameRoomList);
+			roomListInfo.setGameRoomList(roomList);
 			for(String user : this.loginUsersMap.keySet()) {
 				this.loginUsersMap.get(user).getServerOutputStream().writeObject(roomListInfo);
 			}
 			
-			
-			System.out.println("게스트 : " + pasteGameRoomInfo.getGuest());
-			System.out.println("이미지 : " + pasteGameRoomInfo.getEnterImage().getDescription());
-			System.out.println("오너 : " + pasteGameRoomInfo.getOwner());
-			System.out.println("패스워드 : " + pasteGameRoomInfo.getPwd());
-			System.out.println("방이름 : " + pasteGameRoomInfo.getRoomName());
-			System.out.println("방번호 : " + pasteGameRoomInfo.getRoomNumber());
-			System.out.println("-----------------------------------------------");
-			System.out.println("게스트 성별 : " + guestGender);
-			System.out.println("오너 성별 : " + ownerGender);
 			// 각각 오너와 게스트에게 정보 전송(포지션 게임룸)
 			GameRoomInfoVO roomOwnerVO = new GameRoomInfoVO(null);
 			roomOwnerVO.setGuest(pasteGameRoomInfo.getGuest());
@@ -491,67 +480,78 @@ public class OmokServer {
 	
 
 //패스워드 찾기---------------------------------------------------------------------------------------------------
-public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
-	 UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
-	 UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
-	 ObjectOutputStream oos;
-	 
-	 switch(data.getUserAction()) {
-	 	
-	 	//인증 번호 발송
-	 	case USER_SEARCH_CERTIFICATION_CHECK :
+	public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
+		 UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
+		 UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+		 ObjectOutputStream oos;
+		 
+		 switch(data.getUserAction()) {
 		 	
-		 	resultDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
-	 	
-	 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
-	 		personalServer.setCertificationNumber(confirmNumber);
-	 		
-	 		resultDTO.setEmailSuccess(true);
-	 		
-	 		oos = personalServer.getServerOutputStream();
-	 		oos.writeObject(resultDTO);
-	 		break;
-	 		
-	 	//인증번호 비교
-	 	case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
-	 		String RandomNumber = personalServer.getCertificationNumber();
-	 		String clientNumebr = personalDTO.getCertificationNumber();
-	 		
-	 		resultDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER);
+		 	//인증 번호 발송
+		 	case USER_SEARCH_CERTIFICATION_CHECK :
+			 	
+			 	resultDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
+		 	
+		 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
+		 		personalServer.setCertificationNumber(confirmNumber);
+		 		
+		 		System.out.println(confirmNumber + " : 랜덤번호");
+		 		
+		 		//TODO
+		 		//이메일 발송
+		 		try {
+		 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
+		 			resultDTO.setEmailSuccess(true);
+				} catch (Throwable e) {
+					resultDTO.setEmailSuccess(false);
+				}
+ 		
 
-	 		if(RandomNumber.equals(clientNumebr)) {
-	 			resultDTO.setCertificationNumber(true);
-	 		} else {
-	 			resultDTO.setCertificationNumber(false);
-	 		}
-	 		oos = personalServer.getServerOutputStream();
-	 		oos.writeObject(resultDTO);
-	 		break;
-	 		
-	 	//아이디 이메일 체크
-	 	case USER_SEARCH_ID_EMAIL_CHECK :
-	 		UserPersonalInfoDTO resultDTOPersonal = this.userPersonalDAO.findUserPW(personalDTO);
-	 		oos = personalServer.getServerOutputStream();
-	 		oos.writeObject(resultDTOPersonal);
-	 		break;
+		 		oos = personalServer.getServerOutputStream();
+		 		oos.writeObject(resultDTO);
+		 		break;
+		 		
+		 	//인증번호 비교
+		 	case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
+		 		String RandomNumber = personalServer.getCertificationNumber();
+		 		String clientNumebr = personalDTO.getCertificationNumber();
+		 		
+		 		resultDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER);
 
-	 	// 변경된 패스워드확인.
-	 	case USER_SEARCH_PASSWD :
+		 		if(RandomNumber.equals(clientNumebr)) {
+		 			resultDTO.setCertificationNumber(true);
+		 		} else {
+		 			resultDTO.setCertificationNumber(false);
+		 		}
+		 		oos = personalServer.getServerOutputStream();
+		 		oos.writeObject(resultDTO);
+		 		break;
+		 		
+		 	//아이디 이메일 체크
+		 	case USER_SEARCH_ID_EMAIL_CHECK :
+		 		UserPersonalInfoDTO resultDTOPersonal = this.userPersonalDAO.findUserPW(personalDTO);
+		 		oos = personalServer.getServerOutputStream();
+		 		oos.writeObject(resultDTOPersonal);
+		 		break;
 
-	 		ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
-	 		serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
-	 		int result = this.userPersonalDAO.updateUserPasswd(personalDTO);
-	 		
-	 		if(result == 1) {
-	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
-	 		} else {
-	 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
-	 		}	 		
-	 		personalServer.getServerOutputStream().writeObject(serverMessage);
-	 		
-	 	default: //do nothing..
-	 	}
-}
+		 	// 변경된 패스워드확인.
+		 	case USER_SEARCH_PASSWD :
+
+		 		ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
+		 		serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+		 		int result = this.userPersonalDAO.updateUserPasswd(personalDTO);
+		 		
+		 		if(result == 1) {
+		 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+		 		} else {
+		 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+		 		}	 		
+		 		personalServer.getServerOutputStream().writeObject(serverMessage);
+		 		
+		 	default: //do nothing..
+		 	}
+	}
+
 
 	
 //게임방----------------------------------------------------------------------------------------------------
