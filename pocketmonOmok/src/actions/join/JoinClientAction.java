@@ -330,13 +330,6 @@ public class JoinClientAction extends Adapters {
 			//메일발송 메세지 보여주기
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), Color.blue, "joinMail발송");
 			//시간 세어주는 쓰레드 생성
-			
-//			//사용자가 이메일을 바꾸어 다시 인증하기 버튼을 누른다면 계속 쓰레드가 겹치므로 TODO
-//			//플래그를 사용하여 쓰레드 중지 시도
-//			if(this.timeThread != null) {
-//				this.isThreadCheck = false;
-//			}
-			
 			this.timeThread = new Thread() {
 				@Override
 				public void run() {
@@ -450,17 +443,27 @@ public class JoinClientAction extends Adapters {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, msg);
 			errCount++;
 		}
-		
+		this.telFrontNum = (String) this.joinFrame.getTelFrontNumChoice().getSelectedItem();
+		this.telMidNum = this.joinFrame.getTelMidTextField().getText();
+		this.telLastNum = this.joinFrame.getTelLastNumTextField().getText();
 		//전화번호가 앞번호, 뒷번호 중 하나만 입력되었을 때
-		if(!(this.telFrontNum == null && this.telMidNum == null && this.telLastNum == null)) {
-			if((this.telMidNum != null && this.telLastNum == null) || (this.telMidNum == null && this.telLastNum != null) || this.telFrontNum.equals("선택")) {
+		if(!this.telFrontNum.equals("선택") || this.telMidNum.length() != 0 || this.telLastNum.length() != 0) {
+			if(this.telFrontNum.equals("선택")) {
 				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
 				errCount++;
 			}
-		}
+			if(this.telMidNum.length() != 4) {
+				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
+				errCount++;
+			}
+			if(this.telLastNum.length() != 4) {
+				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
+				errCount++;
+			}
+		} 
 		
 		//인증번호를 받지 않았을 때
-		if(this.certificationNumber == null) {
+		if(this.joinFrame.getEmailConfTextField().isEditable()) {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, "joinMail인증필");
 			errCount++;
 		}
@@ -497,6 +500,7 @@ public class JoinClientAction extends Adapters {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 	public void setCertificationNumber(String certificationNumber) {
@@ -510,4 +514,6 @@ public class JoinClientAction extends Adapters {
 	public Thread getTimeThread() {
 		return timeThread;
 	}
+	
+	
 }

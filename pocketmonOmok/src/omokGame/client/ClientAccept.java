@@ -123,8 +123,7 @@ public class ClientAccept {
 		// 서버에서 보낸 정보가 "방생성 성공" 이라면
 		case GAME_CREATEROOM_SUCCESS :
 			UserInGameRoomDTO inGameUserInfo = (UserInGameRoomDTO)data;
-			panel.getCreateGameRoomFrame().setVisible(false);
-			panel.getCreateGameRoomFrame().dispose();
+			panel.getWaitingRoomActions().createRoomFrameExit();
 			this.basicFrame.showGameRoom(inGameUserInfo);
 			this.basicFrame.setVisible(true);
 			break;

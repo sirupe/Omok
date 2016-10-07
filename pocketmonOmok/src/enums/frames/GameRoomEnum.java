@@ -86,7 +86,7 @@ public enum GameRoomEnum {
 //게임메뉴 및 아이템 버튼 설정값---------------------------------------------------	
 	GAME_MENU_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
-			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().getMaxY() * 1.05),
+			(int)(GAME_USERLEVEL_RIGHT_IMAGE_RECT.getRect().y * 1.7),
 			GAME_USERIMAGE_PANEL_RECT.getRect().width,
 			(int) (LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.15)
 	)),
@@ -148,7 +148,7 @@ public enum GameRoomEnum {
 	GAME_CHATTING_PANEL_RECT(new Rectangle(
 			GAME_USERIMAGE_PANEL_RECT.getRect().x,
 			(int) (GAME_MENU_PANEL_RECT.getRect().getMaxY() * 0.94),
-			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().width * 0.93),
+			(int) (GAME_USERIMAGE_PANEL_RECT.getRect().width),
 			(int) (LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.44)//스크로로
 	)),
 	

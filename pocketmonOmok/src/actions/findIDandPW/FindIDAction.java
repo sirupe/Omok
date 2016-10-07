@@ -17,6 +17,10 @@ public class FindIDAction  extends Adapters {
 	private boolean isNameCheck = false;
 	private boolean isEmailCheck = false;
 	
+	private String checkMsg;
+	private String name;
+	private String email;
+	
 	public FindIDAction(SearchIdPanel searchIdPanel){
 		this.searchIdPanel = searchIdPanel;
 	}

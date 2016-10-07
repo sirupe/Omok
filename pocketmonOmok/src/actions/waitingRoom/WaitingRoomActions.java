@@ -44,6 +44,7 @@ public class WaitingRoomActions {
 	
 	// 방만들기 창 닫기
 	public void createRoomFrameExit() {
+		this.openPrivate = 0;
 		this.waitingRoomPanel.getBasicFrame().setVisible(true);
 		this.createRoom.setVisible(false);
 		this.createRoom.dispose();

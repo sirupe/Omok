@@ -28,8 +28,6 @@ public class ClientReceiver extends Thread {
 			while(isAccept) {
 				Object object = this.clientIS.readObject();
 				AbstractEnumsDTO userPosition = (AbstractEnumsDTO)object;
-				System.out.println(userPosition.getPosition());
-				System.out.println(userPosition.getServerAction());
 				switch(userPosition.getPosition()) {
 				case POSITION_LOGIN :
 					this.clientAccept.loginSuccessCheck(userPosition);

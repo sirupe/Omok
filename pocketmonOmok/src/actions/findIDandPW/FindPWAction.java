@@ -1,21 +1,15 @@
 package actions.findIDandPW;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 import actions.adapters.Adapters;
-import enums.frames.JoinSizesEnum;
-import enums.frames.LoginPanelEnum;
-import utility.RegexCheck;
 import enums.frames.LoginPanelEnum;
 import frames.searchFrames.SearchPwdPanel;
-import sun.util.logging.resources.logging;
+import utility.RegexCheck;
 
 public class FindPWAction extends Adapters {
 	private SearchPwdPanel searchPwdPanel;

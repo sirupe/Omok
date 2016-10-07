@@ -24,17 +24,13 @@ public class GameRoomClientAction extends Adapters {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		JButton button = (JButton)e.getSource();
-		if(this.readyCheck == 0) {
-			this.gameRoomPanel.changeButtonImageMouseIn(button.getName());
-		}
+		this.gameRoomPanel.changeButtonImageMouseIn(button.getName());
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		JButton button = (JButton)e.getSource();
-		if(this.readyCheck == 0) {
-			this.gameRoomPanel.changeButtonImageMouseOut(button.getName());
-		}
+		this.gameRoomPanel.changeButtonImageMouseOut(button.getName());
 	}
 	//TODO
 	@Override
@@ -44,10 +40,11 @@ public class GameRoomClientAction extends Adapters {
 		// 게스트가 레디를 누르면 게스트 레디 버튼의 이미지를 바꿔주고 사용자가 레디를 눌렀다고 서버에 전송한다.
 		if(buttonName.equals("ready")) {
 			readyCheck++;
-			if(readyCheck == 2) {
+			System.out.println(readyCheck);
+			if(readyCheck == 1) {
 				this.gameRoomPanel.changeGameReadyButton(true);
 			} 
-			if(readyCheck == 4) {
+			if(readyCheck == 2) {
 				this.gameRoomPanel.changeGameReadyButton(false);
 				this.readyCheck = 0;
 			}
