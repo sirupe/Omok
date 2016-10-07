@@ -86,7 +86,6 @@ public class GameRoomPanel extends JPanel {
 		this.stonePositionCheck = new StonePositionCheck();
 		this.basicFrame 	= basicFrame;
 		this.isThreadStart  = false;
-		this.isGameIngCheck = true;
 		
 		this.omokStonePanel = new JPanel();
 		this.timeLimitPanel = new JPanel();
@@ -354,6 +353,7 @@ public class GameRoomPanel extends JPanel {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 	
 	// 오너의 경우 방에 유저가 들어왔을 때 실행됨
@@ -413,11 +413,13 @@ public class GameRoomPanel extends JPanel {
 	
 	// 메뉴 영역 안으로 마우스 포인터가 진입
 	public void changeButtonImageMouseIn(String buttonName) {
+		System.out.println("마우스진입");
 		if(buttonName.equals("start")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START_GO.getImageDir()));
 		} else if(buttonName.equals("ready")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY_BLUE.getImageDir()));
 		} else {
+			System.out.println(this.menuButtons[1].getName() + " / " + buttonName);
 			String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.thisUserID) ? 
 					ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_OWNER.getImages() : ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_GUEST.getImages();
 			// 시작 혹은 레디버튼 제외
@@ -435,7 +437,7 @@ public class GameRoomPanel extends JPanel {
 	public void changeGameReadyButton(boolean check) {
 		String imageDir = check ? ImageEnum.GAMEROOM_READY_CH.getImageDir() : ImageEnum.GAMEROOM_READY.getImageDir() ;
 		UserActionEnum userAction = check ? UserActionEnum.USER_GUEST_READY_CHECK : UserActionEnum.USER_GUEST_READY_DECHECK ;
-		
+		System.out.println(check? "레디했군" : "레디를 풀었군");
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		
 		// 데이터 전송용 객체를 새로 만들어 필요 정보를 저장한 후 게스트가 레디를 했다는 정보를 서버로 전송한다.
@@ -473,6 +475,7 @@ public class GameRoomPanel extends JPanel {
 	// 기권버튼의 액션을 활성화시킨다.
 	// 서버에서 회신이 오면 게스트도 이 메소드를 생성하며 레디 버튼에 같은 액션을 실행한다.
 	public void gameStart() {
+		this.isGameIngCheck = true;
 		// 이미지를 초기화하고 액션삭제
 		String imageDir = this.getBasicFrame().getUserID().equals(this.gameRoomInfo.getOwner()) ?
 				ImageEnum.GAMEROOM_START_BATTILING.getImageDir() : ImageEnum.GAMEROOM_START_BATTILING.getImageDir();
@@ -480,6 +483,7 @@ public class GameRoomPanel extends JPanel {
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
 		this.menuButtons[2].removeMouseListener(this.gameRoomAction);
+		System.out.println("기권버튼에 액션리스너가 등록되었다.");
 		this.menuButtons[1].addMouseListener(this.gameRoomAction);
 		this.chattingArea.setText(this.chattingArea.getText() + "\n<게임을 시작합니다.>");
 		
@@ -526,6 +530,7 @@ public class GameRoomPanel extends JPanel {
 	// 시간을 세어주는 쓰레드를 구동시키고
 	// 사운드를 내보내주고 게임패널에 액션리스너를 등록시켜준다.
 	public void thisUserTurn(String soundDir) {
+		System.out.println(this.thisUserID + "턴");
 		this.isThreadStart = true;
 		this.gameBoardPanelAddAction();
 		GetResources.soundPlay(soundDir);
@@ -566,8 +571,6 @@ public class GameRoomPanel extends JPanel {
 				}
 			}
 		}
-		
-		this.gameBoardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.red, 100));
 	}
 	
 	// 턴이 종료되면 (유저가 돌을 놓으면)
@@ -693,6 +696,8 @@ public class GameRoomPanel extends JPanel {
 		this.rightUserLevel.setIcon(null);
 		this.leftUserId.setText(null);
 		this.leftUserLevel.setIcon(null);
+		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
+		this.menuButtons[1].removeMouseListener(this.gameRoomAction);
 	}
 	
 	// 다른 유저가 방을 나가면 서버에서 내려준 바뀐 방정보를 내 게임방정보에 저장하고
@@ -722,6 +727,7 @@ public class GameRoomPanel extends JPanel {
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		this.menuButtons[0].setName(GameRoomEnum.GAME_BUTTONNAME_OWNER.getButtonName()[0]);
 		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
+		this.menuButtons[0].removeActionListener(this.gameRoomAction);
 	}
 	
 	public void timeLimitThread() {//TODO
