@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class MsPaint extends JFrame implements ActionListener {
 	private JLabel x1L, y1L, x2L, y2L, z1L, z2L;
 	private JTextField x1T, y1T, x2T, y2T, z1T, z2T;

@@ -10,8 +10,8 @@ public enum DrawingBoardFrameEnum {
 	SCREEN_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	
 //	//DRAWINGBOARD프레임의 가로, 세로 , x,y
-	DRAWINGBOARD_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.55)),
-	DRAWINGBOARD_FRAME_SIZE_HEIGHT((int)(DRAWINGBOARD_FRAME_SIZE_WIDTH.getSize() * 0.65)),	
+	DRAWINGBOARD_FRAME_SIZE_WIDTH((int)(SCREEN_SIZE.getDimension().getWidth() * 0.5)),
+	DRAWINGBOARD_FRAME_SIZE_HEIGHT((int)(DRAWINGBOARD_FRAME_SIZE_WIDTH.getSize() * 0.8)),	
 	DRAWINGBOARD_FRAME_SIZE_POSITION_X((int)((SCREEN_SIZE.getDimension().getWidth() / 2) - (DRAWINGBOARD_FRAME_SIZE_WIDTH.getSize() / 2 ))),
 	DRAWINGBOARD_FRAME_SIZE_POSITION_Y((int)((SCREEN_SIZE.getDimension().getHeight() / 2) - (DRAWINGBOARD_FRAME_SIZE_HEIGHT.getSize() / 2))),
 	
@@ -23,7 +23,7 @@ public enum DrawingBoardFrameEnum {
 			(int)(DRAWINGBOARD_FRAME_SIZE_HEIGHT.getSize())
 	)),
 	
-	//DrawingTypePanel패널의 x, y 위치와  가로, 세로 사이즈
+	//DRAWINGPOSITIOPanel패널의 x, y 위치와  가로, 세로 사이즈
 	DRAWINGPOSITION_PANEL_RECT(new Rectangle(
 			(int)(DRAWINGBOARD_FRAME_SIZE_POSITION_X.getSize() * 0.001),
 			(int)(DRAWINGBOARD_FRAME_SIZE_POSITION_Y.getSize() * 0.001),
@@ -35,18 +35,18 @@ public enum DrawingBoardFrameEnum {
 	//DrawingTypePanel 패널의 x, y 위치와  가로, 세로 사이즈
 	DRAWINGTYPE_PANEL_RECT(new Rectangle(
 			(int)(DRAWINGBOARD_FRAME_SIZE_POSITION_X.getSize() * 0.001),
-			(int)(DRAWINGBOARD_FRAME_SIZE_POSITION_Y.getSize() * 2.07),
+			(int)(DRAWINGBOARD_FRAME_SIZE_POSITION_Y.getSize() * 2.827),
 			(int)(DRAWINGBOARD_FRAME_SIZE_WIDTH.getSize()),
 			(int)(DRAWINGBOARD_FRAME_SIZE_HEIGHT.getSize() * 0.15)
 	)),
 	
 	
 	//DrawingBoaradFrame 패널의 x, y 위치와  가로, 세로 사이즈
-	DRAWINGBOARD_PANEL_RECT(new Rectangle(
+	CANVAS_PANEL_RECT(new Rectangle(
 			(int)(DRAWINGBOARD_FRAME_SIZE_POSITION_X.getSize() * 0.001),
 			(int)(DRAWINGPOSITION_PANEL_RECT.getRectangle().getHeight()),//타입패널의 세로 길이
 			(int)(DRAWINGBOARD_FRAME_SIZE_WIDTH.getSize()),
-			(int)(DRAWINGBOARD_FRAME_SIZE_HEIGHT.getSize() * 0.627)
+			(int)(DRAWINGBOARD_FRAME_SIZE_HEIGHT.getSize() * 0.645)
 	));
 	
 	

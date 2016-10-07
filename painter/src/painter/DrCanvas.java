@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+@SuppressWarnings("serial")
 class DrCanvas extends Canvas {
 	private MsPaint painter;
 	private Image bufferImg;

@@ -3,9 +3,9 @@ package drawingBoardPanel;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import drawingBoardEnum.DrawingBoardFrameEnum;
 import drawingBoardEnum.DrawingTypePanelEnum;
@@ -20,10 +20,10 @@ public class DrawingTypePanel extends JPanel {
 	private JButton pen;			 //펜
 	private JButton eraser;			 //지우개
 	
-	private JLabel fill;			 //"채우기"
-	private	JRadioButton fillButton; //채우기 버튼
-	private JLabel draw;			 //"그리기"
-	private	JRadioButton drawButton; //그리기 버튼
+	private JLabel fillLabel;			 //"채우기"
+	private	JCheckBox fillButton; //채우기 버튼
+	private JLabel drawLabel;			 //"그리기"
+	private	JCheckBox drawButton; //그리기 버튼
 	
 	
 	
@@ -38,7 +38,6 @@ public class DrawingTypePanel extends JPanel {
 		this.setLayout(null);
 		//TODO 지우기
 		this.setBackground(Color.BLUE);
-		
 	}
 	
 	public void ButtonsFunction(){
@@ -56,8 +55,6 @@ public class DrawingTypePanel extends JPanel {
 		this.pen.setBounds(DrawingTypePanelEnum.PEN_JBUTTON_RECT.getRectangle());
 		this.eraser.setBounds(DrawingTypePanelEnum.ERASER_JBUTTON_RECT.getRectangle());
 		
-		
-		
 		this.add(line);
 		this.add(circle);
 		this.add(square);
@@ -68,18 +65,27 @@ public class DrawingTypePanel extends JPanel {
 	
 	//채우기 기능
 	public void fillFunction() {
-		this.fill = new JLabel("채우기");
-		this.fillButton = new JRadioButton();
+		this.fillLabel = new JLabel("채우기");
+		this.fillButton = new JCheckBox();
 		
+		this.fillButton.setBounds(DrawingTypePanelEnum.FILL_JRADIOBUTTON_RECT.getRectangle());
+		this.fillButton.setOpaque(false);
+		this.fillLabel.setBounds(DrawingTypePanelEnum.FILL_JLABEL_RECT.getRectangle());
+		
+		this.add(fillLabel);
+		this.add(fillButton);
 	}
 	
 	//그리기 기능
 	public void drawFunction() {
-		this.draw = new JLabel("그리기");
-		this.drawButton = new JRadioButton();
-			
+		this.drawLabel = new JLabel("그리기");
+		this.drawButton = new JCheckBox();
+		
+		this.drawButton.setBounds(DrawingTypePanelEnum.DRAW_JRADIOBUTTON_RECT.getRectangle());
+		this.drawButton.setOpaque(false);
+		this.drawLabel.setBounds(DrawingTypePanelEnum.DRAW_JLABEL_RECT.getRectangle());
+		
+		this.add(drawLabel);
+		this.add(drawButton);
 	}
-
-	
-
 }

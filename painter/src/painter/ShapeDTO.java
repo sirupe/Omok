@@ -11,7 +11,6 @@ class ShapeDTO {
 		this.color = color;
 		this.fill = fill;
 		this.form = form;
-		
 	}
 
 	public int[] getPointer() {
