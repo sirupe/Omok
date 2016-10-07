@@ -446,6 +446,7 @@ public class JoinClientAction extends Adapters {
 		this.telFrontNum = (String) this.joinFrame.getTelFrontNumChoice().getSelectedItem();
 		this.telMidNum = this.joinFrame.getTelMidTextField().getText();
 		this.telLastNum = this.joinFrame.getTelLastNumTextField().getText();
+		
 		//전화번호가 앞번호, 뒷번호 중 하나만 입력되었을 때
 		if(!this.telFrontNum.equals("선택") || this.telMidNum.length() != 0 || this.telLastNum.length() != 0) {
 			if(this.telFrontNum.equals("선택")) {
@@ -460,7 +461,7 @@ public class JoinClientAction extends Adapters {
 				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
 				errCount++;
 			}
-		} 
+		}
 		
 		//인증번호를 받지 않았을 때
 		if(this.joinFrame.getEmailConfTextField().isEditable()) {
