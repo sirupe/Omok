@@ -22,6 +22,7 @@ import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
+import frames.BasicFrame;
 
 public class CorrectPwdFrame extends JFrame{
 	private static final long serialVersionUID = -3504170481873643135L;
@@ -165,11 +166,17 @@ public class CorrectPwdFrame extends JFrame{
 	}
 	
 	public void dropOutSuccess() {
-		JOptionPane.showMessageDialog(this, "회원탈퇴가 완료되었습니다.");
-		this.setVisible(false);
-		this.dispose();
-		this.modifyFrame.getBasicFrame().setVisible(true);
-		this.modifyFrame.getBasicFrame().showLoginPanel();
+		JOptionPane.showMessageDialog(this, "회원탈퇴가 완료되었습니다. 게임이 종료됩니다.");
+		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
+		BasicFrame basicFrame = this.modifyFrame.getBasicFrame();
+		personalDTO.setUserID(basicFrame.getUserID());
+		basicFrame.sendDTO(personalDTO);
+		
+		basicFrame.setVisible(false);
+//		this.setVisible(false);
+//		this.dispose();
+//		this.modifyFrame.getBasicFrame().setVisible(true);
+//		this.modifyFrame.getBasicFrame().showLoginPanel();
 	}
 	
 	public void dropOutFail() {

@@ -242,7 +242,6 @@ public class JoinFrame extends JFrame {
 		this.addItemAction(this.genderManRadio, 	"genderManRadio");
 		this.addItemAction(this.genderWomanRadio, 	"genderWomanRadio");
 		
-//		this.test();
 	}
 
 	//모든 레이블 위치 -- > 순서대로
@@ -809,5 +808,9 @@ public class JoinFrame extends JFrame {
 	
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
+	}
+	
+	public JComboBox<String> getTelFrontNumChoice() {
+		return telFrontNumChoice;
 	}
 }
