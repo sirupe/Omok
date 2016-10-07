@@ -121,6 +121,7 @@ public class OmokServer {
 		}
 	}
 	
+	// 로그인 성공시
 	public void waitingRoomLoginSuccess(AbstractEnumsDTO listDTO, OmokPersonalServer personalServer) throws IOException {
 		// 접속자리스트 와 게임방 리스트와 현재 접속자의 게임정보를 담아 클라이언트로 발송
 		RoomAndUserListDTO roomAndUserListDTO = new RoomAndUserListDTO(UserPositionEnum.POSITION_WAITING_ROOM);
@@ -245,19 +246,28 @@ public class OmokServer {
 		}
 		
 		ArrayList<GameRoomInfoVO> roomList = new ArrayList<GameRoomInfoVO>();
-		GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 		
 		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
+			GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
 			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
 			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
-			roomVO.setPersons(2);
+			System.out.println("for문 안에서는 ? " + this.gameRoomList.get(i).getOwner());
+			roomVO.setPersons(this.gameRoomList.get(i).getPersonNum());
 			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
 			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
 			roomVO.setRoomNumber(this.gameRoomList.get(i).getRoomNumber());
 			roomList.add(roomVO);
 		}
 
+		for(int i = 0, size = roomList.size(); i < size; i++) {
+			System.out.println(roomList.get(i).getOwner());
+		}
+		
+		for (int i = 0, len = this.gameRoomList.size(); i < len; i++) {
+			System.out.println(this.gameRoomList.get(i).getOwner());
+		}
+		
 		try {
 			int ownerGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getOwner());
 			int guestGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getGuest());
