@@ -24,17 +24,15 @@ public class GameRoomClientAction extends Adapters {
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		JButton button = (JButton)e.getSource();
-		if(readyCheck == 0) {
-			this.gameRoomPanel.changeButtonImageMouseIn(button.getName());
-		}
+		
+		this.gameRoomPanel.changeButtonImageMouseIn(button.getName());
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		JButton button = (JButton)e.getSource();
-		if(readyCheck == 0) {
-			this.gameRoomPanel.changeButtonImageMouseOut(button.getName());
-		}
+			
+		this.gameRoomPanel.changeButtonImageMouseOut(button.getName());
 	}
 	//TODO
 	@Override
@@ -44,9 +42,11 @@ public class GameRoomClientAction extends Adapters {
 		// 게스트가 레디를 누르면 게스트 레디 버튼의 이미지를 바꿔주고 사용자가 레디를 눌렀다고 서버에 전송한다.
 		if(buttonName.equals("ready")) {
 			readyCheck++;
+			
 			if(readyCheck == 1) {
 				this.gameRoomPanel.changeGameReadyButton(true);
 			} 
+			
 			if(readyCheck == 2) {
 				this.gameRoomPanel.changeGameReadyButton(false);
 				this.readyCheck = 0;
@@ -58,6 +58,7 @@ public class GameRoomClientAction extends Adapters {
 		
 		} else if(buttonName.equals("withdraw")) {
 			this.gameRoomPanel.clickWithDraw();
+		
 		} else if(buttonName.equals("exit")) {
 			this.gameRoomPanel.exitGame();
 		// 눌린 버튼이 게임 돌 놓는 작업이라면
@@ -77,5 +78,9 @@ public class GameRoomClientAction extends Adapters {
 	
 	public void setReadyCheck(int readyCheck) {
 		this.readyCheck = readyCheck;
+	}
+	
+	public int getReadyCheck() {
+		return readyCheck;
 	}
 }

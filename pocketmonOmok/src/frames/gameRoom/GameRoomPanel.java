@@ -396,7 +396,7 @@ public class GameRoomPanel extends JPanel {
 	public void changeButtonImageMouseOut(String buttonName) {
 		if(buttonName.equals("start")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START_CH.getImageDir()));
-		} else if(buttonName.equals("ready")) {
+		} else if(buttonName.equals("ready") && this.gameRoomAction.getReadyCheck() == 0) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY.getImageDir()));
 		} else {
 			String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.thisUserID) ? 
@@ -416,7 +416,7 @@ public class GameRoomPanel extends JPanel {
 		System.out.println("마우스진입");
 		if(buttonName.equals("start")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START_GO.getImageDir()));
-		} else if(buttonName.equals("ready")) {
+		} else if(buttonName.equals("ready") && this.gameRoomAction.getReadyCheck() == 0) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY_BLUE.getImageDir()));
 		} else {
 			System.out.println(this.menuButtons[1].getName() + " / " + buttonName);

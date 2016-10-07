@@ -9,18 +9,13 @@ import javax.swing.JTextField;
 import actions.adapters.Adapters;
 import enums.frames.SearchIDEnum;
 import frames.searchFrames.SearchIdPanel;
-import frames.searchFrames.SearchIdResultPanel;
 import utility.RegexCheck;
 
 public class FindIDAction  extends Adapters {
 	private SearchIdPanel searchIdPanel;
 	private boolean isNameCheck = false;
 	private boolean isEmailCheck = false;
-	
-	private String checkMsg;
-	private String name;
-	private String email;
-	
+
 	public FindIDAction(SearchIdPanel searchIdPanel){
 		this.searchIdPanel = searchIdPanel;
 	}

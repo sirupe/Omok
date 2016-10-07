@@ -14,7 +14,6 @@ import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
 import enums.etc.UserPositionEnum;
 import enums.frames.LoginPanelEnum;
-import frames.BasicFrame;
 import frames.LoginPanel;
 import utility.GetResources;
 

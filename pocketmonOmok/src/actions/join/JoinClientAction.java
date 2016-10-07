@@ -38,11 +38,9 @@ public class JoinClientAction extends Adapters {
 	private String certificationNumber;
 	
 	private StringBuffer totalEmail;
-	
 	private boolean emailConfirmTime;
 
 	private Thread timeThread;
-	private boolean isThreadCheck;
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinClientAction(BasicFrame basicFrame, JoinFrame joinFrame){
@@ -104,6 +102,7 @@ public class JoinClientAction extends Adapters {
 		if(e.getSource().toString().contains("genderManRadio")) {
 			this.gender = 1;
 			this.joinFrame.getGenderErrorLabel().setVisible(false);
+		
 		} else if(e.getSource().toString().contains("genderWomanRadio")) {
 			this.gender = 2;
 			this.joinFrame.getGenderErrorLabel().setVisible(false);
@@ -181,13 +180,12 @@ public class JoinClientAction extends Adapters {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
 			personalDTO.setUserAction(UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK);
 			personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
+			
 			try {
 				this.basicFrame.getClientOS().writeObject(personalDTO);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-//			checkMsg = "join성공";
-//			color 	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 		}
 		
 		this.joinFrame.labelSetting(this.joinFrame.getIdErrorLabel(), color, checkMsg);

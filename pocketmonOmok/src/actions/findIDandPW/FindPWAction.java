@@ -17,7 +17,6 @@ public class FindPWAction extends Adapters {
 	private boolean emailCheck;
 	private boolean idCheck;
 	private boolean confirmCheck;
-
 	
 	public FindPWAction(SearchPwdPanel searchPwdPanel) {
 		this.searchPwdPanel = searchPwdPanel;
@@ -42,13 +41,11 @@ public class FindPWAction extends Adapters {
 			//인증번호 확인 눌렀을때
 			this.certification();
 	
-			//TODO 
 			if(this.confirmCheck) {
 				this.searchPwdPanel.confirmNumberCheck();
 			} 
 			
 		//확인버튼	
-
 		} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCH_CHECK.getButtonName())) {
 			//아이디를 체크하고 그 결과 값을 가지고 하단으로 안내려 보낼 수 있다면 
 			if(this.idCheck()) {
@@ -127,7 +124,6 @@ public class FindPWAction extends Adapters {
 		this.searchPwdPanel.userNumberMsgReset();
 		this.emailCheck = true;
 		return false;
-		
 	}
 	
 	//인증번호 검사
@@ -146,5 +142,4 @@ public class FindPWAction extends Adapters {
 		this.searchPwdPanel.setEmailConfirmLimitTime(true);
 		return false;
 	}
-
 }
