@@ -25,8 +25,8 @@ public class DBConnectionPool {
 	private String driver = "oracle.jdbc.driver.OracleDriver";       
 	private String url    = "jdbc:oracle:thin:@localhost:1521:xe";   
 
-	private String user   = "sirupe";   
-	private String passwd = "7133";
+	private String user   = "hr";   
+	private String passwd = "hr";
 
 	private boolean traceOn = true;;
 	private boolean initialized = false;
@@ -52,11 +52,11 @@ public class DBConnectionPool {
 		
 		try {
 			if(this.user == null) {
-				this.user = "";
+				this.user = "hr";
 			}
 			
 			if(this.passwd == null) {
-				this.passwd = "";
+				this.passwd = "hr";
 			}
 			
 			Properties propers = new Properties();
