@@ -52,7 +52,6 @@ public class CanvasPanel extends JPanel{
 				x2 = e.getX();	//종료 지점x
 				y2 = e.getY();	//종료 지점y
 				drawingPositionPanel.getX2Value().setText(e.getX() + "");	//x2TF에 종료값을 저장
-				System.out.println();
 				drawingPositionPanel.getY2Value().setText(e.getX() + "");	//y2TF에 종료값을 저장
 			}
 		});
