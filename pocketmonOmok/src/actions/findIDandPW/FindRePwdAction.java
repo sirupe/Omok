@@ -13,10 +13,8 @@ import utility.RegexCheck;
 public class FindRePwdAction extends Adapters {
 	private SearchRePwdPanel searchRePwdPanel;
 	
-	
 	private boolean pwdCheck;
 	private boolean pwdReCheck;
-	
 	
 	public FindRePwdAction(SearchRePwdPanel searchRePwdPanel) {
 		this.searchRePwdPanel = searchRePwdPanel;
@@ -41,7 +39,6 @@ public class FindRePwdAction extends Adapters {
 				this.searchRePwdPanel.getSearchPwdText().setEditable(false);
 				this.searchRePwdPanel.getsearchRePwdText().setEditable(false);
 				this.searchRePwdPanel.pwdChange();
-				
 			}
 		}
 	}
@@ -52,8 +49,7 @@ public class FindRePwdAction extends Adapters {
 		String pwdChange = textField.getText();
 		
 		if(pwdChange.contains("searchPwdText")) {
-				this.pwCheck();
-		
+			this.pwCheck();
 		} else {
 			this.rePwdCheck();
 		}
@@ -61,10 +57,8 @@ public class FindRePwdAction extends Adapters {
 	
 	// 비밀번호 체크
 	public boolean pwCheck() {
-
 		JTextField TextField = this.searchRePwdPanel.getSearchPwdText();
 		String pwd = TextField.getText();
-		
 		
 		if(pwd.isEmpty()) {
 			this.searchRePwdPanel.pwdMsgLabel("비밀번호 입력해주세요");
@@ -90,7 +84,6 @@ public class FindRePwdAction extends Adapters {
 		String rePwd = textField.getText();
 		String pwd = TextField.getText();
 		
-		
 		if(rePwd.isEmpty()) {
 			this.searchRePwdPanel.pwdMsgLabel("비밀번호 입력해주세요");
 			this.pwdReCheck = false;
@@ -109,9 +102,10 @@ public class FindRePwdAction extends Adapters {
 					+"<br>일치하지않습니다.<br></html>");
 			this.pwdReCheck = false;
 			return true;
-		} 
-			this.searchRePwdPanel.pwdMsgLabel("<html>비밀번호 일치합니다.!");
-			this.pwdReCheck = true;
-			return false;
+		}
+		
+		this.searchRePwdPanel.pwdMsgLabel("<html>비밀번호 일치합니다.!");
+		this.pwdReCheck = true;
+		return false;
 	}
 }

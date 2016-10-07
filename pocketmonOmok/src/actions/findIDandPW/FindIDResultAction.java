@@ -24,8 +24,4 @@ public class FindIDResultAction extends Adapters {
 			this.searchIdResultPanel.doHomeButton();
 		}
 	}
-	
-
-	
 }
-
