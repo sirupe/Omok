@@ -367,13 +367,13 @@ public class ModifyMyInfoFrame extends JFrame {
 		
 	    //취소 해상도 맞기 그리기
 		this.cancelButton.setIcon(GetResources.getImageIcon("resources/myData/reset.Kor.png", 
-    				ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
-    				ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
+				ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle().width,
+				ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle().height));
 	    
 		//탈퇴 해상도 맞기 그리기
 		this.dropoutButton.setIcon(GetResources.getImageIcon("resources/myData/quit.Kor.png", 
-    				ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
-    				ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
+				ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle().width, 
+				ModifyEnum.MODIFY_DROPOUT_BUTTON.getRectangle().height));
 		
 		this.modifyButton.setBounds(ModifyEnum.MODIFY_MODIFY_BUTTON.getRectangle());
 		this.cancelButton.setBounds(ModifyEnum.MODIFY_CANCEL_BUTTON.getRectangle());
@@ -433,14 +433,21 @@ public class ModifyMyInfoFrame extends JFrame {
 		
 		int errCheck = 0;
 		String errMsg = null;
-		if(!(telFrontNum.equals("선택") && telMidNum.length() == 0 && telLastNum.length() == 0)) {
-			if((telMidNum.length() == 0 && telLastNum.length() == 0) || 
-				(telMidNum.length() == 0 && telLastNum.length() == 0) || 
-				telFrontNum.equals("선택")) {
+		
+		if(!telFrontNum.equals("선택") || telMidNum.length() != 0 || telLastNum.length() != 0) {
+			if(telFrontNum.equals("선택")) {
 				errMsg = "전화번호 형식이 맞지 않습니다.";
 				errCheck++;
 			}
-		} 
+			if(telMidNum.length() != 4) {
+				errMsg = "전화번호 형식이 맞지 않습니다.";
+				errCheck++;
+			}
+			if(telLastNum.length() != 4) {
+				errMsg = "전화번호 형식이 맞지 않습니다.";
+				errCheck++;
+			}
+		}
 		
 		if(this.emailIDTextField.getText().length() == 0 || !RegexCheck.emailDomainRegexCheck(this.emailAddrTextField.getText())) {
 			this.pwdLabelError.setForeground(ModifyEnum.ERROR_MESSAGE_COLOR.getColor());
@@ -453,15 +460,15 @@ public class ModifyMyInfoFrame extends JFrame {
 			errMsg = "두 패스워드를 정확히 입력해주세요.";
 			errCheck++;
 		}
-
+		
 		if(pwdStr.length() == 0 || 
-		   rePwdStr.length() == 0 || 
-		   this.nameTextField.getText().length() == 0 || 
-		   this.emailAddrTextField.getText().length() == 0 || 
-		   this.emailAddrTextField.getText().length() == 0) {
+			rePwdStr.length() == 0 || 
+			this.nameTextField.getText().length() == 0 || 
+			this.emailAddrTextField.getText().length() == 0 || 
+			this.emailAddrTextField.getText().length() == 0) {
 			errMsg = "모든 정보를 입력해주세요";
 			errCheck++;
-		}
+		}//TODO
 		
 		if(errCheck == 0) {
 			
