@@ -52,11 +52,11 @@ public class DBConnectionPool {
 		
 		try {
 			if(this.user == null) {
-				this.user = "";
+				this.user = "hr";
 			}
 			
 			if(this.passwd == null) {
-				this.passwd = "";
+				this.passwd = "hr";
 			}
 			
 			Properties propers = new Properties();
