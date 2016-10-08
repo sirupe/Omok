@@ -57,14 +57,23 @@ public enum WaitingRoomEnum {
 	MODIFYINFO_JBUTTON_HEIGHT((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.1)),
 	// 은정 변경 수정하기 x, y
 	MODIFYINFO_JBUTTON_POSITION_X((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.58)),
-	MODIFYINFO_JBUTTON_POSITION_Y((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.62)),
+	MODIFYINFO_JBUTTON_POSITION_Y((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.59)),
 	
 	//방생성 버튼 가로, 세로 길이
 	GAMESTART_JBUTTON_WIDTH((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.13)),
-	GAMESTART_JBUTTON_HEIGHT((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.1)),
+	GAMESTART_JBUTTON_HEIGHT((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.09)),
 	//방생성 x,y 위치
 	GAMESTART_JBUTTON_POSITION_X((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.58)),
-	GAMESTART_JBUTTON_POSITION_Y((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.74)),
+	GAMESTART_JBUTTON_POSITION_Y((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.71)),
+	
+	//로그아웃 버튼 가로, 세로 길이
+	LOGOUT_JBUTTON_WIDTH((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.13)),
+	LOGOUT_JBUTTON_HEIGHT((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.09)),
+	
+	//로그아웃 버튼  x,y 위치
+	LOGOUT_JBUTTON_POSITION_X((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize() * 0.58)),
+	LOGOUT_JBUTTON_POSITION_Y((int)(LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize() * 0.83)),
+	
 	
 	//==================================PLAYER LIST==================================
 	//접속자창 가로, 세로 길이

@@ -181,6 +181,7 @@ public class JoinFrame extends JFrame {
 		//전체 프레임 크기 출력
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 	    backGround = ImageIO.read(
+
 	   		  new File("resources/backGround/join.png")).getScaledInstance(
 	                   JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 	                   JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),

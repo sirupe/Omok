@@ -92,14 +92,18 @@ public class WaitingRoomActions {
 		personalDTO.setUserAction(UserActionEnum.USER_MODIFY_GET_MY_INFO);
 		personalDTO.setUserID(basicFrame.getUserID());
 		basicFrame.sendDTO(personalDTO);
-		
-		//		try {
-//			basicFrame.newModifyJoinFrame();
-//			basicFrame.setVisible(false);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+
 	}
+	
+	
+	
+	//TODO
+	//로그아웃 버튼
+	public void logout() {
+		
+	}
+	
+	
 	
 	// 채팅 메세지가 들어옴
 	public void inputChattingMessage() {
@@ -202,6 +206,7 @@ public class WaitingRoomActions {
 		}
 		
 	}
+
 
 	
 }

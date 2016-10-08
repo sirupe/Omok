@@ -181,7 +181,9 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.emailAddrTextField.setEditable(false);
 		//배경화면
 		background = ImageIO.read(
-			  new File("resources/signUp/join.jpg")).getScaledInstance(
+				//배경이미지 join.png로 바꾸세욤
+			  new File("resources/signUp/join.png")).getScaledInstance(
+
 		          JoinSizesEnum.JOINFRAME_SIZE_WIDTH.getSize(),
 		          JoinSizesEnum.JOINFRMAE_SIZE_HEIGHT.getSize(),
 		          Image.SCALE_SMOOTH);

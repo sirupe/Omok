@@ -11,15 +11,15 @@ import javax.swing.border.EmptyBorder;
 import com.sun.glass.ui.Size;
 
 public enum SearchPwdEnum {
-	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
-	
-	SEARCH_PWD_FRAME_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
-	SEARCH_PWD_FRAME_HEIGHT((int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.9)),	
-	SEARCH_PWD_FRAME_POSITION_X((int)((Screen_SIZE.getDimension().getWidth() / 2) - (SEARCH_PWD_FRAME_WIDTH.getSize() / 2 ))),
-	SEARCH_PWD_FRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (SEARCH_PWD_FRAME_HEIGHT.getSize() / 2))),
-	
+   Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
+   
+   SEARCH_PWD_FRAME_WIDTH((int)(Screen_SIZE.getDimension().getWidth() * 0.25)),
+   SEARCH_PWD_FRAME_HEIGHT((int)(SEARCH_PWD_FRAME_WIDTH.getSize() * 0.9)),   
+   SEARCH_PWD_FRAME_POSITION_X((int)((Screen_SIZE.getDimension().getWidth() / 2) - (SEARCH_PWD_FRAME_WIDTH.getSize() / 2 ))),
+   SEARCH_PWD_FRAME_POSITION_Y((int)((Screen_SIZE.getDimension().getHeight() / 2) - (SEARCH_PWD_FRAME_HEIGHT.getSize() / 2))),
+   
 
-	//이름 레이블
+   //이름 레이블
     SEARCH_ID_LABEL(new Rectangle(
          (int)(SEARCH_PWD_FRAME_POSITION_X.getSize() * 0.1),
          (int)(SEARCH_PWD_FRAME_POSITION_Y.getSize() * 0.1),
@@ -120,37 +120,37 @@ public enum SearchPwdEnum {
     //에러 메세지 폰트
     LABELFONT_ERROR(new Font("a으라차차",Font.BOLD,17)),
 
-	//에러 메세지색깔
-	LABELCOLOR_ERROR(Color.red),
-	// 일반색깔
-	LABELCOLOR_DEFAULT(Color.BLUE);
-	
-	private Dimension dimension;
-	private int size;
-	private Color color;
-	private Font font;
-	private Rectangle rec;
-	
-	
-	private SearchPwdEnum(Rectangle rec) {
-		this.rec = rec;
-	}
-	
-	private SearchPwdEnum(Dimension dimension) {
-		this.dimension = dimension;
-	}
-	
-	private SearchPwdEnum(int size) {
-		this.size = size;
-	}
-	
-	private SearchPwdEnum(Color color) {
-		this.color = color;
-	}
-	
-	private SearchPwdEnum(Font font) {
-		this.font = font;
-	}
+   //에러 메세지색깔
+   LABELCOLOR_ERROR(Color.red),
+   // 일반색깔
+   LABELCOLOR_DEFAULT(Color.BLUE);
+   
+   private Dimension dimension;
+   private int size;
+   private Color color;
+   private Font font;
+   private Rectangle rec;
+   
+   
+   private SearchPwdEnum(Rectangle rec) {
+      this.rec = rec;
+   }
+   
+   private SearchPwdEnum(Dimension dimension) {
+      this.dimension = dimension;
+   }
+   
+   private SearchPwdEnum(int size) {
+      this.size = size;
+   }
+   
+   private SearchPwdEnum(Color color) {
+      this.color = color;
+   }
+   
+   private SearchPwdEnum(Font font) {
+      this.font = font;
+   }
 
 
     public Rectangle getRectangle() {
