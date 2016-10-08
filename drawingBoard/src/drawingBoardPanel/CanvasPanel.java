@@ -17,9 +17,10 @@ import drawingBoardFrame.DrawingBoaradFrame;
 public class CanvasPanel extends JPanel{
 	private DrawingPositionPanel drawingPositionPanel;
 	private Label lb;
-		
+	
 	private boolean isDrag;
 	int x1,x2,y1,y2;
+	
 	
 	public CanvasPanel(DrawingBoaradFrame drawingBoaradFrame) {
 		
@@ -59,8 +60,15 @@ public class CanvasPanel extends JPanel{
 				drawingPositionPanel.getY2Value().setText(e.getX() + "");	//y2TF에 종료값을 저장
 			}
 		});
-		
-		
-		
 	}
+
+	public DrawingPositionPanel getDrawingPositionPanel() {
+		return drawingPositionPanel;
+	}
+
+	public Label getLb() {
+		return lb;
+	}
+	
+	
 }

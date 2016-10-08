@@ -51,6 +51,9 @@ public class WaitingRoomActionListeners extends Adapters {
 		case "modifyInfoButton" :
 			this.waitingRoomActions.correctMyInfo();
 			break;
+			
+		case "logoutButton" :
+			this.waitingRoomActions.logout();
 		default :
 			break;
 		}

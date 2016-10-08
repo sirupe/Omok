@@ -36,15 +36,15 @@ public class DrawingBoaradFrame extends JFrame{
 	}
 	
 	
-	public CanvasPanel getCanvasPanel() {
-		return canvasPanel;
-	}
-	public DrawingTypePanel getDrawingTypePanel() {
-		return drawingTypePanel;
-	}
-	public DrawingPositionPanel getDrawingPositionPanel() {
-		return drawingPositionPanel;
-	}
+//	public CanvasPanel getCanvasPanel() {
+//		return canvasPanel;
+//	}
+//	public DrawingTypePanel getDrawingTypePanel() {
+//		return drawingTypePanel;
+//	}
+//	public DrawingPositionPanel getDrawingPositionPanel() {
+//		return drawingPositionPanel;
+//	}
 
 
 

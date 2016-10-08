@@ -52,6 +52,7 @@ public class WaitingRoomPanel extends JPanel {
 	
 	private JButton modifyInfoButton;
 	private JButton createRoomButton;
+	private JButton logoutButton;
 	
 	private JTextArea chattingOutput;
 	private JTextField chattingInputTextField;
@@ -100,7 +101,8 @@ public class WaitingRoomPanel extends JPanel {
 						
 		this.modifyInfoButton  		 = new JButton();
 		this.createRoomButton 		 = new JButton();
-			
+		this.logoutButton 			 = new JButton();
+		
 		this.userIDTitleLabel 	 	 = new JLabel("ID");
 		this.scoreTitleLabel 		 = new JLabel("전적");
 		this.winningRateTitleLabel 	 = new JLabel("승률");
@@ -426,6 +428,24 @@ public class WaitingRoomPanel extends JPanel {
 					Image.SCALE_AREA_AVERAGING))
 		);
 		/******************************************************************************/
+		//로그아운 버튼 위치와 크기를 가져옴
+		this.logoutButton.setBounds(
+				WaitingRoomEnum.LOGOUT_JBUTTON_POSITION_X.getSize(), 
+				WaitingRoomEnum.LOGOUT_JBUTTON_POSITION_Y.getSize(), 
+				WaitingRoomEnum.LOGOUT_JBUTTON_WIDTH.getSize(),
+				WaitingRoomEnum.LOGOUT_JBUTTON_HEIGHT.getSize()
+		);
+		
+		//로그아웃 버튼 이미지를 불러옴
+		this.logoutButton.setIcon(
+				new ImageIcon(ImageIO.read(
+					new File("resources/waitingroom/logout.png")).getScaledInstance(
+						WaitingRoomEnum.MODIFYINFO_JBUTTON_WIDTH.getSize() ,
+						WaitingRoomEnum.MODIFYINFO_JBUTTON_HEIGHT.getSize(),
+						Image.SCALE_AREA_AVERAGING))
+			);
+		
+		/******************************************************************************/
 		
 		this.playerListScroll.setBounds(
 				WaitingRoomEnum.PLAYERS_LIST_POSITION_X.getSize(),
@@ -611,13 +631,23 @@ public class WaitingRoomPanel extends JPanel {
 		this.modifyInfoButton.setContentAreaFilled(false);
 		this.modifyInfoButton.setFocusPainted(false);
 		//게임시작 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
-		this.modifyInfoButton.setIconTextGap(this.createRoomButton.getIconTextGap() - 15);
+		this.modifyInfoButton.setIconTextGap(this.modifyInfoButton.getIconTextGap() - 15);
+		
 		//방생성 버튼테두리 효과를 없애줌
 		this.createRoomButton.setBorderPainted(false);
 		this.createRoomButton.setContentAreaFilled(false);
 		this.createRoomButton.setFocusPainted(false);
 		//방생성 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
 		this.createRoomButton.setIconTextGap(this.createRoomButton.getIconTextGap() - 15);
+		
+		//로그아웃 버튼테두리 효과를 없애줌
+		this.logoutButton.setBorderPainted(false);
+		this.logoutButton.setContentAreaFilled(false);
+		this.logoutButton.setFocusPainted(false);
+		//로그아웃 버튼이미지 짤리는걸 이미지 간격이동으로 해결해줌
+		this.logoutButton.setIconTextGap(this.logoutButton.getIconTextGap() - 15);
+		
+		
 		
 		//메시지 보내는 버튼테두리 효과를 없애줌
 		this.sendMessageButton.setBorderPainted(false);
@@ -642,6 +672,7 @@ public class WaitingRoomPanel extends JPanel {
 		
 		this.setLayout(null);
 		
+		this.addAction(this.logoutButton, "logoutButton");
 		this.addAction(this.createRoomButton, "createRoomButton");
 		this.addAction(this.chattingInputTextField, "chattingInputTextField");
 		this.addAction(this.modifyInfoButton, "modifyInfoButton");
@@ -654,6 +685,7 @@ public class WaitingRoomPanel extends JPanel {
 		this.add(this.chattingScroll);
 		this.add(chattingInputTextField);
 		this.add(sendMessageButton);
+		this.add(logoutButton);
 		this.add(modifyInfoButton);
 		this.add(createRoomButton);
 		this.playerListBackground.add(playerListScroll);
