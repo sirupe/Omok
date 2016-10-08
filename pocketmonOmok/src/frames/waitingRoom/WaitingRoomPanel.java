@@ -778,7 +778,9 @@ public class WaitingRoomPanel extends JPanel {
 		this.scoreTextLabel.setText(setScore.toString());
 		this.userIDTextLabel.setText(userGameData.getUserID());
 		this.winningRateTextLabel.setText(String.valueOf(((int)(winRate * 100)) / 100.));
-		this.userInfoImageLabel.setIcon(userGameData.getUserWaitingRoomImage());
+		this.userInfoImageLabel.setIcon(GetResources.getImageIcon(userGameData.getUserWaitingRoomImage(), 
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(), 
+				WaitingRoomEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize()));
 		
 		this.userIDTextLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE80.getfont());
 		this.pointTextLabel.setFont(WaitingRoomEnum.LABELFONT_SIZE100.getfont());

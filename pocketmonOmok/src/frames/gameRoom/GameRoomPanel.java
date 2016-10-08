@@ -319,17 +319,23 @@ public class GameRoomPanel extends JPanel {
 			// 오너인 경우
 			if(this.thisUserID.equals(inGameUserInfo.getGameRoomInfo().getOwner())) {
 				imageDir 		 = ImageEnum.GAMEROOM_START.getImageDir();
-				this.leftUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
+				this.myImage 	 = GetResources.getImageIcon(inGameUserInfo.getUserGameData().getUserWaitingRoomImage(), 
+						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height);
+				this.leftUser.setIcon(myImage);
 				this.leftUserId.setText(this.thisUserID);
 				this.leftUserLevel.setIcon(myGradeImage);
 				
 				this.otherUserID = this.gameRoomInfo.getGuest();
-				this.myImage 	 = inGameUserInfo.getUserGameData().getUserGameRoomImage();
 			// 게스트인 경우
 			} else if(this.thisUserID.equals(inGameUserInfo.getGameRoomInfo().getGuest())) {
 				this.chattingField.setEditable(true);
 				imageDir = ImageEnum.GAMEROOM_READY.getImageDir();
-				this.rightUser.setIcon(inGameUserInfo.getUserGameData().getUserGameRoomImage());
+				this.rightUser.setIcon(GetResources.getImageIcon(inGameUserInfo.getUserGameData().getUserWaitingRoomImage(), 
+						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height));
+						
+//						inGameUserInfo.getUserGameData().getUserGameRoomImage());
 				this.rightUserId.setText(this.thisUserID);
 				this.rightUserLevel.setIcon(myGradeImage);
 				
@@ -347,7 +353,11 @@ public class GameRoomPanel extends JPanel {
 						gradeImageMap.get(inGameUserInfo.getOtherGameData().getUserGrade()), 
 						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().width, 
 						GameRoomEnum.GAME_USERLEVEL_LEFT_IMAGE_RECT.getRect().height));
-				this.myImage 	 = inGameUserInfo.getUserGameData().getUserGameRoomImage();
+				this.myImage 	 = GetResources.getImageIcon(inGameUserInfo.getUserGameData().getUserWaitingRoomImage(), 
+						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
+						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height);
+						
+//						inGameUserInfo.getUserGameData().getUserWaitingRoomImage();
 			}
 			this.addTextNotice("게임방에 입장하였습니다.");
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));

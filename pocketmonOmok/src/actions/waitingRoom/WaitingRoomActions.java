@@ -118,17 +118,20 @@ public class WaitingRoomActions {
 		if(userListInputCheck == 2) {	// 두 번쨰 인입일 때에만 실행
 			this.userListInputCheck = 0;// 인입값 초기화
 			String userMessage = this.waitingRoomPanel.getChattingInputTextField().getText();
-			UserMessageVO userMessageVO = new UserMessageVO(UserPositionEnum.POSITION_WAITING_ROOM);
-			userMessageVO.setUserID(this.waitingRoomPanel.getBasicFrame().getUserID());
-			userMessageVO.setMessage(userMessage + "\n");
-			if(this.waitingRoomPanel.getNoticeTextField().getText().equals("전체채팅")) {
-				userMessageVO.setUserAction(UserActionEnum.USER_MESSAGE_DEFAULT);
-			} else {
-				userMessageVO.setUserAction(UserActionEnum.USER_MESSAGE_SECRET);
-				userMessageVO.setTargetID(this.targetUser);
+			if(!userMessage.equals("")) {
+				UserMessageVO userMessageVO = new UserMessageVO(UserPositionEnum.POSITION_WAITING_ROOM);
+				userMessageVO.setUserID(this.waitingRoomPanel.getBasicFrame().getUserID());
+				userMessageVO.setMessage(userMessage + "\n");
+				
+				if(this.waitingRoomPanel.getNoticeTextField().getText().equals("전체채팅")) {
+					userMessageVO.setUserAction(UserActionEnum.USER_MESSAGE_DEFAULT);
+				} else {
+					userMessageVO.setUserAction(UserActionEnum.USER_MESSAGE_SECRET);
+					userMessageVO.setTargetID(this.targetUser);
+				}
+				this.waitingRoomPanel.sendDTO(userMessageVO);
+				this.waitingRoomPanel.getChattingInputTextField().setText("");
 			}
-			this.waitingRoomPanel.sendDTO(userMessageVO);
-			this.waitingRoomPanel.getChattingInputTextField().setText("");
 		}
 	}
 	
