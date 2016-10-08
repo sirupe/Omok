@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ImageEnum;
@@ -86,29 +87,26 @@ public class LoginClientAction extends MouseAdapter implements ActionListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		String buttonName = e.getComponent().toString();
-		if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
-			this.loginPanel.getBasicFrame().setVisible(false);
-			try {
-				this.loginPanel.getBasicFrame().newJoinFrame();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
-			this.loginPanel.getBasicFrame().setVisible(false);
-			try {
-				this.loginPanel.getBasicFrame().newSearchIdFrame();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		} else if(buttonName.contains(LoginPanelEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+		try {
+			JButton button = (JButton)e.getComponent();
+			String buttonName = button.getName();
+			if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SIGNUP.getButtonName())) {
 				this.loginPanel.getBasicFrame().setVisible(false);
-					try {
-						this.loginPanel.getBasicFrame().newSearchPwdFrame();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-			}}
+				this.loginPanel.getBasicFrame().newJoinFrame();
+			
+			} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCHID.getButtonName())) {
+				this.loginPanel.getBasicFrame().setVisible(false);
+				this.loginPanel.getBasicFrame().newSearchIdFrame();
+			
+			} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAME_SEARCHPW.getButtonName())) {
+				this.loginPanel.getBasicFrame().setVisible(false);
+				this.loginPanel.getBasicFrame().newSearchPwdFrame();
+			}
+		
+		} catch(IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 	
 	public void loginAction() {

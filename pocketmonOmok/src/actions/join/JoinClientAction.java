@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
@@ -64,33 +66,35 @@ public class JoinClientAction extends Adapters {
 	// 실시간으로 타이핑 감시하여 에러메세지 송출.
 	@Override
 	public void keyReleased(KeyEvent e) {
-		String source = e.getSource().toString();
-		if(source.contains("idTextField")) {
+		JTextField textField = (JTextField)e.getSource();
+		String source = textField.getName();
+		
+		if(source.equals("idTextField")) {
 			this.idSuitabilityCheck();
 		
-		} else if(source.contains("pwdField")) {
+		} else if(source.equals("pwdField")) {
 			this.pwSuitabilityCheck();
 		
-		} else if(source.contains("rePwdField")) {
+		} else if(source.equals("rePwdField")) {
 			this.rePwSuitabilityCheck();
 		
-		} else if(source.contains("nameTextField")) {
+		} else if(source.equals("nameTextField")) {
 			this.nameSuitabilityCheck();
 		
-		} else if(source.contains("emailIDTextField")) {
+		} else if(source.equals("emailIDTextField")) {
 			this.emailID = this.joinFrame.getEmailIDTextField().getText();			
 			this.emailIDSuitabilityCheck();
 			
-		} else if(source.contains("emailAddrTextField")) {
+		} else if(source.equals("emailAddrTextField")) {
 			this.emailAddrSuitabilityCheck();
 			
-		} else if(source.contains("telMiddleTextField")) {
+		} else if(source.equals("telMiddleTextField")) {
 			this.telMidTextFieldLengthLimit();
 		
-		} else if(source.contains("telLastNumTextField")) {
+		} else if(source.equals("telLastNumTextField")) {
 			this.telLastTextFieldLengthLimit();
 		
-		} else if(source.contains("emailConfTextField")) {
+		} else if(source.equals("emailConfTextField")) {
 			this.emailConfirm();
 		}
 

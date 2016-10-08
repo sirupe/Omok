@@ -180,13 +180,13 @@ public class WaitingRoomActions {
 		if(this.roomListInputCheck == 2) {
 			this.roomListInputCheck = 0;
 			int row = this.waitingRoomPanel.getWaitingRoomTable().getSelectedRow();
-			String image = ((ImageIcon)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 0)).getDescription();
-			
+			ImageIcon image = ((ImageIcon)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 0));
+			System.out.println(image.getDescription());
 			// 입장 가능인 경우
-			if(image.equals(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir())) {
+			if(image.getDescription().equals(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir())) {
 
 				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-				roomVO.setEnterImage(image);
+				roomVO.setEnterImage(image.getDescription());
 				roomVO.setRoomNumber((int)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 1));
 				roomVO.setRoomName((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 2));
 				roomVO.setOwner((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 3));

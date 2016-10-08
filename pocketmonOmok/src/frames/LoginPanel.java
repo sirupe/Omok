@@ -246,7 +246,6 @@ public class LoginPanel extends JPanel {
 		this.loginPanel.add(this.searchPwButton);
 	}
 	
-	//TODO
 	public void setTextFieldPosition(){		
 		this.idField = new JTextField("test3", 10);
 		this.pwField = new JPasswordField("3333", 10);

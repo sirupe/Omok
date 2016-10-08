@@ -24,6 +24,7 @@ public class WaitingRoomListTable {
 			ImageIcon image = GetResources.getImageIcon(gameRoomInfo.getEnterImage(), 
 					WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
 					WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize());
+			image.setDescription(gameRoomInfo.getEnterImage());
 			waitingRoomListData[i] = new Object[] {
 					image,
 					gameRoomInfo.getRoomNumber(),

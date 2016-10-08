@@ -167,6 +167,7 @@ public class WaitingRoomPanel extends JPanel {
 		ImageIcon image = GetResources.getImageIcon(roomInfoVo.getEnterImage(), 
 				WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
 				WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize());
+		image.setDescription(roomInfoVo.getEnterImage());
 		tableModel.addRow(new Object[] {
 				image,
 				roomInfoVo.getRoomNumber(),
@@ -188,6 +189,7 @@ public class WaitingRoomPanel extends JPanel {
 			ImageIcon image = GetResources.getImageIcon(roomInfoVo.getEnterImage(), 
 					WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
 					WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize());
+			image.setDescription(roomInfoVo.getEnterImage());
 			tableModel.addRow(new Object[] {
 					image,
 					roomInfoVo.getRoomNumber(),
