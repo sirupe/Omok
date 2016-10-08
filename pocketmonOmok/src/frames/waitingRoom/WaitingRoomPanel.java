@@ -122,12 +122,10 @@ public class WaitingRoomPanel extends JPanel {
 	//==========================대기방 리스트==========================
 
 	public void roomListSetting(WaitingRoomListTable roomListModel) throws IOException {
-		DefaultTableModel defaultTableModel = new DefaultTableModel(roomListModel.getWaitingRoomListData(), roomListModel.getWaitingRoomListColumn());
+		DefaultTableModel defaultTableModel = 
+				new DefaultTableModel(roomListModel.getWaitingRoomListData(), 
+				roomListModel.getWaitingRoomListColumn());
 		this.waitingRoomTable = new JTable(defaultTableModel) {
-
-			private static final long serialVersionUID = 747424234L;
-
-			
 			@SuppressWarnings("unchecked")
 			public Class getColumnClass(int column) {
 				return getValueAt(0, column).getClass();
@@ -143,9 +141,9 @@ public class WaitingRoomPanel extends JPanel {
 		this.waitingRoomTable.getTableHeader().setFont(WaitingRoomEnum.LABELFONT_SIZE80.getfont());//방타이틀글꼴
 		this.waitingRoomTable.setFont(WaitingRoomEnum.LABELFONT_SIZE90.getfont());
 		this.waitingRoomTable.setForeground(Color.WHITE);
-		this.waitingRoomTable.setShowVerticalLines(false);                               //수직선을 그릴것인가
-		this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              //이동불가
-		this.waitingRoomTable.getTableHeader().setResizingAllowed(false);                //크기 조절 불가
+		this.waitingRoomTable.setShowVerticalLines(false);                               			//수직선을 그릴것인가
+		this.waitingRoomTable.getTableHeader().setReorderingAllowed(false);              			//이동불가
+		this.waitingRoomTable.getTableHeader().setResizingAllowed(false);                			//크기 조절 불가
 		this.waitingRoomTable.setOpaque(false);
 		this.waitingRoomTable.setBorder(new EmptyBorder(0, 0, 0, 0));
 		this.waitingRoomTable.setBackground(new Color(0, 0, 0, 0));
@@ -358,13 +356,13 @@ public class WaitingRoomPanel extends JPanel {
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize(),
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
-		this.chattingScroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-			
-			@Override
-			public void adjustmentValueChanged(AdjustmentEvent e) {
-				JScrollBar src = (JScrollBar)e.getSource();
-				src.setValue(src.getMaximum());
-			}
+		this.chattingScroll.getVerticalScrollBar().addAdjustmentListener(
+			new AdjustmentListener() {
+				@Override
+				public void adjustmentValueChanged(AdjustmentEvent e) {
+					JScrollBar src = (JScrollBar)e.getSource();
+					src.setValue(src.getMaximum());
+				}
 		});
 		
 		this.chattingOutput.setEditable(false);

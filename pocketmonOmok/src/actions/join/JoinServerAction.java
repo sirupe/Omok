@@ -55,6 +55,9 @@ public class JoinServerAction {
 		this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
 		this.joinFrame.getEmailTimeLabel().setVisible(false);
 		this.joinFrame.getEmailConfTextField().setEditable(false);
+		this.joinFrame.getEmailAddrTextField().setEditable(false);
+		this.joinFrame.getEmailIDTextField().setEditable(false);
+		this.joinFrame.getEmailAddrChoice().setEnabled(false);
 		this.joinFrame.getConfirmButton().setEnabled(false);
 		this.joinClientAction.setEmailConfirmTime(true);
 		this.joinClientAction.getTimeThread().interrupt();

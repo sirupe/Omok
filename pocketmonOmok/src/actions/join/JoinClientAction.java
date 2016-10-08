@@ -339,8 +339,6 @@ public class JoinClientAction extends Adapters {
 					Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
 					joinFrame.getConfirmButton().removeActionListener(joinFrame.getJoinAction());
 					
-					//인터럽트는 실행중인 쓰레드에 명령을 주면 쓰레드를 정지시키고
-					//실행중이지 않은 쓰레드에 명령을 주면 다시 실행시킨다.
 					for(int i = 3; i >= 0; --i) {
 						for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
 							time.delete(0, time.length());
@@ -351,9 +349,6 @@ public class JoinClientAction extends Adapters {
 							joinFrame.getEmailTimeLabel().setText(time.toString());
 							try {
 								Thread.sleep(1000);
-								if(emailConfirmTime) {
-									this.interrupt();
-								}
 							} catch (InterruptedException e) {
 								break;
 							}
@@ -450,7 +445,10 @@ public class JoinClientAction extends Adapters {
 		this.telLastNum = this.joinFrame.getTelLastNumTextField().getText();
 		
 		//전화번호가 앞번호, 뒷번호 중 하나만 입력되었을 때
-		if(!this.telFrontNum.equals("선택") || this.telMidNum.length() != 0 || this.telLastNum.length() != 0) {
+		if(!this.telFrontNum.equals("선택") || 
+			this.telMidNum.length() != 0 || 
+			this.telLastNum.length() != 0) {
+			
 			if(this.telFrontNum.equals("선택")) {
 				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
 				errCount++;

@@ -472,7 +472,7 @@ public class ModifyMyInfoFrame extends JFrame {
 			this.emailAddrTextField.getText().length() == 0) {
 			errMsg = "모든 정보를 입력해주세요";
 			errCheck++;
-		}//TODO
+		}
 		
 		if(errCheck == 0) {
 			

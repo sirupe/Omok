@@ -121,7 +121,6 @@ public class CreateGameRoomFrame extends JFrame {
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setVisible(true);
-		System.out.println(this.roomCreateGroup.getSelection().getSelectedObjects());
 		
 	}
 	//========================================================================================================

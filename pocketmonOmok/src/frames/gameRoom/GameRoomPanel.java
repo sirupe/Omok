@@ -310,7 +310,6 @@ public class GameRoomPanel extends JPanel {
 		// 레디버튼 안에 마우스 진입시 색깔이 바뀌어아 하며 사용자가 클릭했다면 더이상 변경되지 말아야 하므로 상태값을 boolean으로 주었다.
 		// 그 boolean 값을 유저가 방에 들어오면 일단 무조건 true 로 만들어준다.
 		this.gameRoomInfo = inGameUserInfo.getGameRoomInfo();
-		System.out.println("꺼내올 때부터 없었떤건가 ? " + inGameUserInfo.getGameRoomInfo().getPwd());
 		this.thisUserID = this.basicFrame.getUserID();
 		try {
 			Map<String, String> gradeImageMap = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap();
@@ -335,7 +334,6 @@ public class GameRoomPanel extends JPanel {
 						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
 						GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height));
 						
-//						inGameUserInfo.getUserGameData().getUserGameRoomImage());
 				this.rightUserId.setText(this.thisUserID);
 				this.rightUserLevel.setIcon(myGradeImage);
 				
@@ -388,12 +386,14 @@ public class GameRoomPanel extends JPanel {
 	
 	// 채팅 입력시 서버로 전송
 	public void chattingInfoSendServer() {
-		UserMessageVO userMessage = new UserMessageVO(UserPositionEnum.POSITION_GAME_ROOM);
-		userMessage.setUserAction(UserActionEnum.USER_IN_GAME_ROOM_CHATTING);
-		userMessage.setUserID(this.thisUserID);
-		userMessage.setTargetID(this.otherUserID);
-		userMessage.setMessage(this.chattingField.getText());
-		this.basicFrame.sendDTO(userMessage);
+		if(!this.chattingField.getText().equals("")) {
+			UserMessageVO userMessage = new UserMessageVO(UserPositionEnum.POSITION_GAME_ROOM);
+			userMessage.setUserAction(UserActionEnum.USER_IN_GAME_ROOM_CHATTING);
+			userMessage.setUserID(this.thisUserID);
+			userMessage.setTargetID(this.otherUserID);
+			userMessage.setMessage(this.chattingField.getText());
+			this.basicFrame.sendDTO(userMessage);
+		}
 	}
 	
 	// 채팅에 관련한 서버에서의 응답
@@ -531,6 +531,7 @@ public class GameRoomPanel extends JPanel {
 		} else {
 			GetResources.soundPlay(this.thisUserID.equals(this.gameRoomInfo.getOwner()) ? 
 					SoundEnum.GAME_WHITE_TURN.getSound() : SoundEnum.GAME_BLACK_TURN.getSound());
+			this.chattingArea.setText(this.chattingArea.getText() + "\n" + this.otherUserID + " 님의 턴");
 		}
 	}
 
@@ -538,7 +539,7 @@ public class GameRoomPanel extends JPanel {
 	// 시간을 세어주는 쓰레드를 구동시키고
 	// 사운드를 내보내주고 게임패널에 액션리스너를 등록시켜준다.
 	public void thisUserTurn(String soundDir) {
-		System.out.println(this.thisUserID + "턴");
+		this.chattingArea.setText(this.chattingArea.getText() + "\n" + this.thisUserID + " 님의 턴");
 		this.isThreadStart = true;
 		this.gameBoardPanelAddAction();
 		GetResources.soundPlay(soundDir);
@@ -612,7 +613,7 @@ public class GameRoomPanel extends JPanel {
 	// 한 유저가 이긴 경우 게임이 종료된다.
 	// 이긴 유저가 접속자와 같다면 승리하셨습니다 메세지를 띄워주고 진 유저가 같다면 패배하셨습니다 메세지 띄워준다.
 	// for문을 돌면 돌이 일정하게 사라지지 않기 대문에 setVisible 먼저 보이지 않게 한 후 for문으로 작업하고 다시 true를 준다.
-	// 초기화 해야 할 값이 있다면 초기화 하고 게스트 유저의 레디를 해제해준다.//TODO
+	// 초기화 해야 할 값이 있다면 초기화 하고 게스트 유저의 레디를 해제해준다.
 	public void gameEnd(AbstractEnumsDTO data) {
 		this.isThreadStart = false;
 		this.isGameIngCheck = false;
@@ -740,13 +741,13 @@ public class GameRoomPanel extends JPanel {
 	
 	public void timeLimitThread() {//TODO
 		new Thread() {
+			// 30초동안 1초 1초 줄어든다. 시간부분과 프로그레스바를 줄어드는 시간에 맞추어 변경시킨다.
+			// 시간이 모두 지나거나 유저가 게임보드에 돌을 놓으면(isThreadStart가 false가 되면)
+			// 현재 유저의 마우스리스너를 삭제하고 현재 게임보드 정보를 서버로 전송하며 턴을 종료한다.
+			// 시간이 시작하면 클릭이 가능하고 턴이 종료되면 불가능하게 하는 플래그 설정
+			// 기권이 자신의 턴에만 가능하게 하기 위해 쓰레드 시작시 이벤트 등록하고 쓰레드 종료시 이벤트를 제거한다.
 			@Override
 			public void run() {
-				// 30초동안 1초 1초 줄어든다. 시간부분과 프로그레스바를 줄어드는 시간에 맞추어 변경시킨다.
-				// 시간이 모두 지나거나 유저가 게임보드에 돌을 놓으면(isThreadStart가 false가 되면)
-				// 현재 유저의 마우스리스너를 삭제하고 현재 게임보드 정보를 서버로 전송하며 턴을 종료한다.
-				// 시간이 시작하면 클릭이 가능하고 턴이 종료되면 불가능하게 하는 플래그 설정
-				// 기권이 자신의 턴에만 가능하게 하기 위해 쓰레드 시작시 이벤트 등록하고 쓰레드 종료시 이벤트를 제거한다.
 				isStoneClickCheck = true;
 				menuButtons[1].addMouseListener(gameRoomAction);
 				int i = 0;

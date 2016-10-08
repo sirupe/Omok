@@ -96,7 +96,8 @@ public class WaitingRoomActions {
 	
 	//로그아웃 버튼
 	public void logout() {
-		int result = JOptionPane.showConfirmDialog(this.waitingRoomPanel, "게임을 종료하시겠습니까?", "게임종료", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(this.waitingRoomPanel, "게임을 종료하시겠습니까?", "게임종료", 
+					 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		BasicFrame basicFrame = this.waitingRoomPanel.getBasicFrame();
 		if(result == JOptionPane.YES_OPTION) {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
@@ -184,7 +185,6 @@ public class WaitingRoomActions {
 			System.out.println(image.getDescription());
 			// 입장 가능인 경우
 			if(image.getDescription().equals(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir())) {
-
 				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 				roomVO.setEnterImage(image.getDescription());
 				roomVO.setRoomNumber((int)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 1));
@@ -196,7 +196,7 @@ public class WaitingRoomActions {
 				this.waitingRoomPanel.sendDTO(roomVO);
 			
 			// 해당 방이 비밀방인 경우
-			} else if(image.equals(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir())) {
+			} else if(image.getDescription().equals(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir())) {
 				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 				roomVO.setUserAction(UserActionEnum.USER_PRIVATE_ROOM_ENTER);
 				roomVO.setOwner((String)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 3));

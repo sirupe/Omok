@@ -814,4 +814,8 @@ public class JoinFrame extends JFrame {
 	public JComboBox<String> getTelFrontNumChoice() {
 		return telFrontNumChoice;
 	}
+	
+	public JComboBox<String> getEmailAddrChoice() {
+		return emailAddrChoice;
+	}
 }

@@ -111,7 +111,8 @@ public class ClientAccept {
 		case WAITING_ROOM_ENTER :
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			
-			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
+			WaitingRoomListTable roomTable = 
+					new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
 			panel.setUserInfo(waitingRoomInfo.getUserGameData());
 			panel.roomListSetting(roomTable);			
 			panel.userListSetting(waitingRoomInfo.getUserList());
@@ -250,7 +251,6 @@ public class ClientAccept {
 		if(infoDTO.getServerAction() == ServerActionEnum.OTHERS_UER_EXIT) {
 			this.basicFrame.getWaitingRoomPanel().deleteUserSetting((UserPersonalInfoDTO)infoDTO);
 		} else {
-			System.out.println("여기까지 오는 경우가 ??????????");
 			this.clientOS.close();
 			this.clientIS.close();
 			this.clientSocket.close();
@@ -258,10 +258,6 @@ public class ClientAccept {
 			System.exit(0);
 		}
 	}
-
-
-	
-	
 	
 	public void sendDTO(AbstractEnumsDTO dto) {
 		try {
