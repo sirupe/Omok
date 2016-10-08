@@ -366,9 +366,9 @@ import omokGame.client.ClientAccept;
 			new Thread(() -> {
 				StringBuffer time = new StringBuffer();
 				
-				for(int i = 0; i >= 0; --i) {
+				for(int i = 2; i >= 0; --i) {
 					
-					for(int j = (i >= 3) ? 0 : 5 ; j >= 0; j--) {
+					for(int j = (i >= 3) ? 0 : 59 ; j >= 0; j--) {
 						time.delete(0, time.length());
 						time.append(i);
 						time.append(" : ");
