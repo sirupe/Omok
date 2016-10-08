@@ -164,9 +164,11 @@ public class WaitingRoomPanel extends JPanel {
 	// 방 리스트에 방을 추가
 	public void addGameRoom(GameRoomInfoVO roomInfoVo) {
 		DefaultTableModel tableModel = (DefaultTableModel) this.waitingRoomTable.getModel();
-		
+		ImageIcon image = GetResources.getImageIcon(roomInfoVo.getEnterImage(), 
+				WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+				WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize());
 		tableModel.addRow(new Object[] {
-				roomInfoVo.getEnterImage(),
+				image,
 				roomInfoVo.getRoomNumber(),
 				roomInfoVo.getRoomName(),
 				roomInfoVo.getOwner(),
@@ -183,9 +185,11 @@ public class WaitingRoomPanel extends JPanel {
 
 		for(int i = 0, size = roomListVo.getGameRoomList().size(); i < size; i++) {
 			GameRoomInfoVO roomInfoVo = roomListVo.getGameRoomList().get(i);
-			
+			ImageIcon image = GetResources.getImageIcon(roomInfoVo.getEnterImage(), 
+					WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+					WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize());
 			tableModel.addRow(new Object[] {
-					roomInfoVo.getEnterImage(),
+					image,
 					roomInfoVo.getRoomNumber(),
 					roomInfoVo.getRoomName(),
 					roomInfoVo.getOwner(),
@@ -789,8 +793,8 @@ public class WaitingRoomPanel extends JPanel {
 		
 		String dir = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap().get(userGameData.getUserGrade());
 		this.levelImageLabel.setIcon(GetResources.getImageIcon(dir, 
-					WaitingRoomEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
-					WaitingRoomEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()));
+				WaitingRoomEnum.MY_INFO_LEVEL_TEXT_WIDTH.getSize(),
+				WaitingRoomEnum.MY_INFO_LEVEL_TEXT_HEIGHT.getSize()));
 	}
 	
 	public void updateDeleteRoom() {

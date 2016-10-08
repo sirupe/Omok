@@ -18,7 +18,7 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 		super(position);
 	}
 	
-	private ImageIcon enterImage;
+	private String enterImage;
 //	private ImageIcon guestImage;
 	private int roomNumber;
 	private int personNum;
@@ -28,24 +28,12 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	private String persons;
 	private String pwd;
 	
-	public ImageIcon getEnterImage() {
+	public String getEnterImage() {
 		return enterImage;
 	}
 	
 	public void setEnterImage(String imageEnum) {
-		try {
-			this.enterImage = new ImageIcon(ImageIO.read(
-				new File(imageEnum)).getScaledInstance(
-					WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
-					WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
-					Image.SCALE_AREA_AVERAGING)
-			);
-			this.enterImage.setDescription(imageEnum);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		this.enterImage.setDescription(imageEnum);
+		this.enterImage = imageEnum;
 	}
 //
 //	public ImageIcon getGuestImage() {

@@ -3,7 +3,11 @@ package frames.waitingRoom;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import datasDTO.GameRoomInfoVO;
+import enums.frames.WaitingRoomEnum;
+import utility.GetResources;
 
 public class WaitingRoomListTable {
 	
@@ -17,8 +21,11 @@ public class WaitingRoomListTable {
 		
 		for(int i = 0, size = waitingRoomListData.length; i < size; i++) {
 			GameRoomInfoVO gameRoomInfo = roomList.get(i);
+			ImageIcon image = GetResources.getImageIcon(gameRoomInfo.getEnterImage(), 
+					WaitingRoomEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
+					WaitingRoomEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize());
 			waitingRoomListData[i] = new Object[] {
-					gameRoomInfo.getEnterImage(),
+					image,
 					gameRoomInfo.getRoomNumber(),
 					gameRoomInfo.getRoomName(),
 					gameRoomInfo.getOwner(),

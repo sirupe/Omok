@@ -16,7 +16,6 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 	private int userScore;		// 유저 점수
 	private double userWinRate;	// 유저 승률 (DTO에서 총게임수와 이긴게임수로 승률을 계산하여 저장함
 	private String userWaitingRoomImage;	// 유저 대기실 이미지
-//	private String userGameRoomImage; // 유저 게임방 이미지
 	
 	public UserGamedataInfoDTO(UserPositionEnum position) {
 		super(position);
@@ -77,25 +76,5 @@ public class UserGamedataInfoDTO extends AbstractEnumsDTO {
 
 	public void setUserWaitingRoomImage(int gender) throws IOException {
 		this.userWaitingRoomImage = gender == 1 ? ImageEnum.GAMEROOM_MALE_IMAGE.getImageDir() : ImageEnum.GAMEROOM_FEMALE_IMAGE.getImageDir();
-		
-//		this.userWaitingRoomImage = new ImageIcon(ImageIO.read(
-//			new File(imageEnum)).getScaledInstance(
-//				WaitingRoomEnum.USER_INFO_VIEW_SIZE_WIDTH.getSize(),
-//				WaitingRoomEnum.USER_INFO_VIEW_SIZE_HEIGHT.getSize(),
-//				Image.SCALE_AREA_AVERAGING)
-//		);
-//		
-//		this.userGameRoomImage = new ImageIcon(ImageIO.read(
-//			new File(imageEnum)).getScaledInstance(
-//				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().width, 
-//				GameRoomEnum.GAME_USERIMAGE_LEFT_RECT.getRect().height, 
-//				Image.SCALE_AREA_AVERAGING)
-//		);
 	}
-	
-//	public ImageIcon getUserGameRoomImage() {
-//		return userGameRoomImage;
-//	}
-	
-
 }

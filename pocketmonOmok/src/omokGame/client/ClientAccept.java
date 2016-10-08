@@ -156,7 +156,7 @@ public class ClientAccept {
 				if(roomVO.getPwd().equals(passwd)) {
 					isPasswordFail = false;
 					GameRoomInfoVO enterRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
-					enterRoomVO.setEnterImage(roomVO.getEnterImage().getDescription());
+					enterRoomVO.setEnterImage(roomVO.getEnterImage());
 					enterRoomVO.setRoomNumber(roomVO.getRoomNumber());
 					enterRoomVO.setRoomName(roomVO.getRoomName());
 					enterRoomVO.setOwner(roomVO.getOwner());

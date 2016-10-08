@@ -73,7 +73,6 @@ public class OmokServer {
 		if(resultDTO.getServerAction() == ServerActionEnum.LOGIN_SUCCESS) {
 			//사용자정보가 탈퇴유저라면
 			if(this.userPersonalDAO.loginDropUserCheck(inputUserPersonalInfo) == 0) {
-				System.out.println("그럼시발여기계속들어온다는거야?");
 				resultDTO.setServerAction(ServerActionEnum.LOGIN_DROP_USER);
 			//클라이언트의 ID가 처음 인입된 것이라면
 			} else if(this.loginUsersMap.get(resultDTO.getUserID()) == null) {
@@ -194,13 +193,12 @@ public class OmokServer {
 		GameRoomInfoVO gameRoomInfo = (GameRoomInfoVO)listDTO;
 		GameRoomInfoVO pasteGameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 		pasteGameRoomInfo.setGuest(gameRoomInfo.getGuest());
-		pasteGameRoomInfo.setEnterImage(gameRoomInfo.getEnterImage().getDescription());
+		pasteGameRoomInfo.setEnterImage(gameRoomInfo.getEnterImage());
 		pasteGameRoomInfo.setOwner(gameRoomInfo.getOwner());
 		pasteGameRoomInfo.setPersons(gameRoomInfo.getPersonNum());
 		pasteGameRoomInfo.setPwd(gameRoomInfo.getPwd());
 		pasteGameRoomInfo.setRoomName(gameRoomInfo.getRoomName());
 		pasteGameRoomInfo.setRoomNumber(gameRoomInfo.getRoomNumber());
-		System.out.println("방생성시 넘어온 데이터는?" + gameRoomInfo.getPwd());
 		// 방이 20개가 넘지 않는다면 생성 성공. 방을 생성한 유저에게 게임방 입장시 필요한 정보를 전송.
 		// 방이 20개가 넘는다면 방만들기 실패.
 		if(this.gameRoomList.size() < 20) {
@@ -247,7 +245,7 @@ public class OmokServer {
 		for(int i = 0, size = this.gameRoomList.size(); i < size; i++)  {
 			GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
 			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
-			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
+			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage());
 			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
 			roomVO.setPersons(this.gameRoomList.get(i).getPersonNum());
 			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
@@ -271,7 +269,7 @@ public class OmokServer {
 			// 각각 오너와 게스트에게 정보 전송(포지션 게임룸)
 			GameRoomInfoVO roomOwnerVO = new GameRoomInfoVO(null);
 			roomOwnerVO.setGuest(pasteGameRoomInfo.getGuest());
-			roomOwnerVO.setEnterImage(pasteGameRoomInfo.getEnterImage().getDescription());
+			roomOwnerVO.setEnterImage(pasteGameRoomInfo.getEnterImage());
 			roomOwnerVO.setOwner(pasteGameRoomInfo.getOwner());
 			roomOwnerVO.setPersons(2);
 			roomOwnerVO.setPwd(pasteGameRoomInfo.getPwd());
@@ -286,7 +284,7 @@ public class OmokServer {
 			
 			GameRoomInfoVO roomGuestVO = new GameRoomInfoVO(null);
 			roomGuestVO.setGuest(pasteGameRoomInfo.getGuest());
-			roomGuestVO.setEnterImage(pasteGameRoomInfo.getEnterImage().getDescription());
+			roomGuestVO.setEnterImage(pasteGameRoomInfo.getEnterImage());
 			roomGuestVO.setOwner(pasteGameRoomInfo.getOwner());
 			roomGuestVO.setPersons(2);
 			roomGuestVO.setPwd(pasteGameRoomInfo.getPwd());
@@ -315,7 +313,7 @@ public class OmokServer {
 		for(GameRoomInfoVO vo : this.gameRoomList) {
 			if(vo.getOwner().equals(owner)) {
 				serverRoomVO.setGuest(vo.getGuest());
-				serverRoomVO.setEnterImage(vo.getEnterImage().getDescription());
+				serverRoomVO.setEnterImage(vo.getEnterImage());
 				serverRoomVO.setOwner(vo.getOwner());
 				serverRoomVO.setPersons(vo.getPersonNum());
 				serverRoomVO.setPwd(vo.getPwd());
@@ -747,7 +745,7 @@ public class OmokServer {
 				pasteRoomInfo.setPwd(roomInfo.getPwd());
 				pasteRoomInfo.setRoomName(roomInfo.getRoomName());
 				pasteRoomInfo.setRoomNumber(roomInfo.getRoomNumber());
-				pasteRoomInfo.setEnterImage(roomInfo.getEnterImage().getDescription());
+				pasteRoomInfo.setEnterImage(roomInfo.getEnterImage());
 				pasteGameRoomList.add(pasteRoomInfo);
 			}
 			//TODO

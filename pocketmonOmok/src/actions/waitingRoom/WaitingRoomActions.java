@@ -92,12 +92,8 @@ public class WaitingRoomActions {
 		personalDTO.setUserAction(UserActionEnum.USER_MODIFY_GET_MY_INFO);
 		personalDTO.setUserID(basicFrame.getUserID());
 		basicFrame.sendDTO(personalDTO);
-
 	}
 	
-	
-	
-	//TODO
 	//로그아웃 버튼
 	public void logout() {
 		int result = JOptionPane.showConfirmDialog(this.waitingRoomPanel, "게임을 종료하시겠습니까?", "게임종료", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -109,8 +105,6 @@ public class WaitingRoomActions {
 			basicFrame.setVisible(false);
 		}
 	}
-	
-	
 	
 	// 채팅 메세지가 들어옴
 	public void inputChattingMessage() {
