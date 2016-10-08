@@ -1,7 +1,7 @@
 package enums.etc;
 
 public enum ServerIPEnum {
-	SERVER_IP("127.0.0.1"),	//로컬호스트 127.0.0.1 = 나다.
+	SERVER_IP("127.0.0.1"), //192.168.43.185 , 127.0.0.1
 	SERVER_PORT(2345);
 	
 	public String serverIP;

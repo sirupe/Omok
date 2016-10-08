@@ -28,7 +28,6 @@ public class DBConnectionPool {
 	private String passwd = "oracle"; 
 
 	private boolean traceOn = true;
-
 	private boolean initialized = false;
 	private int openConnections = 10;
 	

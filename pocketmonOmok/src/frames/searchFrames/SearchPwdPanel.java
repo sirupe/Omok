@@ -312,6 +312,7 @@ import omokGame.client.ClientAccept;
 		
 		//인증메일 보내기
 		public void getCerfication() {
+			this.searchConfirmButton.setEnabled(false);
 			BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
 			ClientAccept clientAccpet = basicFrame.getClientAccept();
 			ObjectOutputStream oos = clientAccpet.getClientOS(); 
@@ -386,6 +387,7 @@ import omokGame.client.ClientAccept;
 				//시간이 지난 후 카운트 삭제
 				this.searchTimeLabel.setText("");
 				this.searchTimeLabel.setVisible(false);
+				this.searchConfirmButton.setEnabled(true);
 				
 				//인증번호 초기화 한다.
 				this.searchConfirmTextField.setText("");
