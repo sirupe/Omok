@@ -152,7 +152,7 @@ public class ClientAccept {
 			
 			while(isPasswordFail) {
 				String passwd = JOptionPane.showInputDialog("비밀번호를 입력해주세요.");
-				//TODO ingameroom 에러픽스
+
 				if(roomVO.getPwd().equals(passwd)) {
 					isPasswordFail = false;
 					GameRoomInfoVO enterRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
@@ -161,8 +161,8 @@ public class ClientAccept {
 					enterRoomVO.setRoomName(roomVO.getRoomName());
 					enterRoomVO.setOwner(roomVO.getOwner());
 					enterRoomVO.setPersons(1);
+					enterRoomVO.setPwd(roomVO.getPwd());
 					enterRoomVO.setGuest(this.basicFrame.getUserID());
-					System.out.println("현재의 유저는 : " + enterRoomVO.getGuest());
 					enterRoomVO.setUserAction(UserActionEnum.USER_ENTER_ROOM);
 					this.basicFrame.sendDTO(enterRoomVO);
 				} else if(passwd == null) {
@@ -250,6 +250,7 @@ public class ClientAccept {
 		if(infoDTO.getServerAction() == ServerActionEnum.OTHERS_UER_EXIT) {
 			this.basicFrame.getWaitingRoomPanel().deleteUserSetting((UserPersonalInfoDTO)infoDTO);
 		} else {
+			System.out.println("여기까지 오는 경우가 ??????????");
 			this.clientOS.close();
 			this.clientIS.close();
 			this.clientSocket.close();

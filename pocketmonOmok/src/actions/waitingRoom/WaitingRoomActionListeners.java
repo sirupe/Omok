@@ -54,6 +54,7 @@ public class WaitingRoomActionListeners extends Adapters {
 			
 		case "logoutButton" :
 			this.waitingRoomActions.logout();
+			break;
 		default :
 			break;
 		}

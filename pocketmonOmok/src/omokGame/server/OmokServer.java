@@ -299,7 +299,6 @@ public class OmokServer {
 			userInGameRoomDTO.setGuestGender(guestGender);
 			userInGameRoomDTO.setOtherGameData(this.gamedataDAO.userGameData(pasteGameRoomInfo.getOwner()));
 			userInGameRoomDTO.setServerAction(ServerActionEnum.ENTER_ROOM_SUCCESS_GUEST);
-			//TODO 여기서 게스트가 없다.
 			this.loginUsersMap.get(userChoiceRoom.getGuest()).getServerOutputStream().writeObject(userInGameRoomDTO);	
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -703,6 +702,7 @@ public class OmokServer {
 		pasteRoomInfoVO.setOwner(gameRoomInfoVO.getOwner());
 		pasteRoomInfoVO.setPersons(gameRoomInfoVO.getPersonNum());
 		pasteRoomInfoVO.setPwd(gameRoomInfoVO.getPwd());
+		System.out.println("이젠 있겠지 부들부들" + gameRoomInfoVO.getPwd());
 		pasteRoomInfoVO.setRoomName(gameRoomInfoVO.getRoomName());
 		pasteRoomInfoVO.setRoomNumber(gameRoomInfoVO.getRoomNumber());
 		

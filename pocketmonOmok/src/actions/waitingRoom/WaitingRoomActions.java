@@ -100,7 +100,14 @@ public class WaitingRoomActions {
 	//TODO
 	//로그아웃 버튼
 	public void logout() {
-		
+		int result = JOptionPane.showConfirmDialog(this.waitingRoomPanel, "게임을 종료하시겠습니까?", "게임종료", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		BasicFrame basicFrame = this.waitingRoomPanel.getBasicFrame();
+		if(result == JOptionPane.YES_OPTION) {
+			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
+			personalDTO.setUserID(basicFrame.getUserID());
+			basicFrame.sendDTO(personalDTO);
+			basicFrame.setVisible(false);
+		}
 	}
 	
 	
