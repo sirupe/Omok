@@ -35,6 +35,7 @@ public class FindPWAction extends Adapters {
 			//이메일이 있고 형식에 맞을때
 			if(this.emailCheck) {
 				this.searchPwdPanel.getCerfication();
+				
 			} 
 
 		} else if(buttonName.equals(LoginPanelEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName())) {
