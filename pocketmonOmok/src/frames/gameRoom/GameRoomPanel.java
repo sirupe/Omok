@@ -310,6 +310,7 @@ public class GameRoomPanel extends JPanel {
 		// 레디버튼 안에 마우스 진입시 색깔이 바뀌어아 하며 사용자가 클릭했다면 더이상 변경되지 말아야 하므로 상태값을 boolean으로 주었다.
 		// 그 boolean 값을 유저가 방에 들어오면 일단 무조건 true 로 만들어준다.
 		this.gameRoomInfo = inGameUserInfo.getGameRoomInfo();
+		System.out.println("꺼내올 때부터 없었떤건가 ? " + inGameUserInfo.getGameRoomInfo().getPwd());
 		this.thisUserID = this.basicFrame.getUserID();
 		try {
 			Map<String, String> gradeImageMap = ImageEnum.WAITINGROOM_USER_GRADE_IMAGE_MAP.getMap();
@@ -419,7 +420,6 @@ public class GameRoomPanel extends JPanel {
 		} else if(buttonName.equals("ready") && this.gameRoomAction.getReadyCheck() == 0) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY_BLUE.getImageDir()));
 		} else {
-			System.out.println(this.menuButtons[1].getName() + " / " + buttonName);
 			String[] buttonImages = this.gameRoomInfo.getOwner().equals(this.thisUserID) ? 
 					ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_OWNER.getImages() : ImageEnum.GAMEROOM_MENU_IMAGES_COLOR_GUEST.getImages();
 			// 시작 혹은 레디버튼 제외
@@ -483,8 +483,6 @@ public class GameRoomPanel extends JPanel {
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		this.menuButtons[0].removeMouseListener(this.gameRoomAction);
 		this.menuButtons[2].removeMouseListener(this.gameRoomAction);
-		System.out.println("기권버튼에 액션리스너가 등록되었다.");
-		this.menuButtons[1].addMouseListener(this.gameRoomAction);
 		this.chattingArea.setText(this.chattingArea.getText() + "\n<게임을 시작합니다.>");
 		
 		GetResources.soundPlay(SoundEnum.GAME_START_SOUND.getSound());
@@ -626,8 +624,6 @@ public class GameRoomPanel extends JPanel {
 		this.x = 0;
 		this.y = 0;
 		
-		this.menuButtons[1].removeMouseListener(this.gameRoomAction);
-		
 		if(this.thisUserID.equals(this.gameRoomInfo.getGuest())) {
 			this.menuButtons[0].addMouseListener(this.gameRoomAction);
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_READY.getImageDir()));
@@ -657,10 +653,12 @@ public class GameRoomPanel extends JPanel {
 	public void exitGame() {
 		// 뜨는 팝업창에서 Yes 가 눌린 경우
 		if(new ConfirmDialog(this.basicFrame, "게임방을 나가시겠습니까?").isYesNoCheck()) {
+			System.out.println("패널에서의 패스워드 : " + this.gameRoomInfo.getPwd());
 			GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
 			gameRoomInfo.setUserAction(UserActionEnum.USER_GAME_ROOM_EXIT);
 			gameRoomInfo.setRoomNumber(this.gameRoomInfo.getRoomNumber());
 			gameRoomInfo.setRoomName(this.gameRoomInfo.getRoomName());
+			gameRoomInfo.setPwd(this.gameRoomInfo.getPwd());
 			
 			// 게임방에 2명이 모두 들어온 경우
 			if(this.gameRoomInfo.getPersonNum() == 2) {
@@ -738,7 +736,9 @@ public class GameRoomPanel extends JPanel {
 				// 시간이 모두 지나거나 유저가 게임보드에 돌을 놓으면(isThreadStart가 false가 되면)
 				// 현재 유저의 마우스리스너를 삭제하고 현재 게임보드 정보를 서버로 전송하며 턴을 종료한다.
 				// 시간이 시작하면 클릭이 가능하고 턴이 종료되면 불가능하게 하는 플래그 설정
+				// 기권이 자신의 턴에만 가능하게 하기 위해 쓰레드 시작시 이벤트 등록하고 쓰레드 종료시 이벤트를 제거한다.
 				isStoneClickCheck = true;
+				menuButtons[1].addMouseListener(gameRoomAction);
 				int i = 0;
 				for(i = time; i >= 0 && isThreadStart; i--) {
 					timeBar.setValue(i);
@@ -751,10 +751,11 @@ public class GameRoomPanel extends JPanel {
 				}
 				timeBar.setValue(0);
 				timeLabel.setText("0:00");
+				menuButtons[1].removeMouseListener(gameRoomAction);
 				// 쓰레드가 끝나면 (시간이 다 갔거나 유저가 돌을 놓았거나) - turnEnd 에서 false처리가 되면
 				// 화면에 등록된 액션들을 삭제한다. (클릭이 불가능하게 만듦)
 				gameBoardPanelDeleteAction();
-
+				
 				// 쓰레드 종료보다 게임종료가 먼저 일어났는지 판단하여 아래 결과를 실행한다.
 				// 게임종료가 먼저 일어났다면 서버에 두 번 요청을 보낼 수 있기 때문.
 				// (기권 등의 상황)

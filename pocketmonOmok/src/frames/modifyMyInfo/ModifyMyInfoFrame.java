@@ -177,6 +177,8 @@ public class ModifyMyInfoFrame extends JFrame {
 		this.emailIDTextField.setFont(textFont);
 		this.emailAddrTextField.setFont(textFont);
 		
+		this.emailIDTextField.setEditable(false);
+		this.emailAddrTextField.setEditable(false);
 		//배경화면
 		background = ImageIO.read(
 			  new File("resources/signUp/join.jpg")).getScaledInstance(
@@ -317,10 +319,10 @@ public class ModifyMyInfoFrame extends JFrame {
 			this.telFrontNumChoice.addItem(telFrontNum[i]);
 		}
 		
-		//이메일주소
-		this.emailAddrChoice.setBounds(ModifyEnum.MODIFY_EMAILADDR_COMBO.getRectangle());
-		this.setComboBoxStr(this.emailAddrChoice);
-		this.add(emailAddrChoice);
+//		//이메일주소
+//		this.emailAddrChoice.setBounds(ModifyEnum.MODIFY_EMAILADDR_COMBO.getRectangle());
+//		this.setComboBoxStr(this.emailAddrChoice);
+//		this.add(emailAddrChoice);
 		
 		//전화번호 앞자리
 		this.telFrontNumChoice.setBounds(ModifyEnum.MODIFY_TELFRONTNUM_COMBO.getRectangle());

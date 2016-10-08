@@ -84,9 +84,7 @@ public class WaitingRoomActions {
 	public void inputCheckPlus() {
 		this.userListInputCheck = 1;
 	}
-	//TODO
-	//MYInfo 창 생성
-	//회원정보 수정창이 뜨게해
+
 	public void correctMyInfo() {
 		BasicFrame basicFrame = this.waitingRoomPanel.getBasicFrame();
 		

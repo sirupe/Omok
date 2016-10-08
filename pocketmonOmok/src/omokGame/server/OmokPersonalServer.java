@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import datasDTO.AbstractEnumsDTO;
-import datasDTO.UserPersonalInfoDTO;
 
 public class OmokPersonalServer extends Thread {
 	private OmokServer omokServer;
@@ -28,47 +27,49 @@ public class OmokPersonalServer extends Thread {
 	@Override
 	public void run() {
 		boolean isAccept = true;
-		try {
-			while(isAccept) {
-				Object object = this.serverInputStream.readObject();
-				AbstractEnumsDTO userPosition = (AbstractEnumsDTO) object;
-				switch(userPosition.getPosition()) {
-				case POSITION_LOGIN :
-					this.omokServer.login(userPosition, this);
-					break;
-				case POSITION_WAITING_ROOM :
-					this.omokServer.waitingRoom(userPosition, this);
-					break;
-				case POSITION_JOIN :
-					this.omokServer.join(userPosition, this);
-					break;
-				//연종
-				case POSITION_FIND_ID :
-					this.omokServer.findID(userPosition, this);
-					break;
-				//수진
-				case POSITION_FIND_PW :
-					this.omokServer.findPw(userPosition, this);
-					break;
-				case POSITION_GAME_ROOM :
-					this.omokServer.gameRoom(userPosition, this);
-					break;
-//				case POSITION_STORE :
-//					this.omokServer.store();
-//					break;
-				case POSITION_MODIFY_MY_INFO :
-					this.omokServer.modifyMyInfo(userPosition, this);
-					break;
-				case POSITION_EXIT :
-					isAccept = false;
-					this.omokServer.exitProgram(userPosition, this);
-					break;
-				default:
-					break;
+		synchronized (this) {	
+			try {
+				while(isAccept) {
+					Object object = this.serverInputStream.readObject();
+					AbstractEnumsDTO userPosition = (AbstractEnumsDTO) object;
+					switch(userPosition.getPosition()) {
+					case POSITION_LOGIN :
+						this.omokServer.login(userPosition, this);
+						break;
+					case POSITION_WAITING_ROOM :
+						this.omokServer.waitingRoom(userPosition, this);
+						break;
+					case POSITION_JOIN :
+						this.omokServer.join(userPosition, this);
+						break;
+					//연종
+					case POSITION_FIND_ID :
+						this.omokServer.findID(userPosition, this);
+						break;
+					//수진
+					case POSITION_FIND_PW :
+						this.omokServer.findPw(userPosition, this);
+						break;
+					case POSITION_GAME_ROOM :
+						this.omokServer.gameRoom(userPosition, this);
+						break;
+	//				case POSITION_STORE :
+	//					this.omokServer.store();
+	//					break;
+					case POSITION_MODIFY_MY_INFO :
+						this.omokServer.modifyMyInfo(userPosition, this);
+						break;
+					case POSITION_EXIT :
+						isAccept = false;
+						this.omokServer.exitProgram(userPosition, this);
+						break;
+					default:
+						break;
+					}
 				}
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -1,7 +1,6 @@
 package omokGame.server;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,8 +12,6 @@ import java.util.Random;
 import datasDAO.JoinDAO;
 import datasDAO.UserGamedataInfoDAO;
 import datasDAO.UserPersonalInfoDAO;
-import datasDAO.UserStoreInfoDAO;
-import datasDAO.UserStoreSkinInfoDAO;
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.GameBoardVO;
 import datasDTO.GameRoomInfoVO;
@@ -66,7 +63,7 @@ public class OmokServer {
 	}
 	
 //로그인--------------------------------------------------------------------------
-	public void login(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
+	public synchronized void login(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		// 클라이언트에게서 받은 데이터 DTO로 전환
 		UserPersonalInfoDTO inputUserPersonalInfo = (UserPersonalInfoDTO) data;
 		// DB에 아이디 패스워드를 보내 일치여부 결과 DTO에 저장
@@ -93,7 +90,7 @@ public class OmokServer {
 	}
 	
 //대기실--------------------------------------------------------------------------
-	public void waitingRoom(AbstractEnumsDTO dto, OmokPersonalServer personalServer) throws IOException {
+	public synchronized void waitingRoom(AbstractEnumsDTO dto, OmokPersonalServer personalServer) throws IOException {
 		switch(dto.getUserAction()) {
 		case USER_LOGIN_SUCCESS :
 			this.waitingRoomLoginSuccess(dto, personalServer);
@@ -178,7 +175,7 @@ public class OmokServer {
 		targetMessage.append(messageVO.getMessage());
 		
 		StringBuffer userMessage = new StringBuffer();
-		userMessage.append(messageVO.getUserID());
+		userMessage.append(messageVO.getTargetID());
 		userMessage.append(" 님에게 귓속말 : ");
 		userMessage.append(messageVO.getMessage());
 		
@@ -203,7 +200,7 @@ public class OmokServer {
 		pasteGameRoomInfo.setPwd(gameRoomInfo.getPwd());
 		pasteGameRoomInfo.setRoomName(gameRoomInfo.getRoomName());
 		pasteGameRoomInfo.setRoomNumber(gameRoomInfo.getRoomNumber());
-		
+		System.out.println("방생성시 넘어온 데이터는?" + gameRoomInfo.getPwd());
 		// 방이 20개가 넘지 않는다면 생성 성공. 방을 생성한 유저에게 게임방 입장시 필요한 정보를 전송.
 		// 방이 20개가 넘는다면 방만들기 실패.
 		if(this.gameRoomList.size() < 20) {
@@ -252,7 +249,6 @@ public class OmokServer {
 			roomVO.setGuest(this.gameRoomList.get(i).getGuest());
 			roomVO.setEnterImage(this.gameRoomList.get(i).getEnterImage().getDescription());
 			roomVO.setOwner(this.gameRoomList.get(i).getOwner());
-			System.out.println("for문 안에서는 ? " + this.gameRoomList.get(i).getOwner());
 			roomVO.setPersons(this.gameRoomList.get(i).getPersonNum());
 			roomVO.setPwd(this.gameRoomList.get(i).getPwd());
 			roomVO.setRoomName(this.gameRoomList.get(i).getRoomName());
@@ -260,14 +256,6 @@ public class OmokServer {
 			roomList.add(roomVO);
 		}
 
-		for(int i = 0, size = roomList.size(); i < size; i++) {
-			System.out.println(roomList.get(i).getOwner());
-		}
-		
-		for (int i = 0, len = this.gameRoomList.size(); i < len; i++) {
-			System.out.println(this.gameRoomList.get(i).getOwner());
-		}
-		
 		try {
 			int ownerGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getOwner());
 			int guestGender = this.userPersonalDAO.getUserGender(pasteGameRoomInfo.getGuest());
@@ -419,7 +407,7 @@ public class OmokServer {
 //	
 
 //회원가입--------------------------------------------------------------------------
-	public void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
+	public synchronized void join(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)data;
 		
 		UserPersonalInfoDTO resultPersonalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
@@ -478,7 +466,7 @@ public class OmokServer {
 	
 	
 	
-	public void findID(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
+	public synchronized void findID(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {
 		// 클라이언트에게서 받은 데이터 DTO로 전환
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data;
 		
@@ -493,7 +481,7 @@ public class OmokServer {
 	
 
 //패스워드 찾기---------------------------------------------------------------------------------------------------
-	public void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
+	public synchronized void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
 		 UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
 		 UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
 		 ObjectOutputStream oos;
@@ -568,7 +556,7 @@ public class OmokServer {
 
 	
 //게임방----------------------------------------------------------------------------------------------------
-	public void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+	public synchronized void gameRoom(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		switch(index.getUserAction()) {
 		// 유저가 게임방에서 채팅을 보낼 떼
 		case USER_IN_GAME_ROOM_CHATTING :
@@ -722,9 +710,11 @@ public class OmokServer {
 			// 방이 없어진 것이 아니라면 남겨진 유저에게 정보를 전달해주어야 한다.
 			if(pasteRoomInfoVO.getPersonNum() > 0) {
 				for(int i = 0, len = this.gameRoomList.size(); i < len; i++) {
-					System.out.println(i + "번");
 					if(this.gameRoomList.get(i).getRoomNumber() == gameRoomInfoVO.getRoomNumber()) {
-						pasteRoomInfoVO.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
+						System.out.println(pasteRoomInfoVO.getPwd());
+						System.out.println(pasteRoomInfoVO.getPwd() == null);
+						pasteRoomInfoVO.setEnterImage(pasteRoomInfoVO.getPwd() == null ? 
+								ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir() : ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
 						this.gameRoomList.set(i, pasteRoomInfoVO);
 						pasteRoomInfoVO.setServerAction(ServerActionEnum.GAME_ROOM_EXIT_OTHER_USER);
 						this.loginUsersMap.get(pasteRoomInfoVO.getOwner()).getServerOutputStream().writeObject(pasteRoomInfoVO);
@@ -775,7 +765,7 @@ public class OmokServer {
 //	public void store() {
 //	}
 //개인정보 수정------------------------------------------------------------------------------------------------
-	public void modifyMyInfo(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
+	public synchronized void modifyMyInfo(AbstractEnumsDTO index, OmokPersonalServer personalServer) {
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)index;
 		UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_MODIFY_MY_INFO);
 		try {
@@ -833,16 +823,18 @@ public class OmokServer {
 		
 	}
 //게임종료---------------------------------------------------------------------------------------------------
-	public void exitProgram(AbstractEnumsDTO index, OmokPersonalServer personalServer) throws IOException {
+	public synchronized void exitProgram(AbstractEnumsDTO index, OmokPersonalServer personalServer) throws IOException {
 		System.out.println("프로그램 종료");
 		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO)index;
 		personalServer.getServerOutputStream().writeObject(index);
 		
-		for(int i = 0, size = this.userIDList.size(); i < size; i++) {
-			if(personalDTO.getUserID().equals(this.userIDList.get(i).getUserID())) {
-				this.userIDList.remove(i);
-				break;
-			}
+		if(personalDTO.getUserID() != null) {
+			for(int i = 0, size = this.userIDList.size(); i < size; i++) {
+				if(personalDTO.getUserID().equals(this.userIDList.get(i).getUserID())) {
+					this.userIDList.remove(i);
+					break;
+				}
+			}	
 		}
 		
 		
