@@ -42,7 +42,7 @@ public class OmokServer {
 	public OmokServer() throws IOException {
 		this.serverSocket = new ServerSocket(ServerIPEnum.SERVER_PORT.getServerPort());
 		this.joinDAO 	  = new JoinDAO();
-		this.userPersonalDAO 	  = new UserPersonalInfoDAO();
+		this.userPersonalDAO = new UserPersonalInfoDAO();
 		this.gamedataDAO  = new UserGamedataInfoDAO();
 		
 		this.loginUsersMap = new HashMap<String, OmokPersonalServer>();

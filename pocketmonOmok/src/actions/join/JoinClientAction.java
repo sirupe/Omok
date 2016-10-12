@@ -429,7 +429,7 @@ public class JoinClientAction extends Adapters {
 			errCount++;
 		}
 		
-		//성별이 입력이 안되었을 때 
+		//성별 입력이 안되었을 때 
 		if(this.gender == 0) {
 			this.joinFrame.labelSetting(this.joinFrame.getGenderErrorLabel(), color, msg);
 			errCount++;

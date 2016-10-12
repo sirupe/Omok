@@ -514,8 +514,9 @@ public class GameRoomPanel extends JPanel {
 	// 서버가 그 정보를 해당 방의 유저들에게 전송해줄 때 이 메소드로 들어오게 된다.
 	public void boardSettingAndMyTurnStart(AbstractEnumsDTO data) {
 		GameBoardVO gameBoardVO = (GameBoardVO)data;
+		System.out.println("x : " + gameBoardVO.getX() + "/ y : " + gameBoardVO.getY());
 		this.gameBoard = gameBoardVO.getGameBoard();
-		this.stoneImageSetting(x, y);
+		this.stoneImageSetting(gameBoardVO.getX(), gameBoardVO.getY());
 		// 서버에서 보내준 정보 중 내가 현재 턴인 유저라면
 		// (내가 현재 턴인 유저가 아니라면 무시 ^^)
 		if(this.thisUserID.equals(gameBoardVO.getNowTurnUser())) {
@@ -574,9 +575,16 @@ public class GameRoomPanel extends JPanel {
 				if(this.gameBoard[i][j] == 1) {
 					imageDir = ImageEnum.GAMEROOM_STONE_ROUND_PIKA.getImageDir();
 					this.gameBoardButtons[i][j].setIcon(this.getStoneImageIcon(imageDir));
+					if(i == x && j == y) {
+						this.gameBoardButtons[x][y].setIcon(this.getStoneImageIcon(ImageEnum.GAMEROOM_STONE_ROUND_PIKA_CLICK.getImageDir()));	
+					}
 				} else if(this.gameBoard[i][j] == 2) {
 					imageDir = ImageEnum.GAMEROOM_STONE_ROUND_KOBOOK.getImageDir();
 					this.gameBoardButtons[i][j].setIcon(this.getStoneImageIcon(imageDir));
+					if(i == x && j == y) {
+						this.gameBoardButtons[x][y].setIcon(this.getStoneImageIcon(ImageEnum.GAMEROOM_STONE_ROUND_KOBOOK_CLICK.getImageDir()));					
+						
+					}
 				}
 			}
 		}

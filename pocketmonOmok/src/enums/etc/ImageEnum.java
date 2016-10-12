@@ -106,7 +106,10 @@ public enum ImageEnum {
 	GAMEROOM_STONE_CHARMANDER("resources/omokball/charmander.png"),
 	GAMEROOM_STONE_PIKACHU("resources/omokball/pikachu.png"),
 	GAMEROOM_STONE_ROUND_PIKA("resources/omokball/pika.png"),
-	GAMEROOM_STONE_ROUND_KOBOOK("resources/omokball/kobook.png");
+	GAMEROOM_STONE_ROUND_PIKA_CLICK("resources/omokball/pica_click.png"),
+	GAMEROOM_STONE_ROUND_KOBOOK("resources/omokball/kobook.png"),
+	GAMEROOM_STONE_ROUND_KOBOOK_CLICK("resources/omokball/koboogi_click.png");
+	
 	
 
 	
