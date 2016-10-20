@@ -17,8 +17,8 @@ import javax.swing.JTextField;
 import enums.frames.GamePayRoomEnum;
 import enums.frames.SearchIDEnum;
 
+@SuppressWarnings("serial")
 public class GamePayRoomFrame extends JFrame {
-	private Image icon;
 	private JLabel imageIcon;
 	private JLabel basicMoneyLabel;
 	private JLabel divLabel;

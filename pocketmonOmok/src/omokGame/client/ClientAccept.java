@@ -201,7 +201,6 @@ public class ClientAccept {
 			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
 			break;
 		case GAME_ROOM_WINNER_INFO :
-			System.out.println("여기로 온다.");
 			this.basicFrame.getGameRoomPanel().gameEnd(data);
 			break;
 		case GAME_ROOM_EXIT_OTHER_USER :
@@ -213,8 +212,6 @@ public class ClientAccept {
 
 //개인정보 수정---------------------------------------------------------------------------------------------
 	public void modifyAction(AbstractEnumsDTO infoDTO) {
-		System.out.println("포지션 : " + infoDTO.getPosition());
-		System.out.println("서버액션 : " + infoDTO.getServerAction());
 		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)infoDTO;
 		switch(userPersonalDTO.getServerAction()) {
 		case MODIFY_USER_PERSONAL_INFO :

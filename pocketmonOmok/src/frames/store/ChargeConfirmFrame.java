@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import enums.frames.ChargeEnum;
 
+@SuppressWarnings("serial")
 public class ChargeConfirmFrame extends JFrame{
 	private Image backGround;
 	private JLabel success;

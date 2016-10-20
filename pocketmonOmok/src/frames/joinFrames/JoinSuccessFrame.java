@@ -17,12 +17,13 @@ import javax.swing.JLabel;
 
 import enums.frames.CorrectEnum;
 
+@SuppressWarnings("serial")
 public class JoinSuccessFrame extends JFrame {
 	private Image backGround;
 	private JLabel joinSuccessLabel;
 	private JButton confirm;
+	@SuppressWarnings("unused")
 	private JoinFrame joinFrame;
-	
 	
 	public JoinSuccessFrame(JoinFrame joinFrame, String message) {
 		this.joinFrame = joinFrame;

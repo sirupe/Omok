@@ -42,7 +42,7 @@ import enums.etc.ImageEnum;
 import enums.frames.WaitingRoomEnum;
 import frames.BasicFrame;
 import utility.GetResources;
-
+@SuppressWarnings("serial")
 public class WaitingRoomPanel extends JPanel {	
 	private static final long serialVersionUID = 6433378L;
 	
@@ -126,7 +126,7 @@ public class WaitingRoomPanel extends JPanel {
 				new DefaultTableModel(roomListModel.getWaitingRoomListData(), 
 				roomListModel.getWaitingRoomListColumn());
 		this.waitingRoomTable = new JTable(defaultTableModel) {
-			@SuppressWarnings("unchecked")
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Class getColumnClass(int column) {
 				return getValueAt(0, column).getClass();
 			}
@@ -258,6 +258,7 @@ public class WaitingRoomPanel extends JPanel {
 	
 	/***************************접속자 리스트 클래스***************************/
 	public class PlayerRenderer extends DefaultListCellRenderer {
+		@SuppressWarnings("rawtypes")
 		public Component getListCellRendererComponent(JList player, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			JLabel label = (JLabel) super.getListCellRendererComponent(player, value, index, isSelected, cellHasFocus);
             label.setIcon(imageMap.get((String) value));
@@ -772,7 +773,6 @@ public class WaitingRoomPanel extends JPanel {
 	
 	// 유저가 유저리스트에서 유저 클릭시 게임데이터를 해당 유저 정보로 바꾸어줌
 	public void setUserInfo(UserGamedataInfoDTO userGameData) throws IOException {
-		System.out.println("여길 안들어온다는거늬???");
 		int allCount = userGameData.getUserGameCount();
 		int winCount = userGameData.getUserWinCount();
 		double winRate = winCount == 0 ? 0 : ((double)winCount / allCount) * 100;

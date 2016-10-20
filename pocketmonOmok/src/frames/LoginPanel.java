@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import actions.login.LoginClientAction;
@@ -33,7 +32,6 @@ public class LoginPanel extends JPanel {
 	private JTextField idField;
 	private JPasswordField pwField;
 	
-	private Font textFieldFont;
 	
 	private JLabel loginFailLabel;
 	
@@ -89,7 +87,6 @@ public class LoginPanel extends JPanel {
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
 	public void loginFail(String errMsg){
 		this.setLayout(null);
-		this.textFieldFont = new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.01));    
 		this.loginFailLabel.setBounds(
 					LoginPanelEnum.LOGIN_FAIL_TEXT_POSITION_X.getSize(),
 					LoginPanelEnum.LOGIN_FAIL_TEXT_POSITION_Y.getSize(),

@@ -1,7 +1,6 @@
 package frames.store;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -17,6 +16,7 @@ import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 
+@SuppressWarnings("serial")
 public class PayConfirmFrame extends JFrame{
 	private Image backGround;
 	private JLabel success;

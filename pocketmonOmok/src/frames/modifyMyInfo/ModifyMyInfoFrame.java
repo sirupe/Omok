@@ -31,6 +31,7 @@ import utility.GetResources;
 import utility.JTextFieldNumOnly;
 import utility.RegexCheck;
 
+@SuppressWarnings("serial")
 public class ModifyMyInfoFrame extends JFrame {
 
 	private JLabel userIdLabel;
@@ -70,7 +71,6 @@ public class ModifyMyInfoFrame extends JFrame {
 
 	private JTextField emailIDTextField;
 	private JTextField emailAddrTextField;
-	private JTextField emailConfTextField;
 	private JComboBox<String> emailAddrChoice;
 
 	private JComboBox<String> telFrontNumChoice; //전화번호 02,010..

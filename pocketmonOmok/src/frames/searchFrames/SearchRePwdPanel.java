@@ -6,10 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
-import javax.sound.midi.Synthesizer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -30,11 +28,9 @@ import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 import frames.BasicFrame;
-import omokGame.client.ClientAccept;
 
 @SuppressWarnings("serial")
 public class SearchRePwdPanel extends JPanel {
-	private JPanel searchRePwdPanel;
 	private Image backGround;
 	
 	private JLabel searchPwdLabel;
@@ -167,7 +163,8 @@ public class SearchRePwdPanel extends JPanel {
 		public void pwdChange() {
 			BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
 
-			String pwd = this.searchPwdText.getText();
+			char[] pwdArr = this.searchPwdText.getPassword();
+			String pwd = new String(pwdArr, 0, pwdArr.length);
 			String userId =  this.getSearchPwdFrame().getSearchPwdPanel().getSearchIdTextField().getText();
 			
 			UserPersonalInfoDTO userPersonalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);

@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 
+@SuppressWarnings("serial")
 public class CorrectCompleteFrame extends JFrame {
 	private Image backGround;
 	private JLabel correctComplete;

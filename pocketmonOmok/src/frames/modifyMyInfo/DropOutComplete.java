@@ -16,6 +16,7 @@ import enums.frames.SearchIDEnum;
 
 //ENUM은 correctEnum 에 탈퇴완료 프레임을 따다가 그대로씀
 
+@SuppressWarnings("serial")
 public class DropOutComplete extends JFrame{
 	private Image backGround;
 	private JLabel dropOutCompleteLabel;

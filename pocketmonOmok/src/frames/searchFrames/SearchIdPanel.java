@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -23,8 +22,8 @@ import enums.frames.CorrectEnum;
 import enums.frames.JoinSizesEnum;
 import enums.frames.SearchIDEnum;
 import frames.BasicFrame;
-import omokGame.client.ClientAccept;
 
+@SuppressWarnings("serial")
 public class SearchIdPanel extends JPanel {
 	
 	private JLabel searchNameLabel;

@@ -16,6 +16,7 @@ import enums.frames.CorrectEnum;
 import enums.frames.SearchIDEnum;
 
 
+@SuppressWarnings("serial")
 public class SearchIdResultPanel extends JPanel {
 	private JLabel showUserIdLabel;
 	private JButton homeButton;

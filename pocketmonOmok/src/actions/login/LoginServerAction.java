@@ -2,7 +2,6 @@ package actions.login;
 
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserPersonalInfoDTO;
-import enums.etc.ServerActionEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import frames.LoginPanel;

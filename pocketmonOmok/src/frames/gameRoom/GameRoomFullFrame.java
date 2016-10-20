@@ -11,9 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import enums.frames.GameRoomFullEnum;
-import enums.frames.GameStoreEnum;
 import enums.frames.SearchIDEnum;
 
+@SuppressWarnings("serial")
 public class GameRoomFullFrame extends JFrame {
 	private JLabel RoomConfirmLabel;
 	private JButton RoomConfirmButton;

@@ -63,7 +63,6 @@ public class JoinDAO {
 			sql.append("USER_BIRTH, ");
 			sql.append("USER_EMAIL, ");
 			if(personalDTO.getUserPhoneNumber() == null) {
-				System.out.println("여기로 들어온다는 말이냐 ?");
 				sql.append("USER_JOINDATE ");
 				sql.append(") VALUES ( ");
 				sql.append("?, ?, ?, ?, ?, ?, sysdate )");				
@@ -76,7 +75,6 @@ public class JoinDAO {
 				ps.setString(6, personalDTO.getUserEmail());
 
 			} else {
-				System.out.println("DB - 전화번호 업데이트 : " + personalDTO.getUserPhoneNumber());
 				sql.append("USER_JOINDATE, ");
 				sql.append("USER_PHONENUMBER ");
 				sql.append(") VALUES ( ");

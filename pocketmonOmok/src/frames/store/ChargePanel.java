@@ -18,6 +18,7 @@ import enums.frames.JoinSizesEnum;
 import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 
+@SuppressWarnings("serial")
 public class ChargePanel extends JPanel {
 	
 	private JLabel chargeLabel;

@@ -178,8 +178,6 @@ public class UserPersonalInfoDAO {
 		
 		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
 		userPersonalInfo.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
-		System.out.println("여기는 DAO : " + personalDTO.getUserPasswd());
-		System.out.println("여기는 DAO : " + personalDTO.getUserID());
 		try {
 			connection = dbPool.getConnection();
 			

@@ -1,7 +1,6 @@
 package actions.modifyMyInfo;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;

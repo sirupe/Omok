@@ -182,7 +182,6 @@ public class WaitingRoomActions {
 			this.roomListInputCheck = 0;
 			int row = this.waitingRoomPanel.getWaitingRoomTable().getSelectedRow();
 			ImageIcon image = ((ImageIcon)this.waitingRoomPanel.getWaitingRoomTable().getValueAt(row, 0));
-			System.out.println(image.getDescription());
 			// 입장 가능인 경우
 			if(image.getDescription().equals(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir())) {
 				GameRoomInfoVO roomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);

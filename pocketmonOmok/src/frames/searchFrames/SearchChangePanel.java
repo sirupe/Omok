@@ -1,8 +1,6 @@
 package frames.searchFrames;
 
-import java.awt.CardLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -15,14 +13,12 @@ import javax.swing.JPanel;
 
 import actions.findIDandPW.findChangePwdConfirmAction;
 import enums.frames.LoginPanelEnum;
-import enums.frames.SearchIDEnum;
-import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 
 @SuppressWarnings("serial")
 public class SearchChangePanel extends JPanel {
+	@SuppressWarnings("unused")
 	private JPanel searchChangePanel;
-	private Image backGround;
 	private SearchPwdFrame searchPwdFrame;
 	private findChangePwdConfirmAction findchangepwdconfirmAction;
 

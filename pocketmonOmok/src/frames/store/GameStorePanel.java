@@ -1,42 +1,34 @@
 package frames.store;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GameStoreEnum;
-import enums.frames.WaitingRoomEnum;
 import enums.frames.SearchIDEnum;
 
-
+@SuppressWarnings("serial")
 public class GameStorePanel extends JPanel {
 	private JPanel userMoneyPanel;
 	private JPanel itemChoicePanel;
 	private JPanel outPanel;
-	private JPanel linePanel;
 	private Image backGround;
 	
 	private JTextField userMoney;
-	private JButton userConfirm;
-	private JButton outButton;
 	
 	public GameStorePanel() throws IOException {
 		
@@ -54,7 +46,6 @@ public class GameStorePanel extends JPanel {
 		
 		this.userMoneyPanel   = new JPanel();
 		this.outPanel         = new JPanel();
-		this.linePanel		  = new JPanel();
 		
 		this.setUserPanel();
 		this.setItemPanel();
@@ -154,7 +145,7 @@ public class GameStorePanel extends JPanel {
 		this.add(this.itemChoicePanel);
 }
 	
-	@SuppressWarnings({ "serial", "unchecked" })
+	@SuppressWarnings("unchecked")
 	public HashMap<String, List<Map<String, Object>>> getResourceData() {
 		return new HashMap<String, List<Map<String, Object>>>() {
 			{

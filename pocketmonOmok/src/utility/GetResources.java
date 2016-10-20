@@ -1,7 +1,6 @@
 package utility;
 
 import java.awt.Image;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,9 +9,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
-
-import enums.etc.ImageEnum;
-import enums.frames.GameRoomEnum;
 
 public class GetResources {
 	public static ImageIcon getImageIcon(String imageDir, int sizeX, int sizeY) {

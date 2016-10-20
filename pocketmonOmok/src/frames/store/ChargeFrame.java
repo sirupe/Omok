@@ -1,7 +1,6 @@
 package frames.store;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,6 +9,7 @@ import javax.swing.JFrame;
 
 import enums.frames.ChargeEnum;
 
+@SuppressWarnings("serial")
 public class ChargeFrame extends JFrame {
 	
 	private ChargePanel chargePanel;
