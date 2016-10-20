@@ -185,6 +185,9 @@ public class CreateGameRoomFrame extends JFrame {
 		this.add(roomCreatePrivate);
 	}
 	//========================================================================================================
+	public void confirmButtonActionRemove() {
+		this.createRoomConfirmButton.removeActionListener(this.waitingRoomAction);
+	}
 	
 	public JTextField getCreateRoomPwdText() {
 		return createRoomPwdText;

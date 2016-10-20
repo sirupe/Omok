@@ -66,12 +66,14 @@ public class WaitingRoomActions {
 				if(this.createRoom.getCreateRoomPwdText().getText().length() == 0) {
 					JOptionPane.showMessageDialog(this.createRoom, "비밀번호를 입력해주세요.", "", JOptionPane.WARNING_MESSAGE);
 				} else {
+					this.createRoom.confirmButtonActionRemove();
 					gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
 					gameRoomInfo.setPwd(this.createRoom.getCreateRoomPwdText().getText());			
 					this.waitingRoomPanel.sendDTO(gameRoomInfo);
 				}
 			// 일반방인경우
 			} else {
+				this.createRoom.confirmButtonActionRemove();
 				gameRoomInfo.setEnterImage(ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir());
 				this.waitingRoomPanel.sendDTO(gameRoomInfo);
 			}
