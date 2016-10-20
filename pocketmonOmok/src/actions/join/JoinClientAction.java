@@ -494,7 +494,7 @@ public class JoinClientAction extends Adapters {
 			personalDTO.setUserID(this.id);
 			personalDTO.setUserName(this.name);
 			personalDTO.setUserPasswd(this.pw);
-			personalDTO.setUserPhoneNumber(this.telLastNum);
+			personalDTO.setUserPhoneNumber(totalTel.toString());
 			
 			try {
 				this.basicFrame.getClientOS().writeObject(personalDTO);

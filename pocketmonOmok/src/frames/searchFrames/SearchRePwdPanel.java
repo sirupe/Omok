@@ -44,9 +44,6 @@ public class SearchRePwdPanel extends JPanel {
 	private JLabel searchRePwdErrorLabel;
 	private JButton searchConfirmButton;
 
-	
-	private String userId;
-	
 	private FindRePwdAction findRePwdAction;
 	private SearchPwdFrame searchPwdFrame;
 	
@@ -55,7 +52,6 @@ public class SearchRePwdPanel extends JPanel {
 		this.searchPwdFrame = searchPwdFrame;
 		this.findRePwdAction = new FindRePwdAction(this);
 		this.setsearchPwdTextLabel();
-		this.userId = this.getSearchPwdFrame().getSearchPwdPanel().getSearchIdTextField().getText();
 		
 		this.addKeyAction(this.searchPwdText, "searchPwdText");
 		this.addKeyAction(this.searchRePwdText, "searchRePwdText");
@@ -170,10 +166,9 @@ public class SearchRePwdPanel extends JPanel {
 		//재비밀번호 저장해서 서버로 보냄
 		public void pwdChange() {
 			BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
-			ClientAccept clientAccpet = basicFrame.getClientAccept();
-			ObjectOutputStream oos = clientAccpet.getClientOS();
-			
+
 			String pwd = this.searchPwdText.getText();
+			String userId =  this.getSearchPwdFrame().getSearchPwdPanel().getSearchIdTextField().getText();
 			
 			UserPersonalInfoDTO userPersonalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
 			
@@ -182,7 +177,7 @@ public class SearchRePwdPanel extends JPanel {
 			userPersonalDTO.setUserPasswd(pwd);
 			
 			try {
-				oos.writeObject(userPersonalDTO);
+				basicFrame.sendDTO(userPersonalDTO);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

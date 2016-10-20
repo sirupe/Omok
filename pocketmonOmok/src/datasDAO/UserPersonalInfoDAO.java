@@ -133,8 +133,7 @@ public class UserPersonalInfoDAO {
 		return userPersonalInfo;
 	}
 	
-	// 유저 아이디와 이메일로 유저 패스워드 찾기
-	// UserPersonalInfoDTO에 유저 패스워드 담아서 반환
+	// 유저 아이디와 이메일이 일치하는 유저의 정보가 있는지 없는지를 판단합니다.
 	public UserPersonalInfoDTO findUserPW(UserPersonalInfoDTO personalDTO) {
 		Connection connection = null;
 		PreparedStatement ps  = null;
@@ -179,7 +178,8 @@ public class UserPersonalInfoDAO {
 		
 		UserPersonalInfoDTO userPersonalInfo = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
 		userPersonalInfo.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
-		
+		System.out.println("여기는 DAO : " + personalDTO.getUserPasswd());
+		System.out.println("여기는 DAO : " + personalDTO.getUserID());
 		try {
 			connection = dbPool.getConnection();
 			
@@ -191,6 +191,8 @@ public class UserPersonalInfoDAO {
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, personalDTO.getUserPasswd());
 			ps.setString(2, personalDTO.getUserID());
+			
+		
 			
 			result = ps.executeUpdate();
 		} catch (Exception e) {

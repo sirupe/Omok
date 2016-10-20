@@ -76,7 +76,7 @@ public class JoinDAO {
 				ps.setString(6, personalDTO.getUserEmail());
 
 			} else {
-				System.out.println("DB - 전화번호 업데이트");
+				System.out.println("DB - 전화번호 업데이트 : " + personalDTO.getUserPhoneNumber());
 				sql.append("USER_JOINDATE, ");
 				sql.append("USER_PHONENUMBER ");
 				sql.append(") VALUES ( ");

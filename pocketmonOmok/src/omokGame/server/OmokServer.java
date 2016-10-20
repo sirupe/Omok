@@ -405,73 +405,77 @@ public class OmokServer {
 
 //패스워드 찾기---------------------------------------------------------------------------------------------------
 	public synchronized void findPw(AbstractEnumsDTO data, OmokPersonalServer personalServer) throws IOException {	
-		 UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
-		 UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
-		 ObjectOutputStream oos;
-		 
-		 switch(data.getUserAction()) {
-		 	
-		 	//인증 번호 발송
-		 	case USER_SEARCH_CERTIFICATION_CHECK :
-			 	
-			 	resultDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
-		 	
-		 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
-		 		personalServer.setCertificationNumber(confirmNumber);
-		 		
-		 		//TODO
-		 		//이메일 발송
-		 		try {
-		 			new SendEmail(confirmNumber, personalDTO.getUserEmail());
-		 			resultDTO.setEmailSuccess(true);
+		UserPersonalInfoDTO personalDTO = (UserPersonalInfoDTO) data; //부모로 가져온걸 형변환
+		UserPersonalInfoDTO resultDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_FIND_PW);
+		ObjectOutputStream oos;
+		
+		switch(data.getUserAction()) {
+			
+		//TODO
+		 //아이디 이메일 체크
+		case USER_SEARCH_ID_EMAIL_CHECK :
+			UserPersonalInfoDTO resultDTOPersonal = this.userPersonalDAO.findUserPW(personalDTO);
+			oos = personalServer.getServerOutputStream();
+			oos.writeObject(resultDTOPersonal);
+			break;
+		//인증 번호 발송
+		case USER_SEARCH_CERTIFICATION_CHECK :
+			UserPersonalInfoDTO resultPersonalDTO = this.userPersonalDAO.findUserPW(personalDTO);
+			
+			if(resultPersonalDTO.getUserCount() > 0) {
+				resultPersonalDTO.setUserAction(UserActionEnum.USER_SEARCH_CERTIFICATION_CHECK);
+		
+				String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
+				personalServer.setCertificationNumber(confirmNumber);
+			
+				//이메일 발송
+				try {
+					new SendEmail(confirmNumber, personalDTO.getUserEmail());
+					resultPersonalDTO.setEmailSuccess(true);
 				} catch (Throwable e) {
-					resultDTO.setEmailSuccess(false);
+					resultPersonalDTO.setEmailSuccess(false);
 				}
- 		
-
-		 		oos = personalServer.getServerOutputStream();
-		 		oos.writeObject(resultDTO);
-		 		break;
-		 		
-		 	//인증번호 비교
-		 	case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
-		 		String RandomNumber = personalServer.getCertificationNumber();
-		 		String clientNumebr = personalDTO.getCertificationNumber();
-		 		
-		 		resultDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER);
-
-		 		if(RandomNumber.equals(clientNumebr)) {
-		 			resultDTO.setCertificationNumber(true);
-		 		} else {
-		 			resultDTO.setCertificationNumber(false);
-		 		}
-		 		oos = personalServer.getServerOutputStream();
-		 		oos.writeObject(resultDTO);
-		 		break;
-		 		
-		 	//아이디 이메일 체크
-		 	case USER_SEARCH_ID_EMAIL_CHECK :
-		 		UserPersonalInfoDTO resultDTOPersonal = this.userPersonalDAO.findUserPW(personalDTO);
-		 		oos = personalServer.getServerOutputStream();
-		 		oos.writeObject(resultDTOPersonal);
-		 		break;
-
-		 	// 변경된 패스워드확인.
-		 	case USER_SEARCH_PASSWD :
-
-		 		ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
-		 		serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
-		 		int result = this.userPersonalDAO.updateUserPasswd(personalDTO);
-		 		
-		 		if(result == 1) {
-		 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
-		 		} else {
-		 			serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
-		 		}	 		
-		 		personalServer.getServerOutputStream().writeObject(serverMessage);
-		 		
-		 	default: //do nothing..
-		 	}
+			} else {
+				resultPersonalDTO.setUserAction(UserActionEnum.USER_SEARCHPW_SERCHFAIL);
+			}
+			oos = personalServer.getServerOutputStream();
+			oos.writeObject(resultPersonalDTO);
+			break;
+			
+		//인증번호 비교
+		case USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER :
+			String RandomNumber = personalServer.getCertificationNumber();
+			String clientNumebr = personalDTO.getCertificationNumber();
+			
+			resultDTO.setUserAction(UserActionEnum.USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER);
+	
+			if(RandomNumber.equals(clientNumebr)) {
+				resultDTO.setCertificationNumber(true);
+			} else {
+				resultDTO.setCertificationNumber(false);
+			}
+			oos = personalServer.getServerOutputStream();
+			oos.writeObject(resultDTO);
+			break;
+			
+	
+		// 변경된 패스워드확인. TODO
+		case USER_SEARCH_PASSWD :
+			System.out.println(personalDTO.getUserID());
+			System.out.println(personalDTO.getUserPasswd());
+			ServerMessageDTO serverMessage = new ServerMessageDTO(UserPositionEnum.POSITION_FIND_PW);
+			serverMessage.setUserAction(UserActionEnum.USER_SEARCH_PASSWD);
+			int result = this.userPersonalDAO.updateUserPasswd(personalDTO);
+			
+			if(result == 1) {
+				serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+			} else {
+				serverMessage.setServerAction(ServerActionEnum.SEARCH_PASSWD_SUCCESS);
+			}	 		
+			personalServer.getServerOutputStream().writeObject(serverMessage);
+			
+		default: //do nothing..
+		}
 	}
 
 
@@ -526,7 +530,9 @@ public class OmokServer {
 		// 복사한 데이터를 방 안에 있는 유저와 상대방에게만 전송함.
 		try {
 			personalServer.getServerOutputStream().writeObject(pasteMessageVO);
-			this.loginUsersMap.get(pasteMessageVO.getTargetID()).getServerOutputStream().writeObject(pasteMessageVO);
+			if(pasteMessageVO.getTargetID() != null) {
+				this.loginUsersMap.get(pasteMessageVO.getTargetID()).getServerOutputStream().writeObject(pasteMessageVO);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -777,6 +783,4 @@ public class OmokServer {
 	public Map<String, OmokPersonalServer> getPsersonalServerMap() {
 		return loginUsersMap;
 	}
-
-
 }

@@ -108,4 +108,13 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	public int getPersonNum() {
 		return personNum;
 	}
+
+	@Override
+	public String toString() {
+		return "GameRoomInfoVO [enterImage=" + enterImage + ", roomNumber=" + roomNumber + ", personNum=" + personNum
+				+ ", roomName=" + roomName + ", owner=" + owner + ", guest=" + guest + ", persons=" + persons + ", pwd="
+				+ pwd + "]";
+	}
+	
+	
 }

@@ -8,6 +8,7 @@ public enum UserActionEnum {
 	USER_JOIN_CERTIFICATION_SUCCESS,
 	USER_JOIN_CERTIFICATION_FAIL,
 	USER_SEARCH_CERTIFICATION_CHECK, // 유저님 패스워드 찾기 중 인증번호(수진)
+	USER_SEARCHPW_SERCHFAIL,		// 패스워드 변경시 찾아줄 정보가 없다.
 	USER_SEARCH_PASSWORD_CERTIFICATION_NUMBER, //유저님 인증번호 비교 결과 (수진)
 	USER_SEARCH_ID_EMAIL_CHECK,		// 유저님 아이디 이메일 DB에 있는지 체크
 	USER_SEARCH_PASSWD,			// 유저 패스워드 재등록(수진)

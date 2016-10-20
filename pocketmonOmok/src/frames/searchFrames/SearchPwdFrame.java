@@ -164,6 +164,9 @@ public class SearchPwdFrame extends JFrame implements Serializable {
 		case USER_SEARCH_PASSWD :
 			this.searchRePwdPanel.searchPwdSuccess(userPosition);
 			break;
+		case USER_SEARCHPW_SERCHFAIL :
+			this.searchPwdPanel.userInfoSearchFail();
+			break;
 		default:
 			break;
 		}

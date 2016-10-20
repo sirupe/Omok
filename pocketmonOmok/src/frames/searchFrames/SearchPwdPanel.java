@@ -310,9 +310,7 @@ import omokGame.client.ClientAccept;
 		public void getCerfication() {
 			this.searchConfirmButton.setEnabled(false);
 			BasicFrame basicFrame = this.searchPwdFrame.getBasicFrame();
-			ClientAccept clientAccpet = basicFrame.getClientAccept();
-			ObjectOutputStream oos = clientAccpet.getClientOS(); 
-			
+	
 			String email = this.searchemailTextField.getText();
 			String id    = this.searchIdTextField.getText();
 			
@@ -321,17 +319,13 @@ import omokGame.client.ClientAccept;
 			userPersonalInfoDTO.setUserEmail(email);
 			userPersonalInfoDTO.setUserID(id);
 			
-			try {
-				oos.writeObject(userPersonalInfoDTO);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			basicFrame.sendDTO(userPersonalInfoDTO);
 		}
 		
-		//이메일 성공 시 발생하는 메소드
+		//이메일 인증번호 발송 성공 시 발생하는 메소드
 		public void emailSuccess(AbstractEnumsDTO userPosition) {
 			UserPersonalInfoDTO data = (UserPersonalInfoDTO) userPosition;
-	
+			System.out.println(data.isEmailSuccess());
 			if(data.isEmailSuccess()) {
 				this.getSearchemailTextField().setEditable(false);
 				this.userNumberMsg("<html>인증번호 발송되었습니다." 
@@ -459,6 +453,11 @@ import omokGame.client.ClientAccept;
 				this.isConfirmNumberSuccess = false;
 				return;
 			}
+		}
+		
+		public void userInfoSearchFail() {
+			this.userNumberMsg("일치하는 정보가 없습니다.");
+			this.searchConfirmButton.setEnabled(true);
 		}
 		
 		//인증이 다된 후 아이디 이메일 검사하는 곳

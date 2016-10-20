@@ -285,7 +285,7 @@ public class GameRoomPanel extends JPanel {
 		this.chattingField = new JTextField();
 		this.chattingField.setBounds(GameRoomEnum.GAME_CHATTINGFIELD_RECT.getRect());
 		this.chattingField.setFont(GameRoomEnum.GAME_CHATTING_FONT.getFont());
-		this.chattingField.setEditable(false);
+		this.chattingField.setEditable(true);
 		this.chattingField.setName("chattingField");
 		this.chattingField.addActionListener(this.gameRoomAction);
 		
@@ -424,7 +424,6 @@ public class GameRoomPanel extends JPanel {
 	
 	// 메뉴 영역 안으로 마우스 포인터가 진입
 	public void changeButtonImageMouseIn(String buttonName) {
-		System.out.println("마우스진입");
 		if(buttonName.equals("start")) {
 			this.menuButtons[0].setIcon(this.getButtonImageIcon(ImageEnum.GAMEROOM_START_GO.getImageDir()));
 		} else if(buttonName.equals("ready") && this.gameRoomAction.getReadyCheck() == 0) {
@@ -447,7 +446,6 @@ public class GameRoomPanel extends JPanel {
 	public void changeGameReadyButton(boolean check) {
 		String imageDir = check ? ImageEnum.GAMEROOM_READY_CH.getImageDir() : ImageEnum.GAMEROOM_READY.getImageDir() ;
 		UserActionEnum userAction = check ? UserActionEnum.USER_GUEST_READY_CHECK : UserActionEnum.USER_GUEST_READY_DECHECK ;
-		System.out.println(check? "레디했군" : "레디를 풀었군");
 		this.menuButtons[0].setIcon(this.getButtonImageIcon(imageDir));
 		
 		// 데이터 전송용 객체를 새로 만들어 필요 정보를 저장한 후 게스트가 레디를 했다는 정보를 서버로 전송한다.
@@ -514,7 +512,6 @@ public class GameRoomPanel extends JPanel {
 	// 서버가 그 정보를 해당 방의 유저들에게 전송해줄 때 이 메소드로 들어오게 된다.
 	public void boardSettingAndMyTurnStart(AbstractEnumsDTO data) {
 		GameBoardVO gameBoardVO = (GameBoardVO)data;
-		System.out.println("x : " + gameBoardVO.getX() + "/ y : " + gameBoardVO.getY());
 		this.gameBoard = gameBoardVO.getGameBoard();
 		this.stoneImageSetting(gameBoardVO.getX(), gameBoardVO.getY());
 		// 서버에서 보내준 정보 중 내가 현재 턴인 유저라면
@@ -672,7 +669,6 @@ public class GameRoomPanel extends JPanel {
 	public void exitGame() {
 		// 뜨는 팝업창에서 Yes 가 눌린 경우
 		if(new ConfirmDialog(this.basicFrame, "게임방을 나가시겠습니까?").isYesNoCheck()) {
-			System.out.println("패널에서의 패스워드 : " + this.gameRoomInfo.getPwd());
 			GameRoomInfoVO gameRoomInfo = new GameRoomInfoVO(UserPositionEnum.POSITION_GAME_ROOM);
 			gameRoomInfo.setUserAction(UserActionEnum.USER_GAME_ROOM_EXIT);
 			gameRoomInfo.setRoomNumber(this.gameRoomInfo.getRoomNumber());
