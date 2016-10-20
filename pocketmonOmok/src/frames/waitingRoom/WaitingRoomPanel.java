@@ -94,7 +94,7 @@ public class WaitingRoomPanel extends JPanel {
 		//==========================채팅방&내정보==========================
 		
 		this.chattingOutput 		 = new JTextArea();
-		this.chattingScroll			 = new JScrollPane(this.chattingOutput);
+		this.chattingScroll			 = new JScrollPane(this.chattingOutput, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		this.chattingInputTextField  = new JTextField();
 		this.noticeTextField		 = new JTextField();
 		this.sendMessageButton    	 = new JButton();
@@ -355,20 +355,15 @@ public class WaitingRoomPanel extends JPanel {
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize() - 20,
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
+		
+		this.chattingOutput.setLineWrap(true);
+		
 		this.chattingScroll.setBounds(
 				WaitingRoomEnum.CHATTING_OUTPUT_POSITION_X.getSize(),
 				WaitingRoomEnum.CHATTING_OUTPUT_POSITION_Y.getSize(),
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_WIDTH.getSize(),
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
-		this.chattingScroll.getVerticalScrollBar().addAdjustmentListener(
-			new AdjustmentListener() {
-				@Override
-				public void adjustmentValueChanged(AdjustmentEvent e) {
-					JScrollBar src = (JScrollBar)e.getSource();
-					src.setValue(src.getMaximum());
-				}
-		});
 		
 		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
