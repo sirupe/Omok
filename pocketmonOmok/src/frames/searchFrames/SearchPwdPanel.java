@@ -42,7 +42,7 @@ import omokGame.client.ClientAccept;
 		private JButton searchConfirmButton; //인증 버튼
 		private JButton searchCancelButton; //취소 버튼 -- > 홈으로 가는 버튼
 		private JButton searchCheckButton; // 확인버튼
-		private JButton CheckNumberButton; // 인증 번호와 일치하는지 보는확인 버튼
+		private JButton checkNumberButton; // 인증 번호와 일치하는지 보는확인 버튼
 	
 	
 		private SearchPwdFrame searchPwdFrame;
@@ -54,6 +54,7 @@ import omokGame.client.ClientAccept;
 		
 	
 		public SearchPwdPanel(SearchPwdFrame searchPwdFrame) throws IOException {
+			
 			this.searchPwdFrame = searchPwdFrame;
 			this.findPwdAction = new FindPWAction(this);
 			
@@ -106,11 +107,6 @@ import omokGame.client.ClientAccept;
 			this.addKeyAction(this.searchemailTextField, "searchemailTextField");
 			this.addKeyAction(this.searchConfirmTextField, "confirmNumberText");
 			this.searchConfirmTextField.setVisible(false);
-			
-			//TODO
-			this.searchIdTextField.setText("test4");
-			this.searchemailTextField.setText("tnwls@daum.net");
-			
 		}
 		
 		//초기화가 되어서 위에 있는 searchErrorMsg의 메세지를 불러온다.
@@ -221,14 +217,14 @@ import omokGame.client.ClientAccept;
 		
 		
 		//인증 버튼을 누른 후 바뀌는 확인 버튼
-		this.CheckNumberButton  = new JButton();
+		this.checkNumberButton  = new JButton();
 		
-		this.CheckNumberButton.setBorderPainted(false);
-		this.CheckNumberButton.setFocusPainted(false);
-		this.CheckNumberButton.setContentAreaFilled(false);
+		this.checkNumberButton.setBorderPainted(false);
+		this.checkNumberButton.setFocusPainted(false);
+		this.checkNumberButton.setContentAreaFilled(false);
 		
-		this.CheckNumberButton.setIconTextGap(this.CheckNumberButton.getIconTextGap() - 15);    	
-		this.CheckNumberButton.setIcon(
+		this.checkNumberButton.setIconTextGap(this.checkNumberButton.getIconTextGap() - 15);    	
+		this.checkNumberButton.setIcon(
 				new ImageIcon(ImageIO.read(
 					new File("resources/forgotPW/confirm.kor.png")).getScaledInstance(
 							SearchPwdEnum.SEARCH_CONFIRM_CHECK_BUTTON.getRectangle().width,
@@ -236,13 +232,13 @@ import omokGame.client.ClientAccept;
 						Image.SCALE_AREA_AVERAGING))
 			);
 		
-		this.CheckNumberButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_CHECK_BUTTON.getRectangle()); 
-		this.CheckNumberButton.setName(LoginPanelEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
+		this.checkNumberButton.setBounds(SearchPwdEnum.SEARCH_CONFIRM_CHECK_BUTTON.getRectangle()); 
+		this.checkNumberButton.setName(LoginPanelEnum.BUTTON_NAVE_CONFIRM_NUMBER.getButtonName());
 		
-		this.add(CheckNumberButton);
-		this.CheckNumberButton.setVisible(false);
+		this.add(checkNumberButton);
+		this.checkNumberButton.setVisible(false);
 		
-		this.CheckNumberButton.addActionListener(this.findPwdAction);
+		this.checkNumberButton.addActionListener(this.findPwdAction);
 		
 		
 		//취소버튼
@@ -345,7 +341,7 @@ import omokGame.client.ClientAccept;
 				btn = this.searchConfirmButton;
 				btn.setVisible(false);
 				
-				btn = this.CheckNumberButton;
+				btn = this.checkNumberButton;
 				btn.setVisible(true);
 				
 				this.searchConfirmTextField.setVisible(true);
@@ -392,7 +388,7 @@ import omokGame.client.ClientAccept;
 				//인증번호 초기화 한다.
 				this.searchConfirmTextField.setText("");
 				this.searchConfirmTextField.setVisible(false);
-				this.CheckNumberButton.setVisible(false);
+				this.checkNumberButton.setVisible(false);
 				this.searchConfirmButton.setVisible(true); 
 				
 				if(this.isEmailConfirmLimitTime) {
@@ -401,7 +397,7 @@ import omokGame.client.ClientAccept;
 				
 				//스레드가 완전히 정상종료 됐을때에는 실행하는거. 
 				this.userNumberMsg("<html>인증메일을 발송하세요.</html>");
-				this.CheckNumberButton.setVisible(false);
+				this.checkNumberButton.setVisible(false);
 				this.searchConfirmButton.setVisible(true); 
 			}).start();
 		}
@@ -435,7 +431,7 @@ import omokGame.client.ClientAccept;
 			if(data.isCertificationNumber()) {
 				this.userNumberMsg("<html>인증완료!!" 
 						+"<br>비밀번호다시설정해주세요.<br></html>");
-				this.CheckNumberButton.setVisible(false);
+				this.checkNumberButton.setVisible(false);
 				this.searchConfirmTextField.setEditable(false);
 				
 				//시간이 지난 후 카운트 삭제
@@ -539,7 +535,7 @@ import omokGame.client.ClientAccept;
 	    }
 	    
 	    public JButton getCheckNumberButton() { //인증번호와 맞는지 보는 확인버튼
-	    	return CheckNumberButton;
+	    	return checkNumberButton;
 	    }
 	    
 	    public JButton getsearchCheckButton() { //마지막 확인 버튼

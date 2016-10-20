@@ -45,7 +45,7 @@ public class SearchChangePanel extends JPanel {
 		this.changeConfirmMsgLabel = new JLabel("<html>비밀번호 변경이 완료 되었습니다."
 				+ "<br>다시 로그인해주세요!<br></html>");
 		this.changeConfirmMsgLabel.setBounds(SearchRePwdEnum.SEARCH_CONFIRM_CHANGE_LABEL.getRectangle());
-		this.changeConfirmMsgLabel.setFont(SearchRePwdEnum.LABELFONT_DEFAULT.getFont());
+		this.changeConfirmMsgLabel.setFont(new Font("consolas", Font.BOLD, 25));
 		this.changeConfirmMsgLabel.setForeground(SearchRePwdEnum.LABELCOLOR_DEFAULT.getColor());
 
 		// 확인 버튼 창

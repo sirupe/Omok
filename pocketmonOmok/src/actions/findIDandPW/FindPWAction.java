@@ -130,9 +130,9 @@ public class FindPWAction extends Adapters {
 	//인증번호 검사
 	public boolean certification() { 
 		JTextField confirmNumberTextField = this.searchPwdPanel.getSearchConfirmTextField();
-		String confirmNumberNumber = confirmNumberTextField.getText();
+		String confirmNumber = confirmNumberTextField.getText();
 		
-		if(confirmNumberNumber.isEmpty()) {
+		if(confirmNumber.isEmpty()) {
 			this.searchPwdPanel.userNumberMsg("인증번호 써주세요");
 			this.confirmCheck = false;
 			return true;

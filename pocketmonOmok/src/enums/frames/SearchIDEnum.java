@@ -28,7 +28,7 @@ public enum SearchIDEnum {
 			
 			(int)(SEARCHFRAME_POSITION_X.getSize() *  0.13),
 			(int)(SEARCHFRAME_POSITION_Y.getSize() * 0.29),
-			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.15),
+			(int)(SEARCHFRAME_SIZE_WIDTH.getSize() * 0.2),
 			(int)(SEARCHFRAME_SIZE_HEIGHT.getSize() * 0.1)
 	)),
 	

@@ -70,21 +70,20 @@ public class CreateGameRoomFrame extends JFrame {
 		
 		//버튼 생성
 		//확인 버튼
-		createRoomConfirmButton  = new JButton();
-		createRoomConfirmButton.setBorderPainted(false);
-		createRoomConfirmButton.setFocusPainted(false);
-		createRoomConfirmButton.setContentAreaFilled(false);
+		this.createRoomConfirmButton  = new JButton();
+		this.createRoomConfirmButton.setBorderPainted(false);
+		this.createRoomConfirmButton.setFocusPainted(false);
+		this.createRoomConfirmButton.setContentAreaFilled(false);
 		
 		//취소 버튼
-		createRoomCancelButton  = new JButton();
-		createRoomCancelButton.setBorderPainted(false);
-		createRoomCancelButton.setFocusPainted(false);
-		createRoomCancelButton.setContentAreaFilled(false);
+		this.createRoomCancelButton  = new JButton();
+		this.createRoomCancelButton.setBorderPainted(false);
+		this.createRoomCancelButton.setFocusPainted(false);
+		this.createRoomCancelButton.setContentAreaFilled(false);
 		
 		
 		
 		//배경화면	
-
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
 				SearchIDEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
 				SearchIDEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),

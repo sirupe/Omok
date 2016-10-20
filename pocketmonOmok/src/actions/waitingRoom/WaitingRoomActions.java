@@ -152,25 +152,25 @@ public class WaitingRoomActions {
 		} else {
 			// 선택된 유저 아이디 
 			String selectValue = this.waitingRoomPanel.getPlayerList().getSelectedValue();
-			
+			String resultValue = selectValue.contains("★") ? selectValue.substring(0, selectValue.length() - 1) : selectValue;
 			// 만약 현재 저장된 유저와(처음 클릭시 저장된 아이디) 같다면 
-			if(this.listSelectUser.equals(selectValue)) {
+			if(this.listSelectUser.equals(resultValue)) {
 				// 접속한 유저와 다른 유저에게만 귓속말 전송 가능. (귓속말)
-				if(!userID.equals(selectValue)) {	
-					this.targetUser = selectValue;
-					this.waitingRoomPanel.getNoticeTextField().setText(selectValue + " 에게 귓속말");
+				if(!userID.equals(resultValue)) {	
+					this.targetUser = resultValue;
+					this.waitingRoomPanel.getNoticeTextField().setText(resultValue + " 에게 귓속말");
 				}
 				
 				UserGamedataInfoDTO gameData = new UserGamedataInfoDTO(UserPositionEnum.POSITION_WAITING_ROOM);
 				gameData.setUserAction(UserActionEnum.USER_CONFIRM_USERINFO);
-				gameData.setUserID(this.listSelectUser);
+				gameData.setUserID(resultValue);
 				try {
 					this.waitingRoomPanel.getBasicFrame().getClientOS().writeObject(gameData);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			} else {
-				this.listSelectUser = this.waitingRoomPanel.getPlayerList().getSelectedValue();
+				this.listSelectUser = resultValue;
 			}
 		}
 	}

@@ -201,7 +201,7 @@ public enum JoinSizesEnum {
 	
 	//ErrorMessage 크기
 
-	SIZE_ERROR_WIDTH(300),
+	SIZE_ERROR_WIDTH(JOINFRAME_SIZE_WIDTH.getSize()),
 	SIZE_ERROR_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 3.5)),
 	
 	//에러 메세지색깔

@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-import javax.swing.border.EmptyBorder;
-
 public enum SearchRePwdEnum {
 	Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	

@@ -217,7 +217,11 @@ public class WaitingRoomPanel extends JPanel {
 		ArrayList<String> usersGrade = new ArrayList<String>();
 		this.players = new Vector<String>();
 		for(UserGamedataInfoDTO gameData : list) {
-			this.players.add(gameData.getUserID());
+			if(this.basicFrame.getUserID().equals(gameData.getUserID())) {
+				this.players.add(gameData.getUserID() + "★");
+			} else {
+				this.players.add(gameData.getUserID());
+			}
 			usersGrade.add(gameData.getUserGrade());
 		}
 
@@ -768,6 +772,7 @@ public class WaitingRoomPanel extends JPanel {
 	
 	// 유저가 유저리스트에서 유저 클릭시 게임데이터를 해당 유저 정보로 바꾸어줌
 	public void setUserInfo(UserGamedataInfoDTO userGameData) throws IOException {
+		System.out.println("여길 안들어온다는거늬???");
 		int allCount = userGameData.getUserGameCount();
 		int winCount = userGameData.getUserWinCount();
 		double winRate = winCount == 0 ? 0 : ((double)winCount / allCount) * 100;

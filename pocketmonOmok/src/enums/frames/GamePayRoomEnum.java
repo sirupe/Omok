@@ -2,13 +2,11 @@ package enums.frames;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.plaf.BorderUIResource.MatteBorderUIResource;
 
 public enum GamePayRoomEnum {
 Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),

@@ -1,8 +1,6 @@
 package enums.frames;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
@@ -68,7 +66,7 @@ public enum CreateGameRoomEnum {
 	//공개방  라디오 버튼
 	GAMEROOM_CREATE_ROOM_PRIVATE_RADIO(new Rectangle(
 				(int)(GAMEROOM_CREATE_FRAME_POSITION_X.getSize() * 0.15),
-				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize()* 0.25),
+				(int)(GAMEROOM_CREATE_FRAME_POSITION_Y.getSize() * 0.25),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.3),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.2)
 	)),
@@ -80,15 +78,6 @@ public enum CreateGameRoomEnum {
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize() * 0.3),
 				(int)(GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize() * 0.2)
 	));
-//		
-//		
-//	
-//	LABELCOLOR_ERROR(Color.red),
-//	
-//	GAMEROOM_USERID_FONT(new Font("a으라차차",Font.BOLD,10)),
-//	GAMEROOM_USERIF_FONT_COLOR(Color.white);
-//	LABEL_DEFAULT(new EmptyBorder(0,0,0,0));
-	
 	
 	private Dimension dimension;
 	private int size;

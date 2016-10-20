@@ -419,8 +419,6 @@ public class OmokServer {
 		 		String confirmNumber = String.valueOf(new Random().nextInt(90000) + 10000);
 		 		personalServer.setCertificationNumber(confirmNumber);
 		 		
-		 		System.out.println(confirmNumber + " : 랜덤번호");
-		 		
 		 		//TODO
 		 		//이메일 발송
 		 		try {
@@ -626,7 +624,6 @@ public class OmokServer {
 		pasteRoomInfoVO.setOwner(gameRoomInfoVO.getOwner());
 		pasteRoomInfoVO.setPersons(gameRoomInfoVO.getPersonNum());
 		pasteRoomInfoVO.setPwd(gameRoomInfoVO.getPwd());
-		System.out.println("이젠 있겠지 부들부들" + gameRoomInfoVO.getPwd());
 		pasteRoomInfoVO.setRoomName(gameRoomInfoVO.getRoomName());
 		pasteRoomInfoVO.setRoomNumber(gameRoomInfoVO.getRoomNumber());
 		
@@ -635,8 +632,6 @@ public class OmokServer {
 			if(pasteRoomInfoVO.getPersonNum() > 0) {
 				for(int i = 0, len = this.gameRoomList.size(); i < len; i++) {
 					if(this.gameRoomList.get(i).getRoomNumber() == gameRoomInfoVO.getRoomNumber()) {
-						System.out.println(pasteRoomInfoVO.getPwd());
-						System.out.println(pasteRoomInfoVO.getPwd() == null);
 						pasteRoomInfoVO.setEnterImage(pasteRoomInfoVO.getPwd() == null ? 
 								ImageEnum.WAITINGROOM_ENTER_POSSIBLE.getImageDir() : ImageEnum.WAITINGROOM_ENTER_PRIVATE.getImageDir());
 						this.gameRoomList.set(i, pasteRoomInfoVO);

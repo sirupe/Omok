@@ -11,15 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import datasDTO.AbstractEnumsDTO;
-import datasDTO.UserPersonalInfoDTO;
 import enums.frames.SearchPwdEnum;
 import enums.frames.SearchRePwdEnum;
 import frames.BasicFrame;
 
 
+@SuppressWarnings("serial")
 public class SearchIdFrame extends JFrame  {
-	
 	private SearchIdPanel searchIdPanel;
 	private SearchIdResultPanel searchIdResultPanel;
 	private Image backGround;
@@ -29,6 +27,7 @@ public class SearchIdFrame extends JFrame  {
 	private BasicFrame basicFrame;
 	
 	public SearchIdFrame(BasicFrame basicFrame) throws IOException {
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.basicFrame = basicFrame;
 		
 		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -127,8 +126,5 @@ public class SearchIdFrame extends JFrame  {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
-	
 
-	
 }
-

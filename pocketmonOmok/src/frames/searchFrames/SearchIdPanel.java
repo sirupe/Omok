@@ -188,10 +188,7 @@ public class SearchIdPanel extends JPanel {
 		try {
 			
 			BasicFrame basicFrame = this.searchIdFrame.getBasicFrame();
-			ClientAccept clientAccept = basicFrame.getClientAccept();
-			ObjectOutputStream oos = clientAccept.getClientOS();
-			
-			oos.writeObject(personalDTO);
+			basicFrame.sendDTO(personalDTO);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
