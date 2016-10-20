@@ -365,6 +365,15 @@ public class WaitingRoomPanel extends JPanel {
 				WaitingRoomEnum.CHATTING_OUTPUT_SIZE_HEIGHT.getSize()
 		);
 		
+		this.chattingScroll.getVerticalScrollBar().addAdjustmentListener(
+			new AdjustmentListener() {
+				@Override
+				public void adjustmentValueChanged(AdjustmentEvent e) {
+					JScrollBar src = (JScrollBar)e.getSource();
+					src.setValue(src.getMaximum());
+				}
+		});
+		
 		this.chattingOutput.setEditable(false);
 		//채팅 출력창의 위치와 크기를 가져옴
 		this.chattingInputTextField.setBounds(
