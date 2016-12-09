@@ -201,7 +201,7 @@ public enum JoinSizesEnum {
 	
 	//ErrorMessage 크기
 
-	SIZE_ERROR_WIDTH(220),
+	SIZE_ERROR_WIDTH(JOINFRAME_SIZE_WIDTH.getSize()),
 	SIZE_ERROR_HEIGHT((int)(JOINFRMAE_SIZE_HEIGHT.getSize() / 100 * 3.5)),
 	
 	//에러 메세지색깔
@@ -212,13 +212,13 @@ public enum JoinSizesEnum {
 	
 	//레이블 폰트
 
-	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 100)),
+	LABELFONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 100)),
 	
 	//컴포넌트 폰트
-	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 120)),
+	JOIN_COMPFONT_DEFAULT(new Font("a으라차차", Font.PLAIN, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 120)),
 
 	//정합성검사 라벨 폰트
-	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 150)),
+	JOIN_CHECKLABEL_FONT_DEFAULT(new Font("a으라차차", Font.BOLD, LoginPanelEnum.SCREEN_SIZE.getDimension().width / 125)),
 	
 	LABEL_DEFAULT_BORDER(new EmptyBorder(0,0,0,0)),
 	
@@ -247,10 +247,10 @@ public enum JoinSizesEnum {
 	
 	
 	//JoinSuccessFrame 설정값------------------------------------------------------------------------------------------------
-	JOIN_SUCCESS_FRAME_WIDTH((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width * 0.2)),
-	JOIN_SUCCESS_FRAME_HEIGHT((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height * 0.2)),
-	JOIN_SUCCESS_FRAME_X((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().width / 2) - (JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2)),
-	JOIN_SUCCESS_FRAME_Y((int)(LoginFrameSizesEnum.SCREEN_SIZE.getDimension().height / 2) - (JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2)),
+	JOIN_SUCCESS_FRAME_WIDTH((int)(LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.2)),
+	JOIN_SUCCESS_FRAME_HEIGHT((int)(LoginPanelEnum.SCREEN_SIZE.getDimension().height * 0.2)),
+	JOIN_SUCCESS_FRAME_X((int)(LoginPanelEnum.SCREEN_SIZE.getDimension().width / 2) - (JOIN_SUCCESS_FRAME_WIDTH.getSize() / 2)),
+	JOIN_SUCCESS_FRAME_Y((int)(LoginPanelEnum.SCREEN_SIZE.getDimension().height / 2) - (JOIN_SUCCESS_FRAME_HEIGHT.getSize() / 2)),
 	
 	JOIN_SUCCESS_LABEL_WIDTH((int)(JOIN_SUCCESS_FRAME_WIDTH.getSize() * 0.34)),
 	JOIN_SUCCESS_LABEL_HEIGHT((int)(JOIN_SUCCESS_FRAME_HEIGHT.getSize() * 0.5)),

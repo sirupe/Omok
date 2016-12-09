@@ -1,7 +1,6 @@
 package frames;
 
 import java.awt.CardLayout;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
@@ -16,18 +15,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.join.JoinServerAction;
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserInGameRoomDTO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserPositionEnum;
-import enums.frames.LoginFrameSizesEnum;
-import enums.frames.LoginSizesEnum;
-
+import enums.frames.LoginPanelEnum;
 import frames.gameRoom.GameRoomPanel;
 import frames.joinFrames.JoinFrame;
+import frames.modifyMyInfo.ModifyMyInfoFrame;
 import frames.searchFrames.SearchIdFrame;
 import frames.searchFrames.SearchPwdFrame;
-import frames.searchFrames.SearchPwdPanel;
 import frames.waitingRoom.WaitingRoomPanel;
 import omokGame.client.ClientAccept;
 
@@ -42,32 +40,36 @@ public class BasicFrame extends JFrame implements Serializable{
 	private JoinFrame joinFrame;
 	private SearchPwdFrame searchPwdFrame;
 	private SearchIdFrame searchIdFrame;
+	private ModifyMyInfoFrame modifyMyInfoFrame;
 	
 	private ClientAccept clientAccept;
 	
 	private String userID;
+	private boolean isExitCheck;
 	
 	public BasicFrame(ClientAccept clientAccept) throws IOException {
+		this.isExitCheck = true;
 		this.clientAccept = clientAccept;
-		
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		//배경이미지 모니터의 해상도에 따라 조절되게 설정
 		this.reimage = ImageIO.read(new File("resources/login/background.jpg")).getScaledInstance(
-					LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-					LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 					Image.SCALE_SMOOTH);
 		
 		this.setContentPane(new JLabel(new ImageIcon(reimage)));   
 		
 		//프레임 화면 출력 위치 설정
 		this.setBounds(   
-					LoginSizesEnum.LOGIN_FRAME_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_FRAME_POSITION_Y.getSize(),
-					LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
-					LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_FRAME_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_POSITION_Y.getSize(),
+					LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
+					LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
 		);
 		
 		this.loginPanel = new LoginPanel(this);
 		this.loginPanel.setOpaque(false);
+		
 		this.cardLayout = new CardLayout();
 
 		this.waitingRoomPanel = new WaitingRoomPanel(this) {
@@ -79,8 +81,8 @@ public class BasicFrame extends JFrame implements Serializable{
 						new File("resources/login/blackhole.png")), 
 						0, 
 						0,
-						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
-						LoginFrameSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+						LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(),
+						LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 						this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -104,9 +106,13 @@ public class BasicFrame extends JFrame implements Serializable{
 	}
 	
 	public void gameExit() {
-		this.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
+		this.addWindowListener(new WindowAction());
+	}
+	
+	class WindowAction extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent e) {
+			if(isExitCheck) {
 				UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_EXIT);
 				personalDTO.setUserID(userID);
 				try {
@@ -117,8 +123,7 @@ public class BasicFrame extends JFrame implements Serializable{
 				
 				e.getWindow().setVisible(false);
 			}
-		
-		});
+		}
 	}
 	
 	// GameRoom 도 결국 패널이므로 패널 생성시 익명클래스를 이용하여  paintComponent 를 오버라이드 하면
@@ -133,7 +138,7 @@ public class BasicFrame extends JFrame implements Serializable{
 						new File("resources/background/background.png")), 
 						0, 
 						0, 
-						LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
+						LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize(),
 						this
 					);
 				} catch (IOException e) {
@@ -143,28 +148,49 @@ public class BasicFrame extends JFrame implements Serializable{
 		};
 	}
 	
+	public void setJoinServerAction(JoinServerAction serverAction) {
+		this.clientAccept.setJoinRequestAction(serverAction);
+	}
+	
 	public void sendDTO(AbstractEnumsDTO dto) {
 		this.clientAccept.sendDTO(dto);
 	}
 	
 	public void showWaitingRoom() {
+		this.isExitCheck = true;
 		this.cardLayout.show(this.getContentPane(), "waitingRoomPanel");
 	}
 	
 	public void showGameRoom(UserInGameRoomDTO inGameUserInfo) {
+		this.isExitCheck = false;
 		this.gameRoomPanel.setEnterUserInfo(inGameUserInfo);
 		this.cardLayout.show(this.getContentPane(), "gameRoomPanel");
+	}
+	
+	public void showLoginPanel() {
+		this.cardLayout.show(this.getContentPane(), "loginPanel");
 	}
 
 	public void newJoinFrame() throws IOException {
 		this.joinFrame = new JoinFrame(this);
 	}
+	
 	public void newSearchPwdFrame() throws IOException {
 		this.searchPwdFrame = new SearchPwdFrame(this);
 	}
 	
 	public void newSearchIdFrame() throws IOException {
 		this.searchIdFrame = new SearchIdFrame(this);
+	}
+	
+	public void newModifyMyInfoFrame(UserPersonalInfoDTO personalInfo) {
+		this.setVisible(false);
+		try {
+			this.modifyMyInfoFrame = new ModifyMyInfoFrame(this);
+			this.modifyMyInfoFrame.setUserInfo(personalInfo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setUserID(String userID) {
@@ -205,6 +231,10 @@ public class BasicFrame extends JFrame implements Serializable{
 
 	public ClientAccept getClientAccept() {
 		return clientAccept;
+	}
+
+	public ModifyMyInfoFrame getModifyMyInfoFrame() {
+		return modifyMyInfoFrame;
 	}
 }
 

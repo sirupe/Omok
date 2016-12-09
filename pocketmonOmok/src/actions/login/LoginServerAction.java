@@ -2,7 +2,6 @@ package actions.login;
 
 import datasDTO.AbstractEnumsDTO;
 import datasDTO.UserPersonalInfoDTO;
-import enums.etc.ServerActionEnum;
 import enums.etc.UserActionEnum;
 import enums.etc.UserPositionEnum;
 import frames.LoginPanel;
@@ -14,16 +13,9 @@ public class LoginServerAction {
 		this.loginPanel = loginPanel;
 	}
 	
-	public void loginFail(AbstractEnumsDTO data) {
-		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)data;
-		
-		if(userPersonalDTO.getServerAction() == ServerActionEnum.LOGIN_FAIL_INPUT_ERROR) {
-			this.loginPanel.loginFailLabelReset();
-			this.loginPanel.loginFail("아이디, 패스워드 오류입니다.");
-		} else {
-			this.loginPanel.loginFailLabelReset();
-			this.loginPanel.loginFail("이미 접속중인 아이디입니다.");
-		}
+	public void loginFail(String errMsg) {		
+		this.loginPanel.loginFailLabelReset();
+		this.loginPanel.loginFail(errMsg);
 	}
 	
 	public void loginSuccess(AbstractEnumsDTO data) {
@@ -34,5 +26,4 @@ public class LoginServerAction {
 		userPersonalDTO.setUserAction(UserActionEnum.USER_LOGIN_SUCCESS);
 		this.loginPanel.getBasicFrame().sendDTO(userPersonalDTO);
 	}
-	
 }

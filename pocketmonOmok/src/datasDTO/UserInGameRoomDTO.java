@@ -5,9 +5,10 @@ import enums.etc.UserPositionEnum;
 public class UserInGameRoomDTO extends AbstractEnumsDTO {
 	private static final long serialVersionUID = -4745744281528295153L;
 	private UserGamedataInfoDTO userGameData;
+	private UserGamedataInfoDTO otherGameData;
 	private GameRoomInfoVO gameRoomInfo;
-	private UserStoreInfoDTO userItemInfo;
-	private UserStoreSkinInfoDTO userSkinInfo;
+	private int ownerGender;
+	private int guestGender;
 	
 	public UserInGameRoomDTO(UserPositionEnum position) {
 		super(position);
@@ -29,19 +30,30 @@ public class UserInGameRoomDTO extends AbstractEnumsDTO {
 		this.gameRoomInfo = gameRoomInfo;
 	}
 
-	public UserStoreInfoDTO getUserItemInfo() {
-		return userItemInfo;
+	public int getOwnerGender() {
+		return ownerGender;
 	}
 
-	public void setUserItemInfo(UserStoreInfoDTO userItemInfo) {
-		this.userItemInfo = userItemInfo;
+	public void setOwnerGender(int ownerGender) {
+		this.ownerGender = ownerGender;
 	}
 
-	public UserStoreSkinInfoDTO getUserSkinInfo() {
-		return userSkinInfo;
+	public int getGuestGender() {
+		return guestGender;
 	}
 
-	public void setUserSkinInfo(UserStoreSkinInfoDTO userSkinInfo) {
-		this.userSkinInfo = userSkinInfo;
+	public void setGuestGender(int guestGender) {
+		this.guestGender = guestGender;
+	}
+
+	public UserGamedataInfoDTO getOtherGameData() {
+		return otherGameData;
+	}
+
+	public void setOtherGameData(UserGamedataInfoDTO otherGameData) {
+		this.otherGameData = otherGameData;
 	}	
+	
+	
+	
 }

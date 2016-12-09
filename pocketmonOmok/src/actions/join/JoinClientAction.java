@@ -7,6 +7,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+
+import javax.swing.JTextField;
+
 import actions.adapters.Adapters;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.UserActionEnum;
@@ -36,9 +39,9 @@ public class JoinClientAction extends Adapters {
 	private String certificationNumber;
 	
 	private StringBuffer totalEmail;
-	
 	private boolean emailConfirmTime;
 
+	private Thread timeThread;
 	
 	// 누를 때마다 갱신되기 때문에 birth~ 들에게 초기값을 지정.
 	public JoinClientAction(BasicFrame basicFrame, JoinFrame joinFrame){
@@ -56,40 +59,41 @@ public class JoinClientAction extends Adapters {
 	public void windowClosing(WindowEvent e) {
 		this.basicFrame.setVisible(true);
 		this.joinFrame.setVisible(false);
-		this.joinFrame.dispose();
+		this.joinFrame.dispose();	
 	}
 	
 	// 실시간으로 타이핑 감시하여 에러메세지 송출.
-	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		String source = e.getSource().toString();
-		if(source.contains("idTextField")) {
+		JTextField textField = (JTextField)e.getSource();
+		String source = textField.getName();
+		
+		if(source.equals("idTextField")) {
 			this.idSuitabilityCheck();
 		
-		} else if(source.contains("pwdField")) {
+		} else if(source.equals("pwdField")) {
 			this.pwSuitabilityCheck();
 		
-		} else if(source.contains("rePwdField")) {
+		} else if(source.equals("rePwdField")) {
 			this.rePwSuitabilityCheck();
 		
-		} else if(source.contains("nameTextField")) {
+		} else if(source.equals("nameTextField")) {
 			this.nameSuitabilityCheck();
 		
-		} else if(source.contains("emailIDTextField")) {
+		} else if(source.equals("emailIDTextField")) {
 			this.emailID = this.joinFrame.getEmailIDTextField().getText();			
 			this.emailIDSuitabilityCheck();
 			
-		} else if(source.contains("emailAddrTextField")) {
+		} else if(source.equals("emailAddrTextField")) {
 			this.emailAddrSuitabilityCheck();
 			
-		} else if(source.contains("telMiddleTextField")) {
+		} else if(source.equals("telMiddleTextField")) {
 			this.telMidTextFieldLengthLimit();
 		
-		} else if(source.contains("telLastNumTextField")) {
+		} else if(source.equals("telLastNumTextField")) {
 			this.telLastTextFieldLengthLimit();
 		
-		} else if(source.contains("emailConfTextField")) {
+		} else if(source.equals("emailConfTextField")) {
 			this.emailConfirm();
 		}
 
@@ -101,6 +105,7 @@ public class JoinClientAction extends Adapters {
 		if(e.getSource().toString().contains("genderManRadio")) {
 			this.gender = 1;
 			this.joinFrame.getGenderErrorLabel().setVisible(false);
+		
 		} else if(e.getSource().toString().contains("genderWomanRadio")) {
 			this.gender = 2;
 			this.joinFrame.getGenderErrorLabel().setVisible(false);
@@ -134,7 +139,7 @@ public class JoinClientAction extends Adapters {
 				
 			} else if(source.contains("telFrontNumChoice")) {
 				this.telFrontNum = (String)e.getItem().toString();
-
+				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "join선택");
 			} else if(source.contains("genderManRadio")) {
 				this.gender = 1;
 				this.joinFrame.getGenderErrorLabel().setVisible(false);
@@ -178,13 +183,12 @@ public class JoinClientAction extends Adapters {
 			UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
 			personalDTO.setUserAction(UserActionEnum.USER_JOIN_ID_OVERLAP_CHECK);
 			personalDTO.setUserID(this.joinFrame.getIdTextField().getText());
+			
 			try {
 				this.basicFrame.getClientOS().writeObject(personalDTO);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-//			checkMsg = "join성공";
-//			color 	 = ClientJoinSizesEnum.LABELCOLOR_DEFAULT.getColor();
 		}
 		
 		this.joinFrame.labelSetting(this.joinFrame.getIdErrorLabel(), color, checkMsg);
@@ -256,10 +260,10 @@ public class JoinClientAction extends Adapters {
 	
 	//email 유효성 및 정합성 검사
 	public boolean emailAddrSuitabilityCheck() {
-		this.emailAddr = this.joinFrame.getEmailAddrTextField().getText();
+		this.emailAddr  = this.joinFrame.getEmailAddrTextField().getText();
 		String checkMsg = null;
 		Color color 	= null;
-		boolean result = false;
+		boolean result  = false;
 		
 		if(!RegexCheck.emailDomainRegexCheck(this.emailAddr)) {
 			checkMsg = "joinMail정합성";
@@ -305,18 +309,18 @@ public class JoinClientAction extends Adapters {
 		}
 	}
 
-	//인증 버튼 눌렀을 시 TODO
+	//인증 버튼 눌렀을 시 
 	public void confirmAction() {
 		if(this.emailAddrSuitabilityCheck() && this.emailIDSuitabilityCheck()) {
 			StringBuffer email = new StringBuffer();
 			email.append(this.joinFrame.getEmailIDTextField().getText());
 			email.append("@");
 			email.append(this.joinFrame.getEmailAddrTextField().getText());
-			System.out.println("유저이메일 : " + email.toString());
 			
 			UserPersonalInfoDTO userPersonalInfoDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
-			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION);
+			userPersonalInfoDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION_CREATE);
 			userPersonalInfoDTO.setUserEmail(email.toString());
+			
 			try {
 				this.basicFrame.getClientOS().writeObject(userPersonalInfoDTO);
 			} catch (IOException e1) {
@@ -328,11 +332,12 @@ public class JoinClientAction extends Adapters {
 			//메일발송 메세지 보여주기
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), Color.blue, "joinMail발송");
 			//시간 세어주는 쓰레드 생성
-			new Thread() {
+			this.timeThread = new Thread() {
 				@Override
 				public void run() {
 					StringBuffer time = new StringBuffer();
 					Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
+					joinFrame.getConfirmButton().removeActionListener(joinFrame.getJoinAction());
 					
 					for(int i = 3; i >= 0; --i) {
 						for(int j = (i >= 3) ? 0 : 59; j >= 0; j-- ) {
@@ -342,11 +347,9 @@ public class JoinClientAction extends Adapters {
 							time.append(j < 10 ? "0" + j : j);
 							
 							joinFrame.getEmailTimeLabel().setText(time.toString());
+							
 							try {
 								Thread.sleep(1000);
-								if(emailConfirmTime) {
-									this.interrupt();
-								}
 							} catch (InterruptedException e) {
 								break;
 							}
@@ -355,29 +358,27 @@ public class JoinClientAction extends Adapters {
 							return;
 						}
 					}
+					
 					joinFrame.labelSetting(joinFrame.getEmailErrorLabel(), color, "joinMail시간초과");
 					joinFrame.getEmailTimeLabel().setVisible(false);
+					joinFrame.getConfirmButton().addActionListener(joinFrame.getJoinAction());
 					
 					if(!certificationNumber.equals(joinFrame.getEmailConfTextField().getText())) {
-						certificationNumber = null;
+						certificationNumber = "0";
 					};
 				}
-			}.start();
+			};
+			
+			this.timeThread.start();
 		}
 	}
 	
 	//이메일 인증번호 입력 텍스트필드 
 	public void emailConfirm() {
-		String inputNum = this.joinFrame.getEmailConfTextField().getText();
-		if(this.certificationNumber.equals(inputNum)) {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
-			this.joinFrame.getEmailTimeLabel().setVisible(false);
-			this.joinFrame.getEmailConfTextField().setEditable(false);
-			this.joinFrame.getConfirmButton().setEnabled(false);
-			this.emailConfirmTime = true;
-		} else {
-			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
-		}
+		UserPersonalInfoDTO personalDTO = new UserPersonalInfoDTO(UserPositionEnum.POSITION_JOIN);
+		personalDTO.setUserAction(UserActionEnum.USER_JOIN_CERTIFICATION_CHECK);
+		personalDTO.setCertificationNumber(this.joinFrame.getEmailConfTextField().getText());
+		this.basicFrame.sendDTO(personalDTO);
 	}
 	
 	//tel 중간번호 체크
@@ -399,69 +400,72 @@ public class JoinClientAction extends Adapters {
 			this.joinFrame.getTelLastNumTextField().setText(this.telLastNum);
 		}
 	}
-
 	
 	//회원가입 버튼 눌렀을 시
 	public void joinAction() {
 		Color color = JoinSizesEnum.LABELCOLOR_ERROR.getColor();
-		String msg = "join필수";
+		String msg  = "join필수";
 		
 		int errCount = 0;
 		
 		//아이디가 공란일 때
 		if(this.id == null) {
-			System.out.println("아이디가공란");
 			this.joinFrame.labelSetting(this.joinFrame.getIdErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//패스워드가 공란일 때
 		if(this.pw == null) {
-			System.out.println("패스워드가공란");
 			this.joinFrame.labelSetting(this.joinFrame.getPwdErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//rePw가 공란일 때
 		if(this.rePw == null) {
-			System.out.println("리패스워드가공란");
 			this.joinFrame.labelSetting(this.joinFrame.getRePwdErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//이름이 공란일 때
 		if(this.name == null) {
-			System.out.println("이름이 공란");
 			this.joinFrame.labelSetting(this.joinFrame.getNameErrorLabel(), color, msg);
 			errCount++;
 		}
 		
-		//성별이 입력이 안되었을 때 
+		//성별 입력이 안되었을 때 
 		if(this.gender == 0) {
-			System.out.println("성별");
 			this.joinFrame.labelSetting(this.joinFrame.getGenderErrorLabel(), color, msg);
 			errCount++;
 		}
 		
 		//이메일 아이디나 주소가 입력 안되었을 때
 		if(this.emailID == null || this.emailAddr == null) {
-			System.out.println("이메일 입력안됨");
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, msg);
 			errCount++;
 		}
+		this.telFrontNum = (String) this.joinFrame.getTelFrontNumChoice().getSelectedItem();
+		this.telMidNum 	 = this.joinFrame.getTelMidTextField().getText();
+		this.telLastNum  = this.joinFrame.getTelLastNumTextField().getText();
 		
 		//전화번호가 앞번호, 뒷번호 중 하나만 입력되었을 때
-		if(!(this.telFrontNum == null && this.telMidNum == null && this.telLastNum == null)) {
-			if((this.telMidNum != null && this.telLastNum == null) || (this.telMidNum == null && this.telLastNum != null) || this.telFrontNum.equals("선택")) {
-				System.out.println("전화번호 입력에러");
+		if(this.isTelNullCheck()) {
+			
+			if(this.telFrontNum.equals("선택")) {
+				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
+				errCount++;
+			}
+			if(this.telMidNum.length() != 4) {
+				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
+				errCount++;
+			}
+			if(this.telLastNum.length() != 4) {
 				this.joinFrame.labelSetting(this.joinFrame.getTelErrorLabel(), color, "joinTel정합성");
 				errCount++;
 			}
 		}
 		
 		//인증번호를 받지 않았을 때
-		if(this.certificationNumber == null) {
-			System.out.println("인증번호");
+		if(this.joinFrame.getEmailConfTextField().isEditable()) {
 			this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), color, "joinMail인증필");
 			errCount++;
 		}
@@ -469,11 +473,11 @@ public class JoinClientAction extends Adapters {
 		if(errCount == 0) {
 			StringBuffer totalBirth = new StringBuffer();
 			totalBirth.append(this.birthYear);
-			totalBirth.append("년 ");
+			totalBirth.append(".");
 			totalBirth.append(this.birthMonth);
-			totalBirth.append("월 ");
+			totalBirth.append(".");
 			totalBirth.append(this.birthDate);
-			totalBirth.append("일");
+			totalBirth.append(".");
 		
 			StringBuffer totalTel = new StringBuffer();
 			totalTel.append(this.telFrontNum);
@@ -490,7 +494,7 @@ public class JoinClientAction extends Adapters {
 			personalDTO.setUserID(this.id);
 			personalDTO.setUserName(this.name);
 			personalDTO.setUserPasswd(this.pw);
-			personalDTO.setUserPhoneNumber(this.telLastNum);
+			personalDTO.setUserPhoneNumber(totalTel.toString());
 			
 			try {
 				this.basicFrame.getClientOS().writeObject(personalDTO);
@@ -498,9 +502,25 @@ public class JoinClientAction extends Adapters {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 	public void setCertificationNumber(String certificationNumber) {
 		this.certificationNumber = certificationNumber;
 	}
+	
+	public void setEmailConfirmTime(boolean emailConfirmTime) {
+		this.emailConfirmTime = emailConfirmTime;
+	}
+	
+	public Thread getTimeThread() {
+		return timeThread;
+	}
+	
+	public boolean isTelNullCheck() {
+		return !this.telFrontNum.equals("선택") || 
+				this.telMidNum.length() != 0 || 
+				this.telLastNum.length() != 0;
+	}
+	
 }

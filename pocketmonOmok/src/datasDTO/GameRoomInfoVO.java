@@ -1,15 +1,8 @@
 package datasDTO;
 
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
 import enums.etc.UserPositionEnum;
-import enums.frames.WaitingRoomSizesEnum;
 
 public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	private static final long serialVersionUID = 3443624527270954244L;
@@ -18,7 +11,8 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 		super(position);
 	}
 	
-	private ImageIcon image;
+	private String enterImage;
+//	private ImageIcon guestImage;
 	private int roomNumber;
 	private int personNum;
 	private String roomName;
@@ -27,24 +21,12 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	private String persons;
 	private String pwd;
 	
-	public ImageIcon getImage() {
-		return image;
+	public String getEnterImage() {
+		return enterImage;
 	}
 	
-	public void setImage(String imageEnum) {
-		try {
-			this.image = new ImageIcon(ImageIO.read(
-				new File(imageEnum)).getScaledInstance(
-					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZE_WIDTH.getSize() ,
-					WaitingRoomSizesEnum.ROOMLIST_STATUS_SIZW_HEIGHT.getSize(),
-					Image.SCALE_AREA_AVERAGING)
-			);
-			this.image.setDescription(imageEnum);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		this.image.setDescription(imageEnum);
+	public void setEnterImage(String imageEnum) {
+		this.enterImage = imageEnum;
 	}
 
 	public int getRoomNumber() {
@@ -99,4 +81,13 @@ public class GameRoomInfoVO extends AbstractEnumsDTO implements Serializable{
 	public int getPersonNum() {
 		return personNum;
 	}
+
+	@Override
+	public String toString() {
+		return "GameRoomInfoVO [enterImage=" + enterImage + ", roomNumber=" + roomNumber + ", personNum=" + personNum
+				+ ", roomName=" + roomName + ", owner=" + owner + ", guest=" + guest + ", persons=" + persons + ", pwd="
+				+ pwd + "]";
+	}
+	
+	
 }

@@ -46,7 +46,6 @@ public class UserGamedataInfoDAO {
 				userGameData.setUserWaitingRoomImage(resultSet.getInt("USER_GENDER"));
 			}
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -87,5 +86,84 @@ public class UserGamedataInfoDAO {
 		}
 		
 		return userGameData;
+	}
+	
+	public int winUserGameDataUpdate(String userID) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		PreparedStatement ps2 = null;
+		ResultSet resultSet	  = null;
+		int result = 0;
+		int userScore = 0;
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		try {
+			connection = dbPool.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("SELECT (USER_SCORE + 10) AS USER_SCORE ");
+			sql.append("FROM USER_GAMEDATA_INFO WHERE USER_ID=?");
+						
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, userID);
+			resultSet = ps.executeQuery();
+			
+			while(resultSet.next()) {
+				userScore = resultSet.getInt("USER_SCORE");
+			}
+			
+			StringBuffer sql2 = new StringBuffer();
+			sql2.append("UPDATE USER_GAMEDATA_INFO ");
+			sql2.append("SET USER_GRADE = ");
+			sql2.append("CASE WHEN " + userScore + " >= 0 AND " + userScore + " < 100 THEN '초보' ");
+			sql2.append("WHEN " + userScore + " >= 100 AND " + userScore + " < 200 THEN '중수' ");
+			sql2.append("WHEN " + userScore + " >= 200 AND " + userScore + " < 400 THEN '고수' ");
+			sql2.append("WHEN " + userScore + " >= 400 AND " + userScore + " < 800 THEN '초고수' ");
+			sql2.append("WHEN " + userScore + " >= 800 AND " + userScore + " < 1600 THEN '달인' ");
+			sql2.append("WHEN " + userScore + " >= 1600 AND " + userScore + " < 3200 THEN '영웅' ");
+			sql2.append("WHEN " + userScore + " >= 3200 THEN '신' ");
+			sql2.append("END, ");
+			sql2.append("USER_GAME_COUNT=USER_GAME_COUNT+1, ");
+			sql2.append("USER_WIN_COUNT=USER_WIN_COUNT+1, ");
+			sql2.append("USER_SCORE=USER_SCORE+10 ");
+			sql2.append("WHERE USER_ID=?");
+						
+			ps2 = connection.prepareStatement(sql2.toString());
+			ps2.setString(1, userID);
+			result = ps2.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps, resultSet);
+			dbPool.freeConnection(connection, ps2, resultSet);
+		}
+		
+		return result;
+	}
+	
+	public int loseUserGameDataUpdate(String userID) {
+		Connection connection = null;
+		PreparedStatement ps  = null;
+		int result = 0;
+		DBConnectionPool dbPool = DBConnectionPool.getInstance();
+		try {
+			connection = dbPool.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("UPDATE USER_GAMEDATA_INFO ");
+			sql.append("SET USER_GAME_COUNT=USER_GAME_COUNT+1 ");
+			sql.append("WHERE USER_ID=?");
+						
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, userID);
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbPool.freeConnection(connection, ps);
+		}
+		
+		return result;
 	}
 }

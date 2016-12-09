@@ -235,12 +235,15 @@ public enum ChargeEnum {
 	private ChargeEnum(int x) {
 		   this.size = x;
 	}
+	
 	private ChargeEnum(Rectangle rect) {
 		this.rect = rect;
 	}
+	
 	private ChargeEnum(Dimension dimension) {
 		  this.dimension = dimension;
 	}
+	
 	private ChargeEnum(String[] strArr) {
 		this.strArr = strArr;
 	}
@@ -253,17 +256,20 @@ public enum ChargeEnum {
 	public int getSize() {
 		return size;
 	}
+	
 	public Rectangle getRect() {
 		return rect;
 	}
+	
 	public Dimension getDimension() {
 		  return dimension;
 	}
+	
 	public String[] getStrArr() {
 		return strArr;
 	}
+	
 	public Font getFont() {
 		return font;
 	}
-	
 }

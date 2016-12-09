@@ -20,9 +20,13 @@ import datasDTO.UserMessageVO;
 import datasDTO.UserPersonalInfoDTO;
 import enums.etc.ServerActionEnum;
 import enums.etc.ServerIPEnum;
+import enums.etc.SoundEnum;
+import enums.etc.UserActionEnum;
+import enums.etc.UserPositionEnum;
 import frames.BasicFrame;
 import frames.waitingRoom.WaitingRoomListTable;
 import frames.waitingRoom.WaitingRoomPanel;
+import utility.GetResources;
 
 // 클라이언트 실행시 클라이언트 소켓 및 프레임 등등 생성
 public class ClientAccept {
@@ -33,7 +37,6 @@ public class ClientAccept {
 	private LoginServerAction loginRequestAction;
 	private JoinServerAction joinRequestAction;
 	private GameRoomServerAction gameRoomRequestAction;
-//	private String userID;
 	
 	public ClientAccept() throws UnknownHostException, IOException {
 		this.clientSocket = new Socket(ServerIPEnum.SERVER_IP.getServerIP(), ServerIPEnum.SERVER_PORT.getServerPort());
@@ -42,10 +45,9 @@ public class ClientAccept {
 		this.basicFrame	  = new BasicFrame(this);
 		
 		this.loginRequestAction		= new LoginServerAction(this.basicFrame.getLoginPanel());
-		this.joinRequestAction		= new JoinServerAction(this.basicFrame.getJoinFrame());
 		this.gameRoomRequestAction 	= new GameRoomServerAction(this.basicFrame.getGameRoomPanel());
 		
-		ClientReciever reciever = new ClientReciever(this, this.basicFrame);
+		ClientReceiver reciever = new ClientReceiver(this, this.basicFrame);
 		reciever.start();
 	}
 //로그인---------------------------------------------------------------------------------------------
@@ -54,9 +56,15 @@ public class ClientAccept {
 		switch(data.getServerAction()) {
 		// - 로그인 중 유저가 입력을 잘못했을 시
 		case LOGIN_FAIL_INPUT_ERROR :
+			this.loginRequestAction.loginFail("아이디, 패스워드를 제대로 입력해주세요.");
+			break;
+		// - 이미 탈퇴한 유저의 정보라면
+		case LOGIN_DROP_USER :
+			this.loginRequestAction.loginFail("이미 탈퇴한 유저입니다.");
+			break;
 		// - 로그인 중 이미 접속한 유저의 정보를 입력했을 시
 		case LOGIN_FAIL_OVERLAP_ACCEPT :
-			this.loginRequestAction.loginFail(data);
+			this.loginRequestAction.loginFail("이미 접속중인 유저입니다.");
 			break;
 		// 로그인에 성공했을 시
 		case LOGIN_SUCCESS :
@@ -77,8 +85,11 @@ public class ClientAccept {
 		case USER_JOIN_JOINACTION : 
 			this.joinRequestAction.joinTry(data);
 			break;
-		case USER_JOIN_CERTIFICATION :
-			this.joinRequestAction.cercificationNumber(data);
+		case USER_JOIN_CERTIFICATION_SUCCESS :
+			this.joinRequestAction.certificationNumSuccess();
+			break;
+		case USER_JOIN_CERTIFICATION_FAIL :
+			this.joinRequestAction.certificationNumFail();
 			break;
 		default : 
 			break;
@@ -99,19 +110,20 @@ public class ClientAccept {
 		case WAITING_ROOM_ENTER :
 			RoomAndUserListDTO waitingRoomInfo = (RoomAndUserListDTO)data;
 			
-			WaitingRoomListTable roomTable = new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
+			WaitingRoomListTable roomTable = 
+					new WaitingRoomListTable(waitingRoomInfo.getGameRoomList());
 			panel.setUserInfo(waitingRoomInfo.getUserGameData());
 			panel.roomListSetting(roomTable);			
 			panel.userListSetting(waitingRoomInfo.getUserList());
 			panel.getChattingOutput().append(waitingRoomInfo.getUserGameData().getUserID() + " 님, 환영합니다.\n");
+			GetResources.soundPlay(SoundEnum.LOGIN_SUCCESS_SOUND.getSound());
 			this.basicFrame.showWaitingRoom();
 			break;
 		
 		// 서버에서 보낸 정보가 "방생성 성공" 이라면
 		case GAME_CREATEROOM_SUCCESS :
 			UserInGameRoomDTO inGameUserInfo = (UserInGameRoomDTO)data;
-			panel.getCreateGameRoomFrame().setVisible(false);
-			panel.getCreateGameRoomFrame().dispose();
+			panel.getWaitingRoomActions().createRoomFrameExit();
 			this.basicFrame.showGameRoom(inGameUserInfo);
 			this.basicFrame.setVisible(true);
 			break;
@@ -128,8 +140,8 @@ public class ClientAccept {
 		case MESSAGE_SEND_SUCCESS :
 			panel.getChattingOutput().append(((UserMessageVO)data).getMessage());
 			break;
-		// 방리스트 정보 변경 (다른 유저가 게임방에 입장함) 
-		case ENTER_ROOM_SUCCESS_LIST :
+		// 방리스트 정보에 변경이 생겼다.
+		case GAME_ROOM_LIST_MODIFY :
 			RoomAndUserListDTO waitingRoomModInfo = (RoomAndUserListDTO)data;
 			panel.modGameRoom(waitingRoomModInfo);
 			break;
@@ -140,9 +152,19 @@ public class ClientAccept {
 			
 			while(isPasswordFail) {
 				String passwd = JOptionPane.showInputDialog("비밀번호를 입력해주세요.");
+
 				if(roomVO.getPwd().equals(passwd)) {
 					isPasswordFail = false;
-					this.basicFrame.showGameRoom((UserInGameRoomDTO)data);
+					GameRoomInfoVO enterRoomVO = new GameRoomInfoVO(UserPositionEnum.POSITION_WAITING_ROOM);
+					enterRoomVO.setEnterImage(roomVO.getEnterImage());
+					enterRoomVO.setRoomNumber(roomVO.getRoomNumber());
+					enterRoomVO.setRoomName(roomVO.getRoomName());
+					enterRoomVO.setOwner(roomVO.getOwner());
+					enterRoomVO.setPersons(1);
+					enterRoomVO.setPwd(roomVO.getPwd());
+					enterRoomVO.setGuest(this.basicFrame.getUserID());
+					enterRoomVO.setUserAction(UserActionEnum.USER_ENTER_ROOM);
+					this.basicFrame.sendDTO(enterRoomVO);
 				} else if(passwd == null) {
 					isPasswordFail = false;
 				} else {
@@ -150,9 +172,9 @@ public class ClientAccept {
 				}
 			}
 			break;
-		default:
-			break;
 			
+		default :
+			break;
 		}
 	}
 	
@@ -162,15 +184,67 @@ public class ClientAccept {
 		case ENTER_ROOM_SUCCESS_GUEST :
 			this.gameRoomRequestAction.guestEnterRoom(data);
 			break;
+		case ENTER_ROOM_SUCCESS_OWNER :
+			this.gameRoomRequestAction.ownerGameRoomModify(data);
+			break;
+		case GAME_ROOM_USER_CHATTING :
+			this.basicFrame.getGameRoomPanel().chattingAreaSetting(data);
+			break;
+		case GAME_ROOM_GUEST_READY_DECHECK :
+		case GAME_ROOM_GUEST_READY_CHECK :
+			this.basicFrame.getGameRoomPanel().changeStartGuestReadyCheck(data);
+			break;
+		case GAME_ROOM_GAME_START :
+			this.basicFrame.getGameRoomPanel().gameStart();
+			break;
+		case GAME_ROOM_SEND_BOARD_INFO :
+			this.basicFrame.getGameRoomPanel().boardSettingAndMyTurnStart(data);
+			break;
+		case GAME_ROOM_WINNER_INFO :
+			this.basicFrame.getGameRoomPanel().gameEnd(data);
+			break;
+		case GAME_ROOM_EXIT_OTHER_USER :
+			this.basicFrame.getGameRoomPanel().otherUserExitGame(data);
 		default :
 			break;
 		}
 	}
 
-	
-	
+//개인정보 수정---------------------------------------------------------------------------------------------
+	public void modifyAction(AbstractEnumsDTO infoDTO) {
+		UserPersonalInfoDTO userPersonalDTO = (UserPersonalInfoDTO)infoDTO;
+		switch(userPersonalDTO.getServerAction()) {
+		case MODIFY_USER_PERSONAL_INFO :
+			this.basicFrame.newModifyMyInfoFrame(userPersonalDTO);
+			break;
+		case MODIFY_USER_DROPCHECK_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropPwCheckFail();
+			break;
+		case MODIFY_USER_DROPCHECK_SUCCESS :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropPwCheckSuccess();
+			break;
+		case MODIFY_USER_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().updateFail();
+			break;
+		case MODIFY_USER_PASSWD_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().passwdFail();
+			break;
+		case MODIFY_USER_SUCCESS :
+			this.basicFrame.getModifyMyInfoFrame().updateSuccess();
+			break;
+		case MODIFY_USER_DROPOUT_SUCCESS :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropOutSuccess();
+			break;
+		case MODIFY_USER_DROPOUT_FAIL :
+			this.basicFrame.getModifyMyInfoFrame().getCorrectPwdFrame().dropOutFail();
+			break;
+		default:
+			break;
+		}
+	}
+
 	public void gameExit(AbstractEnumsDTO infoDTO) throws IOException {
-		if(infoDTO.getServerAction() == ServerActionEnum.OTHER_USER_EXIT) {
+		if(infoDTO.getServerAction() == ServerActionEnum.OTHERS_UER_EXIT) {
 			this.basicFrame.getWaitingRoomPanel().deleteUserSetting((UserPersonalInfoDTO)infoDTO);
 		} else {
 			this.clientOS.close();
@@ -180,8 +254,6 @@ public class ClientAccept {
 			System.exit(0);
 		}
 	}
-	
-	
 	
 	public void sendDTO(AbstractEnumsDTO dto) {
 		try {
@@ -197,5 +269,9 @@ public class ClientAccept {
 
 	public ObjectOutputStream getClientOS() {
 		return clientOS;
+	}
+	
+	public void setJoinRequestAction(JoinServerAction joinRequestAction) {
+		this.joinRequestAction = joinRequestAction;
 	}
 }

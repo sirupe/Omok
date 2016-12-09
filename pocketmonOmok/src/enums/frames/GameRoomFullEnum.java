@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-import javax.swing.border.EmptyBorder;
-
 public enum GameRoomFullEnum {
 Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	//전체 크기 지정
@@ -22,7 +20,7 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 			(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() * 0.15),
 			(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() * 0.7),
 			(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() * 0.4)
-			)),
+	)),
 	
 	//버튼 생성
 	GAMEROOM_CONFIRM_BUTTON(new Rectangle(
@@ -30,7 +28,7 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 				(int)(GAMEROOMFULLFRAME_POSITION_Y.getSize() * 0.42),
 				(int)(GAMEROOMFULLFRAME_SIZE_WIDTH.getSize() * 0.25),
 				(int)(GAMEROOMFULLFRAME_SIZE_HEIGHT.getSize() * 0.15)
-				)),
+	)),
 	
 	//에러 메세지색깔
 	LABELCOLOR_ERROR(Color.red),
@@ -55,24 +53,31 @@ Screen_SIZE(Toolkit.getDefaultToolkit().getScreenSize()),
 	private GameRoomFullEnum(int size) {
 		this.size = size;
 	}
+	
 	private GameRoomFullEnum(Color color) {
 		this.color = color;
 	}
+	
 	private GameRoomFullEnum(Font font) {
 		this.font = font;
 	}
+	
 	public Rectangle getRectangle() {
 		return rec;
 	}
+	
 	public Dimension getDimension() {
 		return dimension;
 	}
+	
 	public int getSize() {
 		return size;
 	}
+	
 	public Color getColor() {
 		return color;
 	}
+	
 	public Font getFont() {
 		return font;
 	}

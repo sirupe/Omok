@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import enums.frames.ChargeEnum;
 
+@SuppressWarnings("serial")
 public class ChargeConfirmFrame extends JFrame{
 	private Image backGround;
 	private JLabel success;
@@ -67,9 +68,4 @@ public class ChargeConfirmFrame extends JFrame{
 		this.setVisible(true);
 	
 	}
-
-	public static void main(String[] args) throws IOException {
-		new ChargeConfirmFrame();
-	}
-
 }

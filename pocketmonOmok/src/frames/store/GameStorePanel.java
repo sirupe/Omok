@@ -1,42 +1,34 @@
 package frames.store;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enums.frames.GameStoreEnum;
-import enums.frames.WaitingRoomSizesEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 
-
+@SuppressWarnings("serial")
 public class GameStorePanel extends JPanel {
 	private JPanel userMoneyPanel;
 	private JPanel itemChoicePanel;
 	private JPanel outPanel;
-	private JPanel linePanel;
 	private Image backGround;
 	
 	private JTextField userMoney;
-	private JButton userConfirm;
-	private JButton outButton;
 	
 	public GameStorePanel() throws IOException {
 		
@@ -54,7 +46,6 @@ public class GameStorePanel extends JPanel {
 		
 		this.userMoneyPanel   = new JPanel();
 		this.outPanel         = new JPanel();
-		this.linePanel		  = new JPanel();
 		
 		this.setUserPanel();
 		this.setItemPanel();
@@ -63,6 +54,7 @@ public class GameStorePanel extends JPanel {
 		this.setOpaque(false);	
 		this.setVisible(true);	
 	}	
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -79,19 +71,15 @@ public class GameStorePanel extends JPanel {
 		}
 	}
 
-
-
 	//사용자 보유 금액, 충전하기 
 	public void setUserPanel() throws IOException {
 		this.userMoneyPanel.setBounds(GameStoreEnum.STORE_USER_MONEY_PANEL_REC.getRectangle());
 		this.userMoneyPanel.setLayout(null);
-		//this.userMoneyPanel.setBackground(Color.black);
 		
 		JTextField userMoney = new JTextField("보유한 금액");
 		this.userMoney.setBounds(GameStoreEnum.STORE_USER_MONEY_REC.getRectangle());
-		this.userMoney.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.userMoney.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.userMoney.setBorder(GameStoreEnum.LABEL_LINE.getMatteBorder());
-		//userMoney.setBackground(Color.red);
 		
 		JButton userConfirm = new JButton() {	
 			@Override
@@ -131,6 +119,7 @@ public class GameStorePanel extends JPanel {
 			GameStoreEnum.GAME_STORE_PANEL_WIDTH.getSize(), 
 			GameStoreEnum.GAME_STORE_PANEL_HEIGHT.getSize()
 		);
+		
 		this.itemChoicePanel.setOpaque(false);
 		this.itemChoicePanel.setLayout(null);
 		this.itemChoicePanel.setBounds(GameStoreEnum.STORE_ITEM_CHOICE_PANEL_REC.getRectangle());
@@ -156,7 +145,7 @@ public class GameStorePanel extends JPanel {
 		this.add(this.itemChoicePanel);
 }
 	
-	@SuppressWarnings({ "serial", "unchecked" })
+	@SuppressWarnings("unchecked")
 	public HashMap<String, List<Map<String, Object>>> getResourceData() {
 		return new HashMap<String, List<Map<String, Object>>>() {
 			{
@@ -203,7 +192,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "1/99");
 							put("setBounds", GameStoreEnum.STORE_USER_OWN_INTERRUPT_ITEM_REC.getRectangle());
-							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIDEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					},
@@ -212,7 +201,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "2/99");
 							put("setBounds", GameStoreEnum.STORE_USER_OWN_RETURN_ITEM_REC.getRectangle());
-							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIDEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					},
@@ -221,7 +210,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "0/99");
 							put("setBounds", GameStoreEnum.STORE_USER_OWN_TIMEEXTION_ITEM_REC.getRectangle());
-							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIDEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					},
@@ -230,7 +219,7 @@ public class GameStorePanel extends JPanel {
 						{	
 							put("title", "스킨뽑기");
 							put("setBounds", GameStoreEnum.STORE_USER_SKIN_CATCH_LABEL_REC.getRectangle());
-							put("setFont", SearchIdEnum.LABELFONT_DEFAULT.getFont());
+							put("setFont", SearchIDEnum.LABELFONT_DEFAULT.getFont());
 							put("setOpaque", false);
 						}
 					}
@@ -284,7 +273,6 @@ public class GameStorePanel extends JPanel {
 	public void setOutPanel() {
 		this.outPanel.setLayout(null);
 		this.outPanel.setBounds(GameStoreEnum.STORE_OUT_PANEL_REC.getRectangle());
-		//this.outPanel.setBackground(Color.PINK);
 		
 		JButton OutButton = new JButton() {
 			@Override

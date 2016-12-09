@@ -14,4 +14,9 @@ public class GameRoomServerAction {
 	public void guestEnterRoom(AbstractEnumsDTO data) {
 		this.gameRoomPanel.getBasicFrame().showGameRoom((UserInGameRoomDTO)data);
 	}
+	
+	public void ownerGameRoomModify(AbstractEnumsDTO data) {
+		UserInGameRoomDTO ownerGameRoomDTO = (UserInGameRoomDTO)data;
+		this.gameRoomPanel.ownerFrameModify(ownerGameRoomDTO);
+	}
 }

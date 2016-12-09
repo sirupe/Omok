@@ -1,7 +1,6 @@
 package frames.store;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -15,8 +14,9 @@ import javax.swing.JLabel;
 
 import enums.frames.ChargeEnum;
 import enums.frames.CorrectEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 
+@SuppressWarnings("serial")
 public class PayConfirmFrame extends JFrame{
 	private Image backGround;
 	private JLabel success;
@@ -38,7 +38,7 @@ public class PayConfirmFrame extends JFrame{
 		);
 		
 		this.success = new JLabel("결제 완료 :)");	
-		this.success.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.success.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.success.setOpaque(false);
 		this.success.setBounds(ChargeEnum.CHARGE_SUCCESS_TEXT_SIZE_RECT.getRect());		
 		
@@ -73,9 +73,4 @@ public class PayConfirmFrame extends JFrame{
 		this.setVisible(true);
 		
 	}
-
-	public static void main(String[] args) throws IOException {
-		new PayConfirmFrame();
-	}
-
 }

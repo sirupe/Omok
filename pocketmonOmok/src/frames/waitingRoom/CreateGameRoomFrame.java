@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -15,11 +16,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import actions.waitingRoom.WaitingRoomActionListeners;
-import enums.frames.GameRoomCreateEnum;
-import enums.frames.GameRoomFullEnum;
-import enums.frames.SearchIdEnum;
-import enums.frames.SearchRePwdEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.CreateGameRoomEnum;
+import enums.frames.SearchIDEnum;
+import enums.frames.WaitingRoomEnum;
+import utility.GetResources;
 
 public class CreateGameRoomFrame extends JFrame {
 	private static final long serialVersionUID = 36363454L;
@@ -70,45 +70,44 @@ public class CreateGameRoomFrame extends JFrame {
 		
 		//버튼 생성
 		//확인 버튼
-		createRoomConfirmButton  = new JButton();
-		createRoomConfirmButton.setBorderPainted(false);
-		createRoomConfirmButton.setFocusPainted(false);
-		createRoomConfirmButton.setContentAreaFilled(false);
+		this.createRoomConfirmButton  = new JButton();
+		this.createRoomConfirmButton.setBorderPainted(false);
+		this.createRoomConfirmButton.setFocusPainted(false);
+		this.createRoomConfirmButton.setContentAreaFilled(false);
 		
 		//취소 버튼
-		createRoomCancelButton  = new JButton();
-		createRoomCancelButton.setBorderPainted(false);
-		createRoomCancelButton.setFocusPainted(false);
-		createRoomCancelButton.setContentAreaFilled(false);
+		this.createRoomCancelButton  = new JButton();
+		this.createRoomCancelButton.setBorderPainted(false);
+		this.createRoomCancelButton.setFocusPainted(false);
+		this.createRoomCancelButton.setContentAreaFilled(false);
 		
 		
 		
 		//배경화면	
-
 		backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
-				SearchIdEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
-				SearchIdEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
+				SearchIDEnum.SEARCHFRAME_SIZE_WIDTH.getSize(),
+				SearchIDEnum.SEARCHFRAME_SIZE_HEIGHT.getSize(),
                 Image.SCALE_SMOOTH);
 
 		this.setContentPane(new JLabel(new ImageIcon(backGround)));
 				
 		this.setBounds(
-				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_POSITION_X.getSize(),
-				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_POSITION_Y.getSize(),
-				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize(),
-				GameRoomCreateEnum.GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize()
+				CreateGameRoomEnum.GAMEROOM_CREATE_FRAME_POSITION_X.getSize(),
+				CreateGameRoomEnum.GAMEROOM_CREATE_FRAME_POSITION_Y.getSize(),
+				CreateGameRoomEnum.GAMEROOM_CREATE_FRAME_SIZE_WIDTH.getSize(),
+				CreateGameRoomEnum.GAMEROOM_CREATE_FRAME_SIZE_HEIGHT.getSize()
 		);
 		
 		//레이블 폰트 -- searchIdEnum 에서 불러옴
-		this.createRoomNameLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());	
-		this.createRoomPwdLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());	
+		this.createRoomPwdLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
 		
-		this.createRoomNameText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
-		this.createRoomPwdText.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomNameText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
+		this.createRoomPwdText.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		
-		this.roomCreateOpen.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
-		this.roomCreatePrivate.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreateOpen.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
+		this.roomCreatePrivate.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		//레이블 색깔
 		this.createRoomNameLabel.setForeground(Color.black);
 		this.createRoomPwdLabel.setForeground(Color.black);
@@ -126,8 +125,8 @@ public class CreateGameRoomFrame extends JFrame {
 	//========================================================================================================
 	//라벨 위치
 	public void setLabelPosition() {
-		this.createRoomNameLabel.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_NAME_LABEL.getRectangle());
-		this.createRoomPwdLabel.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_PWD_NAME_LABEL.getRectangle());
+		this.createRoomNameLabel.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_NAME_LABEL.getRectangle());
+		this.createRoomPwdLabel.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_PWD_NAME_LABEL.getRectangle());
 		
 		this.add(createRoomPwdLabel);
 		this.add(createRoomNameLabel);
@@ -135,8 +134,12 @@ public class CreateGameRoomFrame extends JFrame {
 	
 	//텍스트필드 위치
 	public void setTextPosition() {
-		this.createRoomNameText.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_NAME_TEXT.getRectangle());
-		this.createRoomPwdText.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_PWD_TEXT.getRectangle());
+		String[] roomName = WaitingRoomEnum.ROOM_NAMES.getRandomRoomName();
+		int rand = new Random().nextInt(roomName.length);
+		this.createRoomNameText.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_NAME_TEXT.getRectangle());
+		this.createRoomPwdText.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_PWD_TEXT.getRectangle());
+		this.createRoomNameText.setText(roomName[rand]);
+		
 		this.add(createRoomNameText);
 		this.add(createRoomPwdText);
 		
@@ -146,25 +149,21 @@ public class CreateGameRoomFrame extends JFrame {
 	public void setButtonPosition() throws IOException {
 		//확인 버튼
 		this.createRoomConfirmButton.setIconTextGap(this.createRoomConfirmButton.getIconTextGap() - 15);
-    	this.createRoomConfirmButton.setIcon(
-    			new ImageIcon(ImageIO.read(
-    				new File("resources/signUp/confirm.jpg")).getScaledInstance(
-    						GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().width,
-    						GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().height,
-    						Image.SCALE_AREA_AVERAGING))
-    		);
-    	this.createRoomConfirmButton.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle());
+    	this.createRoomConfirmButton.setIcon(GetResources.getImageIcon("resources/signUp/confirm.jpg", 
+    			CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().width,
+    			CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle().height)
+    	);
     	
-    //취소버튼
+    	this.createRoomConfirmButton.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CONFIRM_BUTTON.getRectangle());
+    	
+    	//취소버튼
     	this.createRoomCancelButton.setIconTextGap(this.createRoomCancelButton.getIconTextGap() - 15);
-    	this.createRoomCancelButton.setIcon(
-    			new ImageIcon(ImageIO.read(
-    				new File("resources/signUp/reset.jpg")).getScaledInstance(
-    						GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().width,
-    						GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().height,
-    						Image.SCALE_AREA_AVERAGING))
-    		);
-    	this.createRoomCancelButton.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle());
+    	this.createRoomCancelButton.setIcon(GetResources.getImageIcon("resources/signUp/reset.jpg", 
+    			CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().width,
+				CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle().height)
+    			
+    	);
+    	this.createRoomCancelButton.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_CANCEL_BUTTON.getRectangle());
     	
     	this.add(createRoomConfirmButton);
     	this.add(createRoomCancelButton);
@@ -176,8 +175,8 @@ public class CreateGameRoomFrame extends JFrame {
 	//========================================================================================================
 	public void setRadioPosition() throws IOException {
 		//공개방라디오 박스
-    	this.roomCreatePrivate.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_OPEN_RADIO.getRectangle());
-    	this.roomCreateOpen.setBounds(GameRoomCreateEnum.GAMEROOM_CREATE_ROOM_PRIVATE_RADIO.getRectangle());
+    	this.roomCreatePrivate.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_OPEN_RADIO.getRectangle());
+    	this.roomCreateOpen.setBounds(CreateGameRoomEnum.GAMEROOM_CREATE_ROOM_PRIVATE_RADIO.getRectangle());
     	
     	
     	this.roomCreatePrivate.setOpaque(false);
@@ -186,6 +185,9 @@ public class CreateGameRoomFrame extends JFrame {
 		this.add(roomCreatePrivate);
 	}
 	//========================================================================================================
+	public void confirmButtonActionRemove() {
+		this.createRoomConfirmButton.removeActionListener(this.waitingRoomAction);
+	}
 	
 	public JTextField getCreateRoomPwdText() {
 		return createRoomPwdText;
@@ -194,4 +196,5 @@ public class CreateGameRoomFrame extends JFrame {
 	public JTextField getCreateRoomNameText() {
 		return createRoomNameText;
 	}
+	
 }

@@ -16,8 +16,8 @@ import enums.frames.SearchRePwdEnum;
 import frames.BasicFrame;
 
 
+@SuppressWarnings("serial")
 public class SearchIdFrame extends JFrame  {
-	
 	private SearchIdPanel searchIdPanel;
 	private SearchIdResultPanel searchIdResultPanel;
 	private Image backGround;
@@ -27,6 +27,7 @@ public class SearchIdFrame extends JFrame  {
 	private BasicFrame basicFrame;
 	
 	public SearchIdFrame(BasicFrame basicFrame) throws IOException {
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.basicFrame = basicFrame;
 		
 		this.backGround = ImageIO.read(new File("resources/background/popup.png")).getScaledInstance(
@@ -80,7 +81,8 @@ public class SearchIdFrame extends JFrame  {
 				}catch (IOException e) {
 					e.printStackTrace();
 				}
-			}};
+			}
+		};
 
 		this.cardLayout = new CardLayout();
 		this.setLayout(this.cardLayout);
@@ -104,6 +106,7 @@ public class SearchIdFrame extends JFrame  {
 	public void doConfirmButton(){	
 		this.cardLayout.show(this.getContentPane(), "searchIdResultPanel");
 	}
+	
 	//ID검색 패널로 바꿔주는 매소드
 	public void searchIdPanel() {
 		this.cardLayout.show(this.getContentPane(), "searchIdPanel");
@@ -113,14 +116,15 @@ public class SearchIdFrame extends JFrame  {
 	public SearchIdPanel getSearchIdPanel() {
 		return searchIdPanel;
 	}
+	
 	//ID검색 결과창 패널로 변환하는 매소드
 	public SearchIdResultPanel getSearchIdResultPanel() {
 		return searchIdResultPanel;
 	}
+	
 	//베이직프래임을 변환하는 매소드
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
-	
-}
 
+}

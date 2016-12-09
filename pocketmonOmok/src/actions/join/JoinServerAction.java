@@ -11,9 +11,11 @@ import frames.joinFrames.JoinSuccessFrame;
 
 public class JoinServerAction {
 	private JoinFrame joinFrame;
+	private JoinClientAction joinClientAction;
 	
 	public JoinServerAction(JoinFrame joinFrame) {
 		this.joinFrame = joinFrame;
+		this.joinClientAction = joinFrame.getJoinAction();
 	}
 	
 	public void joinOverlapCheck(AbstractEnumsDTO data) {
@@ -49,7 +51,20 @@ public class JoinServerAction {
 		}
 	}
 	
-	public void cercificationNumber(AbstractEnumsDTO data) {
-		this.joinFrame.getJoinAction().setCertificationNumber(((UserPersonalInfoDTO)data).getCertificationNumber());
-	}	
+	public void certificationNumSuccess() {
+		this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_DEFAULT.getColor(), "joinMail인증일치");
+		this.joinFrame.getEmailTimeLabel().setVisible(false);
+		this.joinFrame.getEmailConfTextField().setEditable(false);
+		this.joinFrame.getEmailAddrTextField().setEditable(false);
+		this.joinFrame.getEmailIDTextField().setEditable(false);
+		this.joinFrame.getEmailAddrChoice().setEnabled(false);
+		this.joinFrame.getConfirmButton().setEnabled(false);
+		this.joinClientAction.setEmailConfirmTime(true);
+		this.joinClientAction.getTimeThread().interrupt();
+		
+	}
+	
+	public void certificationNumFail() {
+		this.joinFrame.labelSetting(this.joinFrame.getEmailErrorLabel(), JoinSizesEnum.LABELCOLOR_ERROR.getColor(), "jointMail인증불일치");
+	}
 }

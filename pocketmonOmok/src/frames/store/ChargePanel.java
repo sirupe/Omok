@@ -1,7 +1,6 @@
 package frames.store;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +15,10 @@ import javax.swing.JTextField;
 
 import enums.frames.ChargeEnum;
 import enums.frames.JoinSizesEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 import enums.frames.SearchPwdEnum;
 
+@SuppressWarnings("serial")
 public class ChargePanel extends JPanel {
 	
 	private JLabel chargeLabel;
@@ -65,13 +65,14 @@ public class ChargePanel extends JPanel {
 		
 	}
 	
+	//충전하는 메소드
 	public void setchargePanel() {
 		this.chargePanel.setLayout(null);
 		this.chargePanel.setBounds(ChargeEnum.CHARGE_PANEL_SIZE_RECT.getRect());
 		this.chargePanel.setOpaque(false);
 		
 		this.chargeLabel = new JLabel("충전할금액");
-		this.chargeLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.chargeLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.chargeLabel.setBounds(ChargeEnum.CHARGE_LABEL_SIZE_RECT.getRect());
 		
 		//1000원 버튼
@@ -92,6 +93,7 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }	
 		};
+		
 		this.aThousand.setFocusPainted(false);
 		this.aThousand.setBorderPainted(false);
 		this.aThousand.setContentAreaFilled(false);
@@ -120,6 +122,7 @@ public class ChargePanel extends JPanel {
 		this.fiveThousand.setContentAreaFilled(false);
 		this.fiveThousand.setBounds(ChargeEnum.CHARGE_5000_SIZE_RECT.getRect());
 		
+		
 		//10000원 버튼
 		this.tenThousand = new JButton(){
 			@Override
@@ -138,6 +141,7 @@ public class ChargePanel extends JPanel {
 	            }      
 	        }
 		};
+		
 		this.tenThousand.setFocusPainted(false);
 		this.tenThousand.setBorderPainted(false);
 		this.tenThousand.setContentAreaFilled(false);
@@ -182,14 +186,14 @@ public class ChargePanel extends JPanel {
 		this.emailPanel.setBounds(ChargeEnum.EMAIL_PANEL_SIZE_RECT.getRect());
 
 		this.emailLabel = new JLabel("email 입력");
-		this.emailLabel.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.emailLabel.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.emailLabel.setBounds(ChargeEnum.EMAIL_LABEL_SIZE_RECT.getRect());
 	
 		this.emailInput = new JTextField();
 		this.emailInput.setBounds(ChargeEnum.EMAIL_INPUT_SIZE_RECT.getRect());
 		
 		this.at = new JLabel("@");
-		this.at.setFont(SearchIdEnum.LABELFONT_DEFAULT.getFont());
+		this.at.setFont(SearchIDEnum.LABELFONT_DEFAULT.getFont());
 		this.at.setBounds(ChargeEnum.EMAIL_AT_SIZE_RECT.getRect());
 		
 		this.emailAddr = new JTextField();
@@ -210,8 +214,6 @@ public class ChargePanel extends JPanel {
 		this.emailPanel.add(emailInput);
 		this.emailPanel.add(emailLabel);
 		this.add(this.emailPanel);
-		
-			
 	}
 	
 	public void setcertifyPanel() {
@@ -264,7 +266,6 @@ public class ChargePanel extends JPanel {
 		this.certifyPanel.add(certifyText);
 		this.certifyPanel.add(certify);
 		this.add(this.certifyPanel);
-		
 	}
 	
 	public void setbuttonsPanel() {

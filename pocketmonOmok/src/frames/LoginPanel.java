@@ -13,12 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import actions.login.LoginClientAction;
 import enums.etc.ImageEnum;
-import enums.frames.LoginSizesEnum;
+import enums.frames.LoginPanelEnum;
 import frames.searchFrames.SearchPwdPanel;
 
 @SuppressWarnings("serial")
@@ -33,7 +32,6 @@ public class LoginPanel extends JPanel {
 	private JTextField idField;
 	private JPasswordField pwField;
 	
-	private Font textFieldFont;
 	
 	private JLabel loginFailLabel;
 	
@@ -59,15 +57,15 @@ public class LoginPanel extends JPanel {
 		this.loginPanel.setLayout(null);
 		this.loginPanel.setOpaque(false);
 		this.basicFrame = basicFrame;
-		this.searchPwdPanel = searchPwdPanel;
+
 		this.loginFailLabel = new JLabel();
 		
 		//프레임 화면 출력 위치 설정
 		this.setBounds(   
-		      LoginSizesEnum.LOGIN_FRAME_POSITION_X.getSize(),
-		      LoginSizesEnum.LOGIN_FRAME_POSITION_Y.getSize(),
-		      LoginSizesEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
-		      LoginSizesEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
+		      LoginPanelEnum.LOGIN_FRAME_POSITION_X.getSize(),
+		      LoginPanelEnum.LOGIN_FRAME_POSITION_Y.getSize(),
+		      LoginPanelEnum.LOGIN_FRAME_SIZE_WIDTH.getSize(), 
+		      LoginPanelEnum.LOGIN_FRAME_SIZE_HEIGHT.getSize()
 
 		);
 		
@@ -89,17 +87,16 @@ public class LoginPanel extends JPanel {
 	//아이디 또는 비밀번호 오류라서 알려주는 텍스트
 	public void loginFail(String errMsg){
 		this.setLayout(null);
-		this.textFieldFont = new Font("", Font.BOLD, 20);      
 		this.loginFailLabel.setBounds(
-					LoginSizesEnum.LOGIN_FAIL_TEXT_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_FAIL_TEXT_POSITION_Y.getSize(),
-					LoginSizesEnum.LOGIN_FAIL_TEXT_WIDTH.getSize(), 
-					LoginSizesEnum.LOGIN_FAIL_TEXT_HEIGTH.getSize()
+					LoginPanelEnum.LOGIN_FAIL_TEXT_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_FAIL_TEXT_POSITION_Y.getSize(),
+					LoginPanelEnum.LOGIN_FAIL_TEXT_WIDTH.getSize(), 
+					LoginPanelEnum.LOGIN_FAIL_TEXT_HEIGTH.getSize()
 		);
 		this.loginFailLabel.setOpaque(false);
 		this.add(this.loginFailLabel);
 		
-		this.loginFailLabel.setFont(new Font("", Font.PLAIN, 13));
+		this.loginFailLabel.setFont(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.011)));   
 		this.loginFailLabel.setForeground(Color.RED);
 		this.loginFailLabel.setText(errMsg);
 	}
@@ -111,18 +108,18 @@ public class LoginPanel extends JPanel {
 	
 	public void setIdPwImagePositon() throws IOException{
 		this.idReimage = ImageIO.read(new File("resources/login/ID.png")).getScaledInstance(
-			               LoginSizesEnum.SIZE_LABEL_WIDTH.getSize(),
-			               LoginSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
+			               LoginPanelEnum.SIZE_LABEL_WIDTH.getSize(),
+			               LoginPanelEnum.SIZE_LABEL_HEIGHT.getSize(),
 			               Image.SCALE_SMOOTH);
 		
 		this.idImage   = new JButton(new ImageIcon(this.idReimage));
 		
 		//아이디 이미지 위치 설정
 		this.idImage.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_ID_POSITION_Y.getSize(),
-					LoginSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
-					LoginSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_ID_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_ID_POSITION_Y.getSize(),
+					LoginPanelEnum.SIZE_LABEL_WIDTH.getSize(), 
+					LoginPanelEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.idImage.setBorderPainted(false);
@@ -131,18 +128,18 @@ public class LoginPanel extends JPanel {
 		
 		this.PW        = ImageIO.read(new File("resources/login/PW.png"));
 		this.PWreimage = PW.getScaledInstance(
-					LoginSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
-					LoginSizesEnum.SIZE_LABEL_HEIGHT.getSize(),
+					LoginPanelEnum.SIZE_LABEL_WIDTH.getSize(), 
+					LoginPanelEnum.SIZE_LABEL_HEIGHT.getSize(),
 					Image.SCALE_SMOOTH);
 		
 		this.passwordImage = new JButton(new ImageIcon(this.PWreimage));  
 		
 		//비밀번호 이미지 위치 설정
 		this.passwordImage.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_PASSWORD_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_PASSWORD_POSITION_Y.getSize(), 
-					LoginSizesEnum.SIZE_LABEL_WIDTH.getSize(), 
-					LoginSizesEnum.SIZE_LABEL_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_PASSWORD_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_PASSWORD_POSITION_Y.getSize(), 
+					LoginPanelEnum.SIZE_LABEL_WIDTH.getSize(), 
+					LoginPanelEnum.SIZE_LABEL_HEIGHT.getSize()
 		);
 		
 		this.passwordImage.setBorderPainted(false);
@@ -156,35 +153,35 @@ public class LoginPanel extends JPanel {
 	public void setButtonPosition() throws IOException{
 	   //이미지 비율 변환
 		this.loginreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_LOGIN.getImageDir())).getScaledInstance(
-		               LoginSizesEnum.LOGIN_ICON_WIDTH.getSize(),
-		               LoginSizesEnum.LOGIN_ICON_HEIGHT.getSize(),
+		               LoginPanelEnum.LOGIN_ICON_WIDTH.getSize(),
+		               LoginPanelEnum.LOGIN_ICON_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.loginButton = new JButton(new ImageIcon(this.loginreimage));
 	  
 		this.joinreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SIGHUP.getImageDir())).getScaledInstance(
-		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
-		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
+		               LoginPanelEnum.ICON_SIZE_WIDTH.getSize(),
+		               LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.joinButton = new JButton(new ImageIcon(this.joinreimage));
 		
 		this.searchidreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SEARCHID.getImageDir())).getScaledInstance(
-		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
-		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
+		               LoginPanelEnum.ICON_SIZE_WIDTH.getSize(),
+		               LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.searchIdButton = new JButton(new ImageIcon(this.searchidreimage));
 		
 		this.searchpwreimage = ImageIO.read(new File(ImageEnum.LOGINPANEL_SEARCHPW.getImageDir())).getScaledInstance(
-		               LoginSizesEnum.ICON_SIZE_WIDTH.getSize(),
-		               LoginSizesEnum.ICON_SIZE_HEIGHT.getSize(),
+		               LoginPanelEnum.ICON_SIZE_WIDTH.getSize(),
+		               LoginPanelEnum.ICON_SIZE_HEIGHT.getSize(),
 		               Image.SCALE_AREA_AVERAGING);
 		this.searchPwButton = new JButton(new ImageIcon(this.searchpwreimage));
 		
 		//로그인 버튼 위치 설정
 		this.loginButton.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_Y.getSize(),
-					LoginSizesEnum.LOGIN_ICON_WIDTH.getSize(), 
-					LoginSizesEnum.LOGIN_ICON_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_LOGIN_BUTTON_POSITION_Y.getSize(),
+					LoginPanelEnum.LOGIN_ICON_WIDTH.getSize(), 
+					LoginPanelEnum.LOGIN_ICON_HEIGHT.getSize()
 		);
 		this.loginButton.setName("login");
 		this.loginButton.setBorderPainted(false);
@@ -198,12 +195,12 @@ public class LoginPanel extends JPanel {
 		
 		//회원가입 버튼 위치 설정
 		this.joinButton.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_Y.getSize(),
-					LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
-					LoginSizesEnum.ICON_SIZE_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_JOIN_BUTTON_POSITION_Y.getSize(),
+					LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
+					LoginPanelEnum.ICON_SIZE_HEIGHT.getSize()
 		);
-		this.joinButton.setName(LoginSizesEnum.BUTTON_NAME_SIGNUP.getButtonName());
+		this.joinButton.setName(LoginPanelEnum.BUTTON_NAME_SIGNUP.getButtonName());
 		this.joinButton.setBorderPainted(false);
 		this.joinButton.setContentAreaFilled(false);
 		this.joinButton.setFocusPainted(false);
@@ -211,12 +208,12 @@ public class LoginPanel extends JPanel {
 		this.joinButton.addMouseListener(this.loginAction);
 		//아이디찾기 버튼 위치 설정
 		this.searchIdButton.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_Y.getSize(),
-					LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
-					LoginSizesEnum.ICON_SIZE_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_SEARCHID_BUTTON_POSITION_Y.getSize(),
+					LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
+					LoginPanelEnum.ICON_SIZE_HEIGHT.getSize()
 		);
-		this.searchIdButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCHID.getButtonName());
+		this.searchIdButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCHID.getButtonName());
 		this.searchIdButton.setBorderPainted(false);
 		this.searchIdButton.setContentAreaFilled(false);
 		this.searchIdButton.setFocusPainted(false);
@@ -225,12 +222,12 @@ public class LoginPanel extends JPanel {
 		
 		//비밀번호찾기 버튼 위치 설정
 		this.searchPwButton.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y.getSize(),
-					LoginSizesEnum.ICON_SIZE_WIDTH.getSize(), 
-					LoginSizesEnum.ICON_SIZE_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_SEARCHPW_BUTTON_POSITION_Y.getSize(),
+					LoginPanelEnum.ICON_SIZE_WIDTH.getSize(), 
+					LoginPanelEnum.ICON_SIZE_HEIGHT.getSize()
 		);
-		this.searchPwButton.setName(LoginSizesEnum.BUTTON_NAME_SEARCHPW.getButtonName());
+		this.searchPwButton.setName(LoginPanelEnum.BUTTON_NAME_SEARCHPW.getButtonName());
 		this.searchPwButton.setBorderPainted(false);
 		this.searchPwButton.setContentAreaFilled(false);
 		this.searchPwButton.setFocusPainted(false);
@@ -247,34 +244,33 @@ public class LoginPanel extends JPanel {
 	}
 	
 	public void setTextFieldPosition(){		
-		this.idField = new JTextField("", 10);
-		this.pwField = new JPasswordField("", 10);
+		this.idField = new JTextField(10);
+		this.pwField = new JPasswordField(10);
 		
 		//아이디 입력창
 		this.idField.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_ID_FIELD_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_ID_FIELD_POSITION_Y.getSize(),
-					LoginSizesEnum.SIZE_TEXT_WIDTH.getSize(), 
-					LoginSizesEnum.SIZE_TEXT_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_ID_FIELD_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_ID_FIELD_POSITION_Y.getSize(),
+					LoginPanelEnum.SIZE_TEXT_WIDTH.getSize(), 
+					LoginPanelEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
-		this.idField.setFont(this.textFieldFont);
+		this.idField.setFont(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.011)));   
 		
 		//비밀번호 입력창
 		this.pwField.setBounds(
-					LoginSizesEnum.LOGIN_RESOURCE_PW_FIELD_POSITION_X.getSize(),
-					LoginSizesEnum.LOGIN_RESOURCE_PW_FIELD_POSITION_Y.getSize(),
-					LoginSizesEnum.SIZE_TEXT_WIDTH.getSize(), 
-					LoginSizesEnum.SIZE_TEXT_HEIGHT.getSize()
+					LoginPanelEnum.LOGIN_RESOURCE_PW_FIELD_POSITION_X.getSize(),
+					LoginPanelEnum.LOGIN_RESOURCE_PW_FIELD_POSITION_Y.getSize(),
+					LoginPanelEnum.SIZE_TEXT_WIDTH.getSize(), 
+					LoginPanelEnum.SIZE_TEXT_HEIGHT.getSize()
 		);
-		this.pwField.setFont(this.textFieldFont);
+		this.pwField.setFont(new Font("a으라차차", Font.BOLD, (int) (LoginPanelEnum.SCREEN_SIZE.getDimension().width * 0.011)));
 		
 		this.loginPanel.add(this.idField);
 		this.loginPanel.add(this.pwField);
 	   
 	}
 
-	
-	
+
 	public JButton getSearchIdButton() {
 		return searchIdButton;
 	}
@@ -302,6 +298,7 @@ public class LoginPanel extends JPanel {
 	public BasicFrame getBasicFrame() {
 		return basicFrame;
 	}
+	
 	public SearchPwdPanel getSearchPwdPanel() {
 		return searchPwdPanel;
 	}

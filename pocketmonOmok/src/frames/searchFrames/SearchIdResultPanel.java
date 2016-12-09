@@ -11,72 +11,84 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import actions.findIDandPW.FindIdResultAction;
+import actions.findIDandPW.FindIDResultAction;
 import enums.frames.CorrectEnum;
-import enums.frames.SearchIdEnum;
+import enums.frames.SearchIDEnum;
 
 
+@SuppressWarnings("serial")
 public class SearchIdResultPanel extends JPanel {
-	private JLabel showUserId;
-	private JLabel showUserIdResult;
+	private JLabel showUserIdLabel;
 	private JButton homeButton;
 	
 	private SearchIdFrame searchIdFrame;
-	private FindIdResultAction findIdResultAction;
+	private FindIDResultAction findIdResultAction;
 
 	public SearchIdResultPanel(SearchIdFrame searchIdFrame) throws IOException {
 		this.searchIdFrame = searchIdFrame;
-		this.findIdResultAction = new FindIdResultAction(this);
+		this.findIdResultAction = new FindIDResultAction(this);
 		
-		Font defaultFont = SearchIdEnum.LABELFONT_DEFAULT.getFont();
+		Font defaultFont = SearchIDEnum.LABELFONT_DEFAULT.getFont();
 
 		this.setBounds(CorrectEnum.DROPOUT_FRAME_SIZE_RECT.getRect());
 		
-		this.showUserId = new JLabel("회원님 ID");
-		this.showUserId.setFont(defaultFont);
-		this.showUserId.setBounds(CorrectEnum.SHOW_USER_ID_LABEL_RECT.getRect());
-		
-		this.showUserIdResult = new JLabel("yjyj*****");
-		this.showUserIdResult.setFont(defaultFont);
-		this.showUserIdResult.setBounds(CorrectEnum.SHOW_USER_ID_RESULT_RECT.getRect());
+		String IdMsg = "";
+		this.showUserIdLabel = new JLabel(IdMsg);//정보가 있을땐 아이디 // 없을땐 입력정보 오류:(
+		this.showUserIdLabel.setFont(defaultFont);
+		this.showUserIdLabel.setBounds(CorrectEnum.SHOW_USER_ID_RESULT_RECT.getRect());
 		
 		this.homeButton = new JButton();
 		this.homeButton.setIcon(
 				new ImageIcon(ImageIO.read(
 					new File("resources/forgotID/goHome.png")).getScaledInstance(
-							SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
-							SearchIdEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
+							SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().width,
+							SearchIDEnum.SEARCH_CONFIRM_BUTTON.getRectangle().height,
 							Image.SCALE_AREA_AVERAGING))
-			);
-		this.homeButton.setBounds(SearchIdEnum.GO_HOME_BUTTON.getRectangle());
+		);
+		
+		this.homeButton.setBounds(SearchIDEnum.GO_HOME_BUTTON.getRectangle());
 		this.homeButton.setBorderPainted(false);
 		this.homeButton.setFocusPainted(false);
 		this.homeButton.setContentAreaFilled(false);
-		this.homeButton.setName(SearchIdEnum.BUTTON_NAME_GOHOME.getButtonName());
+		this.homeButton.setName(SearchIDEnum.BUTTON_NAME_GOHOME.getButtonName());
 
-		this.add(showUserId);
-		this.add(showUserIdResult);
+		this.add(showUserIdLabel);
 		this.add(homeButton);
 		this.homeButton.addActionListener(this.findIdResultAction);
 		this.setLayout(null);
 		
 	}
+	
 	//홈으로버튼시 실행
 	public void doHomeButton(){	
 		//프레임의 취소버튼을 실행, 취소버튼과 동일한 동작수행
 		this.searchIdFrame.doCancleButton();
 	}
+	
+	//라벨값을 바꿔주는 메소드를만들어
+	public void showUserIdLael(String IdMsg) {
+		
+		this.setLayout(null);
+		this.showUserIdLabel.setBounds(CorrectEnum.SHOW_USER_ID_RESULT_RECT.getRect());
+		this.add(this.showUserIdLabel);
+		this.showUserIdLabel.setText(IdMsg);
+	
+	}
+
+	//DB에서 가져온 userID를 줌
+	public JLabel getSearchIdLabel (){
+		return showUserIdLabel;	
+	}
+	
 	public JButton getHomeButton() {
 		return homeButton;
 	}
+	
 	public SearchIdFrame getSearchIdFrame() {
 		return searchIdFrame;
 	}
-	public FindIdResultAction getFindIdResultAction() {
+	
+	public FindIDResultAction getFindIdResultAction() {
 		return findIdResultAction;
 	}
-	
-	
-	
-	
 }

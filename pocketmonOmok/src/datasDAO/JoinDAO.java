@@ -62,8 +62,8 @@ public class JoinDAO {
 			sql.append("USER_GENDER, ");
 			sql.append("USER_BIRTH, ");
 			sql.append("USER_EMAIL, ");
-			sql.append("USER_JOINDATE ");
 			if(personalDTO.getUserPhoneNumber() == null) {
+				sql.append("USER_JOINDATE ");
 				sql.append(") VALUES ( ");
 				sql.append("?, ?, ?, ?, ?, ?, sysdate )");				
 				ps = connection.prepareStatement(sql.toString());
@@ -75,7 +75,8 @@ public class JoinDAO {
 				ps.setString(6, personalDTO.getUserEmail());
 
 			} else {
-				sql.append("USER_PHONENUMBER, ");
+				sql.append("USER_JOINDATE, ");
+				sql.append("USER_PHONENUMBER ");
 				sql.append(") VALUES ( ");
 				sql.append("?, ?, ?, ?, ?, ?, sysdate, ? )");
 				ps = connection.prepareStatement(sql.toString());

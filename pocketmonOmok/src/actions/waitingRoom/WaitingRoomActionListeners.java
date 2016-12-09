@@ -47,8 +47,13 @@ public class WaitingRoomActionListeners extends Adapters {
 		case "createRoomCancelButton" :
 			this.waitingRoomActions.createRoomFrameExit();
 			break;
-			
+		
 		case "modifyInfoButton" :
+			this.waitingRoomActions.correctMyInfo();
+			break;
+			
+		case "logoutButton" :
+			this.waitingRoomActions.logout();
 			break;
 		default :
 			break;
@@ -73,6 +78,6 @@ public class WaitingRoomActionListeners extends Adapters {
 			}
 		} else {
 			this.waitingRoomActions.userListSelectAction(e.getSource() instanceof JTextField);
-		}
+		}		
 	}
 }
